@@ -1,0 +1,50 @@
+stages:
+	- build
+	- release
+	# - deploy
+
+build-prod: 
+	stage: build
+	image: docker:20.10.16-dind
+	script:
+		- docker build . -t prospectix-front:prod
+	only:
+		- master
+
+build-staging:
+	stage: build
+	image: docker:20.10.16-dind
+	script:
+		- docker build . -t prospectix-front:staging
+	only:
+		- staging
+
+release-prod:
+	services:
+		- docker:20.10.16-dind
+	stage: release
+	before_script:
+		- docker login -u gitlab+deploy-token-25 -p $CI_DEPLOY_TOKEN $CI_REGISTRY
+	script:
+		- docker build --tag $CI_REGISTRY_IMAGE:prod
+		- docker push $CI_REGISTRY_IMAGE:prod
+	only:
+		- master
+	cache: {}
+
+release-staging:
+	services:
+		- docker:20.10.16-dind
+	stage: release
+	before_script:
+		- docker login -u gitlab+deploy-token-25 -p $CI_DEPLOY_TOKEN $CI_REGISTRY
+	script:
+		- docker build --tag $CI_REGISTRY_IMAGE:staging
+		- docker push $CI_REGISTRY_IMAGE:staging
+	only:
+		- staging
+	cache: {}
+
+
+
+

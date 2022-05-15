@@ -1,0 +1,12 @@
+# Git and versionning
+.git
+
+# Node
+node_modules
+
+# IDE and Editor
+.vscode/*
+
+# System files
+.DS_Store
+Thumbs.db
