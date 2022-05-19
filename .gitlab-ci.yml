@@ -69,7 +69,7 @@ deploy-staging:
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - bash -c "ssh-add <(echo \"$SSH_PRIVATE_KEY_STAGING\" | base64 -d)"
+    - bash -c "ssh-add <(echo "$SSH_PRIVATE_KEY_STAGING" | base64 -d)"
     - export COMPOSE_HTTP_TIMEOUT=200
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml down --remove-orphans"
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml pull"
