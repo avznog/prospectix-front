@@ -69,8 +69,34 @@ deploy-staging:
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - echo SSH_PRIVATE_KEY_STAGING"
-    - bash -c "ssh-add <(echo $SSH_PRIVATE_KEY_STAGING)"
+    - echo "$SSH_PRIVATE_KEY_STAGING"
+    - bash -c "ssh-add <(echo -----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAQEA2i998hBbpIgrss9FJUQ7Gpj1OEjFuIdMbClzXCj80Psev3tmkDGt
+Lw92H0P6B1LqIFXa9rLIwe4qB+EUUg0y6UTy42pgtyqYV9zYu7EHZFfyVHQtg/t3luCpy4
+d9abNMHhr4sb4exLN1H3fCaAQ+ucuCT1+c2SxbXrQ93W6uu6g7pNzzztlDs+/qxhG7x1fh
+q5BecYFv72bnp8AOm7zdYpxR8jqFWiTHLwqvWPPV48GgHPu5j9WJgKgB4wvysQRlLFh16R
+XLrFkPymiAYpWFYcxOBA3G9E1jzSMgFd11EIRWUWbM6D46TG49c8eBq3qpXI6u6bdCEZ0X
+16Rxi2/w6QAAA9ACgde9AoHXvQAAAAdzc2gtcnNhAAABAQDaL33yEFukiCuyz0UlRDsamP
+U4SMW4h0xsKXNcKPzQ+x6/e2aQMa0vD3YfQ/oHUuogVdr2ssjB7ioH4RRSDTLpRPLjamC3
+KphX3Ni7sQdkV/JUdC2D+3eW4KnLh31ps0weGvixvh7Es3Ufd8JoBD65y4JPX5zZLFtetD
+3dbq67qDuk3PPO2UOz7+rGEbvHV+GrkF5xgW/vZuenwA6bvN1inFHyOoVaJMcvCq9Y89Xj
+waAc+7mP1YmAqAHjC/KxBGUsWHXpFcusWQ/KaIBilYVhzE4EDcb0TWPNIyAV3XUQhFZRZs
+zoPjpMbj1zx4Greqlcjq7pt0IRnRfXpHGLb/DpAAAAAwEAAQAAAQBd2ZvVKZAh36jcSye0
+9fpuYGjqgvL5gskupU3H0KGeysXZG51sXNHfskje/gBochPfQM7k2tZcBLPzm69/88l4aX
+4IsFNVtm69LHPVmDpTwTitdyO058/zCERBFdCuTL9rG7Lp0ZuuhHrWxE7NKzZH+O/ecIQp
+LllHDUSnINrsQI+UzA83myjSonBJZsypScShG4tZtt4kQKgwI0NJmzbiE44pXRtZGTSOkK
+H4HyTmAM3Ihwy4NGCUWx9yQULOYeBmXHpygJDenEVCfHbzuyHyz37Xpbcws3v1PiAF7z3B
+O2/QNXq5Dyo0WJhUlDAahFTUngx9SoTFZ3mgeEoAsEP5AAAAgQD1t45M1/rYjScwLsyMmt
+iQ4enk6pJDQo1u/G+WjhY+xBk7bwBdNgHEjWbCAzigc/l4C+Ux+JFQ/3oniUZtO3b3PXs6
+EGK5RpcIQto+UoPOxIuVQO2chCT8cVkPWtsDLi0SW8IR0YRVvcuIElgNFVDWQafY+l30mg
+XURQkFXG9g5wAAAIEA9suD4v3EPJRr8E1w9N6um3B6rh0kRBPSjFwjMmDAHFfU9w+Q/F5J
+7Z2K6Ll/vDH8HR0xvFDr2rw/fIVGsUI1kFU/WQKfSwZeoqvADPLt+8dKoHE1ft+1B9Kog/
+YWor/FG8GsddYd4dcyMcv05m6O0r8Ifjnl6o7ZYy+NFcw7VFMAAACBAOJSzbkc+swdeEqk
+TIVOIYwFbmPfTgsVHGhdeK+URPtU9+tXYYOyWKoX/+Oact/M2r7eZho9ZTd4LuAFVL9kjt
+/O5hr3U54+FBvx3zKczjn608HjFOHSbFPVxZdYy5nhXSj7vxu/Tnd73/AAahyMYMrbCFBw
+1tzXmWC1zf7yKr5TAAAAF3Jvb3RAbnByb3NwZWN0aXhzdGFnaW5nAQID
+-----END OPENSSH PRIVATE KEY-----)"
     - export COMPOSE_HTTP_TIMEOUT=200
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml down --remove-orphans"
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml pull"
