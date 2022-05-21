@@ -3,6 +3,7 @@ stages:
   - release
   - deploy
 
+#BUILD
 build-prod: 
   stage: build
   image: docker:latest
@@ -19,6 +20,8 @@ build-staging:
   only:
     - staging
 
+
+#RELEASE
 release-prod:
   image: docker:latest
   services:
@@ -45,6 +48,8 @@ release-staging:
     - staging
   cache: {}
 
+
+#DEPLOY
 deploy-prod:
   stage: deploy
   before_script:
@@ -52,6 +57,7 @@ deploy-prod:
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    
   script:
     - bash -c "ssh-add <(echo \"$SSH_PRIVATE_KEY_PROD\")"
     - export COMPOSE_HTTP_TIMEOUT=200
@@ -59,7 +65,7 @@ deploy-prod:
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml pull"
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml up -d"
   only:
-    - prod
+    - master
 
 deploy-staging:
   stage: deploy
@@ -68,6 +74,7 @@ deploy-staging:
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    
   script:
     - bash -c "ssh-add <(echo \"$SSH_PRIVATE_KEY_STAGING\")"
     - export COMPOSE_HTTP_TIMEOUT=200
