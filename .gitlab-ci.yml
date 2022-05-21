@@ -68,7 +68,7 @@ deploy-staging:
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - docker login -u $DOCKER_LOGIN -p $DOCKER_TOKEN $CI_REGISTRY
+    
   script:
     - bash -c "ssh-add <(echo \"$SSH_PRIVATE_KEY_STAGING\")"
     - export COMPOSE_HTTP_TIMEOUT=200
