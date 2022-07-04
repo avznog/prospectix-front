@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListeGoalsComponent,
     EachGoalComponent,
     GoalsComponent,
-    CreateGoalComponent
+    CreateGoalComponent,
+    EditGoalComponent
   ],
   imports: [
     BrowserModule,

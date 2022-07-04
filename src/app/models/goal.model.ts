@@ -8,4 +8,5 @@ export interface Goal {
     totalSteps: number;
     currentStep: number;
     pm: ProjectManager;
+    description: string;
 }

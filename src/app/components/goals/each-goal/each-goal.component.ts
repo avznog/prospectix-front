@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Goal } from '../../../models/goal.model';
 import { GoalsService } from '../services/goals.service';
@@ -11,7 +12,8 @@ import { GoalsService } from '../services/goals.service';
 export class EachGoalComponent implements OnInit {
   @Input() goal: Goal = {} as Goal;
   constructor(
-    private readonly goalsService: GoalsService
+    private readonly goalsService: GoalsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +24,7 @@ export class EachGoalComponent implements OnInit {
   }
 
   deleteGoal() : Subscription {
+    this.router.navigate(["/edit-goal"]);
     return this.goalsService.deleteGoal(this.goal.id);
   }
 

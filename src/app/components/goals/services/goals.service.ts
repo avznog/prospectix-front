@@ -7,7 +7,7 @@ import { Goal } from '../../../models/goal.model';
   providedIn: 'root'
 })
 export class GoalsService {
-
+  editIsClicked!: boolean;
   constructor(
     private http: HttpClient
   ) { }
