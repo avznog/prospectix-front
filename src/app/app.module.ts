@@ -7,6 +7,8 @@ import { UsersComponent } from './components/users/users/users.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
 import { EachUserComponent } from './components/users/each-user/each-user.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CreateUserComponent } from './components/users/create-user/create-user.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

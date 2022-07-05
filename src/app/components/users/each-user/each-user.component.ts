@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProjectManager } from 'src/app/models/project-manager.model';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-each-user',
@@ -8,9 +10,21 @@ import { ProjectManager } from 'src/app/models/project-manager.model';
 })
 export class EachUserComponent implements OnInit {
   @Input() user!: ProjectManager;
-  constructor() { }
+  constructor(
+    private readonly usersService: UsersService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onDeleteUser() : Subscription {
+    console.log("deleted");
+    return this.usersService.delete(this.user.id);
+  }
+
+  onChangeAdmin() : Subscription {
+    console.log("changed admin")
+    return this.usersService.changeAdmin(this.user.id,  this.user.admin ? false : true);
   }
 
 }

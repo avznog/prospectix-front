@@ -1,1 +1,8 @@
-<p>create-user works!</p>
+<h1>Ajouter un utilisateur</h1>
+<form [formGroup]="createUserForm">
+    <label for="pseudo">Pseudo </label><input id="pseudo" type="text" placeholder="bgonzva" formControlName="pseudo"/><br />
+    <label for="firstname">Prénom </label><input id="firstname" type="text" placeholder="Benjamin" formControlName="firstname" /><br />
+    <label for="name">Nom </label><input id="name" type="text" placeholder="Gonzva" formControlName="name"/><br />
+    <label for="admin">Admin </label><input id="admin" type="checkbox" formControlName="admin" /><br />
+    <input type="submit" (click)="onCreateUser()" value="Créer l'utilisateur"/>
+</form>
