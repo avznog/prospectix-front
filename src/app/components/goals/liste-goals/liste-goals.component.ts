@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Goal } from '../../../models/goal.model';
-import { GoalsService } from '../../../services/goals.service';
+import { GoalsService } from '../../../services/goals/goals.service';
 
 @Component({
   selector: 'app-liste-goals',

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Goal } from '../../../models/goal.model';
-import { GoalsService } from '../../../services/goals.service';
+import { GoalsService } from '../../../services/goals/goals.service';
 
 @Component({
   selector: 'app-each-goal',
