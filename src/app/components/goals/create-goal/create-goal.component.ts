@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GoalsService } from '../services/goals.service';
+import { GoalsService } from '../../../services/goals.service';
 
 @Component({
   selector: 'app-create-goal',

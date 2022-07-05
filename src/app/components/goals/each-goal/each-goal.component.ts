@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Goal } from '../../../models/goal.model';
-import { GoalsService } from '../services/goals.service';
+import { GoalsService } from '../../../services/goals.service';
 
 @Component({
   selector: 'app-each-goal',
@@ -20,11 +20,11 @@ export class EachGoalComponent implements OnInit {
   }
 
   editGoal() : Subscription {
-    return this.goalsService.editGoal(this.goal);
+    // return this.goalsService.editGoal(this.goal);
+    return null as unknown as Subscription;
   }
 
   deleteGoal() : Subscription {
-    this.router.navigate(["/edit-goal"]);
     return this.goalsService.deleteGoal(this.goal.id);
   }
 
