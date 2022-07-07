@@ -20,7 +20,11 @@ export class UsersService {
   }
 
   delete(id: number) : Subscription {
-    return this.http.delete<ProjectManager>(`http://localhost:3000/project-managers/${id}`).subscribe();
+    return this.http.patch<ProjectManager>(`http://localhost:3000/project-managers/disable/${id}`, { disabled: true }).subscribe();
+  }
+
+  enable(id: number) : Subscription {
+    return this.http.patch<ProjectManager>(`http://localhost:3000/project-managers/enable/${id}`, { disable: false }).subscribe();
   }
 
   changeAdmin(id: number,admin: boolean) : Subscription {

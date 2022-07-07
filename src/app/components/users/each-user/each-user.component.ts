@@ -18,8 +18,14 @@ export class EachUserComponent implements OnInit {
   }
 
   onDeleteUser() : Subscription {
-    console.log("deleted");
-    return this.usersService.delete(this.user.id);
+    if(this.user.disabled) {
+      console.log("enabled");
+      return this.usersService.enable(this.user.id);
+    }else{
+      console.log("disabled");
+      return this.usersService.delete(this.user.id);
+    }
+    
   }
 
   onChangeAdmin() : Subscription {

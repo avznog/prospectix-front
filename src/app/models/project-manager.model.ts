@@ -6,4 +6,5 @@ export interface ProjectManager {
     firstname: string;
     mail: string;
     tokenEmail: string;
+    disabled: boolean;
 }
