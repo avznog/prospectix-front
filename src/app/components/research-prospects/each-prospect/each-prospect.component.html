@@ -1,7 +1,7 @@
 <div style="border: 1px solid black;">
   <div><p><b>1. {{prospect.companyName}}</b> | {{prospect.activity.name}} | {{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}</p></div>
-  <div><p>{{prospect.phone.number}} <button style="color: red;">X</button><button style="color: green;">+</button></p></div>
-  <div><p>{{prospect.email.email}} <button style="color: red;">X</button><button style="color: green;">+</button></p></div>
+  <div>{{prospect.phone.number}}<form [formGroup]="changeNumberForm"><input type="number" id="number" placeholder="0684653454" formControlName="number"/></form><button style="color: green;" (click)="onChangePhoneNumber()">Modifier le tel</button></div>
+  <div><p>{{prospect.email.email}}<button style="color: green;">+</button></p></div>
   {{prospect.website.website}}
   <div>
     {{prospect.comment}}
