@@ -1,12 +1,12 @@
 <form>
     <input type="text" placeholder="Rechercher un nom, tel, mail, site, adresse, commentaire" /><br />
     <label for="activity">Domaine d'acitivité : </label><select id="activity" name="activity">
-        <option value="autoecole" selected >Auto-ecole</option>
-        <option value="restaurant" >Restaurant</option>
+       <option selected>Tous les domaines d'activité</option>
+       <option *ngFor="let activity of activites">{{activity.name}}</option>
     </select><br />
     <label for="city">Ville : </label><select id="city" name="city">
-        <option value="paris" selected >Paris</option>
-        <option value="marseille" >Marseille</option>
+        <option selected>Toutes les villes</option>
+        <option *ngFor="let city of cities">{{city.name}}</option>
     </select><br />
     <label for="saveSearch" >Sauvegarder la recherche </label><input type="checkbox" id="saveSearch" /><br />
     <input type="submit" value="Rechercher" />
