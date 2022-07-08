@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Activity } from 'src/app/models/activity.model';
 import { City } from 'src/app/models/city.model';
@@ -13,8 +13,11 @@ import { CitiesService } from 'src/app/services/cities/cities.service';
 })
 export class ResearchBlocComponent implements OnInit {
 
+  researchForm!: FormGroup;
   activites!: Activity[];
   cities!: City[];
+  currentCity!: City;
+  currentActivity!: Activity;
   constructor(
     private formBuilder: FormBuilder,
     private readonly activitiesService: ActivitiesService,
@@ -41,6 +44,21 @@ export class ResearchBlocComponent implements OnInit {
           console.log(err);
         }
       });
+
+      this.researchForm = this.formBuilder.group({
+        city: ["", Validators.required],
+        activity: ["", Validators.required]
+      });
+  }
+  
+  onCityChange() {
+    console.log(this.researchForm.value)
+    this.currentCity = this.researchForm.value["city"];
+  }
+
+  onActivityChange() {
+    console.log(this.researchForm.value["activity"])
+    this.currentActivity = this.researchForm.value["activity"];
   }
 
 }

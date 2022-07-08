@@ -10,7 +10,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 export class ListProspectsComponent implements OnInit {
   prospects!: Prospect[];
   constructor(
-    private readonly prospectsService: ProspectsService
+    private readonly prospectsService: ProspectsService,
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +23,7 @@ export class ListProspectsComponent implements OnInit {
         console.log(err);
       }
     })
+    
   }
 
 }

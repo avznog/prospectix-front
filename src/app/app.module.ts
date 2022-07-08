@@ -24,7 +24,7 @@ import { ResearchBlocComponent } from './components/research-prospects/research-
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ResearchBlocComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Activity } from 'src/app/models/activity.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { EmailsService } from 'src/app/services/emails/emails.service';
 import { PhonesService } from 'src/app/services/phones/phones.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
+import { ResearchBlocComponent } from '../research-bloc/research-bloc.component';
 
 @Component({
   selector: 'app-each-prospect',
@@ -20,7 +22,7 @@ export class EachProspectComponent implements OnInit {
     private formBuilder: FormBuilder,
     private phonesService: PhonesService,
     private websitesService: WebsitesService,
-    private emailsService: EmailsService
+    private emailsService: EmailsService,
     
   ) { }
 

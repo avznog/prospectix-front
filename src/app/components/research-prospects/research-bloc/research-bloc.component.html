@@ -1,10 +1,10 @@
-<form>
+<form [formGroup]="researchForm">
     <input type="text" placeholder="Rechercher un nom, tel, mail, site, adresse, commentaire" /><br />
-    <label for="activity">Domaine d'acitivité : </label><select id="activity" name="activity">
+    <label for="activity">Domaine d'acitivité : </label><select id="activity" name="activity" formControlName="activity" (change)="onActivityChange()">
        <option selected>Tous les domaines d'activité</option>
        <option *ngFor="let activity of activites">{{activity.name}}</option>
     </select><br />
-    <label for="city">Ville : </label><select id="city" name="city">
+    <label for="city">Ville : </label><select id="city" name="city" formControlName="city" (change)="onCityChange()">
         <option selected>Toutes les villes</option>
         <option *ngFor="let city of cities">{{city.name}}</option>
     </select><br />
