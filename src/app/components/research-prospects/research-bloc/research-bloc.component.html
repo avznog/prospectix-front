@@ -1,6 +1,6 @@
 <form [formGroup]="researchForm">
-    <input type="text" placeholder="Rechercher un nom, tel, mail, site, adresse, commentaire" /><br />
-    <label for="activity">Domaine d'acitivité : </label><select id="activity" name="activity" formControlName="activity" (change)="onActivityChange()">
+    <input type="text" formControlName="searchBar" (input)="onSearchChange()" placeholder="Rechercher un nom, tel, mail, site, adresse, commentaire" /><br />
+    <label for="activity">Domaine d'activité : </label><select id="activity" name="activity" formControlName="activity" (change)="onActivityChange()">
        <option selected>Tous les domaines d'activité</option>
        <option *ngFor="let activity of activites">{{activity.name}}</option>
     </select><br />

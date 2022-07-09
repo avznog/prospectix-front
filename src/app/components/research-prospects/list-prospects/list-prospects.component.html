@@ -1,1 +1,4 @@
-<app-each-prospect *ngFor="let prospect of prospects" [prospect]="prospect"></app-each-prospect>
+<div *ngFor="let prospect of prospects" >
+  <app-each-prospect [prospect]="prospect" *ngIf="(prospect.city.name == currentCity.name || currentCity.name == 'Toutes les villes') && (prospect.activity.name == currentActivity.name || currentActivity.name == 'Tous les domaines d\'activité')"></app-each-prospect>
+</div>
+<p *ngIf="noProspect" style="color:red;">Il n'y a pas de prospect pour ces critères !!!</p>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Activity } from 'src/app/models/activity.model';
+import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 
@@ -8,22 +10,15 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
   styleUrls: ['./list-prospects.component.scss']
 })
 export class ListProspectsComponent implements OnInit {
-  prospects!: Prospect[];
+  @Input() prospects!: Prospect[];
+  @Input() currentCity!: City;
+  @Input() currentActivity!: Activity;
+  @Input() noProspect!: boolean;
   constructor(
     private readonly prospectsService: ProspectsService,
   ) { }
 
   ngOnInit(): void {
-    this.prospectsService.findAll().subscribe({
-      next: (data) => {
-        console.log(data)
-        this.prospects = data;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-    
   }
 
 }

@@ -15,4 +15,16 @@ export class ProspectsService {
   findAll() : Observable<Prospect[]> {
     return this.http.get<Prospect[]>("http://localhost:3000/prospects");
   }
+
+  findAllByActivity(activityName: string) : Observable<Prospect[]> {
+    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-activity/${activityName}`);
+  }
+
+  findAllByCity(cityName: string) : Observable<Prospect[]> {
+    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-city/${cityName}`);
+  }
+
+  findAllByKeyword(keyword: string) : Observable<Prospect[]> {
+    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-keywords/${keyword}`);
+  }
 }

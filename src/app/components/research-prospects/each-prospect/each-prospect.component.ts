@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/models/activity.model';
+import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { EmailsService } from 'src/app/services/emails/emails.service';
 import { PhonesService } from 'src/app/services/phones/phones.service';
@@ -15,6 +16,7 @@ import { ResearchBlocComponent } from '../research-bloc/research-bloc.component'
 })
 export class EachProspectComponent implements OnInit {
   @Input() prospect!: Prospect;
+  @Input() currentCity!: City;
   changeNumberForm!: FormGroup;
   changeEmailForm!: FormGroup;
   changeWebsiteForm!: FormGroup;
