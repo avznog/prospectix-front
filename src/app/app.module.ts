@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
 import { ListProspectsComponent } from './components/research-prospects/list-prospects/list-prospects.component';
-import { EachProspectComponent } from './components/research-prospects/each-prospect/each-prospect.component';
+import { EachProspectComponent } from './components/common/each-prospect/each-prospect.component';
 import { ResearchBlocComponent } from './components/research-prospects/research-bloc/research-bloc.component';
 
 @NgModule({

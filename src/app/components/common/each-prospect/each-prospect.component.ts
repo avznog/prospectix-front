@@ -7,7 +7,7 @@ import { Prospect } from 'src/app/models/prospect.model';
 import { EmailsService } from 'src/app/services/emails/emails.service';
 import { PhonesService } from 'src/app/services/phones/phones.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
-import { ResearchBlocComponent } from '../research-bloc/research-bloc.component';
+import { ResearchBlocComponent } from '../../research-prospects/research-bloc/research-bloc.component';
 
 @Component({
   selector: 'app-each-prospect',
