@@ -1,1 +1,3 @@
-<p>reminders works!</p>
+<h1>Mes rappels</h1>
+<app-reminders-research-bloc [orderByPriority]="orderByPriority" [priority]="priority" (updateOrderByPriorityEvent)="updateOrderByPriority($event)" (updatePriorityEvent)="updatePriority($event)"></app-reminders-research-bloc>
+<app-reminders-liste-prospect [prospects]="prospects" [reminders]="reminders" [priority]="priority"></app-reminders-liste-prospect>
