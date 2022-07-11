@@ -10,8 +10,10 @@ export class RemindersResearchBlocComponent implements OnInit {
   formSearchReminders!: FormGroup;
   @Input() orderByPriority!: boolean;
   @Input() priority!: number;
+  @Input() date!: Date;
   @Output() updateOrderByPriorityEvent = new EventEmitter<boolean>();
   @Output() updatePriorityEvent = new EventEmitter<number>();
+  @Output() updateDateEvent = new EventEmitter<Date>();
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -35,12 +37,20 @@ export class RemindersResearchBlocComponent implements OnInit {
     this.updatePriority(this.formSearchReminders.value["priority"]);
   }
 
+  onDateChange() : void {
+    this.updateDate(this.formSearchReminders.value["date"]);
+  }
+
   updateOrderByPriority(value: boolean) {
     this.updateOrderByPriorityEvent.emit(value);
   }
 
   updatePriority(value: number) {
     this.updatePriorityEvent.emit(value);
+  }
+
+  updateDate(value: Date) {
+    this.updateDateEvent.emit(value);
   }
 
 }

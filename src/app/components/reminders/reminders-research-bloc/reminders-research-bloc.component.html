@@ -1,6 +1,6 @@
 <form [formGroup]="formSearchReminders">
   <input type="text" placeholder="Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." formControlName="searchBar"/><br />
-  <label for="date">Date : </label><input type="date" id="date" formControlName="date" /><br />
+  <label for="date">Date : </label><input type="date" id="date" formControlName="date" (change)="onDateChange()"/><br />
   <label for="futureReminders">Futurs rappels : </label><input type="checkbox" id="futureReminders" formControlName="futureReminders" /><br />
   <label for="previousReminders">Anciens rappels : </label><input type="checkbox" id="previousReminders" formControlName="oldReminders" /><br />
   <label for="orderByPriority">Afficher par ordre de priorité : </label><input type="checkbox" id="orderByPriority" formControlName="orderByPriority" (change)="onOrderPriorityChange()"/><br />

@@ -1,43 +1,38 @@
-<!-- <div style="border: 1px solid black;" *ngIf="reminders[index].priority == priority || (priority != 1 && priority != 2 && priority != 3)">
-  <div><p><b>1. {{prospect.companyName}}</b> | {{prospect.activity.name}} | {{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}</p></div>
-  <div><form [formGroup]="changeNumberForm">{{prospect.phone.number}} <input type="tel" id="number" placeholder="0684653454" formControlName="number"/><button style="color: green;" (click)="onChangePhoneNumber()">Modifier le tel</button></form></div>
-  <div><form [formGroup]="changeEmailForm">{{prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button style="color: green;" (click)="onChangeEmail()">Modifier l'email</button></form></div>
-  <div><form [formGroup]="changeWebsiteForm">{{prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
-  <div>
-    {{prospect.comment}}
+<div *ngIf="prospect">
+  <div style="border: 1px solid black;">
+    <div><p><b>1. {{prospect.companyName}}</b> | {{prospect.activity.name}} | {{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}</p></div>
+    <div><form [formGroup]="changeNumberForm">{{prospect.phone.number}} <input type="tel" id="number" placeholder="0684653454" formControlName="number"/><button style="color: green;" (click)="onChangePhoneNumber()">Modifier le tel</button></form></div>
+    <div><form [formGroup]="changeEmailForm">{{prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button style="color: green;" (click)="onChangeEmail()">Modifier l'email</button></form></div>
+    <div><form [formGroup]="changeWebsiteForm">{{prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
+    <div>
+      {{prospect.comment}}
+    </div>
+    <button style="background-color: orange; border: 1px black solid;">Pas de réponse</button><button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
   </div>
-  <br />
-  <div style="border: 1px green solid;" *ngIf="reminders">
-    Rappel de priorité <b>{{reminders[index].priority}}</b> pour la date du {{reminders[index].date | date:"dd/MM/yyyy"}} à {{reminders[index].date | date:"HH:mm"}}<br />
-    Description => {{reminders[index].description}}
-    <form>
-      <input style="color: green;" type="button" value="Rappel effectué" />
-      <input style="color: red;" type="button" value="Supprimer le rappel"/>
-    </form>
-  </div>
-  <br />
-  <button style="background-color: orange; border: 1px black solid;">Pas de réponse</button><button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+
 </div>
-{{prospect.id}}
-     -->
-<div style="border: 1px solid black;" *ngIf="reminder.priority == priority || (priority != 1 && priority != 2 && priority != 3)">
-<div><p><b>{{reminder.prospect.id}} {{reminder.prospect.companyName}}</b> | {{reminder.prospect.activity.name}} | {{reminder.prospect.streetAddress}}, {{reminder.prospect.city.zipcode}}, {{reminder.prospect.city.name}}, {{reminder.prospect.country.name}}</p></div>
-<div><form [formGroup]="changeNumberForm">{{reminder.prospect.phone.number}} <input type="tel" id="number" placeholder="0684653454" formControlName="number"/><button style="color: green;" (click)="onChangePhoneNumber()">Modifier le tel</button></form></div>
-<div><form [formGroup]="changeEmailForm">{{reminder.prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button style="color: green;" (click)="onChangeEmail()">Modifier l'email</button></form></div>
-<div><form [formGroup]="changeWebsiteForm">{{reminder.prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
-<div>
-  {{reminder.prospect.comment}}
+    
+
+<div *ngIf="reminder">
+  <div style="border: 1px solid black;" *ngIf="reminder.priority == priority || (priority != 1 && priority != 2 && priority != 3)">
+    <div><p><b>{{reminder.prospect.id}} {{reminder.prospect.companyName}}</b> | {{reminder.prospect.activity.name}} | {{reminder.prospect.streetAddress}}, {{reminder.prospect.city.zipcode}}, {{reminder.prospect.city.name}}, {{reminder.prospect.country.name}}</p></div>
+    <div><form [formGroup]="changeNumberForm">{{reminder.prospect.phone.number}} <input type="tel" id="number" placeholder="0684653454" formControlName="number"/><button style="color: green;" (click)="onChangePhoneNumber()">Modifier le tel</button></form></div>
+    <div><form [formGroup]="changeEmailForm">{{reminder.prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button style="color: green;" (click)="onChangeEmail()">Modifier l'email</button></form></div>
+    <div><form [formGroup]="changeWebsiteForm">{{reminder.prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
+    <div>
+      {{reminder.prospect.comment}}
+    </div>
+    <br />
+    <div style="border: 1px green solid;">
+      Rappel de priorité <b>{{reminder.priority}}</b> pour la date du {{reminder.date | date:"dd/MM/yyyy"}} à {{reminder.date | date:"HH:mm"}}<br />
+      Description => {{reminder.description}}
+      <form>
+        <input style="color: green;" type="button" value="Rappel effectué" />
+        <input style="color: red;" type="button" value="Supprimer le rappel"/>
+      </form>
+    </div>
+    <br />
+    <button style="background-color: orange; border: 1px black solid;">Pas de réponse</button><button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+    </div>
+    {{reminder.prospect.id}}
 </div>
-<br />
-<div style="border: 1px green solid;">
-  Rappel de priorité <b>{{reminder.priority}}</b> pour la date du {{reminder.date | date:"dd/MM/yyyy"}} à {{reminder.date | date:"HH:mm"}}<br />
-  Description => {{reminder.description}}
-  <form>
-    <input style="color: green;" type="button" value="Rappel effectué" />
-    <input style="color: red;" type="button" value="Supprimer le rappel"/>
-  </form>
-</div>
-<br />
-<button style="background-color: orange; border: 1px black solid;">Pas de réponse</button><button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
-</div>
-{{reminder.prospect.id}}

@@ -13,6 +13,8 @@ export class RemindersComponent implements OnInit {
   reminders: Reminder[] = [];
   orderByPriority!: boolean;
   priority!: number;
+  date!: Date;
+
   constructor(
     private readonly remindersService: RemindersService
   ) { }
@@ -43,5 +45,10 @@ export class RemindersComponent implements OnInit {
     console.log(newPriority)
     this.priority = newPriority;
     this.reminders.filter((reminder) => reminder.priority === newPriority);
+  }
+
+  updateDate(newDate: Date) {
+    console.log(newDate)
+    this.date = newDate;
   }
 }
