@@ -42,6 +42,6 @@ export class RemindersComponent implements OnInit {
   updatePriority(newPriority: number) {
     console.log(newPriority)
     this.priority = newPriority;
-    this.reminders = this.reminders.filter((reminder) => reminder.priority === newPriority);
+    this.reminders.filter((reminder) => reminder.priority === newPriority);
   }
 }

@@ -16,9 +16,9 @@ import { WebsitesService } from 'src/app/services/websites/websites.service';
 export class EachProspectComponent implements OnInit {
   @Input() prospect!: Prospect;
   @Input() currentCity!: City;
-  @Input() reminders!: Reminder[];
   @Input() index!: number;
   @Input() priority!: number;
+  @Input() reminder!: Reminder;
   changeNumberForm!: FormGroup;
   changeEmailForm!: FormGroup;
   changeWebsiteForm!: FormGroup;

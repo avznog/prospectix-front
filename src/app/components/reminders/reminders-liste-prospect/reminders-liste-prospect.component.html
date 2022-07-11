@@ -1,1 +1,2 @@
-<app-each-prospect *ngFor="let prospect of prospects; let i = index;" [index]="i" [prospect]="prospect" [reminders]="reminders" [priority]="priority"></app-each-prospect>
+<!-- <app-each-prospect *ngFor="let prospect of prospects; let i = index;" [index]="i" [prospect]="prospect" [reminders]="reminders" [priority]="priority"></app-each-prospect> -->
+<app-each-prospect *ngFor="let reminder of reminders" [reminder]="reminder" [priority]="priority"></app-each-prospect>
