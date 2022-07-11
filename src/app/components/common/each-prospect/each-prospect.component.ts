@@ -27,7 +27,6 @@ export class EachProspectComponent implements OnInit {
     private phonesService: PhonesService,
     private websitesService: WebsitesService,
     private emailsService: EmailsService,
-    
   ) { }
 
   ngOnInit(): void {

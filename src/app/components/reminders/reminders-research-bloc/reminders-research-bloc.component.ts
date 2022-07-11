@@ -24,7 +24,7 @@ export class RemindersResearchBlocComponent implements OnInit {
       date: [Date, Validators.required],
       futureReminders: [true, Validators.required],
       oldReminders: [true, Validators.required],
-      orderByPriority: [true, Validators.required],
+      orderByPriority: [false, Validators.required],
       priority: [0, Validators.required]
     });
   }
