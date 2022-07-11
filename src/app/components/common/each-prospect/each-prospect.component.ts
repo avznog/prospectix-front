@@ -6,6 +6,7 @@ import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { EmailsService } from 'src/app/services/emails/emails.service';
 import { PhonesService } from 'src/app/services/phones/phones.service';
+import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class EachProspectComponent implements OnInit {
     private phonesService: PhonesService,
     private websitesService: WebsitesService,
     private emailsService: EmailsService,
+    private remindersService: RemindersService
   ) { }
 
   ngOnInit(): void {
@@ -56,5 +58,10 @@ export class EachProspectComponent implements OnInit {
   onChangeWebsite() : Subscription {
     console.log("website changed")
     return this.websitesService.updateWebsite(this.prospect.website.id, { website: this.changeWebsiteForm.value["website"] });
+  }
+
+  onDeleteReminder(idReminder: number) : Subscription {
+    console.log("reminder deleted")
+    return this.remindersService.deleteReminder(idReminder);
   }
 }

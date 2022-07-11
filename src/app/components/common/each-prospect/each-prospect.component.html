@@ -28,7 +28,7 @@
       Description => {{reminder.description}}
       <form>
         <input style="color: green;" type="button" value="Rappel effectué" />
-        <input style="color: red;" type="button" value="Supprimer le rappel"/>
+        <input style="color: red;" type="button" value="Supprimer le rappel" (click)="onDeleteReminder(reminder.id)"/>
       </form>
     </div>
     <br />
