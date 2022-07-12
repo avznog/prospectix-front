@@ -1,3 +1,27 @@
 <h1>Mes rappels</h1>
-<app-reminders-research-bloc [orderByPriority]="orderByPriority" [priority]="priority" [date]="date" (updateOrderByPriorityEvent)="updateOrderByPriority($event)" (updatePriorityEvent)="updatePriority($event)" (updateDateEvent)="updateDate($event)"></app-reminders-research-bloc>
-<app-reminders-liste-prospect [prospects]="prospects" [reminders]="reminders" [priority]="priority"></app-reminders-liste-prospect>
+<app-reminders-research-bloc 
+
+[orderByPriority]="orderByPriority" 
+[priority]="priority" [date]="date" 
+[remindersDone]="remindersDone" 
+[futureReminders]="futureReminders" 
+[previousReminders]="previousReminders" 
+
+(updateOrderByPriorityEvent)="updateOrderByPriority($event)" 
+(updatePriorityEvent)="updatePriority($event)" 
+(updateDateEvent)="updateDate($event)" 
+(updateRemindersDoneEvent)="updateRemindersDone($event)"
+(updateFutureRemindersEvent)="updateFutureReminders($event)"
+(updatePreviousRemindersEvent)="updatePreviousReminders($event)"
+
+></app-reminders-research-bloc>
+<app-reminders-liste-prospect 
+
+[prospects]="prospects" 
+[reminders]="reminders" 
+[priority]="priority" 
+[remindersDone]="remindersDone"
+[futureReminders]="futureReminders"
+[previousReminders]="previousReminders"
+
+></app-reminders-liste-prospect>

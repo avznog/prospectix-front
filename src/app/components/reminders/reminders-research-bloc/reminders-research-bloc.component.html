@@ -1,8 +1,9 @@
 <form [formGroup]="formSearchReminders">
   <input type="text" placeholder="Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." formControlName="searchBar"/><br />
   <label for="date">Date : </label><input type="date" id="date" formControlName="date" (change)="onDateChange()"/><br />
-  <label for="futureReminders">Futurs rappels : </label><input type="checkbox" id="futureReminders" formControlName="futureReminders" /><br />
-  <label for="previousReminders">Anciens rappels : </label><input type="checkbox" id="previousReminders" formControlName="oldReminders" /><br />
+  <label for="futureReminders">Futurs rappels (par rapport à ajd) : </label><input type="checkbox" id="futureReminders" formControlName="futureReminders" (change)="onChangeFutureReminders()"/><br />
+  <label for="previousReminders">Anciens rappels (par rapport à ajd) : </label><input type="checkbox" id="previousReminders" formControlName="previousReminders" (change)="onChangePreviousReminders()"/><br />
+  <label for="remindersDone">Rappels effectués : </label><input type="checkbox" id="remindersDone" formControlName="remindersDone" (change)="onChangeRemindersDone()"/><br />
   <label for="orderByPriority">Afficher par ordre de priorité : </label><input type="checkbox" id="orderByPriority" formControlName="orderByPriority" (change)="onOrderPriorityChange()"/><br />
   <label for="priority">Afficher les rappels de priorité : </label><input type="number" id="priority" placeholder="0" formControlName="priority" (change)="onPriorityChange()" /><br />
   <input type="submit" value="Rechercher" />

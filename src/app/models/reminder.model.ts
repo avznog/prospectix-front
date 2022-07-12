@@ -8,5 +8,5 @@ export interface Reminder {
   date: Date;
   pm: ProjectManager;
   prospect: Prospect;
-  
+  done: boolean;
 }

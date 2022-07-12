@@ -14,6 +14,9 @@ export class RemindersComponent implements OnInit {
   orderByPriority!: boolean;
   priority!: number;
   date!: Date;
+  remindersDone!: boolean;
+  futureReminders!: boolean;
+  previousReminders!: boolean;
 
   constructor(
     private readonly remindersService: RemindersService
@@ -33,6 +36,10 @@ export class RemindersComponent implements OnInit {
           console.log(err);
         }
       });
+      this.remindersDone = false;
+      this.futureReminders = true;
+      this.previousReminders = true;
+      this.priority = 0;
   }
 
   updateOrderByPriority(newOrderByPriority: boolean) {
@@ -51,4 +58,19 @@ export class RemindersComponent implements OnInit {
     if(newDate)
       this.reminders.filter((reminder) => reminder.date.toString().split("T")[0] == newDate.toString()); 
   }
-}
+
+  updateRemindersDone(newRemindersDone: boolean) {
+    console.log(newRemindersDone ? "display reminders done" : "display reminders not done yet");
+    this.remindersDone = newRemindersDone;
+  }
+
+  updateFutureReminders(newFutureReminders: boolean) {
+    console.log("display future reminders");
+    this.futureReminders = newFutureReminders;
+  }
+
+  updatePreviousReminders(newPreviousReminders: boolean) {
+    console.log("display previous reminders");
+    this.previousReminders = newPreviousReminders;
+  }
+ }

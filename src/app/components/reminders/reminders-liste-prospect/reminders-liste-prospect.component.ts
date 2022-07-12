@@ -11,6 +11,9 @@ export class RemindersListeProspectComponent implements OnInit {
   @Input() prospects!: Prospect[];
   @Input() reminders!: Reminder[];
   @Input() priority!: number;
+  @Input() remindersDone!: boolean;
+  @Input() futureReminders!: boolean;
+  @Input() previousReminders!: boolean;
   constructor() { }
 
   ngOnInit(): void {

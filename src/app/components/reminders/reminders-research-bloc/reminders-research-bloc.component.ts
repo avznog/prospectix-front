@@ -11,9 +11,16 @@ export class RemindersResearchBlocComponent implements OnInit {
   @Input() orderByPriority!: boolean;
   @Input() priority!: number;
   @Input() date!: Date;
+  @Input() remindersDone!: boolean;
+  @Input() futureReminders!: boolean;
+  @Input() previousReminders!: boolean;
   @Output() updateOrderByPriorityEvent = new EventEmitter<boolean>();
   @Output() updatePriorityEvent = new EventEmitter<number>();
   @Output() updateDateEvent = new EventEmitter<Date>();
+  @Output() updateRemindersDoneEvent = new EventEmitter<boolean>();
+  @Output() updateFutureRemindersEvent = new EventEmitter<boolean>();
+  @Output() updatePreviousRemindersEvent = new EventEmitter<boolean>();
+
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -23,7 +30,8 @@ export class RemindersResearchBlocComponent implements OnInit {
       searchBar: ["", Validators.required],
       date: [Date, Validators.required],
       futureReminders: [true, Validators.required],
-      oldReminders: [true, Validators.required],
+      previousReminders: [true, Validators.required],
+      remindersDone: [false, Validators.required],
       orderByPriority: [false, Validators.required],
       priority: [0, Validators.required]
     });
@@ -41,6 +49,18 @@ export class RemindersResearchBlocComponent implements OnInit {
     this.updateDate(this.formSearchReminders.value["date"]);
   }
 
+  onChangeRemindersDone() : void {
+    this.updateRemindersDone(this.formSearchReminders.value["remindersDone"]);
+  }
+
+  onChangeFutureReminders() : void {
+    this.updateFutureReminders(this.formSearchReminders.value["futureReminders"]);
+  }
+
+  onChangePreviousReminders() : void {
+    this.updatePreviousReminders(this.formSearchReminders.value["previousReminders"]);
+  }
+
   updateOrderByPriority(value: boolean) {
     this.updateOrderByPriorityEvent.emit(value);
   }
@@ -51,6 +71,18 @@ export class RemindersResearchBlocComponent implements OnInit {
 
   updateDate(value: Date) {
     this.updateDateEvent.emit(value);
+  }
+
+  updateRemindersDone(value: boolean) {
+    this.updateRemindersDoneEvent.emit(value);
+  }
+
+  updateFutureReminders(value: boolean) {
+    this.updateFutureRemindersEvent.emit(value);
+  }
+
+  updatePreviousReminders(value: boolean) {
+    this.updatePreviousRemindersEvent.emit(value);
   }
 
 }

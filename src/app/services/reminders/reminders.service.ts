@@ -17,6 +17,14 @@ export class RemindersService {
   }
 
   deleteReminder(idReminder: number) : Subscription {
-    return this.http.delete(`http://localhost:3000/reminders/delete/${idReminder}`).subscribe();
+    return this.http.delete<Reminder>(`http://localhost:3000/reminders/delete/${idReminder}`).subscribe();
+  }
+
+  markDone(idReminder: number) : Subscription {
+    return this.http.get<Reminder>(`http://localhost:3000/reminders/mark-done/${idReminder}`).subscribe();
+  }
+
+  markUndone(idReminder: number) : Subscription {
+    return this.http.get<Reminder>(`http://localhost:3000/reminders/mark-undone/${idReminder}`).subscribe();
   }
 }

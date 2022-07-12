@@ -19,6 +19,10 @@ export class EachProspectComponent implements OnInit {
   @Input() currentCity!: City;
   @Input() priority!: number;
   @Input() reminder!: Reminder;
+  @Input() remindersDone!: boolean;
+  @Input() futureReminders!: boolean;
+  @Input() previousReminders!: boolean;
+  today = new Date();
   changeNumberForm!: FormGroup;
   changeEmailForm!: FormGroup;
   changeWebsiteForm!: FormGroup;
@@ -43,25 +47,51 @@ export class EachProspectComponent implements OnInit {
     this.changeWebsiteForm = this.formBuilder.group({
       website: ["", Validators.required]
     })
+
   }
 
   onChangePhoneNumber() : Subscription {
     console.log("phone changed")
-    return this.phonesService.updatePhoneNumber(this.prospect.phone.id, { number: this.changeNumberForm.value["number"]});
+    if(this.prospect){
+      console.log("mode prospect")
+      return this.phonesService.updatePhoneNumber(this.prospect.phone.id, { number: this.changeNumberForm.value["number"]});
+    }else {
+      console.log("mode reminder")
+      return this.phonesService.updatePhoneNumber(this.reminder.prospect.id, { number: this.changeNumberForm.value["number"]});
+    }
+    
   }
 
   onChangeEmail() : Subscription {
     console.log("email changed")
-    return this.emailsService.updateEmail(this.prospect.email.id, { email: this.changeEmailForm.value["email"] });
+    if(this.prospect){
+      return this.emailsService.updateEmail(this.prospect.email.id, { email: this.changeEmailForm.value["email"] });
+    } else {
+      return this.emailsService.updateEmail(this.reminder.prospect.id, { email: this.changeEmailForm.value["email"]});
+    }
   }
 
   onChangeWebsite() : Subscription {
     console.log("website changed")
-    return this.websitesService.updateWebsite(this.prospect.website.id, { website: this.changeWebsiteForm.value["website"] });
+    if(this.prospect) {
+      return this.websitesService.updateWebsite(this.prospect.website.id, { website: this.changeWebsiteForm.value["website"] });
+    } else {
+      return this.websitesService.updateWebsite(this.reminder.prospect.id, { website: this.changeWebsiteForm.value["website"]});
+    }
   }
 
   onDeleteReminder(idReminder: number) : Subscription {
     console.log("reminder deleted")
     return this.remindersService.deleteReminder(idReminder);
+  }
+
+  onMarkDone(idreminder: number) : Subscription {
+    console.log("reminder marked done");
+    return this.remindersService.markDone(idreminder);
+  }
+
+  onMarkUndone(idReminder: number) : Subscription {
+    console.log("reminder marked undone");
+    return this.remindersService.markUndone(idReminder);
   }
 }
