@@ -55,6 +55,8 @@ export class RemindersComponent implements OnInit {
   }
 
   updateDate(newDate: Date) {
+    // console.log(this.reminders[0].date.toString().split("T")[0] == newDate.toString() ? "true" : "false")
+    console.log(this.reminders.filter((reminder) => reminder.date.toString().split("T")[0] == newDate.toString())); 
     if(newDate)
       this.reminders.filter((reminder) => reminder.date.toString().split("T")[0] == newDate.toString()); 
   }
