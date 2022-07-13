@@ -76,4 +76,9 @@ export class RemindersComponent implements OnInit {
     console.log("display previous reminders");
     this.previousReminders = newPreviousReminders;
   }
+
+  updateReminders(newReminders: Reminder[]) {
+    this.reminders = newReminders;
+  }
+
  }

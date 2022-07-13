@@ -7,6 +7,7 @@
 [futureReminders]="futureReminders" 
 [previousReminders]="previousReminders" 
 [date]="date"
+[reminders]="reminders"
 
 (updateOrderByPriorityEvent)="updateOrderByPriority($event)" 
 (updatePriorityEvent)="updatePriority($event)" 
@@ -14,6 +15,7 @@
 (updateRemindersDoneEvent)="updateRemindersDone($event)"
 (updateFutureRemindersEvent)="updateFutureReminders($event)"
 (updatePreviousRemindersEvent)="updatePreviousReminders($event)"
+(updateRemindersEvent)="updateReminders($event)"
 
 ></app-reminders-research-bloc>
 <app-reminders-liste-prospect 

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Reminder } from 'src/app/models/reminder.model';
+import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
   selector: 'app-reminders-research-bloc',
@@ -14,15 +16,18 @@ export class RemindersResearchBlocComponent implements OnInit {
   @Input() remindersDone!: boolean;
   @Input() futureReminders!: boolean;
   @Input() previousReminders!: boolean;
+  @Input() reminders!: Reminder[];
   @Output() updateOrderByPriorityEvent = new EventEmitter<boolean>();
   @Output() updatePriorityEvent = new EventEmitter<number>();
   @Output() updateDateEvent = new EventEmitter<Date>();
   @Output() updateRemindersDoneEvent = new EventEmitter<boolean>();
   @Output() updateFutureRemindersEvent = new EventEmitter<boolean>();
   @Output() updatePreviousRemindersEvent = new EventEmitter<boolean>();
+  @Output() updateRemindersEvent = new EventEmitter<Reminder[]>();
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private readonly remindersServcice: RemindersService
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +66,24 @@ export class RemindersResearchBlocComponent implements OnInit {
     this.updatePreviousReminders(this.formSearchReminders.value["previousReminders"]);
   }
 
+  onEditSearchBar() : void {
+    if(this.formSearchReminders.value["searchBar"] != ""){
+      this.remindersServcice.findAllByKeyword(this.formSearchReminders.value["searchBar"])
+      .subscribe({
+        next: (data) => {
+          console.log("reminders updated");
+          this.updateReminders(data);
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      });
+    }
+    
+  }
+
+
+
   updateOrderByPriority(value: boolean) {
     this.updateOrderByPriorityEvent.emit(value);
   }
@@ -83,6 +106,10 @@ export class RemindersResearchBlocComponent implements OnInit {
 
   updatePreviousReminders(value: boolean) {
     this.updatePreviousRemindersEvent.emit(value);
+  }
+
+  updateReminders(value: Reminder[]) {
+    this.updateRemindersEvent.emit(value);
   }
 
 }

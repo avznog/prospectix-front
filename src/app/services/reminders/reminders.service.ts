@@ -27,4 +27,8 @@ export class RemindersService {
   markUndone(idReminder: number) : Subscription {
     return this.http.get<Reminder>(`http://localhost:3000/reminders/mark-undone/${idReminder}`).subscribe();
   }
+
+  findAllByKeyword(keyword: string) : Observable<Reminder[]> {
+    return this.http.get<Reminder[]>(`http://localhost:3000/reminders/by-keyword/${keyword}`);
+  }
 }

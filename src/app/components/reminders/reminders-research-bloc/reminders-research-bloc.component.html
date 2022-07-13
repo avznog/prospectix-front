@@ -1,5 +1,5 @@
 <form [formGroup]="formSearchReminders">
-  <input type="text" placeholder="Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." formControlName="searchBar"/><br />
+  <input type="text" placeholder="Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." formControlName="searchBar" (input)="onEditSearchBar()"/><br />
   <label for="date">Date : </label><input type="date" id="date" formControlName="date" (change)="onDateChange()"/><br />
   <label for="futureReminders">Futurs rappels (par rapport à ajd) : </label><input type="checkbox" id="futureReminders" formControlName="futureReminders" (change)="onChangeFutureReminders()"/><br />
   <label for="previousReminders">Anciens rappels (par rapport à ajd) : </label><input type="checkbox" id="previousReminders" formControlName="previousReminders" (change)="onChangePreviousReminders()"/><br />
