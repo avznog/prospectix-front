@@ -14,6 +14,7 @@ export class RemindersListeProspectComponent implements OnInit {
   @Input() remindersDone!: boolean;
   @Input() futureReminders!: boolean;
   @Input() previousReminders!: boolean;
+  @Input() date!: Date;
   constructor() { }
 
   ngOnInit(): void {

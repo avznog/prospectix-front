@@ -22,6 +22,7 @@ export class EachProspectComponent implements OnInit {
   @Input() remindersDone!: boolean;
   @Input() futureReminders!: boolean;
   @Input() previousReminders!: boolean;
+  @Input() date!: Date;
   today = new Date();
   changeNumberForm!: FormGroup;
   changeEmailForm!: FormGroup;
