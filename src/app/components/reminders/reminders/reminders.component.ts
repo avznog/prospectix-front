@@ -27,10 +27,6 @@ export class RemindersComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.reminders = this.orderByPriority ? data.sort( (a: Reminder, b: Reminder) => (a.priority - b.priority)) : data;
-         for(let reminder of data) {
-          console.log(data)
-          this.prospects.push(reminder.prospect);
-         } 
         },
         error: (err) => {
           console.log(err);
