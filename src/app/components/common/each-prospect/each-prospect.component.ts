@@ -27,7 +27,7 @@ export class EachProspectComponent implements OnInit {
   changeNumberForm!: FormGroup;
   changeEmailForm!: FormGroup;
   changeWebsiteForm!: FormGroup;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private phonesService: PhonesService,
@@ -60,7 +60,7 @@ export class EachProspectComponent implements OnInit {
       console.log("mode reminder")
       return this.phonesService.updatePhoneNumber(this.reminder.prospect.id, { number: this.changeNumberForm.value["number"]});
     }
-    
+
   }
 
   onChangeEmail() : Subscription {
@@ -86,12 +86,12 @@ export class EachProspectComponent implements OnInit {
     return this.remindersService.deleteReminder(idReminder);
   }
 
-  onMarkDone(idreminder: number) : Subscription {
+  onMarkReminderDone(idreminder: number) : Subscription {
     console.log("reminder marked done");
     return this.remindersService.markDone(idreminder);
   }
 
-  onMarkUndone(idReminder: number) : Subscription {
+  onMarkReminderUndone(idReminder: number) : Subscription {
     console.log("reminder marked undone");
     return this.remindersService.markUndone(idReminder);
   }

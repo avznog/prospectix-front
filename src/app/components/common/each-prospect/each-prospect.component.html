@@ -11,7 +11,7 @@
   </div>
 
 </div>
-    
+
 
 <div *ngIf="reminder">
   <div *ngIf="((remindersDone && reminder.done) || (!remindersDone && !reminder.done))">
@@ -30,7 +30,7 @@
             Rappel de priorité <b>{{reminder.priority}}</b> pour la date du {{reminder.date | date:"dd/MM/yyyy"}} à {{reminder.date | date:"HH:mm"}}<br />
             Description => {{reminder.description}}
             <form>
-              <input style="color: green;" type="button" value='{{reminder.done ? "Rendre le rappel disponible" : "Le rappel a été effecuté"}}' (click)="reminder.done ? onMarkUndone(reminder.id) : onMarkDone(reminder.id)"/>
+              <input style="color: green;" type="button" value='{{reminder.done ? "Rendre le rappel disponible" : "Le rappel a été effecuté"}}' (click)="reminder.done ? onMarkReminderUndone(reminder.id) : onMarkReminderDone(reminder.id)"/>
               <input style="color: red;" type="button" value="Supprimer le rappel" (click)="onDeleteReminder(reminder.id)"/>
             </form>
           </div>
