@@ -2,9 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { City } from 'src/app/models/city.model';
+import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { EmailsService } from 'src/app/services/emails/emails.service';
+import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { PhonesService } from 'src/app/services/phones/phones.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
@@ -15,25 +17,41 @@ import { WebsitesService } from 'src/app/services/websites/websites.service';
   styleUrls: ['./each-prospect.component.scss']
 })
 export class EachProspectComponent implements OnInit {
+
+  //prospects
   @Input() prospect!: Prospect;
   @Input() currentCity!: City;
-  @Input() priority!: number;
+
+  //reminders
   @Input() reminder!: Reminder;
+  @Input() priority!: number;
   @Input() remindersDone!: boolean;
   @Input() futureReminders!: boolean;
   @Input() previousReminders!: boolean;
   @Input() date!: Date;
+
+  //meetings
+  @Input() meeting!: Meeting;
+  @Input() meetingsDone!: boolean;
+  @Input() futureMeetings!: boolean;
+  @Input() previousMeetings!: boolean;
+  @Input() typeMeeting!: string;
+
   today = new Date();
+
   changeNumberForm!: FormGroup;
   changeEmailForm!: FormGroup;
   changeWebsiteForm!: FormGroup;
   
   constructor(
     private formBuilder: FormBuilder,
+
     private phonesService: PhonesService,
     private websitesService: WebsitesService,
     private emailsService: EmailsService,
-    private remindersService: RemindersService
+
+    private remindersService: RemindersService,
+    private meetingsService: MeetingsService
   ) { }
 
   ngOnInit(): void {
@@ -54,11 +72,13 @@ export class EachProspectComponent implements OnInit {
   onChangePhoneNumber() : Subscription {
     console.log("phone changed")
     if(this.prospect){
-      console.log("mode prospect")
       return this.phonesService.updatePhoneNumber(this.prospect.phone.id, { number: this.changeNumberForm.value["number"]});
-    }else {
-      console.log("mode reminder")
+    } else if (this.meeting) {
+      return this.phonesService.updatePhoneNumber(this.meeting.prospect.id, { number: this.changeNumberForm.value["number"]});
+    } else if (this.reminder) {
       return this.phonesService.updatePhoneNumber(this.reminder.prospect.id, { number: this.changeNumberForm.value["number"]});
+    } else {
+      throw new Error("Impossible de changer le mail");
     }
     
   }
@@ -67,8 +87,12 @@ export class EachProspectComponent implements OnInit {
     console.log("email changed")
     if(this.prospect){
       return this.emailsService.updateEmail(this.prospect.email.id, { email: this.changeEmailForm.value["email"] });
-    } else {
+    } else if (this.meeting) {
+      return this.emailsService.updateEmail(this.meeting.prospect.id, { email: this.changeEmailForm.value["email"]});
+    } else if (this.reminder){
       return this.emailsService.updateEmail(this.reminder.prospect.id, { email: this.changeEmailForm.value["email"]});
+    } else {
+      throw new Error("Impossible de changer le mail");
     }
   }
 
@@ -76,23 +100,43 @@ export class EachProspectComponent implements OnInit {
     console.log("website changed")
     if(this.prospect) {
       return this.websitesService.updateWebsite(this.prospect.website.id, { website: this.changeWebsiteForm.value["website"] });
-    } else {
+    } else if (this.meeting) {
+      return this.websitesService.updateWebsite(this.meeting.prospect.id, { website: this.changeWebsiteForm.value["website"] });
+    } else if (this.reminder) {
       return this.websitesService.updateWebsite(this.reminder.prospect.id, { website: this.changeWebsiteForm.value["website"]});
+    } else {
+      throw new Error("Impossible de changer le site internet");
     }
   }
 
   onDeleteReminder(idReminder: number) : Subscription {
-    console.log("reminder deleted")
+    console.log("reminder deleted");
     return this.remindersService.deleteReminder(idReminder);
   }
 
-  onMarkDone(idreminder: number) : Subscription {
+  onMarkReminderDone(idreminder: number) : Subscription {
     console.log("reminder marked done");
     return this.remindersService.markDone(idreminder);
   }
 
-  onMarkUndone(idReminder: number) : Subscription {
+  onMarkReminderUndone(idReminder: number) : Subscription {
     console.log("reminder marked undone");
     return this.remindersService.markUndone(idReminder);
+  }
+
+  
+  onDeleteMeeting(idMeeting: number) : Subscription {
+    console.log("meeting deleted");
+    return this.meetingsService.deleteMeeting(idMeeting);
+  }
+
+  onMarkMeetingDone(idMeeting: number) : Subscription {
+    console.log("meeting marked done");
+    return this.meetingsService.markDone(idMeeting);
+  }
+
+  onMarkMeetingUndone(idMeeting: number) : Subscription {
+    console.log("meeting marked undone");
+    return this.meetingsService.markUndone(idMeeting);
   }
 }

@@ -1,1 +1,10 @@
-<p>meetings-liste-prospect works!</p>
+<app-each-prospect
+*ngFor="let meeting of meetings"
+
+[meeting]="meeting"
+[meetingsDone]="meetingsDone"
+[date]="date"
+[futureMeetings]="futureMeetings"
+[previousMeetings]="previousMeetings"
+[typeMeeting]="typeMeeting"
+></app-each-prospect>

@@ -8,13 +8,15 @@ import { MeetingsListeProspectComponent } from './components/meetings/meetings-l
 import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EachProspectComponent } from './components/common/each-prospect/each-prospect.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MeetingsComponent,
     MeetingsListeProspectComponent,
-    MeetingsResearchBlocComponent
+    MeetingsResearchBlocComponent,
+    EachProspectComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,12 @@
 <form [formGroup]="formSearchMeetings">
-  <input type="text" placeholder="Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." formControlName="searchBar" (input)="onMeetingEditSearchBar()"/><br />
-  <label for="date">Date : </label><input type="date" id="date" formControlName="date" (change)="onMeetingDateChange()"/><br />
-  <label for="futureReminders">Futurs rappels (par rapport à ajd) : </label><input type="checkbox" id="futureReminders" formControlName="futureReminders" (change)="onChangeFutureMeeting()"/><br />
-  <label for="previousReminders">Anciens rappels (par rapport à ajd) : </label><input type="checkbox" id="previousReminders" formControlName="previousReminders" (change)="onChangePreviousReminders()"/><br />
-  <label for="remindersDone">Rappels effectués : </label><input type="checkbox" id="remindersDone" formControlName="remindersDone" (change)="onChangeRemindersDone()"/><br />
-  <label for="orderByPriority">Afficher par ordre de priorité : </label><input type="checkbox" id="orderByPriority" formControlName="orderByPriority" (change)="onOrderPriorityChange()"/><br />
-  <label for="priority">Afficher les rappels de priorité : </label><input type="number" id="priority" placeholder="0" formControlName="priority" (change)="onPriorityChange()" /><br />
+  <input type="text" placeholder="Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." formControlName="searchBar" (input)="onMeetingsEditSearchBar()"/><br />
+  <label for="date">Date : </label><input type="date" id="date" formControlName="date" (change)="onMeetingsDateChange()"/><br />
+  <label for="futureMeetings">Futurs rendez-vous (par rapport à ajd) : </label><input type="checkbox" id="futureMeetings" formControlName="futureMeetings" (change)="onChangeFutureMeetings()"/><br />
+  <label for="previousMeetings">Anciens rendez-vous (par rapport à ajd) : </label><input type="checkbox" id="previousMeetings" formControlName="previousMeetings" (change)="onChangePreviousMeetings()"/><br />
+  <label for="meetingsDone">Rendez-vous effectués : </label><input type="checkbox" id="meetingsDone" formControlName="meetingsDone" (change)="onChangeMeetingsDone()"/><br />
+  <label for="typeMeeting">Type de rendez-vous</label><select id="typeMeeting" name="typeMeeting" formControlName="typeMeeting" (change)="onChangeMeetingType()">
+    <option selected>Tous les types</option>
+    <option *ngFor="let typeMeeting of meetingTypeKeys">{{typeMeeting}}</option>
+  </select><br />
   <input type="submit" value="Rechercher" />
 </form>
