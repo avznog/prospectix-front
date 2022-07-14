@@ -78,6 +78,16 @@ export class RemindersResearchBlocComponent implements OnInit {
           console.log(err)
         }
       });
+    } else {
+      this.remindersServcice.findAll()
+        .subscribe({
+          next: (data) => {
+            this.updateReminders(data);
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        })
     }
     
   }
