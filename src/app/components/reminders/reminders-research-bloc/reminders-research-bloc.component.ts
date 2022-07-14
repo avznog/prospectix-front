@@ -42,15 +42,15 @@ export class RemindersResearchBlocComponent implements OnInit {
     });
   }
 
-  onOrderPriorityChange() : void {
+  onRemindersOrderPriorityChange() : void {
     this.updateOrderByPriority(this.formSearchReminders.value["orderByPriority"]);
   }
 
-  onPriorityChange() : void {
+  onRemindersPriorityChange() : void {
     this.updatePriority(this.formSearchReminders.value["priority"]);
   }
 
-  onDateChange() : void {
+  onRemindersDateChange() : void {
     this.updateDate(this.formSearchReminders.value["date"]);
   }
 
@@ -66,7 +66,7 @@ export class RemindersResearchBlocComponent implements OnInit {
     this.updatePreviousReminders(this.formSearchReminders.value["previousReminders"]);
   }
 
-  onEditSearchBar() : void {
+  onRemindersEditSearchBar() : void {
     if(this.formSearchReminders.value["searchBar"] != ""){
       this.remindersServcice.findAllByKeyword(this.formSearchReminders.value["searchBar"])
       .subscribe({
