@@ -8,6 +8,7 @@ import { Reminder } from 'src/app/models/reminder.model';
 import { EmailsService } from 'src/app/services/emails/emails.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { PhonesService } from 'src/app/services/phones/phones.service';
+import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
 
@@ -42,6 +43,7 @@ export class EachProspectComponent implements OnInit {
   changeNumberForm!: FormGroup;
   changeEmailForm!: FormGroup;
   changeWebsiteForm!: FormGroup;
+  changeCommentForm!: FormGroup;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -49,6 +51,7 @@ export class EachProspectComponent implements OnInit {
     private phonesService: PhonesService,
     private websitesService: WebsitesService,
     private emailsService: EmailsService,
+    private prospectService: ProspectsService,
 
     private remindersService: RemindersService,
     private meetingsService: MeetingsService
@@ -65,7 +68,11 @@ export class EachProspectComponent implements OnInit {
 
     this.changeWebsiteForm = this.formBuilder.group({
       website: ["", Validators.required]
-    })
+    });
+
+    this.changeCommentForm = this.formBuilder.group({
+      comment: ["", Validators.required]
+    });
 
   }
 
@@ -148,5 +155,19 @@ export class EachProspectComponent implements OnInit {
     } else if (this.meeting) {
       window.open(`http://www.google.fr/search?q=${this.meeting.prospect.companyName}`, "_blank")
     }
+  }
+
+  onChangeComment() {
+    
+    if(this.changeCommentForm.value["comment"] != ""){
+      if(this.prospect) {
+        this.prospectService.updateComment(this.prospect.id, { comment: this.changeCommentForm.value["comment"] });
+      } else if (this.reminder) {
+        this.prospectService.updateComment(this.reminder.prospect.id, { comment: this.changeCommentForm.value["comment"] });
+      } else if (this.meeting) {
+        this.prospectService.updateComment(this.meeting.prospect.id, { comment: this.changeCommentForm.value["comment"] });
+      }
+    }
+    
   }
 }
