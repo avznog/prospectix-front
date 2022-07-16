@@ -17,6 +17,8 @@ export class RemindersResearchBlocComponent implements OnInit {
   @Input() futureReminders!: boolean;
   @Input() previousReminders!: boolean;
   @Input() reminders!: Reminder[];
+  @Input() remindersDateDown!: Date;
+  @Input() remindersDateUp!: Date;
   @Output() updateOrderByPriorityEvent = new EventEmitter<boolean>();
   @Output() updatePriorityEvent = new EventEmitter<number>();
   @Output() updateDateEvent = new EventEmitter<Date>();
@@ -24,6 +26,8 @@ export class RemindersResearchBlocComponent implements OnInit {
   @Output() updateFutureRemindersEvent = new EventEmitter<boolean>();
   @Output() updatePreviousRemindersEvent = new EventEmitter<boolean>();
   @Output() updateRemindersEvent = new EventEmitter<Reminder[]>();
+  @Output() updateRemindersDateDownEvent = new EventEmitter<Date>();
+  @Output() updateRemindersDateUpEvent = new EventEmitter<Date>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,7 +42,9 @@ export class RemindersResearchBlocComponent implements OnInit {
       previousReminders: [true, Validators.required],
       remindersDone: [false, Validators.required],
       orderByPriority: [false, Validators.required],
-      priority: [0, Validators.required]
+      priority: [0, Validators.required],
+      dateDown: [Date, Validators.required],
+      dateUp: [Date, Validators.required]
     });
   }
 
@@ -52,6 +58,14 @@ export class RemindersResearchBlocComponent implements OnInit {
 
   onRemindersDateChange() : void {
     this.updateDate(this.formSearchReminders.value["date"]);
+  }
+
+  onRemindersDateDownChange() : void {
+    this.updateRemindersDateDown(this.formSearchReminders.value["dateDown"]);
+  }
+
+  onRemindersDateUpChange() : void {
+    this.updateRemindersDateUp(this.formSearchReminders.value["dateUp"]);
   }
 
   onChangeRemindersDone() : void {
@@ -120,6 +134,14 @@ export class RemindersResearchBlocComponent implements OnInit {
 
   updateReminders(value: Reminder[]) {
     this.updateRemindersEvent.emit(value);
+  }
+
+  updateRemindersDateDown(value: Date) {
+    this.updateRemindersDateDownEvent.emit(value);
+  }
+
+  updateRemindersDateUp(value: Date) {
+    this.updateRemindersDateUpEvent.emit(value);
   }
 
 }

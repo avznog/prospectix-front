@@ -17,6 +17,8 @@ export class RemindersComponent implements OnInit {
   remindersDone!: boolean;
   futureReminders!: boolean;
   previousReminders!: boolean;
+  remindersDateDown!: Date;
+  remindersDateUp!: Date;
 
   constructor(
     private readonly remindersService: RemindersService
@@ -75,4 +77,11 @@ export class RemindersComponent implements OnInit {
     this.reminders.sort((a: Reminder, b :Reminder) => new Date(a.date).getTime() - new Date(b.date).getTime());;
   }
 
+  updateRemindersDateDown(newRemindersDateDown: Date) {
+    this.remindersDateDown = newRemindersDateDown;
+  }
+
+  updateRemindersDateUp(newRemindersDateUp: Date) {
+    this.remindersDateUp = newRemindersDateUp;
+  }
  }

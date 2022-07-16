@@ -8,6 +8,8 @@
 [previousReminders]="previousReminders" 
 [date]="date"
 [reminders]="reminders"
+[remindersDateDown]="remindersDateDown"
+[remindersDateUp]="remindersDateUp"
 
 (updateOrderByPriorityEvent)="updateOrderByPriority($event)" 
 (updatePriorityEvent)="updatePriority($event)" 
@@ -16,6 +18,8 @@
 (updateFutureRemindersEvent)="updateFutureReminders($event)"
 (updatePreviousRemindersEvent)="updatePreviousReminders($event)"
 (updateRemindersEvent)="updateReminders($event)"
+(updateRemindersDateDownEvent)="updateRemindersDateDown($event)"
+(updateRemindersDateUpEvent)="updateRemindersDateUp($event)"
 
 ></app-reminders-research-bloc>
 <app-reminders-liste-prospect 
@@ -27,5 +31,7 @@
 [futureReminders]="futureReminders"
 [previousReminders]="previousReminders"
 [date]="date"
+[remindersDateDown]="remindersDateDown"
+[remindersDateUp]="remindersDateUp"
 
 ></app-reminders-liste-prospect>
