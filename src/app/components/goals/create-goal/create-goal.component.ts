@@ -27,7 +27,7 @@ export class CreateGoalComponent implements OnInit {
 
   createGoal() {
     console.log(this.createGoalForm.value);
-    this.goalsService.createGoal(this.createGoalForm.value);
+    this.goalsService.createForPm(this.createGoalForm.value, this.createGoalForm.value["pmPseudo"]);
   }
 
 }

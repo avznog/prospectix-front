@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { CreateGoalDto } from 'src/app/dto/goals/create-goal.dto';
 import { Goal } from 'src/app/models/goal.model';
 
 @Injectable({
@@ -12,15 +13,25 @@ export class GoalsService {
     private http: HttpClient
   ) { }
 
+  findAll() : Observable<Goal[]> {
+    return this.http.get<Goal[]>("http://localhost:3000/goals");
+  }
+
   findAllByCurrentPm() : Observable<Goal[]> {
     console.log("findallbycurrent")
     return this.http.get<Goal[]>("http://localhost:3000/goals/by-current-pm");
   }
 
-  createGoal(goal: Goal) : Subscription{
+  createForPm(createGoalDto: CreateGoalDto, pseudoPm: string) : Subscription {
+    createGoalDto.currentStep = 0;
+    console.log(createGoalDto);
+    return this.http.post<Goal>(`http://localhost:3000/goals/for-pm/${pseudoPm}`, createGoalDto).subscribe();
+  }
+
+  createForCurrentPm(createGoalDto: CreateGoalDto) : Subscription {
     console.log("createGoal")
-    goal.currentStep = 0;
-    return this.http.post<Goal>("http://localhost:3000/goals", goal).subscribe();
+    createGoalDto.currentStep = 0;
+    return this.http.post<Goal>("http://localhost:3000/goals/for-current-pm", createGoalDto).subscribe();
   }
 
   editGoal(goal: Goal) : Subscription {

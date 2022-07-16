@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Goal } from 'src/app/models/goal.model';
 import { GoalsService } from '../../../services/goals/goals.service';
@@ -9,8 +9,13 @@ import { GoalsService } from '../../../services/goals/goals.service';
   styleUrls: ['./edit-goal.component.scss']
 })
 export class EditGoalComponent implements OnInit {
+
   @Input() goal!: Goal;
+  @Input() goalToEdit!: number;
+  @Output() updateGoalToEditEvent = new EventEmitter<number>();
+
   formEditGoal!: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     private readonly goalsService: GoalsService
@@ -18,7 +23,6 @@ export class EditGoalComponent implements OnInit {
 
   ngOnInit(): void {
     this.formEditGoal = this.formBuilder.group({
-      id: [0],
       title: [""],
       description: [""],
       deadline: [Date],
@@ -28,7 +32,22 @@ export class EditGoalComponent implements OnInit {
   }
 
   editFormGoal() {
-    this.goalsService.editGoal(this.formEditGoal.value);
+    
+    this.goalsService.editGoal({
+      ...this.formEditGoal.value,
+      id: this.goalToEdit
+    });
+    this.updateGoalToEdit(-1);
   }
+
+  onCancelEditGoal() {
+    this.updateGoalToEdit(-1);
+  }
+
+
+  updateGoalToEdit(value: number) {
+    this.updateGoalToEditEvent.emit(value);
+  }
+
 
 }

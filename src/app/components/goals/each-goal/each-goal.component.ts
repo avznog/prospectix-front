@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Goal } from '../../../models/goal.model';
@@ -10,7 +10,11 @@ import { GoalsService } from '../../../services/goals/goals.service';
   styleUrls: ['./each-goal.component.scss']
 })
 export class EachGoalComponent implements OnInit {
+
   @Input() goal: Goal = {} as Goal;
+  @Input() goalToEdit!: number;
+  @Output() updateGoalToEditEvent = new EventEmitter<number>();
+
   constructor(
     private readonly goalsService: GoalsService,
     private router: Router
@@ -20,12 +24,17 @@ export class EachGoalComponent implements OnInit {
   }
 
   editGoal() : Subscription {
-    // return this.goalsService.editGoal(this.goal);
+    this.updateGoalToEdit(this.goal.id);
     return null as unknown as Subscription;
   }
 
   deleteGoal() : Subscription {
     return this.goalsService.deleteGoal(this.goal.id);
+  }
+
+
+  updateGoalToEdit(value: number) {
+    this.updateGoalToEditEvent.emit(value);
   }
 
 }

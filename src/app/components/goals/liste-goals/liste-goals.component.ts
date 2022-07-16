@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Goal } from '../../../models/goal.model';
 import { GoalsService } from '../../../services/goals/goals.service';
 
@@ -8,23 +8,22 @@ import { GoalsService } from '../../../services/goals/goals.service';
   styleUrls: ['./liste-goals.component.scss'],
 })
 export class ListeGoalsComponent implements OnInit {
-  goals!: Goal[];
-  goal!: Goal;
-  constructor(
-    private readonly goalsService: GoalsService
-  ) { }
+
+  @Input() goals!: Goal[];
+  @Input() goalToEdit!: number;
+  @Output() updateGoalToEditUpEvent = new EventEmitter<number>();
 
   ngOnInit(): void {
-    this.goalsService.findAllByCurrentPm()
-      .subscribe({
-        next: (data) => {
-          this.goals = data;
-          console.log(data)
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
+  }
+
+  updateGoalToEdit(newGoalToEdit: number) {
+    console.log("goal to edit edited" + newGoalToEdit)
+    this.goalToEdit = newGoalToEdit;
+    this.updateGoalToEditUp(this.goalToEdit);
+  }
+
+  updateGoalToEditUp(value: number) {
+    this.updateGoalToEditUpEvent.emit(value);
   }
 
 

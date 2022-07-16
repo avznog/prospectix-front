@@ -1,2 +1,10 @@
 <b>id | pseudo | kpi | deadline | steps | edit | supprimer</b>
-<app-each-goal *ngFor="let goal of goals" [goal]="goal"></app-each-goal>
+<app-each-goal 
+
+*ngFor="let goal of goals" [goal]="goal"
+
+[goalToEdit]="goalToEdit"
+
+(updateGoalToEditEvent)="updateGoalToEdit($event)"
+
+></app-each-goal>
