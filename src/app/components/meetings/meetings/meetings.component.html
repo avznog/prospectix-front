@@ -7,6 +7,8 @@
 [previousMeetings]="previousMeetings"
 [typeMeeting]="typeMeeting"
 [meetings]="meetings"
+[meetingsDateUp]="meetingsDateUp"
+[meetingsDateDown]="meetingsDateDown"
 
 (updateMeetingsDoneEvent)="updateMeetingsDone($event)"
 (updateDateEvent)="updateDate($event)"
@@ -14,6 +16,8 @@
 (updatePreviousMeetingsEvent)="updatePreviousMeetings($event)"
 (updateTypeMeetingEvent)="updateTypeMeeting($event)"
 (updateMeetingsEvent)="updateMeetings($event)"
+(updateMeetingsDateUpEvent)="updateMeetingsDateUp($event)"
+(updateMeetingsDateDownEvent)="updateMeetingsDateDown($event)"
 
 ></app-meetings-research-bloc>
 <app-meetings-liste-prospect 
@@ -24,5 +28,7 @@
 [futureMeetings]="futureMeetings"
 [previousMeetings]="previousMeetings"
 [typeMeeting]="typeMeeting"
+[meetingsDateDown]="meetingsDateDown"
+[meetingsDateUp]="meetingsDateUp"
 
 ></app-meetings-liste-prospect>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EMPTY, empty } from 'rxjs/internal/observable/empty';
 import { Meeting } from 'src/app/models/meeting.model';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
@@ -15,6 +16,8 @@ export class MeetingsComponent implements OnInit {
   futureMeetings!: boolean;
   date!: Date;
   typeMeeting!: string;
+  meetingsDateDown!: Date;
+  meetingsDateUp!: Date;
   
   constructor(
     private meetingsService: MeetingsService
@@ -58,6 +61,14 @@ export class MeetingsComponent implements OnInit {
 
   updateMeetings(newMeetings: Meeting[]) {
     this.meetings = newMeetings.sort((a: Meeting, b :Meeting) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  }
+
+  updateMeetingsDateUp(newMeetingsDateUp: Date) {
+    this.meetingsDateUp = newMeetingsDateUp;
+  }
+
+  updateMeetingsDateDown(newMeetingsDone: Date) {
+    this.meetingsDateDown = newMeetingsDone;
   }
 
 }

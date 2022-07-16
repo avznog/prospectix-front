@@ -14,6 +14,8 @@ export class MeetingsListeProspectComponent implements OnInit {
   @Input() futureMeetings!: boolean;
   @Input() previousMeetings!: boolean;
   @Input() typeMeeting!: string;
+  @Input() meetingsDateDown!: Date;
+  @Input() meetingsDateUp!: Date;
   constructor() { }
 
   ngOnInit(): void {

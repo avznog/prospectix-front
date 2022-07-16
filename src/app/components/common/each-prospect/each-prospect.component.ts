@@ -30,6 +30,8 @@ export class EachProspectComponent implements OnInit {
   @Input() futureReminders!: boolean;
   @Input() previousReminders!: boolean;
   @Input() date!: Date;
+  @Input() remindersDateDown!: Date;
+  @Input() remindersDateUp!: Date;
 
   //meetings
   @Input() meeting!: Meeting;
@@ -37,6 +39,8 @@ export class EachProspectComponent implements OnInit {
   @Input() futureMeetings!: boolean;
   @Input() previousMeetings!: boolean;
   @Input() typeMeeting!: string;
+  @Input() meetingsDateDown!: Date;
+  @Input() meetingsDateUp!: Date;
 
   today = new Date();
 
