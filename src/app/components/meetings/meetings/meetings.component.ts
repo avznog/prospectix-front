@@ -24,7 +24,7 @@ export class MeetingsComponent implements OnInit {
     this.meetingsService.findAll()
       .subscribe({
         next: (data) => {
-          this.meetings = data;
+          this.meetings = data.sort((a: Meeting, b :Meeting) => new Date(a.date).getTime() - new Date(b.date).getTime());
         },
         error: (err) => {
           console.log(err)
@@ -57,7 +57,7 @@ export class MeetingsComponent implements OnInit {
   }
 
   updateMeetings(newMeetings: Meeting[]) {
-    this.meetings = newMeetings;
+    this.meetings = newMeetings.sort((a: Meeting, b :Meeting) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
 }
