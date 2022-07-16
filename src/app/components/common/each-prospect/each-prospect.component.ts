@@ -158,7 +158,6 @@ export class EachProspectComponent implements OnInit {
   }
 
   onChangeComment() {
-    
     if(this.changeCommentForm.value["comment"] != ""){
       if(this.prospect) {
         this.prospectService.updateComment(this.prospect.id, { comment: this.changeCommentForm.value["comment"] });
@@ -168,6 +167,15 @@ export class EachProspectComponent implements OnInit {
         this.prospectService.updateComment(this.meeting.prospect.id, { comment: this.changeCommentForm.value["comment"] });
       }
     }
-    
+  }
+
+  onChangeNbNo() {
+    if(this.prospect) {
+      this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
+    } else if (this.reminder) {
+      this.prospectService.updateNbNo(this.reminder.prospect.id, { nbNo: this.reminder.prospect.nbNo + 1 });
+    } else if (this.meeting) {
+      this.prospectService.updateNbNo(this.meeting.prospect.id, { nbNo: this.meeting.prospect.nbNo + 1 });
+    }
   }
 }

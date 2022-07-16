@@ -15,4 +15,8 @@ export class ProspectsService {
   updateComment(idProspect: number, comment: { comment: string }) : Subscription {
     return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, comment).subscribe();
   }
+
+  updateNbNo(idProspect: number, nbNo: { nbNo: number }) : Subscription {
+    return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, nbNo).subscribe();
+  }
 }

@@ -59,7 +59,10 @@
               </form>
             </div>
             <br />
-            <button style="background-color: orange; border: 1px black solid;">Pas de réponse</button><button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+            <div>
+              <button style="background-color: rgb(247, 158, 24)" (click)="onChangeNbNo()">Pas de réponse (*{{meeting.prospect.nbNo}})</button>
+              <button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+            </div>
             </div>
         </div>
         </div>
