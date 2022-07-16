@@ -5,7 +5,10 @@
     <div><form [formGroup]="changeEmailForm">{{prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button style="color: green;" (click)="onChangeEmail()">Modifier l'email</button></form></div>
     <div><form [formGroup]="changeWebsiteForm">{{prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
     <div>Commentaire : {{prospect.comment}} <form [formGroup]="changeCommentForm"><textarea formControlName="comment" placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()"></textarea></form> </div>
-    <button style="background-color: orange; border: 1px black solid;">Pas de réponse</button><button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+    <div>
+      <button style="background-color: rgb(247, 158, 24)" (click)="onChangeNbNo()">Pas de réponse (*{{prospect.nbNo}})</button>
+      <button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+    </div>
   </div>
 
 </div>
@@ -31,7 +34,10 @@
             </form>
           </div>
           <br />
-          <button style="background-color: orange; border: 1px black solid;">Pas de réponse</button><button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+          <div>
+            <button style="background-color: rgb(247, 158, 24)" (click)="onChangeNbNo()">Pas de réponse (*{{reminder.prospect.nbNo}})</button>
+            <button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+          </div>
           </div>
       </div>
     </div>
