@@ -27,6 +27,7 @@ export class RemindersComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.reminders = this.orderByPriority ? data.sort( (a: Reminder, b: Reminder) => (a.priority - b.priority)) : data;
+          this.reminders.sort((a: Reminder, b :Reminder) => new Date(a.date).getTime() - new Date(b.date).getTime());
         },
         error: (err) => {
           console.log(err);
@@ -51,11 +52,7 @@ export class RemindersComponent implements OnInit {
   }
 
   updateDate(newDate: Date) {
-    // console.log(this.reminders[0].date.toString().split("T")[0] == newDate.toString() ? "true" : "false")
-    console.log(this.reminders.filter((reminder) => reminder.date.toString().split("T")[0] == newDate.toString())); 
     this.date = newDate;
-    // if(newDate)
-    //   this.reminders.filter((reminder) => reminder.date.toString().split("T")[0] == newDate.toString()); 
   }
 
   updateRemindersDone(newRemindersDone: boolean) {
@@ -74,7 +71,8 @@ export class RemindersComponent implements OnInit {
   }
 
   updateReminders(newReminders: Reminder[]) {
-    this.reminders = newReminders;
+    this.reminders = this.orderByPriority ? newReminders.sort( (a: Reminder, b: Reminder) => (a.priority - b.priority)) : newReminders;
+    this.reminders.sort((a: Reminder, b :Reminder) => new Date(a.date).getTime() - new Date(b.date).getTime());;
   }
 
  }
