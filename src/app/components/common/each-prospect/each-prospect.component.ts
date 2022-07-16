@@ -139,4 +139,14 @@ export class EachProspectComponent implements OnInit {
     console.log("meeting marked undone");
     return this.meetingsService.markUndone(idMeeting);
   }
+
+  onClickButtonGoogle() {
+    if(this.prospect) {
+      window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank")
+    } else if (this.reminder) {
+      window.open(`http://www.google.fr/search?q=${this.reminder.prospect.companyName}`, "_blank")
+    } else if (this.meeting) {
+      window.open(`http://www.google.fr/search?q=${this.meeting.prospect.companyName}`, "_blank")
+    }
+  }
 }
