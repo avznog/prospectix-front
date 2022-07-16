@@ -56,4 +56,8 @@ export class EachProspectComponent implements OnInit {
     console.log("website changed")
     return this.websitesService.updateWebsite(this.prospect.website.id, { website: this.changeWebsiteForm.value["website"] });
   }
+
+  onClickButtonGoogle() {
+    window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank")
+  }
 }
