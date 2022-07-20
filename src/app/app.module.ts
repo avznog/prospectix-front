@@ -9,6 +9,9 @@ import { RemindersListeProspectComponent } from './components/reminders/reminder
 import { EachProspectComponent } from './components/common/each-prospect/each-prospect.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
+import { MeetingsListeProspectComponent } from './components/meetings/meetings-liste-prospect/meetings-liste-prospect.component';
+import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,17 @@ import { HttpClientModule } from '@angular/common/http';
     RemindersComponent,
     RemindersResearchBlocComponent,
     EachProspectComponent,
-    RemindersListeProspectComponent
+    RemindersListeProspectComponent,
+    MeetingsComponent,
+    MeetingsListeProspectComponent,
+    MeetingsResearchBlocComponent,
+    EachProspectComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
