@@ -15,6 +15,10 @@ import { ResearchProspectsComponent } from './components/research-prospects/rese
 import { ListProspectsComponent } from './components/research-prospects/list-prospects/list-prospects.component';
 import { EachProspectComponent } from './components/common/each-prospect/each-prospect.component';
 import { ResearchBlocComponent } from './components/research-prospects/research-bloc/research-bloc.component';
+import { UsersComponent } from './components/users/users/users.component';
+import { ListUsersComponent } from './components/users/list-users/list-users.component';
+import { EachUserComponent } from './components/users/each-user/each-user.component';
+import { CreateUserComponent } from './components/users/create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { ResearchBlocComponent } from './components/research-prospects/research-
     EachProspectComponent,
     ResearchProspectsComponent,
     ListProspectsComponent,
-    ResearchBlocComponent
+    ResearchBlocComponent,
+    UsersComponent,
+    ListUsersComponent,
+    EachUserComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
