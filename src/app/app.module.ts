@@ -25,6 +25,7 @@ import { GoalsComponent } from './components/goals/goals/goals.component';
 import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
 import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { HeaderComponent } from './components/common/header/header.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DashboardComponent } from './components/dashboard/dashboard/dashboard.c
     CreateGoalComponent,
     EditGoalComponent,
     DashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
