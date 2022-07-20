@@ -1,0 +1,10 @@
+<h2>Modifier l'objectif nº{{this.goalToEdit}}</h2>
+<form [formGroup]="formEditGoal">
+    <!-- <label for="id">Id (temporaire) </label><input id="id" placeholder="id" type="number" formControlName="id" /><br /> -->
+    <label for="title">Titre </label><input id="title" placeholder="Appels" type="text" formControlName="title" /><br />
+    <label for="description">Description </label><input id="description" placeholder="nombre d'appels par semaine" formControlName="description" type="text"/><br />
+    <label for="deadline">Deadline </label> <input id="deadline" type="date" formControlName="deadline"/><br />
+    <label for="isCyclic">Redondant ? </label><input id="isCyclic" type="checkbox" formControlName="isCyclic"/><br />
+    <label for="totalSteps">Nombre d'itérations </label><input id="totalSteps" type="number" placeholder="0" formControlName="totalSteps"/><br />
+    <input type="submit" value="Modifier l'objectif" style="color: green;" (click)="editFormGoal()"/><button (click)="onCancelEditGoal()" style="color: red;">Annuler</button>
+</form>
