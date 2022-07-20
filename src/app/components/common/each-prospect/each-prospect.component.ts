@@ -1,16 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { City } from 'src/app/models/city.model';
 import { Meeting } from 'src/app/models/meeting.model';
-import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
-import { EmailsService } from 'src/app/services/emails/emails.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
-import { PhonesService } from 'src/app/services/phones/phones.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
+import { City } from 'src/app/models/city.model';
+import { Prospect } from 'src/app/models/prospect.model';
+import { EmailsService } from 'src/app/services/emails/emails.service';
+import { PhonesService } from 'src/app/services/phones/phones.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
+
 
 @Component({
   selector: 'app-each-prospect',
@@ -52,12 +53,16 @@ export class EachProspectComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
 
+    //prospect
     private phonesService: PhonesService,
     private websitesService: WebsitesService,
     private emailsService: EmailsService,
     private prospectService: ProspectsService,
 
+    //reminders
     private remindersService: RemindersService,
+
+    //meetings
     private meetingsService: MeetingsService
   ) { }
 
