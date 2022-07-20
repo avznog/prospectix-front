@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,7 +11,6 @@ import { RemindersListeProspectComponent } from './components/reminders/reminder
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
 import { MeetingsListeProspectComponent } from './components/meetings/meetings-liste-prospect/meetings-liste-prospect.component';
 import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
-import { HttpClientModule } from "@angular/common/http";
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
 import { ListProspectsComponent } from './components/research-prospects/list-prospects/list-prospects.component';
 import { EachProspectComponent } from './components/common/each-prospect/each-prospect.component';
@@ -24,6 +24,7 @@ import { EachGoalComponent } from './components/goals/each-goal/each-goal.compon
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
 import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.compon
     EachGoalComponent,
     GoalsComponent,
     CreateGoalComponent,
-    EditGoalComponent
+    EditGoalComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
