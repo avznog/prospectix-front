@@ -11,7 +11,8 @@ import { ResearchProspectsComponent } from './components/research-prospects/rese
 import { UsersComponent } from './components/users/users/users.component';
 
 const routes: Routes = [
-  { path: "", component: HeaderComponent },
+  { path:"", component: HeaderComponent },
+  { path:"dashboard", component: DashboardComponent },
   { path:"users", component: UsersComponent },
   { path:"reminders", component: RemindersComponent },
   { path:"meetings", component: MeetingsComponent },
