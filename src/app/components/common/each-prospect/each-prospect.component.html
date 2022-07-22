@@ -1,56 +1,110 @@
+<!-- prospect -->
 <div *ngIf="prospect" class="card card-bordered bg-primary-content shadow-xl">
-  <div class="card-body">
-    <div class="card-title">{{prospect.id}}. {{prospect.companyName}} - {{prospect.activity.name}}<button (click)="onClickButtonGoogle()">G</button></div>
+  <div class="card-body bg-secondary bg-opacity-10">
+    <div class="card-title">{{prospect.id}}. {{prospect.companyName}} - {{prospect.activity.name}}
+      <div (click)="onClickButtonGoogle()" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 to-primary:hover" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
     <h3>{{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}</h3>
     <div class="divider"></div>
-    <div>
-      <form [formGroup]="changeNumberForm">
-          {{prospect.phone.number}}
-        <input class="input input-primary" type="tel" id="number" placeholder="0684653454" formControlName="number"/>
-        <div class=" btn btn-circle btn-primary" (click)="onChangePhoneNumber()">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-          </svg>
-        </div> 
-      </form>
+
+    <!-- Phone / Email / website inputs -->
+    <div class="inline-flex space-x-10">  
+      <app-each-prospect-change-parameter [valueToDisplay]="prospect.phone.number" [el]="'phone'" [id]="prospect.phone.id"></app-each-prospect-change-parameter>
+      <app-each-prospect-change-parameter [valueToDisplay]="prospect.email.email" [el]="'email'" [id]="prospect.email.id"></app-each-prospect-change-parameter>
+      <app-each-prospect-change-parameter [valueToDisplay]="prospect.website.website" [el]="'website'" [id]="prospect.website.id"></app-each-prospect-change-parameter>
+      <!-- Commentaire -->
+      <div>
+        <form [formGroup]="changeCommentForm">
+          <textarea class="textarea textarea-bordered textarea-primary" formControlName="comment"
+            placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
+          </textarea>
+        </form>
+      </div>
     </div>
-    <div><form [formGroup]="changeEmailForm">{{prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button (click)="onChangeEmail()">Modifier l'email</button></form></div>
-    <div><form [formGroup]="changeWebsiteForm">{{prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
-    <div>Commentaire : {{prospect.comment}} <form [formGroup]="changeCommentForm"><textarea formControlName="comment" placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()"></textarea></form> </div>
-    <div>
-      <button (click)="onChangeNbNo()">Pas de réponse (*{{prospect.nbNo}})</button>
-      <button>Rappel</button><button>Rendez-vous</button>
+    
+    <!-- Buttons -->
+    <div class="btn-group">
+      <button (click)="onChangeNbNo()" class="btn btn-primary indicator">
+        <span *ngIf="prospect.nbNo > 0" class="indicator-item badge badge-secondary">{{prospect.nbNo}}</span>
+        Pas de réponse<span *ngIf="prospect.nbNo> 0">s</span>
+      </button>
+      <button class="btn">
+        Rappel
+      </button>
+      <button class="btn">
+        Rendez-vous
+      </button>
+
     </div>
   </div>
-
 </div>
 <br />
-    
 
+<!-- reminder -->
 <div *ngIf="reminder">
   <div *ngIf="((remindersDone && reminder.done) || (!remindersDone && !reminder.done))">
-    <div *ngIf="((date && (reminder.date.toString().split('T')[0] == date.toString())) || !date) || (remindersDateDown && remindersDateUp)">
-      <div *ngIf="(!remindersDateDown || !remindersDateUp) || (remindersDateDown.toString() < reminder.date.toString().split('T')[0] && reminder.date.toString().split('T')[0] < remindersDateUp.toString())">
-        <div *ngIf="futureReminders && previousReminders || (previousReminders && !futureReminders && (reminder.date.toString() < today.toISOString())) || (futureReminders && !previousReminders && (reminder.date.toString() > today.toISOString()))">
-          <div style="border: 1px solid black;" *ngIf="reminder.priority == priority || (priority != 1 && priority != 2 && priority != 3)">
-            <div><p><b>{{reminder.prospect.id}} {{reminder.prospect.companyName}}</b> | {{reminder.prospect.activity.name}} | {{reminder.prospect.streetAddress}}, {{reminder.prospect.city.zipcode}}, {{reminder.prospect.city.name}}, {{reminder.prospect.country.name}}<button (click)="onClickButtonGoogle()">Rechercher le prospect sur Google</button></p></div>
-            <div><form [formGroup]="changeNumberForm">{{reminder.prospect.phone.number}} <input type="tel" id="number" placeholder="0684653454" formControlName="number"/><button style="color: green;" (click)="onChangePhoneNumber()">Modifier le tel</button></form></div>
-            <div><form [formGroup]="changeEmailForm">{{reminder.prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button style="color: green;" (click)="onChangeEmail()">Modifier l'email</button></form></div>
-            <div><form [formGroup]="changeWebsiteForm">{{reminder.prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
-            <div>Commentaire : {{reminder.prospect.comment}} <form [formGroup]="changeCommentForm"><textarea formControlName="comment" placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()"></textarea></form> </div>
+    <div
+      *ngIf="((date && (reminder.date.toString().split('T')[0] == date.toString())) || !date) || (remindersDateDown && remindersDateUp)">
+      <div
+        *ngIf="(!remindersDateDown || !remindersDateUp) || (remindersDateDown.toString() < reminder.date.toString().split('T')[0] && reminder.date.toString().split('T')[0] < remindersDateUp.toString())">
+        <div
+          *ngIf="futureReminders && previousReminders || (previousReminders && !futureReminders && (reminder.date.toString() < today.toISOString())) || (futureReminders && !previousReminders && (reminder.date.toString() > today.toISOString()))">
+          <div style="border: 1px solid black;"
+            *ngIf="reminder.priority == priority || (priority != 1 && priority != 2 && priority != 3)">
+            <div>
+              <p><b>{{reminder.prospect.id}} {{reminder.prospect.companyName}}</b> | {{reminder.prospect.activity.name}}
+                | {{reminder.prospect.streetAddress}}, {{reminder.prospect.city.zipcode}},
+                {{reminder.prospect.city.name}}, {{reminder.prospect.country.name}}<button
+                  (click)="onClickButtonGoogle()">Rechercher le prospect sur Google</button></p>
+            </div>
+            <div>
+              <!-- <form [formGroup]="changeNumberForm">{{reminder.prospect.phone.number}} <input type="tel" id="number"
+                  placeholder="0684653454" formControlName="number" /><button style="color: green;"
+                  (click)="onChangePhoneNumber()">
+                  Modifier le tel</button></form> -->
+                  <!-- <form [formGroup]="changeNumberForm">{{reminder.prospect.phone.number}} <input type="tel" id="number"
+                    placeholder="0684653454" formControlName="number" /><button style="color: green;"
+                    >Modifier le tel</button></form> -->
+            </div>
+            <div>
+              <!-- <form [formGroup]="changeEmailForm">{{reminder.prospect.email.email}} <input type="email" id="email"
+                  placeholder="bgonzva@juniorisepc.com" formControlName="email" /><button style="color: green;"
+                  (click)="onChangeEmail()">Modifier l'email</button></form>
+            </div> -->
+            <div>
+              <!-- <form [formGroup]="changeWebsiteForm">{{reminder.prospect.website.website}} <input type="text"
+                  id="website" placeholder="www.juniorisep.com" formControlName="website" /><button
+                  style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form> -->
+            </div>
+            <div>Commentaire : {{reminder.prospect.comment}} <form [formGroup]="changeCommentForm"><textarea
+                  formControlName="comment" placeholder="Modifier le commentaire (autosave)"
+                  (change)="onChangeComment()"></textarea></form>
+            </div>
             <br />
             <div style="border: 1px green solid;">
-              Rappel de priorité <b>{{reminder.priority}}</b> pour la date du {{reminder.date | date:"dd/MM/yyyy"}} à {{reminder.date | date:"HH:mm"}}<br />
+              Rappel de priorité <b>{{reminder.priority}}</b> pour la date du {{reminder.date | date:"dd/MM/yyyy"}} à
+              {{reminder.date | date:"HH:mm"}}<br />
               Description => {{reminder.description}}
               <form>
-                <input style="color: green;" type="button" value='{{reminder.done ? "Rendre le rappel disponible" : "Le rappel a été effecuté"}}' (click)="reminder.done ? onMarkReminderUndone(reminder.id) : onMarkReminderDone(reminder.id)"/>
-                <input style="color: red;" type="button" value="Supprimer le rappel" (click)="onDeleteReminder(reminder.id)"/>
+                <input style="color: green;" type="button"
+                  value='{{reminder.done ? "Rendre le rappel disponible" : "Le rappel a été effecuté"}}'
+                  (click)="reminder.done ? onMarkReminderUndone(reminder.id) : onMarkReminderDone(reminder.id)" />
+                <input style="color: red;" type="button" value="Supprimer le rappel"
+                  (click)="onDeleteReminder(reminder.id)" />
               </form>
             </div>
             <br />
             <div>
-              <button style="background-color: rgb(247, 158, 24)" (click)="onChangeNbNo()">Pas de réponse (*{{reminder.prospect.nbNo}})</button>
-              <button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+              <button style="background-color: rgb(247, 158, 24)" (click)="onChangeNbNo()">Pas de réponse
+                (*{{reminder.prospect.nbNo}})</button>
+              <button style="background-color: olive; border: 1px black solid;">Rappel</button><button
+                style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
             </div>
           </div>
         </div>
@@ -59,35 +113,68 @@
   </div>
 </div>
 
+<!-- meetings -->
 <div *ngIf="meeting">
   <div *ngIf="((meetingsDone && meeting.done) || (!meetingsDone && !meeting.done))">
-    <div *ngIf="((date && (meeting.date.toString().split('T')[0] == date.toString())) || !date) || (meetingsDateDown && meetingsDateUp)">
-      <div *ngIf="(!meetingsDateDown || !meetingsDateUp) || (meetingsDateDown.toString() < meeting.date.toString().split('T')[0] && meeting.date.toString().split('T')[0] < meetingsDateUp.toString())">
-        <div *ngIf="futureMeetings && previousMeetings || (previousMeetings && !futureMeetings && (meeting.date.toString() < today.toISOString())) || (futureMeetings && !previousMeetings && (meeting.date.toString() > today.toISOString()))">
+    <div
+      *ngIf="((date && (meeting.date.toString().split('T')[0] == date.toString())) || !date) || (meetingsDateDown && meetingsDateUp)">
+      <div
+        *ngIf="(!meetingsDateDown || !meetingsDateUp) || (meetingsDateDown.toString() < meeting.date.toString().split('T')[0] && meeting.date.toString().split('T')[0] < meetingsDateUp.toString())">
+        <div
+          *ngIf="futureMeetings && previousMeetings || (previousMeetings && !futureMeetings && (meeting.date.toString() < today.toISOString())) || (futureMeetings && !previousMeetings && (meeting.date.toString() > today.toISOString()))">
           <div *ngIf="(typeMeeting == 'tous les types') || (typeMeeting == meeting.type.toLowerCase()) ">
             <div style="border: 1px solid black;">
-              <div><p><b>{{meeting.prospect.id}} {{meeting.prospect.companyName}}</b> | {{meeting.prospect.activity.name}} | {{meeting.prospect.streetAddress}}, {{meeting.prospect.city.zipcode}}, {{meeting.prospect.city.name}}, {{meeting.prospect.country.name}}<button (click)="onClickButtonGoogle()">Rechercher le prospect sur Google</button></p></div>
-              <div><form [formGroup]="changeNumberForm">{{meeting.prospect.phone.number}} <input type="tel" id="number" placeholder="0684653454" formControlName="number"/><button style="color: green;" (click)="onChangePhoneNumber()">Modifier le tel</button></form></div>
-              <div><form [formGroup]="changeEmailForm">{{meeting.prospect.email.email}} <input type="email" id="email" placeholder="bgonzva@juniorisepc.com" formControlName="email"/><button style="color: green;" (click)="onChangeEmail()">Modifier l'email</button></form></div>
-              <div><form [formGroup]="changeWebsiteForm">{{meeting.prospect.website.website}} <input type="text" id="website" placeholder="www.juniorisep.com" formControlName="website"/><button style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form></div>
-              <div>Commentaire : {{meeting.prospect.comment}} <form [formGroup]="changeCommentForm"><textarea formControlName="comment" placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()"></textarea></form> </div>
+              <div>
+                <p><b>{{meeting.prospect.id}} {{meeting.prospect.companyName}}</b> | {{meeting.prospect.activity.name}}
+                  | {{meeting.prospect.streetAddress}}, {{meeting.prospect.city.zipcode}},
+                  {{meeting.prospect.city.name}}, {{meeting.prospect.country.name}}<button
+                    (click)="onClickButtonGoogle()">Rechercher le prospect sur Google</button></p>
+              </div>
+              <div>
+                <!-- <form [formGroup]="changeNumberForm">{{meeting.prospect.phone.number}} <input type="tel" id="number"
+                    placeholder="0684653454" formControlName="number" /><button style="color: green;"
+                    (click)="onChangePhoneNumber()">Modifier le tel</button></form> -->
+                    <!-- <form [formGroup]="changeNumberForm">{{meeting.prospect.phone.number}} <input type="tel" id="number"
+                      placeholder="0684653454" formControlName="number" /><button style="color: green;"
+                      >Modifier le tel</button></form> -->
+              </div>
+              <div>
+                <!-- <form [formGroup]="changeEmailForm">{{meeting.prospect.email.email}} <input type="email" id="email"
+                    placeholder="bgonzva@juniorisepc.com" formControlName="email" /><button style="color: green;"
+                    (click)="onChangeEmail()">Modifier l'email</button></form> -->
+              </div>
+              <div>
+                <!-- <form [formGroup]="changeWebsiteForm">{{meeting.prospect.website.website}} <input type="text"
+                    id="website" placeholder="www.juniorisep.com" formControlName="website" /><button
+                    style="color: green;" (click)="onChangeWebsite()">Modifier le site internet</button></form> -->
+              </div>
+              <div>Commentaire : {{meeting.prospect.comment}} <form [formGroup]="changeCommentForm"><textarea
+                    formControlName="comment" placeholder="Modifier le commentaire (autosave)"
+                    (change)="onChangeComment()"></textarea></form>
+              </div>
               <br />
               <div style="border: 1px green solid;">
-                {{meeting.id}}. Rendez-vous de type <b>{{meeting.type}}</b> pour la date du {{meeting.date | date:"dd/MM/yyyy"}} à {{meeting.date | date:"HH:mm"}}<br />
+                {{meeting.id}}. Rendez-vous de type <b>{{meeting.type}}</b> pour la date du {{meeting.date |
+                date:"dd/MM/yyyy"}} à {{meeting.date | date:"HH:mm"}}<br />
                 avec le pm: {{meeting.pm.pseudo}}
                 <form>
-                  <input style="color: green;" type="button" value='{{meeting.done ? "Rendre le meeting comme non effectué" : "Rendre le meeting comme effectué"}}' (click)="meeting.done ? onMarkMeetingUndone(meeting.id) : onMarkMeetingDone(meeting.id)"/>
-                  <input style="color: red;" type="button" value="Supprimer le meeting" (click)="onDeleteMeeting(meeting.id)"/>
+                  <input style="color: green;" type="button"
+                    value='{{meeting.done ? "Rendre le meeting comme non effectué" : "Rendre le meeting comme effectué"}}'
+                    (click)="meeting.done ? onMarkMeetingUndone(meeting.id) : onMarkMeetingDone(meeting.id)" />
+                  <input style="color: red;" type="button" value="Supprimer le meeting"
+                    (click)="onDeleteMeeting(meeting.id)" />
                 </form>
               </div>
               <br />
               <div>
-                <button style="background-color: rgb(247, 158, 24)" (click)="onChangeNbNo()">Pas de réponse (*{{meeting.prospect.nbNo}})</button>
-                <button style="background-color: olive; border: 1px black solid;">Rappel</button><button style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
+                <button style="background-color: rgb(247, 158, 24)" (click)="onChangeNbNo()">Pas de réponse
+                  (*{{meeting.prospect.nbNo}})</button>
+                <button style="background-color: olive; border: 1px black solid;">Rappel</button><button
+                  style="background-color: blueviolet; border: 1px black solid;">Rendez-vous</button>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

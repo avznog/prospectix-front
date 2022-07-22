@@ -26,6 +26,7 @@ import { CreateGoalComponent } from './components/goals/create-goal/create-goal.
 import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { HeaderComponent } from './components/common/header/header.component';
+import { EachProspectChangeParameterComponent } from './components/common/each-prospect-change-parameter/each-prospect-change-parameter.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { HeaderComponent } from './components/common/header/header.component';
     CreateGoalComponent,
     EditGoalComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    EachProspectChangeParameterComponent,
   ],
   imports: [
     BrowserModule,

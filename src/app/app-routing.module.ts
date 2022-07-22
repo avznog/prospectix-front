@@ -11,14 +11,14 @@ import { ResearchProspectsComponent } from './components/research-prospects/rese
 import { UsersComponent } from './components/users/users/users.component';
 
 const routes: Routes = [
-  { path:"", component: HeaderComponent },
+  { path:"", component: DashboardComponent },
   { path:"dashboard", component: DashboardComponent },
   { path:"users", component: UsersComponent },
   { path:"reminders", component: RemindersComponent },
   { path:"meetings", component: MeetingsComponent },
   { path:"prospects", component: ResearchProspectsComponent },
   { path:"goals", component: GoalsComponent },
-  { path: '**', redirectTo: 'home', pathMatch: 'full'}
+  { path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
 
 @NgModule({
