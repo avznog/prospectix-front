@@ -33,7 +33,7 @@ export class MeetingsComponent implements OnInit {
           console.log(err)
         }
       });
-      this.meetingsDone = true;
+      this.meetingsDone = false;
       this.futureMeetings = true;
       this.previousMeetings = true;
       this.typeMeeting = "tous les types";

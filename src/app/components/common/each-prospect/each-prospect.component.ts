@@ -61,7 +61,8 @@ export class EachProspectComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeCommentForm = this.formBuilder.group({
-      comment: ["", Validators.required]
+      comment: [
+        this.prospect ? this.prospect.comment : this.reminder ? this.reminder.prospect.comment : this.meeting.prospect.comment, Validators.required]
     });
 
   }
