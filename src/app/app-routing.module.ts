@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/common/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
-import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
