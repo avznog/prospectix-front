@@ -130,64 +130,56 @@
             <div  class="card card-bordered shadow-xl">
               <div class="card-body bg-secondary bg-opacity-10">
                 <div class="card-title">{{meeting.prospect.id}}. {{meeting.prospect.companyName}} - {{meeting.prospect.activity.name}}
-                  <div (click)="onClickButtonGoogle()" class="btn btn-primary">
+                  <div (click)="onClickButtonGoogle()" class="btn btn-primary btn-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                 </div>
-                {{meeting.prospect.streetAddress}}, {{meeting.prospect.city}}, {{meeting.prospect.city.name}}, {{meeting.prospect.country.name}}
+                {{meeting.prospect.streetAddress}}, {{meeting.prospect.city.name}}, {{meeting.prospect.country.name}}
 
                 <div class="divider"></div>
 
                 
-                <br />
                 <!-- Meeting section -->
-              <div class="inline-flex space-x-20">
-                <div class="indicator">
+              <div class="inline-flex space-x-5">
+                <div class="indicator w-1/3">
                   <div class="card card-side card-bordered border-separate border-primary">
                     <div class="card-body">
-                      <div class="card-title"> Rendez-vous le {{meeting.date | date:"dd/MM/yyyy"}} à {{meeting.date | date:"HH:mm"}} avec {{meeting.pm.firstname}} {{meeting.pm.name}}
+                      <div class="card-title"> {{meeting.date | date:"dd/MM/YYYY"}} à {{meeting.date | date:"HH:mm"}} avec {{meeting.pm.firstname}} {{meeting.pm.name}}
                       </div>
-                      <input class="btn btn-primary" type="button" value='{{meeting.done ? "Rendre le meeting comme non effectué" : "Rendre le meeting comme effectué"}}' (click)="meeting.done ? onMarkMeetingUndone(meeting.id) : onMarkMeetingDone(meeting.id)" />
-                      <input class="btn btn-primary" type="button" value="Supprimer le meeting" (click)="onDeleteMeeting(meeting.id)" />
+                      <input class="btn btn-primary btn-sm btn-success" type="button" value='{{meeting.done ? "Rendre le meeting comme non effectué" : "Rendre le meeting comme effectué"}}' (click)="meeting.done ? onMarkMeetingUndone(meeting.id) : onMarkMeetingDone(meeting.id)" />
+                      <input class="btn btn-primary btn-sm btn-error" type="button" value="Supprimer le meeting" (click)="onDeleteMeeting(meeting.id)" />
                     </div>
                   </div>
                   <div class="badge badge-secondary indicator-item">{{meeting.type}}</div>
                 </div>
 
                 <!-- Commentaire -->
-                <div class="w-1/3">
-                  <form [formGroup]="changeCommentForm" class="h-full w-full">
-                    <textarea class="textarea textarea-bordered textarea-primary focus:textarea-accent h-full w-full" formControlName="comment" placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
-                    </textarea>
-                    </form>
+                <div class="w-1/3 ">
+                  <app-each-prospect-change-parameter [valueToDisplay]="meeting.prospect.phone.number" [el]="'phone'" [id]="meeting.prospect.phone.id"></app-each-prospect-change-parameter>
+                  <app-each-prospect-change-parameter [valueToDisplay]="meeting.prospect.email.email" [el]="'email'" [id]="meeting.prospect.email.id"></app-each-prospect-change-parameter>
+                  <app-each-prospect-change-parameter [valueToDisplay]="meeting.prospect.website.website" [el]="'website'" [id]="meeting.prospect.website.id"></app-each-prospect-change-parameter>
+                
                 </div>
-                <div class="btn-group-vertical btn-group w-1/3 justify-center">
-                    <button (click)="onChangeNbNo()" class="btn btn-primary indicator w-full">
+                <div class="w-1/3 space-y-5">
+                  <div class="btn-group-vertical btn-group ">
+                    <button (click)="onChangeNbNo()" class="btn btn-primary btn-sm indicator w-full">
                       <span *ngIf="meeting.prospect" class="indicator-item badge badge-secondary">{{meeting.prospect.nbNo}}</span>
                       Pas de réponse
                       <span *ngIf="meeting.prospect.nbNo">s</span>
                     </button>
                   
-                  <button class="btn">Rappel</button> 
-                  <button class="btn">Rendez-vous</button>
+                  <button class="btn btn-sm">Rappel</button> 
+                  <button class="btn btn-sm">Rendez-vous</button>
+                  
+              
+                  </div>
+                  <form [formGroup]="changeCommentForm">
+                    <textarea class="textarea textarea-bordered textarea-primary focus:textarea-accent h-full w-full" formControlName="comment" placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
+                    </textarea>
+                    </form>
                 </div>
-              </div>
-              <br />
-              
-              <!-- Buttons -->
-              <div class=" justify-center">
-              
-              <!-- Phone / Email / Website inputs -->
-              <div class="grid grid-cols-3 place-items-center">
-                <app-each-prospect-change-parameter [valueToDisplay]="meeting.prospect.phone.number" [el]="'phone'" [id]="meeting.prospect.phone.id"></app-each-prospect-change-parameter>
-                <app-each-prospect-change-parameter [valueToDisplay]="meeting.prospect.email.email" [el]="'email'" [id]="meeting.prospect.email.id"></app-each-prospect-change-parameter>
-                <app-each-prospect-change-parameter [valueToDisplay]="meeting.prospect.website.website" [el]="'website'" [id]="meeting.prospect.website.id"></app-each-prospect-change-parameter>
-
-                
-                </div>
-              
               </div>
             </div>
           </div>
