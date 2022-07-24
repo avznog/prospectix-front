@@ -3,10 +3,10 @@ import { Goal } from 'src/app/models/goal.model';
 
 @Component({
   selector: 'app-each-goal',
-  templateUrl: './each-goal.component.html',
-  styleUrls: ['./each-goal.component.scss']
+  templateUrl: './each-goal-dashboard.component.html',
+  styleUrls: ['./each-goal-dashboard.component.scss']
 })
-export class EachGoalComponent implements OnInit {
+export class EachGoalDashboardComponent implements OnInit {
   @Input() goal!: Goal;
   constructor() { }
 

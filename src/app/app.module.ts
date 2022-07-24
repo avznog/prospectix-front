@@ -48,6 +48,7 @@ import { ThemesDropdownComponent } from './components/common/header/themes-dropd
     CreateUserComponent,
     ListeGoalsComponent,
     EachGoalComponent,
+    EachGoalDashboardComponent
     GoalsComponent,
     CreateGoalComponent,
     EditGoalComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Goal } from 'src/app/models/goal.model';
 import { GoalsService } from 'src/app/services/goals/goals.service';
 
@@ -9,7 +9,7 @@ import { GoalsService } from 'src/app/services/goals/goals.service';
 })
 export class ListeGoalsComponent implements OnInit {
 
-  goals!: Goal[];
+  @Input() goals!: Goal[];
   constructor(
     private readonly goalsService: GoalsService
   ) { }

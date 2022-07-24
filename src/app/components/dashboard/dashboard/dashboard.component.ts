@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Goal } from 'src/app/models/goal.model';
+import { GoalsService } from 'src/app/services/goals/goals.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  goals!: Goal[];
+  constructor(
+    private goalsService: GoalsService
+  ) { }
 
   ngOnInit(): void {
+    // TODO : Must change to findForCurrentPm findForPm
+    this.goalsService.findAll()
+      .subscribe({
+        next: (data) => {
+          console.log(data)
+          this.goals
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
   }
 
 }
