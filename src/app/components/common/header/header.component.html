@@ -1,10 +1,15 @@
-<div class="navbar">
-  <div class="tabs" >
-  <a routerLink="/dashboard" class="tab tab-lg tab-lifted" >Prospectix</a>
-  <a routerLink="/prospects" class="tab tab-lg tab-lifted">Recherche de prospects</a>
-  <a routerLink="/reminders" class="tab tab-lg tab-lifted">Recherche rappels</a>
-  <a routerLink="/meetings" class="tab tab-lg tab-lifted">Recherche de rendez-vous</a>
-  <a routerLink="/users" class="tab tab-lg tab-lifted">des utilisateurs (Admin)</a> 
-  <a routerLink="/goals" class="tab tab-lg tab-lifted">Gestion des objectifs (Admin)</a>
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl">Prospectix</a>
   </div>
-</div> 
+  <div class="flex-none">
+    <ul class="menu menu-horizontal p-0">
+      <li><a routerLink="/prospects" class="tab tab-lg tab-lifted">Recherche</a></li>
+      <li><a routerLink="/reminders" class="tab tab-lg tab-lifted">Rappels</a></li>
+      <li><a routerLink="/meetings" class="tab tab-lg tab-lifted">Rendez-vous</a></li>
+      <li><a routerLink="/users" class="tab tab-lg tab-lifted">Users</a></li>
+      <li><a routerLink="/goals" class="tab tab-lg tab-lifted">Gestion des objectifs</a></li>
+
+    </ul>
+  </div>
+</div>

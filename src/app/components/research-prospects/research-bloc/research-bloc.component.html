@@ -1,12 +1,53 @@
-<form [formGroup]="researchForm">
-    <input type="text" formControlName="searchBar" (input)="onSearchChange()" placeholder="Rechercher un nom, tel, mail, site, adresse, commentaire" /><br />
-    <label for="activity">Domaine d'activité : </label><select id="activity" name="activity" formControlName="activity" (change)="onActivityChange()">
-       <option selected>Tous les domaines d'activité</option>
-       <option *ngFor="let activity of activites">{{activity.name}}</option>
-    </select><br />
-    <label for="city">Ville : </label><select id="city" name="city" formControlName="city" (change)="onCityChange()">
-        <option selected>Toutes les villes</option>
-        <option *ngFor="let city of cities">{{city.name}}</option>
-    </select><br />
-    <label for="saveSearch" >Sauvegarder la recherche </label><input type="checkbox" id="saveSearch" /><br />
+<form [formGroup]="researchForm" class="flex flex-row justify-center items-end m-0 space-x-10">
+    <!-- Search a prospect - overrides the other filters -->
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="search">
+            <span class="label-text">Recherche</span>
+        </label>
+        <input type="text" formControlName="searchBar" (input)="onSearchChange()" placeholder="Recherche"
+            class="input input-bordered w-full max-w-xs" />
+    </div>
+
+    <!-- <label for="my-modal" class="btn modal-button">Infos</label> -->
+
+    <!-- Select activity domain -->
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="activity">
+            <span class="label-text">Domaine d'activité</span>
+        </label>
+        <select id="activity" name="activity" formControlName="activity" (change)="onActivityChange()"
+            class="select select-bordered">
+            <option selected>Tous les domaines d'activité</option>
+            <option *ngFor="let activity of activites">{{activity.name}}</option>
+        </select>
+    </div>
+
+    <!-- Select city -->
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="city">
+            <span class="label-text">Ville</span>
+        </label>
+        <select id="city" name="city" formControlName="city" (change)="onCityChange()" class="select select-bordered">
+            <option selected>Toutes les villes</option>
+            <option *ngFor="let city of cities">{{city.name}}</option>
+        </select>
+    </div>
+
+    <!-- Save this research or not -->
+    <label for="saveSearch" class="label cursor-pointer">
+        <span class="label-text">Sauvegarder la recherche</span>
+        <input id="saveSearch" type="checkbox" class="toggle" checked />
+    </label>
 </form>
+
+<input type="checkbox" id="my-modal" class="modal-toggle" />
+<div class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Recherche de prospects</h3>
+        <p class="py-4">We gotcha you! — Vous pouvez cherchez un prospect par son nom, son numéro de téléphone, mail,
+            site web, adresse ou encore par commentaire enregistré dans Prospectix</p>
+        <div class="modal-action">
+            <label for="my-modal" class="btn">Ok</label>
+        </div>
+    </div>
+</div>
