@@ -1,11 +1,89 @@
-<form [formGroup]="formSearchReminders">
-  <input type="text" placeholder="Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." formControlName="searchBar" (input)="onRemindersEditSearchBar()"/><br />
-  <label for="date">Date : </label><input type="date" id="date" formControlName="date" (change)="onRemindersDateChange()"/><br />
-  <label for="dateDown">Date inférieure</label><input type="date" id="dateDown" formControlName="dateDown" (change)="onRemindersDateDownChange()"/>
-  <label for="dateUp">Date inférieure</label><input type="date" id="dateUp" formControlName="dateUp" (change)="onRemindersDateUpChange()"/><br />
-  <label for="futureReminders">Futurs rappels (par rapport à ajd) : </label><input type="checkbox" id="futureReminders" formControlName="futureReminders" (change)="onChangeFutureReminders()"/><br />
-  <label for="previousReminders">Anciens rappels (par rapport à ajd) : </label><input type="checkbox" id="previousReminders" formControlName="previousReminders" (change)="onChangePreviousReminders()"/><br />
-  <label for="remindersDone">Rappels effectués : </label><input type="checkbox" id="remindersDone" formControlName="remindersDone" (change)="onChangeRemindersDone()"/><br />
-  <label for="orderByPriority">Afficher par ordre de priorité : </label><input type="checkbox" id="orderByPriority" formControlName="orderByPriority" (change)="onRemindersOrderPriorityChange()"/><br />
-  <label for="priority">Afficher les rappels de priorité : </label><input type="number" id="priority" placeholder="0" formControlName="priority" (change)="onRemindersPriorityChange()" /><br />
+<form [formGroup]="formSearchReminders" class="flex flex-row justify-around items-start m-0">
+
+  <!-- "Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." -->
+
+  <div class="form-control w-full max-w-xs">
+    <label class="label" for="search">
+      <span class="label-text">Recherche</span>
+    </label>
+    <input type="text" formControlName="searchBar" (input)="onRemindersEditSearchBar()" placeholder="Recherche"
+      class="input input-bordered w-full max-w-xs" />
+  </div>
+
+  <!-- Show upcoming reminders -->
+
+  <div class="form-control min-w-fit">
+    <label for="futureReminders" class="label cursor-pointer">
+      <span class="label-text">Futurs rappels</span>
+    </label>
+    <input id="futureReminders" type="checkbox" class="toggle" formControlName="futureReminders"
+      (change)="onChangeFutureReminders()" checked />
+  </div>
+
+  <!-- Show past reminders -->
+
+  <div class="form-control min-w-fit">
+    <label for="previousReminders" class="label cursor-pointer">
+      <span class="label-text">Anciens rappels</span>
+    </label>
+    <input class="toggle" type="checkbox" id="previousReminders" formControlName="previousReminders"
+      (change)="onChangePreviousReminders()" checked />
+  </div>
+
+  <!-- Show done reminders -->
+
+  <div class="form-control min-w-fit">
+    <label for="remindersDone" class="label cursor-pointer">
+      <span class="label-text">Rappels effectués</span>
+    </label>
+    <input class="toggle" type="checkbox" id="remindersDone" formControlName="remindersDone"
+      (change)="onChangeRemindersDone()" checked />
+  </div>
+
+  <!-- Show by priority order -->
+
+  <div class="form-control min-w-fit">
+    <label for="orderByPriority" class="label cursor-pointer">
+      <span class="label-text">Par ordre de priorité</span>
+    </label>
+    <input class="toggle" type="checkbox" id="orderByPriority" formControlName="orderByPriority"
+      (change)="onRemindersOrderPriorityChange()" checked />
+  </div>
+
+  <!-- Prority level -->
+
+  <div class="form-control min-w-fit">
+    <label for="priority" class="label cursor-pointer">
+      <span class="label-text">Priorité</span>
+    </label>
+    <input type="range" min="0" max="5" value="5" class="range range-primary" id="priority" formControlName="priority"
+      (change)="onRemindersPriorityChange()" />
+  </div>
+
+  <!-- Select with a specific date or within a date range -->
+
+  <label for="date-option" class="btn modal-button">By date</label>
+
+  <input type="checkbox" id="date-option" class="modal-toggle" />
+  <div class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box">
+      <div class="flex flex-col w-full lg:flex-row">
+        <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+          <label class="label" for="date">Date : </label>
+          <input type="date" id="date" formControlName="date" (change)="onRemindersDateChange()" />
+        </div>
+        <div class="divider lg:divider-horizontal">OR</div>
+        <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+          <label class="label" for="dateDown">Date inférieure</label>
+          <input type="date" id="dateDown" formControlName="dateDown" (change)="onRemindersDateDownChange()" />
+
+          <label class="label" for="dateUp">Date supérieure</label>
+          <input type="date" id="dateUp" formControlName="dateUp" (change)="onRemindersDateUpChange()" />
+        </div>
+      </div>
+      <div class="modal-action">
+        <label for="date-option" class="btn">Ok</label>
+      </div>
+    </div>
+  </div>
 </form>
