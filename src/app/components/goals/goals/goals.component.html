@@ -1,0 +1,22 @@
+<app-header></app-header>
+<h1>Page des objectifs</h1>
+<app-liste-goals
+
+[goalToEdit]="goalToEdit"
+[goals]="goals"
+
+(updateGoalToEditUpEvent)="updateGoalToEditUp($event)"
+
+></app-liste-goals>
+
+<app-create-goal></app-create-goal>
+
+<app-edit-goal 
+
+*ngIf="goalToEdit != -1"
+
+[goalToEdit]="goalToEdit"
+
+(updateGoalToEditEvent)="updateGoalToEditUp($event)"
+
+></app-edit-goal>

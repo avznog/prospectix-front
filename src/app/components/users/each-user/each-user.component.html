@@ -1,0 +1,3 @@
+<div>
+    {{user.id}} | {{user.firstname}} {{user.name}} | {{user.pseudo}} | {{user.mail }} | <button style="color: blue;" (click)="onChangeAdmin()"> {{user.admin ? "Révoquer admin" : "Rendre admin"}}</button><button style="color: red;" (click)="onDeleteUser()">{{user.disabled ? "Activer le compte":"Désactiver le compte"}}</button>
+</div>
