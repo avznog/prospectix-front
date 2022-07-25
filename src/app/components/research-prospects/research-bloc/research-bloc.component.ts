@@ -52,32 +52,32 @@ export class ResearchBlocComponent implements OnInit {
         }
       });
 
-      this.researchForm = this.formBuilder.group({
-        city: ["", Validators.required],
-        activity: ["", Validators.required],
-        searchBar: ["", Validators.required]
-      });
+    this.researchForm = this.formBuilder.group({
+      city: ["", Validators.required],
+      activity: ["", Validators.required],
+      searchBar: ["", Validators.required]
+    });
   }
 
   onCityChange() {
-    if(this.researchForm.value["city"] != "Toutes les villes"){
+    if (this.researchForm.value["city"] != "Toutes les villes") {
       this.prospectsService.findAllByCity(this.researchForm.value["city"])
-      .subscribe({
-        next: (data) => {
-          this.updateProspects(data);
-          this.updateCurrentCity(
-            {
-              id: 0,
-              name: this.researchForm.value["city"],
-              zipcode: 0
-            }
+        .subscribe({
+          next: (data) => {
+            this.updateProspects(data);
+            this.updateCurrentCity(
+              {
+                id: 0,
+                name: this.researchForm.value["city"],
+                zipcode: 0
+              }
             );
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
-    }else {
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        });
+    } else {
       this.prospectsService.findAll()
         .subscribe({
           next: (data) => {
@@ -88,25 +88,25 @@ export class ResearchBlocComponent implements OnInit {
           }
         });
     }
-}
+  }
 
   onActivityChange() {
-    if(this.researchForm.value["activity"] != "Tous les domaines d'activité"){
+    if (this.researchForm.value["activity"] != "Tous les domaines d'activité") {
       this.prospectsService.findAllByActivity(this.researchForm.value["activity"])
-            .subscribe({
-              next: (data) => {
-                this.updateProspects(data);
-                this.updateCurrentActivity(
-                  {
-                    id: 0,
-                    name: this.researchForm.value["activity"],
-                  }
-                  );
-              },
-              error: (err) => {
-                console.log(err)
+        .subscribe({
+          next: (data) => {
+            this.updateProspects(data);
+            this.updateCurrentActivity(
+              {
+                id: 0,
+                name: this.researchForm.value["activity"],
               }
-            });
+            );
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        });
     } else {
       this.prospectsService.findAll()
         .subscribe({
@@ -142,20 +142,20 @@ export class ResearchBlocComponent implements OnInit {
     this.updateCurrentActivityEvent.emit(value);
   }
 
-  onSearchChange(): void {  
+  onSearchChange(): void {
     console.log("changed by keyword")
-    if(this.researchForm.value["searchBar"] != "") {
+    if (this.researchForm.value["searchBar"] != "") {
 
       this.prospectsService.findAllByKeyword(this.researchForm.value["searchBar"])
-      .subscribe({
-        next: (data) => {
-          this.updateProspects(data);
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
-  }
+        .subscribe({
+          next: (data) => {
+            this.updateProspects(data);
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        });
     }
-  
+  }
+
 }
