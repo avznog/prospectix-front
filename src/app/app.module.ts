@@ -28,6 +28,8 @@ import { DashboardComponent } from './components/dashboard/dashboard/dashboard.c
 import { HeaderComponent } from './components/common/header/header/header.component';
 import { EachProspectChangeParameterComponent } from './components/common/each-prospect-change-parameter/each-prospect-change-parameter.component';
 import { ThemesDropdownComponent } from './components/common/header/themes-dropdown/themes-dropdown.component';
+import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
+import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,6 @@ import { ThemesDropdownComponent } from './components/common/header/themes-dropd
     CreateUserComponent,
     ListeGoalsComponent,
     EachGoalComponent,
-    EachGoalDashboardComponent
     GoalsComponent,
     CreateGoalComponent,
     EditGoalComponent,
@@ -56,6 +57,8 @@ import { ThemesDropdownComponent } from './components/common/header/themes-dropd
     HeaderComponent,
     EachProspectChangeParameterComponent,
     ThemesDropdownComponent,
+    DashboardListeGoalsComponent,
+    DashboardEachGoalComponent,
   ],
   imports: [
     BrowserModule,

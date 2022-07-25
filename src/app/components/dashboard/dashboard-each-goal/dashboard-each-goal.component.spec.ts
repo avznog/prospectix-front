@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EachGoalDashboardComponent } from './each-goal-dashboard.component';
+import { DashboardEachGoalComponent } from './dashboard-each-goal.component';
 
-describe('EachGoalComponent', () => {
-  let component: EachGoalDashboardComponent;
-  let fixture: ComponentFixture<EachGoalDashboardComponent>;
+describe('DashboardEachGoalComponent', () => {
+  let component: DashboardEachGoalComponent;
+  let fixture: ComponentFixture<DashboardEachGoalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EachGoalDashboardComponent ]
+      declarations: [ DashboardEachGoalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EachGoalDashboardComponent);
+    fixture = TestBed.createComponent(DashboardEachGoalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

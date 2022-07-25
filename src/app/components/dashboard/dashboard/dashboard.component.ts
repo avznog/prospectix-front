@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next: (data) => {
           console.log(data)
-          this.goals
+          this.goals = data;
         },
         error: (err) => {
           console.log(err)
