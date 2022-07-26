@@ -1,36 +1,49 @@
 <!-- prospect -->
 <!-- begin filtering conditions-->
-<div *ngIf="prospect" class="card card-bordered shadow-xl">
+<div *ngIf="prospect" class="card card-bordered shadow-md border-solid border-current">
 <!-- end filtering conditions -->
 
   <!-- Card -->
   <div class="card-body bg-opacity-10">
     <!-- Header card -->
-    <div class="card-title">{{prospect.id}}. {{prospect.companyName}} - {{prospect.activity.name}}
-      <div (click)="onClickButtonGoogle()" class="btn btn-sm btn-ghost">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+   
+      <div class="grid grid-cols-2">
+        <div>
+          <div class="card-title">
+            {{prospect.id}}. {{prospect.companyName}} - {{prospect.activity.name}}
+            <div (click)="onClickButtonGoogle()" class="btn btn-sm btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+          {{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}
+        </div>
+        
+        <!-- Commentaire -->
+        <div>
+          <form [formGroup]="changeCommentForm">
+            <textarea class="textarea textarea-bordered h-1/2 w-full" formControlName="comment"
+              placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
+            </textarea>
+          </form>
+        </div>
       </div>
-    </div>
-    {{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}
-
-
+    
     <div class="divider"></div>
 
     <!-- Phone / Email / Website inputs -->
     <div class="inline-flex space-x-10 self-baseline">  
-      <div class="space-x-5">
-        <app-each-prospect-change-parameter [valueToDisplay]="prospect.phone.number" [el]="'phone'" [id]="prospect.phone.id"></app-each-prospect-change-parameter>
-      <app-each-prospect-change-parameter [valueToDisplay]="prospect.email.email" [el]="'email'" [id]="prospect.email.id"></app-each-prospect-change-parameter>
-      <app-each-prospect-change-parameter [valueToDisplay]="prospect.website.website" [el]="'website'" [id]="prospect.website.id"></app-each-prospect-change-parameter>
       
-      </div>
+        <app-each-prospect-change-parameter [valueToDisplay]="prospect.phone.number" [el]="'phone'" [id]="prospect.phone.id"></app-each-prospect-change-parameter>
+        <app-each-prospect-change-parameter [valueToDisplay]="prospect.email.email" [el]="'email'" [id]="prospect.email.id"></app-each-prospect-change-parameter>
+        <app-each-prospect-change-parameter [valueToDisplay]="prospect.website.website" [el]="'website'" [id]="prospect.website.id"></app-each-prospect-change-parameter>
+      
       
       <!-- Buttons -->
-      <div class="btn-group btn-group-vertical">
+      <div class="btn-group">
         <button (click)="onChangeNbNo()" class="btn btn-ghost btn-outline indicator">
           <span *ngIf="prospect.nbNo > 0" class="indicator-item badge badge-secondary">{{prospect.nbNo}}</span>
           Pas de réponse<span *ngIf="prospect.nbNo> 0">s</span>
@@ -41,14 +54,6 @@
         <button class="btn btn-ghost btn-outline">
           Rendez-vous
         </button>
-      </div>
-      <!-- Commentaire -->
-      <div>
-        <form [formGroup]="changeCommentForm">
-          <textarea class="textarea textarea-bordered" formControlName="comment"
-            placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
-          </textarea>
-        </form>
       </div>
     </div>
   </div>
@@ -65,7 +70,7 @@
 <!-- End filtering conditions -->
 
              <!-- Card -->
-             <div  class="card card-bordered shadow-xl">
+             <div  class="card card-bordered shadow-md border-solid border-current">
               <div class="card-body bg-opacity-10">
                 <div class="card-title">
                  
@@ -111,7 +116,7 @@
   <!-- End filtering conditions -->
 
             <!-- Card -->
-            <div  class="card card-bordered shadow-xl">
+            <div  class="card card-bordered shadow-md border-solid border-current">
               <div class="card-body bg-opacity-10">
                 <div class="card-title">
                   <div class="badge badge-secondary">{{meeting.type}}</div>
