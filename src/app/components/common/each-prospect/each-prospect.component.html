@@ -125,8 +125,8 @@
                   {{meeting.date | date:"dd/MM/YYYY"}} à {{meeting.date | date:"HH:mm"}} {{meeting.prospect.companyName}} - {{meeting.pm.firstname}} {{meeting.pm.name}}
 
                   <!-- Boutons meetingDone / suppression -->
-                <input class="btn btn-primary btn-sm btn-success w-1/5" type="button" value='{{meeting.done ? "Rendre le meeting comme non effectué" : "Rendre le meeting comme effectué"}}' (click)="meeting.done ? onMarkMeetingUndone(meeting.id) : onMarkMeetingDone(meeting.id)" />
-                <input class="btn btn-primary btn-sm btn-error w-1/5" type="button" value="Supprimer le meeting" (click)="onDeleteMeeting(meeting.id)" />
+                <input class="btn btn-primary btn-sm btn-success w-1/4" type="button" value='{{meeting.done ? "Rendre le meeting comme non effectué" : "Rendre le meeting comme effectué"}}' (click)="meeting.done ? onMarkMeetingUndone(meeting.id) : onMarkMeetingDone(meeting.id)" />
+                <input class="btn btn-primary btn-sm btn-error w-1/4" type="button" value="Supprimer le meeting" (click)="onDeleteMeeting(meeting.id)" />
               </div>
               </div>
             </div>
