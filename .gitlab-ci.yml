@@ -3,8 +3,25 @@ stages:
   - docker
   - deploy
 
-# BUILD FOR STAGING AND MASTER
-build:
+#BUILD STAGE
+
+build-prod:
+  stage: build
+  image: node:16.13-alpine
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn/
+      - yarn.lock
+  artifacts:
+    paths:
+      - build/
+  only:
+    - master
+
+build-staging:
   stage: build
   image: node:16.13-alpine
   cache:
@@ -20,11 +37,10 @@ build:
   artifacts:
     paths:
       - build/
+  only:
+    - staging
 
-
-# DOCKER BUILD AND PUSH
-
-# staging
+# DOCKER STAGE
 docker-staging:
   stage: docker
   image: docker:latest
@@ -34,11 +50,10 @@ docker-staging:
     - docker build --tag $CI_REGISTRY_IMAGE:staging .
     - docker push $CI_REGISTRY_IMAGE:staging
   dependencies:
-    - build
+    - build-staging
   only:
     - staging
 
-# master
 docker-prod:
   stage: docker
   image: docker:latest
@@ -48,13 +63,13 @@ docker-prod:
     - docker build --tag $CI_REGISTRY_IMAGE:prod .
     - docker push $CI_REGISTRY_IMAGE:prod
   dependencies:
-    - build
+    - build-prod
   only:
     - master
 
-# DEPLOY
 
-# staging
+#DEPLOY STAGE
+
 deploy-staging:
   stage: deploy
   before_script:
@@ -70,11 +85,10 @@ deploy-staging:
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml pull"
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml up -d"
   dependencies:
-    - build
+    - build-staging
   only:
     - staging
 
-# master
 deploy-prod:
   stage: deploy
   before_script:
@@ -90,6 +104,6 @@ deploy-prod:
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml pull"
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml up -d"
   dependencies:
-    - build
+    - build-prod
   only:
     - master
