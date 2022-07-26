@@ -19,9 +19,9 @@ build-staging:
     key:
       files:
         - yarn.lock
-      paths:
-        - .yarn/
-        - yarn.lock
+    paths:
+      - .yarn/
+      - yarn.lock
   script:
     - yarn install
     - yarn run build
