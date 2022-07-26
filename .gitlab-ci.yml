@@ -1,5 +1,5 @@
 stages:
-  # - build
+  - build
   - release
   - deploy
 
@@ -12,13 +12,24 @@ stages:
 #   only:
 #     - master
 
-# build-staging:
-#   stage: build
-#   image: docker:latest
-#   script:
-#     - docker build --tag $CI_REGISTRY_IMAGE:staging .
-#   only:
-#     - staging
+build-staging:
+  stage: build
+  image: node:16.13-alpine
+  cache:
+    key:
+      files:
+        - yarn.lock
+      paths:
+        - .yarn/
+        - yarn.lock
+  script:
+    - yarn install
+    - yarn run build
+  artifacts:
+    paths:
+      - build/
+  only:
+    - staging
 
 
 #RELEASE
@@ -36,18 +47,16 @@ stages:
 #   cache: {}
 
 release-staging:
-  image: docker:latest
-  services:
-    - docker:dind
   stage: release
   before_script:
     - docker login -u $CI_DEPLOY_USERNAME -p $CI_DEPLOY_TOKEN $CI_REGISTRY
   script:
     - docker build --tag $CI_REGISTRY_IMAGE:staging .
     - docker push $CI_REGISTRY_IMAGE:staging
+  dependencies:
+    - build-staging
   only:
     - staging
-  cache: {}
 
 
 #DEPLOY
@@ -82,6 +91,8 @@ deploy-staging:
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml down --remove-orphans"
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml pull"
     - ssh root@$HOST_STAGING "docker-compose -f ~/docker-compose.yml up -d"
+  dependencies:
+    - build-staging
   only:
     - staging
 
