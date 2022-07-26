@@ -15,6 +15,9 @@ build-prod:
     paths:
       - .yarn/
       - yarn.lock
+  script:
+    - yarn install
+    - yarn run build
   artifacts:
     paths:
       - build/
