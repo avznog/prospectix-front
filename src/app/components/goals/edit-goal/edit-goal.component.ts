@@ -11,8 +11,6 @@ import { GoalsService } from '../../../services/goals/goals.service';
 export class EditGoalComponent implements OnInit {
 
   @Input() goal!: Goal;
-  @Input() goalToEdit!: number;
-  @Output() updateGoalToEditEvent = new EventEmitter<number>();
 
   formEditGoal!: FormGroup;
 
@@ -29,24 +27,7 @@ export class EditGoalComponent implements OnInit {
       isCyclic: [false],
       totalSteps: [0]
     });
-  }
-
-  editFormGoal() {
     
-    this.goalsService.editGoal({
-      ...this.formEditGoal.value,
-      id: this.goalToEdit
-    });
-    this.updateGoalToEdit(-1);
-  }
-
-  onCancelEditGoal() {
-    this.updateGoalToEdit(-1);
-  }
-
-
-  updateGoalToEdit(value: number) {
-    this.updateGoalToEditEvent.emit(value);
   }
 
 

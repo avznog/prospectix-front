@@ -17,15 +17,13 @@ import { EachProspectComponent } from './components/common/each-prospect/each-pr
 import { ResearchBlocComponent } from './components/research-prospects/research-bloc/research-bloc.component';
 import { UsersComponent } from './components/users/users/users.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
-import { EachUserComponent } from './components/users/each-user/each-user.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
 import { ListeGoalsComponent } from './components/goals/liste-goals/liste-goals.component';
-import { EachGoalComponent } from './components/goals/each-goal/each-goal.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
-import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
 import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { HeaderComponent } from './components/common/header/header.component';
+import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
 
 @NgModule({
   declarations: [
@@ -42,15 +40,13 @@ import { HeaderComponent } from './components/common/header/header.component';
     ResearchBlocComponent,
     UsersComponent,
     ListUsersComponent,
-    EachUserComponent,
     CreateUserComponent,
     ListeGoalsComponent,
-    EachGoalComponent,
     GoalsComponent,
-    CreateGoalComponent,
     EditGoalComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    CreateGoalComponent
   ],
   imports: [
     BrowserModule,

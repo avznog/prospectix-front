@@ -28,8 +28,9 @@ export class CreateUserComponent implements OnInit {
   onCreateUser() : Subscription {
     const us = {
       ...this.createUserForm.value,
+      pseudo: `${this.createUserForm.value["firstname"].charAt(0)}${this.createUserForm.value["name"]}`.toLowerCase().replace(/\s/g, '').trim(),
       currentHashedRefreshToken: "",
-      mail: `${this.createUserForm.value["pseudo"]}@juniorisep.com`,
+      mail: `${this.createUserForm.value["firstname"].charAt(0)}${this.createUserForm.value["name"]}@juniorisep.com`.toLowerCase().replace(/\s/g, '').trim(),
       tokenEmail: ""
     }
     console.log(us);

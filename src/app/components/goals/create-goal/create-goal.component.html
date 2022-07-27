@@ -1,67 +1,42 @@
-<!-- The button to open modal -->
-<label for="add-goal" class="btn modal-button m-6">Ajouter un objectif</label>
+<div class="modal-box overflow-hidden">
+    <label for="add-goal-modal" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+    <h3 class="text-lg font-bold">Créer un objectif</h3>
+    <div class="divider"></div>
+    <form [formGroup]="createGoalForm" class="space-y-5">
+      <label class="input-group">
+        <span>Titre</span>
+        <input class="input input-bordered" type="text" placeholder="Ex: Appels" formControlName="title" />
+      </label>
+        <div class="dropdown dropdown-bottom" *ngIf="!choosingPm">
+            <label tabindex="0" class="btn btn-outline btn-ghost">Choisir un chef de projet</label>
+            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box scroll-auto overflow-scroll">
+                <div *ngFor="let pm of projectManagers">    
+                    <li (click)="selectPm(pm)" (click)="choosingPm = true"><a>{{pm.pseudo}}</a></li>
+                </div>
+            </ul>
+          </div>
+        <div class="dropdown">
+            <label *ngIf="choosingPm" tabindex="0" class="btn btn-outline btn-ghost" (click)="choosingPm = false">{{pmSelected.pseudo}}</label>
 
-<!-- Put this part before </body> tag -->
-<input type="checkbox" id="add-goal" class="modal-toggle" />
-<div class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box">
-        <p class="text-xl">Ajouter un objectif</p>
-
-        <form [formGroup]="createGoalForm" class="flex flex-col justify-center">
-
-            <div class="form-control w-full max-w-xs">
-                <label class="label" for="title">
-                    <span class="label-text">Titre</span>
-                </label>
-                <input class="input input-bordered w-full max-w-xs" id="title" placeholder="Appels" type="text"
-                    formControlName="title" />
-            </div>
-
-            <div class="form-control w-full max-w-xs">
-                <label class="label" for="pmPseudo">
-                    <span class="label-text">Chef de projet</span>
-                </label>
-                <input class="input input-bordered w-full max-w-xs" id="pmPseudo" placeholder="bgonzva" type="text"
-                    formControlName="pmPseudo" />
-            </div>
-
-            <div class="form-control w-full max-w-xs">
-                <label class="label" for="description">
-                    <span class="label-text">Description</span>
-                </label>
-                <input class="input input-bordered w-full max-w-xs" id="description"
-                    placeholder="Nombre d'appels par semaine" formControlName="description" type="number" />
-            </div>
-
-            <div class="form-control min-w-fit">
-                <label class="label" for="deadline">
-                    <span class="label-text">Deadline</span>
-                </label>
-                <input id="deadline" type="date" formControlName="deadline" />
-            </div>
-
-            <div class="form-control min-w-fit">
-                <label class="label" for="isCyclic">
-                    <span class="label-text">Est redondant</span>
-                </label>
-                <input class="toggle" type="checkbox" id="isCyclic" formControlName="isCyclic" />
-            </div>
-
-            <div class="form-control min-w-fit mb-4">
-                <label class="label" for="totalSteps">
-                    <span class="label-text">Nombre d'itérations</span>
-                </label>
-                <input class="input input-bordered w-full max-w-xs" id="totalSteps" type="number" placeholder="0"
-                    formControlName="totalSteps" />
-            </div>
-
-            <div class="modal-action">
-                <label for="add-goal" type="submit" (click)="createGoal()" value="Ajouter objectif"
-                    class="btn btn-active btn-primary">Ajouter objectif</label>
-            </div>
-            <label for="add-goal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        </form>
-
-
-    </div>
-</div>
+        </div>
+      <label class="input-group">
+        <span>Description</span>
+        <input class="input input-bordered" type="text" placeholder="Ex: Nombre d'appels par semaine" formControlName="description" />
+      </label>
+      <label class="input-group">
+        <span>Deadline</span>
+        <input class="input input-bordered" type="date" formControlName="deadline" />
+      </label>
+      <label class="input-group">
+        <span>Redondant ?</span>
+        <input class="checkbox" type="checkbox" formControlName="isCyclic" />
+      </label>
+      <label class="input-group">
+        <span>Nombre d'itérations</span>
+        <input class="input input-bordered" type="number" placeholder="Ex: 0" formControlName="totalSteps" />
+      </label>
+      <div class="modal-action">
+        <label for="add-goal-modal" class="btn btn-outline btn-ghost right-2" (click)="createGoal()">Créer l'objectif</label>
+      </div>  
+    </form>
+  </div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Goal } from '../../../models/goal.model';
 import { GoalsService } from '../../../services/goals/goals.service';
 
@@ -10,22 +11,18 @@ import { GoalsService } from '../../../services/goals/goals.service';
 export class ListeGoalsComponent implements OnInit {
 
   @Input() goals!: Goal[];
-  @Input() goalToEdit!: number;
   @Output() updateGoalToEditUpEvent = new EventEmitter<number>();
+
+  constructor(
+    private goalsService: GoalsService
+  ){}
 
   ngOnInit(): void {
   }
 
-  updateGoalToEdit(newGoalToEdit: number) {
-    console.log("goal to edit edited" + newGoalToEdit)
-    this.goalToEdit = newGoalToEdit;
-    this.updateGoalToEditUp(this.goalToEdit);
+
+  deleteGoal(goal: Goal) : Subscription {
+    return this.goalsService.deleteGoal(goal.id);
   }
-
-  updateGoalToEditUp(value: number) {
-    this.updateGoalToEditUpEvent.emit(value);
-  }
-
-
 
 }

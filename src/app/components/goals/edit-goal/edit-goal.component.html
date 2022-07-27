@@ -1,10 +1,31 @@
-<h2>Modifier l'objectif nº{{this.goalToEdit}}</h2>
-<form [formGroup]="formEditGoal">
-    <!-- <label for="id">Id (temporaire) </label><input id="id" placeholder="id" type="number" formControlName="id" /><br /> -->
-    <label for="title">Titre </label><input id="title" placeholder="Appels" type="text" formControlName="title" /><br />
-    <label for="description">Description </label><input id="description" placeholder="nombre d'appels par semaine" formControlName="description" type="text"/><br />
-    <label for="deadline">Deadline </label> <input id="deadline" type="date" formControlName="deadline"/><br />
-    <label for="isCyclic">Redondant ? </label><input id="isCyclic" type="checkbox" formControlName="isCyclic"/><br />
-    <label for="totalSteps">Nombre d'itérations </label><input id="totalSteps" type="number" placeholder="0" formControlName="totalSteps"/><br />
-    <input type="submit" value="Modifier l'objectif" style="color: green;" (click)="editFormGoal()"/><button (click)="onCancelEditGoal()" style="color: red;">Annuler</button>
-</form>
+<div class="modal-box">
+  <label for="edit-goal-modal" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+  <h3 class="text-lg font-bold">Modifier l'objectif</h3>
+  <div class="divider"></div>
+  <form [formGroup]="formEditGoal" class="space-y-5">
+    <label class="input-group">
+      <span>Titre</span>
+      <input class="input input-bordered" type="text" placeholder="Ex: Appels" formControlName="title" />
+    </label>
+    <label class="input-group">
+      <span>Description</span>
+      <input class="input input-bordered" type="text" placeholder="Ex: Nombre d'appels par semaine" formControlName="description" />
+    </label>
+    <label class="input-group">
+      <span>Deadline</span>
+      <input class="input input-bordered" type="date" formControlName="deadline" />
+    </label>
+    <label class="input-group">
+      <span>Redondant ?</span>
+      <input class="checkbox" type="checkbox" formControlName="isCyclic" />
+    </label>
+    <label class="input-group">
+      <span>Nombre d'itérations</span>
+      <input class="input input-bordered" type="number" placeholder="Ex: 0" formControlName="totalSteps" />
+    </label>
+    <div class="modal-action">
+      <label for="edit-goal-modal" class="btn btn-outline btn-ghost right-2">Modifier l'objectif</label>
+    </div>  
+  </form>
+  
+</div>
