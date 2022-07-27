@@ -8,7 +8,6 @@ import { GoalsService } from 'src/app/services/goals/goals.service';
   styleUrls: ['./goals.component.scss']
 })
 export class GoalsComponent implements OnInit {
-  goalToEdit = -1;
   goals!: Goal[];
 
   constructor(
@@ -28,8 +27,4 @@ export class GoalsComponent implements OnInit {
       });
   }
 
-  updateGoalToEditUp(newGoalToEdit: number) {
-    this.goalToEdit = newGoalToEdit;
-    console.log(this.goalToEdit)
-  }
 }
