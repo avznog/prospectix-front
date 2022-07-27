@@ -12,6 +12,8 @@ import { GoalsService } from '../../../services/goals/goals.service';
 export class CreateGoalComponent implements OnInit {
   createGoalForm!: FormGroup;
   projectManagers!: ProjectManager[];
+  pmSelected!: ProjectManager;
+  choosingPm = false;
   constructor(
     private formBuilder: FormBuilder,
     private readonly goalsService: GoalsService,
@@ -42,7 +44,10 @@ export class CreateGoalComponent implements OnInit {
 
   createGoal() {
     console.log(this.createGoalForm.value);
-    this.goalsService.createForPm(this.createGoalForm.value, this.createGoalForm.value["pmPseudo"]);
+    this.goalsService.createForPm(this.createGoalForm.value, this.pmSelected.pseudo);
   }
 
+  selectPm(pm: ProjectManager) {
+    this.pmSelected = pm;
+  }
 }

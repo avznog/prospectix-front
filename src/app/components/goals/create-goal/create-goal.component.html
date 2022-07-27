@@ -1,4 +1,4 @@
-<div class="modal-box">
+<div class="modal-box overflow-hidden">
     <label for="add-goal-modal" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
     <h3 class="text-lg font-bold">Créer un objectif</h3>
     <div class="divider"></div>
@@ -7,10 +7,18 @@
         <span>Titre</span>
         <input class="input input-bordered" type="text" placeholder="Ex: Appels" formControlName="title" />
       </label>
-      <label class="input-group">
-        <span>Chef de projet (pseudo (a faire liste))</span>
-        <input class="input input-bordered" type="text" placeholder="Ex: bgonzva" formControlName="pmPseudo" />
-      </label>
+        <div class="dropdown dropdown-bottom" *ngIf="!choosingPm">
+            <label tabindex="0" class="btn btn-outline btn-ghost">Choisir un chef de projet</label>
+            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box scroll-auto overflow-scroll">
+                <div *ngFor="let pm of projectManagers">    
+                    <li (click)="selectPm(pm)" (click)="choosingPm = true"><a>{{pm.pseudo}}</a></li>
+                </div>
+            </ul>
+          </div>
+        <div class="dropdown">
+            <label *ngIf="choosingPm" tabindex="0" class="btn btn-outline btn-ghost" (click)="choosingPm = false">{{pmSelected.pseudo}}</label>
+
+        </div>
       <label class="input-group">
         <span>Description</span>
         <input class="input input-bordered" type="text" placeholder="Ex: Nombre d'appels par semaine" formControlName="description" />
