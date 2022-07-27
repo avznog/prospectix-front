@@ -1,4 +1,7 @@
 <app-header></app-header>
-<h1>Page utilisateurs</h1>
+<input type="checkbox" id="add-user-modal" class="modal-toggle" />
+<div class="modal">
+    <app-create-user></app-create-user>
+</div>
 <app-list-users></app-list-users>
-<app-create-user></app-create-user>
+<label for="add-user-modal" class="btn modal-button btn-ghost btn-outline w-1/3 m-5">Ajouter un utilisateur</label>
