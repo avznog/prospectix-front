@@ -23,9 +23,8 @@ import { GoalsComponent } from './components/goals/goals/goals.component';
 import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
-import { HeaderComponent } from './components/common/header/header/header.component';
+import { HeaderComponent } from './components/common/header/header.component';
 import { EachProspectChangeParameterComponent } from './components/common/each-prospect-change-parameter/each-prospect-change-parameter.component';
-import { ThemesDropdownComponent } from './components/common/header/themes-dropdown/themes-dropdown.component';
 import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
 
@@ -52,7 +51,6 @@ import { DashboardEachGoalComponent } from './components/dashboard/dashboard-eac
     HeaderComponent,
     CreateGoalComponent,
     EachProspectChangeParameterComponent,
-    ThemesDropdownComponent,
     DashboardListeGoalsComponent,
     DashboardEachGoalComponent,
   ],

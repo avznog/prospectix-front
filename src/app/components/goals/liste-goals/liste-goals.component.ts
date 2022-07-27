@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { GoalsService } from 'src/app/services/goals/goals.service';
 import { Goal } from '../../../models/goal.model';
 
 @Component({
