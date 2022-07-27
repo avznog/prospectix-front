@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Goal } from '../../../models/goal.model';
-import { GoalsService } from '../../../services/goals/goals.service';
 
 @Component({
   selector: 'app-liste-goals',

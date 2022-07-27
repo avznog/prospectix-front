@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Reminder } from 'src/app/models/reminder.model';
@@ -44,19 +44,12 @@ export class EachProspectComponent implements OnInit {
   @Input() meetingsDateUp!: Date;
 
   today = new Date();
-
-  changeNumberForm!: FormGroup;
-  changeEmailForm!: FormGroup;
-  changeWebsiteForm!: FormGroup;
   changeCommentForm!: FormGroup;
   
   constructor(
     private formBuilder: FormBuilder,
 
     //prospect
-    private phonesService: PhonesService,
-    private websitesService: WebsitesService,
-    private emailsService: EmailsService,
     private prospectService: ProspectsService,
 
     //reminders
@@ -67,62 +60,11 @@ export class EachProspectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.changeNumberForm = this.formBuilder.group({
-      number: ["", Validators.required]
-    });
-
-    this.changeEmailForm = this.formBuilder.group({
-      email: ["", Validators.required]
-    });
-
-    this.changeWebsiteForm = this.formBuilder.group({
-      website: ["", Validators.required]
-    });
-
     this.changeCommentForm = this.formBuilder.group({
-      comment: ["", Validators.required]
+      comment: [
+        this.prospect ? this.prospect.comment : this.reminder ? this.reminder.prospect.comment : this.meeting.prospect.comment, Validators.required]
     });
 
-  }
-
-  onChangePhoneNumber() : Subscription {
-    console.log("phone changed")
-    if(this.prospect){
-      return this.phonesService.updatePhoneNumber(this.prospect.phone.id, { number: this.changeNumberForm.value["number"]});
-    } else if (this.meeting) {
-      return this.phonesService.updatePhoneNumber(this.meeting.prospect.id, { number: this.changeNumberForm.value["number"]});
-    } else if (this.reminder) {
-      return this.phonesService.updatePhoneNumber(this.reminder.prospect.id, { number: this.changeNumberForm.value["number"]});
-    } else {
-      throw new Error("Impossible de changer le mail");
-    }
-    
-  }
-
-  onChangeEmail() : Subscription {
-    console.log("email changed")
-    if(this.prospect){
-      return this.emailsService.updateEmail(this.prospect.email.id, { email: this.changeEmailForm.value["email"] });
-    } else if (this.meeting) {
-      return this.emailsService.updateEmail(this.meeting.prospect.id, { email: this.changeEmailForm.value["email"]});
-    } else if (this.reminder){
-      return this.emailsService.updateEmail(this.reminder.prospect.id, { email: this.changeEmailForm.value["email"]});
-    } else {
-      throw new Error("Impossible de changer le mail");
-    }
-  }
-
-  onChangeWebsite() : Subscription {
-    console.log("website changed")
-    if(this.prospect) {
-      return this.websitesService.updateWebsite(this.prospect.website.id, { website: this.changeWebsiteForm.value["website"] });
-    } else if (this.meeting) {
-      return this.websitesService.updateWebsite(this.meeting.prospect.id, { website: this.changeWebsiteForm.value["website"] });
-    } else if (this.reminder) {
-      return this.websitesService.updateWebsite(this.reminder.prospect.id, { website: this.changeWebsiteForm.value["website"]});
-    } else {
-      throw new Error("Impossible de changer le site internet");
-    }
   }
 
   onDeleteReminder(idReminder: number) : Subscription {

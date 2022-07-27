@@ -1,0 +1,45 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { Meeting } from 'src/app/models/meeting.model';
+import { Prospect } from 'src/app/models/prospect.model';
+import { Reminder } from 'src/app/models/reminder.model';
+import { EmailsService } from 'src/app/services/emails/emails.service';
+import { PhonesService } from 'src/app/services/phones/phones.service';
+import { WebsitesService } from 'src/app/services/websites/websites.service';
+
+@Component({
+  selector: 'app-each-prospect-change-parameter',
+  templateUrl: './each-prospect-change-parameter.component.html',
+  styleUrls: ['./each-prospect-change-parameter.component.scss']
+})
+export class EachProspectChangeParameterComponent implements OnInit {
+
+  @Input() valueToDisplay!: string;
+  @Input() prospect!: Prospect;
+  @Input() meeting!: Meeting;
+  @Input() reminder!: Reminder;
+  @Input() el!: string;
+  @Input() id!: number;
+  isClicked!: boolean;
+  fcontrol = new FormControl("", [Validators.required, Validators.maxLength(10)])
+  constructor(
+    private readonly phonesService: PhonesService,
+    private readonly emailsService: EmailsService,
+    private readonly websitesService: WebsitesService
+  ) { }
+
+  ngOnInit(): void {
+  }
+
+  onChangeElement() : Subscription {
+    if(this.el == "phone") {
+      return this.phonesService.updatePhoneNumber(this.id, { number: this.fcontrol.value});
+    } else if (this.el == "email") {
+      return this.emailsService.updateEmail(this.id, { email: this.fcontrol.value });
+    } else {
+      return this.websitesService.updateWebsite(this.id, { website: this.fcontrol.value });
+    }
+    
+  }
+}

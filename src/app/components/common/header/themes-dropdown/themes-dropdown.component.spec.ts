@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListeGoalsComponent } from './liste-goals.component';
+import { ThemesDropdownComponent } from './themes-dropdown.component';
 
-describe('ListeGoalsComponent', () => {
-  let component: ListeGoalsComponent;
-  let fixture: ComponentFixture<ListeGoalsComponent>;
+describe('ThemesDropdownComponent', () => {
+  let component: ThemesDropdownComponent;
+  let fixture: ComponentFixture<ThemesDropdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListeGoalsComponent ]
+      declarations: [ ThemesDropdownComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListeGoalsComponent);
+    fixture = TestBed.createComponent(ThemesDropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

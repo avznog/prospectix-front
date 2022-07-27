@@ -1,6 +1,6 @@
 <!-- <app-each-prospect *ngFor="let prospect of prospects; let i = index;" [index]="i" [prospect]="prospect" [reminders]="reminders" [priority]="priority"></app-each-prospect> -->
-<app-each-prospect 
-*ngFor="let reminder of reminders" 
+<div *ngFor="let reminder of reminders" >
+    <app-each-prospect 
 
 [reminder]="reminder" 
 [priority]="priority" 
@@ -12,3 +12,5 @@
 [remindersDateUp]="remindersDateUp"
 
 ></app-each-prospect>
+<br />
+</div>

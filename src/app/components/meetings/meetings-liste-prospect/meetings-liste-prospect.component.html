@@ -1,12 +1,15 @@
-<app-each-prospect
-*ngFor="let meeting of meetings"
+<div *ngFor="let meeting of meetings">
+    <app-each-prospect
+    
 
-[meeting]="meeting"
-[meetingsDone]="meetingsDone"
-[date]="date"
-[futureMeetings]="futureMeetings"
-[previousMeetings]="previousMeetings"
-[typeMeeting]="typeMeeting"
-[meetingsDateDown]="meetingsDateDown"
-[meetingsDateUp]="meetingsDateUp"
+    [meeting]="meeting"
+    [meetingsDone]="meetingsDone"
+    [date]="date"
+    [futureMeetings]="futureMeetings"
+    [previousMeetings]="previousMeetings"
+    [typeMeeting]="typeMeeting"
+    [meetingsDateDown]="meetingsDateDown"
+    [meetingsDateUp]="meetingsDateUp"
 ></app-each-prospect>
+    <br />
+</div>

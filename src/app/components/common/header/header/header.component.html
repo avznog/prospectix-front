@@ -1,0 +1,15 @@
+<div class="navbar">
+  <div class="tabs" >
+    <a routerLink="/dashboard" class='tab tab-lg tab-lifted tab-border-3 {{currentRoute == "/dashboard" ? " bg-primary bg-opacity-25" : "bg-secondary bg-opacity-10"}}' >Prospectix</a>
+    <a routerLink="/prospects" class='tab tab-lg tab-lifted tab-border-3 {{currentRoute == "/prospects" ? " bg-primary bg-opacity-25" : "bg-secondary bg-opacity-10"}}'>Recherche de prospects</a>
+    <a routerLink="/reminders" class='tab tab-lg tab-lifted tab-border-3 {{currentRoute == "/reminders" ? " bg-primary bg-opacity-25" : "bg-secondary bg-opacity-10"}}'>Recherche rappels</a>
+    <a routerLink="/meetings" class='tab tab-lg tab-lifted tab-border-3 {{currentRoute == "/meetings" ? " bg-primary bg-opacity-25" : "bg-secondary bg-opacity-10"}}'>Recherche de rendez-vous</a>
+    <a routerLink="/users" class='tab tab-lg tab-lifted tab-border-3 {{currentRoute == "/users" ? " bg-primary bg-opacity-25" : "bg-secondary bg-opacity-10"}}'>des utilisateurs (Admin)</a> 
+    <a routerLink="/goals" class='tab tab-lg tab-lifted tab-border-3 {{currentRoute == "/goals" ? " bg-primary bg-opacity-25" : "bg-secondary bg-opacity-10"}}'>Gestion des objectifs (Admin)</a>
+    <a class='tab tab-lg tab-lifted tab-border-3 bg-primary bg-opacity-10 '>
+      <div class="dropdown">
+        <app-themes-dropdown></app-themes-dropdown>
+      </div>
+    </a>
+  </div>
+</div> 
