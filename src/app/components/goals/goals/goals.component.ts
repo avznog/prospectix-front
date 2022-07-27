@@ -18,7 +18,7 @@ export class GoalsComponent implements OnInit {
     this.goalsService.findAll()
       .subscribe({
         next: (data) => {
-          this.goals = data;
+          this.goals = data.sort((a: Goal, b: Goal) => (a.id - b.id));
           console.log(data)
         },
         error: (err) => {
