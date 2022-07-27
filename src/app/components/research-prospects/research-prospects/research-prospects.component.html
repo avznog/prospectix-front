@@ -1,9 +1,7 @@
 <app-header></app-header>
-
+<h1 class="ml-6 text-xl mb-5">Recherche de prospects</h1>
 <app-research-bloc [prospects]="prospects" [currentCity]="currentCity" (updateProspectEvent)="updateProspects($event)"
   (updateCurrentCityEvent)="updateCurrentCity($event)" (updateCurrentActivityEvent)="updateCurrentActivity($event)">
 </app-research-bloc>
-<br />
-<br />
 <app-list-prospects [prospects]="prospects" [currentCity]="currentCity" [currentActivity]="currentActivity"
   [noProspect]="noProspect"></app-list-prospects>

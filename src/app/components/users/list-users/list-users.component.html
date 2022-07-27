@@ -1,2 +1,27 @@
-<p><b>Nom | UID | Email | Admin | Supprimer</b></p>
 <app-each-user *ngFor="let user of users" [user]="user"></app-each-user>
+
+<div class="overflow-x-auto">
+  <table class="table table-compact w-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nom</th>
+        <th>UID</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Compte actif</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <th>{{user.id}}</th>
+        <td>{{user.firstname}} {{user.name}}</td>
+        <td>{{user.pseudo}}</td>
+        <td>{{user.mail}}</td>
+        <td>{{user.admin ? "Révoquer admin" : "Rendre admin"}}</td>
+        <td>{{user.disabled ? "Activer le compte":"Désactiver le compte"}}</td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+</div>
