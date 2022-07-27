@@ -1,4 +1,4 @@
-<form [formGroup]="formSearchReminders" class="flex flex-row justify-around items-start m-0">
+<form [formGroup]="formSearchReminders" class="flex flex-row justify-around items-start m-0 mb-5">
 
   <!-- "Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." -->
 
@@ -62,22 +62,28 @@
 
   <!-- Select with a specific date or within a date range -->
 
-  <label for="date-option" class="btn modal-button">By date</label>
+  <label for="date-option" class="btn modal-button">Par date</label>
 
   <input type="checkbox" id="date-option" class="modal-toggle" />
   <div class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <div class="flex flex-col w-full lg:flex-row">
         <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-          <label class="label" for="date">Date : </label>
+          <label class="label" for="date">
+            <span class="label-text">Date</span>
+          </label>
           <input type="date" id="date" formControlName="date" (change)="onRemindersDateChange()" />
         </div>
         <div class="divider lg:divider-horizontal">OR</div>
         <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-          <label class="label" for="dateDown">Date inférieure</label>
+          <label class="label" for="dateDown">
+            <span class="label-text">Date inférieure</span>
+          </label>
           <input type="date" id="dateDown" formControlName="dateDown" (change)="onRemindersDateDownChange()" />
 
-          <label class="label" for="dateUp">Date supérieure</label>
+          <label class="label" for="dateUp">
+            <span class="label-text">Date supérieure</span>
+          </label>
           <input type="date" id="dateUp" formControlName="dateUp" (change)="onRemindersDateUpChange()" />
         </div>
       </div>

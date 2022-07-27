@@ -1,32 +1,42 @@
-<form [formGroup]="formSearchMeetings" class="flex flex-row justify-around items-start m-0">
+<form [formGroup]="formSearchMeetings" class="flex flex-row justify-around items-start m-0 mb-5">
 
   <!-- "Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." -->
   <div class="form-control w-full max-w-xs">
-    <label class="label" for="date">Recherche</label>
+    <label class="label" for="date">
+      <span class="label-text">Recherche</span>
+    </label>
     <input class="input input-bordered w-full max-w-xs" type="text" placeholder="Recherche" formControlName="searchBar"
       (input)="onMeetingsEditSearchBar()" />
   </div>
 
   <div class="form-control min-w-fit">
-    <label class="label" for="futureMeetings">Futurs RDV</label>
+    <label class="label" for="futureMeetings">
+      <span class="label-text">Futurs RDV</span>
+    </label>
     <input class="toggle" type="checkbox" id="futureMeetings" formControlName="futureMeetings"
       (change)="onChangeFutureMeetings()" />
   </div>
 
   <div class="form-control min-w-fit">
-    <label class="label" for="previousMeetings">Anciens RDV</label>
+    <label class="label" for="previousMeetings">
+      <span class="label-text">Anciens RDV</span>
+    </label>
     <input type="checkbox" class="toggle" id="previousMeetings" formControlName="previousMeetings"
       (change)="onChangePreviousMeetings()" />
   </div>
 
   <div class="form-control min-w-fit">
-    <label class="label" for="meetingsDone">Rendez-vous effectués : </label>
+    <label class="label" for="meetingsDone">
+      <span class="label-text">RDV effectués</span>
+    </label>
     <input class="toggle" type="checkbox" id="meetingsDone" formControlName="meetingsDone"
       (change)="onChangeMeetingsDone()" />
   </div>
 
   <div class="form-control min-w-fit">
-    <label class="label" for="typeMeeting">Type de rendez-vous</label>
+    <label class="label" for="typeMeeting">
+      <span class="label-text">Type de RDV</span>
+    </label>
     <select class="select select-bordered" id="typeMeeting" name="typeMeeting" formControlName="typeMeeting"
       (change)="onChangeMeetingType()">
       <option selected>Tous les types</option>
@@ -34,7 +44,7 @@
     </select>
   </div>
 
-  <label for="date-option" class="btn modal-button">By date</label>
+  <label for="date-option" class="btn modal-button">Par date</label>
 
   <input type="checkbox" id="date-option" class="modal-toggle" />
   <div class="modal modal-bottom sm:modal-middle">

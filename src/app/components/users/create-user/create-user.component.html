@@ -1,9 +1,43 @@
 <h1>Ajouter un utilisateur</h1>
-<form [formGroup]="createUserForm">
-    <label for="pseudo">Pseudo </label><input id="pseudo" type="text" placeholder="bgonzva" formControlName="pseudo"/><br />
-    <label for="firstname">Prénom </label><input id="firstname" type="text" placeholder="Benjamin" formControlName="firstname" /><br />
-    <label for="name">Nom </label><input id="name" type="text" placeholder="Gonzva" formControlName="name"/><br />
-    <label for="admin">Admin ? </label><input id="admin" type="checkbox" formControlName="admin" /><br />
-    <label for="disabled">Disabled ? </label><input id="disabled" type="checkbox" formControlName="disabled" /><br />
-    <input type="submit" (click)="onCreateUser()" value="Créer l'utilisateur"/>
+<form [formGroup]="createUserForm" class="flex flex-column justify-around items-start m-0 mb-5">
+
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="pseudo">
+            <span class="label-text">Pseudo</span>
+        </label>
+        <input class="input input-bordered w-full max-w-xs" id="pseudo" type="text" placeholder="jbond"
+            formControlName="pseudo" />
+    </div>
+
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="firstname">
+            <span class="label-text">Prénom</span>
+        </label>
+        <input class="input input-bordered w-full max-w-xs" id="firstname" type="text" placeholder="James"
+            formControlName="firstname" />
+    </div>
+
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="name">
+            <span class="label-text">Nom</span>
+        </label>
+        <input class="input input-bordered w-full max-w-xs" id="name" type="text" placeholder="Bond"
+            formControlName="name" />
+    </div>
+
+    <div class="form-control min-w-fit">
+        <label for="admin" class="label cursor-pointer">
+            <span class="label-text">Est Admin</span>
+        </label>
+        <input class="toggle" type="checkbox" id="admin" formControlName="admin" />
+    </div>
+
+    <div class="form-control min-w-fit">
+        <label for="disabled" class="label cursor-pointer">
+            <span class="label-text">Est actif</span>
+        </label>
+        <input class="toggle" type="checkbox" id="admin" formControlName="disabled" checked />
+    </div>
+
+    <input type="submit" (click)="onCreateUser()" value="Créer l'utilisateur" />
 </form>
