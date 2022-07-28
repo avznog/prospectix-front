@@ -1,0 +1,13 @@
+<app-header></app-header>
+<h1 class="ml-6 text-xl mb-5">Détails d'un prospect</h1>
+<div class="card card-bordered shadow-md border-solid border-current" *ngIf="prospect">
+    <div class="card-body">
+        <h1 class="card-title">{{prospect.companyName}}</h1>
+        <span>{{prospect.streetAddress}}, {{prospect.city.zipcode}} {{prospect.city.name}}, {{prospect.country.name}}</span>
+        <div class="divider"></div>
+
+    </div>
+</div>
+
+<!-- If no prospect selected -->
+<label *ngIf="!prospect">Vous devez cliquer sur un prospect d'abord</label>

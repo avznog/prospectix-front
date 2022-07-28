@@ -27,6 +27,7 @@ import { HeaderComponent } from './components/common/header/header.component';
 import { EachProspectChangeParameterComponent } from './components/common/each-prospect-change-parameter/each-prospect-change-parameter.component';
 import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
+import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { DashboardEachGoalComponent } from './components/dashboard/dashboard-eac
     EachProspectChangeParameterComponent,
     DashboardListeGoalsComponent,
     DashboardEachGoalComponent,
+    ProspectDetailsComponent,
   ],
   imports: [
     BrowserModule,

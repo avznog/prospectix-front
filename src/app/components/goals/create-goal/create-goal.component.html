@@ -7,7 +7,7 @@
         <span>Titre</span>
         <input class="input input-bordered" type="text" placeholder="Ex: Appels" formControlName="title" />
       </label>
-        <div class="dropdown dropdown-bottom" *ngIf="!choosingPm">
+        <!-- <div class="dropdown dropdown-bottom" *ngIf="!choosingPm">
             <label tabindex="0" class="btn btn-outline btn-ghost">Choisir un chef de projet</label>
             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box scroll-auto overflow-scroll">
                 <div *ngFor="let pm of projectManagers">    
@@ -17,8 +17,18 @@
           </div>
         <div class="dropdown">
             <label *ngIf="choosingPm" tabindex="0" class="btn btn-outline btn-ghost" (click)="choosingPm = false">{{pmSelected.pseudo}}</label>
-
-        </div>
+        </div> -->
+      <div class="form-control">
+      
+          <select class="select select-bordered">
+            <option disabled selected>Choisir un chef de projet</option>
+            <div *ngFor="let pm of projectManagers">
+              <option>{{pm.pseudo}}d</option>
+            </div>
+            
+          </select>
+        
+      </div>
       <label class="input-group">
         <span>Description</span>
         <input class="input input-bordered" type="text" placeholder="Ex: Nombre d'appels par semaine" formControlName="description" />
