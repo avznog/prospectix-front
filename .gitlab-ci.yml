@@ -102,7 +102,6 @@ deploy-prod:
     
   script:
     - bash -c "ssh-add <(echo \"$SSH_PRIVATE_KEY_PROD\")"
-    - QNqTUe3qzWR6G9u
     - export COMPOSE_HTTP_TIMEOUT=200
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml down --remove-orphans"
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml pull"
