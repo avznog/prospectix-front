@@ -106,6 +106,7 @@ deploy-prod:
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml down --remove-orphans"
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml pull"
     - ssh root@$HOST_PROD "docker-compose -f ~/docker-compose.yml up -d"
+    - QNqTUe3qzWR6G9u
   dependencies:
     - build-prod
   only:
