@@ -1,12 +1,23 @@
 <app-header></app-header>
 <h1 class="ml-6 text-xl mb-5">Détails d'un prospect</h1>
 <div class="card card-bordered shadow-md border-solid border-current" *ngIf="prospect">
-    <div class="card-body">
-        <h1 class="card-title">{{prospect.companyName}}</h1>
-        <span>{{prospect.streetAddress}}, {{prospect.city.zipcode}} {{prospect.city.name}}, {{prospect.country.name}}</span>
-        <div class="divider"></div>
+	<div class="card-body">
+		<div class="inline-flex space-x-5">
+			<app-row-edit [prospectVariable]="prospect.companyName" [titleRow]="'Entreprise'" [prospect]="prospect"></app-row-edit>
+			<app-row-edit [prospectVariable]="prospect.streetAddress" [titleRow]="'Address'" [prospect]="prospect"></app-row-edit>
+			<app-row-edit [prospectVariable]="prospect.city.name" [titleRow]="'Ville'" [prospect]="prospect"></app-row-edit>
+			<!-- TODO FOR CITY: SECTION -->
+		</div>
+		<app-row-edit [prospectVariable]="prospect.activity.name" [titleRow]="'Domaine d\'activité'" [prospect]="prospect"></app-row-edit>
+		<!-- TODO FOR ACTIVITT: SECTION -->
+		
+		<div class="divider"></div>
 
-    </div>
+		<app-row-edit [prospectVariable]="prospect.phone.number" [titleRow]="'Téléphone'" [prospect]="prospect"></app-row-edit>
+		<app-row-edit [prospectVariable]="prospect.email.email" [titleRow]="'Mail'" [prospect]="prospect"></app-row-edit>
+		<app-row-edit [prospectVariable]="prospect.website.website" [titleRow]="'Site internet'" [prospect]="prospect"></app-row-edit>
+
+	</div>
 </div>
 
 <!-- If no prospect selected -->
