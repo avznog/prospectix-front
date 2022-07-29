@@ -41,4 +41,8 @@ export class ProspectsService {
   findAllByKeyword(keyword: string) : Observable<Prospect[]> {
     return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-keywords/${keyword}`);
   }
+
+  findAllByBookmarks(pseudoPm: string) : Observable<Prospect[]> {
+    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-bookmarks/${pseudoPm}`);
+  }
 }

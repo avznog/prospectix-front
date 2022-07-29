@@ -29,6 +29,7 @@ import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-l
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
 import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
 import { RowEditComponent } from './components/prospect-details/row-edit/row-edit.component';
+import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { RowEditComponent } from './components/prospect-details/row-edit/row-edi
     DashboardEachGoalComponent,
     ProspectDetailsComponent,
     RowEditComponent,
+    BookmarksComponent,
   ],
   imports: [
     BrowserModule,

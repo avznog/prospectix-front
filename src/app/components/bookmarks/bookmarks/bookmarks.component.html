@@ -1,0 +1,12 @@
+<app-header></app-header>
+<div class="form-control">
+  <select class="select select-bordered" (change)="onChangePm()" [formControl]="formControlPm">
+    <option disabled selected>Choisir un chef de projet</option>
+    <option *ngFor="let pm of projectManagers" >{{pm.pseudo}}</option>
+  </select>
+  <div class="divider"></div>
+</div>
+<div *ngFor="let prospect of prospects">
+  <app-each-prospect [prospect]="prospect"></app-each-prospect>
+  <br />
+</div>

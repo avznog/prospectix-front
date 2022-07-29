@@ -39,7 +39,7 @@ export class RowEditComponent implements OnInit {
         this.prospectsService.update(this.prospect.id, {companyName: this.formControl.value} as UpdateProspectDto);
       break;
 
-      case "Address":
+      case "Addresse":
         this.prospectsService.update(this.prospect.id, {streetAddress: this.formControl.value} as UpdateProspectDto);
       break;
 
@@ -72,4 +72,5 @@ export class RowEditComponent implements OnInit {
     console.log("updated")
     
   }
+  
 }

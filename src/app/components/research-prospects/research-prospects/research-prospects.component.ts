@@ -20,9 +20,10 @@ export class ResearchProspectsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.prospectsService.findAll().subscribe({
+    this.prospectsService.findAll()
+    .subscribe({
       next: (data) => {
-        this.prospects = data;
+        this.prospects = data
       },
       error: (err) => {
         console.log(err);

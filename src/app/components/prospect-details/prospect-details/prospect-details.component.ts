@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { Activity } from 'src/app/models/activity.model';
+import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
+import { ActivitiesService } from 'src/app/services/activities/activities.service';
+import { CitiesService } from 'src/app/services/cities/cities.service';
+import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 
 @Component({
   selector: 'app-prospect-details',
@@ -9,46 +15,50 @@ import { Prospect } from 'src/app/models/prospect.model';
 export class ProspectDetailsComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-  constructor() { }
+  cities!: City[];  
+  activities!: Activity[];
+  formControlActivity!: FormControl;
+  formControlCity!: FormControl;
+  constructor(
+    private prospectsService: ProspectsService,
+    private citiesService: CitiesService,
+    private activitiesService: ActivitiesService
+  ) { }
 
   ngOnInit(): void {
-    this.prospect = {
-      id: 0,
-      companyName: "Tibermont Antiquites 2",
-      comment: "Prospect très réactif",
-      disabled: false,
-      nbNo: 0,
-      streetAddress: "rue de la Paix",
-      activity: {
-        id: 0,
-        name: "Recouvrement de créances"
-      },
-      city: {
-        id: 0,
-        name: "Paris",
-        zipcode: 75014
-      },
-      country: {
-        id: 0,
-        name: "France",
-      },
-      phone: {
-        id: 0,
-        number: "06 84 65 34 54"
-      },
-      website: {
-        id: 0,
-        website: "www.tibermontantiquites2.com"
-      },
-      email: {
-        id: 0,
-        email: "tibermont@antiquites2.com"
-      },
-      meetings: [],
-      reminders: [],
-      events: [],
-      bookmarks: []
-    }
+
+    this.formControlCity = new FormControl(this.prospect.city.name, Validators.required);
+    this.formControlActivity = new FormControl(this.prospect.activity.name, Validators.required);
+    this.citiesService.findAll()
+      .subscribe({
+        next: (data) => {
+          this.cities = data;
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+
+    this.activitiesService.findAll()
+      .subscribe({
+        next: (data) => {
+          this.activities = data;
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      });
   }
 
+  onChangeNbNo() {
+    this.prospectsService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 })
+  }
+
+  onChangeActivity() {
+   console.log(this.formControlActivity.value) 
+  }
+
+  onChangeCity() {
+    console.log(this.formControlCity.value)
+  }
 }

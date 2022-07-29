@@ -19,12 +19,9 @@
             <label *ngIf="choosingPm" tabindex="0" class="btn btn-outline btn-ghost" (click)="choosingPm = false">{{pmSelected.pseudo}}</label>
         </div> -->
       <div class="form-control">
-      
           <select class="select select-bordered">
             <option disabled selected>Choisir un chef de projet</option>
-            <div *ngFor="let pm of projectManagers">
-              <option>{{pm.pseudo}}d</option>
-            </div>
+            <option *ngFor="let pm of projectManagers">{{pm.pseudo}}</option>
             
           </select>
         

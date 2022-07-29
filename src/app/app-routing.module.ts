@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
-import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
 import { UsersComponent } from './components/users/users/users.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path:"meetings", component: MeetingsComponent },
   { path:"prospects", component: ResearchProspectsComponent },
   { path:"goals", component: GoalsComponent },
-  { path:"prospect-details", component: ProspectDetailsComponent },
+  { path: "bookmarks", component: BookmarksComponent },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
 

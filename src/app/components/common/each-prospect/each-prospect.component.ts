@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Reminder } from 'src/app/models/reminder.model';
@@ -8,9 +8,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
-import { EmailsService } from 'src/app/services/emails/emails.service';
-import { PhonesService } from 'src/app/services/phones/phones.service';
-import { WebsitesService } from 'src/app/services/websites/websites.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -56,7 +54,11 @@ export class EachProspectComponent implements OnInit {
     private remindersService: RemindersService,
 
     //meetings
-    private meetingsService: MeetingsService
+    private meetingsService: MeetingsService,
+
+    //router
+    private router: Router
+   
   ) { }
 
   ngOnInit(): void {
@@ -128,5 +130,8 @@ export class EachProspectComponent implements OnInit {
     } else if (this.meeting) {
       this.prospectService.updateNbNo(this.meeting.prospect.id, { nbNo: this.meeting.prospect.nbNo + 1 });
     }
+  }
+  onEditProspect() {
+    this.router.navigate(['prospect-details']);
   }
 }
