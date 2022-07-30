@@ -21,7 +21,7 @@ export class ResearchBlocComponent implements OnInit {
   @Input() currentCity!: City;
   @Input() currentActivity!: Activity;
   researchForm!: FormGroup;
-  activites!: Activity[];
+  activities!: Activity[];
   cities!: City[];
 
   constructor(
@@ -35,7 +35,7 @@ export class ResearchBlocComponent implements OnInit {
     this.activitiesService.findAll()
       .subscribe({
         next: (data) => {
-          this.activites = data
+          this.activities = data
         },
         error: (err) => {
           console.log(err)

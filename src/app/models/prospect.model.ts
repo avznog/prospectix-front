@@ -22,10 +22,9 @@ export interface Prospect {
     phone: Phone;
     email: Email;
     website: Website;
+    isBookmarked: boolean;
     meetings: Meeting[];
     reminders: Reminder[];
     bookmarks: Bookmark[];
     events: Event[];
-
-
 }

@@ -9,6 +9,8 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Router } from '@angular/router';
+import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 
 
 @Component({
@@ -55,6 +57,9 @@ export class EachProspectComponent implements OnInit {
 
     //meetings
     private meetingsService: MeetingsService,
+
+    //bookmarks
+    private bookmarksService: BookmarksService,
 
     //router
     private router: Router
@@ -133,5 +138,45 @@ export class EachProspectComponent implements OnInit {
   }
   onEditProspect() {
     this.router.navigate(['prospect-details']);
+  }
+
+  onCreateBookmark(prospect: Prospect) {
+    // TODO : ADD for current pm
+    let pm = {
+      "id": 1,
+      "pseudo": "bgonzva",
+      "admin": true,
+      "name": "Gonzva",
+      "firstname": "Benjamin",
+      "mail": "bgonzva@juniorisep.com",
+      "tokenEmail": "",
+      "disabled": false,
+      "goals": [
+         
+      ],
+      "meetings": [
+          
+      ],
+      "reminders": [
+         
+      ],
+      "sentEmails": [],
+      "bookmarks": [],
+      "events": []
+    };
+    const createBookmarkDto: CreateBookmarkDto = {
+      prospect: prospect,
+      pm: pm,
+      creationDate: new Date()
+    };
+    this.bookmarksService.create(createBookmarkDto);
+    this.prospectService.updateIsBookmarked(prospect.id, { isBookmarked: true });
+    console.log("added to bookmarks");
+  }
+
+  onDeleteBookmark(prospect: Prospect) {
+    this.prospectService.updateIsBookmarked(prospect.id, { isBookmarked: false });
+    this.bookmarksService.deleteByProspect(prospect.id);
+    console.log("removed from bookmarks");
   }
 }

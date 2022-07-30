@@ -23,7 +23,7 @@
         <select id="activity" name="activity" formControlName="activity" (change)="onActivityChange()"
             class="select select-bordered">
             <option selected>Tous les domaines d'activité</option>
-            <option *ngFor="let activity of activites">{{activity.name}}</option>
+            <option *ngFor="let activity of activities">{{activity.name}}</option>
         </select>
     </div>
 

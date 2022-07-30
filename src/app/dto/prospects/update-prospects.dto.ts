@@ -21,4 +21,5 @@ export interface UpdateProspectDto {
   comment: string;
   nbNo: number;
   disabled: boolean;
+  isBookmarked: boolean;
 }

@@ -26,6 +26,10 @@ export class ProspectsService {
     return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, nbNo).subscribe();
   }
 
+  updateIsBookmarked(idProspect: number, isBookmarked: { isBookmarked: boolean }) : Subscription {
+    return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, isBookmarked).subscribe();
+  }
+
   findAll() : Observable<Prospect[]> {
     return this.http.get<Prospect[]>("http://localhost:3000/prospects");
   }
