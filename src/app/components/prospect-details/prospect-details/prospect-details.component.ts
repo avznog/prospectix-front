@@ -55,10 +55,12 @@ export class ProspectDetailsComponent implements OnInit {
   }
 
   onChangeActivity() {
-   console.log(this.formControlActivity.value) 
+   console.log("activity changed");
+   this.prospectsService.updateByActivity(this.prospect.id, this.formControlActivity.value);
   }
 
   onChangeCity() {
-    console.log(this.formControlCity.value)
+    console.log("city changed")
+    this.prospectsService.updateByCity(this.prospect.id, this.formControlCity.value);
   }
 }

@@ -7,27 +7,37 @@
 			<app-row-edit [prospectVariable]="prospect.streetAddress" [titleRow]="'Addresse'" [prospect]="prospect"></app-row-edit>
 
 			<!-- Select city -->
-			<div class="form-control w-full max-w-xs">
-        <label class="label" for="city">
-            <span class="label-text">Ville</span>
-        </label>
-        <select id="city" name="city" class="select select-bordered" [formControl]="formControlCity" (change)="onChangeCity()" >
-            <option *ngFor="let city of cities" >{{city.name}}</option>
-        </select>
-    	</div>	
+		</div>
+		<div class="form-control">
+			<label class="label" for="city">
+				<span class="label-text">Ville</span>
+			</label>
+			<div class="input-group">
+				<select id="city" class="select select-bordered" [formControl]="formControlCity" >
+					<option disabled selected>Ville actuelle : {{prospect.city.name}}</option>
+					<option *ngFor="let city of cities" >{{city.name}}</option>
+				</select>
+				<button class="btn btn-ghost btn-outline" (click)="onChangeCity()">Changer la ville</button>
+			</div>
 		</div>
 
 		<!-- Domaine d'activité -->
-		<div class="form-control w-full max-w-xs">
+		<div class="form-control">
 			<label class="label" for="activity">
-					<span class="label-text">Domaine d'activité</span>
+				<span class="label-text">Domaine d'activité</span>
 			</label>
-			<select id="activity" name="activity" class="select select-bordered"[formControl]="formControlActivity" (change)="onChangeActivity()" >
+			<div class="input-group">
+				<select id="activity" class="select select-bordered" [formControl]="formControlActivity">
+					<option disabled selected>Domaine d'acitvité actuel : {{prospect.activity.name}}</option>
 					<option *ngFor="let activity of activities" >{{activity.name}}</option>
-			</select>
+				</select>
+				<button class="btn btn-ghost btn-outline" (click)="onChangeActivity()">Changer le domaine d'activité</button>
+			</div>
 		</div>
 		
 		<div class="divider"></div>
+
+		<!-- Boutons informations phone / mail / website -->
 
 		<app-row-edit [prospectVariable]="prospect.phone.number" [titleRow]="'Téléphone'" [prospect]="prospect"></app-row-edit>
 		<app-row-edit [prospectVariable]="prospect.email.email" [titleRow]="'Mail'" [prospect]="prospect"></app-row-edit>
