@@ -40,6 +40,15 @@ export class EachProspectChangeParameterComponent implements OnInit {
     } else {
       return this.websitesService.updateWebsite(this.id, { website: this.fcontrol.value });
     }
-    
+  }
+
+  onClickValueToDisplay() {
+    if(this.el == "website") {
+      window.open(`http://${this.valueToDisplay}`, "_blank")
+    } else if (this.el == "email") {
+      window.open(`mailto:${this.valueToDisplay}`, "_blank")
+    } else {
+      window.open(`tel:${this.valueToDisplay}`, "_blank")
+    }
   }
 }
