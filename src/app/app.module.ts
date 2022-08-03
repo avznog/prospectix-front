@@ -30,6 +30,7 @@ import { DashboardEachGoalComponent } from './components/dashboard/dashboard-eac
 import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
 import { RowEditComponent } from './components/prospect-details/row-edit/row-edit.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
+import { AddProspectComponent } from './components/common/add-prospect/add-prospect/add-prospect.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.c
     ProspectDetailsComponent,
     RowEditComponent,
     BookmarksComponent,
+    AddProspectComponent,
   ],
   imports: [
     BrowserModule,
