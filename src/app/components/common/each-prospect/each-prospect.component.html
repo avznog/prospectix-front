@@ -1,6 +1,6 @@
 <!-- prospect -->
 <!-- begin filtering conditions-->
-<div *ngIf="prospect" class="card card-bordered shadow-md border-solid border-current">
+<div *ngIf="prospect" class="card card-bordered shadow-md border-solid border-current overflow-visible">
 <!-- end filtering conditions -->
 
   <!-- Card -->
@@ -48,9 +48,12 @@
           <span *ngIf="prospect.nbNo > 0" class="indicator-item badge badge-secondary">{{prospect.nbNo}}</span>
           Pas de réponse<span *ngIf="prospect.nbNo> 0">s</span>
         </button>
-        <button class="btn btn-ghost btn-outline">
-          Rappel
-        </button>
+        <div class="dropdown dropdown-top dropdown-right">
+          <label tabindex="0" class="btn btn-ghost btn-outline">Rappel</label>
+          <div tabindex="0" class="dropdown-content card card-compact">
+            <app-add-reminder-dropdown class="card-body outline"></app-add-reminder-dropdown>
+          </div>
+        </div>
         <button class="btn btn-ghost btn-outline">
           Rendez-vous
         </button>
