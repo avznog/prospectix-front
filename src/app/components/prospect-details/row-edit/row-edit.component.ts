@@ -42,17 +42,7 @@ export class RowEditComponent implements OnInit {
       case "Addresse":
         this.prospectsService.update(this.prospect.id, {streetAddress: this.formControl.value} as UpdateProspectDto);
       break;
-
-      case "Ville":
-        // TODO section !!
-        // this.prospectsService.update(1, {city: {id: this.prospect.city.id, name: this.formControl.value}} as UpdateProspectDto);
-      break;
-
-      case "Domaine d'activité":
-        // TODO section !!
-        // this.prospectsService.update(1, {activity: {id: this.prospect.activity.id, name: this.formControl.value}} as UpdateProspectDto);
-      break;
-
+      
       case "Téléphone":
         this.phonesService.updatePhoneNumber(this.prospect.phone.id, {number: this.formControl.value});
       break;
