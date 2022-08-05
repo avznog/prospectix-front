@@ -1,18 +1,13 @@
 <div class="space-y-5 card-bordered border-4 p-2 rounded-lg bg-base-100 drop-shadow-lg">
   <h3 class="card-title">Ajouter un rappel</h3>
-  <div class="inline-flex">
-    <label class="label" for="date">
-      <span class="label-text">Date : </span>
-    </label>
-      <input class="datepicker" type="date" id="date">
-  </div>
+  <input class="datepicker" type="date" id="date" class="btn btn-outline btn-ghost " [formControl]="formDate">
   
   <div class="inline-flex">
     <div class="w-1/2">
       <label>Priorité du rappel</label>
     </div>
     <div class="w-1/2">
-      <input type="range" min="1" max="3" value="1" class="range" step="1" />
+      <input type="range" min="1" max="3" value="1" class="range" step="1" [formControl]="formPriority"/>
       <div class="w-full flex justify-between text-xs px-2">
         <span>1</span>
         <span>2</span>
@@ -22,7 +17,7 @@
     
   </div>
   <div>
-    <textarea class="textarea textarea-bordered textarea-ghost" placeholder="Description du rappel"></textarea>
+    <textarea class="textarea textarea-bordered textarea-ghost" placeholder="Description du rappel" [formControl]="formDescription"></textarea>
   </div>
-  <button class="btn btn-outline btn-ghost ">Créer le rappel</button>
+  <button class="btn btn-outline btn-ghost" (click)="onCreateReminder()">Créer le rappel</button>
 </div>

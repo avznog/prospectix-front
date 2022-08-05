@@ -23,6 +23,8 @@ export class EachProspectComponent implements OnInit {
   //prospects
   @Input() prospect!: Prospect;
   @Input() currentCity!: City;
+  currentProspectMeetings!: Meeting[];
+  currentProspectReminders!: Reminder[];
 
   //reminders
   @Input() reminder!: Reminder;
@@ -42,6 +44,7 @@ export class EachProspectComponent implements OnInit {
   @Input() typeMeeting!: string;
   @Input() meetingsDateDown!: Date;
   @Input() meetingsDateUp!: Date;
+  
 
   today = new Date();
   changeCommentForm!: FormGroup;
@@ -64,6 +67,26 @@ export class EachProspectComponent implements OnInit {
       comment: [
         this.prospect ? this.prospect.comment : this.reminder ? this.reminder.prospect.comment : this.meeting.prospect.comment, Validators.required]
     });
+    
+    this.meetingsService.findAllByProspect(this.prospect.id).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.currentProspectMeetings = data;
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
+
+    this.remindersService.findAllByProspect(this.prospect.id).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.currentProspectReminders = data;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
 
   }
 

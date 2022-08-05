@@ -28,6 +28,7 @@ import { EachProspectChangeParameterComponent } from './components/common/each-p
 import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
 import { AddReminderDropdownComponent } from './components/common/add-reminder-dropdown/add-reminder-dropdown.component';
+import { AddMeetingsDropdownComponent } from './components/common/add-meetings-dropdown/add-meetings-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AddReminderDropdownComponent } from './components/common/add-reminder-d
     DashboardListeGoalsComponent,
     DashboardEachGoalComponent,
     AddReminderDropdownComponent,
+    AddMeetingsDropdownComponent,
   ],
   imports: [
     BrowserModule,

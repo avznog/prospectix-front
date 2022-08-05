@@ -1,29 +1,31 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MeetingType } from 'src/app/constants/meeting.type';
 import { Prospect } from 'src/app/models/prospect.model';
-import { RemindersService } from 'src/app/services/reminders/reminders.service';
+import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
-  selector: 'app-add-reminder-dropdown',
-  templateUrl: './add-reminder-dropdown.component.html',
-  styleUrls: ['./add-reminder-dropdown.component.scss']
+  selector: 'app-add-meetings-dropdown',
+  templateUrl: './add-meetings-dropdown.component.html',
+  styleUrls: ['./add-meetings-dropdown.component.scss']
 })
-export class AddReminderDropdownComponent implements OnInit {
-
-  @Input() prospect!: Prospect;
+export class AddMeetingsDropdownComponent implements OnInit {
 
   formDate = new FormControl(new Date);
-  formPriority = new FormControl(1);
+  formType = new FormControl(MeetingType.EXT);
   formDescription = new FormControl("");
+  meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
+  @Input() prospect!: Prospect;
+  
 
   constructor(
-    private remindersService: RemindersService
+    private meetingsService: MeetingsService
   ) { }
 
   ngOnInit(): void {
   }
 
-  onCreateReminder() {
+  onCreateMeeting() {
     // TODO : add current pm
     let pm = {
       "id": 1,
@@ -48,14 +50,13 @@ export class AddReminderDropdownComponent implements OnInit {
       "events": []
     };
 
-    this.remindersService.create({
+    this.meetingsService.create({
+      type: this.formType.value,
       date: this.formDate.value,
-      priority: this.formPriority.value,
       done: false,
-      description: this.formDescription.value,
-      pm: pm,
-      prospect: this.prospect
+      prospect: this.prospect,
+      pm: pm
     });
-    console.log("Reminder created / ATTENTION: implement current pm")
+    console.log("meeting created ! ATTENTION: current pm to implement");
   }
 }

@@ -1,16 +1,4 @@
 <!-- <app-each-prospect *ngFor="let prospect of prospects; let i = index;" [index]="i" [prospect]="prospect" [reminders]="reminders" [priority]="priority"></app-each-prospect> -->
 <div *ngFor="let reminder of reminders" >
-    <app-each-prospect 
-
-[reminder]="reminder" 
-[priority]="priority" 
-[remindersDone]="remindersDone"
-[futureReminders]="futureReminders"
-[previousReminders]="previousReminders"
-[date]="date"
-[remindersDateDown]="remindersDateDown"
-[remindersDateUp]="remindersDateUp"
-
-></app-each-prospect>
-<br />
+    <app-each-prospect [reminder]="reminder" [priority]="priority" [remindersDone]="remindersDone" [futureReminders]="futureReminders" [previousReminders]="previousReminders" [date]="date" [remindersDateDown]="remindersDateDown" [remindersDateUp]="remindersDateUp" ></app-each-prospect>
 </div>
