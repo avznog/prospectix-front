@@ -51,12 +51,27 @@
 				<span *ngIf="prospect.nbNo > 0" class="indicator-item badge badge-secondary">{{prospect.nbNo}}</span>
 				Pas de réponse<span *ngIf="prospect.nbNo> 0">s</span>
 			</button>
-			<button class="btn btn-ghost btn-outline">
-				Rappel
-			</button>
-			<button class="btn btn-ghost btn-outline">
-				Rendez-vous
-			</button>
+			
+			<!-- Bouton de rappel + dropdown -->
+			<div class="dropdown dropdown-top indicator">
+				<span *ngIf="currentProspectReminders.length > 0" class="indicator-item badge ">{{currentProspectReminders.length}}</span>
+				<label tabindex="0" class="btn btn-ghost btn-outline">Rappel</label>
+			<div tabindex="0" class="dropdown-content card card-compact">
+				<app-add-reminder-dropdown class="card-body outline" [prospect]="prospect"></app-add-reminder-dropdown>
+			</div>
+
+			</div>
+			 <!-- Bouton de rendez-vous + dropdown -->
+			<div class="dropdown dropdown-top indicator">
+				<span *ngIf="currentProspectMeetings.length > 0" class="indicator-item badge ">{{currentProspectMeetings.length}}</span>
+				<label tabindex="0" class="btn btn-ghost btn-outline">Rendez-vous</label>
+				
+				<div tabindex="0" class="dropdown-content card">
+					<app-add-meetings-dropdown class="card-body outline" [prospect]="prospect"></app-add-meetings-dropdown>
+				</div>
+			</div>
+
+			
 			<button class="btn btn-ghost btn-outline">
 				Refus
 			</button>

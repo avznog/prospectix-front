@@ -23,8 +23,8 @@ export class EachProspectComponent implements OnInit {
   //prospects
   @Input() prospect!: Prospect;
   @Input() currentCity!: City;
-  currentProspectMeetings!: Meeting[];
-  currentProspectReminders!: Reminder[];
+  currentProspectMeetings : Meeting[] = [];
+  currentProspectReminders : Reminder[] = [];
 
   //reminders
   @Input() reminder!: Reminder;
