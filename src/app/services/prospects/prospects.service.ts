@@ -43,6 +43,10 @@ export class ProspectsService {
     return this.http.get<Prospect[]>("http://localhost:3000/prospects");
   }
 
+  findAllAndCount(take: number, skip: number) : Observable<[Prospect[], Number]> {
+      return this.http.get<[Prospect[], Number]>(`http://localhost:3000/prospects/find-all-and-count/${take}/${skip}`)
+  }
+
   findAllByActivity(activityName: string) : Observable<Prospect[]> {
     return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-activity/${activityName}`);
   }

@@ -17,9 +17,12 @@ export class ResearchBlocComponent implements OnInit {
   @Output() updateProspectEvent = new EventEmitter<Prospect[]>();
   @Output() updateCurrentCityEvent = new EventEmitter<City>();
   @Output() updateCurrentActivityEvent = new EventEmitter<Activity>();
+
   @Input() prospects!: Prospect[];
   @Input() currentCity!: City;
   @Input() currentActivity!: Activity;
+  @Input() currentPage!: number;
+
   researchForm!: FormGroup;
   activities!: Activity[];
   cities!: City[];
@@ -78,10 +81,11 @@ export class ResearchBlocComponent implements OnInit {
           }
         });
     } else {
-      this.prospectsService.findAll()
+      this.prospectsService.findAllAndCount(2, this.currentPage)
         .subscribe({
           next: (data) => {
-            this.updateProspects(data);
+            console.log(data[0])
+            this.updateProspects(data[0]);
           },
           error: (err) => {
             console.log(err);
@@ -108,11 +112,11 @@ export class ResearchBlocComponent implements OnInit {
           }
         });
     } else {
-      this.prospectsService.findAll()
+      this.prospectsService.findAllAndCount(2,this.currentPage)
         .subscribe({
           next: (data) => {
-            console.log(data)
-            this.updateProspects(data);
+            console.log(data[0])
+            this.updateProspects(data[0]);
             this.updateCurrentActivity({
               id: -1,
               name: "Tous les domaines d'activité"
@@ -145,7 +149,6 @@ export class ResearchBlocComponent implements OnInit {
   onSearchChange(): void {
     console.log("changed by keyword")
     if (this.researchForm.value["searchBar"] != "") {
-
       this.prospectsService.findAllByKeyword(this.researchForm.value["searchBar"])
         .subscribe({
           next: (data) => {

@@ -14,16 +14,19 @@ export class ResearchProspectsComponent implements OnInit {
   currentCity!: City;
   currentActivity!: Activity;
   noProspect!: boolean;
+  currentPage = 0;
 
   constructor(
     private readonly prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
-    this.prospectsService.findAll()
+    this.prospectsService.findAllAndCount(2,this.currentPage)
     .subscribe({
       next: (data) => {
-        this.prospects = data
+        console.log(data[0])
+        this.prospects = data[0];
+        console.log(data)
       },
       error: (err) => {
         console.log(err);
@@ -61,4 +64,33 @@ export class ResearchProspectsComponent implements OnInit {
     this.currentActivity = newCurrentActivity;
   }
 
+  pageDown() {
+    this.currentPage -= 2;
+    this.prospectsService.findAllAndCount(2,this.currentPage)
+    .subscribe({
+      next: (data) => {
+        console.log(data[0])
+        this.prospects = data[0];
+        console.log(data)
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  pageUp() {
+    this.currentPage += 2;
+    this.prospectsService.findAllAndCount(2,this.currentPage)
+    .subscribe({
+      next: (data) => {
+        console.log(data[0])
+        this.prospects = data[0];
+        console.log(data)
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 }
