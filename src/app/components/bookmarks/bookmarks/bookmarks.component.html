@@ -1,6 +1,6 @@
 <app-header></app-header>
+<h1 class="ml-6 text-xl mb-5">Mes prospects favoris</h1>
 <div class="form-control">
-<div class="inline-flex justify-center form-control">
   <div class="input-group">
   <label class="label">
     <span class="label-text">Rechercher les favoris de</span>
@@ -11,7 +11,6 @@
 </div>
 </div>
   <div class="divider"></div>
-</div>
 <div *ngFor="let prospect of prospects">
   <app-each-prospect [prospect]="prospect"></app-each-prospect>
   <br />
