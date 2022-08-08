@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path:"meetings", component: MeetingsComponent },
   { path:"prospects", component: ResearchProspectsComponent },
   { path:"goals", component: GoalsComponent },
+  { path: "bookmarks", component: BookmarksComponent },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
 

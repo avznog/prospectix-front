@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="form-control">
+<div class="inline-flex justify-center form-control">
+  <div class="input-group">
+  <label class="label">
+    <span class="label-text">Rechercher les favoris de</span>
+  </label>
+  <select class="select select-bordered" (change)="onChangePm()" [formControl]="formControlPm">
+    <option *ngFor="let pm of projectManagers" >{{pm.pseudo}}</option>
+  </select>
+</div>
+</div>
+  <div class="divider"></div>
+</div>
+<div *ngFor="let prospect of prospects">
+  <app-each-prospect [prospect]="prospect"></app-each-prospect>
+  <br />
+</div>

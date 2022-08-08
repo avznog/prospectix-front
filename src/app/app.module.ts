@@ -29,6 +29,10 @@ import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-l
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
 import { AddReminderDropdownComponent } from './components/common/add-reminder-dropdown/add-reminder-dropdown.component';
 import { AddMeetingsDropdownComponent } from './components/common/add-meetings-dropdown/add-meetings-dropdown.component';
+import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
+import { RowEditComponent } from './components/prospect-details/row-edit/row-edit.component';
+import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
+import { AddProspectComponent } from './components/common/add-prospect/add-prospect/add-prospect.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { AddMeetingsDropdownComponent } from './components/common/add-meetings-d
     DashboardEachGoalComponent,
     AddReminderDropdownComponent,
     AddMeetingsDropdownComponent,
+    ProspectDetailsComponent,
+    RowEditComponent,
+    BookmarksComponent,
+    AddProspectComponent,
   ],
   imports: [
     BrowserModule,

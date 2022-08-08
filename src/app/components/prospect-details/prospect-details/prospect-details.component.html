@@ -1,0 +1,68 @@
+<div class="max-w-screen-xl">
+	<label for="modal-prospect-details" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+<h1 class="text-xl mb-5">{{prospect.companyName}}</h1>
+<div class="divider"></div>
+		<div class="inline-flex space-x-5">
+			<app-row-edit [prospectVariable]="prospect.companyName" [titleRow]="'Entreprise'" [prospect]="prospect"></app-row-edit>
+			<app-row-edit [prospectVariable]="prospect.streetAddress" [titleRow]="'Addresse'" [prospect]="prospect"></app-row-edit>
+
+			<!-- Select city -->
+		</div>
+		<div class="form-control">
+			<label class="label" for="city">
+				<span class="label-text">Ville</span>
+			</label>
+			<div class="input-group">
+				<select id="city" class="select select-bordered" [formControl]="formControlCity" >
+					<option disabled selected>Ville actuelle : {{prospect.city.name}}</option>
+					<option *ngFor="let city of cities" >{{city.name}}</option>
+				</select>
+				<button class="btn btn-ghost btn-outline" (click)="onChangeCity()">Changer la ville</button>
+			</div>
+		</div>
+
+		<!-- Domaine d'activité -->
+		<div class="form-control">
+			<label class="label" for="activity">
+				<span class="label-text">Domaine d'activité</span>
+			</label>
+			<div class="input-group">
+				<select id="activity" class="select select-bordered" [formControl]="formControlActivity">
+					<option disabled selected>Domaine d'acitvité actuel : {{prospect.activity.name}}</option>
+					<option *ngFor="let activity of activities" >{{activity.name}}</option>
+				</select>
+				<button class="btn btn-ghost btn-outline" (click)="onChangeActivity()">Changer le domaine d'activité</button>
+			</div>
+		</div>
+		
+		<div class="divider"></div>
+
+		<!-- Boutons informations phone / mail / website -->
+
+		<app-row-edit [prospectVariable]="prospect.phone.number" [titleRow]="'Téléphone'" [prospect]="prospect"></app-row-edit>
+		<app-row-edit [prospectVariable]="prospect.email.email" [titleRow]="'Mail'" [prospect]="prospect"></app-row-edit>
+		<app-row-edit [prospectVariable]="prospect.website.website" [titleRow]="'Site internet'" [prospect]="prospect"></app-row-edit>
+
+		<div class="divider"></div>
+
+		<!-- Buttons -->
+		<div class="btn-group">
+			<button class="btn btn-ghost btn-outline indicator" (click)="onChangeNbNo()">
+				<span *ngIf="prospect.nbNo > 0" class="indicator-item badge badge-secondary">{{prospect.nbNo}}</span>
+				Pas de réponse<span *ngIf="prospect.nbNo> 0">s</span>
+			</button>
+			<button class="btn btn-ghost btn-outline">
+				Rappel
+			</button>
+			<button class="btn btn-ghost btn-outline">
+				Rendez-vous
+			</button>
+			<button class="btn btn-ghost btn-outline">
+				Refus
+			</button>
+			<button class="btn btn-ghost btn-outline">
+				Mail
+			</button>
+		</div>
+		
+		</div>
