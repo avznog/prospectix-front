@@ -1,12 +1,10 @@
-import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Activity } from 'src/app/models/activity.model';
 import { City } from 'src/app/models/city.model';
-import { Prospect } from 'src/app/models/prospect.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
-import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { EventEmitter } from '@angular/core';
+import { ResearchParams } from 'src/app/models/research-params.model';
 
 @Component({
   selector: 'app-research-bloc',
@@ -14,14 +12,10 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./research-bloc.component.scss']
 })
 export class ResearchBlocComponent implements OnInit {
-  @Output() updateProspectEvent = new EventEmitter<Prospect[]>();
-  @Output() updateCurrentCityEvent = new EventEmitter<City>();
-  @Output() updateCurrentActivityEvent = new EventEmitter<Activity>();
+  
+  @Input() researchParams! : ResearchParams;
 
-  @Input() prospects!: Prospect[];
-  @Input() currentCity!: City;
-  @Input() currentActivity!: Activity;
-  @Input() currentPage!: number;
+  @Output() updateResearchParamsEvent = new  EventEmitter<ResearchParams>();
 
   researchForm!: FormGroup;
   activities!: Activity[];
@@ -31,7 +25,6 @@ export class ResearchBlocComponent implements OnInit {
     private formBuilder: FormBuilder,
     private readonly activitiesService: ActivitiesService,
     private readonly citiesServices: CitiesService,
-    private readonly prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
@@ -58,107 +51,41 @@ export class ResearchBlocComponent implements OnInit {
     this.researchForm = this.formBuilder.group({
       city: ["", Validators.required],
       activity: ["", Validators.required],
-      searchBar: ["", Validators.required]
+      keyword: ["", Validators.required]
     });
   }
 
   onCityChange() {
-    if (this.researchForm.value["city"] != "Toutes les villes") {
-      this.prospectsService.findAllByCity(this.researchForm.value["city"])
-        .subscribe({
-          next: (data) => {
-            this.updateProspects(data);
-            this.updateCurrentCity(
-              {
-                id: 0,
-                name: this.researchForm.value["city"],
-                zipcode: 0
-              }
-            );
-          },
-          error: (err) => {
-            console.log(err)
-          }
-        });
-    } else {
-      this.prospectsService.findAllAndCount(2, this.currentPage)
-        .subscribe({
-          next: (data) => {
-            console.log(data[0])
-            this.updateProspects(data[0]);
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        });
-    }
+    console.log(this.researchForm.value["city"]);
+    this.updateResearchParams({
+      ...this.researchParams,
+      city: this.researchForm.value["city"] == "allCities" ? "" : this.researchForm.value["city"]
+    });
   }
 
   onActivityChange() {
-    if (this.researchForm.value["activity"] != "Tous les domaines d'activité") {
-      this.prospectsService.findAllByActivity(this.researchForm.value["activity"])
-        .subscribe({
-          next: (data) => {
-            this.updateProspects(data);
-            this.updateCurrentActivity(
-              {
-                id: 0,
-                name: this.researchForm.value["activity"],
-              }
-            );
-          },
-          error: (err) => {
-            console.log(err)
-          }
-        });
-    } else {
-      this.prospectsService.findAllAndCount(2,this.currentPage)
-        .subscribe({
-          next: (data) => {
-            console.log(data[0])
-            this.updateProspects(data[0]);
-            this.updateCurrentActivity({
-              id: -1,
-              name: "Tous les domaines d'activité"
-            });
-            this.updateCurrentCity({
-              id: -1,
-              name: "Toutes les villes",
-              zipcode: -1
-            })
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        });
-    }
-  }
-
-  updateProspects(value: Prospect[]) {
-    this.updateProspectEvent.emit(value);
-  }
-
-  updateCurrentCity(value: City) {
-    this.updateCurrentCityEvent.emit(value);
-  }
-
-  updateCurrentActivity(value: Activity) {
-    this.updateCurrentActivityEvent.emit(value);
+    console.log(this.researchForm.value["activity"])
+    this.updateResearchParams({
+      ...this.researchParams,
+      activity: this.researchForm.value["activity"] == "allActivities" ? "" : this.researchForm.value["activity"]
+    });
   }
 
   onSearchChange(): void {
-    console.log("changed by keyword")
-    if (this.researchForm.value["searchBar"] != "") {
-      this.prospectsService.findAllByKeyword(this.researchForm.value["searchBar"])
-        .subscribe({
-          next: (data) => {
-            this.updateProspects(data);
-          },
-          error: (err) => {
-            console.log(err)
-          }
-        });
-    }
+    console.log(this.researchForm.value["searchBar"])
+    this.updateResearchParams({
+      ...this.researchParams,
+      keyword: this.researchForm.value["keyword"]
+    });
+  }
+
+  updateResearchParams(value: ResearchParams) {
+    console.log(`PARAMS : 
+    activity : ${value.activity}
+    city : ${value.city}
+    keyword : ${value.keyword}
+    `)
+    this.updateResearchParamsEvent.emit(value);
   }
 
 }

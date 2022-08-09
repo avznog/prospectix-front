@@ -22,7 +22,6 @@ export class EachProspectComponent implements OnInit {
 
   //prospects
   @Input() prospect!: Prospect;
-  @Input() currentCity!: City;
   currentProspectMeetings : Meeting[] = [];
   currentProspectReminders : Reminder[] = [];
 
@@ -77,7 +76,6 @@ export class EachProspectComponent implements OnInit {
     
     this.meetingsService.findAllByProspect(this.prospect.id).subscribe({
       next: (data) => {
-        console.log(data)
         this.currentProspectMeetings = data;
       },
       error: (err) => {
@@ -87,7 +85,6 @@ export class EachProspectComponent implements OnInit {
 
     this.remindersService.findAllByProspect(this.prospect.id).subscribe({
       next: (data) => {
-        console.log(data);
         this.currentProspectReminders = data;
       },
       error: (err) => {

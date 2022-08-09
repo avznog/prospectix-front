@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
+import { ResearchParams } from 'src/app/models/research-params.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,20 +40,26 @@ export class ProspectsService {
     return this.http.get<Prospect>(`http://localhost:3000/prospects/by-activity/${idProspect}/${activityName}`).subscribe();
   }
 
-  findAll() : Observable<Prospect[]> {
-    return this.http.get<Prospect[]>("http://localhost:3000/prospects");
-  }
+  findAllAndCount(researchParams: ResearchParams) {
+      let queryParams = new HttpParams();
+      if(researchParams.activity)
+        queryParams = queryParams.append("activity", researchParams.activity)
+      
+      if(researchParams.city)
+        queryParams = queryParams.append("city", researchParams.city)
+      
+      if(researchParams.skip)
+        queryParams = queryParams.append("skip", researchParams.skip)
+      
+      if(researchParams.keyword)
+        queryParams = queryParams.append("keyword", researchParams.keyword)
+      else
+        queryParams = queryParams.append("keyword","")
+      
+        queryParams = queryParams.append("take", 2);
 
-  findAllAndCount(take: number, skip: number) : Observable<[Prospect[], Number]> {
-      return this.http.get<[Prospect[], Number]>(`http://localhost:3000/prospects/find-all-and-count/${take}/${skip}`)
-  }
 
-  findAllByActivity(activityName: string) : Observable<Prospect[]> {
-    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-activity/${activityName}`);
-  }
-
-  findAllByCity(cityName: string) : Observable<Prospect[]> {
-    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-city/${cityName}`);
+      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-and-count/`, { params: queryParams});
   }
 
   findAllByKeyword(keyword: string) : Observable<Prospect[]> {
@@ -62,4 +69,5 @@ export class ProspectsService {
   findAllByBookmarks(pseudoPm: string) : Observable<Prospect[]> {
     return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-bookmarks/${pseudoPm}`);
   }
+
 }

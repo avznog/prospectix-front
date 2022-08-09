@@ -1,5 +1,10 @@
 <div *ngFor="let prospect of prospects" >
-  <app-each-prospect [prospect]="prospect" *ngIf="(prospect.city.name == currentCity.name || currentCity.name == 'Toutes les villes') && (prospect.activity.name == currentActivity.name || currentActivity.name == 'Tous les domaines d\'activité')"></app-each-prospect>
+  <app-each-prospect [prospect]="prospect"></app-each-prospect>
   <br/>
 </div>
-<p *ngIf="noProspect" style="color:red;">Il n'y a pas de prospect pour ces critères !!!</p>
+<div *ngIf="prospects && prospects.length <= 0">
+  <div class="alert alert-error card">
+    <div class="radial-progress" style="--value:100;">100%</div>
+    <div class="label">Vous avez épuisé tous les prospects de la base !!</div>
+  </div>
+</div>
