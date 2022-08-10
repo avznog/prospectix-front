@@ -8,7 +8,6 @@ import { Reminder } from 'src/app/models/reminder.model';
   styleUrls: ['./reminders-liste-prospect.component.scss']
 })
 export class RemindersListeProspectComponent implements OnInit {
-  @Input() prospects!: Prospect[];
   @Input() reminders!: Reminder[];
   @Input() priority!: number;
   @Input() remindersDone!: boolean;

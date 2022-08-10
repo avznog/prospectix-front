@@ -16,7 +16,7 @@ export class ResearchProspectsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.prospectsService.findAllAndCount(this.researchParams)
+    this.prospectsService.findAllPaginated(this.researchParams)
       .subscribe({
         next: (data) => {
           this.prospects = data;
@@ -39,7 +39,7 @@ export class ResearchProspectsComponent implements OnInit {
 
   updateProspects(researchParams: ResearchParams) {
     this.researchParams = researchParams;
-    this.prospectsService.findAllAndCount(researchParams)
+    this.prospectsService.findAllPaginated(researchParams)
       .subscribe({
         next: (data) => {
           this.prospects = data;

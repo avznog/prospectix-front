@@ -40,7 +40,7 @@ export class ProspectsService {
     return this.http.get<Prospect>(`http://localhost:3000/prospects/by-activity/${idProspect}/${activityName}`).subscribe();
   }
 
-  findAllAndCount(researchParams: ResearchParams) {
+  findAllPaginated(researchParams: ResearchParams) {
       let queryParams = new HttpParams();
       if(researchParams.activity)
         queryParams = queryParams.append("activity", researchParams.activity)
@@ -59,7 +59,7 @@ export class ProspectsService {
         queryParams = queryParams.append("take", 2);
 
 
-      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-and-count/`, { params: queryParams});
+      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-paginated/`, { params: queryParams});
   }
 
   findAllByKeyword(keyword: string) : Observable<Prospect[]> {

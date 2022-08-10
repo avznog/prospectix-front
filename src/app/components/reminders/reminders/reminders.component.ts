@@ -9,7 +9,6 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
   styleUrls: ['./reminders.component.scss']
 })
 export class RemindersComponent implements OnInit {
-  prospects: Prospect[] = [];
   reminders: Reminder[] = [];
   orderByPriority!: boolean;
   priority!: number;
