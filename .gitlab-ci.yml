@@ -20,7 +20,7 @@ build-prod:
     - yarn run build
   artifacts:
     paths:
-      - build/
+      - dist/
   only:
     - master
 
@@ -39,7 +39,7 @@ build-staging:
     - yarn run build
   artifacts:
     paths:
-      - build/
+      - dist/
   only:
     - staging
 

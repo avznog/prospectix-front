@@ -1,4 +1,4 @@
 FROM nginx:1.21.6-alpine
 
 COPY default.conf /etc/nginx/conf.d/default.conf
-COPY build/ /usr/share/nginx/html
+COPY dist/prospectix-front/ /usr/share/nginx/html
