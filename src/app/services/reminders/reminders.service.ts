@@ -30,10 +30,6 @@ export class RemindersService {
     return this.http.get<Reminder>(`http://localhost:3000/reminders/mark-undone/${idReminder}`).subscribe();
   }
 
-  findAllByKeyword(keyword: string) : Observable<Reminder[]> {
-    return this.http.get<Reminder[]>(`http://localhost:3000/reminders/by-keyword/${keyword}`);
-  }
-
   create(createReminderDto: CreateReminderDto) : Subscription {
     return this.http.post<Reminder>(`http://localhost:3000/reminders`, createReminderDto).subscribe();
   }
