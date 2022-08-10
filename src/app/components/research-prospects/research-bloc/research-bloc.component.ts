@@ -15,7 +15,7 @@ export class ResearchBlocComponent implements OnInit {
   
   @Input() researchParamsProspect! : ResearchParamsProspect;
 
-  @Output() updateResearchParamsProspectEvent = new  EventEmitter<ResearchParamsProspect>();
+  @Output() updateResearchParamsProspectEvent = new EventEmitter<ResearchParamsProspect>();
 
   researchForm!: FormGroup;
   activities!: Activity[];

@@ -48,9 +48,14 @@ export class RemindersResearchBlocComponent implements OnInit {
 
   onEditDate() : void {
     console.log(this.formDate.value)
-    this.updateResearchParamsReminder({
+    if(this.formDate.value != "")
+      this.updateResearchParamsReminder({
+        ...this.researchParamsReminder,
+        date: `${this.formDate.value}T22:00:00.000Z`
+      });
+    else this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
-      date: `${this.formDate.value}T22:00:00.000Z`
+      date: ""
     });
   }
 
