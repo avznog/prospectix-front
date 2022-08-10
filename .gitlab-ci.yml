@@ -16,7 +16,7 @@ build-prod:
       - .yarn/
       - yarn.lock
   script:
-    - yarn install
+    - yarn install --immutable
     - yarn run build
   artifacts:
     paths:
@@ -35,7 +35,7 @@ build-staging:
       - .yarn/
       - yarn.lock
   script:
-    - yarn install
+    - yarn install --immutable
     - yarn run build
   artifacts:
     paths:
