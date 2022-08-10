@@ -4,7 +4,7 @@ import { Activity } from 'src/app/models/activity.model';
 import { City } from 'src/app/models/city.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
-import { ResearchParams } from 'src/app/models/research-params.model';
+import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 
 @Component({
   selector: 'app-research-bloc',
@@ -13,9 +13,9 @@ import { ResearchParams } from 'src/app/models/research-params.model';
 })
 export class ResearchBlocComponent implements OnInit {
   
-  @Input() researchParams! : ResearchParams;
+  @Input() researchParamsProspect! : ResearchParamsProspect;
 
-  @Output() updateResearchParamsEvent = new  EventEmitter<ResearchParams>();
+  @Output() updateResearchParamsProspectEvent = new  EventEmitter<ResearchParamsProspect>();
 
   researchForm!: FormGroup;
   activities!: Activity[];
@@ -57,35 +57,35 @@ export class ResearchBlocComponent implements OnInit {
 
   onCityChange() {
     console.log(this.researchForm.value["city"]);
-    this.updateResearchParams({
-      ...this.researchParams,
+    this.updateResearchParamsProspect({
+      ...this.researchParamsProspect,
       city: this.researchForm.value["city"] == "allCities" ? "" : this.researchForm.value["city"]
     });
   }
 
   onActivityChange() {
     console.log(this.researchForm.value["activity"])
-    this.updateResearchParams({
-      ...this.researchParams,
+    this.updateResearchParamsProspect({
+      ...this.researchParamsProspect,
       activity: this.researchForm.value["activity"] == "allActivities" ? "" : this.researchForm.value["activity"]
     });
   }
 
   onSearchChange(): void {
     console.log(this.researchForm.value["searchBar"])
-    this.updateResearchParams({
-      ...this.researchParams,
+    this.updateResearchParamsProspect({
+      ...this.researchParamsProspect,
       keyword: this.researchForm.value["keyword"]
     });
   }
 
-  updateResearchParams(value: ResearchParams) {
+  updateResearchParamsProspect(value: ResearchParamsProspect) {
     console.log(`PARAMS : 
     activity : ${value.activity}
     city : ${value.city}
     keyword : ${value.keyword}
     `)
-    this.updateResearchParamsEvent.emit(value);
+    this.updateResearchParamsProspectEvent.emit(value);
   }
 
 }

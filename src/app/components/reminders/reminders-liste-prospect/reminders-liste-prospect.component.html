@@ -1,5 +1,12 @@
-<div *ngFor="let reminder of reminders">
+<!-- <div *ngFor="let reminder of reminders">
     <app-each-prospect [reminder]="reminder" [priority]="priority" [remindersDone]="remindersDone"
         [futureReminders]="futureReminders" [previousReminders]="previousReminders" [date]="date"
         [remindersDateDown]="remindersDateDown" [remindersDateUp]="remindersDateUp"></app-each-prospect>
+</div> -->
+
+<div *ngFor="let reminder of reminders">
+    <!-- <app-each-prospect [reminder]="reminder"></app-each-prospect> -->
+    Mon rappel {{reminder.date}}
+    {{reminder.priority}}
+    {{reminder.prospect.companyName}}
 </div>

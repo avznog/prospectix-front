@@ -1,4 +1,4 @@
-<form [formGroup]="formSearchReminders" class="flex flex-row justify-around items-start m-0 mb-5">
+<div class="flex flex-row justify-around items-start m-0 mb-5">
 
   <!-- "Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." -->
 
@@ -6,7 +6,7 @@
     <label class="label" for="search">
       <span class="label-text">Recherche</span>
     </label>
-    <input type="text" formControlName="searchBar" (input)="onRemindersEditSearchBar()" placeholder="Recherche"
+    <input type="text" [formControl]="formKeyword" (input)="onEditKeyword()" placeholder="Recherche"
       class="input input-bordered w-full max-w-xs" />
   </div>
 
@@ -16,8 +16,8 @@
     <label for="futureReminders" class="label cursor-pointer">
       <span class="label-text">Futurs rappels</span>
     </label>
-    <input id="futureReminders" type="checkbox" class="toggle" formControlName="futureReminders"
-      (change)="onChangeFutureReminders()" checked />
+    <input id="futureReminders" name="oldNewReminders" type="radio" class="radio"[checked]="formOldOrNew.value == 'new'" [value]="'new'" [formControl]="formOldOrNew"
+      (change)="onEditOldOrNew()" />
   </div>
 
   <!-- Show past reminders -->
@@ -26,8 +26,8 @@
     <label for="previousReminders" class="label cursor-pointer">
       <span class="label-text">Anciens rappels</span>
     </label>
-    <input class="toggle" type="checkbox" id="previousReminders" formControlName="previousReminders"
-      (change)="onChangePreviousReminders()" checked />
+    <input class="radio" name="oldNewReminders" type="radio" id="previousReminders" [value]="'old'" [formControl]="formOldOrNew"
+      (change)="onEditOldOrNew()"  />
   </div>
 
   <!-- Show done reminders -->
@@ -36,8 +36,8 @@
     <label for="remindersDone" class="label cursor-pointer">
       <span class="label-text">Rappels effectués</span>
     </label>
-    <input class="toggle" type="checkbox" id="remindersDone" formControlName="remindersDone"
-      (change)="onChangeRemindersDone()" checked />
+    <input class="toggle" type="checkbox" id="remindersDone" [formControl]="formDone"
+      (change)="onEditDone()" checked />
   </div>
 
   <!-- Show by priority order -->
@@ -46,8 +46,8 @@
     <label for="orderByPriority" class="label cursor-pointer">
       <span class="label-text">Par ordre de priorité</span>
     </label>
-    <input class="toggle" type="checkbox" id="orderByPriority" formControlName="orderByPriority"
-      (change)="onRemindersOrderPriorityChange()" checked />
+    <input class="toggle" type="checkbox" id="orderByPriority" [formControl]="formOrderByPriority"
+      (change)="onEditOrderByPriority()" checked />
   </div>
 
   <!-- Prority level -->
@@ -56,8 +56,8 @@
     <label for="priority" class="label cursor-pointer">
       <span class="label-text">Priorité</span>
     </label>
-    <input type="range" min="0" max="3" value="3" class="range range-primary" id="priority" formControlName="priority"
-      (change)="onRemindersPriorityChange()" />
+    <input type="range" min="0" max="3" value="3" class="range range-primary" id="priority" [formControl]="formPriority"
+      (change)="onEditPriority()" />
   </div>
 
   <!-- Select with a specific date or within a date range -->
@@ -72,19 +72,19 @@
           <label class="label" for="date">
             <span class="label-text">Date</span>
           </label>
-          <input type="date" id="date" formControlName="date" (change)="onRemindersDateChange()" />
+          <input type="date" id="date" [formControl]="formDate" (change)="onEditDate()" />
         </div>
         <div class="divider lg:divider-horizontal">OR</div>
         <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
           <label class="label" for="dateDown">
             <span class="label-text">Date inférieure</span>
           </label>
-          <input type="date" id="dateDown" formControlName="dateDown" (change)="onRemindersDateDownChange()" />
+          <input type="date" id="dateDown"[formControl]="formDateDown" (change)="onEditDateDown()" />
 
           <label class="label" for="dateUp">
             <span class="label-text">Date supérieure</span>
           </label>
-          <input type="date" id="dateUp" formControlName="dateUp" (change)="onRemindersDateUpChange()" />
+          <input type="date" id="dateUp" [formControl]="formDateUp" (change)="onEditDateUp()" />
         </div>
       </div>
       <div class="modal-action">
@@ -92,4 +92,4 @@
       </div>
     </div>
   </div>
-</form>
+</div>

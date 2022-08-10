@@ -1,4 +1,4 @@
-export interface ResearchParams {
+export interface ResearchParamsProspect {
   keyword?: string;
   take?: number;
   skip: number;

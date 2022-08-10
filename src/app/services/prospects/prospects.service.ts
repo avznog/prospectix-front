@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
-import { ResearchParams } from 'src/app/models/research-params.model';
+import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class ProspectsService {
     return this.http.get<Prospect>(`http://localhost:3000/prospects/by-activity/${idProspect}/${activityName}`).subscribe();
   }
 
-  findAllPaginated(researchParams: ResearchParams) {
+  findAllPaginated(researchParams: ResearchParamsProspect) : Observable<Prospect[]> {
       let queryParams = new HttpParams();
       if(researchParams.activity)
         queryParams = queryParams.append("activity", researchParams.activity)

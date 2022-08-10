@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { ResearchParams } from 'src/app/models/research-params.model'
+import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model'
 
 @Component({
   selector: 'app-research-prospects',
@@ -10,13 +10,13 @@ import { ResearchParams } from 'src/app/models/research-params.model'
 })
 export class ResearchProspectsComponent implements OnInit {
   prospects!: Prospect[];
-  researchParams : ResearchParams = { skip: 0 };
+  researchParamsProspect : ResearchParamsProspect = { skip: 0 };
   constructor(
     private readonly prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
-    this.prospectsService.findAllPaginated(this.researchParams)
+    this.prospectsService.findAllPaginated(this.researchParamsProspect)
       .subscribe({
         next: (data) => {
           this.prospects = data;
@@ -28,18 +28,18 @@ export class ResearchProspectsComponent implements OnInit {
   }
 
   pageUp() {
-    this.researchParams.skip = this.researchParams.skip+2 
-    this.updateProspects(this.researchParams)
+    this.researchParamsProspect.skip = this.researchParamsProspect.skip+2 
+    this.updateProspects(this.researchParamsProspect)
   }
 
   pageDown() {
-    this.researchParams.skip = this.researchParams.skip-2 
-    this.updateProspects(this.researchParams)
+    this.researchParamsProspect.skip = this.researchParamsProspect.skip-2 
+    this.updateProspects(this.researchParamsProspect)
   }
 
-  updateProspects(researchParams: ResearchParams) {
-    this.researchParams = researchParams;
-    this.prospectsService.findAllPaginated(researchParams)
+  updateProspects(researchParamsProspect: ResearchParamsProspect) {
+    this.researchParamsProspect = researchParamsProspect;
+    this.prospectsService.findAllPaginated(researchParamsProspect)
       .subscribe({
         next: (data) => {
           this.prospects = data;
@@ -50,9 +50,9 @@ export class ResearchProspectsComponent implements OnInit {
       });
   }
 
-  updateResearchParams(newParams: ResearchParams) {
-    this.researchParams = newParams;
-    this.updateProspects(this.researchParams);
+  updateResearchParamsProspect(newParams: ResearchParamsProspect) {
+    this.researchParamsProspect = newParams;
+    this.updateProspects(this.researchParamsProspect);
   }
   
 }

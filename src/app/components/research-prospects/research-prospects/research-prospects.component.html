@@ -1,10 +1,10 @@
 <app-header></app-header>
 <h1 class="ml-6 text-xl mb-5">Recherche de prospects</h1>
-<app-research-bloc [researchParams]="researchParams" (updateResearchParamsEvent)="updateResearchParams($event)"></app-research-bloc>
+<app-research-bloc [researchParamsProspect]="researchParamsProspect" (updateResearchParamsProspectEvent)="updateResearchParamsProspect($event)"></app-research-bloc>
 <app-list-prospects [prospects]="prospects"></app-list-prospects>
 <div class="divider" ></div>
   <div class="btn-group flex justify-center">
-    <button class="btn btn-outline btn-ghost {{researchParams.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-    <button class="btn btn-outline btn-ghost">Page {{researchParams.skip / 2 }}</button>
+    <button class="btn btn-outline btn-ghost {{researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{researchParamsProspect.skip / 2 }}</button>
     <button class="btn btn-outline btn-ghost {{prospects && prospects.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
