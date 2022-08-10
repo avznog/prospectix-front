@@ -4,7 +4,7 @@
         <label class="label" for="search">
             <span class="label-text">Recherche</span>
         </label>
-        <input type="text" formControlName="searchBar" (input)="onSearchChange()" placeholder="Recherche"
+        <input type="text" formControlName="keyword" (input)="onSearchChange()" placeholder="Recherche"
             class="input input-bordered w-full max-w-xs" />
     </div>
 
@@ -22,7 +22,7 @@
         </label>
         <select id="activity" name="activity" formControlName="activity" (change)="onActivityChange()"
             class="select select-bordered">
-            <option selected>Tous les domaines d'activité</option>
+            <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'activité</option>
             <option *ngFor="let activity of activities">{{activity.name}}</option>
         </select>
     </div>
@@ -33,7 +33,7 @@
             <span class="label-text">Ville</span>
         </label>
         <select id="city" name="city" formControlName="city" (change)="onCityChange()" class="select select-bordered">
-            <option selected>Toutes les villes</option>
+            <option [defaultSelected]="'Toutes les villes'" [value]="'allCities'">Toutes les villes</option>
             <option *ngFor="let city of cities">{{city.name}}</option>
         </select>
     </div>

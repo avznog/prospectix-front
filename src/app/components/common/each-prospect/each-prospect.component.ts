@@ -20,22 +20,7 @@ import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 })
 export class EachProspectComponent implements OnInit {
 
-  //prospects
-  @Input() prospect!: Prospect;
-  @Input() currentCity!: City;
-  currentProspectMeetings : Meeting[] = [];
-  currentProspectReminders : Reminder[] = [];
-
-  //reminders
-  @Input() reminder!: Reminder;
-  @Input() priority!: number;
-  @Input() remindersDone!: boolean;
-  @Input() futureReminders!: boolean;
-  @Input() previousReminders!: boolean;
   @Input() date!: Date;
-  @Input() remindersDateDown!: Date;
-  @Input() remindersDateUp!: Date;
-
   //meetings
   @Input() meeting!: Meeting;
   @Input() meetingsDone!: boolean;
@@ -72,44 +57,10 @@ export class EachProspectComponent implements OnInit {
   ngOnInit(): void {
     this.changeCommentForm = this.formBuilder.group({
       comment: [
-        this.prospect ? this.prospect.comment : this.reminder ? this.reminder.prospect.comment : this.meeting.prospect.comment, Validators.required]
+         this.meeting.prospect.comment, Validators.required]
     });
-    
-    this.meetingsService.findAllByProspect(this.prospect.id).subscribe({
-      next: (data) => {
-        console.log(data)
-        this.currentProspectMeetings = data;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
+  
 
-    this.remindersService.findAllByProspect(this.prospect.id).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.currentProspectReminders = data;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-
-  }
-
-  onDeleteReminder(idReminder: number) : Subscription {
-    console.log("reminder deleted");
-    return this.remindersService.deleteReminder(idReminder);
-  }
-
-  onMarkReminderDone(idreminder: number) : Subscription {
-    console.log("reminder marked done");
-    return this.remindersService.markDone(idreminder);
-  }
-
-  onMarkReminderUndone(idReminder: number) : Subscription {
-    console.log("reminder marked undone");
-    return this.remindersService.markUndone(idReminder);
   }
 
   
@@ -128,37 +79,31 @@ export class EachProspectComponent implements OnInit {
     return this.meetingsService.markUndone(idMeeting);
   }
 
-  onClickButtonGoogle() {
-    if(this.prospect) {
-      window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank")
-    } else if (this.reminder) {
-      window.open(`http://www.google.fr/search?q=${this.reminder.prospect.companyName}`, "_blank")
-    } else if (this.meeting) {
-      window.open(`http://www.google.fr/search?q=${this.meeting.prospect.companyName}`, "_blank")
-    }
-  }
+  // onClickButtonGoogle() {
+  //   if(this.prospect) {
+  //     window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank")
+  //   } else if (this.meeting) {
+  //     window.open(`http://www.google.fr/search?q=${this.meeting.prospect.companyName}`, "_blank")
+  //   }
+  // }
 
-  onChangeComment() {
-    if(this.changeCommentForm.value["comment"] != ""){
-      if(this.prospect) {
-        this.prospectService.updateComment(this.prospect.id, { comment: this.changeCommentForm.value["comment"] });
-      } else if (this.reminder) {
-        this.prospectService.updateComment(this.reminder.prospect.id, { comment: this.changeCommentForm.value["comment"] });
-      } else if (this.meeting) {
-        this.prospectService.updateComment(this.meeting.prospect.id, { comment: this.changeCommentForm.value["comment"] });
-      }
-    }
-  }
+  // onChangeComment() {
+  //   if(this.changeCommentForm.value["comment"] != ""){
+  //     if(this.prospect) {
+  //       this.prospectService.updateComment(this.prospect.id, { comment: this.changeCommentForm.value["comment"] });
+  //     } else if (this.meeting) {
+  //       this.prospectService.updateComment(this.meeting.prospect.id, { comment: this.changeCommentForm.value["comment"] });
+  //     }
+  //   }
+  // }
 
-  onChangeNbNo() {
-    if(this.prospect) {
-      this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
-    } else if (this.reminder) {
-      this.prospectService.updateNbNo(this.reminder.prospect.id, { nbNo: this.reminder.prospect.nbNo + 1 });
-    } else if (this.meeting) {
-      this.prospectService.updateNbNo(this.meeting.prospect.id, { nbNo: this.meeting.prospect.nbNo + 1 });
-    }
-  }
+  // onChangeNbNo() {
+  //   if(this.prospect) {
+  //     this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
+  //   } else if (this.meeting) {
+  //     this.prospectService.updateNbNo(this.meeting.prospect.id, { nbNo: this.meeting.prospect.nbNo + 1 });
+  //   }
+  // }
   onEditProspect() {
     this.router.navigate(['prospect-details']);
   }

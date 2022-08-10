@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Activity } from 'src/app/models/activity.model';
-import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
+import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model'
 
 @Component({
   selector: 'app-research-prospects',
@@ -11,54 +10,49 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 })
 export class ResearchProspectsComponent implements OnInit {
   prospects!: Prospect[];
-  currentCity!: City;
-  currentActivity!: Activity;
-  noProspect!: boolean;
-
+  researchParamsProspect : ResearchParamsProspect = { skip: 0 };
   constructor(
     private readonly prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
-    this.prospectsService.findAll()
-    .subscribe({
-      next: (data) => {
-        this.prospects = data
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-    this.currentCity = {
-      id: -1,
-      name: "Toutes les villes",
-      zipcode: -1
-    } as City;
-
-    this.currentActivity = {
-      id: -1,
-      name: "Tous les domaines d'activité"
-    }
+    this.prospectsService.findAllPaginated(this.researchParamsProspect)
+      .subscribe({
+        next: (data) => {
+          this.prospects = data;
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      });
   }
 
-  updateProspects(newProspects: Prospect[]) {
-    console.log("prospects updated")
-    this.prospects = newProspects;
-    if(this.prospects.length == 0) {
-      this.noProspect = true;
-    } else {
-      this.noProspect = false;
-    }
+  pageUp() {
+    this.researchParamsProspect.skip = this.researchParamsProspect.skip+2 
+    this.updateProspects(this.researchParamsProspect)
   }
 
-  updateCurrentCity(newCurrentCity: City) {
-    console.log("city updated");
-    this.currentCity = newCurrentCity;
+  pageDown() {
+    this.researchParamsProspect.skip = this.researchParamsProspect.skip-2 
+    this.updateProspects(this.researchParamsProspect)
   }
 
-  updateCurrentActivity(newCurrentActivity: Activity) {
-    console.log("activity updated")
-    this.currentActivity = newCurrentActivity;
+  updateProspects(researchParamsProspect: ResearchParamsProspect) {
+    this.researchParamsProspect = researchParamsProspect;
+    this.prospectsService.findAllPaginated(researchParamsProspect)
+      .subscribe({
+        next: (data) => {
+          this.prospects = data;
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      });
   }
 
+  updateResearchParamsProspect(newParams: ResearchParamsProspect) {
+    this.researchParamsProspect = newParams;
+    this.updateProspects(this.researchParamsProspect);
+  }
+  
 }

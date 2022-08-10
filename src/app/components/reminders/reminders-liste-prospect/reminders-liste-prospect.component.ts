@@ -8,15 +8,7 @@ import { Reminder } from 'src/app/models/reminder.model';
   styleUrls: ['./reminders-liste-prospect.component.scss']
 })
 export class RemindersListeProspectComponent implements OnInit {
-  @Input() prospects!: Prospect[];
   @Input() reminders!: Reminder[];
-  @Input() priority!: number;
-  @Input() remindersDone!: boolean;
-  @Input() futureReminders!: boolean;
-  @Input() previousReminders!: boolean;
-  @Input() date!: Date;
-  @Input() remindersDateDown!: Date;
-  @Input() remindersDateUp!: Date;
   constructor() { }
 
   ngOnInit(): void {
