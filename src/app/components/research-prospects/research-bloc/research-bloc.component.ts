@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Activity } from 'src/app/models/activity.model';
 import { City } from 'src/app/models/city.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
@@ -14,15 +14,15 @@ import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.
 export class ResearchBlocComponent implements OnInit {
   
   @Input() researchParamsProspect! : ResearchParamsProspect;
-
   @Output() updateResearchParamsProspectEvent = new EventEmitter<ResearchParamsProspect>();
 
-  researchForm!: FormGroup;
   activities!: Activity[];
   cities!: City[];
+  formKeyword = new FormControl("");
+  formActivity = new FormControl("allActivities")
+  formCity = new FormControl("allCities")
 
   constructor(
-    private formBuilder: FormBuilder,
     private readonly activitiesService: ActivitiesService,
     private readonly citiesServices: CitiesService,
   ) { }
@@ -48,34 +48,26 @@ export class ResearchBlocComponent implements OnInit {
         }
       });
 
-    this.researchForm = this.formBuilder.group({
-      city: ["", Validators.required],
-      activity: ["", Validators.required],
-      keyword: ["", Validators.required]
+  }
+
+  onEditCity() {
+    this.updateResearchParamsProspect({
+      ...this.researchParamsProspect,
+      city: this.formCity.value == "allCities" ? "" : this.formCity.value
     });
   }
 
-  onCityChange() {
-    console.log(this.researchForm.value["city"]);
+  onEditActivity() {
     this.updateResearchParamsProspect({
       ...this.researchParamsProspect,
-      city: this.researchForm.value["city"] == "allCities" ? "" : this.researchForm.value["city"]
+      activity: this.formActivity.value == "allActivities" ? "" : this.formActivity.value
     });
   }
 
-  onActivityChange() {
-    console.log(this.researchForm.value["activity"])
+  onEditKeyword(): void {
     this.updateResearchParamsProspect({
       ...this.researchParamsProspect,
-      activity: this.researchForm.value["activity"] == "allActivities" ? "" : this.researchForm.value["activity"]
-    });
-  }
-
-  onSearchChange(): void {
-    console.log(this.researchForm.value["searchBar"])
-    this.updateResearchParamsProspect({
-      ...this.researchParamsProspect,
-      keyword: this.researchForm.value["keyword"]
+      keyword: this.formKeyword.value
     });
   }
 

@@ -17,7 +17,7 @@ export class RemindersComponent implements OnInit {
     done: "false",
     oldOrNew: "new",
     keyword: "",
-  }
+  };
 
   constructor(
     private readonly remindersService: RemindersService
@@ -37,14 +37,14 @@ export class RemindersComponent implements OnInit {
   }
 
   pageUp() {
-    this.updateReminders({
+    this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
       skip: this.researchParamsReminder.skip! + 2
     });
   }
 
   pageDown() {
-    this.updateReminders({
+    this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
       skip: this.researchParamsReminder.skip! - 2
     });

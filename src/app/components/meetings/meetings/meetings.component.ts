@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EMPTY, empty } from 'rxjs/internal/observable/empty';
 import { Meeting } from 'src/app/models/meeting.model';
+import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
@@ -11,64 +12,58 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 export class MeetingsComponent implements OnInit {
 
   meetings!: Meeting[];
-  meetingsDone!: boolean;
-  previousMeetings!: boolean;
-  futureMeetings!: boolean;
-  date!: Date;
-  typeMeeting!: string;
-  meetingsDateDown!: Date;
-  meetingsDateUp!: Date;
+  researchParamsMeeting : ResearchParamsMeeting = {
+    take: 2,
+    skip: 0,
+    done: "false",
+    oldOrNew: "new",
+    keyword: ""
+  };
   
   constructor(
     private meetingsService: MeetingsService
   ) { }
 
   ngOnInit(): void {
-    this.meetingsService.findAll()
+    this.meetingsService.findAllPaginated(this.researchParamsMeeting)
       .subscribe({
         next: (data) => {
-          this.meetings = data.sort((a: Meeting, b :Meeting) => new Date(a.date).getTime() - new Date(b.date).getTime());
+          this.meetings = data;
         },
         error: (err) => {
           console.log(err)
         }
       });
-      this.meetingsDone = false;
-      this.futureMeetings = true;
-      this.previousMeetings = true;
-      this.typeMeeting = "tous les types";
   }
 
-  updateMeetingsDone(newMeetingsDone: boolean) {
-    this.meetingsDone = newMeetingsDone;
+  pageDown() {
+    this.updateResearchParamsMeeting({
+      ...this.researchParamsMeeting,
+      skip: this.researchParamsMeeting.skip! - 2
+    });
   }
 
-  updateDate(newDate: Date) {
-    this.date = newDate;
+  pageUp() {
+    this.updateResearchParamsMeeting({
+      ...this.researchParamsMeeting,
+      skip: this.researchParamsMeeting.skip! + 2
+    });
   }
 
-  updatePreviousMeetings(newPreviousMeetings: boolean) {
-    this.previousMeetings = newPreviousMeetings;
+  updateResearchParamsMeeting(newResearchParamsMeeting: ResearchParamsMeeting) {
+    this.researchParamsMeeting = newResearchParamsMeeting;
+    this.updateMeetings(this.researchParamsMeeting);
   }
 
-  updateFutureMeetings(newFutureMeetings: boolean) {
-    this.futureMeetings = newFutureMeetings;
+  updateMeetings(researchParamsMeeting: ResearchParamsMeeting) {
+    this.meetingsService.findAllPaginated(researchParamsMeeting)
+      .subscribe({
+        next: (data) => {
+          this.meetings = data;
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      });
   }
-
-  updateTypeMeeting(newTypeMeeting: string) {
-    this.typeMeeting = newTypeMeeting;
-  }
-
-  updateMeetings(newMeetings: Meeting[]) {
-    this.meetings = newMeetings.sort((a: Meeting, b :Meeting) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  }
-
-  updateMeetingsDateUp(newMeetingsDateUp: Date) {
-    this.meetingsDateUp = newMeetingsDateUp;
-  }
-
-  updateMeetingsDateDown(newMeetingsDone: Date) {
-    this.meetingsDateDown = newMeetingsDone;
-  }
-
 }

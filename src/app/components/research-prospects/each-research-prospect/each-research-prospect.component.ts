@@ -67,7 +67,7 @@ export class EachResearchProspectComponent implements OnInit {
     this.router.navigate(['prospect-details']);
   }
 
-  onCreateBookmark(prospect: Prospect) {
+  onCreateBookmark() {
     // TODO : ADD for current pm
     let pm = {
       "id": 1,
@@ -93,18 +93,18 @@ export class EachResearchProspectComponent implements OnInit {
     };
 
     const createBookmarkDto: CreateBookmarkDto = {
-      prospect: prospect,
+      prospect: this.prospect,
       pm: pm,
       creationDate: new Date()
     };
     this.bookmarksService.create(createBookmarkDto);
-    this.prospectService.updateIsBookmarked(prospect.id, { isBookmarked: true });
+    this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: true });
     console.log("added to bookmarks");
   }
 
-  onDeleteBookmark(prospect: Prospect) {
-    this.prospectService.updateIsBookmarked(prospect.id, { isBookmarked: false });
-    this.bookmarksService.deleteByProspect(prospect.id);
+  onDeleteBookmark() {
+    this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
+    this.bookmarksService.deleteByProspect(this.prospect.id);
     console.log("removed from bookmarks");
   }
 }
