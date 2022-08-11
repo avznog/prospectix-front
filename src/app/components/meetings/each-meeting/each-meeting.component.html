@@ -1,0 +1,32 @@
+<!-- Card -->
+<div class="card card-bordered shadow-md border-solid border-current">
+    <div class="card-body bg-opacity-10 ">
+      <div class="inline-flex ">
+        
+        <!-- Type de meeting -->
+        <div class="w-1/12" >
+          <label class="badge badge-secondary">{{meeting.type}}</label>
+        </div>
+    
+        
+        <!-- Date , heure, nom du client, nom du CDP -->
+        <div class="flex w-6/12 justify-center">
+          <label class="indicator-item badge badge-lg badge-ghost badge-outline">{{meeting.pm.firstname}} {{meeting.pm.name}} avec {{meeting.prospect.companyName}}</label>
+          <div class="divider divider-horizontal"></div>
+          <label>Le <b>{{meeting.date | date:"'EEEE d MMMM y"}}</b> à {{meeting.date | date:"HH:mm"}} </label>
+          
+        </div>
+        
+  
+        <!-- Boutons meetingDone / suppression -->
+        <div class="w-5/12 space-x-5">
+          <input class="btn btn-primary btn-sm btn-success" type="button"
+          value='{{meeting.done ? "Rendre le rendez-vous comme non effectué" : "Rendre le rendez-vous comme effectué"}}'
+          (click)="meeting.done ? onMarkMeetingDone() : onMarkMeetingUndone()" />
+        <input class="btn btn-primary btn-sm btn-error" type="button" value="Supprimer le rendez-vous"
+          (click)="onDeleteMeeting()" />
+        </div>
+        
+      </div>
+    </div>
+  </div>

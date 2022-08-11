@@ -1,0 +1,10 @@
+<div *ngFor="let meeting of meetings">
+  <app-each-meeting [meeting]="meeting"></app-each-meeting>
+  <br />
+</div>
+<div *ngIf="meetings && meetings.length <= 0">
+  <div class="alert alert-error card">
+    <div class="radial-progress" style="--value:100;">100%</div>
+    <div class="label">Vous avez épuisé tous les rendez-vous de la base !!</div>
+  </div>
+</div>

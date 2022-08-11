@@ -9,11 +9,10 @@ import { RemindersComponent } from './components/reminders/reminders/reminders.c
 import { RemindersResearchBlocComponent } from './components/reminders/reminders-research-bloc/reminders-research-bloc.component';
 import { RemindersListeProspectComponent } from './components/reminders/reminders-liste-prospect/reminders-liste-prospect.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
-import { MeetingsListeProspectComponent } from './components/meetings/meetings-liste-prospect/meetings-liste-prospect.component';
+import { MeetingsListeComponent as MeetingsListeComponent } from './components/meetings/meetings-liste/meetings-liste.component';
 import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
 import { ListProspectsComponent } from './components/research-prospects/list-prospects/list-prospects.component';
-import { EachProspectComponent } from './components/common/each-prospect/each-prospect.component';
 import { ResearchBlocComponent } from './components/research-prospects/research-bloc/research-bloc.component';
 import { UsersComponent } from './components/users/users/users.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
@@ -35,6 +34,7 @@ import { AddProspectComponent } from './components/common/add-prospect/add-prosp
 import { EachReminderComponent } from './components/reminders/each-reminder/each-reminder.component';
 import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
 import { EachResearchProspectComponent } from './components/research-prospects/each-research-prospect/each-research-prospect.component';
+import { EachMeetingComponent } from './components/meetings/each-meeting/each-meeting.component';
 
 @NgModule({
   declarations: [
@@ -43,9 +43,8 @@ import { EachResearchProspectComponent } from './components/research-prospects/e
     RemindersResearchBlocComponent,
     RemindersListeProspectComponent,
     MeetingsComponent,
-    MeetingsListeProspectComponent,
+    MeetingsListeComponent,
     MeetingsResearchBlocComponent,
-    EachProspectComponent,
     ResearchProspectsComponent,
     ListProspectsComponent,
     ResearchBlocComponent,
@@ -68,7 +67,8 @@ import { EachResearchProspectComponent } from './components/research-prospects/e
     AddProspectComponent,
     EachReminderComponent,
     ProspectDetailsComponent,
-    EachResearchProspectComponent
+    EachResearchProspectComponent,
+    EachMeetingComponent
   ],
   imports: [
     BrowserModule,

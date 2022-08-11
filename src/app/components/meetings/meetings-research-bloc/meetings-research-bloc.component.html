@@ -1,62 +1,60 @@
-<form [formGroup]="formSearchMeetings" class="flex flex-row justify-around items-start m-0 mb-5">
-
-  <!-- "Rechercher un rappel par nom, tel, mail, website, commentaire, objet du rappel..." -->
+<div class="flex flex-row justify-around items-start m-0 mb-5">
+  <!-- Keywprd -->
   <div class="form-control w-full max-w-xs">
     <label class="label" for="date">
       <span class="label-text">Recherche</span>
     </label>
-    <input class="input input-bordered w-full max-w-xs" type="text" placeholder="Recherche" formControlName="searchBar"
-      (input)="onMeetingsEditSearchBar()" />
+    <input class="input input-bordered w-full max-w-xs" type="text" placeholder="Recherche" [formControl]="formKeyword"
+      (input)="onEditKeyword()" />
   </div>
 
+  <!-- OldOrNew -->
   <div class="form-control min-w-fit">
     <label class="label" for="futureMeetings">
       <span class="label-text">Futurs RDV</span>
     </label>
-    <input class="toggle" type="checkbox" id="futureMeetings" formControlName="futureMeetings"
-      (change)="onChangeFutureMeetings()" />
+    <input class="radio" type="radio" name="oldOrNew" id="futureMeetings" [value]="'new'" [formControl]="formOldOrNew"
+      (change)="onEditOldOrNew()" />
   </div>
 
   <div class="form-control min-w-fit">
     <label class="label" for="previousMeetings">
       <span class="label-text">Anciens RDV</span>
     </label>
-    <input type="checkbox" class="toggle" id="previousMeetings" formControlName="previousMeetings"
-      (change)="onChangePreviousMeetings()" />
+    <input type="radio" class="radio" name="oldOrNew" id="previousMeetings" [value]="'old'" [formControl]="formOldOrNew"
+      (change)="onEditOldOrNew()" />
   </div>
 
   <div class="form-control min-w-fit">
     <label class="label" for="meetingsDone">
       <span class="label-text">RDV effectués</span>
     </label>
-    <input class="toggle" type="checkbox" id="meetingsDone" formControlName="meetingsDone"
-      (change)="onChangeMeetingsDone()" />
+    <input class="toggle" type="checkbox" id="meetingsDone" [formControl]="formDone"
+      (change)="onEditDone()" />
   </div>
 
   <div class="form-control min-w-fit">
     <label class="label" for="typeMeeting">
       <span class="label-text">Type de RDV</span>
     </label>
-    <select class="select select-bordered" id="typeMeeting" name="typeMeeting" formControlName="typeMeeting"
-      (change)="onChangeMeetingType()">
-      <option selected>Tous les types</option>
-      <option *ngFor="let typeMeeting of meetingTypeKeys">{{typeMeeting}}</option>
-    </select>
+    <select id="type" name="type" [formControl]="formType" (change)="onEditType()" class="select select-bordered">
+      <option [defaultSelected]="'Tous les types'" [value]="'allTypes'">Tous les types</option>
+      <option *ngFor="let type of meetingTypeKeys">{{type}}</option>
+  </select>
   </div>
 
   <label for="date-option" class="btn modal-button">Par date</label>
-
   <input type="checkbox" id="date-option" class="modal-toggle" />
   <div class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <div class="form-control min-w-fit">
         <label class="label" for="dateDown">Date inférieure</label>
-        <input type="date" id="dateDown" formControlName="dateDown" (change)="onMeetingsDateDownChange()" />
+        <input type="date" id="dateDown"[formControl]="formDateDown" (change)="onEditDateDown()" />
       </div>
 
       <div class="form-control min-w-fit">
         <label class="label" for="dateUp">Date supérieure</label>
-        <input type="date" id="dateUp" formControlName="dateUp" (change)="onMeetingsDateUpChange()" />
+        <input type="date" id="dateUp" [formControl]="formDateUp" (change)="onEditDateUp()" />
       </div>
       <div class="modal-action">
         <label for="date-option" class="btn">Ok</label>
@@ -64,4 +62,4 @@
     </div>
   </div>
 
-</form>
+</div>

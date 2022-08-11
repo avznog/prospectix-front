@@ -28,13 +28,17 @@ export class ResearchProspectsComponent implements OnInit {
   }
 
   pageUp() {
-    this.researchParamsProspect.skip = this.researchParamsProspect.skip+2 
-    this.updateProspects(this.researchParamsProspect)
+    this.updateResearchParamsProspect({
+      ...this.researchParamsProspect,
+      skip: this.researchParamsProspect.skip + 2
+    });
   }
 
   pageDown() {
-    this.researchParamsProspect.skip = this.researchParamsProspect.skip-2 
-    this.updateProspects(this.researchParamsProspect)
+    this.updateResearchParamsProspect({
+      ...this.researchParamsProspect,
+      skip: this.researchParamsProspect.skip - 2
+    });
   }
 
   updateProspects(researchParamsProspect: ResearchParamsProspect) {

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EMPTY } from 'rxjs';
+import { FormBuilder, FormControl} from '@angular/forms';
 import { MeetingType } from 'src/app/constants/meeting.type';
-import { Meeting } from 'src/app/models/meeting.model';
+import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
@@ -12,129 +11,72 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 })
 export class MeetingsResearchBlocComponent implements OnInit {
 
-  formSearchMeetings!: FormGroup;
+  @Input() researchParamsMeeting!: ResearchParamsMeeting;
+  @Output() updateResearchParamsMeetingEvent = new EventEmitter<ResearchParamsMeeting>();
 
-  @Input() meetings!: Meeting[];
-  @Input() meetingsDone!: boolean;
-  @Input() date!: Date;
-  @Input() futureMeetings!: boolean;
-  @Input() previousMeetings!: boolean;
-  @Input() typeMeeting!: string;
-  @Input() meetingsDateUp!: Date;
-  @Input() meetingsDateDown!: Date;
-  @Output() updateMeetingsDoneEvent = new EventEmitter<boolean>();
-  @Output() updateDateEvent = new EventEmitter<Date>();
-  @Output() updateFutureMeetingsEvent = new EventEmitter<boolean>();
-  @Output() updatePreviousMeetingsEvent = new EventEmitter<boolean>();
-  @Output() updateTypeMeetingEvent = new EventEmitter<string>();
-  @Output() updateMeetingsEvent = new EventEmitter<Meeting[]>();
-  @Output() updateMeetingsDateUpEvent = new EventEmitter<Date>();
-  @Output() updateMeetingsDateDownEvent = new EventEmitter<Date>();
 
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
-  
+  formKeyword = new FormControl("");
+  formOldOrNew = new FormControl("new");
+  formDone = new FormControl(false);
+  formType = new FormControl("");
+  formDateDown = new FormControl(Date)
+  formDateUp = new FormControl(Date)
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private meetingsService: MeetingsService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.formSearchMeetings = this.formBuilder.group({
-      searchBar: ["", Validators.required],
-      date: [Date, Validators.required],
-      futureMeetings: [true, Validators.required],
-      previousMeetings: [true, Validators.required],
-      meetingsDone: [true, Validators.required],
-      typeMeeting: ["", Validators.required],
-      dateDown: [Date, Validators.required],
-      dateUp: [Date, Validators.required]
-    })
+    
   }
 
-  onMeetingsEditSearchBar() {
-    if(this.formSearchMeetings.value["searchBar"] != "") {
-      this.meetingsService.findAllByKeyword(this.formSearchMeetings.value["searchBar"])
-        .subscribe({
-          next: (data) => {
-            this.updateMeetings(data);
-          },
-          error: (err) => {
-            console.log(err)
-          }
-        })
-    } else {
-      this.meetingsService.findAll()
-        .subscribe({
-          next: (data) => (
-            this.updateMeetings(data)
-          ),
-          error: (err) => {
-            console.log(err)
-          }
-        });
-    }
+  onEditKeyword() {
+    console.log(this.formKeyword.value)
+    this.updateResearchParamsMeeting({
+      ...this.researchParamsMeeting,
+      keyword: this.formKeyword.value
+    });
   }
 
-  onMeetingsDateChange() {
-    this.updateDate(this.formSearchMeetings.value["date"]);
+  onEditOldOrNew() {
+    console.log(this.formOldOrNew.value)
+    this.updateResearchParamsMeeting({
+      ...this.researchParamsMeeting,
+      oldOrNew: this.formOldOrNew.value
+    });
   }
 
-  onMeetingsDateDownChange() {
-    this.updateMeetingsDateDown(this.formSearchMeetings.value["dateDown"]);
+  onEditDone() {
+    console.log(this.formDone.value)
+    this.updateResearchParamsMeeting({
+      ...this.researchParamsMeeting,
+      done: this.formDone.value
+    });
   }
 
-  onMeetingsDateUpChange() {
-    this.updateMeetingsDateUp(this.formSearchMeetings.value["dateUp"]);
+  onEditType() {
+    console.log(this.formType.value)
+    if(this.formType.value != "allTypes")
+      this.updateResearchParamsMeeting({
+        ...this.researchParamsMeeting,
+        type: this.formType.value
+      });
+    else
+    this.updateResearchParamsMeeting({
+      ...this.researchParamsMeeting,
+      type: ""
+    });
   }
 
-  onChangeFutureMeetings() {
-    this.updateFutureMeetings(this.formSearchMeetings.value["futureMeetings"])
+  onEditDateDown() {
+    console.log(this.formDateDown.value)
   }
 
-  onChangePreviousMeetings() {
-    this.updatePreviousMeetings(this.formSearchMeetings.value["previousMeetings"])
+  onEditDateUp() {
+    console.log(this.formDateUp.value)
   }
 
-  onChangeMeetingsDone() {
-    this.updateMeetingsDone(this.formSearchMeetings.value["meetingsDone"]);
-  }
-
-  onChangeMeetingType() {
-    this.updateTypeMeeting(this.formSearchMeetings.value["typeMeeting"].toLowerCase())
-  }
-
-
-  updateMeetingsDone(value: boolean) {
-    this.updateMeetingsDoneEvent.emit(value);
-  }
-
-  updateDate(value: Date) {
-    this.updateDateEvent.emit(value)
-  }
-
-  updateFutureMeetings(value: boolean) {
-    this.updateFutureMeetingsEvent.emit(value);
-  }
-
-  updatePreviousMeetings(value: boolean) {
-    this.updatePreviousMeetingsEvent.emit(value)
-  }
-
-  updateTypeMeeting(value: string) {
-    this.updateTypeMeetingEvent.emit(value);
-  }
-
-  updateMeetings(value: Meeting[]) {
-    this.updateMeetingsEvent.emit(value);
-  }
-
-  updateMeetingsDateUp(value: Date) {
-    this.updateMeetingsDateUpEvent.emit(value);
-  }
-
-  updateMeetingsDateDown(value: Date) {
-    this.updateMeetingsDateDownEvent.emit(value);
+  updateResearchParamsMeeting(value: ResearchParamsMeeting) {
+    this.updateResearchParamsMeetingEvent.emit(value);
   }
 
 }
