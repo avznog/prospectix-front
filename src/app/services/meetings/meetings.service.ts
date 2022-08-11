@@ -30,10 +30,6 @@ export class MeetingsService {
     return this.http.get<Meeting>(`http://localhost:3000/meetings/mark-undone/${idMeeting}`).subscribe();
   }
 
-  findAllByKeyword(keyword: string) : Observable<Meeting[]> {
-    return this.http.get<Meeting[]>(`http://localhost:3000/meetings/by-keyword/${keyword}`);
-  }
-
   create(createMeetingDto: CreateMeetingDto) : Subscription {
     return this.http.post<Meeting>(`http://localhost:3000/meetings`, createMeetingDto).subscribe();
   }
