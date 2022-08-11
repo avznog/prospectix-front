@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
@@ -20,7 +19,6 @@ export class EachResearchProspectComponent implements OnInit {
   @Input() prospect!: Prospect;
   currentProspectMeetings : Meeting[] = [];
   currentProspectReminders : Reminder[] = [];
-  today = new Date();
   formComment = new FormControl("");
   
   constructor(
@@ -28,7 +26,6 @@ export class EachResearchProspectComponent implements OnInit {
     private readonly bookmarksService: BookmarksService,
     private readonly meetingsService: MeetingsService,
     private readonly remindersService: RemindersService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -62,9 +59,6 @@ export class EachResearchProspectComponent implements OnInit {
 
   onChangeNbNo() {
       this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
-  }
-  onEditProspect() {
-    this.router.navigate(['prospect-details']);
   }
 
   onCreateBookmark() {

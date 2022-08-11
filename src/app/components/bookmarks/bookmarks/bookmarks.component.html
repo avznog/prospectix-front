@@ -1,17 +1,10 @@
 <app-header></app-header>
-<h1 class="ml-6 text-xl mb-5">Mes prospects favoris</h1>
-<div class="form-control">
-  <div class="input-group">
-  <label class="label">
-    <span class="label-text">Rechercher les favoris de</span>
-  </label>
-  <select class="select select-bordered" (change)="onChangePm()" [formControl]="formControlPm">
-    <option *ngFor="let pm of projectManagers" >{{pm.pseudo}}</option>
-  </select>
-</div>
-</div>
-  <div class="divider"></div>
-<div *ngFor="let prospect of prospects">
-  <!-- <app-each-prospect [prospect]="prospect"></app-each-prospect> -->
-  <br />
-</div>
+<h1 class="ml-6 text-xl mb-5">Prospects favoris de {{ researchParamsBookmark.pseudo == "" ? 'tous les chefs de projets': researchParamsBookmark.pseudo}}</h1>
+<app-bookmarks-research-bloc [researchParamsBookmark]="researchParamsBookmark" (updateResearchParamsBookmarkEvent)="updateResearchParamsBookmark($event)"></app-bookmarks-research-bloc>
+<app-liste-bookmarks [prospects]="prospects"></app-liste-bookmarks>
+<div class="divider" ></div>
+  <div class="btn-group flex justify-center">
+    <button class="btn btn-outline btn-ghost {{researchParamsBookmark.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{researchParamsBookmark.skip / 2 }}</button>
+    <button class="btn btn-outline btn-ghost {{prospects && prospects.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+  </div>

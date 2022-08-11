@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { ProjectManager } from 'src/app/models/project-manager.model';
@@ -21,5 +21,9 @@ export class BookmarksService {
 
   deleteByProspect(prospectId: number) : Subscription {
     return this.http.delete<Bookmark>(`http://localhost:3000/bookmarks/by-prospect/${prospectId}`).subscribe();
+  }
+
+  findAll() : Observable<Bookmark[]> {
+    return this.http.get<Bookmark[]>(`http://localhost:3000/bookmarks`);
   }
 }
