@@ -35,6 +35,9 @@ import { EachReminderComponent } from './components/reminders/each-reminder/each
 import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
 import { EachResearchProspectComponent } from './components/research-prospects/each-research-prospect/each-research-prospect.component';
 import { EachMeetingComponent } from './components/meetings/each-meeting/each-meeting.component';
+import { ListeBookmarksComponent } from './components/bookmarks/liste-bookmarks/liste-bookmarks.component';
+import { EachBookmarkComponent } from './components/bookmarks/each-bookmark/each-bookmark.component';
+import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks-research-bloc/bookmarks-research-bloc.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,10 @@ import { EachMeetingComponent } from './components/meetings/each-meeting/each-me
     EachReminderComponent,
     ProspectDetailsComponent,
     EachResearchProspectComponent,
-    EachMeetingComponent
+    EachMeetingComponent,
+    ListeBookmarksComponent,
+    EachBookmarkComponent,
+    BookmarksResearchBlocComponent
   ],
   imports: [
     BrowserModule,

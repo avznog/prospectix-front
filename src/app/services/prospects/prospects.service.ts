@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
+import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 
 @Injectable({
@@ -41,25 +42,42 @@ export class ProspectsService {
   }
 
   findAllPaginated(researchParams: ResearchParamsProspect) : Observable<Prospect[]> {
-      let queryParams = new HttpParams();
+      let queryParameters = new HttpParams();
       if(researchParams.activity)
-        queryParams = queryParams.append("activity", researchParams.activity)
+      queryParameters = queryParameters.append("activity", researchParams.activity)
       
       if(researchParams.city)
-        queryParams = queryParams.append("city", researchParams.city)
+      queryParameters = queryParameters.append("city", researchParams.city)
       
       if(researchParams.skip)
-        queryParams = queryParams.append("skip", researchParams.skip)
+      queryParameters = queryParameters.append("skip", researchParams.skip)
       
       if(researchParams.keyword)
-        queryParams = queryParams.append("keyword", researchParams.keyword)
+      queryParameters = queryParameters.append("keyword", researchParams.keyword)
       else
-        queryParams = queryParams.append("keyword","")
+      queryParameters = queryParameters.append("keyword","")
       
-        queryParams = queryParams.append("take", 2);
+      queryParameters = queryParameters.append("take", 2);
 
+      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-paginated/`, { params: queryParameters});
+  }
 
-      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-paginated/`, { params: queryParams});
+  findAllBookmarksPaginated(researchParams: ResearchParamsBookmarks) : Observable<Prospect[]> {
+    let queryParameters = new HttpParams();
+    if(researchParams.activity)
+      queryParameters = queryParameters.append("activity", researchParams.activity)
+      
+      if(researchParams.city)
+      queryParameters = queryParameters.append("city", researchParams.city)
+      
+      if(researchParams.skip)
+      queryParameters = queryParameters.append("skip", researchParams.skip)
+      
+      queryParameters = queryParameters.append("keyword", researchParams.keyword)
+      queryParameters = queryParameters.append("pseudo", researchParams.pseudo)
+      queryParameters = queryParameters.append("take", 2);
+
+      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-bookmarks-paginated`, { params: queryParameters });
   }
 
   findAllByKeyword(keyword: string) : Observable<Prospect[]> {

@@ -42,7 +42,6 @@ export class ResearchProspectsComponent implements OnInit {
   }
 
   updateProspects(researchParamsProspect: ResearchParamsProspect) {
-    this.researchParamsProspect = researchParamsProspect;
     this.prospectsService.findAllPaginated(researchParamsProspect)
       .subscribe({
         next: (data) => {

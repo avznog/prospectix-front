@@ -8,12 +8,17 @@
             class="input input-bordered w-full max-w-xs" />
     </div>
 
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-        stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg> -->
-    <!-- <label for="my-modal" class="btn modal-button">Infos</label> -->
+    <!-- Select chef de projet -->
+    <!-- Select city -->
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="pm">
+            <span class="label-text">Chef de Projet</span>
+        </label>
+        <select id="pm" name="pm" [formControl]="formPm" (change)="onEditPm()" class="select select-bordered">
+            <option [defaultSelected]="''" [value]="''">Toutes les chefs de projets</option>
+            <option *ngFor="let pm of projectManagers">{{pm.pseudo}}</option>
+        </select>
+    </div>
 
     <!-- Select activity domain -->
     <div class="form-control w-full max-w-xs">
@@ -36,31 +41,5 @@
             <option [defaultSelected]="'Toutes les villes'" [value]="'allCities'">Toutes les villes</option>
             <option *ngFor="let city of cities">{{city.name}}</option>
         </select>
-    </div>
-
-    <!-- Save this research or not -->
-    <div class="form-control w-full max-w-xs">
-        <label for="saveSearch" class="label cursor-pointer">
-            <span class="label-text">Sauvegarder la recherche</span>
-        </label>
-        <input id="saveSearch" type="checkbox" class="toggle" checked />
-    </div>
-
-    <!-- Ajouter un prospect -->
-    <label class="btn btn-ghost btn-outline modal-button" for="modal-add-prospect">Ajouter un prospct</label>
-    <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
-    <app-add-prospect class="modal"></app-add-prospect>
-</div>
-
-
-<input type="checkbox" id="my-modal" class="modal-toggle" />
-<div class="modal">
-    <div class="modal-box">
-        <h3 class="font-bold text-lg">Recherche de prospects</h3>
-        <p class="py-4">We gotcha you! — Vous pouvez cherchez un prospect par son nom, son numéro de téléphone, mail,
-            site web, adresse ou encore par commentaire enregistré dans Prospectix</p>
-        <div class="modal-action">
-            <label for="my-modal" class="btn">Ok</label>
-        </div>
     </div>
 </div>

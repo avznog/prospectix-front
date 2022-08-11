@@ -4,5 +4,4 @@ export interface ResearchParamsProspect {
   skip: number;
   city?: string;
   activity?: string;
-
 }

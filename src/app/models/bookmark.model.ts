@@ -5,4 +5,5 @@ export interface Bookmark {
   id: number;
   creationDate: Date;
   pm: ProjectManager;
+  prospect: Prospect;
 }

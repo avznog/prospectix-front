@@ -19,12 +19,12 @@ export class ResearchBlocComponent implements OnInit {
   activities!: Activity[];
   cities!: City[];
   formKeyword = new FormControl("");
-  formActivity = new FormControl("allActivities")
-  formCity = new FormControl("allCities")
+  formActivity = new FormControl("allActivities");
+  formCity = new FormControl("allCities");
 
   constructor(
     private readonly activitiesService: ActivitiesService,
-    private readonly citiesServices: CitiesService,
+    private readonly citiesService: CitiesService,
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class ResearchBlocComponent implements OnInit {
         }
       });
 
-    this.citiesServices.findAll()
+    this.citiesService.findAll()
       .subscribe({
         next: (data) => {
           this.cities = data;
