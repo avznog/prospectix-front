@@ -1,19 +1,19 @@
 import { Activity } from "src/app/models/activity.model";
 import { City } from "src/app/models/city.model";
 import { Country } from "src/app/models/country.model";
-import { Email } from "src/app/models/email.model";
-import { Phone } from "src/app/models/phone.model";
-import { Website } from "src/app/models/website.model";
+import { CreateEmailDto } from "../emails/create-email.dto";
+import { CreatePhoneDto } from "../phones/create-phone.dto";
+import { CreateWebsiteDto } from "../websites/create-website.dto";
 
-export interface UpdateProspectDto {
+export interface CreateProspectDto {
   companyName: string;
-  activity: Activity;
   streetAddress: string;
+  activity: Activity;
   city: City;
   country: Country;
-  phone: Phone;
-  email: Email;
-  website: Website;
+  phone: CreatePhoneDto;
+  email: CreateEmailDto;
+  website: CreateWebsiteDto;
   comment: string;
   nbNo: number;
   disabled: boolean;

@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
-import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
@@ -16,6 +16,14 @@ export class ProspectsService {
   constructor(
     private http: HttpClient
   ) { }
+
+  create(createProspectDto: CreateProspectDto) : Subscription {
+    createProspectDto.disabled = false;
+    createProspectDto.nbNo = 0;
+    createProspectDto.isBookmarked = false;
+    
+    return this.http.post<Prospect>(`http://localhost:3000/prospects/create`, createProspectDto).subscribe();
+  }
 
   update(idProspect: number, updateProspectDto: UpdateProspectDto) : Subscription {
     return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, updateProspectDto).subscribe();

@@ -20,7 +20,6 @@ export class ListeBookmarksComponent implements OnInit {
     this.bookmarksService.findAll()
     .subscribe({
       next: (data) => {
-        console.log(data)
         this.bookmarks = data;       
       },
       error: (err) => {

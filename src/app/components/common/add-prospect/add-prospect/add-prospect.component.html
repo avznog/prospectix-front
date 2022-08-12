@@ -1,70 +1,98 @@
-<div class="modal-box max-w-screen-lg">
+<div class="modal-box max-w-screen-2xl">
   <label for="modal-add-prospect" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
   <div class="text-lg">Ajouter un prospect dans la base</div>
   <div class="divider"></div>
+
   <div class="inline-flex space-x-5">
+
+    <!-- Nom du prospect -->
     <div class="form-control">
       <label class="label">
         <span class="label-text">Nom du prospect</span>
       </label>
-        <input type="text" class="input input-bordered" />
+      <input type="text" class="input input-bordered" [formControl]="formCompanyName" />
     </div>
+
+    <!-- Adresse du prospect -->
     <div class="form-control">
       <label class="label">
         <span class="label-text">Adresse</span>
       </label>
-     
-      
-        <input type="text" class="input input-bordered" />
+      <input type="text" class="input input-bordered" [formControl]="formAddress" />
     </div>
+
+    <!-- Domaine d'activité du prospect -->
     <div class="form-control">
-      <label class="label">
-        <span class="label-text">Ville</span>
+      <label class="label" for="activity">
+          <span class="label-text">Domaine d'activité</span>
       </label>
-      
-        <input type="text" class="input input-bordered" />
-      
-    </div>
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Domaine d'activité</span>
-      </label>
-      
-        <input type="text" class="input input-bordered" />
-      
-    </div>
+      <select id="activity" name="activity"[formControl]="formActivity" class="select select-bordered" >
+          <option *ngFor="let activity of activities" [ngValue]="activity" [defaultSelected]="activity">{{activity.name}}</option>
+      </select>
   </div>
-  
+
+  <!-- Ville du prospect -->
   <div class="form-control">
-    <label class="label">
-      <span class="label-text">Pays</span>
-    </label>
-    
-      <input type="text" class="input input-bordered" />
-    
+      <label class="label" for="city">
+          <span class="label-text">Ville</span>
+      </label>
+      <select id="city" name="city" [formControl]="formCity" class="select select-bordered">
+          <option *ngFor="let city of cities" [ngValue]="city" [defaultSelected]="city">{{city.name}}</option>
+      </select>
   </div>
+
+  
+  <!-- Pays du prospect -->
+  <div class="form-control">
+    <label class="label" for="country">
+        <span class="label-text">Pays</span>
+    </label>
+    <div class="inline-flex">
+    <select id="country" name="country" [formControl]="formCountry" class="select select-bordered">
+        <option *ngFor="let country of countries" [ngValue]="country" [defaultSelected]="country">{{country.name}}</option>
+    </select>
+    <div class="dropdown">
+      <label tabindex="0" class="btn btn-ghost btn-outline">+</label>
+      <div tabindex="0" class="dropdown-content card card-bordered bg-inherit outline">
+        <div class="card-body ">
+          <div class="card-title">Ajouter une ville</div>
+          <input type="text" class="input" placeholder="Ville">
+          <input type="text" class="input" placeholder="Code postal">
+          <label tabindex="0" class="btn">Ajouter</label>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+  <!-- Téléphone du prospect -->
   <div class="form-control">
     <label class="label">
       <span class="label-text">Téléphone</span>
     </label>
-    
-      <input type="text" class="input input-bordered" />
-    
+    <input type="text" class="input input-bordered" [formControl]="formPhone" />
   </div>
+
+  <!-- Email du prospect -->
   <div class="form-control">
     <label class="label">
       <span class="label-text">Email</span>
     </label>
-    
-      <input type="text" class="input input-bordered" />
-    
+    <input type="text" class="input input-bordered" [formControl]="formEmail" />
   </div>
+
+  <!-- Site internet du prospect -->
   <div class="form-control">
     <label class="label">
       <span class="label-text">Site internet</span>
     </label>
-    
-      <input type="text" class="input input-bordered" />
-    
+    <input type="text" class="input input-bordered" [formControl]="formWebsite" />
   </div>
+
+  <div class="divider"></div>
+
+  <!-- Bouton créer le prospect -->
+  <label class="btn btn-ghost btn-outline flex" (click)="onCreateProspect()">Créer le prospect</label>
 </div>
