@@ -18,10 +18,6 @@ export class ProspectsService {
   ) { }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
-    createProspectDto.disabled = false;
-    createProspectDto.nbNo = 0;
-    createProspectDto.isBookmarked = false;
-    
     return this.http.post<Prospect>(`http://localhost:3000/prospects/create`, createProspectDto).subscribe();
   }
 

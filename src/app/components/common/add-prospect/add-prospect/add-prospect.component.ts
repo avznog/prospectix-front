@@ -22,18 +22,35 @@ export class AddProspectComponent implements OnInit {
     private readonly prospectService: ProspectsService
   ) { }
 
+  // City
   cities!: City[];
-  activities!: Activity[];
-  countries!: Country[];
-
+  addCityDisabled = false;
+  newCity = false;
   formCity = new FormControl({} as City);
+  formAddCity = new FormControl("");
+  formAddZipcode = new FormControl("");
+
+  // Activity
+  activities!: Activity[];
+  addActivityDisabled = false;
+  newActivity = false;
   formActivity = new FormControl({} as Activity);
+  formAddActivity = new FormControl("");
+
+  // Country
+  countries!: Country[];
+  addCountryDisabled = false;
+  newCountry = false;
   formCountry = new FormControl({} as Country);
+  formAddCountry = new FormControl("");
+  
+  // Prospect
   formCompanyName = new FormControl("");
   formAddress = new FormControl("");
   formPhone = new FormControl("");
   formEmail = new FormControl("");
   formWebsite = new FormControl("");
+  formComment = new FormControl("");
 
   ngOnInit(): void {
     this.activitiesService.findAll()
@@ -59,6 +76,7 @@ export class AddProspectComponent implements OnInit {
       this.countriesService.findAll()
         .subscribe({
           next: (data) => {
+            console.log(data)
             this.countries = data;
           },
           error: (err) => {
@@ -68,11 +86,10 @@ export class AddProspectComponent implements OnInit {
   }
 
   onCreateProspect() {
-    // if(this.cities.filter((city: City) => city.name == this.formCity.value.name))
     this.prospectService.create({
-      activity: this.formActivity.value,
-      city: this.formCity.value,
-      country: this.formCountry.value,
+      activity: this.newActivity ? { name: this.formAddActivity.value } : this.formActivity.value,
+      city: this.newCity ? { name: this.formAddCity.value, zipcode: this.formAddZipcode.value } : this.formCity.value,
+      country: this.newCountry ? { name: this.formAddCountry.value } : this.formCountry.value,
       phone: {
         number: this.formPhone.value
       },
@@ -84,18 +101,50 @@ export class AddProspectComponent implements OnInit {
       },
       companyName: this.formCompanyName.value,
       streetAddress: this.formAddress.value,
-      comment: "",
+      comment: this.formComment.value,
       nbNo: 0,
       disabled: false,
       isBookmarked: false
     });
-    console.log(this.formActivity.value)
-    console.log(this.formCity.value)
-    console.log(this.formAddress.value)
-    console.log(this.formCompanyName.value)
-    console.log(this.formCountry.value)
-    console.log(this.formEmail.value)
-    console.log(this.formPhone.value)
-    console.log(this.formWebsite.value)
   }
+
+  onAddCity() {
+    this.cities.push({
+      id: Number(),
+      name: this.formAddCity.value,
+      zipcode: this.formAddZipcode.value
+    });
+    this.newCity = true;
+  }
+
+  onEditAddCity() {
+    this.cities.filter(city => city.name.toLowerCase() == this.formAddCity.value.toLowerCase() || city.zipcode == this.formAddZipcode.value).length == 0 ? this.addCityDisabled = false : this.addCityDisabled = true;
+  }
+
+  onAddActivity() {
+    this.activities.push({
+      id: Number(),
+      name: this.formAddActivity.value
+    });
+    this.newActivity = true;
+  }
+
+  onEditAddActivity() {
+    this.activities.filter(activity => activity.name.toLowerCase() == this.formAddActivity.value.toLowerCase()).length == 0 ? this.addActivityDisabled = false : this.addActivityDisabled = true;
+  }
+
+  onAddCountry() {
+    this.countries.push({
+      id: Number(),
+      name: this.formAddCountry.value
+    });
+    this.newCountry = true;
+  }
+
+  onEditAddCountry() {
+    console.log(this.countries)
+    console.log("the country" + this.formAddCountry.value)
+    this.countries.filter(country => country.name.toLowerCase() == this.formAddCountry.value.toLowerCase()).length == 0 ? this.addCountryDisabled = false : this.addCountryDisabled = true;
+  }
+
 }
