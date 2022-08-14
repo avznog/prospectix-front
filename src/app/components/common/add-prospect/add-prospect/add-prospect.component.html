@@ -1,4 +1,4 @@
-<div class="modal-box max-w-screen-2xl h-full">
+<div class="modal-box max-w-screen-lg h-3/4 space-y-4 overflow-hidden">
   <label for="modal-add-prospect" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
   <div class="text-lg">Ajouter un prospect dans la base</div>
   <div class="divider"></div>
@@ -20,37 +20,40 @@
       </label>
       <input type="text" class="input input-bordered" [formControl]="formAddress" placeholder="Ex: 22 rue notre Dame des Champs"/>
     </div>
+   
 
-    <!-- Domaine d'activité du prospect -->
-    <div class="form-control">
-      <label class="label" for="activity">
-          <span class="label-text">Domaine d'activité</span>
-      </label>
-      <div class="inline-flex">
+</div>
+<div class="inline-flex space-x-5">
+   <!-- Domaine d'activité du prospect -->
+   <div class="form-control">
+    <label class="label" for="activity">
+        <span class="label-text">Domaine d'activité</span>
+    </label>
+    <div class="inline-flex">
 
-        <!-- select activity -->
-        <select id="activity" name="activity"[formControl]="formActivity" class="select select-bordered" >
-          <option *ngFor="let activity of activities" [ngValue]="activity" [defaultSelected]="activity">{{activity.name}}</option>
-        </select>
+      <!-- select activity -->
+      <select id="activity" name="activity"[formControl]="formActivity" class="select select-bordered" >
+        <option *ngFor="let activity of activities" [ngValue]="activity" [defaultSelected]="activity">{{activity.name}}</option>
+      </select>
 
-        <!-- dropdown add activity -->
-        <div class="dropdown">
-          <label class="btn btn-ghost btn-outline" tabindex="0">+</label>
-          <div tabindex="0" class="dropdown-content card outline-1 bg-white outline">
-            <div class="card-body">
-              <div class="card-title">Ajouter un domaine d'activité</div>
-              <input type="text" class="input input-ghost outline outline-1" placeholder="Domaine d'activité" [formControl]="formAddActivity" (input)="onEditAddActivity()">
-              <label tabindex="0" class="btn {{addActivityDisabled ? 'btn-disabled' : ''}}" (click)="onAddActivity()">Ajouter</label>
-              <div class="alert alert-error shadow-lg" *ngIf="addActivityDisabled">
-                <span>Attention ! Ce domaine d'activité existe déjà dans la base</span>
-              </div>
+      <!-- dropdown add activity -->
+      <div class="dropdown dropdown-right">
+        <label class="btn btn-ghost btn-outline" tabindex="0">+</label>
+        <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
+          <div class="card-body">
+            <div class="card-title">Ajouter un domaine d'activité</div>
+            <input type="text" class="input input-ghost outline outline-1" placeholder="Domaine d'activité" [formControl]="formAddActivity" (input)="onEditAddActivity()">
+            <label tabindex="0" class="btn {{addActivityDisabled ? 'btn-disabled' : ''}}" (click)="onAddActivity()">Ajouter</label>
+            <div class="alert alert-error shadow-lg" *ngIf="addActivityDisabled">
+              <span>Attention ! Ce domaine d'activité existe déjà dans la base</span>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
 
-  
+
   <!-- Ville du prospect -->
   <div class="form-control">
       <label class="label" for="city">
@@ -64,9 +67,9 @@
         </select>
 
         <!-- dropdown add city -->
-        <div class="dropdown">
+        <div class="dropdown dropdown-right">
           <label tabindex="0" class="btn btn-ghost btn-outline">+</label>
-          <div tabindex="0" class="dropdown-content card outline-1 bg-white outline">
+          <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
             <div class="card-body ">
               <div class="card-title">Ajouter une ville</div>
               <input type="text" class="input input-ghost outline-1 outline" placeholder="Ville" [formControl]="formAddCity" (input)="onEditAddCity()">
@@ -81,7 +84,7 @@
       </div>
   </div>
 
-  
+
   <!-- Pays du prospect -->
   <div class="form-control">
     <label class="label" for="country">
@@ -95,9 +98,9 @@
       </select>
 
       <!-- dropdown add country -->
-      <div class="dropdown">
+      <div class="dropdown dropdown-right">
         <label tabindex="0" class="btn btn-ghost btn-outline">+</label>
-        <div tabindex="0" class="dropdown-content card outline-1 bg-white outline">
+        <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
           <div class="card-body">
             <div class="card-title">Ajouter un Pays</div>
             <input type="text" class="input input-ghost outline-1 outline" placeholder="Pays" [formControl]="formAddCountry" (input)="onEditAddCountry()">
@@ -110,7 +113,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 
@@ -138,17 +140,21 @@
       </label>
       <input type="text" class="input input-bordered" [formControl]="formWebsite" placeholder="Ex: www.juniorisep.com"/>
     </div>
-
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Commentaire</span>
-      </label>
-      <textarea class="textarea outline-1 outline" placeholder="Commentaire sur le prospect" [formControl]="formComment"></textarea>
-    </div>
   </div>
+
+   <!-- Commentaire sur le prospect -->
+   <div class="form-control">
+    <label class="label">
+      <span class="label-text">Commentaire</span>
+    </label>
+    <textarea class="textarea outline-1 outline h-1/3" placeholder="Commentaire sur le prospect" [formControl]="formComment"></textarea>
+  </div>
+
 
   <div class="divider"></div>
 
   <!-- Bouton créer le prospect -->
-  <label class="btn btn-ghost btn-outline flex" (click)="onCreateProspect()">Créer le prospect</label>
+  <div class="flex justify-center">
+    <label class="btn btn-ghost btn-outline w-1/5" (click)="onCreateProspect()">Créer le prospect</label>
+  </div>
 </div>
