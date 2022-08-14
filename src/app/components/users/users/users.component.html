@@ -2,11 +2,22 @@
 <h1 class="ml-6 text-xl">Utilisateurs</h1>
 <input type="checkbox" id="add-user-modal" class="modal-toggle" />
 <div class="modal">
-    <app-create-user></app-create-user>
+  <app-create-user></app-create-user>
 </div>
+<div class="flex justify-end">
+  <label for="add-user-modal" class="btn modal-button btn-outline w-1/4">Ajouter un utilisateur</label>
+</div>
+
 <div class="card">
-    <div class="card-body">
-        <app-list-users></app-list-users>
-    </div>
-    </div>
-<label for="add-user-modal" class="btn modal-button btn-ghost btn-outline w-1/3 m-5">Ajouter un utilisateur</label>
+  <div class="card-body">
+    <app-list-users [users]="users" [researchParamsUsers]="researchParamsUsers"></app-list-users>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="btn-group justify-center">
+  <button class="btn btn-ghost btn-outline {{researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+  <button class="btn btn-ghost btn-outline">Page {{researchParamsUsers.skip / 2}}</button>
+  <button class="btn btn-ghost btn-outline {{users && users.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+</div>

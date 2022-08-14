@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { Observable, Subscription } from 'rxjs';
+import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,5 +30,14 @@ export class UsersService {
 
   changeAdmin(id: number,admin: boolean) : Subscription {
     return this.http.patch<ProjectManager>(`http://localhost:3000/project-managers/${id}`, {admin}).subscribe();
+  }
+
+  findAllPaginated(researchParamsUsers: ResearchParamsUsers) : Observable<ProjectManager[]> {
+    let queryParameters = new HttpParams();
+
+    queryParameters = queryParameters.append("take", researchParamsUsers.take);
+    queryParameters = queryParameters.append("skip", researchParamsUsers.skip);
+
+    return this.http.get<ProjectManager[]>(`http://localhost:3000/project-managers/find-all-paginated`, { params: queryParameters});
   }
 }
