@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProjectManager } from 'src/app/models/project-manager.model';
+import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
@@ -10,22 +11,15 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./list-users.component.scss']
 })
 export class ListUsersComponent implements OnInit {
-  users!: ProjectManager[];
+  
+  @Input() users!: ProjectManager[];
+  @Input() researchParamsUsers!: ResearchParamsUsers;
+
   constructor(
     private readonly usersService: UsersService
   ) { }
 
   ngOnInit(): void {
-    this.usersService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.users = data.sort((a: ProjectManager, b:ProjectManager) => (a.id -b.id));
-          console.log(data);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
   }
 
   onChangeUserStatus(user: ProjectManager) : Subscription {
