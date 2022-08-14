@@ -35,7 +35,6 @@ export class EachBookmarkComponent implements OnInit {
   
     const result = this.bookmarks.some((bookmark) => {
       if(bookmark.prospect.id == this.prospect.id)
-        console.log(bookmark.id)
         this.currentPm = bookmark.pm.pseudo;
         return bookmark.prospect.id == this.prospect.id;
      });

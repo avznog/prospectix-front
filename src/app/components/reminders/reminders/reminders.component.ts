@@ -28,7 +28,6 @@ export class RemindersComponent implements OnInit {
     .subscribe({
       next: (data) => {
         this.reminders = data;
-        console.log("ngoninit")
       },
       error: (err) => {
         console.log(err);

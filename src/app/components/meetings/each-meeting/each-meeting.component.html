@@ -1,16 +1,16 @@
 <!-- Card -->
 <div class="card card-bordered shadow-md border-solid border-current">
     <div class="card-body bg-opacity-10 ">
-      <div class="inline-flex ">
+      <div class="inline-flex items-baseline">
         
         <!-- Type de meeting -->
-        <div class="w-1/12" >
+        <div class="w-1/6 justify-center flex">
           <label class="badge badge-secondary">{{meeting.type}}</label>
         </div>
     
         
         <!-- Date , heure, nom du client, nom du CDP -->
-        <div class="flex w-6/12 justify-center">
+        <div class="flex justify-center w-4/6">
           <label class="indicator-item badge badge-lg badge-ghost badge-outline">{{meeting.pm.firstname}} {{meeting.pm.name}} avec {{meeting.prospect.companyName}}</label>
           <div class="divider divider-horizontal"></div>
           <label>Le <b>{{meeting.date | date:"'EEEE d MMMM y"}}</b> à {{meeting.date | date:"HH:mm"}} </label>
@@ -19,12 +19,21 @@
         
   
         <!-- Boutons meetingDone / suppression -->
-        <div class="w-5/12 space-x-5">
-          <input class="btn btn-primary btn-sm btn-success" type="button"
-          value='{{meeting.done ? "Rendre le rendez-vous comme non effectué" : "Rendre le rendez-vous comme effectué"}}'
-          (click)="meeting.done ? onMarkMeetingDone() : onMarkMeetingUndone()" />
-        <input class="btn btn-primary btn-sm btn-error" type="button" value="Supprimer le rendez-vous"
-          (click)="onDeleteMeeting()" />
+        <div class="w-1/6 flex justify-center space-x-5">
+          <div class="tooltip" *ngIf="!meeting.done" data-tip="Rendez-vous effectué">
+            <label class="btn btn-circle btn-success" (click)="onMarkMeetingDone()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </label>
+          </div>
+          <div data-tip="Supprimer le rendez-vous" class="tooltip">
+            <label class="btn btn-circle btn-error" (click)="onDeleteMeeting()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </label>
+          </div>  
         </div>
         
       </div>
