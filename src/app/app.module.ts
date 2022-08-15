@@ -38,6 +38,8 @@ import { EachMeetingComponent } from './components/meetings/each-meeting/each-me
 import { ListeBookmarksComponent } from './components/bookmarks/liste-bookmarks/liste-bookmarks.component';
 import { EachBookmarkComponent } from './components/bookmarks/each-bookmark/each-bookmark.component';
 import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks-research-bloc/bookmarks-research-bloc.component';
+import { ProspectHistoryComponent } from './components/common/prospect-history/prospect-history/prospect-history.component';
+import { ThemePickerComponent } from './components/common/theme-picker/theme-picker.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks
     EachMeetingComponent,
     ListeBookmarksComponent,
     EachBookmarkComponent,
-    BookmarksResearchBlocComponent
+    BookmarksResearchBlocComponent,
+    ProspectHistoryComponent,
+    ThemePickerComponent
   ],
   imports: [
     BrowserModule,

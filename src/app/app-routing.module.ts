@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Input, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';

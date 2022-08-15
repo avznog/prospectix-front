@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
+import { Event } from 'src/app/models/event.model';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
@@ -17,6 +19,10 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 export class EachResearchProspectComponent implements OnInit {
 
   @Input() prospect!: Prospect;
+
+  @Input() events!: Event[];
+  @Output() updateEventsEvent = new EventEmitter<Event[]>();
+
   currentProspectMeetings : Meeting[] = [];
   currentProspectReminders : Reminder[] = [];
   formComment = new FormControl("");
@@ -26,6 +32,7 @@ export class EachResearchProspectComponent implements OnInit {
     private readonly bookmarksService: BookmarksService,
     private readonly meetingsService: MeetingsService,
     private readonly remindersService: RemindersService,
+    private readonly eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
@@ -104,5 +111,21 @@ export class EachResearchProspectComponent implements OnInit {
 
   onClickRefus() {
     this.prospectService.disable(this.prospect.id);
+  }
+
+  onClickDrawer() {
+    this.eventsService.findAllByProspect(this.prospect.id)
+    .subscribe({
+      next: (data) => {
+        this.updateEvents(data);
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
+  }
+
+  updateEvents(value: Event[]) {
+    this.updateEventsEvent.emit(value);
   }
 }
