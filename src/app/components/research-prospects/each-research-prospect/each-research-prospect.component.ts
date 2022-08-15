@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Event } from 'src/app/models/event.model';
 import { Meeting } from 'src/app/models/meeting.model';
@@ -100,6 +102,14 @@ export class EachResearchProspectComponent implements OnInit {
     };
     this.bookmarksService.create(createBookmarkDto);
     this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: true });
+
+    this.eventsService.create({
+      type: EventType.ADD_BOOKMARKS,
+      prospect: this.prospect,
+      pm: pm,
+      date: new Date,
+      description: EventDescriptionType.ADD_BOOKMARKS
+    });
     console.log("added to bookmarks");
   }
 
@@ -107,9 +117,67 @@ export class EachResearchProspectComponent implements OnInit {
     this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
     this.bookmarksService.deleteByProspect(this.prospect.id);
     console.log("removed from bookmarks");
+    let pm = {
+      "id": 1,
+      "pseudo": "bgonzva",
+      "admin": true,
+      "name": "Gonzva",
+      "firstname": "Benjamin",
+      "mail": "bgonzva@juniorisep.com",
+      "tokenEmail": "",
+      "disabled": false,
+      "goals": [
+         
+      ],
+      "meetings": [
+          
+      ],
+      "reminders": [
+         
+      ],
+      "sentEmails": [],
+      "bookmarks": [],
+      "events": []
+    };
+    this.eventsService.create({
+      type: EventType.DELETE_BOOKMARKS,
+      prospect: this.prospect,
+      pm: pm,
+      date: new Date,
+      description: EventDescriptionType.DELETE_BOOKMARKS
+    });
   }
 
   onClickRefus() {
+    let pm = {
+      "id": 1,
+      "pseudo": "bgonzva",
+      "admin": true,
+      "name": "Gonzva",
+      "firstname": "Benjamin",
+      "mail": "bgonzva@juniorisep.com",
+      "tokenEmail": "",
+      "disabled": false,
+      "goals": [
+         
+      ],
+      "meetings": [
+          
+      ],
+      "reminders": [
+         
+      ],
+      "sentEmails": [],
+      "bookmarks": [],
+      "events": []
+    };
+    this.eventsService.create({
+      type: EventType.NEGATIVE_ANSWER,
+      prospect: this.prospect,
+      pm: pm,
+      date: new Date,
+      description: EventDescriptionType.NEGATIVE_ANSWER
+    });
     this.prospectService.disable(this.prospect.id);
   }
 

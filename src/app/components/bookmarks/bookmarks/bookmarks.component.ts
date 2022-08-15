@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Event } from 'src/app/models/event.model';
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
@@ -19,7 +20,7 @@ export class BookmarksComponent implements OnInit {
     keyword: "",
     pseudo: ""
   };
-
+  events!: Event[];
   constructor(
     private readonly prospectsService: ProspectsService
   ) { }
@@ -65,6 +66,10 @@ export class BookmarksComponent implements OnInit {
   updateResearchParamsBookmark(newResearchParamsBookmark: ResearchParamsBookmarks) {
     this.researchParamsBookmark = newResearchParamsBookmark;
     this.updateProspects(this.researchParamsBookmark);
+  }
+
+  updateEvents(newEvents: Event[]) {
+    this.events = newEvents;
   }
 
 }

@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { MeetingType } from 'src/app/constants/meeting.type';
 import { Prospect } from 'src/app/models/prospect.model';
+import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
@@ -19,7 +22,8 @@ export class AddMeetingsDropdownComponent implements OnInit {
   
 
   constructor(
-    private meetingsService: MeetingsService
+    private readonly meetingsService: MeetingsService,
+    private readonly eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +60,14 @@ export class AddMeetingsDropdownComponent implements OnInit {
       done: false,
       prospect: this.prospect,
       pm: pm
+    });
+
+    this.eventsService.create({
+      type: EventType.ADD_MEETING,
+      prospect: this.prospect,
+      pm: pm,
+      date: new Date,
+      description: EventDescriptionType.ADD_MEETING
     });
     console.log("meeting created ! ATTENTION: current pm to implement");
   }

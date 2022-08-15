@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { Prospect } from 'src/app/models/prospect.model';
+import { EventsService } from 'src/app/services/events/events.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
@@ -17,7 +20,8 @@ export class AddReminderDropdownComponent implements OnInit {
   formDescription = new FormControl("");
 
   constructor(
-    private remindersService: RemindersService
+    private readonly remindersService: RemindersService,
+    private readonly eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +60,14 @@ export class AddReminderDropdownComponent implements OnInit {
       pm: pm,
       prospect: this.prospect
     });
+
+    this.eventsService.create({
+      type: EventType.ADD_REMINDER,
+      prospect: this.prospect,
+      pm: pm,
+      date: new Date,
+      description: EventDescriptionType.ADD_REMINDER
+    })
     console.log("Reminder created / ATTENTION: implement current pm")
   }
 }
