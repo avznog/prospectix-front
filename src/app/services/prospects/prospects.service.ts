@@ -92,4 +92,8 @@ export class ProspectsService {
     return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-bookmarks/${pseudoPm}`);
   }
 
+  disable(idProspect: number) : Subscription {
+    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/disable/${idProspect}`).subscribe();
+  }
+
 }

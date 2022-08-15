@@ -101,4 +101,8 @@ export class EachResearchProspectComponent implements OnInit {
     this.bookmarksService.deleteByProspect(this.prospect.id);
     console.log("removed from bookmarks");
   }
+
+  onClickRefus() {
+    this.prospectService.disable(this.prospect.id);
+  }
 }

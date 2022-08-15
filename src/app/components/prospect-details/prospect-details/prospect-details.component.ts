@@ -67,4 +67,8 @@ export class ProspectDetailsComponent implements OnInit {
     console.log("city changed")
     this.prospectsService.updateByCity(this.prospect.id, this.formControlCity.value);
   }
+
+  onClickRefus() {
+    this.prospectsService.disable(this.prospect.id);
+  }
 }
