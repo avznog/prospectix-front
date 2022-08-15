@@ -30,7 +30,6 @@ export class MeetingsResearchBlocComponent implements OnInit {
   }
 
   onEditKeyword() {
-    console.log(this.formKeyword.value)
     this.updateResearchParamsMeeting({
       ...this.researchParamsMeeting,
       keyword: this.formKeyword.value
@@ -38,7 +37,6 @@ export class MeetingsResearchBlocComponent implements OnInit {
   }
 
   onEditOldOrNew() {
-    console.log(this.formOldOrNew.value)
     this.updateResearchParamsMeeting({
       ...this.researchParamsMeeting,
       oldOrNew: this.formOldOrNew.value
@@ -46,7 +44,6 @@ export class MeetingsResearchBlocComponent implements OnInit {
   }
 
   onEditDone() {
-    console.log(this.formDone.value)
     this.updateResearchParamsMeeting({
       ...this.researchParamsMeeting,
       done: this.formDone.value
@@ -54,7 +51,6 @@ export class MeetingsResearchBlocComponent implements OnInit {
   }
 
   onEditType() {
-    console.log(this.formType.value)
     if(this.formType.value != "allTypes")
       this.updateResearchParamsMeeting({
         ...this.researchParamsMeeting,
@@ -68,11 +64,9 @@ export class MeetingsResearchBlocComponent implements OnInit {
   }
 
   onEditDateDown() {
-    console.log(this.formDateDown.value)
   }
 
   onEditDateUp() {
-    console.log(this.formDateUp.value)
   }
 
   updateResearchParamsMeeting(value: ResearchParamsMeeting) {

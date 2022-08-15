@@ -55,7 +55,6 @@ export class RemindersComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.reminders = data;
-          console.log(this.reminders)
         },
         error: (err) => {
           console.log(err)

@@ -31,7 +31,6 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditOrderByPriority() : void {
-    console.log(this.formOrderByPriority.value)
     this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
       orderByPriority: this.formOrderByPriority.value ? 'true' : 'false'
@@ -39,7 +38,6 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditPriority() : void {
-    console.log(this.formPriority.value)
     this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
       priority: this.formPriority.value
@@ -47,7 +45,6 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditDate() : void {
-    console.log(this.formDate.value)
     if(this.formDate.value != "")
       this.updateResearchParamsReminder({
         ...this.researchParamsReminder,
@@ -60,15 +57,12 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditDateDown() : void {
-    console.log(this.formDateDown.value)
   }
 
   onEditDateUp() : void {
-    console.log(this.formDateUp.value)
   }
 
   onEditDone() : void {
-    console.log(this.formDone.value)
     this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
       done: this.formDone.value
@@ -76,7 +70,6 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditOldOrNew() : void {
-    console.log(this.formOldOrNew.value)
     this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
       oldOrNew: this.formOldOrNew.value
@@ -84,7 +77,6 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditKeyword() : void {
-    console.log(this.formKeyword.value)
     this.updateResearchParamsReminder({
       ...this.researchParamsReminder,
       keyword: this.formKeyword.value

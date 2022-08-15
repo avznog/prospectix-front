@@ -24,7 +24,6 @@ export class UsersComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.users = data;
-          console.log(data)
         },
         error: (err) => {
           console.log(err)
@@ -51,7 +50,6 @@ export class UsersComponent implements OnInit {
     .subscribe({
       next: (data) => {
         this.users = data;
-        console.log(data)
       },
       error: (err) => {
         console.log(err)

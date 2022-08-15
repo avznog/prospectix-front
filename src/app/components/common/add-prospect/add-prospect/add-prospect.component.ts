@@ -76,7 +76,6 @@ export class AddProspectComponent implements OnInit {
       this.countriesService.findAll()
         .subscribe({
           next: (data) => {
-            console.log(data)
             this.countries = data;
           },
           error: (err) => {
@@ -142,8 +141,6 @@ export class AddProspectComponent implements OnInit {
   }
 
   onEditAddCountry() {
-    console.log(this.countries)
-    console.log("the country" + this.formAddCountry.value)
     this.countries.filter(country => country.name.toLowerCase() == this.formAddCountry.value.toLowerCase()).length == 0 ? this.addCountryDisabled = false : this.addCountryDisabled = true;
   }
 

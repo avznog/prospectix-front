@@ -72,11 +72,6 @@ export class ResearchBlocComponent implements OnInit {
   }
 
   updateResearchParamsProspect(value: ResearchParamsProspect) {
-    console.log(`PARAMS : 
-    activity : ${value.activity}
-    city : ${value.city}
-    keyword : ${value.keyword}
-    `)
     this.updateResearchParamsProspectEvent.emit(value);
   }
 

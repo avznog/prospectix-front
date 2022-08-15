@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
     this.goalsService.findAll()
       .subscribe({
         next: (data) => {
-          console.log(data)
           this.goals = data;
         },
         error: (err) => {

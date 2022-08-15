@@ -34,7 +34,6 @@ export class CreateGoalComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.projectManagers = data.filter(pm => !pm.disabled);
-          console.log(this.projectManagers);
         },
         error: (err) => {
           console.log(err);
@@ -43,7 +42,6 @@ export class CreateGoalComponent implements OnInit {
   }
 
   createGoal() {
-    console.log(this.createGoalForm.value);
     this.goalsService.createForPm(this.createGoalForm.value, this.pmSelected.pseudo);
   }
 

@@ -19,7 +19,6 @@ export class GoalsComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.goals = data.sort((a: Goal, b: Goal) => (a.id - b.id));
-          console.log(data)
         },
         error: (err) => {
           console.log(err)
