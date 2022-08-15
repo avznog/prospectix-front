@@ -76,4 +76,8 @@ export class EachBookmarkComponent implements OnInit {
     this.bookmarksService.deleteByProspect(this.prospect.id);
   }
 
+  onClickRefus() {
+    this.prospectService.disable(this.prospect.id);
+  }
+
 }
