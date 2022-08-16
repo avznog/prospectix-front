@@ -1,6 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +25,10 @@ import { HeaderComponent } from './components/common/header/header.component';
 import { EachProspectChangeParameterComponent } from './components/common/each-prospect-change-parameter/each-prospect-change-parameter.component';
 import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
+import { JwtInterceptorInterceptor } from './auth/jwt-interceptor.interceptor';
+import { ErrorInterceptor } from './auth/error.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './auth/login/login.component';
 import { AddReminderDropdownComponent } from './components/common/add-reminder-dropdown/add-reminder-dropdown.component';
 import { AddMeetingsDropdownComponent } from './components/common/add-meetings-dropdown/add-meetings-dropdown.component';
 import { RowEditComponent } from './components/prospect-details/row-edit/row-edit.component';
@@ -65,6 +68,7 @@ import { ThemePickerComponent } from './components/common/theme-picker/theme-pic
     EachProspectChangeParameterComponent,
     DashboardListeGoalsComponent,
     DashboardEachGoalComponent,
+    LoginComponent,
     AddReminderDropdownComponent,
     AddMeetingsDropdownComponent,
     RowEditComponent,
@@ -84,8 +88,12 @@ import { ThemePickerComponent } from './components/common/theme-picker/theme-pic
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ]
 })
 export class AppModule { }
