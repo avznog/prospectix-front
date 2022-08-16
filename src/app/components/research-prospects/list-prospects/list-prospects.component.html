@@ -1,5 +1,5 @@
 <div *ngFor="let prospect of prospects" >
-  <app-each-research-prospect [prospect]="prospect"></app-each-research-prospect>
+  <app-each-research-prospect [prospect]="prospect" [events]="events" (updateEventsEvent)="eventsUpdated($event)"></app-each-research-prospect>
   <br/>
 </div>
 <div *ngIf="prospects && prospects.length <= 0">

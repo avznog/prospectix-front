@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Bookmark } from 'src/app/models/bookmark.model';
+import { Event } from 'src/app/models/event.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 
@@ -9,7 +10,8 @@ import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
   styleUrls: ['./liste-bookmarks.component.scss']
 })
 export class ListeBookmarksComponent implements OnInit {
-
+  @Input() events!: Event[];
+  @Output() updateEventsEvent = new EventEmitter<Event[]>();
   @Input() prospects!: Prospect[];
   bookmarks!: Bookmark[];
   constructor(
@@ -28,4 +30,7 @@ export class ListeBookmarksComponent implements OnInit {
     });
   }
 
+  eventsUpdated(value: Event[]) {
+    this.updateEventsEvent.emit(value);
+  }
 }

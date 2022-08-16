@@ -1,10 +1,21 @@
 <app-header></app-header>
+<div class="drawer drawer-end">
 <h1 class="ml-6 text-xl mb-5">Prospects favoris de {{ researchParamsBookmark.pseudo == "" ? 'tous les chefs de projets': researchParamsBookmark.pseudo}}</h1>
+<input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
+<div class="drawer-content">
 <app-bookmarks-research-bloc [researchParamsBookmark]="researchParamsBookmark" (updateResearchParamsBookmarkEvent)="updateResearchParamsBookmark($event)"></app-bookmarks-research-bloc>
-<app-liste-bookmarks [prospects]="prospects"></app-liste-bookmarks>
+<app-liste-bookmarks [prospects]="prospects" [events]="events" (updateEventsEvent)="updateEvents($event)"></app-liste-bookmarks>
 <div class="divider" ></div>
   <div class="btn-group flex justify-center">
     <button class="btn btn-outline btn-ghost {{researchParamsBookmark.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
     <button class="btn btn-outline btn-ghost">Page {{researchParamsBookmark.skip / 2 }}</button>
     <button class="btn btn-outline btn-ghost {{prospects && prospects.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
+</div>
+<div class="drawer-side">
+  <label for="drawer-prospect-history" class="drawer-overlay"></label>
+  <div class="menu p-4 overflow-y-auto w-100 bg-base-100 text-base-content">
+    <app-prospect-history [events]="events"></app-prospect-history>
+  </div>
+</div>
+</div>

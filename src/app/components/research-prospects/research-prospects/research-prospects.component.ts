@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model'
+import { Event } from 'src/app/models/event.model';
 
 @Component({
   selector: 'app-research-prospects',
@@ -11,6 +12,7 @@ import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.
 export class ResearchProspectsComponent implements OnInit {
   prospects!: Prospect[];
   researchParamsProspect : ResearchParamsProspect = { skip: 0 };
+  events!: Event[];
   constructor(
     private readonly prospectsService: ProspectsService
   ) { }
@@ -57,5 +59,8 @@ export class ResearchProspectsComponent implements OnInit {
     this.researchParamsProspect = newParams;
     this.updateProspects(this.researchParamsProspect);
   }
-  
+
+  updateEvents(newEvents: Event[]) {
+    this.events = newEvents;
+  }
 }
