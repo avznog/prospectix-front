@@ -20,5 +20,4 @@ export interface ProjectManager {
   sentEmails: SentEmail[];
   bookmarks: Bookmark[];
   events: Event[];
-  token?: string;
 }
