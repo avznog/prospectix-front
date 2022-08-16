@@ -5,6 +5,7 @@
   ((event.type == 'ADD_BOOKMARKS' || event.type == 'DELETE_BOOKMARKS') && '★') || 
   (event.type == 'CREATION' && '☼') || 
   ((event.type == 'ADD_REMINDER' || event.type == 'ADD_BOOKMARKS' || event.type == 'ADD_MEETING') && '➕') || 
+  ((event.type == 'DELETE_REMINDER' || event.type == 'DELETE_MEETING') && 'X') ||
   ((event.type == 'DONE_REMINDER' || event.type == 'DONE_MEETING') && '✓') || 
   (event.type == 'NO_ANSWER' && '...') ||
   (event.type == 'NEGATIVE_ANSWER' && 'x') "

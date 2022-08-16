@@ -81,11 +81,11 @@ export class EachReminderComponent implements OnInit {
       "events": []
     };
     this.eventsService.create({
-      type: EventType.DELETE_REMINDER,
+      type: EventType.DONE_REMINDER,
       prospect: this.reminder.prospect,
       pm: pm,
       date: new Date,
-      description: EventDescriptionType.DELETE_REMINDER
+      description: EventDescriptionType.DONE_REMINDER
     });
     return this.remindersService.markDone(this.reminder.id);
   }

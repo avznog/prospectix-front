@@ -68,6 +68,35 @@ export class EachResearchProspectComponent implements OnInit {
 
   onChangeNbNo() {
       this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
+      let pm = {
+        "id": 1,
+        "pseudo": "bgonzva",
+        "admin": true,
+        "name": "Gonzva",
+        "firstname": "Benjamin",
+        "mail": "bgonzva@juniorisep.com",
+        "tokenEmail": "",
+        "disabled": false,
+        "goals": [
+           
+        ],
+        "meetings": [
+            
+        ],
+        "reminders": [
+           
+        ],
+        "sentEmails": [],
+        "bookmarks": [],
+        "events": []
+      };
+      this.eventsService.create({
+        type: EventType.NO_ANSWER,
+        prospect: this.prospect,
+        pm: pm,
+        date: new Date,
+        description: EventDescriptionType.NO_ANSWER
+      });
   }
 
   onCreateBookmark() {
