@@ -16,14 +16,14 @@ export class BookmarksService {
   ) { }
 
   create(createBookmarkDto: CreateBookmarkDto) : Subscription {
-    return this.http.post<Bookmark>(`http://localhost:3000/bookmarks`, createBookmarkDto).subscribe();
+    return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe();
   }
 
   deleteByProspect(prospectId: number) : Subscription {
-    return this.http.delete<Bookmark>(`http://localhost:3000/bookmarks/by-prospect/${prospectId}`).subscribe();
+    return this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe();
   }
 
   findAll() : Observable<Bookmark[]> {
-    return this.http.get<Bookmark[]>(`http://localhost:3000/bookmarks`);
+    return this.http.get<Bookmark[]>(`bookmarks`);
   }
 }

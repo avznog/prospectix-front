@@ -15,27 +15,27 @@ export class MeetingsService {
   ) { }
 
   findAll() : Observable<Meeting[]> {
-    return this.http.get<Meeting[]>(`http://localhost:3000/meetings`);
+    return this.http.get<Meeting[]>(`meetings`);
   }
 
   deleteMeeting(idMeeting: number) : Subscription {
-    return this.http.delete<Meeting>(`http://localhost:3000/meetings/delete/${idMeeting}`).subscribe();
+    return this.http.delete<Meeting>(`meetings/delete/${idMeeting}`).subscribe();
   }
 
   markDone(idMeeting : number) : Subscription {
-    return this.http.get<Meeting>(`http://localhost:3000/meetings/mark-done/${idMeeting}`).subscribe();
+    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe();
   }
 
   markUndone(idMeeting: number) : Subscription {
-    return this.http.get<Meeting>(`http://localhost:3000/meetings/mark-undone/${idMeeting}`).subscribe();
+    return this.http.get<Meeting>(`meetings/mark-undone/${idMeeting}`).subscribe();
   }
 
   create(createMeetingDto: CreateMeetingDto) : Subscription {
-    return this.http.post<Meeting>(`http://localhost:3000/meetings`, createMeetingDto).subscribe();
+    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe();
   }
 
   findAllByProspect(idProspect: number) : Observable<Meeting[]> {
-    return this.http.get<Meeting[]>(`http://localhost:3000/meetings/by-prospect/${idProspect}`);
+    return this.http.get<Meeting[]>(`meetings/by-prospect/${idProspect}`);
   }
 
   findAllPaginated(researchParamsMeeting: ResearchParamsMeeting) : Observable<Meeting[]> {
@@ -55,6 +55,6 @@ export class MeetingsService {
     queryParameters = queryParameters.append("keyword", researchParamsMeeting.keyword)
     queryParameters = queryParameters.append("take",2)
 
-    return this.http.get<Meeting[]>(`http://localhost:3000/meetings/find-all-paginated`, { params: queryParameters });
+    return this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters });
   }
 }

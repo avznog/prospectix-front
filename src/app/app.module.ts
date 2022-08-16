@@ -41,6 +41,10 @@ import { EachMeetingComponent } from './components/meetings/each-meeting/each-me
 import { ListeBookmarksComponent } from './components/bookmarks/liste-bookmarks/liste-bookmarks.component';
 import { EachBookmarkComponent } from './components/bookmarks/each-bookmark/each-bookmark.component';
 import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks-research-bloc/bookmarks-research-bloc.component';
+import { environment } from 'src/environments/environment';
+import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
+import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
+import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
 
 @NgModule({
   declarations: [
@@ -88,8 +92,16 @@ import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks
   ],
   bootstrap: [AppComponent],
   providers: [
+
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    { provide: "BASE_API_URL", useValue: environment.apiUrl },
+    { provide: "DEFAULT_TIMEOUT", useValue: 30_000 },
+
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
   ]
 })
 export class AppModule { }

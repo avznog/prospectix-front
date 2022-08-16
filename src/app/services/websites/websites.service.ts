@@ -13,6 +13,6 @@ export class WebsitesService {
   ) { }
 
   updateWebsite(idWebsite: number, website: { website: string }) : Subscription {
-    return this.http.patch<Website>(`http://localhost:3000/websites/${idWebsite}`, website).subscribe();
+    return this.http.patch<Website>(`websites/${idWebsite}`, website).subscribe();
   }
 }

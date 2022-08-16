@@ -14,6 +14,6 @@ export class ProjectManagersService {
   ) { }
 
   findAll() : Observable<ProjectManager[]> {
-    return this.http.get<ProjectManager[]>("http://localhost:3000/project-managers/findAll");
+    return this.http.get<ProjectManager[]>("project-managers/findAll");
   }
 }

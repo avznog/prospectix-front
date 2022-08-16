@@ -14,28 +14,28 @@ export class GoalsService {
   ) { }
 
   findAll() : Observable<Goal[]> {
-    return this.http.get<Goal[]>("http://localhost:3000/goals");
+    return this.http.get<Goal[]>("goals");
   }
 
   findAllByCurrentPm() : Observable<Goal[]> {
-    return this.http.get<Goal[]>("http://localhost:3000/goals/by-current-pm");
+    return this.http.get<Goal[]>("goals/by-current-pm");
   }
 
   createForPm(createGoalDto: CreateGoalDto, pseudoPm: string) : Subscription {
     createGoalDto.currentStep = 0;
-    return this.http.post<Goal>(`http://localhost:3000/goals/for-pm/${pseudoPm}`, createGoalDto).subscribe();
+    return this.http.post<Goal>(`goals/for-pm/${pseudoPm}`, createGoalDto).subscribe();
   }
 
   createForCurrentPm(createGoalDto: CreateGoalDto) : Subscription {
     createGoalDto.currentStep = 0;
-    return this.http.post<Goal>("http://localhost:3000/goals/for-current-pm", createGoalDto).subscribe();
+    return this.http.post<Goal>("goals/for-current-pm", createGoalDto).subscribe();
   }
 
   editGoal(goal: Goal) : Subscription {
-    return this.http.patch<Goal>(`http://localhost:3000/goals/${goal.id}`, goal).subscribe();
+    return this.http.patch<Goal>(`goals/${goal.id}`, goal).subscribe();
   }
 
   deleteGoal(id: number) : Subscription {
-    return this.http.delete<Goal>(`http://localhost:3000/goals/${id}`).subscribe();
+    return this.http.delete<Goal>(`goals/${id}`).subscribe();
   }
 }

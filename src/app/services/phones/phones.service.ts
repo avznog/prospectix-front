@@ -13,6 +13,6 @@ export class PhonesService {
   ) { }
 
   updatePhoneNumber(idPhone: number, updatePhoneDto: {number: string}) : Subscription {
-    return this.http.patch<Phone>(`http://localhost:3000/phones/${idPhone}`, updatePhoneDto).subscribe();
+    return this.http.patch<Phone>(`phones/${idPhone}`, updatePhoneDto).subscribe();
   }
 }

@@ -8,18 +8,20 @@ import { MeetingsComponent } from './components/meetings/meetings/meetings.compo
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
 import { UsersComponent } from './components/users/users/users.component';
+import { LoggedGuard } from './guards/logged.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  { path:"", component: DashboardComponent },
-  { path:"dashboard", component: DashboardComponent },
-  { path:"users", component: UsersComponent },
-  { path:"reminders", component: RemindersComponent },
-  { path:"meetings", component: MeetingsComponent },
-  { path:"prospects", component: ResearchProspectsComponent },
-  { path:"goals", component: GoalsComponent },
-  { path: "bookmarks", component: BookmarksComponent },
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent, children: [], canActivate: [LoginGuard] },
+  { path:"dashboard", component: DashboardComponent, canActivate: [LoggedGuard] },
+  { path:"users", component: UsersComponent, canActivate: [LoggedGuard] },
+  { path:"reminders", component: RemindersComponent, canActivate: [LoggedGuard] },
+  { path:"meetings", component: MeetingsComponent, canActivate: [LoggedGuard] },
+  { path:"prospects", component: ResearchProspectsComponent, canActivate: [LoggedGuard] },
+  { path:"goals", component: GoalsComponent, canActivate: [LoggedGuard] },
+  { path: "bookmarks", component: BookmarksComponent, canActivate: [LoggedGuard] },
+  { path:"", pathMatch: "full", redirectTo: "dashboard" },
+  { path: "**", pathMatch: "full", redirectTo: "dashboard"},
 ];
 
 @NgModule({
