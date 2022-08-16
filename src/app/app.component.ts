@@ -16,9 +16,12 @@ export class AppComponent {
     this.subscription = this.dataThemeService.getData()
       .subscribe(x => {
         console.log(x)
+        localStorage.setItem("theme", x)
         this.dataTheme = x
       });
   }
   ngOnInit() {
+    console.log(localStorage.getItem("theme"))
+    this.dataThemeService.sendData(localStorage.getItem("theme") || "")
   }
 }
