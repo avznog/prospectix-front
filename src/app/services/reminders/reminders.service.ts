@@ -15,27 +15,27 @@ export class RemindersService {
   ) { }
 
   findAll() : Observable<Reminder[]> {
-    return this.http.get<Reminder[]>(`http://localhost:3000/reminders`);
+    return this.http.get<Reminder[]>(`reminders`);
   }
 
   deleteReminder(idReminder: number) : Subscription {
-    return this.http.delete<Reminder>(`http://localhost:3000/reminders/delete/${idReminder}`).subscribe();
+    return this.http.delete<Reminder>(`reminders/delete/${idReminder}`).subscribe();
   }
 
   markDone(idReminder: number) : Subscription {
-    return this.http.get<Reminder>(`http://localhost:3000/reminders/mark-done/${idReminder}`).subscribe();
+    return this.http.get<Reminder>(`reminders/mark-done/${idReminder}`).subscribe();
   }
 
   markUndone(idReminder: number) : Subscription {
-    return this.http.get<Reminder>(`http://localhost:3000/reminders/mark-undone/${idReminder}`).subscribe();
+    return this.http.get<Reminder>(`reminders/mark-undone/${idReminder}`).subscribe();
   }
 
   create(createReminderDto: CreateReminderDto) : Subscription {
-    return this.http.post<Reminder>(`http://localhost:3000/reminders`, createReminderDto).subscribe();
+    return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe();
   }
 
   findAllByProspect(idProspect: number) : Observable<Reminder[]> {
-    return this.http.get<Reminder[]>(`http://localhost:3000/reminders/by-prospect/${idProspect}`);
+    return this.http.get<Reminder[]>(`reminders/by-prospect/${idProspect}`);
   }
 
   findAllPaginated(researchParamsReminder: ResearchParamsReminder) : Observable<Reminder[]> {
@@ -57,7 +57,7 @@ export class RemindersService {
     queryParameters = queryParameters.append("keyword",researchParamsReminder.keyword)
     queryParameters = queryParameters.append("take", 2);
     
-    return this.http.get<Reminder[]>(`http://localhost:3000/reminders/find-all-paginated`, { params: queryParameters });
+    return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters });
   }
 
 }

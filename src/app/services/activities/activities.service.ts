@@ -13,6 +13,6 @@ export class ActivitiesService {
   ) { }
 
   findAll() : Observable<Activity[]> {
-    return this.http.get<Activity[]>("http://localhost:3000/activities");
+    return this.http.get<Activity[]>("activities");
   }
 }

@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { DataThemeService } from './services/common/data-theme.service';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-import { ProjectManager } from './models/project-manager.model';
 
 @Component({
   selector: 'app-root',
@@ -15,20 +14,21 @@ export class AppComponent {
   dataTheme!: string;
   subscription!: Subscription;
   mainTheme!: string;
-  currentUser!: ProjectManager;
   constructor(
     private router: Router,
-    private authService: AuthService,
+    public authService: AuthService,
     private readonly dataThemeService: DataThemeService
-    ) {
-      this.authService.currentUser.subscribe(x => this.currentUser = x)
-      this.subscription = this.dataThemeService.getData()
+  ) { 
+    this.subscription = this.dataThemeService.getData()
       .subscribe(x => {
         console.log(x)
         localStorage.setItem("theme", x)
         this.dataTheme = x
       });
-    }
+  }
+
+  
+
   ngOnInit() {
     console.log(localStorage.getItem("theme"))
     this.dataThemeService.sendData(localStorage.getItem("theme") || "")
@@ -36,7 +36,5 @@ export class AppComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(["/login"]);
-    // this.router.navigateByUrl("http://localhost:4200/login");
   }
 }

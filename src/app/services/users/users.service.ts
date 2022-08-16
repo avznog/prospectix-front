@@ -13,23 +13,23 @@ export class UsersService {
   ) { }
 
   findAll() : Observable<ProjectManager[]> {
-    return this.http.get<ProjectManager[]>("http://localhost:3000/project-managers/findAll");
+    return this.http.get<ProjectManager[]>("project-managers/findAll");
   }
 
   create(user: ProjectManager) : Subscription{
-    return this.http.post<ProjectManager>("http://localhost:3000/project-managers/", user).subscribe();
+    return this.http.post<ProjectManager>("project-managers/", user).subscribe();
   }
 
   delete(id: number) : Subscription {
-    return this.http.patch<ProjectManager>(`http://localhost:3000/project-managers/disable/${id}`, { disabled: true }).subscribe();
+    return this.http.patch<ProjectManager>(`project-managers/disable/${id}`, { disabled: true }).subscribe();
   }
 
   enable(id: number) : Subscription {
-    return this.http.patch<ProjectManager>(`http://localhost:3000/project-managers/enable/${id}`, { disable: false }).subscribe();
+    return this.http.patch<ProjectManager>(`project-managers/enable/${id}`, { disable: false }).subscribe();
   }
 
   changeAdmin(id: number,admin: boolean) : Subscription {
-    return this.http.patch<ProjectManager>(`http://localhost:3000/project-managers/${id}`, {admin}).subscribe();
+    return this.http.patch<ProjectManager>(`project-managers/${id}`, {admin}).subscribe();
   }
 
   findAllPaginated(researchParamsUsers: ResearchParamsUsers) : Observable<ProjectManager[]> {
@@ -38,6 +38,6 @@ export class UsersService {
     queryParameters = queryParameters.append("take", researchParamsUsers.take);
     queryParameters = queryParameters.append("skip", researchParamsUsers.skip);
 
-    return this.http.get<ProjectManager[]>(`http://localhost:3000/project-managers/find-all-paginated`, { params: queryParameters});
+    return this.http.get<ProjectManager[]>(`project-managers/find-all-paginated`, { params: queryParameters});
   }
 }

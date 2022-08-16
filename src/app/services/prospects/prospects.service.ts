@@ -18,31 +18,31 @@ export class ProspectsService {
   ) { }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
-    return this.http.post<Prospect>(`http://localhost:3000/prospects/create`, createProspectDto).subscribe();
+    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe();
   }
 
   update(idProspect: number, updateProspectDto: UpdateProspectDto) : Subscription {
-    return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, updateProspectDto).subscribe();
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, updateProspectDto).subscribe();
   }
 
   updateComment(idProspect: number, comment: { comment: string }) : Subscription {
-    return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, comment).subscribe();
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, comment).subscribe();
   }
 
   updateNbNo(idProspect: number, nbNo: { nbNo: number }) : Subscription {
-    return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, nbNo).subscribe();
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, nbNo).subscribe();
   }
 
   updateIsBookmarked(idProspect: number, isBookmarked: { isBookmarked: boolean }) : Subscription {
-    return this.http.patch<Prospect>(`http://localhost:3000/prospects/${idProspect}`, isBookmarked).subscribe();
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, isBookmarked).subscribe();
   }
 
   updateByCity(idProspect: number, cityName: string) : Subscription {
-    return this.http.get<Prospect>(`http://localhost:3000/prospects/by-city/${idProspect}/${cityName}`).subscribe();
+    return this.http.get<Prospect>(`prospects/by-city/${idProspect}/${cityName}`).subscribe();
   }
 
   updateByActivity(idProspect: number, activityName: string) : Subscription {
-    return this.http.get<Prospect>(`http://localhost:3000/prospects/by-activity/${idProspect}/${activityName}`).subscribe();
+    return this.http.get<Prospect>(`prospects/by-activity/${idProspect}/${activityName}`).subscribe();
   }
 
   findAllPaginated(researchParams: ResearchParamsProspect) : Observable<Prospect[]> {
@@ -63,7 +63,7 @@ export class ProspectsService {
       
       queryParameters = queryParameters.append("take", 2);
 
-      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-paginated/`, { params: queryParameters});
+      return this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters});
   }
 
   findAllBookmarksPaginated(researchParams: ResearchParamsBookmarks) : Observable<Prospect[]> {
@@ -81,19 +81,19 @@ export class ProspectsService {
       queryParameters = queryParameters.append("pseudo", researchParams.pseudo)
       queryParameters = queryParameters.append("take", 2);
 
-      return this.http.get<Prospect[]>(`http://localhost:3000/prospects/find-all-bookmarks-paginated`, { params: queryParameters });
+      return this.http.get<Prospect[]>(`prospects/find-all-bookmarks-paginated`, { params: queryParameters });
   }
 
   findAllByKeyword(keyword: string) : Observable<Prospect[]> {
-    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-keywords/${keyword}`);
+    return this.http.get<Prospect[]>(`prospects/by-keywords/${keyword}`);
   }
 
   findAllByBookmarks(pseudoPm: string) : Observable<Prospect[]> {
-    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/by-bookmarks/${pseudoPm}`);
+    return this.http.get<Prospect[]>(`prospects/by-bookmarks/${pseudoPm}`);
   }
 
   disable(idProspect: number) : Subscription {
-    return this.http.get<Prospect[]>(`http://localhost:3000/prospects/disable/${idProspect}`).subscribe();
+    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe();
   }
 
 }

@@ -13,6 +13,6 @@ export class CitiesService {
   ) { }
 
   findAll() : Observable<City[]> {
-    return this.http.get<City[]>("http://localhost:3000/cities");
+    return this.http.get<City[]>("cities");
   }
 }

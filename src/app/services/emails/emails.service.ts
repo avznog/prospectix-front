@@ -13,6 +13,6 @@ export class EmailsService {
   ) { }
 
   updateEmail(idEmail: number, email: { email: string }) : Subscription {
-    return this.http.patch<Email>(`http://localhost:3000/emails/${idEmail}`, email).subscribe();
+    return this.http.patch<Email>(`emails/${idEmail}`, email).subscribe();
   }
 }

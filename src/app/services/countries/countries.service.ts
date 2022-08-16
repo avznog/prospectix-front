@@ -13,6 +13,6 @@ export class CountriesService {
   ) { }
 
   findAll() : Observable<Country[]> {
-    return this.http.get<Country[]>("http://localhost:3000/countries");
+    return this.http.get<Country[]>("countries");
   }
 }
