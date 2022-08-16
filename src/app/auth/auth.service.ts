@@ -55,23 +55,27 @@ export class AuthService {
     try{
       return !!(await this.getAccessToken())?.length
     }catch(e){
-      console.log("error", e)
       return false
     }
   }
 
-  login(username: string, password: string) {
-    return this.http.post<LoginResponseDTO>("auth/login", {username, password})
-      .pipe(map(response =>{
-        console.log("done", response.accessToken)
-        this.setLoggedIn()
-        return this.accessToken = response.accessToken
-      }))
+  async login(username: string, password: string) {
+    const response = await lastValueFrom(this.http.post<LoginResponseDTO>("auth/login", {username, password}))
+    this.accessToken = response.accessToken
+    await this.setLoggedIn()
+    return this.accessToken
   }
 
-  setLoggedIn(){
+  async setLoggedIn(){
     this.loggedInSubject.next(true)
     localStorage.setItem("loggedIn", "true")
+
+    if(!this.currentUserSubject.value)
+      await this.refreshUser()
+  }
+  async refreshUser() {
+    this.currentUserSubject.next(await lastValueFrom(this.http.get<ProjectManager>("project-managers/me")))
+    localStorage.setItem("currentUser", JSON.stringify(this.currentUserSubject.value))
   }
 
   logout() {
@@ -81,11 +85,10 @@ export class AuthService {
     this.loggedInSubject.next(false);
     this.currentUserSubject.next({} as ProjectManager);
     this.http.get("auth/logout").subscribe();
-    console.log("logout");
   }
 
   async refresh() {
     this.accessToken = (await lastValueFrom(this.http.get<{ accessToken: string }>("auth/refresh")))?.accessToken
-    this.setLoggedIn()
+    await this.setLoggedIn()
   }
 }

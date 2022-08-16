@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -42,7 +41,7 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    onSubmit() {
+    async onSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
@@ -51,17 +50,12 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authService.login(this.loginForm.value["username"], this.loginForm.value["password"])
-            .pipe(first())
-            .subscribe({
-                next: data => {
-                    console.log("logggggg", this.returnUrl)
-                    this.router.navigate([this.returnUrl]);
-                },
-                error: error => {
-                    this.error = error;
-                    this.loading = false;
-                }
-            });
+        try{
+            await this.authService.login(this.loginForm.value["username"], this.loginForm.value["password"])
+            this.router.navigate([this.returnUrl]);
+        }catch(e){
+            this.error = e as string;
+            this.loading = false;
+        }
     }
 }
