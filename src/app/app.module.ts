@@ -25,8 +25,7 @@ import { HeaderComponent } from './components/common/header/header.component';
 import { EachProspectChangeParameterComponent } from './components/common/each-prospect-change-parameter/each-prospect-change-parameter.component';
 import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
-import { JwtInterceptorInterceptor } from './auth/jwt-interceptor.interceptor';
-import { ErrorInterceptor } from './auth/error.interceptor';
+import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { AddReminderDropdownComponent } from './components/common/add-reminder-dropdown/add-reminder-dropdown.component';
@@ -45,6 +44,7 @@ import { environment } from 'src/environments/environment';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [

@@ -10,9 +10,9 @@ import LoginResponseDTO from './dto/login-response.dto';
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<ProjectManager>;
-  public loggedInSubject: BehaviorSubject<boolean>;
-  public currentUser: Observable<ProjectManager>;
+  public readonly currentUserSubject: BehaviorSubject<ProjectManager>;
+  public readonly loggedInSubject: BehaviorSubject<boolean>;
+  public readonly currentUser: Observable<ProjectManager>;
   private accessToken?: string;
 
   constructor(
@@ -21,10 +21,6 @@ export class AuthService {
     this.currentUserSubject = new BehaviorSubject<ProjectManager>(JSON.parse(localStorage.getItem("currentUser")!));
     this.loggedInSubject = new BehaviorSubject(localStorage.getItem("loggedIn") == "true");
     this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  public getCurrentUser(): ProjectManager {
-    return this.currentUserSubject.value;
   }
 
   private tokenWaiter?: Promise<string>
