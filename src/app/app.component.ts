@@ -26,9 +26,7 @@ export class AppComponent {
         this.dataTheme = x
       });
   }
-
   
-
   ngOnInit() {
     console.log(localStorage.getItem("theme"))
     this.dataThemeService.sendData(localStorage.getItem("theme") || "")
