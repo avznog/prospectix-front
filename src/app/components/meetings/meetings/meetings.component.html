@@ -4,7 +4,7 @@
 <app-meetings-liste></app-meetings-liste>
 <div class="divider" ></div>
 <div class="btn-group flex justify-center">
-  <button class="btn btn-outline btn-ghost {{this.meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{this.meetingsService.researchParamsMeeting.skip / 2}}</button>
-  <button class="btn btn-outline btn-ghost {{this.meetingsService.meetings && this.meetingsService.meetings.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+  <button class="btn btn-outline btn-ghost {{meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
+  <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 2}}</button>
+  <button class="btn btn-outline btn-ghost {{meetingsService.meetings && meetingsService.meetings.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
 </div>

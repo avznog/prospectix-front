@@ -1,10 +1,10 @@
 <app-header></app-header>
 <h1 class="ml-6 text-xl mb-5">Rappels</h1>
-<app-reminders-research-bloc [researchParamsReminder]="researchParamsReminder" (updateResearchParamsReminderEvent)="updateResearchParamsReminder($event)"></app-reminders-research-bloc>
-<app-reminders-liste-prospect [reminders]="reminders"></app-reminders-liste-prospect>
+<app-reminders-research-bloc></app-reminders-research-bloc>
+<app-reminders-liste-prospect ></app-reminders-liste-prospect>
 <div class="divider" ></div>
   <div class="btn-group flex justify-center">
-    <button class="btn btn-outline btn-ghost {{researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-    <button class="btn btn-outline btn-ghost">Page {{researchParamsReminder.skip! / 2}}</button>
-    <button class="btn btn-outline btn-ghost {{reminders && reminders.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+    <button class="btn btn-outline btn-ghost {{remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{remindersService.researchParamsReminder.skip / 2}}</button>
+    <button class="btn btn-outline btn-ghost {{remindersService.reminders && remindersService.reminders.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>

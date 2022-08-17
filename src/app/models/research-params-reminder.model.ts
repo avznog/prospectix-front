@@ -1,6 +1,6 @@
 export interface ResearchParamsReminder {
     take?: number;
-    skip?: number;
+    skip: number;
     priority?: string;
     orderByPriority?: string;
     done: string;

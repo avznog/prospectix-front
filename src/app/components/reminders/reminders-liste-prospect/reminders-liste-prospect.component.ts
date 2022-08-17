@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Prospect } from 'src/app/models/prospect.model';
-import { Reminder } from 'src/app/models/reminder.model';
+import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
   selector: 'app-reminders-liste-prospect',
@@ -8,8 +7,9 @@ import { Reminder } from 'src/app/models/reminder.model';
   styleUrls: ['./reminders-liste-prospect.component.scss']
 })
 export class RemindersListeProspectComponent implements OnInit {
-  @Input() reminders!: Reminder[];
-  constructor() { }
+  constructor(
+    public remindersService: RemindersService
+  ) { }
 
   ngOnInit(): void {
   }

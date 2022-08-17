@@ -1,11 +1,11 @@
-<div *ngFor="let reminder of reminders">
-    <app-each-reminder [reminder]="reminder"></app-each-reminder>
+<div *ngFor="let reminder of remindersService.reminders | keyvalue | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 2">
+    <app-each-reminder [reminder]="reminder.value"></app-each-reminder>
     <br />
 </div>
 
-<div *ngIf="reminders && reminders.length <= 0">
-    <div class="alert alert-error card">
-      <div class="radial-progress" style="--value:100;">100%</div>
-      <div class="label">Vous avez épuisé tous les rappels de la base !!</div>
-    </div>
+<div *ngIf="remindersService.reminders && remindersService.reminders.size <= 0">
+  <div class="alert alert-error card">
+    <div class="radial-progress" style="--value:100;">100%</div>
+    <div class="label">Vous avez épuisé tous les rappels de la base !!</div>
   </div>
+</div>

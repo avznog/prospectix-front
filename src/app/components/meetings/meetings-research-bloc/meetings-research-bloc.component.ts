@@ -27,10 +27,12 @@ export class MeetingsResearchBlocComponent implements OnInit {
   }
 
   onEditKeyword() {
-    this.meetingsService.resetSearch({
-      ...this.meetingsService.researchParamsMeeting,
-      keyword: this.formKeyword.value
-    });
+    setTimeout(() => {
+      this.meetingsService.resetSearch({
+        ...this.meetingsService.researchParamsMeeting,
+        keyword: this.formKeyword.value
+      });
+    }, 200);
   }
 
   onEditOldOrNew() {

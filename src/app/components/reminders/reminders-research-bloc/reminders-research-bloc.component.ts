@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.model';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
@@ -10,10 +9,6 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
   styleUrls: ['./reminders-research-bloc.component.scss']
 })
 export class RemindersResearchBlocComponent implements OnInit {
-
-  @Input() researchParamsReminder!: ResearchParamsReminder;
-
-  @Output() updateResearchParamsReminderEvent = new EventEmitter<ResearchParamsReminder>();
   
   formKeyword = new FormControl("");
   formOldOrNew = new FormControl("new");
@@ -25,35 +20,31 @@ export class RemindersResearchBlocComponent implements OnInit {
   formDateUp = new FormControl(Date);
 
   constructor(
+    private remindersService: RemindersService
   ) { }
 
   ngOnInit(): void {
   }
 
   onEditOrderByPriority() : void {
-    this.updateResearchParamsReminder({
-      ...this.researchParamsReminder,
+    this.remindersService.resetSearch({
+      ...this.remindersService.researchParamsReminder,
       orderByPriority: this.formOrderByPriority.value ? 'true' : 'false'
     });
   }
 
   onEditPriority() : void {
-    this.updateResearchParamsReminder({
-      ...this.researchParamsReminder,
+    this.remindersService.resetSearch({
+      ...this.remindersService.researchParamsReminder,
       priority: this.formPriority.value
     });
   }
 
   onEditDate() : void {
-    if(this.formDate.value != "")
-      this.updateResearchParamsReminder({
-        ...this.researchParamsReminder,
-        date: `${this.formDate.value}T22:00:00.000Z`
-      });
-    else this.updateResearchParamsReminder({
-      ...this.researchParamsReminder,
-      date: ""
-    });
+    this.remindersService.resetSearch({
+      ...this.remindersService.researchParamsReminder,
+      date: this.formDate.value!= "" ? `${this.formDate.value}T22:00:00:000Z` : ""
+    })
   }
 
   onEditDateDown() : void {
@@ -63,28 +54,25 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditDone() : void {
-    this.updateResearchParamsReminder({
-      ...this.researchParamsReminder,
+    this.remindersService.resetSearch({
+      ...this.remindersService.researchParamsReminder,
       done: this.formDone.value
     })
   }
 
   onEditOldOrNew() : void {
-    this.updateResearchParamsReminder({
-      ...this.researchParamsReminder,
+    this.remindersService.resetSearch({
+      ...this.remindersService.researchParamsReminder,
       oldOrNew: this.formOldOrNew.value
     });
   }
 
   onEditKeyword() : void {
-    this.updateResearchParamsReminder({
-      ...this.researchParamsReminder,
-      keyword: this.formKeyword.value
-    });
+    setTimeout(() => {
+      this.remindersService.resetSearch({
+        ...this.remindersService.researchParamsReminder,
+        keyword: this.formKeyword.value
+      });
+    }, 200);
   }
-
-  updateResearchParamsReminder(value: ResearchParamsReminder) {
-    this.updateResearchParamsReminderEvent.emit(value);
-  }
-
 }

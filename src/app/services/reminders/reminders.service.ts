@@ -10,9 +10,55 @@ import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.
 })
 export class RemindersService {
 
+  reminders = new Map<number, Reminder>();
+  researchParamsReminder: ResearchParamsReminder = {
+    take: 2,
+    skip: 0,
+    done: "false",
+    oldOrNew: "new",
+    keyword: "",
+  }
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.loadMore();
+   }
+
+
+  resetSearch(researchParamsReminder: ResearchParamsReminder) {
+    this.reminders.clear();
+    this.updateSearchParameters({
+      ...researchParamsReminder,
+      skip: 0
+    });
+  }
+
+  updateSearchParameters(researchParamsReminder: ResearchParamsReminder) {
+    if(researchParamsReminder != this.researchParamsReminder)
+      this.researchParamsReminder = researchParamsReminder;
+      this.loadMore();
+  }
+
+  loadMore() {
+    let queryParameters = new HttpParams();
+    if(this.researchParamsReminder.priority)
+      queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority)
+    
+    if(this.researchParamsReminder.orderByPriority)
+      queryParameters = queryParameters.append("orderByPriority", this.researchParamsReminder.orderByPriority)
+    
+    if(this.researchParamsReminder.date && this.researchParamsReminder.date != "")
+      queryParameters = queryParameters.append("date",this.researchParamsReminder.date)
+
+    queryParameters = queryParameters.append("skip", this.researchParamsReminder.skip)      
+    queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
+    queryParameters = queryParameters.append("oldOrNew", this.researchParamsReminder.oldOrNew)
+    queryParameters = queryParameters.append("keyword",this.researchParamsReminder.keyword)
+    queryParameters = queryParameters.append("take", 2);
+    
+    return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.reminders.set(reminder.id, reminder)));
+  }
+
 
   findAll() : Observable<Reminder[]> {
     return this.http.get<Reminder[]>(`reminders`);
@@ -37,27 +83,4 @@ export class RemindersService {
   findAllByProspect(idProspect: number) : Observable<Reminder[]> {
     return this.http.get<Reminder[]>(`reminders/by-prospect/${idProspect}`);
   }
-
-  findAllPaginated(researchParamsReminder: ResearchParamsReminder) : Observable<Reminder[]> {
-    let queryParameters = new HttpParams();
-    if(researchParamsReminder.priority)
-      queryParameters = queryParameters.append("priority", researchParamsReminder.priority)
-    
-    if(researchParamsReminder.orderByPriority)
-      queryParameters = queryParameters.append("orderByPriority", researchParamsReminder.orderByPriority)
-    
-    if(researchParamsReminder.date && researchParamsReminder.date != "")
-      queryParameters = queryParameters.append("date",researchParamsReminder.date)
-
-    if(researchParamsReminder.skip)
-      queryParameters = queryParameters.append("skip", researchParamsReminder.skip)
-      
-    queryParameters = queryParameters.append("done", researchParamsReminder.done)
-    queryParameters = queryParameters.append("oldOrNew", researchParamsReminder.oldOrNew)
-    queryParameters = queryParameters.append("keyword",researchParamsReminder.keyword)
-    queryParameters = queryParameters.append("take", 2);
-    
-    return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters });
-  }
-
 }
