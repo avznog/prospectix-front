@@ -28,7 +28,7 @@
         <select id="activity" name="activity"[formControl]="formActivity" (change)="onEditActivity()"
             class="select select-bordered">
             <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'activité</option>
-            <option *ngFor="let activity of activities">{{activity.name}}</option>
+            <option *ngFor="let activity of activitiesService.activities">{{activity.name}}</option>
         </select>
     </div>
 
@@ -39,7 +39,7 @@
         </label>
         <select id="city" name="city" [formControl]="formCity" (change)="onEditCity()" class="select select-bordered">
             <option [defaultSelected]="'Toutes les villes'" [value]="'allCities'">Toutes les villes</option>
-            <option *ngFor="let city of cities">{{city.name}}</option>
+            <option *ngFor="let city of citiesService.cities">{{city.name}}</option>
         </select>
     </div>
 </div>

@@ -23,37 +23,15 @@ export class BookmarksResearchBlocComponent implements OnInit {
   formCity = new FormControl("allCities");
   formPm = new FormControl("");
 
-  cities!: City[];
-  activities!: Activity[];
   projectManagers!: ProjectManager[];
 
   constructor(
-    private readonly activitiesService: ActivitiesService,
-    private readonly citiesService: CitiesService,
+    public readonly activitiesService: ActivitiesService,
+    public readonly citiesService: CitiesService,
     private readonly pmService: ProjectManagersService
   ) { }
 
   ngOnInit(): void {
-    this.activitiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.activities = data
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-
-    this.citiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.cities = data;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-
       this.pmService.findAll()
         .subscribe({
           next: (data) => {

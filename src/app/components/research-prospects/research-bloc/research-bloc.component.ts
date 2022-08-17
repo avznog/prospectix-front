@@ -16,38 +16,16 @@ export class ResearchBlocComponent implements OnInit {
   @Input() researchParamsProspect! : ResearchParamsProspect;
   @Output() updateResearchParamsProspectEvent = new EventEmitter<ResearchParamsProspect>();
 
-  activities!: Activity[];
-  cities!: City[];
   formKeyword = new FormControl("");
   formActivity = new FormControl("allActivities");
   formCity = new FormControl("allCities");
 
   constructor(
-    private readonly activitiesService: ActivitiesService,
-    private readonly citiesService: CitiesService,
+    public readonly activitiesService: ActivitiesService,
+    public readonly citiesService: CitiesService,
   ) { }
 
   ngOnInit(): void {
-    this.activitiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.activities = data
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
-
-    this.citiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.cities = data;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-
   }
 
   onEditCity() {

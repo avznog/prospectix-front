@@ -16,14 +16,13 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 export class AddProspectComponent implements OnInit {
 
   constructor(
-    private readonly activitiesService: ActivitiesService,
-    private readonly citiesService: CitiesService,
-    private readonly countriesService: CountriesService,
+    public readonly activitiesService: ActivitiesService,
+    public readonly citiesService: CitiesService,
+    public readonly countriesService: CountriesService,
     private readonly prospectService: ProspectsService
   ) { }
 
   // City
-  cities!: City[];
   addCityDisabled = false;
   newCity = false;
   formCity = new FormControl({} as City);
@@ -31,14 +30,12 @@ export class AddProspectComponent implements OnInit {
   formAddZipcode = new FormControl("");
 
   // Activity
-  activities!: Activity[];
   addActivityDisabled = false;
   newActivity = false;
   formActivity = new FormControl({} as Activity);
   formAddActivity = new FormControl("");
 
   // Country
-  countries!: Country[];
   addCountryDisabled = false;
   newCountry = false;
   formCountry = new FormControl({} as Country);
@@ -53,35 +50,6 @@ export class AddProspectComponent implements OnInit {
   formComment = new FormControl("");
 
   ngOnInit(): void {
-    this.activitiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.activities = data
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
-
-    this.citiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.cities = data;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-
-      this.countriesService.findAll()
-        .subscribe({
-          next: (data) => {
-            this.countries = data;
-          },
-          error: (err) => {
-            console.log(err)
-          }
-        })
   }
 
   onCreateProspect() {
@@ -108,40 +76,51 @@ export class AddProspectComponent implements OnInit {
   }
 
   onAddCity() {
-    this.cities.push({
-      id: Number(),
+    this.citiesService.create({
       name: this.formAddCity.value,
       zipcode: this.formAddZipcode.value
     });
-    this.newCity = true;
+    // this.newCity = true;
+    // this.cities.push({
+    //   id: Number(),
+    //   name: this.formAddCity.value,
+    //   zipcode: this.formAddZipcode.value
+    // });
+    // this.newCity = true;
   }
 
   onEditAddCity() {
-    this.cities.filter(city => city.name.toLowerCase() == this.formAddCity.value.toLowerCase() || city.zipcode == this.formAddZipcode.value).length == 0 ? this.addCityDisabled = false : this.addCityDisabled = true;
+    this.citiesService.cities.filter(city => city.name.toLowerCase() == this.formAddCity.value.toLowerCase() || city.zipcode == this.formAddZipcode.value).length == 0 ? this.addCityDisabled = false : this.addCityDisabled = true;
   }
 
   onAddActivity() {
-    this.activities.push({
-      id: Number(),
+    // this.activities.push({
+    //   id: Number(),
+    //   name: this.formAddActivity.value
+    // });
+    // this.newActivity = true;
+    this.activitiesService.add({
       name: this.formAddActivity.value
     });
-    this.newActivity = true;
   }
 
   onEditAddActivity() {
-    this.activities.filter(activity => activity.name.toLowerCase() == this.formAddActivity.value.toLowerCase()).length == 0 ? this.addActivityDisabled = false : this.addActivityDisabled = true;
+    this.activitiesService.activities.filter(activity => activity.name.toLowerCase() == this.formAddActivity.value.toLowerCase()).length == 0 ? this.addActivityDisabled = false : this.addActivityDisabled = true;
   }
 
   onAddCountry() {
-    this.countries.push({
-      id: Number(),
+    this.countriesService.add({
       name: this.formAddCountry.value
     });
-    this.newCountry = true;
+    // this.countries.push({
+    //   id: Number(),
+    //   name: this.formAddCountry.value
+    // });
+    // this.newCountry = true;
   }
 
   onEditAddCountry() {
-    this.countries.filter(country => country.name.toLowerCase() == this.formAddCountry.value.toLowerCase()).length == 0 ? this.addCountryDisabled = false : this.addCountryDisabled = true;
+    this.countriesService.countries.filter(country => country.name.toLowerCase() == this.formAddCountry.value.toLowerCase()).length == 0 ? this.addCountryDisabled = false : this.addCountryDisabled = true;
   }
 
 }

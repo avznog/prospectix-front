@@ -19,39 +19,20 @@ export class ProspectDetailsComponent implements OnInit {
   @Input() prospect!: Prospect;
   @Input() currentProspectReminders!: Reminder[];
   @Input() currentProspectMeetings!: Meeting[];
-  cities!: City[];  
-  activities!: Activity[];
+  
   formControlActivity!: FormControl;
   formControlCity!: FormControl;
   constructor(
     private prospectsService: ProspectsService,
-    private citiesService: CitiesService,
-    private activitiesService: ActivitiesService
+    public citiesService: CitiesService,
+    public activitiesService: ActivitiesService
   ) { }
 
   ngOnInit(): void {
 
     this.formControlCity = new FormControl(this.prospect.city.name, Validators.required);
     this.formControlActivity = new FormControl(this.prospect.activity.name, Validators.required);
-    this.citiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.cities = data;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
 
-    this.activitiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.activities = data;
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
   }
 
   onChangeNbNo() {

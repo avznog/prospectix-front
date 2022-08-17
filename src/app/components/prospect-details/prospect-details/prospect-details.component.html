@@ -15,7 +15,7 @@
 			<div class="input-group">
 				<select id="city" class="select select-bordered" [formControl]="formControlCity" >
 					<option disabled selected>Ville actuelle : {{prospect.city.name}}</option>
-					<option *ngFor="let city of cities" >{{city.name}}</option>
+					<option *ngFor="let city of citiesService.cities" >{{city.name}}</option>
 				</select>
 				<button class="btn btn-ghost btn-outline" (click)="onChangeCity()">Changer la ville</button>
 			</div>
@@ -29,7 +29,7 @@
 			<div class="input-group">
 				<select id="activity" class="select select-bordered" [formControl]="formControlActivity">
 					<option disabled selected>Domaine d'acitvité actuel : {{prospect.activity.name}}</option>
-					<option *ngFor="let activity of activities" >{{activity.name}}</option>
+					<option *ngFor="let activity of activitiesService.activities" >{{activity.name}}</option>
 				</select>
 				<button class="btn btn-ghost btn-outline" (click)="onChangeActivity()">Changer le domaine d'activité</button>
 			</div>
