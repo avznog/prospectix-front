@@ -23,13 +23,13 @@ export class ProspectsService {
     this.loadMore();
   }
 
-  resetSearch() {
+  resetSearch(researchParamsProspect: ResearchParamsProspect) {
+    this.prospects.clear();
     this.updateSearchParameters({
+      ...researchParamsProspect,
       skip: 0
-    }); // ! Rien dedeans
-    this.researchParamsProspect = {
-      skip: 0
-    };
+  }); // ! Rien dedeans
+    
   }
 
   updateSearchParameters(researchParamsProspect: ResearchParamsProspect) {

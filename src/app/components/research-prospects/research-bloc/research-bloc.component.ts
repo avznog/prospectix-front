@@ -14,10 +14,6 @@ import { timeout } from 'rxjs';
   styleUrls: ['./research-bloc.component.scss']
 })
 export class ResearchBlocComponent implements OnInit {
-  
-  @Input() researchParamsProspect! : ResearchParamsProspect;
-  @Output() updateResearchParamsProspectEvent = new EventEmitter<ResearchParamsProspect>();
-
   formKeyword = new FormControl("");
   formActivity = new FormControl("allActivities");
   formCity = new FormControl("allCities");
@@ -32,42 +28,27 @@ export class ResearchBlocComponent implements OnInit {
   }
 
   onEditCity() {
-    // this.updateResearchParamsProspect({
-    //   ...this.researchParamsProspect,
-    //   city: this.formCity.value == "allCities" ? "" : this.formCity.value
-    // });
-    this.prospectsService.updateSearchParameters({
+    this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       city: this.formCity.value == "allCities" ? "": this.formCity.value
-    });
+    })
   }
 
   onEditActivity() {
-    // this.updateResearchParamsProspect({
-    //   ...this.researchParamsProspect,
-    //   activity: this.formActivity.value == "allActivities" ? "" : this.formActivity.value
-    // });
-
-    this.prospectsService.updateSearchParameters({
+    this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       activity: this.formActivity.value == "allActivities" ? "" : this.formActivity.value
     });
   }
 
-  onEditKeyword(): void {
-    // this.updateResearchParamsProspect({
-    //   ...this.researchParamsProspect,
-    //   keyword: this.formKeyword.value
-    // });
-    timeout(200);
-    this.prospectsService.updateSearchParameters({
+  onEditKeyword() {
+    setTimeout(() => {
+       this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       keyword: this.formKeyword.value
     });
-  }
-
-  updateResearchParamsProspect(value: ResearchParamsProspect) {
-    // this.updateResearchParamsProspectEvent.emit(value);
+    }, 200)
+   
   }
 
 }
