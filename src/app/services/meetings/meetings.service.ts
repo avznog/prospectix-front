@@ -10,9 +10,55 @@ import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.mo
 })
 export class MeetingsService {
 
+  meetings = new Map<number, Meeting>();
+  researchParamsMeeting: ResearchParamsMeeting = {
+    take: 2,
+    skip: 0,
+    done: "false",
+    oldOrNew: "new",
+    keyword: ""
+  }
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.loadMore();
+  }
+
+
+  resetSearch(researchParamsMeeting: ResearchParamsMeeting) {
+    this.meetings.clear();
+    this.updateSearchParameters({
+      ...researchParamsMeeting,
+      take: 2,
+      skip: 0
+    }); 
+  }
+
+  updateSearchParameters(researchParamsMeeting: ResearchParamsMeeting) {
+    if(researchParamsMeeting != this.researchParamsMeeting)
+      console.log("not same search")
+      this.researchParamsMeeting = researchParamsMeeting;
+      this.loadMore();
+  }
+
+  loadMore() {
+    let queryParameters = new HttpParams();
+
+    if(this.researchParamsMeeting.type)
+      queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
+
+    if(this.researchParamsMeeting.date)
+      queryParameters = queryParameters.append("date",this.researchParamsMeeting.date)
+
+    queryParameters = queryParameters.append("skip", this.researchParamsMeeting.skip)
+    queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
+    queryParameters = queryParameters.append("oldOrNew", this.researchParamsMeeting.oldOrNew)
+    queryParameters = queryParameters.append("keyword", this.researchParamsMeeting.keyword)
+    queryParameters = queryParameters.append("take",2)
+    
+    return this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(meetings => meetings.forEach(meeting => this.meetings.set(meeting.id, meeting)));
+  
+  }
 
   findAll() : Observable<Meeting[]> {
     return this.http.get<Meeting[]>(`meetings`);
@@ -36,25 +82,5 @@ export class MeetingsService {
 
   findAllByProspect(idProspect: number) : Observable<Meeting[]> {
     return this.http.get<Meeting[]>(`meetings/by-prospect/${idProspect}`);
-  }
-
-  findAllPaginated(researchParamsMeeting: ResearchParamsMeeting) : Observable<Meeting[]> {
-    let queryParameters = new HttpParams();
-
-    if(researchParamsMeeting.skip)
-      queryParameters = queryParameters.append("skip", researchParamsMeeting.skip)
-
-    if(researchParamsMeeting.type)
-      queryParameters = queryParameters.append("type", researchParamsMeeting.type)
-
-    if(researchParamsMeeting.date)
-      queryParameters = queryParameters.append("date",researchParamsMeeting.date)
-
-    queryParameters = queryParameters.append("done", researchParamsMeeting.done)
-    queryParameters = queryParameters.append("oldOrNew", researchParamsMeeting.oldOrNew)
-    queryParameters = queryParameters.append("keyword", researchParamsMeeting.keyword)
-    queryParameters = queryParameters.append("take",2)
-
-    return this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters });
   }
 }

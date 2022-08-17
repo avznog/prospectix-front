@@ -11,10 +11,6 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 })
 export class MeetingsResearchBlocComponent implements OnInit {
 
-  @Input() researchParamsMeeting!: ResearchParamsMeeting;
-  @Output() updateResearchParamsMeetingEvent = new EventEmitter<ResearchParamsMeeting>();
-
-
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
   formKeyword = new FormControl("");
   formOldOrNew = new FormControl("new");
@@ -23,43 +19,38 @@ export class MeetingsResearchBlocComponent implements OnInit {
   formDateDown = new FormControl(Date)
   formDateUp = new FormControl(Date)
 
-  constructor() { }
+  constructor(
+    public meetingsService: MeetingsService
+  ) { }
 
   ngOnInit(): void {
-    
   }
 
   onEditKeyword() {
-    this.updateResearchParamsMeeting({
-      ...this.researchParamsMeeting,
+    this.meetingsService.resetSearch({
+      ...this.meetingsService.researchParamsMeeting,
       keyword: this.formKeyword.value
     });
   }
 
   onEditOldOrNew() {
-    this.updateResearchParamsMeeting({
-      ...this.researchParamsMeeting,
+    this.meetingsService.resetSearch({
+      ...this.meetingsService.researchParamsMeeting,
       oldOrNew: this.formOldOrNew.value
     });
   }
 
   onEditDone() {
-    this.updateResearchParamsMeeting({
-      ...this.researchParamsMeeting,
+    this.meetingsService.resetSearch({
+      ...this.meetingsService.researchParamsMeeting,
       done: this.formDone.value
     });
   }
 
   onEditType() {
-    if(this.formType.value != "allTypes")
-      this.updateResearchParamsMeeting({
-        ...this.researchParamsMeeting,
-        type: this.formType.value
-      });
-    else
-    this.updateResearchParamsMeeting({
-      ...this.researchParamsMeeting,
-      type: ""
+    this.meetingsService.resetSearch({
+      ...this.meetingsService.researchParamsMeeting,
+      type: this.formType.value != "allTypes" ? this.formType.value : ""
     });
   }
 
@@ -67,10 +58,6 @@ export class MeetingsResearchBlocComponent implements OnInit {
   }
 
   onEditDateUp() {
-  }
-
-  updateResearchParamsMeeting(value: ResearchParamsMeeting) {
-    this.updateResearchParamsMeetingEvent.emit(value);
   }
 
 }

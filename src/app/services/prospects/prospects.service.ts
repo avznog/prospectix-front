@@ -28,14 +28,10 @@ export class ProspectsService {
     this.updateSearchParameters({
       ...researchParamsProspect,
       skip: 0
-  }); // ! Rien dedeans
-    
+    });
   }
 
   updateSearchParameters(researchParamsProspect: ResearchParamsProspect) {
-    //update local parameters
-    
-    // ? Si c'est la meme recherche qu'avant, tu cleear pas et tu loadmore pas
     if(researchParamsProspect != this.researchParamsProspect)
       this.researchParamsProspect = researchParamsProspect;
       this.loadMore();
@@ -55,8 +51,6 @@ export class ProspectsService {
       queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword ?? "")
       queryParameters = queryParameters.append("take", 2);
       this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters}).subscribe(prospects => prospects.forEach(prospect => this.prospects.set(prospect.id, prospect)));
-
-      //load more in prospects w/ parameters
   }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
@@ -85,27 +79,6 @@ export class ProspectsService {
 
   updateByActivity(idProspect: number, activityName: string) : Subscription {
     return this.http.get<Prospect>(`prospects/by-activity/${idProspect}/${activityName}`).subscribe();
-  }
-
-  findAllPaginated(researchParams: ResearchParamsProspect) : Observable<Prospect[]> {
-      let queryParameters = new HttpParams();
-      if(researchParams.activity)
-      queryParameters = queryParameters.append("activity", researchParams.activity)
-      
-      if(researchParams.city)
-      queryParameters = queryParameters.append("city", researchParams.city)
-      
-      if(researchParams.skip)
-      queryParameters = queryParameters.append("skip", researchParams.skip)
-      
-      if(researchParams.keyword)
-      queryParameters = queryParameters.append("keyword", researchParams.keyword)
-      else
-      queryParameters = queryParameters.append("keyword","")
-      
-      queryParameters = queryParameters.append("take", 2);
-
-      return this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters});
   }
 
   findAllBookmarksPaginated(researchParams: ResearchParamsBookmarks) : Observable<Prospect[]> {
@@ -137,5 +110,4 @@ export class ProspectsService {
   disable(idProspect: number) : Subscription {
     return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe();
   }
-
 }

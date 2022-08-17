@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, empty } from 'rxjs/internal/observable/empty';
-import { Meeting } from 'src/app/models/meeting.model';
-import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
@@ -10,60 +7,26 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
   styleUrls: ['./meetings.component.scss']
 })
 export class MeetingsComponent implements OnInit {
-
-  meetings!: Meeting[];
-  researchParamsMeeting : ResearchParamsMeeting = {
-    take: 2,
-    skip: 0,
-    done: "false",
-    oldOrNew: "new",
-    keyword: ""
-  };
   
   constructor(
-    private meetingsService: MeetingsService
+    public meetingsService: MeetingsService
   ) { }
 
   ngOnInit(): void {
-    this.meetingsService.findAllPaginated(this.researchParamsMeeting)
-      .subscribe({
-        next: (data) => {
-          this.meetings = data;
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
+    console.log(this.meetingsService.meetings)
   }
 
   pageDown() {
-    this.updateResearchParamsMeeting({
-      ...this.researchParamsMeeting,
-      skip: this.researchParamsMeeting.skip! - 2
+    this.meetingsService.updateSearchParameters({
+      ...this.meetingsService.researchParamsMeeting,
+      skip: this.meetingsService.researchParamsMeeting.skip - 2
     });
   }
 
   pageUp() {
-    this.updateResearchParamsMeeting({
-      ...this.researchParamsMeeting,
-      skip: this.researchParamsMeeting.skip! + 2
+    this.meetingsService.updateSearchParameters({
+      ...this.meetingsService.researchParamsMeeting,
+      skip: this.meetingsService.researchParamsMeeting.skip + 2
     });
-  }
-
-  updateResearchParamsMeeting(newResearchParamsMeeting: ResearchParamsMeeting) {
-    this.researchParamsMeeting = newResearchParamsMeeting;
-    this.updateMeetings(this.researchParamsMeeting);
-  }
-
-  updateMeetings(researchParamsMeeting: ResearchParamsMeeting) {
-    this.meetingsService.findAllPaginated(researchParamsMeeting)
-      .subscribe({
-        next: (data) => {
-          this.meetings = data;
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
   }
 }

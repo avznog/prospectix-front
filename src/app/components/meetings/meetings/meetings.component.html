@@ -1,10 +1,10 @@
 <app-header></app-header>
 <h1 class="ml-6 text-xl mb-5">Rendez-vous</h1>
-<app-meetings-research-bloc [researchParamsMeeting]="researchParamsMeeting" (updateResearchParamsMeetingEvent)="updateResearchParamsMeeting($event)" ></app-meetings-research-bloc>
-<app-meetings-liste [meetings]="meetings" ></app-meetings-liste>
+<app-meetings-research-bloc></app-meetings-research-bloc>
+<app-meetings-liste></app-meetings-liste>
 <div class="divider" ></div>
 <div class="btn-group flex justify-center">
-  <button class="btn btn-outline btn-ghost {{researchParamsMeeting.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{researchParamsMeeting.skip! / 2}}</button>
-  <button class="btn btn-outline btn-ghost {{meetings && meetings.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+  <button class="btn btn-outline btn-ghost {{this.meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
+  <button class="btn btn-outline btn-ghost">Page {{this.meetingsService.researchParamsMeeting.skip / 2}}</button>
+  <button class="btn btn-outline btn-ghost {{this.meetingsService.meetings && this.meetingsService.meetings.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
 </div>

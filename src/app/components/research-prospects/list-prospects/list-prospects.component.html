@@ -1,4 +1,4 @@
-<div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip +2" >
+<div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 2" >
   <app-each-research-prospect [prospect]="prospect.value" [events]="events" (updateEventsEvent)="eventsUpdated($event)"></app-each-research-prospect>
   <br/>
 </div>
