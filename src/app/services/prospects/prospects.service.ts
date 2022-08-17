@@ -13,9 +13,51 @@ import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.
 })
 export class ProspectsService {
 
+  prospects = new Map<number, Prospect>();
+  researchParamsProspect : ResearchParamsProspect = {
+    skip: 0
+  };
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.loadMore();
+  }
+
+  resetSearch() {
+    this.updateSearchParameters({
+      skip: 0
+    }); // ! Rien dedeans
+    this.researchParamsProspect = {
+      skip: 0
+    };
+  }
+
+  updateSearchParameters(researchParamsProspect: ResearchParamsProspect) {
+    //update local parameters
+    
+    // ? Si c'est la meme recherche qu'avant, tu cleear pas et tu loadmore pas
+    if(researchParamsProspect != this.researchParamsProspect)
+      this.researchParamsProspect = researchParamsProspect;
+      this.loadMore();
+  }
+
+  loadMore() {
+    let queryParameters = new HttpParams();
+      if(this.researchParamsProspect.activity)
+      queryParameters = queryParameters.append("activity", this.researchParamsProspect.activity)
+      
+      if(this.researchParamsProspect.city)
+      queryParameters = queryParameters.append("city", this.researchParamsProspect.city)
+      
+      if(this.researchParamsProspect.skip)
+      queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
+      
+      queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword ?? "")
+      queryParameters = queryParameters.append("take", 2);
+      this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters}).subscribe(prospects => prospects.forEach(prospect => this.prospects.set(prospect.id, prospect)));
+
+      //load more in prospects w/ parameters
+  }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
     return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe();

@@ -10,54 +10,53 @@ import { Event } from 'src/app/models/event.model';
   styleUrls: ['./research-prospects.component.scss']
 })
 export class ResearchProspectsComponent implements OnInit {
-  prospects!: Prospect[];
-  researchParamsProspect : ResearchParamsProspect = { skip: 0 };
+  // researchParamsProspect : ResearchParamsProspect = { skip: 0 };
   events!: Event[];
   constructor(
-    private readonly prospectsService: ProspectsService
+    public readonly prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
-    this.prospectsService.findAllPaginated(this.researchParamsProspect)
-      .subscribe({
-        next: (data) => {
-          this.prospects = data;
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
   }
 
   pageUp() {
-    this.updateResearchParamsProspect({
-      ...this.researchParamsProspect,
-      skip: this.researchParamsProspect.skip + 2
+    // this.updateResearchParamsProspect({
+    //   ...this.researchParamsProspect,
+    //   skip: this.researchParamsProspect.skip + 2
+    // });
+    this.prospectsService.updateSearchParameters({
+      ...this.prospectsService.researchParamsProspect,
+      skip: this.prospectsService.researchParamsProspect.skip + 2
     });
+    console.log(this.prospectsService.prospects)
   }
 
   pageDown() {
-    this.updateResearchParamsProspect({
-      ...this.researchParamsProspect,
-      skip: this.researchParamsProspect.skip - 2
+    // this.updateResearchParamsProspect({
+    //   ...this.researchParamsProspect,
+    //   skip: this.researchParamsProspect.skip - 2
+    // });
+    this.prospectsService.updateSearchParameters({
+      ...this.prospectsService.researchParamsProspect,
+      skip: this.prospectsService.researchParamsProspect.skip - 2
     });
   }
 
   updateProspects(researchParamsProspect: ResearchParamsProspect) {
-    this.prospectsService.findAllPaginated(researchParamsProspect)
-      .subscribe({
-        next: (data) => {
-          this.prospects = data;
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
+    // this.prospectsService.findAllPaginated(researchParamsProspect)
+    //   .subscribe({
+    //     next: (data) => {
+    //       this.prospects = data;
+    //     },
+    //     error: (err) => {
+    //       console.log(err)
+    //     }
+    //   });
   }
 
   updateResearchParamsProspect(newParams: ResearchParamsProspect) {
-    this.researchParamsProspect = newParams;
-    this.updateProspects(this.researchParamsProspect);
+    // this.researchParamsProspect = newParams;
+    // this.updateProspects(this.researchParamsProspect);
   }
 
   updateEvents(newEvents: Event[]) {
