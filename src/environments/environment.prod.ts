@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://staging.nprospectix.juniorisep.com/api",
+  apiUrl: "https://api.staging.nprospectix.juniorisep.com",
 };
