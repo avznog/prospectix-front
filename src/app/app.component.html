@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="authService.loggedInSubject">
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="authService.loggedInSubject">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Home</a>
         <a class="nav-item btn " (click)="logout()">Logout</a>
     </div>
-</nav>
+</nav> -->
 <div [attr.data-theme]="dataTheme">
   <div class="container mx-auto">
     <router-outlet></router-outlet>

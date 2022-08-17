@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100">
+<div class="navbar bg-base-100" *ngIf="authService.loggedInSubject">
   <div class="flex-1">
     <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl">Prospectix</a>
   </div>
@@ -13,6 +13,7 @@
       <div class="dropdown">
         <app-theme-picker></app-theme-picker>
       </div>
+      <li (click)="logout()"><a>Se déconnecter</a></li>
     </ul>
   </div>
 </div>

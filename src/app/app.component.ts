@@ -34,7 +34,4 @@ export class AppComponent {
     this.dataThemeService.sendData(localStorage.getItem("theme") || "")
   }
 
-  logout() {
-    this.authService.logout();
-  }
 }
