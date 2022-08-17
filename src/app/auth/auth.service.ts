@@ -5,6 +5,7 @@ import { ProjectManager } from '../models/project-manager.model';
 import jwtDecode from 'jwt-decode';
 import AccessToken from './models/access-token.model';
 import LoginResponseDTO from './dto/login-response.dto';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
   private accessToken?: string;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { 
     this.currentUserSubject = new BehaviorSubject<ProjectManager>(JSON.parse(localStorage.getItem("currentUser")!));
     this.loggedInSubject = new BehaviorSubject(localStorage.getItem("loggedIn") == "true");
@@ -81,6 +83,7 @@ export class AuthService {
     this.loggedInSubject.next(false);
     this.currentUserSubject.next({} as ProjectManager);
     this.http.get("auth/logout").subscribe();
+    this.router.navigate(["login"]);
   }
 
   async refresh() {
