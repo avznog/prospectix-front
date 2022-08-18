@@ -1,17 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { Bookmark } from 'src/app/models/bookmark.model';
-import { Event } from 'src/app/models/event.model';
-import { Meeting } from 'src/app/models/meeting.model';
-import { Prospect } from 'src/app/models/prospect.model';
-import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
-import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
   selector: 'app-each-bookmark',
@@ -20,38 +14,28 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 })
 export class EachBookmarkComponent implements OnInit {
 
-  @Input() prospect!: Prospect;
+  @Input() bookmark!: Bookmark;
   formComment = new FormControl("");
-  currentPm!: string;
-  @Input() bookmarks!: Bookmark[];
-
-
   constructor(
     private readonly prospectService: ProspectsService,
-    private readonly bookmarksService: BookmarksService,
+    public readonly bookmarksService: BookmarksService,
     private readonly eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
-  
-    const result = this.bookmarks.some((bookmark) => {
-      if(bookmark.prospect.id == this.prospect.id)
-        this.currentPm = bookmark.pm.pseudo;
-        return bookmark.prospect.id == this.prospect.id;
-     });
   }
 
   onClickButtonGoogle() {
-    window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank");
+    window.open(`http://www.google.fr/search?q=${this.bookmark.prospect.companyName}`, "_blank");
   }
 
   onChangeComment() {
     if (this.formComment.value != "")
-      this.prospectService.updateComment(this.prospect.id, { comment: this.formComment.value });
+      this.prospectService.updateComment(this.bookmark.prospect.id, { comment: this.formComment.value });
   }
 
   onChangeNbNo() {
-    this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
+    this.prospectService.updateNbNo(this.bookmark.prospect.id, { nbNo: this.bookmark.prospect.nbNo + 1 });
   }
 
   onDeleteBookmark() {
@@ -79,13 +63,13 @@ export class EachBookmarkComponent implements OnInit {
     };
     this.eventsService.create({
       type: EventType.DELETE_BOOKMARKS,
-      prospect: this.prospect,
+      prospect: this.bookmark.prospect,
       pm: pm,
       date: new Date,
       description: EventDescriptionType.DELETE_BOOKMARKS
     });
-    this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
-    this.bookmarksService.deleteByProspect(this.prospect.id);
+    this.prospectService.updateIsBookmarked(this.bookmark.prospect.id, { isBookmarked: false });
+    this.bookmarksService.deleteByProspect(this.bookmark.prospect.id);
   }
 
   onClickRefus() {
@@ -113,16 +97,16 @@ export class EachBookmarkComponent implements OnInit {
     };
     this.eventsService.create({
       type: EventType.NEGATIVE_ANSWER,
-      prospect: this.prospect,
+      prospect: this.bookmark.prospect,
       pm: pm,
       date: new Date,
       description: EventDescriptionType.NEGATIVE_ANSWER
     });
-    this.prospectService.disable(this.prospect.id);
+    this.prospectService.disable(this.bookmark.prospect.id);
   }
 
   onClickDrawer() {
-    this.eventsService.updateEvents(this.prospect.id);
+    this.eventsService.updateEvents(this.bookmark.prospect.id);
   }
 
 }

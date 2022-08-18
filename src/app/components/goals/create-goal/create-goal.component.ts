@@ -11,13 +11,12 @@ import { GoalsService } from '../../../services/goals/goals.service';
 })
 export class CreateGoalComponent implements OnInit {
   createGoalForm!: FormGroup;
-  projectManagers!: ProjectManager[];
   pmSelected!: ProjectManager;
   choosingPm = false;
   constructor(
     private formBuilder: FormBuilder,
     private readonly goalsService: GoalsService,
-    private readonly pmService: ProjectManagersService
+    public readonly pmService: ProjectManagersService
   ) { }
 
   ngOnInit(): void {
@@ -30,15 +29,6 @@ export class CreateGoalComponent implements OnInit {
       totalSteps: [0, Validators.required]
     })
 
-    this.pmService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.projectManagers = data.filter(pm => !pm.disabled);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
   }
 
   createGoal() {

@@ -1,11 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { Prospect } from 'src/app/models/prospect.model';
-import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 
 @Injectable({
@@ -17,6 +15,7 @@ export class ProspectsService {
   researchParamsProspect : ResearchParamsProspect = {
     skip: 0
   };
+
   constructor(
     private http: HttpClient
   ) { 
@@ -79,32 +78,6 @@ export class ProspectsService {
 
   updateByActivity(idProspect: number, activityName: string) : Subscription {
     return this.http.get<Prospect>(`prospects/by-activity/${idProspect}/${activityName}`).subscribe();
-  }
-
-  findAllBookmarksPaginated(researchParams: ResearchParamsBookmarks) : Observable<Prospect[]> {
-    let queryParameters = new HttpParams();
-    if(researchParams.activity)
-      queryParameters = queryParameters.append("activity", researchParams.activity)
-      
-      if(researchParams.city)
-      queryParameters = queryParameters.append("city", researchParams.city)
-      
-      if(researchParams.skip)
-      queryParameters = queryParameters.append("skip", researchParams.skip)
-      
-      queryParameters = queryParameters.append("keyword", researchParams.keyword)
-      queryParameters = queryParameters.append("pseudo", researchParams.pseudo)
-      queryParameters = queryParameters.append("take", 2);
-
-      return this.http.get<Prospect[]>(`prospects/find-all-bookmarks-paginated`, { params: queryParameters });
-  }
-
-  findAllByKeyword(keyword: string) : Observable<Prospect[]> {
-    return this.http.get<Prospect[]>(`prospects/by-keywords/${keyword}`);
-  }
-
-  findAllByBookmarks(pseudoPm: string) : Observable<Prospect[]> {
-    return this.http.get<Prospect[]>(`prospects/by-bookmarks/${pseudoPm}`);
   }
 
   disable(idProspect: number) : Subscription {

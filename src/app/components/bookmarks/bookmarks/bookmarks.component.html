@@ -1,15 +1,16 @@
 <app-header></app-header>
+
+<h1 class="ml-6 text-xl mb-5">Prospects favoris de {{ bookmarksService.researchParamsBookmarks.pseudo == "" ? 'tous les chefs de projets': bookmarksService.researchParamsBookmarks.pseudo}}</h1>
 <div class="drawer drawer-end">
-<h1 class="ml-6 text-xl mb-5">Prospects favoris de {{ researchParamsBookmark.pseudo == "" ? 'tous les chefs de projets': researchParamsBookmark.pseudo}}</h1>
 <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
 <div class="drawer-content">
-<app-bookmarks-research-bloc [researchParamsBookmark]="researchParamsBookmark" (updateResearchParamsBookmarkEvent)="updateResearchParamsBookmark($event)"></app-bookmarks-research-bloc>
-<app-liste-bookmarks [prospects]="prospects"></app-liste-bookmarks>
+<app-bookmarks-research-bloc></app-bookmarks-research-bloc>
+<app-liste-bookmarks></app-liste-bookmarks>
 <div class="divider" ></div>
   <div class="btn-group flex justify-center">
-    <button class="btn btn-outline btn-ghost {{researchParamsBookmark.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-    <button class="btn btn-outline btn-ghost">Page {{researchParamsBookmark.skip / 2 }}</button>
-    <button class="btn btn-outline btn-ghost {{prospects && prospects.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+    <button class="btn btn-outline btn-ghost {{bookmarksService.researchParamsBookmarks.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 2 }}</button>
+    <button class="btn btn-outline btn-ghost {{bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
 </div>
 <div class="drawer-side">

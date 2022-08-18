@@ -6,7 +6,7 @@
     <label class="label" for="search">
       <span class="label-text">Recherche</span>
     </label>
-    <input type="text" [formControl]="formKeyword" (input)="onEditKeyword()" placeholder="Recherche"
+    <input type="search" [formControl]="formKeyword" (keyup)="onEditKeyword()" placeholder="Recherche"
       class="input input-bordered w-full max-w-xs" />
   </div>
 

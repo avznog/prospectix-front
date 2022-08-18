@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
-import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
 
 @Injectable({
