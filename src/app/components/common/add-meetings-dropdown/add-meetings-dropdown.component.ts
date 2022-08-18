@@ -30,45 +30,19 @@ export class AddMeetingsDropdownComponent implements OnInit {
   }
 
   onCreateMeeting() {
-    // TODO : add current pm
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
-
     this.meetingsService.create({
       type: this.formType.value,
       date: this.formDate.value,
       done: false,
       prospect: this.prospect,
-      pm: pm
     });
 
     this.eventsService.create({
       type: EventType.ADD_MEETING,
       prospect: this.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.ADD_MEETING
     });
-    console.log("meeting created ! ATTENTION: current pm to implement");
+    console.log("meeting created !");
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { Bookmark } from 'src/app/models/bookmark.model';
@@ -19,7 +20,8 @@ export class EachBookmarkComponent implements OnInit {
   constructor(
     private readonly prospectService: ProspectsService,
     public readonly bookmarksService: BookmarksService,
-    private readonly eventsService: EventsService
+    private readonly eventsService: EventsService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -39,32 +41,9 @@ export class EachBookmarkComponent implements OnInit {
   }
 
   onDeleteBookmark() {
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.DELETE_BOOKMARKS,
       prospect: this.bookmark.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.DELETE_BOOKMARKS
     });
@@ -73,32 +52,9 @@ export class EachBookmarkComponent implements OnInit {
   }
 
   onClickRefus() {
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.NEGATIVE_ANSWER,
       prospect: this.bookmark.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.NEGATIVE_ANSWER
     });

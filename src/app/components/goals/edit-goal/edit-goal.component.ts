@@ -10,13 +10,11 @@ import { GoalsService } from '../../../services/goals/goals.service';
 })
 export class EditGoalComponent implements OnInit {
 
-  @Input() goal!: Goal;
 
   formEditGoal!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private readonly goalsService: GoalsService
   ) { }
 
   ngOnInit(): void {

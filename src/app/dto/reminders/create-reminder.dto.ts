@@ -6,6 +6,6 @@ export interface CreateReminderDto {
   date: Date;
   priority: number;
   done: boolean;
-  pm: ProjectManager;
   prospect: Prospect;
+  pm?: ProjectManager;
 }

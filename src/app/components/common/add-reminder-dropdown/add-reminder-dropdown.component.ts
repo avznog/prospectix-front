@@ -28,46 +28,20 @@ export class AddReminderDropdownComponent implements OnInit {
   }
 
   onCreateReminder() {
-    // TODO : add current pm
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
-
     this.remindersService.create({
       date: this.formDate.value,
       priority: this.formPriority.value,
       done: false,
       description: this.formDescription.value,
-      pm: pm,
       prospect: this.prospect
     });
 
     this.eventsService.create({
       type: EventType.ADD_REMINDER,
       prospect: this.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.ADD_REMINDER
     })
-    console.log("Reminder created / ATTENTION: implement current pm")
+    console.log("Reminder created")
   }
 }

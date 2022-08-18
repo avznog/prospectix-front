@@ -25,32 +25,9 @@ export class EachMeetingComponent implements OnInit {
 
   onDeleteMeeting() : Subscription {
     console.log("meeting deleted");
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.DELETE_MEETING,
       prospect: this.meeting.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.DELETE_MEETING
     });
@@ -59,32 +36,9 @@ export class EachMeetingComponent implements OnInit {
 
   onMarkMeetingDone() : Subscription {
     console.log("meeting marked done");
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.DONE_MEETING,
       prospect: this.meeting.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.DONE_MEETING
     });

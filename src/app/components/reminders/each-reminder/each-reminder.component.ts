@@ -24,32 +24,9 @@ export class EachReminderComponent implements OnInit {
 
   onDeleteReminder() : Subscription {
     console.log("reminder deleted");
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.DELETE_REMINDER,
       prospect: this.reminder.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.DELETE_REMINDER
     });
@@ -58,32 +35,9 @@ export class EachReminderComponent implements OnInit {
 
   onMarkReminderDone() : Subscription {
     console.log("reminder marked done");
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.DONE_REMINDER,
       prospect: this.reminder.prospect,
-      pm: pm,
       date: new Date,
       description: EventDescriptionType.DONE_REMINDER
     });

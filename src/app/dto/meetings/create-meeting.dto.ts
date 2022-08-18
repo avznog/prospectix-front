@@ -7,5 +7,5 @@ export interface CreateMeetingDto {
   date: Date;
   done: boolean;
   prospect: Prospect;
-  pm: ProjectManager;
+  pm?: ProjectManager;
 }
