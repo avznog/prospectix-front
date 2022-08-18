@@ -18,6 +18,8 @@ export class RemindersService {
     oldOrNew: "new",
     keyword: "",
   }
+
+  remindersForProspect: Reminder[] = [];
   constructor(
     private http: HttpClient
   ) {
@@ -80,7 +82,11 @@ export class RemindersService {
     return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe();
   }
 
-  findAllByProspect(idProspect: number) : Observable<Reminder[]> {
+  findAllByProspect(idProspect: number) {
     return this.http.get<Reminder[]>(`reminders/by-prospect/${idProspect}`);
+  }
+
+  updateRemindersForProspect(idProspect: number) {
+    this.findAllByProspect(idProspect).subscribe(reminders => this.remindersForProspect = reminders);
   }
 }

@@ -25,36 +25,19 @@ export class EachResearchProspectComponent implements OnInit {
   @Input() events!: Event[];
   @Output() updateEventsEvent = new EventEmitter<Event[]>();
 
-  currentProspectMeetings : Meeting[] = [];
-  currentProspectReminders : Reminder[] = [];
   formComment = new FormControl("");
   
   constructor(
     private readonly prospectService: ProspectsService,
     private readonly bookmarksService: BookmarksService,
-    private readonly meetingsService: MeetingsService,
-    private readonly remindersService: RemindersService,
+    public readonly meetingsService: MeetingsService,
+    public readonly remindersService: RemindersService,
     private readonly eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
-    this.meetingsService.findAllByProspect(this.prospect.id).subscribe({
-      next: (data) => {
-        this.currentProspectMeetings = data;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
-
-    this.remindersService.findAllByProspect(this.prospect.id).subscribe({
-      next: (data) => {
-        this.currentProspectReminders = data;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    this.meetingsService.updateMeetingsForProspect(this.prospect.id);
+    this.remindersService.updateRemindersForProspect(this.prospect.id);
   }
 
   onClickButtonGoogle() {

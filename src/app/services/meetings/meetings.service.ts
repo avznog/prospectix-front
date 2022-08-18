@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
+import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class MeetingsService {
     oldOrNew: "new",
     keyword: ""
   }
+  meetingsForProspect: Meeting[] = [];
   constructor(
     private http: HttpClient
   ) { 
@@ -80,7 +82,11 @@ export class MeetingsService {
     return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe();
   }
 
-  findAllByProspect(idProspect: number) : Observable<Meeting[]> {
+  findAllByProspect(idProspect: number) {
     return this.http.get<Meeting[]>(`meetings/by-prospect/${idProspect}`);
+  }
+
+  updateMeetingsForProspect(idProspect: number) {
+    this.findAllByProspect(idProspect).subscribe(meetings => this.meetingsForProspect = meetings);
   }
 }

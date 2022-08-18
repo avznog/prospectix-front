@@ -80,13 +80,6 @@ export class AddProspectComponent implements OnInit {
       name: this.formAddCity.value,
       zipcode: this.formAddZipcode.value
     });
-    // this.newCity = true;
-    // this.cities.push({
-    //   id: Number(),
-    //   name: this.formAddCity.value,
-    //   zipcode: this.formAddZipcode.value
-    // });
-    // this.newCity = true;
   }
 
   onEditAddCity() {
@@ -94,11 +87,6 @@ export class AddProspectComponent implements OnInit {
   }
 
   onAddActivity() {
-    // this.activities.push({
-    //   id: Number(),
-    //   name: this.formAddActivity.value
-    // });
-    // this.newActivity = true;
     this.activitiesService.add({
       name: this.formAddActivity.value
     });
@@ -112,11 +100,6 @@ export class AddProspectComponent implements OnInit {
     this.countriesService.add({
       name: this.formAddCountry.value
     });
-    // this.countries.push({
-    //   id: Number(),
-    //   name: this.formAddCountry.value
-    // });
-    // this.newCountry = true;
   }
 
   onEditAddCountry() {
