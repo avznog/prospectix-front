@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl} from '@angular/forms';
 import { MeetingType } from 'src/app/constants/meeting.type';
-import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({

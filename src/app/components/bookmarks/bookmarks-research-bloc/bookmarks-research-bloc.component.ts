@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Activity } from 'src/app/models/activity.model';
-import { City } from 'src/app/models/city.model';
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';

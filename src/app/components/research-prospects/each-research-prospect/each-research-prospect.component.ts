@@ -1,12 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
-import { Event } from 'src/app/models/event.model';
-import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
-import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
@@ -21,9 +18,6 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 export class EachResearchProspectComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-
-  // @Input() events!: Event[];
-  // @Output() updateEventsEvent = new EventEmitter<Event[]>();
 
   formComment = new FormControl("");
   
@@ -194,19 +188,6 @@ export class EachResearchProspectComponent implements OnInit {
   }
 
   onClickDrawer() {
-    // this.eventsService.findAllByProspect(this.prospect.id)
-    // .subscribe({
-    //   next: (data) => {
-    //     this.updateEvents(data);
-    //   },
-    //   error: (err) => {
-    //     console.log(err)
-    //   }
-    // });
     this.eventsService.updateEvents(this.prospect.id);
-  }
-
-  updateEvents(value: Event[]) {
-    // this.updateEventsEvent.emit(value);
   }
 }

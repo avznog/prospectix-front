@@ -21,14 +21,9 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 export class EachBookmarkComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-  // currentProspectMeetings : Meeting[] = [];
-  // currentProspectReminders : Reminder[] = [];
   formComment = new FormControl("");
   currentPm!: string;
   @Input() bookmarks!: Bookmark[];
-
-  @Input() events!: Event[];
-  @Output() updateEventsEvent = new EventEmitter<Event[]>();
 
 
   constructor(
@@ -131,20 +126,7 @@ export class EachBookmarkComponent implements OnInit {
   }
 
   onClickDrawer() {
-    this.eventsService.findAllByProspect(this.prospect.id)
-    .subscribe({
-      next: (data) => {
-        this.updateEvents(data);
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
-    
-  }
-
-  updateEvents(value: Event[]) {
-    this.updateEventsEvent.emit(value);
+    this.eventsService.updateEvents(this.prospect.id);
   }
 
 }
