@@ -17,8 +17,8 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 export class ProspectDetailsComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-  @Input() currentProspectReminders!: Reminder[];
-  @Input() currentProspectMeetings!: Meeting[];
+  // @Input() currentProspectReminders!: Reminder[];
+  // @Input() currentProspectMeetings!: Meeting[];
   
   formControlActivity!: FormControl;
   formControlCity!: FormControl;

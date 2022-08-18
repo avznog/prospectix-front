@@ -19,7 +19,6 @@ export class MeetingsService {
     oldOrNew: "new",
     keyword: ""
   }
-  meetingsForProspect: Meeting[] = [];
   constructor(
     private http: HttpClient
   ) { 
@@ -84,9 +83,5 @@ export class MeetingsService {
 
   findAllByProspect(idProspect: number) {
     return this.http.get<Meeting[]>(`meetings/by-prospect/${idProspect}`);
-  }
-
-  updateMeetingsForProspect(idProspect: number) {
-    this.findAllByProspect(idProspect).subscribe(meetings => this.meetingsForProspect = meetings);
   }
 }

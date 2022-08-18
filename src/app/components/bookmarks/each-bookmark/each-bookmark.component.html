@@ -28,7 +28,7 @@
               <!-- Modal edit prospect -->
               <div class="modal">
                 <div class="modal-box max-w-screen-lg">
-                  <app-prospect-details [prospect]="prospect" [currentProspectMeetings]="meetingsService.meetingsForProspect" [currentProspectReminders]="remindersService.remindersForProspect"></app-prospect-details>/app-prospect-details>
+                  <app-prospect-details [prospect]="prospect"></app-prospect-details>/app-prospect-details>
                 </div>
               </div>
   
@@ -82,7 +82,7 @@
   
           <!-- Bouton de rappel + dropdown -->
           <div class="dropdown dropdown-top indicator">
-            <span *ngIf="remindersService.remindersForProspect.length > 0" class="indicator-item badge ">{{remindersService.remindersForProspect.length}}</span>
+            <span *ngIf="prospect.reminders.length > 0" class="indicator-item badge ">{{prospect.reminders.length}}</span>
             <label tabindex="0" class="btn btn-ghost btn-outline">Rappel</label>
           <div tabindex="0" class="dropdown-content card card-compact">
             <app-add-reminder-dropdown class="card-body outline" [prospect]="prospect"></app-add-reminder-dropdown>
@@ -91,7 +91,7 @@
           </div>
            <!-- Bouton de rendez-vous + dropdown -->
           <div class="dropdown dropdown-top indicator">
-            <span *ngIf="meetingsService.meetingsForProspect.length > 0" class="indicator-item badge ">{{meetingsService.meetingsForProspect.length}}</span>
+            <span *ngIf="prospect.meetings.length > 0" class="indicator-item badge ">{{prospect.meetings.length}}</span>
             <label tabindex="0" class="btn btn-ghost btn-outline">Rendez-vous</label>
             
             <div tabindex="0" class="dropdown-content card">

@@ -6,9 +6,7 @@ import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
-import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
   selector: 'app-each-research-prospect',
@@ -24,14 +22,10 @@ export class EachResearchProspectComponent implements OnInit {
   constructor(
     private readonly prospectService: ProspectsService,
     private readonly bookmarksService: BookmarksService,
-    public readonly meetingsService: MeetingsService,
-    public readonly remindersService: RemindersService,
     private readonly eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
-    this.meetingsService.updateMeetingsForProspect(this.prospect.id);
-    this.remindersService.updateRemindersForProspect(this.prospect.id);
   }
 
   onClickButtonGoogle() {

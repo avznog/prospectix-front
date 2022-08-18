@@ -28,8 +28,6 @@ export class EachBookmarkComponent implements OnInit {
 
   constructor(
     private readonly prospectService: ProspectsService,
-    public readonly meetingsService: MeetingsService,
-    public readonly remindersService: RemindersService,
     private readonly bookmarksService: BookmarksService,
     private readonly eventsService: EventsService
   ) { }
@@ -41,8 +39,6 @@ export class EachBookmarkComponent implements OnInit {
         this.currentPm = bookmark.pm.pseudo;
         return bookmark.prospect.id == this.prospect.id;
      });
-     this.meetingsService.updateMeetingsForProspect(this.prospect.id);
-     this.remindersService.updateRemindersForProspect(this.prospect.id);
   }
 
   onClickButtonGoogle() {

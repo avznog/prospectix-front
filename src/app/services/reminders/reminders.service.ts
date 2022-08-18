@@ -19,7 +19,6 @@ export class RemindersService {
     keyword: "",
   }
 
-  remindersForProspect: Reminder[] = [];
   constructor(
     private http: HttpClient
   ) {
@@ -84,9 +83,5 @@ export class RemindersService {
 
   findAllByProspect(idProspect: number) {
     return this.http.get<Reminder[]>(`reminders/by-prospect/${idProspect}`);
-  }
-
-  updateRemindersForProspect(idProspect: number) {
-    this.findAllByProspect(idProspect).subscribe(reminders => this.remindersForProspect = reminders);
   }
 }
