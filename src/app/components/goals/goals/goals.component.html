@@ -2,8 +2,16 @@
 <h1 class="ml-6 text-xl">Objectifs</h1>
 <div class="card">
     <div class="card-body">
-        <app-liste-goals [goals]="goals"></app-liste-goals>
+        <app-goal-research-bloc></app-goal-research-bloc>
+        <div class="divider"></div>
+        <app-liste-goals></app-liste-goals>
     </div>
+    <div class="divider" ></div>
+      <div class="btn-group flex justify-center">
+        <button class="btn btn-outline btn-ghost {{goalsService.researchParamsGoals.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+        <button class="btn btn-outline btn-ghost">Page {{goalsService.researchParamsGoals.skip / 2 }}</button>
+        <button class="btn btn-outline btn-ghost {{goalsService.goals && goalsService.goals.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+      </div> 
     <input type="checkbox" id="add-goal-modal" class="modal-toggle" />
     <div class="modal">
        <app-create-goal></app-create-goal>

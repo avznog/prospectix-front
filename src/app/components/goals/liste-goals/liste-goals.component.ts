@@ -10,11 +10,11 @@ import { Goal } from '../../../models/goal.model';
 })
 export class ListeGoalsComponent implements OnInit {
 
-  @Input() goals!: Goal[];
-  @Output() updateGoalToEditUpEvent = new EventEmitter<number>();
+  // @Input() goals!: Goal[];
+  // @Output() updateGoalToEditUpEvent = new EventEmitter<number>();
 
   constructor(
-    private goalsService: GoalsService
+    public goalsService: GoalsService
   ){}
 
   ngOnInit(): void {

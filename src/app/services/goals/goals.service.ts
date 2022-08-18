@@ -1,17 +1,52 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CreateGoalDto } from 'src/app/dto/goals/create-goal.dto';
 import { Goal } from 'src/app/models/goal.model';
+import { ResearchParamsGoals } from 'src/app/models/research-params-goals.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoalsService {
-  editIsClicked!: boolean;
+
+  goals = new Map<number, Goal>();
+  researchParamsGoals: ResearchParamsGoals = {
+    take: 2,
+    skip: 0,
+    pseudo: '',
+    keyword: ''
+  }
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.loadMore();
+  }
+
+  resetSearch(researchParamsGoals: ResearchParamsGoals) {
+    this.goals.clear();
+    this.updateSearchParameters({
+      ...researchParamsGoals,
+      skip: 0
+    });
+  }
+
+  updateSearchParameters(researchParamsGoals: ResearchParamsGoals) {
+    if(researchParamsGoals != this.researchParamsGoals)
+      this.researchParamsGoals = researchParamsGoals;
+      this.loadMore();
+  }
+
+  loadMore() {
+    let queryParameters = new HttpParams();
+      queryParameters = queryParameters.appendAll({
+        "take": this.researchParamsGoals.take,
+        "skip": this.researchParamsGoals.skip,
+        "pseudo": this.researchParamsGoals.pseudo,
+        "keyword": this.researchParamsGoals.keyword
+      })
+    this.http.get<Goal[]>(`goals/find-all-paginated/`, { params: queryParameters }).subscribe(goals => goals.forEach(goal => this.goals.set(goal.id, goal)));
+  }
 
   findAll() : Observable<Goal[]> {
     return this.http.get<Goal[]>("goals");

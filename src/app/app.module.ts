@@ -47,6 +47,7 @@ import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { GoalResearchBlocComponent } from './components/goals/goal-research-bloc/goal-research-bloc.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     EachBookmarkComponent,
     BookmarksResearchBlocComponent,
     ProspectHistoryComponent,
-    ThemePickerComponent
+    ThemePickerComponent,
+    GoalResearchBlocComponent
   ],
   imports: [
     BrowserModule,
