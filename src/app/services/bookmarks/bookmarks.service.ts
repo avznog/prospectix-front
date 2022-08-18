@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
@@ -59,8 +59,9 @@ export class BookmarksService {
     return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe();
   }
 
-  deleteByProspect(prospectId: number) : Subscription {
-    return this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe();
+  deleteByProspect(prospectId: number) {
+    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(bookmark => this.bookmarks.delete(bookmark.id));
+    
   }
 
   findAll() {
