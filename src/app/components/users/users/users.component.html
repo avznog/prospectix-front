@@ -10,14 +10,14 @@
 
 <div class="card">
   <div class="card-body">
-    <app-list-users [users]="users" [researchParamsUsers]="researchParamsUsers"></app-list-users>
+    <app-list-users></app-list-users>
   </div>
 </div>
 
 <div class="divider"></div>
 
 <div class="btn-group justify-center">
-  <button class="btn btn-ghost btn-outline {{researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-  <button class="btn btn-ghost btn-outline">Page {{researchParamsUsers.skip / 2}}</button>
-  <button class="btn btn-ghost btn-outline {{users && users.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+  <button class="btn btn-ghost btn-outline {{usersService.researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+  <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 2}}</button>
+  <button class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
 </div>

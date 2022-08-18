@@ -8,9 +8,39 @@ import { ResearchParamsUsers } from 'src/app/models/research-params-users.model'
 })
 export class UsersService {
 
+  users = new Map<number, ProjectManager>();
+  researchParamsUsers : ResearchParamsUsers = {
+    skip: 0,
+    take: 2
+  }
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.loadMore();
+  }
+
+  resetSearch(researchParamsUsers: ResearchParamsUsers) {
+    this.users.clear();
+    this.updateSearchParameters({
+      ...researchParamsUsers,
+      skip: 0
+    });
+  }
+
+  updateSearchParameters(researchParamsUsers: ResearchParamsUsers) {
+    if(researchParamsUsers != this.researchParamsUsers)
+      this.researchParamsUsers = researchParamsUsers;
+      this.loadMore();
+  }
+
+  loadMore() {
+    let queryParameters = new HttpParams();
+
+    queryParameters = queryParameters.append("take", this.researchParamsUsers.take);
+    queryParameters = queryParameters.append("skip", this.researchParamsUsers.skip);
+
+    this.http.get<ProjectManager[]>(`project-managers/find-all-paginated/`, { params: queryParameters}).subscribe(users => users.forEach(user => this.users.set(user.id, user)));
+  }
 
   findAll() : Observable<ProjectManager[]> {
     return this.http.get<ProjectManager[]>("project-managers/findAll");
@@ -30,14 +60,5 @@ export class UsersService {
 
   changeAdmin(id: number,admin: boolean) : Subscription {
     return this.http.patch<ProjectManager>(`project-managers/${id}`, {admin}).subscribe();
-  }
-
-  findAllPaginated(researchParamsUsers: ResearchParamsUsers) : Observable<ProjectManager[]> {
-    let queryParameters = new HttpParams();
-
-    queryParameters = queryParameters.append("take", researchParamsUsers.take);
-    queryParameters = queryParameters.append("skip", researchParamsUsers.skip);
-
-    return this.http.get<ProjectManager[]>(`project-managers/find-all-paginated`, { params: queryParameters});
   }
 }

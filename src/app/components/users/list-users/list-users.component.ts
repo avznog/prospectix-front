@@ -11,12 +11,9 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./list-users.component.scss']
 })
 export class ListUsersComponent implements OnInit {
-  
-  @Input() users!: ProjectManager[];
-  @Input() researchParamsUsers!: ResearchParamsUsers;
 
   constructor(
-    private readonly usersService: UsersService
+    public readonly usersService: UsersService
   ) { }
 
   ngOnInit(): void {
