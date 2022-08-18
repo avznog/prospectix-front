@@ -21,8 +21,8 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 export class EachBookmarkComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-  currentProspectMeetings : Meeting[] = [];
-  currentProspectReminders : Reminder[] = [];
+  // currentProspectMeetings : Meeting[] = [];
+  // currentProspectReminders : Reminder[] = [];
   formComment = new FormControl("");
   currentPm!: string;
   @Input() bookmarks!: Bookmark[];
@@ -33,8 +33,8 @@ export class EachBookmarkComponent implements OnInit {
 
   constructor(
     private readonly prospectService: ProspectsService,
-    private readonly meetingsService: MeetingsService,
-    private readonly remindersService: RemindersService,
+    public readonly meetingsService: MeetingsService,
+    public readonly remindersService: RemindersService,
     private readonly bookmarksService: BookmarksService,
     private readonly eventsService: EventsService
   ) { }
@@ -46,24 +46,8 @@ export class EachBookmarkComponent implements OnInit {
         this.currentPm = bookmark.pm.pseudo;
         return bookmark.prospect.id == this.prospect.id;
      });
-
-  this.meetingsService.findAllByProspect(this.prospect.id).subscribe({
-    next: (data) => {
-      this.currentProspectMeetings = data;
-    },
-    error: (err) => {
-      console.log(err)
-    }
-  });
-
-  this.remindersService.findAllByProspect(this.prospect.id).subscribe({
-    next: (data) => {
-      this.currentProspectReminders = data;
-    },
-    error: (err) => {
-      console.log(err);
-    }
-  });
+     this.meetingsService.updateMeetingsForProspect(this.prospect.id);
+     this.remindersService.updateRemindersForProspect(this.prospect.id);
   }
 
   onClickButtonGoogle() {
