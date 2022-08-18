@@ -22,8 +22,8 @@ export class EachResearchProspectComponent implements OnInit {
 
   @Input() prospect!: Prospect;
 
-  @Input() events!: Event[];
-  @Output() updateEventsEvent = new EventEmitter<Event[]>();
+  // @Input() events!: Event[];
+  // @Output() updateEventsEvent = new EventEmitter<Event[]>();
 
   formComment = new FormControl("");
   
@@ -194,18 +194,19 @@ export class EachResearchProspectComponent implements OnInit {
   }
 
   onClickDrawer() {
-    this.eventsService.findAllByProspect(this.prospect.id)
-    .subscribe({
-      next: (data) => {
-        this.updateEvents(data);
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
+    // this.eventsService.findAllByProspect(this.prospect.id)
+    // .subscribe({
+    //   next: (data) => {
+    //     this.updateEvents(data);
+    //   },
+    //   error: (err) => {
+    //     console.log(err)
+    //   }
+    // });
+    this.eventsService.updateEvents(this.prospect.id);
   }
 
   updateEvents(value: Event[]) {
-    this.updateEventsEvent.emit(value);
+    // this.updateEventsEvent.emit(value);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { Event } from 'src/app/models/event.model';
+import { EventsService } from 'src/app/services/events/events.service';
 
 @Component({
   selector: 'app-research-prospects',
@@ -8,9 +9,9 @@ import { Event } from 'src/app/models/event.model';
   styleUrls: ['./research-prospects.component.scss']
 })
 export class ResearchProspectsComponent implements OnInit {
-  events!: Event[];
   constructor(
-    public readonly prospectsService: ProspectsService
+    public readonly prospectsService: ProspectsService,
+    public readonly eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class ResearchProspectsComponent implements OnInit {
   }
 
 
-  updateEvents(newEvents: Event[]) {
-    this.events = newEvents;
-  }
+  // updateEvents(newEvents: Event[]) {
+  //   this.events = newEvents;
+  // }
 }

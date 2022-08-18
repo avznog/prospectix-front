@@ -9,6 +9,7 @@ import { Event } from 'src/app/models/event.model';
 })
 export class EventsService {
 
+  events: Event[] = [];
   constructor(
     private http: HttpClient
   ) { }
@@ -21,5 +22,9 @@ export class EventsService {
     let queryParameters = new HttpParams();
     queryParameters = queryParameters.append("prospectId", prospectId);
     return this.http.get<Event[]>(`events/find-all-by-prospect`, { params: queryParameters });
+  }
+
+  updateEvents(prospectId: number) {
+    this.findAllByProspect(prospectId).subscribe(events => this.events = events);
   }
 }

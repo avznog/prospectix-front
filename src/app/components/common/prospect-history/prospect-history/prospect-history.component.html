@@ -23,5 +23,5 @@
     {{event.type == 'NEGATIVE_ANSWER' ? 'step-error' : ''}}
     {{event.type == 'NO_ANSWER' ? 'step-error' : ''}}
     "
-    *ngFor="let event of events; let index = index">{{event.date | date:"dd MMMM" }} - {{event.description}}</li>
+    *ngFor="let event of eventsService.events; let index = index">{{event.date | date:"dd MMMM" }} - {{event.description}}</li>
 </ul>
