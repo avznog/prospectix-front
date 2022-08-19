@@ -53,7 +53,7 @@ export class ProspectsService {
   }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
-    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe();
+    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe(prospect => this.prospects.set(prospect.id, prospect));
   }
 
   update(idProspect: number, updateProspectDto: UpdateProspectDto) : Subscription {

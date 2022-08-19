@@ -52,7 +52,7 @@
           
           <!-- Commentaire -->
           <div>
-            <textarea class="textarea textarea-bordered h-1/2 w-full" [formControl]="formComment"
+            <textarea class="textarea textarea-bordered h-1/2 w-full" [(ngModel)]="comment"
                 placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
               </textarea>
           </div>

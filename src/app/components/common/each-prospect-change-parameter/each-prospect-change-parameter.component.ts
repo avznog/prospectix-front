@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
@@ -22,7 +21,8 @@ export class EachProspectChangeParameterComponent implements OnInit {
   @Input() el!: string;
   @Input() id!: number;
   isClicked!: boolean;
-  fcontrol = new FormControl("", [Validators.required, Validators.maxLength(10)])
+  element: string = "";
+  
   constructor(
     private readonly phonesService: PhonesService,
     private readonly emailsService: EmailsService,
@@ -34,11 +34,11 @@ export class EachProspectChangeParameterComponent implements OnInit {
 
   onChangeElement() : Subscription {
     if(this.el == "phone") {
-      return this.phonesService.updatePhoneNumber(this.id, { number: this.fcontrol.value});
+      return this.phonesService.updatePhoneNumber(this.id, { number: this.element});
     } else if (this.el == "email") {
-      return this.emailsService.updateEmail(this.id, { email: this.fcontrol.value });
+      return this.emailsService.updateEmail(this.id, { email: this.element });
     } else {
-      return this.websitesService.updateWebsite(this.id, { website: this.fcontrol.value });
+      return this.websitesService.updateWebsite(this.id, { website: this.element });
     }
   }
 

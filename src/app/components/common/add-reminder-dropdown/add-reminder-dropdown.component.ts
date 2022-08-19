@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { Prospect } from 'src/app/models/prospect.model';
@@ -14,10 +13,10 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 export class AddReminderDropdownComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-
-  formDate = new FormControl(new Date);
-  formPriority = new FormControl(1);
-  formDescription = new FormControl("");
+  
+  date: Date = new Date;
+  priority: number = 1;
+  description: string = "";
 
   constructor(
     private readonly remindersService: RemindersService,
@@ -29,10 +28,10 @@ export class AddReminderDropdownComponent implements OnInit {
 
   onCreateReminder() {
     this.remindersService.create({
-      date: this.formDate.value,
-      priority: this.formPriority.value,
+      date: this.date,
+      priority: this.priority,
       done: false,
-      description: this.formDescription.value,
+      description: this.description,
       prospect: this.prospect
     });
 

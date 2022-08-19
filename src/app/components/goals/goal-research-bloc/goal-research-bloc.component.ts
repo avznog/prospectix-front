@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { GoalsService } from 'src/app/services/goals/goals.service';
 import { ProjectManagersService } from 'src/app/services/project-managers/project-managers.service';
 
@@ -10,8 +9,8 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
 })
 export class GoalResearchBlocComponent implements OnInit {
 
-  formKeyword = new FormControl("")
-  formPm = new FormControl("")
+  keyword: string = "";
+  pm: string = "";
   constructor(
     public pmService: ProjectManagersService,
     private readonly goalsService: GoalsService
@@ -24,7 +23,7 @@ export class GoalResearchBlocComponent implements OnInit {
     setTimeout(() => {
       this.goalsService.resetSearch({
         ...this.goalsService.researchParamsGoals,
-        keyword: this.formKeyword.value
+        keyword: this.keyword
       });
     }, 200);
   }
@@ -32,7 +31,7 @@ export class GoalResearchBlocComponent implements OnInit {
   onEditPm() {
     this.goalsService.resetSearch({
       ...this.goalsService.researchParamsGoals,
-      pseudo: this.formPm.value
+      pseudo: this.pm
     });
   }
 

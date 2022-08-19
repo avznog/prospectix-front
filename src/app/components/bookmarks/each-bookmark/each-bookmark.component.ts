@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
@@ -16,7 +15,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 export class EachBookmarkComponent implements OnInit {
 
   @Input() bookmark!: Bookmark;
-  formComment = new FormControl("");
+  comment: string = "";
   constructor(
     private readonly prospectService: ProspectsService,
     public readonly bookmarksService: BookmarksService,
@@ -32,8 +31,8 @@ export class EachBookmarkComponent implements OnInit {
   }
 
   onChangeComment() {
-    if (this.formComment.value != "")
-      this.prospectService.updateComment(this.bookmark.prospect.id, { comment: this.formComment.value });
+    if (this.comment != "")
+      this.prospectService.updateComment(this.bookmark.prospect.id, { comment: this.comment });
   }
 
   onChangeNbNo() {

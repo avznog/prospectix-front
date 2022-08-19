@@ -26,7 +26,7 @@ import { EachProspectChangeParameterComponent } from './components/common/each-p
 import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
 import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { AddReminderDropdownComponent } from './components/common/add-reminder-dropdown/add-reminder-dropdown.component';
 import { AddMeetingsDropdownComponent } from './components/common/add-meetings-dropdown/add-meetings-dropdown.component';
@@ -95,6 +95,7 @@ import { GoalResearchBlocComponent } from './components/goals/goal-research-bloc
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   bootstrap: [AppComponent],
   providers: [

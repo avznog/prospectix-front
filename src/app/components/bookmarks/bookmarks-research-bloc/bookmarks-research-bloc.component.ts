@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
@@ -11,10 +10,10 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
   styleUrls: ['./bookmarks-research-bloc.component.scss']
 })
 export class BookmarksResearchBlocComponent implements OnInit {
-  formKeyword = new FormControl("");
-  formActivity = new FormControl("allActivities");
-  formCity = new FormControl("allCities");
-  formPm = new FormControl("");
+  keyword: string = "";
+  activity: string = "";
+  city: string = "";
+  pm: string = "";
 
   constructor(
     public readonly activitiesService: ActivitiesService,
@@ -30,7 +29,7 @@ export class BookmarksResearchBlocComponent implements OnInit {
     setTimeout(() => {
       this.bookmarksService.resetSearch({
         ...this.bookmarksService.researchParamsBookmarks,
-        keyword: this.formKeyword.value
+        keyword: this.keyword
       });
     }, 200);
   }
@@ -38,21 +37,21 @@ export class BookmarksResearchBlocComponent implements OnInit {
   onEditActivity() {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      activity: this.formActivity.value == "allActivities" ? "" : this.formActivity.value
+      activity: this.activity == "allActivities" ? "" : this.activity
     });
   }
 
   onEditCity() {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      city: this.formCity.value == "allCities" ? "" : this.formCity.value
+      city: this.city == "allCities" ? "" : this.city
     });
   }
 
   onEditPm() {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      pseudo: this.formPm.value
+      pseudo: this.pm
     });
   }
 }

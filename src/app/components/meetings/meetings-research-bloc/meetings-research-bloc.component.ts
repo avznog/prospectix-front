@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl} from '@angular/forms';
 import { MeetingType } from 'src/app/constants/meeting.type';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
@@ -11,12 +10,13 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 export class MeetingsResearchBlocComponent implements OnInit {
 
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
-  formKeyword = new FormControl("");
-  formOldOrNew = new FormControl("new");
-  formDone = new FormControl(false);
-  formType = new FormControl("");
-  formDateDown = new FormControl(Date)
-  formDateUp = new FormControl(Date)
+
+  keyword: string = "";
+  oldOrNew: string = "new";
+  done: boolean = false;
+  type: string = "";
+  dateDown: Date = new Date;
+  dateUp: Date = new Date;
 
   constructor(
     public meetingsService: MeetingsService
@@ -29,7 +29,7 @@ export class MeetingsResearchBlocComponent implements OnInit {
     setTimeout(() => {
       this.meetingsService.resetSearch({
         ...this.meetingsService.researchParamsMeeting,
-        keyword: this.formKeyword.value
+        keyword: this.keyword
       });
     }, 200);
   }
@@ -37,21 +37,21 @@ export class MeetingsResearchBlocComponent implements OnInit {
   onEditOldOrNew() {
     this.meetingsService.resetSearch({
       ...this.meetingsService.researchParamsMeeting,
-      oldOrNew: this.formOldOrNew.value
+      oldOrNew: this.oldOrNew
     });
   }
 
   onEditDone() {
     this.meetingsService.resetSearch({
       ...this.meetingsService.researchParamsMeeting,
-      done: this.formDone.value
+      done: this.done.toString()
     });
   }
 
   onEditType() {
     this.meetingsService.resetSearch({
       ...this.meetingsService.researchParamsMeeting,
-      type: this.formType.value != "allTypes" ? this.formType.value : ""
+      type: this.type != "allTypes" ? this.type : ""
     });
   }
 

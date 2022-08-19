@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { Observable, Subscription } from 'rxjs';
 import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
+import { CreateUserDto } from 'src/app/dto/users/create-user.dto';
 @Injectable({
   providedIn: 'root'
 })
@@ -46,8 +47,8 @@ export class UsersService {
     return this.http.get<ProjectManager[]>("project-managers/findAll");
   }
 
-  create(user: ProjectManager) : Subscription{
-    return this.http.post<ProjectManager>("project-managers/", user).subscribe();
+  create(createUserDto: CreateUserDto) : Subscription{
+    return this.http.post<ProjectManager>("project-managers/", createUserDto).subscribe(user => this.users.set(user.id, user));
   }
 
   delete(id: number) : Subscription {

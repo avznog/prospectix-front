@@ -13,7 +13,7 @@
 				<span class="label-text">Ville</span>
 			</label>
 			<div class="input-group">
-				<select id="city" class="select select-bordered" [formControl]="formControlCity" >
+				<select id="city" class="select select-bordered" [(ngModel)]="city" >
 					<option disabled selected>Ville actuelle : {{prospect.city.name}}</option>
 					<option *ngFor="let city of citiesService.cities" >{{city.name}}</option>
 				</select>
@@ -27,7 +27,7 @@
 				<span class="label-text">Domaine d'activité</span>
 			</label>
 			<div class="input-group">
-				<select id="activity" class="select select-bordered" [formControl]="formControlActivity">
+				<select id="activity" class="select select-bordered" [(ngModel)]="activity">
 					<option disabled selected>Domaine d'acitvité actuel : {{prospect.activity.name}}</option>
 					<option *ngFor="let activity of activitiesService.activities" >{{activity.name}}</option>
 				</select>

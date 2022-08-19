@@ -1,7 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Goal } from 'src/app/models/goal.model';
-import { GoalsService } from '../../../services/goals/goals.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-edit-goal',
@@ -10,22 +7,15 @@ import { GoalsService } from '../../../services/goals/goals.service';
 })
 export class EditGoalComponent implements OnInit {
 
+  title: string = "";
+  description: string = "";
+  deadline: Date = new Date;
+  isCyclic: boolean = true;
+  totalSteps: number = Number();
 
-  formEditGoal!: FormGroup;
-
-  constructor(
-    private formBuilder: FormBuilder,
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.formEditGoal = this.formBuilder.group({
-      title: [""],
-      description: [""],
-      deadline: [Date],
-      isCyclic: [false],
-      totalSteps: [0]
-    });
-    
   }
 
 

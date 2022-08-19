@@ -1,10 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Activity } from 'src/app/models/activity.model';
-import { City } from 'src/app/models/city.model';
-import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
-import { Reminder } from 'src/app/models/reminder.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -17,20 +12,20 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 export class ProspectDetailsComponent implements OnInit {
 
   @Input() prospect!: Prospect;
+  activity: string = "";
+  city: string = "";
   
-  formControlActivity!: FormControl;
-  formControlCity!: FormControl;
   constructor(
     private prospectsService: ProspectsService,
     public citiesService: CitiesService,
     public activitiesService: ActivitiesService
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit(): void {
-
-    this.formControlCity = new FormControl(this.prospect.city.name, Validators.required);
-    this.formControlActivity = new FormControl(this.prospect.activity.name, Validators.required);
-
+    this.activity = this.prospect.city.name;
+    this.city = this.prospect.city.name
   }
 
   onChangeNbNo() {
@@ -39,12 +34,12 @@ export class ProspectDetailsComponent implements OnInit {
 
   onChangeActivity() {
    console.log("activity changed");
-   this.prospectsService.updateByActivity(this.prospect.id, this.formControlActivity.value);
+   this.prospectsService.updateByActivity(this.prospect.id, this.activity);
   }
 
   onChangeCity() {
     console.log("city changed")
-    this.prospectsService.updateByCity(this.prospect.id, this.formControlCity.value);
+    this.prospectsService.updateByCity(this.prospect.id, this.city);
   }
 
   onClickRefus() {

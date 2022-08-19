@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { MeetingType } from 'src/app/constants/meeting.type';
@@ -14,9 +13,9 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 })
 export class AddMeetingsDropdownComponent implements OnInit {
 
-  formDate = new FormControl(new Date);
-  formType = new FormControl(MeetingType.EXT);
-  formDescription = new FormControl("");
+  date: Date = new Date;
+  type: MeetingType = MeetingType.EXT;
+  
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
   @Input() prospect!: Prospect;
   
@@ -31,8 +30,8 @@ export class AddMeetingsDropdownComponent implements OnInit {
 
   onCreateMeeting() {
     this.meetingsService.create({
-      type: this.formType.value,
-      date: this.formDate.value,
+      type: this.type,
+      date: this.date,
       done: false,
       prospect: this.prospect,
     });

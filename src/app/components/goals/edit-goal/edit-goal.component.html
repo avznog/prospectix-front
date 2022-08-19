@@ -2,30 +2,41 @@
   <label for="edit-goal-modal" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
   <h3 class="text-lg font-bold">Modifier l'objectif</h3>
   <div class="divider"></div>
-  <form [formGroup]="formEditGoal" class="space-y-5">
+  <div class="space-y-5">
+
+    <!-- Title -->
     <label class="input-group">
       <span>Titre</span>
-      <input class="input input-bordered" type="text" placeholder="Ex: Appels" formControlName="title" />
+      <input class="input input-bordered" type="text" placeholder="Ex: Appels" [(ngModel)]="title" />
     </label>
+
+    <!-- Description -->
     <label class="input-group">
       <span>Description</span>
-      <input class="input input-bordered" type="text" placeholder="Ex: Nombre d'appels par semaine" formControlName="description" />
+      <input class="input input-bordered" type="text" placeholder="Ex: Nombre d'appels par semaine" [(ngModel)]="description" />
     </label>
+
+    <!-- Deadline -->
     <label class="input-group">
       <span>Deadline</span>
-      <input class="input input-bordered" type="date" formControlName="deadline" />
+      <input class="input input-bordered" type="date" [(ngModel)]="deadline" />
     </label>
+
+    <!-- Redondant ? isCyclic ? -->
     <label class="input-group">
       <span>Redondant ?</span>
-      <input class="checkbox" type="checkbox" formControlName="isCyclic" />
+      <input class="checkbox" type="checkbox" [(ngModel)]="isCyclic" />
     </label>
+
+    <!-- Nombre d'itération / totalSteps -->
     <label class="input-group">
       <span>Nombre d'itérations</span>
-      <input class="input input-bordered" type="number" placeholder="Ex: 0" formControlName="totalSteps" />
+      <input class="input input-bordered" type="number" placeholder="Ex: 0" [(ngModel)]="totalSteps" />
     </label>
+
+    <!-- Button -->
     <div class="modal-action">
       <label for="edit-goal-modal" class="btn btn-outline btn-ghost right-2">Modifier l'objectif</label>
     </div>  
-  </form>
-  
+  </div>
 </div>

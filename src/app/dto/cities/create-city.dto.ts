@@ -1,4 +1,4 @@
 export interface CreateCityDto {
     name: string;
-    zipcode: string;
+    zipcode: number;
 }

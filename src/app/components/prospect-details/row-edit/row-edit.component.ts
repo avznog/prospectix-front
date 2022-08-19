@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { EmailsService } from 'src/app/services/emails/emails.service';
@@ -18,7 +17,7 @@ export class RowEditComponent implements OnInit {
   @Input() prospectVariable!: string;
   @Input() prospect!: Prospect;
 
-  formControl!: FormControl;
+  element: string = "";
   constructor(
     private prospectsService: ProspectsService,
     private phonesService: PhonesService,
@@ -27,7 +26,7 @@ export class RowEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.formControl = new FormControl(this.prospectVariable, Validators.required);
+    this.element = this.prospectVariable;
   }
 
   onClickEdit() {
@@ -36,23 +35,23 @@ export class RowEditComponent implements OnInit {
     switch(this.titleRow) {
 
       case "Entreprise":
-        this.prospectsService.update(this.prospect.id, {companyName: this.formControl.value} as UpdateProspectDto);
+        this.prospectsService.update(this.prospect.id, {companyName: this.element} as UpdateProspectDto);
       break;
 
       case "Addresse":
-        this.prospectsService.update(this.prospect.id, {streetAddress: this.formControl.value} as UpdateProspectDto);
+        this.prospectsService.update(this.prospect.id, {streetAddress: this.element} as UpdateProspectDto);
       break;
       
       case "Téléphone":
-        this.phonesService.updatePhoneNumber(this.prospect.phone.id, {number: this.formControl.value});
+        this.phonesService.updatePhoneNumber(this.prospect.phone.id, {number: this.element});
       break;
 
       case "Email":
-        this.emailsService.updateEmail(this.prospect.email.id, { email: this.formControl.value });
+        this.emailsService.updateEmail(this.prospect.email.id, { email: this.element });
       break;
 
       case "Site internet":
-        this.websitesService.updateWebsite(this.prospect.website.id, { website: this.formControl.value });
+        this.websitesService.updateWebsite(this.prospect.website.id, { website: this.element });
       break;
 
       default:

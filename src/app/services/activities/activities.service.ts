@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { CreateActivityDto } from 'src/app/dto/activities/create-activity.dto';
 import { Activity } from 'src/app/models/activity.model';
 

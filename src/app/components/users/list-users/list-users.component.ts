@@ -1,8 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProjectManager } from 'src/app/models/project-manager.model';
-import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({

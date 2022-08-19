@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -10,9 +9,9 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
   styleUrls: ['./research-bloc.component.scss']
 })
 export class ResearchBlocComponent implements OnInit {
-  formKeyword = new FormControl("");
-  formActivity = new FormControl("allActivities");
-  formCity = new FormControl("allCities");
+  formKeyword: string = "";
+  formActivity: string = "allActivities";
+  formCity: string = "allCities";
 
   constructor(
     public readonly activitiesService: ActivitiesService,
@@ -26,14 +25,14 @@ export class ResearchBlocComponent implements OnInit {
   onEditCity() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      city: this.formCity.value == "allCities" ? "": this.formCity.value
+      city: this.formCity == "allCities" ? "": this.formCity
     })
   }
 
   onEditActivity() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      activity: this.formActivity.value == "allActivities" ? "" : this.formActivity.value
+      activity: this.formActivity == "allActivities" ? "" : this.formActivity
     });
   }
 
@@ -41,7 +40,7 @@ export class ResearchBlocComponent implements OnInit {
     setTimeout(() => {
        this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      keyword: this.formKeyword.value
+      keyword: this.formKeyword
     });
     }, 200)
    

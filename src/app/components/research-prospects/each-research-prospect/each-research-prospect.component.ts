@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
@@ -17,7 +16,7 @@ export class EachResearchProspectComponent implements OnInit {
 
   @Input() prospect!: Prospect;
 
-  formComment = new FormControl("");
+  comment: string = "";
   
   constructor(
     private readonly prospectService: ProspectsService,
@@ -33,8 +32,8 @@ export class EachResearchProspectComponent implements OnInit {
   }
 
   onChangeComment() {
-    if(this.formComment.value != "")
-      this.prospectService.updateComment(this.prospect.id, { comment: this.formComment.value });
+    
+      this.comment != "" && this.prospectService.updateComment(this.prospect.id, { comment: this.comment });
   }
 
   onChangeNbNo() {
