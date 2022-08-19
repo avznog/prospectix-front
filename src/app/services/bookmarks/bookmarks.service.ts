@@ -60,7 +60,7 @@ export class BookmarksService {
   }
 
   deleteByProspect(prospectId: number) {
-    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(bookmark => this.bookmarks.delete(bookmark.id));
+    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe();
     
   }
 
