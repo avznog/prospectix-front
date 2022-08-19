@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { GoalsService } from 'src/app/services/goals/goals.service';
 import { Goal } from '../../../models/goal.model';
@@ -9,17 +9,12 @@ import { Goal } from '../../../models/goal.model';
   styleUrls: ['./liste-goals.component.scss'],
 })
 export class ListeGoalsComponent implements OnInit {
-
-  @Input() goals!: Goal[];
-  @Output() updateGoalToEditUpEvent = new EventEmitter<number>();
-
   constructor(
-    private goalsService: GoalsService
+    public goalsService: GoalsService
   ){}
 
   ngOnInit(): void {
   }
-
 
   deleteGoal(goal: Goal) : Subscription {
     return this.goalsService.deleteGoal(goal.id);

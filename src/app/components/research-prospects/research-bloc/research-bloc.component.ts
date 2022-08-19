@@ -1,10 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Activity } from 'src/app/models/activity.model';
-import { City } from 'src/app/models/city.model';
+import { Component, OnInit } from '@angular/core';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
-import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
+import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 
 @Component({
   selector: 'app-research-bloc',
@@ -12,67 +9,41 @@ import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.
   styleUrls: ['./research-bloc.component.scss']
 })
 export class ResearchBlocComponent implements OnInit {
-  
-  @Input() researchParamsProspect! : ResearchParamsProspect;
-  @Output() updateResearchParamsProspectEvent = new EventEmitter<ResearchParamsProspect>();
-
-  activities!: Activity[];
-  cities!: City[];
-  formKeyword = new FormControl("");
-  formActivity = new FormControl("allActivities");
-  formCity = new FormControl("allCities");
+  formKeyword: string = "";
+  formActivity: string = "allActivities";
+  formCity: string = "allCities";
 
   constructor(
-    private readonly activitiesService: ActivitiesService,
-    private readonly citiesService: CitiesService,
+    public readonly activitiesService: ActivitiesService,
+    public readonly citiesService: CitiesService,
+    public readonly prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
-    this.activitiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.activities = data
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
-
-    this.citiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.cities = data;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-
   }
 
   onEditCity() {
-    this.updateResearchParamsProspect({
-      ...this.researchParamsProspect,
-      city: this.formCity.value == "allCities" ? "" : this.formCity.value
-    });
+    this.prospectsService.resetSearch({
+      ...this.prospectsService.researchParamsProspect,
+      city: this.formCity == "allCities" ? "": this.formCity
+    })
   }
 
   onEditActivity() {
-    this.updateResearchParamsProspect({
-      ...this.researchParamsProspect,
-      activity: this.formActivity.value == "allActivities" ? "" : this.formActivity.value
+    this.prospectsService.resetSearch({
+      ...this.prospectsService.researchParamsProspect,
+      activity: this.formActivity == "allActivities" ? "" : this.formActivity
     });
   }
 
-  onEditKeyword(): void {
-    this.updateResearchParamsProspect({
-      ...this.researchParamsProspect,
-      keyword: this.formKeyword.value
+  onEditKeyword() {
+    setTimeout(() => {
+       this.prospectsService.resetSearch({
+      ...this.prospectsService.researchParamsProspect,
+      keyword: this.formKeyword
     });
-  }
-
-  updateResearchParamsProspect(value: ResearchParamsProspect) {
-    this.updateResearchParamsProspectEvent.emit(value);
+    }, 200)
+   
   }
 
 }

@@ -1,17 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
-import { Event } from 'src/app/models/event.model';
-import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
-import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
-import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
   selector: 'app-each-research-prospect',
@@ -22,39 +17,16 @@ export class EachResearchProspectComponent implements OnInit {
 
   @Input() prospect!: Prospect;
 
-  @Input() events!: Event[];
-  @Output() updateEventsEvent = new EventEmitter<Event[]>();
-
-  currentProspectMeetings : Meeting[] = [];
-  currentProspectReminders : Reminder[] = [];
-  formComment = new FormControl("");
+  comment: string = "";
   
   constructor(
     private readonly prospectService: ProspectsService,
     private readonly bookmarksService: BookmarksService,
-    private readonly meetingsService: MeetingsService,
-    private readonly remindersService: RemindersService,
-    private readonly eventsService: EventsService
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.meetingsService.findAllByProspect(this.prospect.id).subscribe({
-      next: (data) => {
-        this.currentProspectMeetings = data;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
-
-    this.remindersService.findAllByProspect(this.prospect.id).subscribe({
-      next: (data) => {
-        this.currentProspectReminders = data;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
   }
 
   onClickButtonGoogle() {
@@ -62,71 +34,24 @@ export class EachResearchProspectComponent implements OnInit {
   }
 
   onChangeComment() {
-    if(this.formComment.value != "")
-      this.prospectService.updateComment(this.prospect.id, { comment: this.formComment.value });
+    
+      this.comment != "" && this.prospectService.updateComment(this.prospect.id, { comment: this.comment });
   }
 
   onChangeNbNo() {
       this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
-      let pm = {
-        "id": 1,
-        "pseudo": "bgonzva",
-        "admin": true,
-        "name": "Gonzva",
-        "firstname": "Benjamin",
-        "mail": "bgonzva@juniorisep.com",
-        "tokenEmail": "",
-        "disabled": false,
-        "goals": [
-           
-        ],
-        "meetings": [
-            
-        ],
-        "reminders": [
-           
-        ],
-        "sentEmails": [],
-        "bookmarks": [],
-        "events": []
-      };
+
       this.eventsService.create({
         type: EventType.NO_ANSWER,
         prospect: this.prospect,
-        pm: pm,
         date: new Date,
-        description: EventDescriptionType.NO_ANSWER
+        description: `${EventDescriptionType.NO_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
       });
   }
 
   onCreateBookmark() {
-    // TODO : ADD for current pm
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
-
     const createBookmarkDto: CreateBookmarkDto = {
       prospect: this.prospect,
-      pm: pm,
       creationDate: new Date()
     };
     this.bookmarksService.create(createBookmarkDto);
@@ -135,9 +60,8 @@ export class EachResearchProspectComponent implements OnInit {
     this.eventsService.create({
       type: EventType.ADD_BOOKMARKS,
       prospect: this.prospect,
-      pm: pm,
       date: new Date,
-      description: EventDescriptionType.ADD_BOOKMARKS
+      description: `${EventDescriptionType.ADD_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     console.log("added to bookmarks");
   }
@@ -146,83 +70,25 @@ export class EachResearchProspectComponent implements OnInit {
     this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
     this.bookmarksService.deleteByProspect(this.prospect.id);
     console.log("removed from bookmarks");
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.DELETE_BOOKMARKS,
       prospect: this.prospect,
-      pm: pm,
       date: new Date,
-      description: EventDescriptionType.DELETE_BOOKMARKS
+      description: `${EventDescriptionType.DELETE_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
   }
 
   onClickRefus() {
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.NEGATIVE_ANSWER,
       prospect: this.prospect,
-      pm: pm,
       date: new Date,
-      description: EventDescriptionType.NEGATIVE_ANSWER
+      description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     this.prospectService.disable(this.prospect.id);
   }
 
   onClickDrawer() {
-    this.eventsService.findAllByProspect(this.prospect.id)
-    .subscribe({
-      next: (data) => {
-        this.updateEvents(data);
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
-  }
-
-  updateEvents(value: Event[]) {
-    this.updateEventsEvent.emit(value);
+    this.eventsService.updateEvents(this.prospect.id);
   }
 }

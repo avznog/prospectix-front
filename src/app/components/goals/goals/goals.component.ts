@@ -8,22 +8,26 @@ import { GoalsService } from 'src/app/services/goals/goals.service';
   styleUrls: ['./goals.component.scss']
 })
 export class GoalsComponent implements OnInit {
-  goals!: Goal[];
 
   constructor(
-    private goalsService: GoalsService
+    public goalsService: GoalsService
   ) { }
 
   ngOnInit(): void {
-    this.goalsService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.goals = data.sort((a: Goal, b: Goal) => (a.id - b.id));
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
+  }
+
+  pageDown() {
+    this.goalsService.updateSearchParameters({
+      ...this.goalsService.researchParamsGoals,
+      skip: this.goalsService.researchParamsGoals.skip - 2
+    });
+  }
+  
+  pageUp() {
+    this.goalsService.updateSearchParameters({
+      ...this.goalsService.researchParamsGoals,
+      skip: this.goalsService.researchParamsGoals.skip + 2
+    });
   }
 
 }

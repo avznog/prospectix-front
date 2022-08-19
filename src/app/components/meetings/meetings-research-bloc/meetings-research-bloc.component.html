@@ -4,8 +4,8 @@
     <label class="label" for="date">
       <span class="label-text">Recherche</span>
     </label>
-    <input class="input input-bordered w-full max-w-xs" type="text" placeholder="Recherche" [formControl]="formKeyword"
-      (input)="onEditKeyword()" />
+    <input class="input input-bordered w-full max-w-xs" type="search" placeholder="Recherche" [(ngModel)]="keyword"
+      (keyup)="onEditKeyword()" />
   </div>
 
   <!-- OldOrNew -->
@@ -13,48 +13,52 @@
     <label class="label" for="futureMeetings">
       <span class="label-text">Futurs RDV</span>
     </label>
-    <input class="radio" type="radio" name="oldOrNew" id="futureMeetings" [value]="'new'" [formControl]="formOldOrNew"
+    <input class="radio" type="radio" name="oldOrNew" id="futureMeetings" [value]="'new'" [(ngModel)]="oldOrNew"
       (change)="onEditOldOrNew()" />
   </div>
 
+  <!-- OldOrNew -->
   <div class="form-control min-w-fit">
     <label class="label" for="previousMeetings">
       <span class="label-text">Anciens RDV</span>
     </label>
-    <input type="radio" class="radio" name="oldOrNew" id="previousMeetings" [value]="'old'" [formControl]="formOldOrNew"
+    <input type="radio" class="radio" name="oldOrNew" id="previousMeetings" [value]="'old'" [(ngModel)]="oldOrNew"
       (change)="onEditOldOrNew()" />
   </div>
 
+  <!-- done -->
   <div class="form-control min-w-fit">
     <label class="label" for="meetingsDone">
       <span class="label-text">RDV effectués</span>
     </label>
-    <input class="toggle" type="checkbox" id="meetingsDone" [formControl]="formDone"
+    <input class="toggle" type="checkbox" id="meetingsDone" [(ngModel)]="done"
       (change)="onEditDone()" />
   </div>
 
+  <!-- tpye of meeting -->
   <div class="form-control min-w-fit">
     <label class="label" for="typeMeeting">
       <span class="label-text">Type de RDV</span>
     </label>
-    <select id="type" name="type" [formControl]="formType" (change)="onEditType()" class="select select-bordered">
+    <select id="type" name="type" [(ngModel)]="type" (change)="onEditType()" class="select select-bordered">
       <option [defaultSelected]="'Tous les types'" [value]="'allTypes'">Tous les types</option>
       <option *ngFor="let type of meetingTypeKeys">{{type}}</option>
   </select>
   </div>
 
+  <!-- datedown / date up -->
   <label for="date-option" class="btn modal-button">Par date</label>
   <input type="checkbox" id="date-option" class="modal-toggle" />
   <div class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <div class="form-control min-w-fit">
         <label class="label" for="dateDown">Date inférieure</label>
-        <input type="date" id="dateDown"[formControl]="formDateDown" (change)="onEditDateDown()" />
+        <input type="date" id="dateDown"[(ngModel)]="dateDown" (change)="onEditDateDown()" />
       </div>
 
       <div class="form-control min-w-fit">
         <label class="label" for="dateUp">Date supérieure</label>
-        <input type="date" id="dateUp" [formControl]="formDateUp" (change)="onEditDateUp()" />
+        <input type="date" id="dateUp" [(ngModel)]="dateUp" (change)="onEditDateUp()" />
       </div>
       <div class="modal-action">
         <label for="date-option" class="btn">Ok</label>

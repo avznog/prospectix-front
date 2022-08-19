@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event } from 'src/app/models/event.model';
+import { EventsService } from 'src/app/services/events/events.service';
 
 @Component({
   selector: 'app-prospect-history',
@@ -8,9 +9,9 @@ import { Event } from 'src/app/models/event.model';
 })
 export class ProspectHistoryComponent implements OnInit {
 
-  constructor() { }
-  content!: string;
-  @Input() events!: Event[];
+  constructor(
+    public eventsService: EventsService
+  ) { }
   ngOnInit(): void {
   }
 

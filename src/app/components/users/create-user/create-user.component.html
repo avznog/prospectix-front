@@ -2,29 +2,35 @@
   <label for="add-user-modal" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
   <h3 class="text-lg font-bold">Ajouter un utilisateur</h3>
   <div class="divider"></div>
-  <form [formGroup]="createUserForm" class="space-y-5">
+  <div class="space-y-5">
+
+    <!-- Firstname -->
     <label class="input-group">
       <span>Prénom</span>
-      <input class="input input-bordered" type="text" placeholder="Ex: Benjamin" formControlName="firstname" />
+      <input class="input input-bordered" type="text" placeholder="Ex: Benjamin" [(ngModel)]="firstname" />
     </label>
 
+    <!-- Lastname -->
     <label class="input-group">
       <span>Nom</span>
-      <input class="input input-bordered" type="text" placeholder="Ex: Gonzva" formControlName="name"/>
+      <input class="input input-bordered" type="text" placeholder="Ex: Gonzva" [(ngModel)]="lastname"/>
     </label>
 
+    <!-- Admin ? -->
     <label class="input-group">
       <span>Admin ?</span>
-      <input class="input input-bordered" type="checkbox" class="checkbox" formControlName="admin" />
+      <input class="input input-bordered" type="checkbox" class="checkbox" [(ngModel)]="admin" />
     </label>
 
+    <!-- Disabled ? -->
     <label class="input-group">
       <span>Disabled ? </span>
-      <input class="input input-bordered" type="checkbox" class="checkbox" formControlName="disabled" />
+      <input class="input input-bordered" type="checkbox" class="checkbox" [(ngModel)]="disabled" />
     </label>
 
+    <!-- Button -->
     <div class="modal-action">
       <label for="add-user-modal" (click)="onCreateUser()" class="btn btn-outline btn-ghost">Créer l'utilisateur</label>
     </div>
-  </form>
+  </div>
 </div>

@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Event } from 'src/app/models/event.model';
-import { Prospect } from 'src/app/models/prospect.model';
+import { Component, OnInit } from '@angular/core';
+import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 
 @Component({
   selector: 'app-list-prospects',
@@ -8,21 +7,10 @@ import { Prospect } from 'src/app/models/prospect.model';
   styleUrls: ['./list-prospects.component.scss']
 })
 export class ListProspectsComponent implements OnInit {
-  @Input() prospects!: Prospect[];
-  @Input() events!: Event[];
-  @Output() updateEventsEvent = new EventEmitter<Event[]>();
   constructor(
+    public prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
   }
-
-  eventsUpdated(newEvents: Event[]) {
-    this.updateEvents(newEvents);
-  }
-
-  updateEvents(value: Event[]) {
-    this.updateEventsEvent.emit(value);
-  }
-
 }

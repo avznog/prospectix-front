@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Meeting } from 'src/app/models/meeting.model';
+import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
   selector: 'app-meetings-liste',
@@ -7,9 +7,9 @@ import { Meeting } from 'src/app/models/meeting.model';
   styleUrls: ['./meetings-liste.component.scss']
 })
 export class MeetingsListeComponent implements OnInit {
-
-  @Input() meetings!: Meeting[];
-  constructor() { }
+  constructor(
+    public meetingsService: MeetingsService
+  ) { }
 
   ngOnInit(): void {
   }

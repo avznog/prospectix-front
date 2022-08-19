@@ -1,6 +1,6 @@
 export interface ResearchParamsMeeting {
     take?: number;
-    skip?: number;
+    skip: number;
     done: string;
     date?: string;
     oldOrNew: string;

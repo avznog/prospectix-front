@@ -10,7 +10,7 @@
       <label class="label">
         <span class="label-text">Nom du prospect</span>
       </label>
-      <input type="text" class="input input-bordered" [formControl]="formCompanyName" placeholder="Ex: ISEP"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="companyName" placeholder="Ex: ISEP"/>
     </div>
 
     <!-- Adresse du prospect -->
@@ -18,7 +18,7 @@
       <label class="label">
         <span class="label-text">Adresse</span>
       </label>
-      <input type="text" class="input input-bordered" [formControl]="formAddress" placeholder="Ex: 22 rue notre Dame des Champs"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="address" placeholder="Ex: 22 rue notre Dame des Champs"/>
     </div>
    
 
@@ -32,8 +32,8 @@
     <div class="inline-flex">
 
       <!-- select activity -->
-      <select id="activity" name="activity"[formControl]="formActivity" class="select select-bordered" >
-        <option *ngFor="let activity of activities" [ngValue]="activity" [defaultSelected]="activity">{{activity.name}}</option>
+      <select id="activity" name="activity"[(ngModel)]="activity" class="select select-bordered" >
+        <option *ngFor="let activity of activitiesService.activities" [ngValue]="activity" [defaultSelected]="activity">{{activity.name}}</option>
       </select>
 
       <!-- dropdown add activity -->
@@ -42,7 +42,9 @@
         <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
           <div class="card-body">
             <div class="card-title">Ajouter un domaine d'activité</div>
-            <input type="text" class="input input-ghost outline outline-1" placeholder="Domaine d'activité" [formControl]="formAddActivity" (input)="onEditAddActivity()">
+
+            <input type="text" class="input input-ghost outline outline-1" placeholder="Domaine d'activité" [(ngModel)]="addActivity" (input)="onEditAddActivity()">
+            
             <label tabindex="0" class="btn {{addActivityDisabled ? 'btn-disabled' : ''}}" (click)="onAddActivity()">Ajouter</label>
             <div class="alert alert-error shadow-lg" *ngIf="addActivityDisabled">
               <span>Attention ! Ce domaine d'activité existe déjà dans la base</span>
@@ -62,8 +64,8 @@
       <div class="inline-flex">
 
         <!-- select city -->
-        <select id="city" name="city" [formControl]="formCity" class="select select-bordered">
-          <option *ngFor="let city of cities" [ngValue]="city" [defaultSelected]="city">{{city.name}}</option>
+        <select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
+          <option *ngFor="let city of citiesService.cities" [ngValue]="city" [defaultSelected]="city">{{city.name}}</option>
         </select>
 
         <!-- dropdown add city -->
@@ -72,8 +74,8 @@
           <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
             <div class="card-body ">
               <div class="card-title">Ajouter une ville</div>
-              <input type="text" class="input input-ghost outline-1 outline" placeholder="Ville" [formControl]="formAddCity" (input)="onEditAddCity()">
-              <input type="text" class="input outline outline-1" placeholder="Code postal" [formControl]="formAddZipcode" (input)="onEditAddCity()">
+              <input type="text" class="input input-ghost outline-1 outline" placeholder="Ville" [(ngModel)]="addCity" (input)="onEditAddCity()">
+              <input type="text" class="input outline outline-1" placeholder="Code postal" [(ngModel)]="addZipcode" (input)="onEditAddCity()">
               <label tabindex="0" class="btn {{addCityDisabled ? 'btn-disabled' : ''}}" (click)="onAddCity()">Ajouter</label>
               <div class="alert alert-error shadow-lg" *ngIf="addCityDisabled">
                 <span>Attention ! Cette ville existe déjà dans la base</span>
@@ -93,8 +95,8 @@
     <div class="inline-flex">
 
       <!-- select country -->
-      <select id="country" name="country" [formControl]="formCountry" class="select select-bordered">
-          <option *ngFor="let country of countries" [ngValue]="country" [defaultSelected]="country">{{country.name}}</option>
+      <select id="country" name="country" [(ngModel)]="country" class="select select-bordered">
+          <option *ngFor="let country of countriesService.countries" [ngValue]="country" [defaultSelected]="country">{{country.name}}</option>
       </select>
 
       <!-- dropdown add country -->
@@ -103,7 +105,7 @@
         <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
           <div class="card-body">
             <div class="card-title">Ajouter un Pays</div>
-            <input type="text" class="input input-ghost outline-1 outline" placeholder="Pays" [formControl]="formAddCountry" (input)="onEditAddCountry()">
+            <input type="text" class="input input-ghost outline-1 outline" placeholder="Pays" [(ngModel)]="addCountry" (input)="onEditAddCountry()">
             <label tabindex="0" class="btn {{addCountryDisabled ? 'btn-disabled' : ''}}" (click)="onAddCountry()">Ajouter</label>
             <div class="alert alert-error shadow-lg" *ngIf="addCountryDisabled">
               <span>Attention ! Ce pays existe déjà dans la base</span>
@@ -122,7 +124,7 @@
       <label class="label">
         <span class="label-text">Téléphone</span>
       </label>
-      <input type="text" class="input input-bordered" [formControl]="formPhone" placeholder="Ex: 09 87 65 43 32" />
+      <input type="text" class="input input-bordered" [(ngModel)]="phone" placeholder="Ex: 09 87 65 43 32" />
     </div>
 
     <!-- Email du prospect -->
@@ -130,7 +132,7 @@
       <label class="label">
         <span class="label-text">Email</span>
       </label>
-      <input type="text" class="input input-bordered" [formControl]="formEmail" placeholder="Ex: accueil@juniorisep.com"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="email" placeholder="Ex: accueil@juniorisep.com"/>
     </div>
 
     <!-- Site internet du prospect -->
@@ -138,7 +140,7 @@
       <label class="label">
         <span class="label-text">Site internet</span>
       </label>
-      <input type="text" class="input input-bordered" [formControl]="formWebsite" placeholder="Ex: www.juniorisep.com"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="website" placeholder="Ex: www.juniorisep.com"/>
     </div>
   </div>
 
@@ -147,7 +149,7 @@
     <label class="label">
       <span class="label-text">Commentaire</span>
     </label>
-    <textarea class="textarea outline-1 outline h-1/3" placeholder="Commentaire sur le prospect" [formControl]="formComment"></textarea>
+    <textarea class="textarea outline-1 outline h-1/3" placeholder="Commentaire sur le prospect" [(ngModel)]="comment"></textarea>
   </div>
 
 

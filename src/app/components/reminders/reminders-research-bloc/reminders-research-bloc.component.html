@@ -6,7 +6,7 @@
     <label class="label" for="search">
       <span class="label-text">Recherche</span>
     </label>
-    <input type="text" [formControl]="formKeyword" (input)="onEditKeyword()" placeholder="Recherche"
+    <input type="search" [(ngModel)]="keyword" (keyup)="onEditKeyword()" placeholder="Recherche"
       class="input input-bordered w-full max-w-xs" />
   </div>
 
@@ -16,7 +16,7 @@
     <label for="futureReminders" class="label cursor-pointer">
       <span class="label-text">Futurs rappels</span>
     </label>
-    <input id="futureReminders" name="oldNewReminders" type="radio" class="radio"[checked]="formOldOrNew.value == 'new'" [value]="'new'" [formControl]="formOldOrNew"
+    <input id="futureReminders" name="oldNewReminders" type="radio" class="radio"[checked]="oldOrNew == 'new'" [value]="'new'" [(ngModel)]="oldOrNew"
       (change)="onEditOldOrNew()" />
   </div>
 
@@ -26,7 +26,7 @@
     <label for="previousReminders" class="label cursor-pointer">
       <span class="label-text">Anciens rappels</span>
     </label>
-    <input class="radio" name="oldNewReminders" type="radio" id="previousReminders" [value]="'old'" [formControl]="formOldOrNew"
+    <input class="radio" name="oldNewReminders" type="radio" id="previousReminders" [value]="'old'" [(ngModel)]="oldOrNew"
       (change)="onEditOldOrNew()"  />
   </div>
 
@@ -36,7 +36,7 @@
     <label for="remindersDone" class="label cursor-pointer">
       <span class="label-text">Rappels effectués</span>
     </label>
-    <input class="toggle" type="checkbox" id="remindersDone" [formControl]="formDone"
+    <input class="toggle" type="checkbox" id="remindersDone" [(ngModel)]="done"
       (change)="onEditDone()" checked />
   </div>
 
@@ -46,7 +46,7 @@
     <label for="orderByPriority" class="label cursor-pointer">
       <span class="label-text">Par ordre de priorité</span>
     </label>
-    <input class="toggle" type="checkbox" id="orderByPriority" [formControl]="formOrderByPriority"
+    <input class="toggle" type="checkbox" id="orderByPriority" [(ngModel)]="orderByPriority"
       (change)="onEditOrderByPriority()" checked />
   </div>
 
@@ -56,8 +56,14 @@
     <label for="priority" class="label cursor-pointer">
       <span class="label-text">Priorité</span>
     </label>
-    <input type="range" min="0" max="3" value="3" class="range range-primary" id="priority" [formControl]="formPriority"
+    <input type="range" min="0" max="3" value="3" class="range range-primary{{priority == 1 && 'range-accent'}} {{priority == 2 && 'range-secondary'}} {{priority == 3 && 'range-primary'}}" id="priority" [(ngModel)]="priority"
       (change)="onEditPriority()" />
+      <div class="w-full flex justify-between text-xs px-2">
+        <span>*</span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+      </div>
   </div>
 
   <!-- Select with a specific date or within a date range -->
@@ -72,19 +78,19 @@
           <label class="label" for="date">
             <span class="label-text">Date</span>
           </label>
-          <input type="date" id="date" [formControl]="formDate" (change)="onEditDate()" />
+          <input type="date" id="date" [(ngModel)]="date" (change)="onEditDate()" />
         </div>
         <div class="divider lg:divider-horizontal">OR</div>
         <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
           <label class="label" for="dateDown">
             <span class="label-text">Date inférieure</span>
           </label>
-          <input type="date" id="dateDown"[formControl]="formDateDown" (change)="onEditDateDown()" />
+          <input type="date" id="dateDown"[(ngModel)]="dateDown" (change)="onEditDateDown()" />
 
           <label class="label" for="dateUp">
             <span class="label-text">Date supérieure</span>
           </label>
-          <input type="date" id="dateUp" [formControl]="formDateUp" (change)="onEditDateUp()" />
+          <input type="date" id="dateUp" [(ngModel)]="dateUp" (change)="onEditDateUp()" />
         </div>
       </div>
       <div class="modal-action">

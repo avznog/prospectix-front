@@ -18,7 +18,7 @@
     </span>
 
     <!-- Buttons -->
-    <input *ngIf="isClicked" [formControl]="fcontrol" class="input input-bordered input-sm text-center w-full" placeholder="Ex: {{valueToDisplay}}" >
+    <input *ngIf="isClicked" [(ngModel)]="element" class="input input-bordered input-sm text-center w-full" placeholder="Ex: {{valueToDisplay}}" >
     <div class="{{isClicked ? 'inline-flex' : ''}}">
       <span class="btn btn-sm btn-outline btn-ghost {{isClicked ? 'w-1/2' : ''}}" (click)="isClicked ? onChangeElement() && isClicked = false : isClicked = true">
         <svg *ngIf="!isClicked" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24" stroke-width="2">

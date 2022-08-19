@@ -1,10 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Activity } from 'src/app/models/activity.model';
-import { City } from 'src/app/models/city.model';
-import { ProjectManager } from 'src/app/models/project-manager.model';
-import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
+import { Component, OnInit } from '@angular/core';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
+import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { ProjectManagersService } from 'src/app/services/project-managers/project-managers.service';
 
@@ -14,86 +10,48 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
   styleUrls: ['./bookmarks-research-bloc.component.scss']
 })
 export class BookmarksResearchBlocComponent implements OnInit {
-
-  @Input() researchParamsBookmark!: ResearchParamsBookmarks;
-  @Output() updateResearchParamsBookmarkEvent = new EventEmitter<ResearchParamsBookmarks>();
-
-  formKeyword = new FormControl("");
-  formActivity = new FormControl("allActivities");
-  formCity = new FormControl("allCities");
-  formPm = new FormControl("");
-
-  cities!: City[];
-  activities!: Activity[];
-  projectManagers!: ProjectManager[];
+  keyword: string = "";
+  activity: string = "";
+  city: string = "";
+  pm: string = "";
 
   constructor(
-    private readonly activitiesService: ActivitiesService,
-    private readonly citiesService: CitiesService,
-    private readonly pmService: ProjectManagersService
+    public readonly activitiesService: ActivitiesService,
+    public readonly citiesService: CitiesService,
+    public readonly pmService: ProjectManagersService,
+    private readonly bookmarksService: BookmarksService
   ) { }
 
   ngOnInit(): void {
-    this.activitiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.activities = data
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-
-    this.citiesService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.cities = data;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-
-      this.pmService.findAll()
-        .subscribe({
-          next: (data) => {
-            this.projectManagers = data;
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        })
   }
 
   onEditKeyword() {
-    this.updateResearchParamsBookmarks({
-      ...this.researchParamsBookmark,
-      keyword: this.formKeyword.value
-    });
+    setTimeout(() => {
+      this.bookmarksService.resetSearch({
+        ...this.bookmarksService.researchParamsBookmarks,
+        keyword: this.keyword
+      });
+    }, 200);
   }
 
   onEditActivity() {
-    this.updateResearchParamsBookmarks({
-      ...this.researchParamsBookmark,
-      activity: this.formActivity.value == "allActivities" ? "" : this.formActivity.value
+    this.bookmarksService.resetSearch({
+      ...this.bookmarksService.researchParamsBookmarks,
+      activity: this.activity == "allActivities" ? "" : this.activity
     });
   }
 
   onEditCity() {
-    this.updateResearchParamsBookmarks({
-      ...this.researchParamsBookmark,
-      city: this.formCity.value == "allCities" ? "" : this.formCity.value
+    this.bookmarksService.resetSearch({
+      ...this.bookmarksService.researchParamsBookmarks,
+      city: this.city == "allCities" ? "" : this.city
     });
   }
 
   onEditPm() {
-    this.updateResearchParamsBookmarks({
-      ...this.researchParamsBookmark,
-      pseudo: this.formPm.value
-    })
-  }
-
-  updateResearchParamsBookmarks(value: ResearchParamsBookmarks) {
-    this.updateResearchParamsBookmarkEvent.emit(value);
+    this.bookmarksService.resetSearch({
+      ...this.bookmarksService.researchParamsBookmarks,
+      pseudo: this.pm
+    });
   }
 }

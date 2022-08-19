@@ -1,8 +1,8 @@
-<div *ngFor="let meeting of meetings">
-  <app-each-meeting [meeting]="meeting"></app-each-meeting>
+<div *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 2">
+  <app-each-meeting [meeting]="meeting.value"></app-each-meeting>
   <br />
 </div>
-<div *ngIf="meetings && meetings.length <= 0">
+<div *ngIf="meetingsService.meetings && meetingsService.meetings.size <= 0">
   <div class="alert alert-error card">
     <div class="radial-progress" style="--value:100;">100%</div>
     <div class="label">Vous avez épuisé tous les rendez-vous de la base !!</div>

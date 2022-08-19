@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { MeetingType } from 'src/app/constants/meeting.type';
@@ -14,61 +14,36 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 })
 export class AddMeetingsDropdownComponent implements OnInit {
 
-  formDate = new FormControl(new Date);
-  formType = new FormControl(MeetingType.EXT);
-  formDescription = new FormControl("");
+  date: Date = new Date;
+  type: MeetingType = MeetingType.EXT;
+  
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
   @Input() prospect!: Prospect;
   
 
   constructor(
     private readonly meetingsService: MeetingsService,
-    private readonly eventsService: EventsService
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
   onCreateMeeting() {
-    // TODO : add current pm
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
-
     this.meetingsService.create({
-      type: this.formType.value,
-      date: this.formDate.value,
+      type: this.type,
+      date: this.date,
       done: false,
       prospect: this.prospect,
-      pm: pm
     });
 
     this.eventsService.create({
       type: EventType.ADD_MEETING,
       prospect: this.prospect,
-      pm: pm,
       date: new Date,
-      description: EventDescriptionType.ADD_MEETING
+      description: `${EventDescriptionType.ADD_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-    console.log("meeting created ! ATTENTION: current pm to implement");
+    console.log("meeting created !");
   }
 }

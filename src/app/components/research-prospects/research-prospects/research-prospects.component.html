@@ -1,21 +1,22 @@
 <app-header></app-header>
-<div class="drawer drawer-end">
+
   <h1 class="ml-6 text-xl mb-5">Recherche de prospects</h1>
+  <div class="drawer drawer-end">
     <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
-      <app-research-bloc [researchParamsProspect]="researchParamsProspect" (updateResearchParamsProspectEvent)="updateResearchParamsProspect($event)"></app-research-bloc>
-      <app-list-prospects [prospects]="prospects" [events]="events" (updateEventsEvent)="updateEvents($event)"></app-list-prospects>
+      <app-research-bloc></app-research-bloc>
+      <app-list-prospects ></app-list-prospects>
       <div class="divider" ></div>
       <div class="btn-group flex justify-center">
-        <button class="btn btn-outline btn-ghost {{researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-        <button class="btn btn-outline btn-ghost">Page {{researchParamsProspect.skip / 2 }}</button>
-        <button class="btn btn-outline btn-ghost {{prospects && prospects.length <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+        <button class="btn btn-outline btn-ghost {{prospectsService.researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+        <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 2 }}</button>
+        <button class="btn btn-outline btn-ghost {{prospectsService.prospects && prospectsService.prospects.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
       </div> 
     </div> 
     <div class="drawer-side">
       <label for="drawer-prospect-history" class="drawer-overlay"></label>
       <div class="menu p-4 overflow-y-auto w-100 bg-base-100 text-base-content">
-        <app-prospect-history [events]="events"></app-prospect-history>
+        <app-prospect-history></app-prospect-history>
       </div>
     </div>
   </div>

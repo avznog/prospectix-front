@@ -1,17 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { Bookmark } from 'src/app/models/bookmark.model';
-import { Event } from 'src/app/models/event.model';
-import { Meeting } from 'src/app/models/meeting.model';
-import { Prospect } from 'src/app/models/prospect.model';
-import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
-import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
   selector: 'app-each-bookmark',
@@ -20,147 +14,54 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 })
 export class EachBookmarkComponent implements OnInit {
 
-  @Input() prospect!: Prospect;
-  currentProspectMeetings : Meeting[] = [];
-  currentProspectReminders : Reminder[] = [];
-  formComment = new FormControl("");
-  currentPm!: string;
-  @Input() bookmarks!: Bookmark[];
-
-  @Input() events!: Event[];
-  @Output() updateEventsEvent = new EventEmitter<Event[]>();
-
-
+  @Input() bookmark!: Bookmark;
+  comment: string = "";
   constructor(
     private readonly prospectService: ProspectsService,
-    private readonly meetingsService: MeetingsService,
-    private readonly remindersService: RemindersService,
-    private readonly bookmarksService: BookmarksService,
-    private readonly eventsService: EventsService
+    public readonly bookmarksService: BookmarksService,
+    private readonly eventsService: EventsService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
-  
-    const result = this.bookmarks.some((bookmark) => {
-      if(bookmark.prospect.id == this.prospect.id)
-        this.currentPm = bookmark.pm.pseudo;
-        return bookmark.prospect.id == this.prospect.id;
-     });
-
-  this.meetingsService.findAllByProspect(this.prospect.id).subscribe({
-    next: (data) => {
-      this.currentProspectMeetings = data;
-    },
-    error: (err) => {
-      console.log(err)
-    }
-  });
-
-  this.remindersService.findAllByProspect(this.prospect.id).subscribe({
-    next: (data) => {
-      this.currentProspectReminders = data;
-    },
-    error: (err) => {
-      console.log(err);
-    }
-  });
   }
 
   onClickButtonGoogle() {
-    window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank");
+    window.open(`http://www.google.fr/search?q=${this.bookmark.prospect.companyName}`, "_blank");
   }
 
   onChangeComment() {
-    if (this.formComment.value != "")
-      this.prospectService.updateComment(this.prospect.id, { comment: this.formComment.value });
+    if (this.comment != "")
+      this.prospectService.updateComment(this.bookmark.prospect.id, { comment: this.comment });
   }
 
   onChangeNbNo() {
-    this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
+    this.prospectService.updateNbNo(this.bookmark.prospect.id, { nbNo: this.bookmark.prospect.nbNo + 1 });
   }
 
   onDeleteBookmark() {
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.DELETE_BOOKMARKS,
-      prospect: this.prospect,
-      pm: pm,
+      prospect: this.bookmark.prospect,
       date: new Date,
-      description: EventDescriptionType.DELETE_BOOKMARKS
+      description: `${EventDescriptionType.DELETE_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-    this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
-    this.bookmarksService.deleteByProspect(this.prospect.id);
+    this.prospectService.updateIsBookmarked(this.bookmark.prospect.id, { isBookmarked: false });
+    this.bookmarksService.deleteByProspect(this.bookmark.prospect.id);
   }
 
   onClickRefus() {
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
     this.eventsService.create({
       type: EventType.NEGATIVE_ANSWER,
-      prospect: this.prospect,
-      pm: pm,
+      prospect: this.bookmark.prospect,
       date: new Date,
-      description: EventDescriptionType.NEGATIVE_ANSWER
+      description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-    this.prospectService.disable(this.prospect.id);
+    this.prospectService.disable(this.bookmark.prospect.id);
   }
 
   onClickDrawer() {
-    this.eventsService.findAllByProspect(this.prospect.id)
-    .subscribe({
-      next: (data) => {
-        this.updateEvents(data);
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
-    
-  }
-
-  updateEvents(value: Event[]) {
-    this.updateEventsEvent.emit(value);
+    this.eventsService.updateEvents(this.bookmark.prospect.id);
   }
 
 }

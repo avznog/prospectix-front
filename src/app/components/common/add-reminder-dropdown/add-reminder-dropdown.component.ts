@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { Prospect } from 'src/app/models/prospect.model';
@@ -14,60 +14,35 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 export class AddReminderDropdownComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-
-  formDate = new FormControl(new Date);
-  formPriority = new FormControl(1);
-  formDescription = new FormControl("");
+  
+  date: Date = new Date;
+  priority: number = 1;
+  description: string = "";
 
   constructor(
     private readonly remindersService: RemindersService,
-    private readonly eventsService: EventsService
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
   onCreateReminder() {
-    // TODO : add current pm
-    let pm = {
-      "id": 1,
-      "pseudo": "bgonzva",
-      "admin": true,
-      "name": "Gonzva",
-      "firstname": "Benjamin",
-      "mail": "bgonzva@juniorisep.com",
-      "tokenEmail": "",
-      "disabled": false,
-      "goals": [
-         
-      ],
-      "meetings": [
-          
-      ],
-      "reminders": [
-         
-      ],
-      "sentEmails": [],
-      "bookmarks": [],
-      "events": []
-    };
-
     this.remindersService.create({
-      date: this.formDate.value,
-      priority: this.formPriority.value,
+      date: this.date,
+      priority: this.priority,
       done: false,
-      description: this.formDescription.value,
-      pm: pm,
+      description: this.description,
       prospect: this.prospect
     });
 
     this.eventsService.create({
       type: EventType.ADD_REMINDER,
       prospect: this.prospect,
-      pm: pm,
       date: new Date,
-      description: EventDescriptionType.ADD_REMINDER
+      description: `${EventDescriptionType.ADD_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
     })
-    console.log("Reminder created / ATTENTION: implement current pm")
+    console.log("Reminder created")
   }
 }
