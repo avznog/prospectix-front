@@ -14,7 +14,7 @@ export class RemindersResearchBlocComponent implements OnInit {
   done: string = "";
   orderByPriority: string = "";
   priority: number = 0;
-  date!: Date;
+  date: Date = new Date;
   dateDown: Date = new Date;
   dateUp: Date = new Date;
 

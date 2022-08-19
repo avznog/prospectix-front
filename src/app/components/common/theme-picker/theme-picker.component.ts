@@ -8,7 +8,7 @@ import { DataThemeService } from 'src/app/services/common/data-theme.service';
 })
 export class ThemePickerComponent implements OnInit {
 
-  currentTheme!: string;
+  currentTheme: string = "";
   constructor(
     private readonly dataThemeService: DataThemeService
   ) { }

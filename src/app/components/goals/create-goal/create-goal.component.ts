@@ -10,7 +10,7 @@ import { GoalsService } from '../../../services/goals/goals.service';
 })
 export class CreateGoalComponent implements OnInit {
 
-  pmSelected!: ProjectManager;
+  pmSelected: ProjectManager = {} as ProjectManager;
   choosingPm = false;
   title: string = "";
   pmPseudo: string = "";

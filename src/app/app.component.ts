@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataThemeService } from './services/common/data-theme.service';
-import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 
 @Component({
@@ -11,24 +10,14 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent {
   title = 'prospectix-front';
-  dataTheme!: string;
-  subscription!: Subscription;
-  mainTheme!: string;
+  dataTheme: string = "";
   constructor(
-    private router: Router,
     public authService: AuthService,
-    private readonly dataThemeService: DataThemeService
+    public readonly dataThemeService: DataThemeService
   ) { 
-    this.subscription = this.dataThemeService.getData()
-      .subscribe(x => {
-        console.log(x)
-        localStorage.setItem("theme", x)
-        this.dataTheme = x
-      });
   }
   
   ngOnInit() {
-    console.log(localStorage.getItem("theme"))
     this.dataThemeService.sendData(localStorage.getItem("theme") || "")
   }
 

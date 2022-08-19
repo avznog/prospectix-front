@@ -20,9 +20,9 @@ export class EachProspectChangeParameterComponent implements OnInit {
   @Input() reminder!: Reminder;
   @Input() el!: string;
   @Input() id!: number;
-  isClicked!: boolean;
+  isClicked: boolean = Boolean();
   element: string = "";
-  
+
   constructor(
     private readonly phonesService: PhonesService,
     private readonly emailsService: EmailsService,
