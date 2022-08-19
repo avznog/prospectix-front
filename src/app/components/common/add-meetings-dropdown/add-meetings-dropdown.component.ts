@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { MeetingType } from 'src/app/constants/meeting.type';
@@ -22,7 +23,8 @@ export class AddMeetingsDropdownComponent implements OnInit {
 
   constructor(
     private readonly meetingsService: MeetingsService,
-    private readonly eventsService: EventsService
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class AddMeetingsDropdownComponent implements OnInit {
       type: EventType.ADD_MEETING,
       prospect: this.prospect,
       date: new Date,
-      description: EventDescriptionType.ADD_MEETING
+      description: `${EventDescriptionType.ADD_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     console.log("meeting created !");
   }

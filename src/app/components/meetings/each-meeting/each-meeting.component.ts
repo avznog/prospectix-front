@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { Meeting } from 'src/app/models/meeting.model';
@@ -17,7 +18,8 @@ export class EachMeetingComponent implements OnInit {
 
   constructor(
     private readonly meetingsService: MeetingsService,
-    private readonly eventsService: EventsService
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class EachMeetingComponent implements OnInit {
       type: EventType.DELETE_MEETING,
       prospect: this.meeting.prospect,
       date: new Date,
-      description: EventDescriptionType.DELETE_MEETING
+      description: `${EventDescriptionType.DELETE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     return this.meetingsService.deleteMeeting(this.meeting.id);
   }
@@ -40,7 +42,7 @@ export class EachMeetingComponent implements OnInit {
       type: EventType.DONE_MEETING,
       prospect: this.meeting.prospect,
       date: new Date,
-      description: EventDescriptionType.DONE_MEETING
+      description: `${EventDescriptionType.DONE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     return this.meetingsService.markDone(this.meeting.id);
   }

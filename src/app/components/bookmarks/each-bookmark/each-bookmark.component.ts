@@ -44,7 +44,7 @@ export class EachBookmarkComponent implements OnInit {
       type: EventType.DELETE_BOOKMARKS,
       prospect: this.bookmark.prospect,
       date: new Date,
-      description: EventDescriptionType.DELETE_BOOKMARKS
+      description: `${EventDescriptionType.DELETE_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     this.prospectService.updateIsBookmarked(this.bookmark.prospect.id, { isBookmarked: false });
     this.bookmarksService.deleteByProspect(this.bookmark.prospect.id);
@@ -55,7 +55,7 @@ export class EachBookmarkComponent implements OnInit {
       type: EventType.NEGATIVE_ANSWER,
       prospect: this.bookmark.prospect,
       date: new Date,
-      description: EventDescriptionType.NEGATIVE_ANSWER
+      description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     this.prospectService.disable(this.bookmark.prospect.id);
   }

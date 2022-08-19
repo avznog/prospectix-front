@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { Prospect } from 'src/app/models/prospect.model';
@@ -20,7 +21,8 @@ export class AddReminderDropdownComponent implements OnInit {
 
   constructor(
     private readonly remindersService: RemindersService,
-    private readonly eventsService: EventsService
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +41,7 @@ export class AddReminderDropdownComponent implements OnInit {
       type: EventType.ADD_REMINDER,
       prospect: this.prospect,
       date: new Date,
-      description: EventDescriptionType.ADD_REMINDER
+      description: `${EventDescriptionType.ADD_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
     })
     console.log("Reminder created")
   }

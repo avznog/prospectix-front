@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
@@ -22,6 +23,7 @@ export class EachResearchProspectComponent implements OnInit {
     private readonly prospectService: ProspectsService,
     private readonly bookmarksService: BookmarksService,
     private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class EachResearchProspectComponent implements OnInit {
         type: EventType.NO_ANSWER,
         prospect: this.prospect,
         date: new Date,
-        description: EventDescriptionType.NO_ANSWER
+        description: `${EventDescriptionType.NO_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
       });
   }
 
@@ -59,7 +61,7 @@ export class EachResearchProspectComponent implements OnInit {
       type: EventType.ADD_BOOKMARKS,
       prospect: this.prospect,
       date: new Date,
-      description: EventDescriptionType.ADD_BOOKMARKS
+      description: `${EventDescriptionType.ADD_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     console.log("added to bookmarks");
   }
@@ -72,7 +74,7 @@ export class EachResearchProspectComponent implements OnInit {
       type: EventType.DELETE_BOOKMARKS,
       prospect: this.prospect,
       date: new Date,
-      description: EventDescriptionType.DELETE_BOOKMARKS
+      description: `${EventDescriptionType.DELETE_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
   }
 
@@ -81,7 +83,7 @@ export class EachResearchProspectComponent implements OnInit {
       type: EventType.NEGATIVE_ANSWER,
       prospect: this.prospect,
       date: new Date,
-      description: EventDescriptionType.NEGATIVE_ANSWER
+      description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     this.prospectService.disable(this.prospect.id);
   }
