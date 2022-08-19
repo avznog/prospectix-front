@@ -42,8 +42,7 @@ export class RemindersService {
 
   loadMore() {
     let queryParameters = new HttpParams();
-    if(this.researchParamsReminder.priority)
-      queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority)
+    queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority ?? 0)
     
     if(this.researchParamsReminder.orderByPriority)
       queryParameters = queryParameters.append("orderByPriority", this.researchParamsReminder.orderByPriority)

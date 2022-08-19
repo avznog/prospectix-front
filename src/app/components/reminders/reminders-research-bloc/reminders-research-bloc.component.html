@@ -56,8 +56,14 @@
     <label for="priority" class="label cursor-pointer">
       <span class="label-text">Priorité</span>
     </label>
-    <input type="range" min="0" max="3" value="3" class="range range-primary" id="priority" [(ngModel)]="priority"
+    <input type="range" min="0" max="3" value="3" class="range range-primary{{priority == 1 && 'range-accent'}} {{priority == 2 && 'range-secondary'}} {{priority == 3 && 'range-primary'}}" id="priority" [(ngModel)]="priority"
       (change)="onEditPriority()" />
+      <div class="w-full flex justify-between text-xs px-2">
+        <span>*</span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+      </div>
   </div>
 
   <!-- Select with a specific date or within a date range -->
