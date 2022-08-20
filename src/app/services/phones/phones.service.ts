@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Phone } from 'src/app/models/phone.model';
+import { Prospect } from 'src/app/models/prospect.model';
+import { ProspectsService } from '../prospects/prospects.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,11 @@ import { Phone } from 'src/app/models/phone.model';
 export class PhonesService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private prospectsService: ProspectsService
   ) { }
-
-  updatePhoneNumber(idPhone: number, updatePhoneDto: {number: string}) : Subscription {
-    return this.http.patch<Phone>(`phones/${idPhone}`, updatePhoneDto).subscribe();
+  
+  update(prospect: Prospect, phone: Phone) {
+    return this.http.patch<Phone>(`phones/${phone.id}`, phone).subscribe(() => this.prospectsService.prospects.set(prospect.id, { ...this.prospectsService.prospects.get(prospect.id)!, phone: phone }));
   }
 }

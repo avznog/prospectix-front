@@ -3,10 +3,24 @@
 <h1 class="text-xl mb-5">{{prospect.companyName}}</h1>
 <div class="divider"></div>
 		<div class="inline-flex space-x-5">
-			<app-row-edit [prospectVariable]="prospect.companyName" [titleRow]="'Entreprise'" [prospect]="prospect"></app-row-edit>
-			<app-row-edit [prospectVariable]="prospect.streetAddress" [titleRow]="'Addresse'" [prospect]="prospect"></app-row-edit>
+			<!-- CompanyName -->
+			<div class="input-group">
+				<input class="input input-bordered" type="text" [(ngModel)]="companyName">
+				<div class="btn-group">
+					<label class="btn btn-ghost btn-outline" (click)="onChangeCompanyName()">Edit</label>
+				</div>
+			</div>
 
-			<!-- Select city -->
+			<!-- streetAddress -->
+			<div class="input-group">
+				<input class="input input-bordered" type="text" [(ngModel)]="streetAddress">
+				<div class="btn-group">
+					<label class="btn btn-outline btn-ghost" (click)="onChangeStreetAddress()">Edit</label>
+				</div>
+			</div>
+
+
+		<!-- Select city -->
 		</div>
 		<div class="form-control">
 			<label class="label" for="city">
@@ -38,13 +52,33 @@
 		<div class="divider"></div>
 
 		<!-- Boutons informations phone / mail / website -->
+		<div class="inline-flex">
+			<!-- Phone -->
+			<div class="input-group">
+				<input class="input input-bordered" type="text" [(ngModel)]="phone">
+				<div class="btn-group">
+					<label class="btn btn-outline btn-ghost w-1/2" (click)="onChangePhone()">Edit</label>
+				</div>
+			</div>
 
-		<app-row-edit [prospectVariable]="prospect.phone.number" [titleRow]="'Téléphone'" [prospect]="prospect"></app-row-edit>
-		<app-row-edit [prospectVariable]="prospect.email.email" [titleRow]="'Mail'" [prospect]="prospect"></app-row-edit>
-		<app-row-edit [prospectVariable]="prospect.website.website" [titleRow]="'Site internet'" [prospect]="prospect"></app-row-edit>
+			<!-- Mail -->
+			<div class="input-group">
+				<input class="input input-bordered" type="text" [(ngModel)]="email">
+				<div class="btn-group">
+					<label class="btn btn-outline btn-ghost w-1/2" (click)="onChangeEmail()">Edit</label>
+				</div>
+			</div>
+
+			<!-- Website -->
+			<div class="input-group">
+				<input class="input input-bordered" type="text" [(ngModel)]="website">
+				<div class="btn-group">
+					<label class="btn btn-outline btn-ghost w-1/2" (click)="onChangeWebsite()">Edit</label>
+				</div>
+			</div>
+		</div>
 
 		<div class="divider"></div>
-
 		<!-- Buttons -->
 		<div class="btn-group">
 			<button class="btn btn-ghost btn-outline indicator" (click)="onChangeNbNo()">
@@ -71,7 +105,6 @@
 				</div>
 			</div>
 
-			
 			<button class="btn btn-ghost btn-outline" (click)="onClickRefus()">
 				Refus
 			</button>

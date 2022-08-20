@@ -1,5 +1,5 @@
 <div *ngFor="let bookmark of bookmarksService.bookmarks | keyvalue | slice:bookmarksService.researchParamsBookmarks.skip:bookmarksService.researchParamsBookmarks.skip + 2">
-    <app-each-bookmark [bookmark]="bookmark.value" ></app-each-bookmark>
+    <app-each-bookmark [bookmark]="bookmark.value" *ngIf="!bookmark.value.prospect.disabled"></app-each-bookmark>
     <br />
 </div>
 <div *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0">

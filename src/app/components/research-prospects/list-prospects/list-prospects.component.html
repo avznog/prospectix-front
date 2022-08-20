@@ -1,5 +1,5 @@
 <div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 2" >
-  <app-each-research-prospect [prospect]="prospect.value" ></app-each-research-prospect>
+  <app-each-research-prospect [prospect]="prospect.value" *ngIf="!prospect.value.disabled"></app-each-research-prospect>
   <br/>
 </div>
 <div *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0">

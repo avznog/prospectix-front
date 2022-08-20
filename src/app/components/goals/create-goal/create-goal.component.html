@@ -14,9 +14,9 @@
 
       <!-- Chef de projet -->
       <div class="form-control">
-          <select class="select select-bordered" [(ngModel)]="pmPseudo">
+          <select class="select select-bordered" [(ngModel)]="pmPseudo" >
             <option disabled selected>Choisir un chef de projet</option>
-            <option *ngFor="let pm of pmService.projectManagers">{{pm.pseudo}}</option>
+            <option *ngFor="let pm of pmService.projectManagers" [defaultSelected]="pm">{{pm.pseudo}}</option>
           </select>
       </div>
 

@@ -56,15 +56,10 @@ export class BookmarksService {
   }
 
   create(createBookmarkDto: CreateBookmarkDto) : Subscription {
-    return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe();
+    return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => this.bookmarks.set(bookmark.id, bookmark));
   }
 
   deleteByProspect(prospectId: number) {
-    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe();
-    
-  }
-
-  findAll() {
-    return this.http.get<Bookmark[]>(`bookmarks`);
+    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(bookmark => this.bookmarks.delete(bookmark.id));
   }
 }

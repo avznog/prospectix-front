@@ -10,7 +10,6 @@ import { GoalsService } from '../../../services/goals/goals.service';
 })
 export class CreateGoalComponent implements OnInit {
 
-  pmSelected: ProjectManager = {} as ProjectManager;
   choosingPm = false;
   title: string = "";
   pmPseudo: string = "";
@@ -29,7 +28,6 @@ export class CreateGoalComponent implements OnInit {
   }
 
   createGoal() {
-    console.log(this.isCyclic)
     this.goalsService.createForPm({
       isCyclic: this.isCyclic,
       deadline: this.deadline,
@@ -38,11 +36,7 @@ export class CreateGoalComponent implements OnInit {
       currentStep: 0,
       description: this.description
     },
-    this.pmSelected.pseudo
+    this.pmPseudo
     );
-  }
-
-  selectPm(pm: ProjectManager) {
-    this.pmSelected = pm;
   }
 }

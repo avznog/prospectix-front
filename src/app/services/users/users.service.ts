@@ -43,10 +43,6 @@ export class UsersService {
     this.http.get<ProjectManager[]>(`project-managers/find-all-paginated/`, { params: queryParameters}).subscribe(users => users.forEach(user => this.users.set(user.id, user)));
   }
 
-  findAll() : Observable<ProjectManager[]> {
-    return this.http.get<ProjectManager[]>("project-managers/findAll");
-  }
-
   create(createUserDto: CreateUserDto) : Subscription{
     return this.http.post<ProjectManager>("project-managers/", createUserDto).subscribe(user => this.users.set(user.id, user));
   }

@@ -22,7 +22,6 @@ import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.compon
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
 import { HeaderComponent } from './components/common/header/header.component';
-import { EachProspectChangeParameterComponent } from './components/common/each-prospect-change-parameter/each-prospect-change-parameter.component';
 import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
 import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
 import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interceptor';
@@ -30,7 +29,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { AddReminderDropdownComponent } from './components/common/add-reminder-dropdown/add-reminder-dropdown.component';
 import { AddMeetingsDropdownComponent } from './components/common/add-meetings-dropdown/add-meetings-dropdown.component';
-import { RowEditComponent } from './components/prospect-details/row-edit/row-edit.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { AddProspectComponent } from './components/common/add-prospect/add-prospect/add-prospect.component';
 import { EachReminderComponent } from './components/reminders/each-reminder/each-reminder.component';
@@ -70,13 +68,11 @@ import { GoalResearchBlocComponent } from './components/goals/goal-research-bloc
     DashboardComponent,
     HeaderComponent,
     CreateGoalComponent,
-    EachProspectChangeParameterComponent,
     DashboardListeGoalsComponent,
     DashboardEachGoalComponent,
     LoginComponent,
     AddReminderDropdownComponent,
     AddMeetingsDropdownComponent,
-    RowEditComponent,
     BookmarksComponent,
     AddProspectComponent,
     EachReminderComponent,

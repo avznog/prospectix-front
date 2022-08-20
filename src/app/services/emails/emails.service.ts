@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Email } from 'src/app/models/email.model';
+import { Prospect } from 'src/app/models/prospect.model';
+import { ProspectsService } from '../prospects/prospects.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ import { Email } from 'src/app/models/email.model';
 export class EmailsService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private prospectsService: ProspectsService
   ) { }
 
-  updateEmail(idEmail: number, email: { email: string }) : Subscription {
-    return this.http.patch<Email>(`emails/${idEmail}`, email).subscribe();
+  update(prospect: Prospect, email: Email) {
+    return this.http.patch<Email>(`emails/${email.id}`, email).subscribe(() => this.prospectsService.prospects.set(prospect.id, { ...this.prospectsService.prospects.get(prospect.id)!, email: email }));
   }
 }

@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
+import { Phone } from 'src/app/models/phone.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
+import { CitiesService } from '../cities/cities.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class ProspectsService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private citiesService: CitiesService
   ) { 
     this.loadMore();
   }
@@ -56,20 +59,24 @@ export class ProspectsService {
     return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe(prospect => this.prospects.set(prospect.id, prospect));
   }
 
-  update(idProspect: number, updateProspectDto: UpdateProspectDto) : Subscription {
-    return this.http.patch<Prospect>(`prospects/${idProspect}`, updateProspectDto).subscribe();
+  updateStreetAddress(idProspect: number, streetAddress: { streetAddress: string }) {
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, streetAddress).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, streetAddress: streetAddress.streetAddress}))
+  }
+
+  updateCompanyName(idProspect: number, companyName: { companyName: string }) {
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, companyName).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, companyName: companyName.companyName}));
   }
 
   updateComment(idProspect: number, comment: { comment: string }) : Subscription {
-    return this.http.patch<Prospect>(`prospects/${idProspect}`, comment).subscribe();
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, comment).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, comment: comment.comment }));
   }
 
   updateNbNo(idProspect: number, nbNo: { nbNo: number }) : Subscription {
-    return this.http.patch<Prospect>(`prospects/${idProspect}`, nbNo).subscribe();
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, nbNo).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, nbNo: nbNo.nbNo }));
   }
 
   updateIsBookmarked(idProspect: number, isBookmarked: { isBookmarked: boolean }) : Subscription {
-    return this.http.patch<Prospect>(`prospects/${idProspect}`, isBookmarked).subscribe();
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, isBookmarked).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, isBookmarked: isBookmarked.isBookmarked }));
   }
 
   updateByCity(idProspect: number, cityName: string) : Subscription {
@@ -79,8 +86,8 @@ export class ProspectsService {
   updateByActivity(idProspect: number, activityName: string) : Subscription {
     return this.http.get<Prospect>(`prospects/by-activity/${idProspect}/${activityName}`).subscribe();
   }
-
+  
   disable(idProspect: number) : Subscription {
-    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe();
+    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, disabled: true }));
   }
 }

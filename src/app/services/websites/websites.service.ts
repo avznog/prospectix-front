@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Prospect } from 'src/app/models/prospect.model';
 import { Website } from 'src/app/models/website.model';
+import { ProspectsService } from '../prospects/prospects.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,11 @@ import { Website } from 'src/app/models/website.model';
 export class WebsitesService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private prospectsService: ProspectsService
   ) { }
-
-  updateWebsite(idWebsite: number, website: { website: string }) : Subscription {
-    return this.http.patch<Website>(`websites/${idWebsite}`, website).subscribe();
+  
+  update(prospect: Prospect, website: Website) {
+    return this.http.patch<Website>(`websites/${website.id}`, website).subscribe(() => this.prospectsService.prospects.set(prospect.id, { ...this.prospectsService.prospects.get(prospect.id)!, website: website }));
   }
 }

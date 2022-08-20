@@ -63,10 +63,32 @@
       <!-- Phone / Email / Website inputs -->
       <div class="inline-flex space-x-10 self-baseline">  
         
-          <app-each-prospect-change-parameter [valueToDisplay]="prospect.phone.number" [el]="'phone'" [id]="prospect.phone.id"></app-each-prospect-change-parameter>
-          <app-each-prospect-change-parameter [valueToDisplay]="prospect.email.email" [el]="'email'" [id]="prospect.email.id"></app-each-prospect-change-parameter>
-          <app-each-prospect-change-parameter [valueToDisplay]="prospect.website.website" [el]="'website'" [id]="prospect.website.id"></app-each-prospect-change-parameter>
-        
+        <!-- Phone -->
+        <div >
+          <input class="input input-bordered" type="text" [(ngModel)]="phone">
+          <div class="btn-group">
+            <label class="btn btn-outline btn-ghost w-1/2" (click)="onChangePhone()">Edit</label>
+            <label class="btn btn-outline btn-ghost w-1/2" (click)="onClickPhone()">Appeler</label>
+          </div>
+        </div>
+
+        <!-- Mail -->
+        <div>
+          <input class="input input-bordered" type="text" [(ngModel)]="email">
+          <div class="btn-group">
+            <label class="btn btn-outline btn-ghost w-1/2" (click)="onChangeEmail()">Edit</label>
+            <label class="btn btn-outline btn-ghost w-1/2" (click)="onClickEmail()">Ecrire</label>
+          </div>
+        </div>
+
+        <!-- Website -->
+        <div>
+          <input class="input input-bordered" type="text" [(ngModel)]="website">
+          <div class="btn-group">
+            <label class="btn btn-outline btn-ghost w-1/2" (click)="onChangeWebsite()">Edit</label>
+            <label class="btn btn-outline btn-ghost w-1/2" (click)="onClickWebsite()">Visiter</label>
+          </div>
+        </div>
         
         <!-- Buttons -->
         <div class="btn-group">

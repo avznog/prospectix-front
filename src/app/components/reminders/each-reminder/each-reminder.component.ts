@@ -45,9 +45,4 @@ export class EachReminderComponent implements OnInit {
     });
     return this.remindersService.markDone(this.reminder.id);
   }
-
-  onMarkReminderUndone() : Subscription {
-    console.log("reminder marked undone");
-    return this.remindersService.markUndone(this.reminder.id);
-  }
 }

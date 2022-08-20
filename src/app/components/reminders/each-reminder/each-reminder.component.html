@@ -31,8 +31,6 @@
 
       <!-- Boutons meetingDone / suppression -->
       <div class="w-1/6 space-x-5 flex justify-center">
-        <!-- <input class="btn btn-primary btn-xs btn-success" type="button" value='{{reminder.done ? "Rendre le rappel comme non effectué" : "Rendre le rappel comme effectué"}}'
-        (click)="reminder.done ? onMarkReminderDone() : onMarkReminderUndone()" /> -->
         <div class="tooltip" *ngIf="!reminder.done" data-tip="Rappel effectué">
           <label class="btn btn-circle btn-success" (click)="onMarkReminderDone()">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

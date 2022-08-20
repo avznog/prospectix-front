@@ -15,16 +15,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // TODO : Must change to findForCurrentPm findForPm
-    this.goalsService.findAll()
-      .subscribe({
-        next: (data) => {
-          this.goals = data;
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
   }
 
 }

@@ -5,8 +5,11 @@ import { EventType } from 'src/app/constants/event.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { EmailsService } from 'src/app/services/emails/emails.service';
 import { EventsService } from 'src/app/services/events/events.service';
+import { PhonesService } from 'src/app/services/phones/phones.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
+import { WebsitesService } from 'src/app/services/websites/websites.service';
 
 @Component({
   selector: 'app-each-research-prospect',
@@ -18,15 +21,24 @@ export class EachResearchProspectComponent implements OnInit {
   @Input() prospect!: Prospect;
 
   comment: string = "";
-  
+  phone: string = "";
+  email: string = "";
+  website: string = "";
+
   constructor(
     private readonly prospectService: ProspectsService,
     private readonly bookmarksService: BookmarksService,
     private readonly eventsService: EventsService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly phonesService: PhonesService,
+    private readonly emailsService: EmailsService,
+    private readonly websitesService: WebsitesService
   ) { }
 
   ngOnInit(): void {
+    this.phone = this.prospect.phone.number;
+    this.email = this.prospect.email.email;
+    this.website = this.prospect.website.website;
   }
 
   onClickButtonGoogle() {
@@ -90,5 +102,29 @@ export class EachResearchProspectComponent implements OnInit {
 
   onClickDrawer() {
     this.eventsService.updateEvents(this.prospect.id);
+  }
+
+  onChangePhone() {
+    this.phonesService.update(this.prospect, { ...this.prospect.phone, number: this.phone });
+  }
+
+  onChangeEmail() {
+    this.emailsService.update(this.prospect, { ...this.prospect.email, email: this.email});
+  }
+
+  onChangeWebsite() {
+    this.websitesService.update(this.prospect, { ...this.prospect.website, website: this.website });
+  }
+
+  onClickPhone() {
+    window.open(`tel:${this.phone}`, "_blank")
+  }
+
+  onClickEmail() {
+    window.open(`mailto:${this.email}`, "_blank")
+  }
+
+  onClickWebsite() {
+    window.open(`http://${this.website}`, "_blank")
   }
 }

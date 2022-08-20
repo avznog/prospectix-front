@@ -60,24 +60,20 @@ export class MeetingsService {
   
   }
 
-  findAll() : Observable<Meeting[]> {
-    return this.http.get<Meeting[]>(`meetings`);
-  }
-
   deleteMeeting(idMeeting: number) : Subscription {
-    return this.http.delete<Meeting>(`meetings/delete/${idMeeting}`).subscribe();
+    return this.http.delete<Meeting>(`meetings/delete/${idMeeting}`).subscribe(() => this.meetings.delete(idMeeting));
   }
 
   markDone(idMeeting : number) : Subscription {
-    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe();
+    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe(() => this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true }));
   }
 
   markUndone(idMeeting: number) : Subscription {
-    return this.http.get<Meeting>(`meetings/mark-undone/${idMeeting}`).subscribe();
+    return this.http.get<Meeting>(`meetings/mark-undone/${idMeeting}`).subscribe(() => this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: false }));
   }
 
   create(createMeetingDto: CreateMeetingDto) : Subscription {
-    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe();
+    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => this.meetings.set(meeting.id, meeting));
   }
 
   findAllByProspect(idProspect: number) {
