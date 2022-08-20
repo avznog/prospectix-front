@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectManager } from 'src/app/models/project-manager.model';
 import { ProjectManagersService } from 'src/app/services/project-managers/project-managers.service';
 import { GoalsService } from '../../../services/goals/goals.service';
 

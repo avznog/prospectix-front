@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Website } from 'src/app/models/website.model';
 import { ProspectsService } from '../prospects/prospects.service';

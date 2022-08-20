@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { ProjectManager } from 'src/app/models/project-manager.model';
-import { Observable, Subscription } from 'rxjs';
-import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
+import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CreateUserDto } from 'src/app/dto/users/create-user.dto';
+import { ProjectManager } from 'src/app/models/project-manager.model';
+import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
 @Injectable({
   providedIn: 'root'
 })

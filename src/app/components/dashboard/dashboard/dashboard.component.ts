@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Goal } from 'src/app/models/goal.model';
-import { GoalsService } from 'src/app/services/goals/goals.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +10,6 @@ export class DashboardComponent implements OnInit {
 
   goals!: Goal[];
   constructor(
-    private goalsService: GoalsService
   ) { }
 
   ngOnInit(): void {

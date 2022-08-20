@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({

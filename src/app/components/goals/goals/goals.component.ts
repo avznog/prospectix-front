@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Goal } from 'src/app/models/goal.model';
 import { GoalsService } from 'src/app/services/goals/goals.service';
 
 @Component({

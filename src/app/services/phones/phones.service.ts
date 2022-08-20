@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { Phone } from 'src/app/models/phone.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ProspectsService } from '../prospects/prospects.service';

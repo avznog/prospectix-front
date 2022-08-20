@@ -1,6 +1,3 @@
-import { Activity } from "src/app/models/activity.model";
-import { City } from "src/app/models/city.model";
-import { Country } from "src/app/models/country.model";
 import { CreateActivityDto } from "../activities/create-activity.dto";
 import { CreateCityDto } from "../cities/create-city.dto";
 import { CreateCountryDto } from "../countries/create-country.dto";

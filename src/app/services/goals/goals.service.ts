@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CreateGoalDto } from 'src/app/dto/goals/create-goal.dto';
 import { Goal } from 'src/app/models/goal.model';
 import { ResearchParamsGoals } from 'src/app/models/research-params-goals.model';

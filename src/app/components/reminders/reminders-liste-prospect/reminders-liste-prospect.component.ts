@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({

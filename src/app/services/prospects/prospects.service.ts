@@ -2,8 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
-import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
-import { Phone } from 'src/app/models/phone.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 import { CitiesService } from '../cities/cities.service';

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { DataThemeService } from './services/common/data-theme.service';
 import { AuthService } from './auth/auth.service';
+import { DataThemeService } from './services/common/data-theme.service';
 
 @Component({
   selector: 'app-root',
