@@ -3,12 +3,15 @@
   
   [attr.data-content]="
   ((event.type == 'ADD_BOOKMARKS' || event.type == 'DELETE_BOOKMARKS') && '★') || 
-  (event.type == 'CREATION' && '☼') || 
-  ((event.type == 'ADD_REMINDER' || event.type == 'ADD_BOOKMARKS' || event.type == 'ADD_MEETING') && '➕') || 
-  ((event.type == 'DELETE_REMINDER' || event.type == 'DELETE_MEETING') && 'X') ||
-  ((event.type == 'DONE_REMINDER' || event.type == 'DONE_MEETING') && '✓') || 
-  (event.type == 'NO_ANSWER' && '...') ||
-  (event.type == 'NEGATIVE_ANSWER' && 'x') "
+  (event.type == 'CREATION' && '🔆') || 
+  (event.type == 'ADD_REMINDER' && '🔔') || 
+  (event.type == 'ADD_MEETING' && '👥') || 
+  (event.type == 'DELETE_REMINDER' && '🔕') ||
+  (event.type == 'DELETE_MEETING' && '🔥') ||
+  (event.type == 'DONE_REMINDER' && '🎯') || 
+  (event.type == 'DONE_MEETING' && '🤝') ||
+  (event.type == 'NO_ANSWER' && '💬') ||
+  (event.type == 'NEGATIVE_ANSWER' && '🗑') "
   class="
     step
     {{event.type == 'CREATION' ? 'step-success' : ''}}
@@ -17,7 +20,7 @@
     {{event.type == 'ADD_BOOKMARKS' ? 'step-warning' : ''}}
     {{event.type == 'DONE_REMINDER' ? 'step-success' : ''}}
     {{event.type == 'DONE_MEETING' ? 'step-success' : ''}}
-    {{event.type == 'DELETE_REMINDER' ? 'step-info' : ''}}
+    {{event.type == 'DELETE_REMINDER' ? 'step-error' : ''}}
     {{event.type == 'DELETE_MEETING' ? 'step-error' : ''}}
     {{event.type == 'DELETE_BOOKMARKS' ? 'step-warning' : ''}}
     {{event.type == 'NEGATIVE_ANSWER' ? 'step-error' : ''}}
