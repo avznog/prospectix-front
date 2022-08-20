@@ -47,15 +47,15 @@ export class UsersService {
     return this.http.post<ProjectManager>("project-managers/", createUserDto).subscribe(user => this.users.set(user.id, user));
   }
 
-  delete(id: number) : Subscription {
-    return this.http.patch<ProjectManager>(`project-managers/disable/${id}`, { disabled: true }).subscribe();
+  delete(userId: number) : Subscription {
+    return this.http.patch<ProjectManager>(`project-managers/disable/${userId}`, { disabled: true }).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, disabled: true }));
   }
 
-  enable(id: number) : Subscription {
-    return this.http.patch<ProjectManager>(`project-managers/enable/${id}`, { disable: false }).subscribe();
+  enable(userId: number) : Subscription {
+    return this.http.patch<ProjectManager>(`project-managers/enable/${userId}`, { disable: false }).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, disabled: false }));
   }
 
-  changeAdmin(id: number,admin: boolean) : Subscription {
-    return this.http.patch<ProjectManager>(`project-managers/${id}`, {admin}).subscribe();
+  changeAdmin(userId: number,admin: boolean) : Subscription {
+    return this.http.patch<ProjectManager>(`project-managers/${userId}`, {admin}).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, admin: admin}));
   }
 }

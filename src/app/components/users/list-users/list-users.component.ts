@@ -17,13 +17,13 @@ export class ListUsersComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onChangeUserStatus(user: ProjectManager) : Subscription {
+  onChangeUserStatus(user: ProjectManager) {
     if(user.disabled) {
       console.log("enabled");
-      return this.usersService.enable(user.id);
+      this.usersService.enable(user.id);
     }else{
       console.log("disabled");
-      return this.usersService.delete(user.id);
+      this.usersService.delete(user.id);
     }
     
   }
