@@ -8,11 +8,11 @@
       <li><a routerLink="/reminders">Rappels</a></li>
       <li><a routerLink="/meetings">Rendez-vous</a></li>
       <li><a routerLink="/bookmarks">Mes prospects favoris</a></li>
-      <li><a routerLink="/users">Users</a></li>
-      <li><a routerLink="/goals">Gestion des objectifs</a></li>
-      <div class="dropdown">
+      <li *ngIf="(authService.currentUser | async)?.admin"><a routerLink="/users">Users</a></li>
+      <li *ngIf="(authService.currentUser | async)?.admin"><a routerLink="/goals">Gestion des objectifs</a></li>
+      <li class="dropdown">
         <app-theme-picker></app-theme-picker>
-      </div>
+      </li>
       <li (click)="logout()"><a>Se déconnecter</a></li>
     </ul>
   </div>
