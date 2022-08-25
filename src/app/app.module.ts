@@ -46,6 +46,7 @@ import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interceptor';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
+import { ChangelogsComponent } from './components/changelogs/changelogs/changelogs.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
     BookmarksResearchBlocComponent,
     ProspectHistoryComponent,
     ThemePickerComponent,
-    GoalResearchBlocComponent
+    GoalResearchBlocComponent,
+    ChangelogsComponent
   ],
   imports: [
     BrowserModule,
