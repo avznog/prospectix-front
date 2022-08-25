@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChangelogsService } from 'src/app/services/changelogs/changelogs.service';
 
 @Component({
   selector: 'app-changelogs',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangelogsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public changelogsService: ChangelogsService
+  ) { }
 
   ngOnInit(): void {
   }
