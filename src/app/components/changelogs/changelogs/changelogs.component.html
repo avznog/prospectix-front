@@ -1,7 +1,8 @@
-<div class="card modal-box">
-    <h1 class="card-title">Historique des versions</h1>
+<div class="card">
+    <h1 class="">Historique des versions</h1>
+    <div class="divider"></div>
     <div *ngFor="let log of changelogsService.changelogs">
-        <h2>Version {{log.version}} = {{log.date}}</h2>
+        <h2>Version {{log.version}} : {{log.date}}</h2>
         <h3>Bugs Fixed:</h3>
         <ul>
             <li *ngFor="let bug of log.bugs">{{bug}}</li>

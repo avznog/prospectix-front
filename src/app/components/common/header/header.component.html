@@ -1,13 +1,21 @@
 <div class="navbar bg-base-100" *ngIf="authService.loggedInSubject">
   <div class="flex-1">
     <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl">Prospectix</a>
-   
       <div class="dropdown">
-        <label tabindex="0" class=" btn btn-ghost normal-case text-xl">Version</label>
-        <app-changelogs class="menu dropdown-content"></app-changelogs>
+        <label tabindex="0" class="btn btn-ghost normal-case text-xl">Version</label>
+        <div class="dropdown-content">
+          <div class="card">
+            <div class="card-title">hello</div>
+            <div class="card-body">
+              ceci est mon conetent
+            </div>
+          </div>
+          
+        </div>
+        <!-- <app-changelogs class="dropdown-content menu"></app-changelogs> -->
       </div>
-  
   </div>
+  
   <div class="flex-none">
     <ul class="menu menu-horizontal p-0">
       <li><a routerLink="/prospects">Recherche</a></li>
