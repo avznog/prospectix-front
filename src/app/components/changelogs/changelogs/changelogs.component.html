@@ -1,16 +1,13 @@
-<div class="card">
-    <h1 class="">Historique des versions</h1>
-    <div class="divider"></div>
-    <div *ngFor="let log of changelogsService.changelogs">
-        <h2>Version {{log.version}} : {{log.date}}</h2>
-        <h3>Bugs Fixed:</h3>
-        <ul>
-            <li *ngFor="let bug of log.bugs">{{bug}}</li>
-        </ul>
-        <h3>Nouvelles fonctionnaliés :</h3>
-        <ul>
-            <li *ngFor="let feature of log.features">{{feature}}</li>
-        </ul>
-       <div class="divider"></div>
-    </div>
+<div class="divider"></div>
+<div *ngFor="let log of changelogsService.changelogs">
+  <span class="text-lg">{{log.version}} : {{log.date | date:"dd/MM/YYYY"}}</span><br />
+  <span class="text-md font-medium">Bugs Fixed:</span>
+  <ol>
+      <li class="text-xs" *ngFor="let bug of log.bugs">- {{bug}}</li>
+  </ol>
+  <span class="text-md font-medium">Nouvelles fonctionnaliés :</span>
+  <ul>
+      <li class="text-xs" *ngFor="let feature of log.features">- {{feature}}</li>
+  </ul>
+  <div class="divider"></div>
 </div>

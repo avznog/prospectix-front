@@ -1,19 +1,17 @@
 <div class="navbar bg-base-100" *ngIf="authService.loggedInSubject">
   <div class="flex-1">
     <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl">Prospectix</a>
-      <div class="dropdown">
-        <label tabindex="0" class="btn btn-ghost normal-case text-xl">Version</label>
-        <div class="dropdown-content">
-          <div class="card">
-            <div class="card-title">hello</div>
+    <div class="dropdown w-full">
+      <label tabindex="0" class="btn btn-ghost normal-case text-xl">Version</label>
+      <div class="dropdown-content w-full bg-base-100">
+          <div class="border card">
             <div class="card-body">
-              ceci est mon conetent
+              <div class="card-title">Historique des versions</div>
+              <app-changelogs class="w-full max-h-screen overflow-scroll"></app-changelogs>
             </div>
-          </div>
-          
-        </div>
-        <!-- <app-changelogs class="dropdown-content menu"></app-changelogs> -->
+          </div> 
       </div>
+    </div>
   </div>
   
   <div class="flex-none">
