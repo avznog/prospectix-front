@@ -1,13 +1,13 @@
 <div class="divider"></div>
 <div *ngFor="let log of changelogsService.changelogs">
-  <span class="text-lg">{{log.version}} : {{log.date | date:"dd/MM/YYYY"}}</span><br />
-  <span class="text-md font-medium">Bugs Fixed:</span>
-  <ol>
-      <li class="text-xs" *ngFor="let bug of log.bugs">- {{bug}}</li>
+  <div class="inline-flex"><span class="text-xs justify-center">{{log.version}} : {{log.date | date:"dd/MM/YYYY"}}</span></div><br />
+  <span class="text-lg font-medium" *ngIf="log.bugs.length > 0">Bugs Fixed:</span>
+  <ol *ngIf="log.bugs.length > 0">
+      <li class="text-md" *ngFor="let bug of log.bugs">- {{bug}}</li>
   </ol>
-  <span class="text-md font-medium">Nouvelles fonctionnaliés :</span>
-  <ul>
-      <li class="text-xs" *ngFor="let feature of log.features">- {{feature}}</li>
+  <span class="text-lg font-medium" *ngIf="log.features.length > 0">Nouvelles fonctionnaliés :</span>
+  <ul *ngIf="log.features.length > 0">
+      <li class="text-md" *ngFor="let feature of log.features">- {{feature}}</li>
   </ul>
   <div class="divider"></div>
 </div>

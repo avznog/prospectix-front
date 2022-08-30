@@ -3,3 +3,6 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+<div class="toast toast-end" *ngIf="changelogsService.changelogs[0].version != changelogsService.localVersion">
+  <div class="alert alert-info">Une nouvelle version est disponible <span class="btn btn-outline" (click)="changelogsService.updateVersion()">Mettre à jour</span> </div>
+</div>

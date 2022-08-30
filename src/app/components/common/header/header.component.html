@@ -1,6 +1,6 @@
 <div class="navbar bg-base-100" *ngIf="authService.loggedInSubject">
   <div class="flex-1">
-    <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl">Prospectix</a>
+    <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl indicator">Prospectix<span *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion" class="badge indicator-item"></span></a>
     <div class="dropdown w-full">
       <label tabindex="0" class="btn btn-ghost normal-case text-xl">Version</label>
       <div class="dropdown-content w-full bg-base-100">

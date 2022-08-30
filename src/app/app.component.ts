@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { ChangelogsService } from './services/changelogs/changelogs.service';
 import { DataThemeService } from './services/common/data-theme.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class AppComponent {
   dataTheme: string = "";
   constructor(
     public authService: AuthService,
-    public readonly dataThemeService: DataThemeService
+    public readonly dataThemeService: DataThemeService,
+    public readonly changelogsService: ChangelogsService  
   ) { 
   }
   

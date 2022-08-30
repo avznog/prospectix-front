@@ -1,5 +1,5 @@
 export interface Changelog {
-	version: number;
+	version: string;
 	date: Date;
 	features: string[];
 	bugs: string[];
