@@ -20,8 +20,8 @@
       <li><a routerLink="/reminders">Rappels</a></li>
       <li><a routerLink="/meetings">Rendez-vous</a></li>
       <li><a routerLink="/bookmarks">Mes prospects favoris</a></li>
-      <li *ngIf="(authService.currentUser | async)?.admin"><a routerLink="/users">Users</a></li>
-      <li *ngIf="(authService.currentUser | async)?.admin"><a routerLink="/goals">Gestion des objectifs</a></li>
+      <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/users">Users</a></li>
+      <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/goals">Gestion des objectifs</a></li>
       <li class="dropdown">
         <app-theme-picker></app-theme-picker>
       </li>
