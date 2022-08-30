@@ -1,7 +1,19 @@
 <div class="navbar bg-base-100" *ngIf="authService.loggedInSubject">
   <div class="flex-1">
-    <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl">Prospectix</a>
+    <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl indicator">Prospectix<span *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion" class="badge badge-secondary indicator-item"></span></a>
+    <div class="dropdown w-full">
+      <label tabindex="0" class="btn btn-ghost normal-case text-xl">Version</label>
+      <div class="dropdown-content w-full bg-base-100">
+          <div class="border card">
+            <div class="card-body">
+              <div class="card-title">Historique des versions</div>
+              <app-changelogs class="w-full max-h-screen overflow-scroll"></app-changelogs>
+            </div>
+          </div> 
+      </div>
+    </div>
   </div>
+  
   <div class="flex-none">
     <ul class="menu menu-horizontal p-0">
       <li><a routerLink="/prospects">Recherche</a></li>
