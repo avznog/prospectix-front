@@ -11,6 +11,15 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.0.5.1",
+        date: new Date("2022-08-31T00:00:00.000Z"),
+        bugs: [
+          "Fix le problème des accents lors de l'ajout d'utilisateurs"
+        ],
+        features: [
+        ]
+      },
+      {
         version: "0.0.5",
         date: new Date("2022-08-30T00:00:00.000Z"),
         bugs: [

@@ -25,8 +25,8 @@ export class CreateUserComponent implements OnInit {
     return this.usersService.create({
       firstname: this.firstname,
       name: this.lastname,
-      pseudo: `${this.firstname.charAt(0)}${this.lastname}`.toLowerCase().replace(/\s/g, '').trim(),
-      mail: `${this.firstname.charAt(0)}${this.lastname}@juniorisep.com`.toLowerCase().replace(/\s/g, '').trim(),
+      pseudo: `${this.firstname.charAt(0)}${this.lastname}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '').trim(),
+      mail: `${this.firstname.charAt(0)}${this.lastname}@juniorisep.com`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '').trim(),
       tokenEmail: "",
       admin: this.admin,
       disabled: this.disabled
