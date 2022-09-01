@@ -46,6 +46,9 @@ import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interceptor';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
+import { NoResultComponent } from './components/common/no-result/no-result/no-result.component';
+import { DashboardListeRemindersComponent } from './components/dashboard/dashboard-liste-reminders/dashboard-liste-reminders.component';
+import { DashboardEachReminderComponent } from './components/dashboard/dashboard-each-reminder/dashboard-each-reminder.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +87,10 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
     BookmarksResearchBlocComponent,
     ProspectHistoryComponent,
     ThemePickerComponent,
-    GoalResearchBlocComponent
+    GoalResearchBlocComponent,
+    NoResultComponent,
+    DashboardListeRemindersComponent,
+    DashboardEachReminderComponent
   ],
   imports: [
     BrowserModule,

@@ -7,8 +7,6 @@ import { Goal } from 'src/app/models/goal.model';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  goals!: Goal[];
   constructor(
   ) { }
 

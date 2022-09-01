@@ -2,9 +2,4 @@
   <app-each-research-prospect [prospect]="prospect.value" *ngIf="!prospect.value.disabled"></app-each-research-prospect>
   <br/>
 </div>
-<div *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0">
-  <div class="alert alert-error card">
-    <div class="radial-progress" style="--value:100;">100%</div>
-    <div class="label">Vous avez épuisé tous les prospects de la base !!</div>
-  </div> 
-</div>
+<app-no-result *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
