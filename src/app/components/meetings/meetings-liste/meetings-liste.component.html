@@ -2,9 +2,4 @@
   <app-each-meeting [meeting]="meeting.value"></app-each-meeting>
   <br />
 </div>
-<div *ngIf="meetingsService.meetings && meetingsService.meetings.size <= 0">
-  <div class="alert alert-error card">
-    <div class="radial-progress" style="--value:100;">100%</div>
-    <div class="label">Vous avez épuisé tous les rendez-vous de la base !!</div>
-  </div>
-</div>
+<app-no-result *ngIf="meetingsService.meetings && meetingsService.meetings.size <= 0"></app-no-result>

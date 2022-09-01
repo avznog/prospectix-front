@@ -2,10 +2,4 @@
     <app-each-bookmark [bookmark]="bookmark.value" *ngIf="!bookmark.value.prospect.disabled"></app-each-bookmark>
     <br />
 </div>
-<div *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0">
-  <div class="alert alert-error card">
-    <div class="radial-progress" style="--value:100;">100%</div>
-    <div class="label">Vous avez épuisé tous les prospects favoris de la base !!</div>
-  </div>
-</div>
-  
+<app-no-result *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0"></app-no-result>

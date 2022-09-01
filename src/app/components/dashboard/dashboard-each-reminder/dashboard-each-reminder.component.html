@@ -1,0 +1,21 @@
+<tr>
+<td>
+		<div class="flex items-center space-x-3">
+		<div>
+			<div class="font-bold">{{reminder.prospect.companyName}}</div>
+			<div class="text-sm opacity-50">{{reminder.prospect.streetAddress}}, <br> {{reminder.prospect.city.name}}, {{reminder.prospect.country.name}}</div>
+		</div>
+		</div>
+	</td>
+	<td>
+		{{reminder.prospect.nbNo}} pas de réponse{{reminder.prospect.nbNo > 0 && 's'}}
+		<br>
+		<span class="badge badge-ghost badge-sm">{{reminder.prospect.comment}}</span>
+	</td>
+	<td>
+		{{reminder.date | date:"dd/MM/YYYY"}}
+	</td>
+	<td class="col-end-8">
+		{{reminder.priority}}
+	</td>
+</tr>

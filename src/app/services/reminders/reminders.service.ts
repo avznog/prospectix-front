@@ -42,7 +42,7 @@ export class RemindersService {
 
   loadMore() {
     let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority ?? 0)
+    queryParameters = queryParameters.append("priority",2)
     
     if(this.researchParamsReminder.orderByPriority)
       queryParameters = queryParameters.append("orderByPriority", this.researchParamsReminder.orderByPriority)
@@ -56,7 +56,9 @@ export class RemindersService {
     queryParameters = queryParameters.append("keyword",this.researchParamsReminder.keyword)
     queryParameters = queryParameters.append("take", 2);
     
-    return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.reminders.set(reminder.id, reminder)));
+    return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => { 
+      reminders.forEach(reminder => this.reminders.set(reminder.id, reminder))
+    });
   }
 
   deleteReminder(idReminder: number) : Subscription {

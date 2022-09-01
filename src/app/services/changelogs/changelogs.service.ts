@@ -11,6 +11,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.0.6",
+        date: new Date("2022-09-01T00:00:00.000Z"),
+        bugs: [
+        ],
+        features: [
+          "Ajout du dashboard",
+          "Tri des goals / reminders du dashboard pour n'afficher que ceux du CDP connecté"
+        ]
+      },
+      {
         version: "0.0.5.1",
         date: new Date("2022-08-31T00:00:00.000Z"),
         bugs: [

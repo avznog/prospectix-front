@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Goal } from 'src/app/models/goal.model';
+import { AuthService } from 'src/app/auth/auth.service';
+import { GoalsService } from 'src/app/services/goals/goals.service';
 
 @Component({
   selector: 'app-dashboard-liste-goals',
@@ -8,8 +9,10 @@ import { Goal } from 'src/app/models/goal.model';
 })
 export class DashboardListeGoalsComponent implements OnInit {
 
-  @Input() goals!: Goal[];
-  constructor() { }
+  constructor (
+    public goalsService: GoalsService,
+    public authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
