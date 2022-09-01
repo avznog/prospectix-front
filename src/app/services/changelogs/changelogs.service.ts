@@ -14,6 +14,7 @@ export class ChangelogsService {
         version: "0.0.6",
         date: new Date("2022-09-01T00:00:00.000Z"),
         bugs: [
+          "Fix des reminders pour qu'ils s'affichent bien selon la priorité: Attention ! tri par done / undone toujours bugged"
         ],
         features: [
           "Ajout du dashboard",

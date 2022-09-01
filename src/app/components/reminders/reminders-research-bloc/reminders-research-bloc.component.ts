@@ -26,6 +26,7 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditOrderByPriority() : void {
+    
     this.remindersService.resetSearch({
       ...this.remindersService.researchParamsReminder,
       orderByPriority: this.orderByPriority ? 'true' : 'false'
@@ -33,9 +34,10 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditPriority() : void {
+    console.log(this.priority)
     this.remindersService.resetSearch({
       ...this.remindersService.researchParamsReminder,
-      priority: this.priority.toString()
+      priority: this.priority
     });
   }
 
