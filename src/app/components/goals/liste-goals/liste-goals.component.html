@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let goal of goalsService.goals | keyvalue | slice:goalsService.researchParamsGoals.skip:goalsService.researchParamsGoals.skip + 2" class="hover">
+    <tr *ngFor="let goal of goalsService.goals | keyvalue | slice:goalsService.researchParamsGoals.skip:goalsService.researchParamsGoals.skip + 20" class="hover">
       <td>{{goal.value.id}}</td>
       <td>{{goal.value.pm.pseudo}}</td>
       <td>{{goal.value.title}}</td>

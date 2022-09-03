@@ -17,7 +17,7 @@ export class ResearchProspectsComponent implements OnInit {
   pageUp() {
     this.prospectsService.updateSearchParameters({
       ...this.prospectsService.researchParamsProspect,
-      skip: this.prospectsService.researchParamsProspect.skip + 2
+      skip: this.prospectsService.researchParamsProspect.skip + 20
     });
     console.log(this.prospectsService.prospects)
   }
@@ -25,7 +25,7 @@ export class ResearchProspectsComponent implements OnInit {
   pageDown() {
     this.prospectsService.updateSearchParameters({
       ...this.prospectsService.researchParamsProspect,
-      skip: this.prospectsService.researchParamsProspect.skip - 2
+      skip: this.prospectsService.researchParamsProspect.skip - 20
     });
   }
 }

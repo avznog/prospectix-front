@@ -1,4 +1,4 @@
-<div *ngFor="let reminder of remindersService.reminders | keyvalue | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 2">
+<div *ngFor="let reminder of remindersService.reminders | keyvalue | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
     <app-each-reminder [reminder]="reminder.value"></app-each-reminder>
     <br />
 </div>

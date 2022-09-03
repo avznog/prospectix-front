@@ -18,14 +18,14 @@ export class GoalsComponent implements OnInit {
   pageDown() {
     this.goalsService.updateSearchParameters({
       ...this.goalsService.researchParamsGoals,
-      skip: this.goalsService.researchParamsGoals.skip - 2
+      skip: this.goalsService.researchParamsGoals.skip - 20
     });
   }
   
   pageUp() {
     this.goalsService.updateSearchParameters({
       ...this.goalsService.researchParamsGoals,
-      skip: this.goalsService.researchParamsGoals.skip + 2
+      skip: this.goalsService.researchParamsGoals.skip + 20
     });
   }
 

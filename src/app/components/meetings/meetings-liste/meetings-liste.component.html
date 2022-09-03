@@ -1,4 +1,4 @@
-<div *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 2">
+<div *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
   <app-each-meeting [meeting]="meeting.value"></app-each-meeting>
   <br />
 </div>

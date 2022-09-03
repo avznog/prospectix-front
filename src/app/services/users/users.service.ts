@@ -12,7 +12,7 @@ export class UsersService {
   users = new Map<number, ProjectManager>();
   researchParamsUsers : ResearchParamsUsers = {
     skip: 0,
-    take: 2
+    take: 20
   }
   constructor(
     private http: HttpClient

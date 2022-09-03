@@ -19,14 +19,14 @@ export class MeetingsComponent implements OnInit {
   pageDown() {
     this.meetingsService.updateSearchParameters({
       ...this.meetingsService.researchParamsMeeting,
-      skip: this.meetingsService.researchParamsMeeting.skip - 2
+      skip: this.meetingsService.researchParamsMeeting.skip - 20
     });
   }
 
   pageUp() {
     this.meetingsService.updateSearchParameters({
       ...this.meetingsService.researchParamsMeeting,
-      skip: this.meetingsService.researchParamsMeeting.skip + 2
+      skip: this.meetingsService.researchParamsMeeting.skip + 20
     });
   }
 }

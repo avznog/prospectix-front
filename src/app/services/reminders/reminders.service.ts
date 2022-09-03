@@ -12,7 +12,7 @@ export class RemindersService {
 
   reminders = new Map<number, Reminder>();
   researchParamsReminder: ResearchParamsReminder = {
-    take: 2,
+    take: 20,
     skip: 0,
     done: "false",
     oldOrNew: "new",
@@ -55,7 +55,7 @@ export class RemindersService {
     queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
     queryParameters = queryParameters.append("oldOrNew", this.researchParamsReminder.oldOrNew)
     queryParameters = queryParameters.append("keyword",this.researchParamsReminder.keyword)
-    queryParameters = queryParameters.append("take", 2);
+    queryParameters = queryParameters.append("take", 20);
     
     return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.reminders.set(reminder.id, reminder)));
   }

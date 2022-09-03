@@ -18,6 +18,6 @@
 
 <div class="btn-group justify-center">
   <button class="btn btn-ghost btn-outline {{usersService.researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-  <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 2}}</button>
+  <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 20}}</button>
   <button class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
 </div>

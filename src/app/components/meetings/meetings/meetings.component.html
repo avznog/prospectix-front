@@ -5,6 +5,6 @@
 <div class="divider" ></div>
 <div class="btn-group flex justify-center">
   <button class="btn btn-outline btn-ghost {{meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 2}}</button>
+  <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 20}}</button>
   <button class="btn btn-outline btn-ghost {{meetingsService.meetings && meetingsService.meetings.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
 </div>

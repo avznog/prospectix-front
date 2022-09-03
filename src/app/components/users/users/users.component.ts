@@ -17,14 +17,14 @@ export class UsersComponent implements OnInit {
   pageUp() {
     this.usersService.updateSearchParameters({
       ...this.usersService.researchParamsUsers,
-      skip: this.usersService.researchParamsUsers.skip + 2
+      skip: this.usersService.researchParamsUsers.skip + 20
     });
   }
 
   pageDown() {
     this.usersService.updateSearchParameters({
       ...this.usersService.researchParamsUsers,
-      skip: this.usersService.researchParamsUsers.skip - 2
+      skip: this.usersService.researchParamsUsers.skip - 20
     });
   }
 }

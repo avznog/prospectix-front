@@ -50,7 +50,7 @@ export class BookmarksService {
     
     queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword)
     queryParameters = queryParameters.append("pseudo", this.researchParamsBookmarks.pseudo)
-    queryParameters = queryParameters.append("take", 2);
+    queryParameters = queryParameters.append("take", 20);
 
     this.http.get<Bookmark[]>(`bookmarks/find-all-paginated/`, { params: queryParameters}).subscribe(bookmarks => bookmarks.forEach(bookmark => this.bookmarks.set(bookmark.id, bookmark)));
   }

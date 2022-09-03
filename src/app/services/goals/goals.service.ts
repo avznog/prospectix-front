@@ -12,7 +12,7 @@ export class GoalsService {
 
   goals = new Map<number, Goal>();
   researchParamsGoals: ResearchParamsGoals = {
-    take: 2,
+    take: 20,
     skip: 0,
     pseudo: '',
     keyword: ''

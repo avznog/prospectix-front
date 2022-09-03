@@ -18,14 +18,14 @@ export class BookmarksComponent implements OnInit {
   pageDown() {
     this.bookmarksService.updateSearchParameters({
       ...this.bookmarksService.researchParamsBookmarks,
-      skip: this.bookmarksService.researchParamsBookmarks.skip - 2
+      skip: this.bookmarksService.researchParamsBookmarks.skip - 20
     })
   }
 
   pageUp() {
     this.bookmarksService.updateSearchParameters({
       ...this.bookmarksService.researchParamsBookmarks,
-      skip: this.bookmarksService.researchParamsBookmarks.skip + 2
+      skip: this.bookmarksService.researchParamsBookmarks.skip + 20
     })
   }
 

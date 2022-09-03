@@ -49,7 +49,7 @@ export class ProspectsService {
       queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
       
       queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword ?? "")
-      queryParameters = queryParameters.append("take", 2);
+      queryParameters = queryParameters.append("take", 20);
       this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters }).subscribe(prospects => prospects.forEach(prospect => this.prospects.set(prospect.id, prospect)));
   }
 

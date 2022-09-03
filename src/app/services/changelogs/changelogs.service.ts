@@ -11,6 +11,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.0.7",
+        date: new Date("2022-09-03T00:00:00.000Z"),
+        bugs: [
+          "Réduction de la taille du bouton version",
+          "Suppression du bouton version pour les CDP"
+        ],
+        features: [
+          "Modification du nombre d'éléments pour les pages recherche, rappels, rendez-vous, favoris, utilisateurs, objectifs : 2 > 20"
+        ]
+      },{
         version: "0.0.6",
         date: new Date("2022-09-01T00:00:00.000Z"),
         bugs: [

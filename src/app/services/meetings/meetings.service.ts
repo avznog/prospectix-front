@@ -12,7 +12,7 @@ export class MeetingsService {
 
   meetings = new Map<number, Meeting>();
   researchParamsMeeting: ResearchParamsMeeting = {
-    take: 2,
+    take: 20,
     skip: 0,
     done: "false",
     oldOrNew: "new",
@@ -29,7 +29,7 @@ export class MeetingsService {
     this.meetings.clear();
     this.updateSearchParameters({
       ...researchParamsMeeting,
-      take: 2,
+      take: 20,
       skip: 0
     }); 
   }
@@ -54,7 +54,7 @@ export class MeetingsService {
     queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
     queryParameters = queryParameters.append("oldOrNew", this.researchParamsMeeting.oldOrNew)
     queryParameters = queryParameters.append("keyword", this.researchParamsMeeting.keyword)
-    queryParameters = queryParameters.append("take",2)
+    queryParameters = queryParameters.append("take",20)
     
     return this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(meetings => meetings.forEach(meeting => this.meetings.set(meeting.id, meeting)));
   

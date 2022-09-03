@@ -17,14 +17,14 @@ export class RemindersComponent implements OnInit {
   pageUp() {
     this.remindersService.updateSearchParameters({
       ...this.remindersService.researchParamsReminder,
-      skip: this.remindersService.researchParamsReminder.skip + 2
+      skip: this.remindersService.researchParamsReminder.skip + 20
     });
   }
 
   pageDown() {
     this.remindersService.updateSearchParameters({
       ...this.remindersService.researchParamsReminder,
-      skip: this.remindersService.researchParamsReminder.skip - 2
+      skip: this.remindersService.researchParamsReminder.skip - 20
     });
   }
  }
