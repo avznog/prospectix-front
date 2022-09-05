@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { DataThemeService } from 'src/app/services/common/data-theme.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class ThemePickerComponent implements OnInit {
 
   currentTheme: string = "";
   constructor(
-    private readonly dataThemeService: DataThemeService
+    private readonly dataThemeService: DataThemeService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
