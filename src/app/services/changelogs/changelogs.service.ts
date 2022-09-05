@@ -11,6 +11,15 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.0.8",
+        date: new Date("2022-09-05T00:00:00.000Z"),
+        bugs: [
+        ],
+        features: [
+          "Ajout de 3000 prospects de test dans la base de données"
+        ]
+      },
+      {
         version: "0.0.7",
         date: new Date("2022-09-03T00:00:00.000Z"),
         bugs: [
@@ -20,7 +29,8 @@ export class ChangelogsService {
         features: [
           "Modification du nombre d'éléments pour les pages recherche, rappels, rendez-vous, favoris, utilisateurs, objectifs : 2 > 20"
         ]
-      },{
+      },
+      {
         version: "0.0.6",
         date: new Date("2022-09-01T00:00:00.000Z"),
         bugs: [
