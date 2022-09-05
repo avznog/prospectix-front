@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
   }
 
 
-  onClickAddProspectsBase() {
-    this.prospectsService.addProspectsBase();
-  }
+  // onClickAddProspectsBase() {
+  //   this.prospectsService.addProspectsBase();
+  // }
 }
