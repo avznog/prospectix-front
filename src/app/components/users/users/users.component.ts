@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
+import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
@@ -8,7 +10,9 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 export class UsersComponent implements OnInit {
   constructor(
-    public readonly usersService: UsersService
+    public readonly usersService: UsersService,
+    public authService: AuthService,
+    private readonly prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
@@ -26,5 +30,10 @@ export class UsersComponent implements OnInit {
       ...this.usersService.researchParamsUsers,
       skip: this.usersService.researchParamsUsers.skip - 20
     });
+  }
+
+
+  onClickAddProspectsBase() {
+    this.prospectsService.addProspectsBase();
   }
 }

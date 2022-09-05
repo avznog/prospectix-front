@@ -88,4 +88,8 @@ export class ProspectsService {
   disable(idProspect: number) : Subscription {
     return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, disabled: true }));
   }
+
+  addProspectsBase() {
+    return this.http.get("prospects/create-from-scrapper").subscribe();
+  }
 }
