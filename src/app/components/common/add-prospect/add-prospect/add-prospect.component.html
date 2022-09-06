@@ -65,7 +65,7 @@
 
         <!-- select city -->
         <select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
-          <option *ngFor="let city of citiesService.cities" [ngValue]="city" [defaultSelected]="city">{{city.name}}</option>
+          <option *ngFor="let city of citiesService.cities" [ngValue]="city" [defaultSelected]="city">{{city.name}} : {{city.zipcode}}</option>
         </select>
 
         <!-- dropdown add city -->

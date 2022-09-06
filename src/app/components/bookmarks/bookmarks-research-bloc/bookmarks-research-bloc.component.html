@@ -39,7 +39,7 @@
         </label>
         <select id="city" name="city" [(ngModel)]="city" (change)="onEditCity()" class="select select-bordered">
             <option [defaultSelected]="'Toutes les villes'" [value]="'allCities'">Toutes les villes</option>
-            <option *ngFor="let city of citiesService.cities">{{city.name}}</option>
+            <option *ngFor="let city of citiesService.cities">{{city.name}} : {{city.zipcode}}</option>
         </select>
     </div>
 </div>

@@ -29,7 +29,7 @@
 			<div class="input-group">
 				<select id="city" class="select select-bordered" [(ngModel)]="city" >
 					<option disabled selected>Ville actuelle : {{prospect.city.name}}</option>
-					<option *ngFor="let city of citiesService.cities" >{{city.name}}</option>
+					<option *ngFor="let city of citiesService.cities" >{{city.name}} : {{city.zipcode}}</option>
 				</select>
 				<button class="btn btn-ghost btn-outline" (click)="onChangeCity()">Changer la ville</button>
 			</div>
