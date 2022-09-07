@@ -81,7 +81,7 @@ export class AuthService {
     localStorage.removeItem("currentUser");
     localStorage.removeItem("loggedIn");
     this.loggedInSubject.next(false);
-    this.currentUserSubject.next({} as ProjectManager);
+    this.currentUserSubject.next(undefined!);
     this.http.get("auth/logout").subscribe();
     this.router.navigate(["login"]);
   }
