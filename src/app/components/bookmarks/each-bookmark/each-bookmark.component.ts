@@ -37,6 +37,7 @@ export class EachBookmarkComponent implements OnInit {
     this.phone = this.bookmark.prospect.phone.number;
     this.email = this.bookmark.prospect.email.email;
     this.website = this.bookmark.prospect.website.website;
+    this.comment = this.bookmark.prospect.comment;
   }
 
   onClickButtonGoogle() {

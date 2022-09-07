@@ -39,14 +39,14 @@ export class EachResearchProspectComponent implements OnInit {
     this.phone = this.prospect.phone.number;
     this.email = this.prospect.email.email;
     this.website = this.prospect.website.website;
+    this.comment = this.prospect.comment;
   }
 
   onClickButtonGoogle() {
       window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank");
   }
 
-  onChangeComment() {
-    
+  onChangeComment() {    
       this.comment != "" && this.prospectService.updateComment(this.prospect.id, { comment: this.comment });
   }
 
