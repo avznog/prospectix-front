@@ -11,6 +11,17 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.1.0.2",
+        date: new Date("2022-09-07T00:00:00.000Z"),
+        bugs: [
+          "La fenetre d'ajout d'un prospect disparaît bien lorsque le prospect est ajouté",
+          "Il est maintenant possible de scroll sur la fenêtre d'ajout d'un prospect si l'écran est trop petit pour tout afficher"
+        ],
+        features: [
+          
+        ]
+      },
+      {
         version: "0.1.0.1",
         date: new Date("2022-09-07T00:00:00.000Z"),
         bugs: [
