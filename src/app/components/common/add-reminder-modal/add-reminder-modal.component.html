@@ -1,0 +1,28 @@
+<label for="modal-add-reminder" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+<div class="form-control space-y-5">
+
+  <label class="text-2xl font-bold">Ajouter un rappel</label>
+  <div class="divider"></div>
+  <input class="datepicker" type="date" id="date" class="btn btn-outline btn-ghost " [(ngModel)]="date">
+
+  <div class="inline-flex">
+    <label class="w-1/2 text-lg">Priorité du rappel</label>
+    <div class="w-1/2">
+      <input type="range" min="1" max="3" value="1"
+        class="range {{priority == 2 && 'range-primary'}} {{priority == 0 && 'range-secondary'}} {{priority == 3 && 'range-accent'}}"
+        step="1" [(ngModel)]="priority" />
+      <div class="w-full flex justify-between text-xs px-2">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <textarea class="textarea textarea-bordered textarea-ghost" placeholder="Description du rappel"
+    [(ngModel)]="description"></textarea>
+
+  <label class="btn btn-outline btn-ghost" for="modal-add-reminder" (click)="onCreateReminder()">Créer le rappel</label>
+</div>

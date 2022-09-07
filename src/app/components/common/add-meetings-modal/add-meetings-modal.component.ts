@@ -8,11 +8,11 @@ import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
-  selector: 'app-add-meetings-dropdown',
-  templateUrl: './add-meetings-dropdown.component.html',
-  styleUrls: ['./add-meetings-dropdown.component.scss']
+  selector: 'app-add-meetings-modal',
+  templateUrl: './add-meetings-modal.component.html',
+  styleUrls: ['./add-meetings-modal.component.scss']
 })
-export class AddMeetingsDropdownComponent implements OnInit {
+export class AddMeetingsModalComponent implements OnInit {
 
   date: Date = new Date;
   type: MeetingType = MeetingType.EXT;

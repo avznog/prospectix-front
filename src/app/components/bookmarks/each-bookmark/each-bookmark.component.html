@@ -102,21 +102,29 @@
           </button>
   
           <!-- Bouton de rappel + dropdown -->
-          <div class="dropdown dropdown-top indicator">
+          <div class="indicator">
             <span *ngIf="bookmark.prospect.reminders.length > 0" class="indicator-item badge ">{{bookmark.prospect.reminders.length}}</span>
-            <label tabindex="0" class="btn btn-ghost btn-outline">Rappel</label>
-          <div tabindex="0" class="dropdown-content card card-compact">
-            <app-add-reminder-dropdown class="card-body outline" [prospect]="bookmark.prospect"></app-add-reminder-dropdown>
+            <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder">Rappel</label>        
+          
+            <input type="checkbox" id="modal-add-reminder" class="modal-toggle" />
+            <div class="modal">
+              <div class="modal-box">
+                <app-add-reminder-modal [prospect]="bookmark.prospect"></app-add-reminder-modal>
+              </div>
+            </div>    
+           
           </div>
-  
-          </div>
-           <!-- Bouton de rendez-vous + dropdown -->
-          <div class="dropdown dropdown-top indicator">
+
+           <!-- Bouton de rendez-vous -->
+          <div class="indicator">
             <span *ngIf="bookmark.prospect.meetings.length > 0" class="indicator-item badge ">{{bookmark.prospect.meetings.length}}</span>
-            <label tabindex="0" class="btn btn-ghost btn-outline">Rendez-vous</label>
-            
-            <div tabindex="0" class="dropdown-content card">
-              <app-add-meetings-dropdown class="card-body outline" [prospect]="bookmark.prospect"></app-add-meetings-dropdown>
+            <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-meeting">Rendez-vous</label>        
+          
+            <input type="checkbox" id="modal-add-meeting" class="modal-toggle" />
+            <div class="modal">
+              <div class="modal-box">
+                <app-add-meetings-modal [prospect]="bookmark.prospect"></app-add-meetings-modal>
+              </div>
             </div>
           </div>
          

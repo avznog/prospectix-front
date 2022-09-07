@@ -11,9 +11,8 @@ import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { EachBookmarkComponent } from './components/bookmarks/each-bookmark/each-bookmark.component';
 import { ListeBookmarksComponent } from './components/bookmarks/liste-bookmarks/liste-bookmarks.component';
-import { AddMeetingsDropdownComponent } from './components/common/add-meetings-dropdown/add-meetings-dropdown.component';
 import { AddProspectComponent } from './components/common/add-prospect/add-prospect/add-prospect.component';
-import { AddReminderDropdownComponent } from './components/common/add-reminder-dropdown/add-reminder-dropdown.component';
+import { AddReminderModalComponent } from './components/common/add-reminder-modal/add-reminder-modal.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { ProspectHistoryComponent } from './components/common/prospect-history/prospect-history/prospect-history.component';
 import { ThemePickerComponent } from './components/common/theme-picker/theme-picker.component';
@@ -50,6 +49,7 @@ import { ChangelogsComponent } from './components/changelogs/changelogs/changelo
 import { NoResultComponent } from './components/common/no-result/no-result/no-result.component';
 import { DashboardListeRemindersComponent } from './components/dashboard/dashboard-liste-reminders/dashboard-liste-reminders.component';
 import { DashboardEachReminderComponent } from './components/dashboard/dashboard-each-reminder/dashboard-each-reminder.component';
+import { AddMeetingsModalComponent } from './components/common/add-meetings-modal/add-meetings-modal.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +75,8 @@ import { DashboardEachReminderComponent } from './components/dashboard/dashboard
     DashboardListeGoalsComponent,
     DashboardEachGoalComponent,
     LoginComponent,
-    AddReminderDropdownComponent,
-    AddMeetingsDropdownComponent,
+    AddReminderModalComponent,
+    AddMeetingsModalComponent,
     BookmarksComponent,
     AddProspectComponent,
     EachReminderComponent,

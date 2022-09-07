@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddMeetingsDropdownComponent } from './add-meetings-dropdown.component';
+import { AddMeetingsModalComponent } from './add-meetings-modal.component';
 
 describe('AddMeetingsDropdownComponent', () => {
-  let component: AddMeetingsDropdownComponent;
-  let fixture: ComponentFixture<AddMeetingsDropdownComponent>;
+  let component: AddMeetingsModalComponent;
+  let fixture: ComponentFixture<AddMeetingsModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddMeetingsDropdownComponent ]
+      declarations: [ AddMeetingsModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddMeetingsDropdownComponent);
+    fixture = TestBed.createComponent(AddMeetingsModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

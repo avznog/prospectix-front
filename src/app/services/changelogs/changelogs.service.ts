@@ -11,6 +11,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.1.0.3",
+        date: new Date("2022-09-07T00:00:00.000Z"),
+        bugs: [
+          "Les dropdown rendez-vous et rappel ont été transformés en modal: ils se ferment bien lors de l'ajout d'un rappel / rdb et ne dépassent plus au delà du cadre"
+        ],
+        features: [
+          
+        ]
+      },
+      {
         version: "0.1.0.2",
         date: new Date("2022-09-07T00:00:00.000Z"),
         bugs: [

@@ -7,11 +7,11 @@ import { EventsService } from 'src/app/services/events/events.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
-  selector: 'app-add-reminder-dropdown',
-  templateUrl: './add-reminder-dropdown.component.html',
-  styleUrls: ['./add-reminder-dropdown.component.scss']
+  selector: 'app-add-reminder-modal',
+  templateUrl: './add-reminder-modal.component.html',
+  styleUrls: ['./add-reminder-modal.component.scss']
 })
-export class AddReminderDropdownComponent implements OnInit {
+export class AddReminderModalComponent implements OnInit {
 
   @Input() prospect!: Prospect;
   

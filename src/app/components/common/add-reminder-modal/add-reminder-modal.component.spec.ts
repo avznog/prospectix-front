@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddReminderDropdownComponent } from './add-reminder-dropdown.component';
+import { AddReminderModalComponent } from './add-reminder-modal.component';
 
 describe('AddReminderDropdownComponent', () => {
-  let component: AddReminderDropdownComponent;
-  let fixture: ComponentFixture<AddReminderDropdownComponent>;
+  let component: AddReminderModalComponent;
+  let fixture: ComponentFixture<AddReminderModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddReminderDropdownComponent ]
+      declarations: [ AddReminderModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddReminderDropdownComponent);
+    fixture = TestBed.createComponent(AddReminderModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
