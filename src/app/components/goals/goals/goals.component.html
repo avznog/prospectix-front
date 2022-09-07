@@ -9,7 +9,7 @@
     <div class="divider" ></div>
       <div class="btn-group flex justify-center">
         <button class="btn btn-outline btn-ghost {{goalsService.researchParamsGoals.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-        <button class="btn btn-outline btn-ghost">Page {{goalsService.researchParamsGoals.skip / 20 }}</button>
+        <button class="btn btn-outline btn-ghost">Page {{goalsService.researchParamsGoals.skip / 20 + 1}}</button>
         <button class="btn btn-outline btn-ghost {{goalsService.goals && goalsService.goals.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
       </div> 
     <input type="checkbox" id="add-goal-modal" class="modal-toggle" />

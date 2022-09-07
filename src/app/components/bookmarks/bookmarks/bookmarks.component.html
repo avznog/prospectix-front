@@ -9,7 +9,7 @@
 <div class="divider" ></div>
   <div class="btn-group flex justify-center">
     <button class="btn btn-outline btn-ghost {{bookmarksService.researchParamsBookmarks.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-    <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 20 }}</button>
+    <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 20 + 1}}</button>
     <button class="btn btn-outline btn-ghost {{bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
 </div>
