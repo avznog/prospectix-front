@@ -103,6 +103,6 @@ export class EachBookmarkComponent implements OnInit {
   }
 
   onClickWebsite() {
-    window.open(`http://${this.website}`, "_blank")
+    window.open(`${this.website.includes("http") ? this.website : "http://" + this.website}`, "_blank")
   }
 }
