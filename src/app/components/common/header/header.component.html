@@ -6,26 +6,34 @@
       <div class="dropdown-content w-full bg-base-100">
           <div class="border card">
             <div class="card-body">
-              <div class="card-title">Historique des versions</div>
+              <span class="text-xs">Dev par Benjamin GONZVA /w ❤️ (@ben.gonzva)</span>
+              <div class="divider"></div>
               <app-changelogs class="w-full max-h-screen overflow-scroll"></app-changelogs>
             </div>
           </div> 
       </div>
     </div>
   </div>
-  
-  <div class="flex-none">
-    <ul class="menu menu-horizontal p-0">
-      <li><a routerLink="/prospects">Recherche</a></li>
-      <li><a routerLink="/reminders">Rappels</a></li>
-      <li><a routerLink="/meetings">Rendez-vous</a></li>
-      <li><a routerLink="/bookmarks">Mes prospects favoris</a></li>
-      <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/users">Users</a></li>
-      <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/goals">Gestion des objectifs</a></li>
-      <li class="dropdown">
+    <ul class="menu-horizontal menu">
+      <li><a routerLink="/prospects" class="text-xl font-medium">Recherche</a></li>
+      <li><a routerLink="/reminders" class="text-xl font-medium">Rappels</a></li>
+      <li><a routerLink="/meetings" class="text-xl font-medium">Rendez-vous</a></li>
+      <li><a routerLink="/bookmarks" class="text-xl font-medium">Mes prospects favoris</a></li>
+      <div *ngIf="authService.currentUserSubject.getValue().admin" class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost text-xl font-medium">Admin</label>
+        <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60">
+          <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/users" class="w-full">Users</a></li>
+          <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li>
+        </ul>
+      </div>
+      <li class="dropdown dropdown-end">
         <app-theme-picker></app-theme-picker>
       </li>
-      <li (click)="logout()"><a>Se déconnecter</a></li>
+      <li (click)="logout()" class="text-xs"><a>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+        <path d="M7 12h14l-3 -3m0 6l3 -3" />
+      </svg></a></li>
     </ul>
   </div>
-</div>

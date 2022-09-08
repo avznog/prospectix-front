@@ -11,6 +11,20 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.1.1",
+        date: new Date("2022-09-08T00:00:00.000Z"),
+        bugs: [
+          "Modification des types de rendez-vous pour qu'ils ne dépassent pas de la zone dans la page de rendez-vous"
+        ],
+        features: [
+          "Réduction de la taille du bouton \"nouvelle version\"",
+          "Refonte de la tuile du prospect: réduction des boutons et modification de leur emplacements",
+          "Ajout d'un spacing entre les éléments des blocs de recherche des pages \"recherche\" et \"Mes prospects favoris\"",
+          "Refonte graphique du header: réduction de la taille des boutons de thème et de déconnexion, augmentation de la taille des boutons principaux, regroupement des pages d'administrateur dans un dropdown",
+          "Refonte de la page d'édition d'un prospect: ajout de la possibilité de cliquer hors de la zone pour enlever le pop up"
+        ]
+      },
+      {
         version: "0.1.0.5",
         date: new Date("2022-09-07T00:00:00.000Z"),
         bugs: [
