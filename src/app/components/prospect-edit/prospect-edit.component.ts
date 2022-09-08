@@ -74,4 +74,9 @@ export class ProspectEditComponent implements OnInit {
   onChangeStreetAddress() {
     this.prospectsService.updateStreetAddress(this.prospect.id, { streetAddress: this.streetAddress });
   }
+
+  // TODO: créer la fonction oneditprospect
+  onEditProspect() {
+    console.log("TODO")
+  }
 }
