@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddReminderModalComponent } from './add-reminder-modal.component';
 
-describe('AddReminderDropdownComponent', () => {
+describe('AddReminderModalComponent', () => {
   let component: AddReminderModalComponent;
   let fixture: ComponentFixture<AddReminderModalComponent>;
 

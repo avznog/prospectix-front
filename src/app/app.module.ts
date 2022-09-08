@@ -28,7 +28,7 @@ import { EachMeetingComponent } from './components/meetings/each-meeting/each-me
 import { MeetingsListeComponent } from './components/meetings/meetings-liste/meetings-liste.component';
 import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
-import { ProspectDetailsComponent } from './components/prospect-details/prospect-details/prospect-details.component';
+import { ProspectEditComponent } from './components/prospect-edit/prospect-edit.component';
 import { EachReminderComponent } from './components/reminders/each-reminder/each-reminder.component';
 import { RemindersListeProspectComponent } from './components/reminders/reminders-liste-prospect/reminders-liste-prospect.component';
 import { RemindersResearchBlocComponent } from './components/reminders/reminders-research-bloc/reminders-research-bloc.component';
@@ -80,7 +80,7 @@ import { AddMeetingsModalComponent } from './components/common/add-meetings-moda
     BookmarksComponent,
     AddProspectComponent,
     EachReminderComponent,
-    ProspectDetailsComponent,
+    ProspectEditComponent,
     EachResearchProspectComponent,
     EachMeetingComponent,
     ListeBookmarksComponent,

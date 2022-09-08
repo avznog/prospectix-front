@@ -19,7 +19,7 @@ import { WebsitesService } from 'src/app/services/websites/websites.service';
 export class EachResearchProspectComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-
+  
   comment: string = "";
   phone: string = "";
   email: string = "";
@@ -125,6 +125,6 @@ export class EachResearchProspectComponent implements OnInit {
   }
 
   onClickWebsite() {
-    window.open(`http://${this.website}`, "_blank")
+    window.open(`${this.website.includes("http") ? this.website : 'http://' + this.website}`, "_blank")
   }
 }
