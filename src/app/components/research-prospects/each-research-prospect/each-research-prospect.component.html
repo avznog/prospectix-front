@@ -1,139 +1,130 @@
 <div class="card card-bordered shadow-md border-solid border-current overflow-visible">
-    <!-- Card -->
-    <div class="card-body bg-opacity-10">
-      <!-- Header card -->
-        <div class="grid grid-cols-2">
-          <div>
-            <div class="card-title">
-              <!-- Title -->
-              {{prospect.id}}. {{prospect.companyName}} - {{prospect.activity.name}}
-  
-              <!-- Button search google -->
-              <div (click)="onClickButtonGoogle()" class="btn btn-sm btn-ghost btn-outline">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <!-- Button MODAL Edit prospect -->
-              <label for="modal-prospect-details" class="btn btn-ghost btn-outline btn-sm modal-button">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-neutral" fill="none" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
-              </label>
-              <input type="checkbox" id="modal-prospect-details" class="modal-toggle" />
-  
-              <!-- Modal edit prospect -->
-              <div class="modal">
-                <div class="modal-box max-w-screen-lg">
-                  <app-prospect-details [prospect]="prospect" ></app-prospect-details>
-                </div>
-              </div>
-  
-              <!-- Button Bookmark -->
-              <div class="btn btn-ghost btn-outline btn-sm {{prospect.isBookmarked ? 'bg-warning btn-disabled' : 'bg-error'}}" (click)="prospect.isBookmarked ? onDeleteBookmark() : onCreateBookmark()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="warning">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              </div>
+  <!-- Card -->
+  <div class="card-body bg-opacity-10">
+    <!-- Header card -->
+    <div class="grid grid-cols-2">
+      <div>
+        <div class="card-title">
 
-              <!-- Button history -->
-              <label for="drawer-prospect-history" class="drawer-button btn btn-ghost btn-outline btn-sm" (click)="onClickDrawer()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </label>
-            </div>
-  
-            <!-- Address -->
-            {{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}
+          <!-- Title -->
+          {{prospect.id}}. {{prospect.companyName}} - {{prospect.activity.name}}
+
+          <!-- Button search google -->
+          <div (click)="onClickButtonGoogle()" class="btn btn-sm btn-ghost btn-outline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
-          
-          <!-- Commentaire -->
-          <div>
-            <textarea class="textarea textarea-bordered h-1/2 w-full" [(ngModel)]="comment"
-                placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
+
+          <!-- Button MODAL Edit prospect -->
+          <label for="modal-prospect-edit" class="btn btn-ghost btn-outline btn-sm modal-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-neutral" fill="none" viewBox="0 0 24 24"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          </label>
+          <input type="checkbox" id="modal-prospect-edit" class="modal-toggle" />
+          <!-- Modal edit prospect -->
+          <div class="modal">
+            <div class="modal-box max-w-screen-lg">
+              
+              <app-prospect-edit [prospect]="prospect"></app-prospect-edit>
+            </div>
+          </div>
+
+          <!-- Button Bookmark -->
+          <div
+            class="btn btn-ghost btn-outline btn-sm {{prospect.isBookmarked ? 'bg-warning btn-disabled' : 'bg-error'}}"
+            (click)="prospect.isBookmarked ? onDeleteBookmark() : onCreateBookmark()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="warning">
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          </div>
+
+          <!-- Button history -->
+          <label for="drawer-prospect-history" class="drawer-button btn btn-ghost btn-outline btn-sm"
+            (click)="onClickDrawer()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </label>
+        </div>
+
+        <!-- Address -->
+        {{prospect.streetAddress}}, {{prospect.city.zipcode}}, {{prospect.city.name}}, {{prospect.country.name}}
+      </div>
+
+      <!-- Commentaire -->
+      <div>
+        <textarea class="textarea textarea-bordered h-1/2 w-full" [(ngModel)]="comment"
+          placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
               </textarea>
-          </div>
-        </div>
-      
-      <div class="divider"></div>
-  
-      <!-- Phone / Email / Website inputs -->
-      <div class="inline-flex space-x-10 self-baseline">  
-        
-        <!-- Phone -->
-        <div >
-          <input class="input input-bordered" type="text" [(ngModel)]="phone">
-          <div class="btn-group">
-            <label class="btn btn-outline btn-ghost w-1/2" (click)="onChangePhone()">Edit</label>
-            <label class="btn btn-outline btn-ghost w-1/2" (click)="onClickPhone()">Appeler</label>
-          </div>
-        </div>
+      </div>
+    </div>
 
-        <!-- Mail -->
-        <div>
-          <input class="input input-bordered" type="text" [(ngModel)]="email">
-          <div class="btn-group">
-            <label class="btn btn-outline btn-ghost w-1/2" (click)="onChangeEmail()">Edit</label>
-            <label class="btn btn-outline btn-ghost w-1/2" (click)="onClickEmail()">Ecrire</label>
-          </div>
-        </div>
+    <div class="divider"></div>
 
-        <!-- Website -->
-        <div>
-          <input class="input input-bordered" type="text" [(ngModel)]="website">
-          <div class="btn-group">
-            <label class="btn btn-outline btn-ghost w-1/2" (click)="onChangeWebsite()">Edit</label>
-            <label class="btn btn-outline btn-ghost w-1/2" (click)="onClickWebsite()">Visiter</label>
-          </div>
-        </div>
-        
-        <!-- Buttons -->
-        <div class="btn-group">
-          <!-- Bouton Pas de réponse -->
-          <button (click)="onChangeNbNo()" class="btn btn-ghost btn-outline indicator">
-            <span *ngIf="prospect.nbNo > 0" class="indicator-item badge">{{prospect.nbNo}}</span>Pas de réponse<span *ngIf="prospect.nbNo> 0">s</span>
-          </button>
-  
-          <!-- Bouton de rappel  -->
-          <div class="indicator">
-            <span *ngIf="prospect.reminders.length > 0" class="indicator-item badge ">{{prospect.reminders.length}}</span>
-            <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder">Rappel</label>        
-          
-            <input type="checkbox" id="modal-add-reminder" class="modal-toggle" />
-            <div class="modal">
-              <div class="modal-box">
-                <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
-              </div>
-            </div>    
-           
-          </div>
-           <!-- Bouton de rendez-vous -->
-          <div class="indicator">
-            <span *ngIf="prospect.meetings.length > 0" class="indicator-item badge ">{{prospect.meetings.length}}</span>
-            <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-meeting">Rendez-vous</label>        
-          
-            <input type="checkbox" id="modal-add-meeting" class="modal-toggle" />
-            <div class="modal">
-              <div class="modal-box">
-                <app-add-meetings-modal [prospect]="prospect"></app-add-meetings-modal>
-              </div>
+    <div class="inline-flex space-x-5">
+
+      <!-- Phone -->
+      <label class="btn btn-sm btn-outline" *ngIf="phone" (click)="onClickPhone()">{{phone}}</label>
+
+      <!-- Mail -->
+      <label class="btn btn-sm btn-outline" *ngIf="email" (click)="onClickEmail()">{{email}}</label>
+
+      <!-- Website -->
+      <label class="btn btn-sm btn-outline" *ngIf="website" (click)="onClickWebsite()">{{website}}</label>
+
+      <!-- Buttons -->
+      <div class="btn-group">
+
+        <!-- Bouton Pas de réponse -->
+        <button (click)="onChangeNbNo()" class="btn btn-ghost btn-outline indicator">
+          <span *ngIf="prospect.nbNo > 0" class="indicator-item badge">{{prospect.nbNo}}</span>Pas de réponse<span
+            *ngIf="prospect.nbNo> 0">s</span>
+        </button>
+
+        <!-- Bouton de rappel  -->
+        <div class="indicator">
+          <span *ngIf="prospect.reminders.length > 0" class="indicator-item badge ">{{prospect.reminders.length}}</span>
+          <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder">Rappel</label>
+
+          <input type="checkbox" id="modal-add-reminder" class="modal-toggle" />
+          <div class="modal">
+            <div class="modal-box">
+              <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
             </div>
           </div>
-         
-          <!-- Bouton Refus -->
-          <button class="btn btn-ghost btn-outline" (click)="onClickRefus()">
-            Refus
-          </button>
-  
-          <!-- Bouton Mail -->
-          <button class="btn btn-ghost btn-outline">
-            Mail
-          </button>
+
         </div>
+        <!-- Bouton de rendez-vous -->
+        <div class="indicator">
+          <span *ngIf="prospect.meetings.length > 0" class="indicator-item badge ">{{prospect.meetings.length}}</span>
+          <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-meeting">Rendez-vous</label>
+
+          <input type="checkbox" id="modal-add-meeting" class="modal-toggle" />
+          <div class="modal">
+            <div class="modal-box">
+              <app-add-meetings-modal [prospect]="prospect"></app-add-meetings-modal>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bouton Refus -->
+        <button class="btn btn-ghost btn-outline" (click)="onClickRefus()">
+          Refus
+        </button>
+
+        <!-- Bouton Mail -->
+        <button class="btn btn-ghost btn-outline">
+          Mail
+        </button>
       </div>
     </div>
   </div>
-  
+</div>

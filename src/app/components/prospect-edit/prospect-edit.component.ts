@@ -8,11 +8,11 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
 
 @Component({
-  selector: 'app-prospect-details',
-  templateUrl: './prospect-details.component.html',
-  styleUrls: ['./prospect-details.component.scss']
+  selector: 'app-prospect-edit',
+  templateUrl: './prospect-edit.component.html',
+  styleUrls: ['./prospect-edit.component.scss']
 })
-export class ProspectDetailsComponent implements OnInit {
+export class ProspectEditComponent implements OnInit {
 
   @Input() prospect!: Prospect;
   activity: string = "";
@@ -35,13 +35,6 @@ export class ProspectDetailsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.activity = this.prospect.city.name;
-    this.city = this.prospect.city.name;
-    this.phone = this.prospect.phone.number;
-    this.email = this.prospect.email.email;
-    this.website = this.prospect.website.website;
-    this.companyName = this.prospect.companyName;
-    this.streetAddress = this.prospect.streetAddress;
   }
 
   onChangeNbNo() {

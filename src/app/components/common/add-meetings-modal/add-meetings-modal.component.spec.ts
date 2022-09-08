@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddMeetingsModalComponent } from './add-meetings-modal.component';
 
-describe('AddMeetingsDropdownComponent', () => {
+describe('AddMeetingsModalComponent', () => {
   let component: AddMeetingsModalComponent;
   let fixture: ComponentFixture<AddMeetingsModalComponent>;
 
