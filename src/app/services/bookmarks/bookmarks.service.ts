@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
@@ -13,12 +14,13 @@ export class BookmarksService {
   researchParamsBookmarks: ResearchParamsBookmarks = {
     keyword: '',
     skip: 0,
-    pseudo: ''
+    pseudo: this.authService.currentUserSubject.getValue().pseudo ?? ""
   };
   bookmarks = new Map<number, Bookmark>();
   
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly authService: AuthService
   ) { 
     this.loadMore();
   }

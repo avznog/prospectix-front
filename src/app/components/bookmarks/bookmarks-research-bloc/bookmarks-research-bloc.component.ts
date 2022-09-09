@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
@@ -19,10 +20,12 @@ export class BookmarksResearchBlocComponent implements OnInit {
     public readonly activitiesService: ActivitiesService,
     public readonly citiesService: CitiesService,
     public readonly pmService: ProjectManagersService,
-    private readonly bookmarksService: BookmarksService
+    private readonly bookmarksService: BookmarksService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.pm = this.authService.currentUserSubject.getValue().pseudo;
   }
 
   onEditKeyword() {
