@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 })
 export class RemindersListeProspectComponent implements OnInit {
   constructor(
-    public remindersService: RemindersService
+    public remindersService: RemindersService,
+    public readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

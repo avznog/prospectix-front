@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 })
 export class MeetingsListeComponent implements OnInit {
   constructor(
-    public meetingsService: MeetingsService
+    public meetingsService: MeetingsService,
+    public readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
