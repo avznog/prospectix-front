@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { waitForAsync } from '@angular/core/testing';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -37,13 +38,10 @@ export class ResearchBlocComponent implements OnInit {
   }
 
   onEditKeyword() {
-    setTimeout(() => {
-       this.prospectsService.resetSearch({
+    this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       keyword: this.formKeyword
     });
-    }, 200)
-   
   }
 
 }
