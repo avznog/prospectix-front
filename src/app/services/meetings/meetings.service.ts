@@ -70,11 +70,11 @@ export class MeetingsService {
   }
 
   markDone(idMeeting : number) : Subscription {
-    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe();
+    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe(() => this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true }));
   }
 
   markUndone(idMeeting: number) : Subscription {
-    return this.http.get<Meeting>(`meetings/mark-undone/${idMeeting}`).subscribe();
+    return this.http.get<Meeting>(`meetings/mark-undone/${idMeeting}`).subscribe(() => this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: false }));
   }
 
   create(createMeetingDto: CreateMeetingDto) : Subscription {

@@ -53,7 +53,7 @@ export class ProspectsService {
   }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
-    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe();
+    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe(prospect => this.prospects.set(prospect.id, prospect));
   }
 
   updateStreetAddress(idProspect: number, streetAddress: { streetAddress: string }) {
@@ -91,7 +91,7 @@ export class ProspectsService {
   }
   
   disable(idProspect: number) : Subscription {
-    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe();
+    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: StageType.ARCHIVED, disabled: true }));
   }
 
   addProspectsBase() {

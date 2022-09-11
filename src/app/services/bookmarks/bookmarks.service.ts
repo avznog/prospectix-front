@@ -61,6 +61,7 @@ export class BookmarksService {
   create(createBookmarkDto: CreateBookmarkDto) : Subscription {
     return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => {
       bookmark.prospect.stage = StageType.BOOKMARK;
+      bookmark.prospect.isBookmarked = true;
       this.bookmarks.set(bookmark.id, bookmark)
     });
   }

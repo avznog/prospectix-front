@@ -1,5 +1,5 @@
 <div *ngFor="let bookmark of bookmarksService.bookmarks | keyvalue | slice:bookmarksService.researchParamsBookmarks.skip:bookmarksService.researchParamsBookmarks.skip + 20">
-    <app-each-bookmark [bookmark]="bookmark.value" *ngIf="bookmark.value.prospect.stage == 1"></app-each-bookmark>
-    <br />
+    <!-- <app-each-bookmark [bookmark]="bookmark.value" *ngIf="bookmark.value.prospect.stage == 1"></app-each-bookmark> -->
+    <app-prospect-tile [prospect]="bookmark.value.prospect" [bookmark]="bookmark.value" *ngIf="bookmark.value.prospect.stage == 1"></app-prospect-tile>
 </div>
 <app-no-result *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0"></app-no-result>

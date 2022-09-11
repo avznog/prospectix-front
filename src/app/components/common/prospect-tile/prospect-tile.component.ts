@@ -77,7 +77,7 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onCreateBookmark() {
-    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK} );
+    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK} );
     const createBookmarkDto: CreateBookmarkDto = {
       prospect: this.prospect,
       creationDate: new Date()
@@ -138,6 +138,28 @@ export class ProspectTileComponent implements OnInit {
       prospect: this.prospect
     });
     console.log("email compatibilisé")
+  }
+
+  onMarkMeetingDone() {
+    console.log("meeting marked done");
+    this.eventsService.create({
+      type: EventType.DONE_MEETING,
+      prospect: this.meeting.prospect,
+      date: new Date,
+      description: `${EventDescriptionType.DONE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
+    });
+    return this.meetingsService.markDone(this.meeting.id);
+  }
+
+  onMarkReminderDone() {
+    console.log("reminder marked done");
+    this.eventsService.create({
+      type: EventType.DONE_REMINDER,
+      prospect: this.reminder.prospect,
+      date: new Date,
+      description: `${EventDescriptionType.DONE_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
+    });
+    return this.remindersService.markDone(this.reminder.id);
   }
 
   onClickDrawer() {
