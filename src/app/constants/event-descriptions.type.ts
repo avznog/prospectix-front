@@ -5,6 +5,8 @@ export enum EventDescriptionType {
   ADD_MEETING = "Ajout d'un rendez-vous par",
   DONE_MEETING = "Rendez-vous effectué par",
   DELETE_MEETING = "Rendez-vous supprimé par",
+  ADD_SENT_EMAIL = "Email envoyé par",
+  DELETE_SENT_EMAIL = "Email supprimé par",
   ADD_BOOKMARKS = "Ajouté en favoris par",
   DELETE_BOOKMARKS = "Supprimé des favoris par",
   CREATION = "Création du prospect par",

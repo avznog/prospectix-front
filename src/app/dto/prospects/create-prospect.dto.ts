@@ -1,3 +1,4 @@
+import { StageType } from "src/app/constants/stage.type";
 import { CreateActivityDto } from "../activities/create-activity.dto";
 import { CreateCityDto } from "../cities/create-city.dto";
 import { CreateCountryDto } from "../countries/create-country.dto";
@@ -18,4 +19,6 @@ export interface CreateProspectDto {
   nbNo: number;
   disabled: boolean;
   isBookmarked: boolean;
+  stage: StageType;
+  archived?: Date;
 }

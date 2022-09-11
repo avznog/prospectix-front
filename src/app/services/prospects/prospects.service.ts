@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
-import { CitiesService } from '../cities/cities.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,6 @@ export class ProspectsService {
 
   constructor(
     private http: HttpClient,
-    private citiesService: CitiesService
   ) { 
     this.loadMore();
   }
@@ -54,7 +53,7 @@ export class ProspectsService {
   }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
-    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe(prospect => this.prospects.set(prospect.id, prospect));
+    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe();
   }
 
   updateStreetAddress(idProspect: number, streetAddress: { streetAddress: string }) {
@@ -84,9 +83,15 @@ export class ProspectsService {
   updateByActivity(idProspect: number, activityName: string) : Subscription {
     return this.http.get<Prospect>(`prospects/by-activity/${idProspect}/${activityName}`).subscribe();
   }
+
+  updateByStage(idProspect: number, stage: { stage: StageType }) : Subscription {
+    if(stage.stage == StageType.ARCHIVED)
+      return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date(), disabled: true}).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
+  }
   
   disable(idProspect: number) : Subscription {
-    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, disabled: true }));
+    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe();
   }
 
   addProspectsBase() {

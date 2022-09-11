@@ -1,0 +1,10 @@
+<app-header></app-header>
+<h1 class="ml-6 text-xl mb-5">Mes mails</h1>
+<app-mails-research-bloc></app-mails-research-bloc>
+<app-liste-mails></app-liste-mails>
+<div class="divider"></div>
+<div class="btn-group flex justify-center">
+  <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.skip <= 0 ? 'btn-disabled' : '' }}" (click)="pageDown()">«</button>
+  <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 +1 }}</button>
+  <button class="btn btn-outline btn-ghost {{sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()"></button>
+</div>

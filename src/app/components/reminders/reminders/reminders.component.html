@@ -3,8 +3,8 @@
 <app-reminders-research-bloc></app-reminders-research-bloc>
 <app-reminders-liste-prospect ></app-reminders-liste-prospect>
 <div class="divider" ></div>
-  <div class="btn-group flex justify-center">
-    <button class="btn btn-outline btn-ghost {{remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-    <button class="btn btn-outline btn-ghost">Page {{remindersService.researchParamsReminder.skip / 20 + 1}}</button>
-    <button class="btn btn-outline btn-ghost {{remindersService.reminders && remindersService.reminders.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
-  </div>
+<div class="btn-group flex justify-center">
+  <button class="btn btn-outline btn-ghost {{remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
+  <button class="btn btn-outline btn-ghost">Page {{remindersService.researchParamsReminder.skip / 20 + 1}}</button>
+  <button class="btn btn-outline btn-ghost {{remindersService.reminders && remindersService.reminders.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+</div>

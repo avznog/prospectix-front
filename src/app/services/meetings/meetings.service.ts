@@ -1,9 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { StageType } from 'src/app/constants/stage.type';
 import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
+import { ProspectsService } from '../prospects/prospects.service';
+import { RemindersService } from '../reminders/reminders.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,9 @@ export class MeetingsService {
     keyword: ""
   }
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private prospectsService: ProspectsService,
+    private remindersService: RemindersService
   ) { 
     this.loadMore();
   }
@@ -65,15 +70,18 @@ export class MeetingsService {
   }
 
   markDone(idMeeting : number) : Subscription {
-    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe(() => this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true }));
+    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe();
   }
 
   markUndone(idMeeting: number) : Subscription {
-    return this.http.get<Meeting>(`meetings/mark-undone/${idMeeting}`).subscribe(() => this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: false }));
+    return this.http.get<Meeting>(`meetings/mark-undone/${idMeeting}`).subscribe();
   }
 
   create(createMeetingDto: CreateMeetingDto) : Subscription {
-    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => this.meetings.set(meeting.id, meeting));
+    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => {
+      meeting.prospect.stage = StageType.MEETING;
+      this.meetings.set(meeting.prospect.id, meeting);
+    });
   }
 
   findAllByProspect(idProspect: number) {

@@ -1,10 +1,11 @@
+<app-prospect-tile [prospect]="reminder.prospect" [reminder]="reminder"></app-prospect-tile>
 <!-- Card -->
-<div class="card card-bordered shadow-md border-solid border-current">
+<!-- <div class="card card-bordered shadow-md border-solid border-current">
   <div class="card-body bg-opacity-10 ">
-    <div class="inline-flex items-baseline">
+    <div class="inline-flex items-baseline"> -->
       
       <!-- Priority stars -->
-      <div class="w-1/6 flex justify-center">
+      <!-- <div class="w-1/6 flex justify-center">
         <div class="rating rating-md gap-1">
           <input name="priority" type="radio"
             class="mask mask-star {{reminder.priority == 1 ? 'bg-success' : reminder.priority == 2 ? 'bg-warning' : 'bg-error'}}"
@@ -19,18 +20,18 @@
         </div>
       </div>
   
-      
+       -->
       <!-- Date , heure, nom du client, nom du CDP -->
-      <div class="flex w-4/6 justify-center ">
+      <!-- <div class="flex w-4/6 justify-center ">
         <label class="indicator-item badge badge-lg badge-ghost badge-outline">{{reminder.pm.firstname}} {{reminder.pm.name}} avec {{reminder.prospect.companyName}}</label>
         <div class="divider divider-horizontal"></div>
         <label>Le <b>{{reminder.date | date:"'EEEE d MMMM y"}}</b> à {{reminder.date | date:"HH:mm"}} </label>
         
       </div>
-      
+       -->
 
       <!-- Boutons meetingDone / suppression -->
-      <div class="w-1/6 space-x-5 flex justify-center">
+      <!-- <div class="w-1/6 space-x-5 flex justify-center">
         <div class="tooltip" *ngIf="!reminder.done" data-tip="Rappel effectué">
           <label class="btn btn-circle btn-success" (click)="onMarkReminderDone()">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -52,4 +53,4 @@
       
     </div>
   </div>
-</div>
+</div> -->

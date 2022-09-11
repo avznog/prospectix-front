@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { StageType } from 'src/app/constants/stage.type';
 import { CreateReminderDto } from 'src/app/dto/reminders/create-reminder.dto';
 import { Reminder } from 'src/app/models/reminder.model';
 import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.model';
@@ -69,7 +70,10 @@ export class RemindersService {
   }
 
   create(createReminderDto: CreateReminderDto) : Subscription {
-    return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => this.reminders.set(reminder.id, reminder));
+    return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => {
+      reminder.prospect.stage = StageType.REMINDER;
+      this.reminders.set(reminder.prospect.id, reminder);
+    });
   }
 
   findAllByProspect(idProspect: number) {

@@ -25,30 +25,30 @@ export class EachMeetingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDeleteMeeting() : Subscription {
-    console.log("meeting deleted");
-    this.eventsService.create({
-      type: EventType.DELETE_MEETING,
-      prospect: this.meeting.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.DELETE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
-    });
-    return this.meetingsService.deleteMeeting(this.meeting.id);
-  }
+  // onDeleteMeeting() : Subscription {
+  //   console.log("meeting deleted");
+  //   this.eventsService.create({
+  //     type: EventType.DELETE_MEETING,
+  //     prospect: this.meeting.prospect,
+  //     date: new Date,
+  //     description: `${EventDescriptionType.DELETE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
+  //   });
+  //   return this.meetingsService.deleteMeeting(this.meeting.id);
+  // }
 
-  onMarkMeetingDone() : Subscription {
-    console.log("meeting marked done");
-    this.eventsService.create({
-      type: EventType.DONE_MEETING,
-      prospect: this.meeting.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.DONE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
-    });
-    return this.meetingsService.markDone(this.meeting.id);
-  }
+  // onMarkMeetingDone() : Subscription {
+  //   console.log("meeting marked done");
+  //   this.eventsService.create({
+  //     type: EventType.DONE_MEETING,
+  //     prospect: this.meeting.prospect,
+  //     date: new Date,
+  //     description: `${EventDescriptionType.DONE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
+  //   });
+  //   return this.meetingsService.markDone(this.meeting.id);
+  // }
 
-  onMarkMeetingUndone() : Subscription {
-    console.log("meeting marked undone");
-    return this.meetingsService.markUndone(this.meeting.id);
-  }
+  // onMarkMeetingUndone() : Subscription {
+  //   console.log("meeting marked undone");
+  //   return this.meetingsService.markUndone(this.meeting.id);
+  // }
 }

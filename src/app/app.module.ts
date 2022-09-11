@@ -50,6 +50,11 @@ import { NoResultComponent } from './components/common/no-result/no-result/no-re
 import { DashboardListeRemindersComponent } from './components/dashboard/dashboard-liste-reminders/dashboard-liste-reminders.component';
 import { DashboardEachReminderComponent } from './components/dashboard/dashboard-each-reminder/dashboard-each-reminder.component';
 import { AddMeetingsModalComponent } from './components/common/add-meetings-modal/add-meetings-modal.component';
+import { MailsComponent } from './components/mails/mails/mails.component';
+import { MailsResearchBlocComponent } from './components/mails/mails-research-bloc/mails-research-bloc.component';
+import { ListeMailsComponent } from './components/mails/liste-mails/liste-mails.component';
+import { EachMailComponent } from './components/mails/each-mail/each-mail.component';
+import { ProspectTileComponent } from './components/common/prospect-tile/prospect-tile.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +97,12 @@ import { AddMeetingsModalComponent } from './components/common/add-meetings-moda
     ChangelogsComponent,
     NoResultComponent,
     DashboardListeRemindersComponent,
-    DashboardEachReminderComponent
+    DashboardEachReminderComponent,
+    MailsComponent,
+    MailsResearchBlocComponent,
+    ListeMailsComponent,
+    EachMailComponent,
+    ProspectTileComponent
   ],
   imports: [
     BrowserModule,
