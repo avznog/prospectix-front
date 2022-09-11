@@ -69,11 +69,9 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditKeyword() : void {
-    setTimeout(() => {
-      this.remindersService.resetSearch({
-        ...this.remindersService.researchParamsReminder,
-        keyword: this.keyword
-      });
-    }, 200);
+    this.remindersService.resetSearch({
+      ...this.remindersService.researchParamsReminder,
+      keyword: this.keyword
+    });
   }
 }

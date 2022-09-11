@@ -29,12 +29,10 @@ export class BookmarksResearchBlocComponent implements OnInit {
   }
 
   onEditKeyword() {
-    setTimeout(() => {
-      this.bookmarksService.resetSearch({
-        ...this.bookmarksService.researchParamsBookmarks,
-        keyword: this.keyword
-      });
-    }, 200);
+    this.bookmarksService.resetSearch({
+      ...this.bookmarksService.researchParamsBookmarks,
+      keyword: this.keyword
+    });
   }
 
   onEditActivity() {

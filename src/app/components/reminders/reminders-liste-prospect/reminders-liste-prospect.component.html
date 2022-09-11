@@ -1,5 +1,4 @@
 <div *ngFor="let reminder of remindersService.reminders | keyvalue | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
-    <!-- <app-each-reminder [reminder]="reminder.value" *ngIf="reminder.value.prospect.stage == 2"></app-each-reminder> -->
     <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect" *ngIf="reminder.value.prospect.stage == 2"></app-prospect-tile>
 </div>
 <app-no-result *ngIf="remindersService.reminders && remindersService.reminders.size <= 0"></app-no-result>

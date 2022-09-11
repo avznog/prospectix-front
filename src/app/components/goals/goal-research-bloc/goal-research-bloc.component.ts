@@ -20,12 +20,10 @@ export class GoalResearchBlocComponent implements OnInit {
   }
 
   onEditKeyword() {
-    setTimeout(() => {
-      this.goalsService.resetSearch({
-        ...this.goalsService.researchParamsGoals,
-        keyword: this.keyword
-      });
-    }, 200);
+    this.goalsService.resetSearch({
+      ...this.goalsService.researchParamsGoals,
+      keyword: this.keyword
+    });
   }
 
   onEditPm() {
