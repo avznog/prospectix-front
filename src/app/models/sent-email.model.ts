@@ -1,10 +1,11 @@
 import { Email } from "./email.model";
 import { ProjectManager } from "./project-manager.model";
+import { Prospect } from "./prospect.model";
 
 export interface SentEmail {
   id: number;
   pm: ProjectManager;
-  email: Email;
+  prospect: Prospect;
   object: string;
   message: string;
   sendingDate: Date;

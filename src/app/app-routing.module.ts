@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
+import { MailsComponent } from './components/mails/mails/mails.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path:"prospects", component: ResearchProspectsComponent, canActivate: [LoggedGuard] },
   { path:"goals", component: GoalsComponent, canActivate: [LoggedGuard, AdminGuard] },
   { path: "bookmarks", component: BookmarksComponent, canActivate: [LoggedGuard] },
+  { path: "mails", component: MailsComponent, canActivate: [LoggedGuard] },
   { path:"", pathMatch: "full", redirectTo: "dashboard" },
   { path: "**", pathMatch: "full", redirectTo: "dashboard"},
 ];

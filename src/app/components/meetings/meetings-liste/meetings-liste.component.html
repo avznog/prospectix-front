@@ -1,5 +1,4 @@
 <div *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
-  <app-each-meeting *ngIf="meeting.value.pm.pseudo == authService.currentUserSubject.getValue().pseudo" [meeting]="meeting.value"></app-each-meeting>
-  <br />
+  <app-prospect-tile *ngIf="meeting.value.prospect.stage == 3" [prospect]="meeting.value.prospect" [meeting]="meeting.value"></app-prospect-tile>
 </div>
 <app-no-result *ngIf="meetingsService.meetings && meetingsService.meetings.size <= 0"></app-no-result>

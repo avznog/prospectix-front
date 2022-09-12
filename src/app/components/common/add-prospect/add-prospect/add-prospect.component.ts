@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StageType } from 'src/app/constants/stage.type';
 import { Activity } from 'src/app/models/activity.model';
 import { City } from 'src/app/models/city.model';
 import { Country } from 'src/app/models/country.model';
@@ -53,6 +54,7 @@ export class AddProspectComponent implements OnInit {
       activity: !this.activity.name ? { name: this.addActivity } : this.activity,
       city: !this.city.name ? { name: this.addCity, zipcode: this.addZipcode } : this.city,
       country: !this.country.name ? { name: this.addCountry } : this.country,
+      stage: StageType.RESEARCH,
       phone: {
         number: this.phone
       },

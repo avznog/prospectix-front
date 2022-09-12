@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks-research-bloc/bookmarks-research-bloc.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
-import { EachBookmarkComponent } from './components/bookmarks/each-bookmark/each-bookmark.component';
 import { ListeBookmarksComponent } from './components/bookmarks/liste-bookmarks/liste-bookmarks.component';
 import { AddProspectComponent } from './components/common/add-prospect/add-prospect/add-prospect.component';
 import { AddReminderModalComponent } from './components/common/add-reminder-modal/add-reminder-modal.component';
@@ -24,16 +23,13 @@ import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.compon
 import { GoalResearchBlocComponent } from './components/goals/goal-research-bloc/goal-research-bloc.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { ListeGoalsComponent } from './components/goals/liste-goals/liste-goals.component';
-import { EachMeetingComponent } from './components/meetings/each-meeting/each-meeting.component';
 import { MeetingsListeComponent } from './components/meetings/meetings-liste/meetings-liste.component';
 import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
 import { ProspectEditComponent } from './components/prospect-edit/prospect-edit.component';
-import { EachReminderComponent } from './components/reminders/each-reminder/each-reminder.component';
 import { RemindersListeProspectComponent } from './components/reminders/reminders-liste-prospect/reminders-liste-prospect.component';
 import { RemindersResearchBlocComponent } from './components/reminders/reminders-research-bloc/reminders-research-bloc.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
-import { EachResearchProspectComponent } from './components/research-prospects/each-research-prospect/each-research-prospect.component';
 import { ListProspectsComponent } from './components/research-prospects/list-prospects/list-prospects.component';
 import { ResearchBlocComponent } from './components/research-prospects/research-bloc/research-bloc.component';
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
@@ -50,6 +46,10 @@ import { NoResultComponent } from './components/common/no-result/no-result/no-re
 import { DashboardListeRemindersComponent } from './components/dashboard/dashboard-liste-reminders/dashboard-liste-reminders.component';
 import { DashboardEachReminderComponent } from './components/dashboard/dashboard-each-reminder/dashboard-each-reminder.component';
 import { AddMeetingsModalComponent } from './components/common/add-meetings-modal/add-meetings-modal.component';
+import { MailsComponent } from './components/mails/mails/mails.component';
+import { MailsResearchBlocComponent } from './components/mails/mails-research-bloc/mails-research-bloc.component';
+import { ListeMailsComponent } from './components/mails/liste-mails/liste-mails.component';
+import { ProspectTileComponent } from './components/common/prospect-tile/prospect-tile.component';
 
 @NgModule({
   declarations: [
@@ -79,12 +79,8 @@ import { AddMeetingsModalComponent } from './components/common/add-meetings-moda
     AddMeetingsModalComponent,
     BookmarksComponent,
     AddProspectComponent,
-    EachReminderComponent,
     ProspectEditComponent,
-    EachResearchProspectComponent,
-    EachMeetingComponent,
     ListeBookmarksComponent,
-    EachBookmarkComponent,
     BookmarksResearchBlocComponent,
     ProspectHistoryComponent,
     ThemePickerComponent,
@@ -92,7 +88,11 @@ import { AddMeetingsModalComponent } from './components/common/add-meetings-moda
     ChangelogsComponent,
     NoResultComponent,
     DashboardListeRemindersComponent,
-    DashboardEachReminderComponent
+    DashboardEachReminderComponent,
+    MailsComponent,
+    MailsResearchBlocComponent,
+    ListeMailsComponent,
+    ProspectTileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,5 @@
+<div *ngFor="let sentEmail of sentEmailsService.sentEmails | keyvalue | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
+  <!-- <app-each-mail [sentEmail]="sentEmail.value" *ngIf="sentEmail.value.prospect.stage == 4"></app-each-mail> -->
+  <app-prospect-tile [sentEmail]="sentEmail.value" [prospect]="sentEmail.value.prospect" *ngIf="sentEmail.value.prospect.stage == 4"></app-prospect-tile>
+</div>
+<app-no-result *ngIf="sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0"></app-no-result>

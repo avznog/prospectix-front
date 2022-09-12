@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { StageType } from 'src/app/constants/stage.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
@@ -58,10 +59,16 @@ export class BookmarksService {
   }
 
   create(createBookmarkDto: CreateBookmarkDto) : Subscription {
-    return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => this.bookmarks.set(bookmark.id, bookmark));
+    return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => {
+      bookmark.prospect.stage = StageType.BOOKMARK;
+      bookmark.prospect.isBookmarked = true;
+      this.bookmarks.set(bookmark.id, bookmark)
+    });
   }
 
-  deleteByProspect(prospectId: number) {
-    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(bookmark => this.bookmarks.delete(bookmark.id));
+  deleteByProspect(prospectId: number, bookmarkId: number) {
+    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(() => {
+      this.bookmarks.delete(bookmarkId);
+    });
   }
 }

@@ -16,9 +16,10 @@
   </div>
     <ul class="menu-horizontal menu">
       <li><a routerLink="/prospects" class="text-xl font-medium">Recherche</a></li>
+      <li><a routerLink="/bookmarks" class="text-xl font-medium">Mes prospects favoris</a></li>
       <li><a routerLink="/reminders" class="text-xl font-medium">Rappels</a></li>
       <li><a routerLink="/meetings" class="text-xl font-medium">Rendez-vous</a></li>
-      <li><a routerLink="/bookmarks" class="text-xl font-medium">Mes prospects favoris</a></li>
+      <li><a routerLink="/mails" class="text-xl font-medium">Mails</a></li>
       <div *ngIf="authService.currentUserSubject.getValue().admin" class="dropdown dropdown-end">
         <label tabindex="0" class="btn btn-ghost text-xl font-medium">Admin</label>
         <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60">
@@ -30,7 +31,7 @@
         <app-theme-picker></app-theme-picker>
       </li>
       <li (click)="logout()" class="text-xs"><a>
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-current" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
         <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
         <path d="M7 12h14l-3 -3m0 6l3 -3" />

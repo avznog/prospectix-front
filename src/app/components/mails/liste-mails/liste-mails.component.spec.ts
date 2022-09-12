@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EachBookmarkComponent } from './each-bookmark.component';
+import { ListeMailsComponent } from './liste-mails.component';
 
-describe('EachBookmarkComponent', () => {
-  let component: EachBookmarkComponent;
-  let fixture: ComponentFixture<EachBookmarkComponent>;
+describe('ListeMailsComponent', () => {
+  let component: ListeMailsComponent;
+  let fixture: ComponentFixture<ListeMailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EachBookmarkComponent ]
+      declarations: [ ListeMailsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EachBookmarkComponent);
+    fixture = TestBed.createComponent(ListeMailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
