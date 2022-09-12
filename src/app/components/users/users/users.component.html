@@ -1,25 +1,31 @@
 <app-header></app-header>
-<h1 class="ml-6 text-xl">Utilisateurs</h1>
-<input type="checkbox" id="add-user-modal" class="modal-toggle" />
-<div class="modal">
-  <app-create-user></app-create-user>
-</div>
-<div class="flex justify-end">
-  <label for="add-user-modal" class="btn modal-button btn-outline w-1/4">Ajouter un utilisateur</label>
-</div>
-<!-- <div class="btn btn-primary" *ngIf="authService.currentUserSubject.getValue().pseudo == 'bgonzva'" (click)="onClickAddProspectsBase()">
+<div class="container mx-auto">
+  <h1 class="ml-6 text-xl">Utilisateurs</h1>
+  <input type="checkbox" id="add-user-modal" class="modal-toggle" />
+  <div class="modal">
+    <app-create-user></app-create-user>
+  </div>
+  <div class="flex justify-end">
+    <label for="add-user-modal" class="btn modal-button btn-outline w-1/4">Ajouter un utilisateur</label>
+  </div>
+  <!-- <div class="btn btn-primary" *ngIf="authService.currentUserSubject.getValue().pseudo == 'bgonzva'" (click)="onClickAddProspectsBase()">
   Ajouter les prospects base
 </div> -->
-<div class="card">
-  <div class="card-body">
-    <app-list-users></app-list-users>
+  <div class="card">
+    <div class="card-body">
+      <app-list-users></app-list-users>
+    </div>
   </div>
-</div>
 
-<div class="divider"></div>
+  <div class="divider"></div>
 
-<div class="btn-group justify-center">
-  <button class="btn btn-ghost btn-outline {{usersService.researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-  <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 20 + 1}}</button>
-  <button class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+  <div class="btn-group justify-center">
+    <button class="btn btn-ghost btn-outline {{usersService.researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}"
+      (click)="pageDown()">«</button>
+    <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 20 + 1}}</button>
+    <button
+      class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}"
+      (click)="pageUp()">»</button>
+  </div>
+
 </div>

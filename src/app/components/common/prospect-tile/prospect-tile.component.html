@@ -6,8 +6,8 @@
 
       <div class="space-x-4 w-2/3 inline-flex">
         <!-- Title -->
-        <div class="w-2/3 bg-red-500">{{prospect.companyName}} - {{prospect.activity.name}}</div>
-       <div class="{{prospect.stage == 0 || prospect.stage == 1 ? 'w-full' : 'w-1/3'}} space-x-3 bg-green-400">
+        <div class="w-2/3">{{prospect.companyName}} - {{prospect.activity.name}}</div>
+       <div class="{{prospect.stage == 0 || prospect.stage == 1 ? 'w-full' : 'w-1/3'}} space-x-3">
          <!-- Button search google -->
          <div (click)="onClickButtonGoogle()" class="btn btn-sm btn-ghost btn-outline">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"

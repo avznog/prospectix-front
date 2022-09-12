@@ -1,7 +1,5 @@
 <div [attr.data-theme]="dataThemeService.dataTheme">
-  <div class="container mx-auto">
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet class="container mx-auto"></router-outlet>
 </div>
 <div class="toast toast-end text-sm"
   *ngIf="changelogsService.changelogs[0].version != changelogsService.localVersion && authService.currentUserSubject.getValue()">

@@ -1,28 +1,31 @@
-<div class="flex justify-center items-center h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-    <div class="card w-96 bg-base-100 shadow-xl ">
+<div class="flex justify-center items-center h-screen bg-gradient-to-br from-primary via-secondary to-accent-focus">
+    <div class="card w-1/2 bg-base-100 shadow-xl">
+      
         <div class="card-body">
-            <p class="text-2xl">Connexion</p>
-
-            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="flex flex-col justify-center">
-                <div class="form-control w-full max-w-xs">
+          <div class="inline-flex">
+            <figure class="w-3/5"><img src="../../../assets/logo_jisep.png"></figure>
+            <div class="w-2/5">
+              <p class="text-2xl">Connexion</p>
+            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class=" justify-center w-full">
+                <div class="form-control w-full">
                     <label class="label" for="username">
                         <span class="label-text">
                             Identifiant
                         </span>
                     </label> 
-                    <input type="text" formControlName="username" class="input input-bordered w-full max-w-xs" [ngClass]="{ 'is-invalid': submitted && loginForm.value['username'].errors }" />
+                    <input type="text" formControlName="username" class="input input-bordered w-full" [ngClass]="{ 'is-invalid': submitted && loginForm.value['username'].errors }" />
                     <div *ngIf="submitted && loginForm.value['username'].errors" class="invalid-feedback">
                         <div *ngIf="loginForm.value['username'].errors.required">Username is required</div>
                     </div>
                 </div>
 
-                <div class="form-control w-full max-w-xs">
+                <div class="form-control w-full">
                     <label class="label" for="password">
                         <span class="label-text">
                             Mot de passe
                         </span>
                     </label>
-                    <input type="password" formControlName="password" class="input input-bordered w-full max-w-xs mb-5" [ngClass]="{ 'is-invalid': submitted && loginForm.value['password'].errors }" />
+                    <input type="password" formControlName="password" class="input input-bordered w-full mb-5" [ngClass]="{ 'is-invalid': submitted && loginForm.value['password'].errors }" />
                     <div *ngIf="submitted && loginForm.value['password'].errors" class="invalid-feedback">
                       <div *ngIf="loginForm.value['password'].errors.required">Password is required</div>
                   </div>
@@ -36,6 +39,8 @@
                     <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
                 </div>
             </form>
+            </div>
+          </div>
         </div>
     </div>
 </div>
