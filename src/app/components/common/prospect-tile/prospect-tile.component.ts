@@ -97,7 +97,7 @@ export class ProspectTileComponent implements OnInit {
   onDeleteBookmark() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
     this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
-    this.bookmarksService.deleteByProspect(this.prospect.id);
+    this.bookmarksService.deleteByProspect(this.prospect.id, this.bookmark.id);
     console.log("removed from bookmarks");
     this.eventsService.create({
       type: EventType.DELETE_BOOKMARKS,

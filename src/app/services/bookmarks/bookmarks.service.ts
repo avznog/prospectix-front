@@ -66,7 +66,9 @@ export class BookmarksService {
     });
   }
 
-  deleteByProspect(prospectId: number) {
-    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(bookmark => this.bookmarks.delete(bookmark.id));
+  deleteByProspect(prospectId: number, bookmarkId: number) {
+    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(() => {
+      this.bookmarks.delete(bookmarkId);
+    });
   }
 }
