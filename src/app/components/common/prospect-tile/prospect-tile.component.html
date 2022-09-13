@@ -73,8 +73,8 @@
               class="mask mask-star-2 {{reminder.priority == 3 ? 'bg-accent' : reminder.priority == 2 ? 'bg-primary' : 'bg-secondary'}}"
               disabled *ngIf="reminder.priority == 3">
           </div>
-          Rappel défini au {{reminder.date | date: "EEEE dd MMMM YYYY"}}
-          <div class="tooltip" *ngIf="!reminder.done" data-tip="Rendez-vous effectué" (click)="onMarkReminderDone()">
+          Rappel défini au {{reminder.date | date: "EEEE dd MMMM YYYY"}} à {{reminder.date |date:"hh:mm:ss"}}
+          <div class="tooltip" *ngIf="!reminder.done" data-tip="Rappel effectué" (click)="onMarkReminderDone()">
             <label class="btn btn-circle btn-success">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="2">
@@ -189,7 +189,7 @@
       </button>
 
       <!-- Bouton Mail -->
-      <button class="btn btn-ghost btn-outline" (click)="onClickSentEmail()">
+      <button class="btn btn-ghost btn-outline" (click)="onClickSentEmail()" *ngIf="prospect.stage != 4">
         Mail
       </button>
 
