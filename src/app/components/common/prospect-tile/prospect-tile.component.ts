@@ -78,6 +78,10 @@ export class ProspectTileComponent implements OnInit {
 
   onCreateBookmark() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK} );
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
     const createBookmarkDto: CreateBookmarkDto = {
       prospect: this.prospect,
       creationDate: new Date()
@@ -96,8 +100,10 @@ export class ProspectTileComponent implements OnInit {
 
   onDeleteBookmark() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
-    this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
-    this.bookmarksService.deleteByProspect(this.prospect.id, this.bookmark.id);
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
     console.log("removed from bookmarks");
     this.eventsService.create({
       type: EventType.DELETE_BOOKMARKS,
@@ -120,6 +126,10 @@ export class ProspectTileComponent implements OnInit {
 
   onClickSentEmail() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.sentEmailsService.create({
       sendingDate: new Date,
       message: "",

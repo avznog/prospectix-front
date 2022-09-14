@@ -18,7 +18,7 @@
         </div>
 
         <!-- Button MODAL Edit prospect -->
-        <label for="modal-prospect-edit" class="btn btn-ghost btn-outline btn-sm modal-button">
+        <label for="modal-prospect-edit-{{prospect.id}}" class="btn btn-ghost btn-outline btn-sm modal-button">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
             stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,8 +26,8 @@
           </svg>
         </label>
 
-        <input type="checkbox" id="modal-prospect-edit" class="modal-toggle" />
-        <label for="modal-prospect-edit" class="modal cursor-pointer">
+        <input type="checkbox" id="modal-prospect-edit-{{prospect.id}}" class="modal-toggle" />
+        <label for="modal-prospect-edit-{{prospect.id}}" class="modal cursor-pointer">
           <label class="modal-box relative max-w-screen-lg" for="">
             <app-prospect-edit [prospect]="prospect"></app-prospect-edit>
           </label>
@@ -174,7 +174,7 @@
       <!-- Bouton de rendez-vous -->
       <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4">
         <span *ngIf="prospect.meetings.length > 0" class="indicator-item badge ">{{prospect.meetings.length}}</span>
-        <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
+        <label tabindex="0" class="btn btn-ghost btn-outline modal-button {{prospect.stage == 4 ? 'btn-disabled' : ''}}" for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
 
         <input type="checkbox" id="modal-add-meeting-{{prospect.id}}" class="modal-toggle" />
         <div class="modal">

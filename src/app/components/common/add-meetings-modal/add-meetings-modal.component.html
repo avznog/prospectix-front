@@ -12,5 +12,5 @@
     </select>
 
   </div>
-  <label class="btn btn-outline btn-ghost" for="modal-add-meeting-{{prospect.id}}" (click)="onCreateMeeting()">Créer le rendez-vous</label>
+  <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}} " for="modal-add-meeting-{{prospect.id}}" (click)="onCreateMeeting()">Créer le rendez-vous</label>
 </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
+import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 
@@ -84,9 +85,17 @@ export class ProspectsService {
     return this.http.get<Prospect>(`prospects/by-activity/${idProspect}/${activityName}`).subscribe();
   }
 
+  updateAllProspect(idProspect: number, updateProspectDto: UpdateProspectDto) : Subscription {
+    return this.http.patch<Prospect>(`prospects/all-prospect/${idProspect}`, updateProspectDto).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, ...updateProspectDto}));
+  }
+
   updateByStage(idProspect: number, stage: { stage: StageType }) : Subscription {
     if(stage.stage == StageType.ARCHIVED)
       return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date(), disabled: true}).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
+    else if (stage.stage == StageType.BOOKMARK)
+      return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: true }));  
+    else if (stage.stage == StageType.RESEARCH)
+      return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: false }));  
     return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
   }
   

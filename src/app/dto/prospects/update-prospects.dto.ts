@@ -6,16 +6,16 @@ import { Phone } from "src/app/models/phone.model";
 import { Website } from "src/app/models/website.model";
 
 export interface UpdateProspectDto {
-  companyName: string;
-  activity: Activity;
-  streetAddress: string;
-  city: City;
-  country: Country;
-  phone: Phone;
-  email: Email;
-  website: Website;
-  comment: string;
-  nbNo: number;
-  disabled: boolean;
-  isBookmarked: boolean;
+  companyName?: string;
+  activity?: Activity;
+  streetAddress?: string;
+  city?: City;
+  country?: Country;
+  phone?: Phone;
+  email?: Email;
+  website?: Website;
+  comment?: string;
+  nbNo?: number;
+  disabled?: boolean;
+  isBookmarked?: boolean;
 }

@@ -1,11 +1,10 @@
-<label for="modal-prospect-edit" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+<label for="modal-prospect-edit-{{prospect.id}}" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
 
 <h1 class="text-xl mb-5">{{prospect.companyName}}</h1>
 
 <div class="divider"></div>
 <div class="space-y-5">
 	<div class="inline-flex space-x-5">
-
 		<!-- CompanyName -->
 		<div class="input-group">
 			<span class="text-sm">Nom</span>
@@ -25,14 +24,14 @@
 	<div class="input-group">
 		<span class="text-sm">Ville</span>
 		<select id="city" class="select select-bordered" [(ngModel)]="city">
-			<option *ngFor="let city of citiesService.cities" >{{city.name}} : {{city.zipcode}}</option>
+			<option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
 		</select>
 	</div>
 	
 	<div class="input-group">
 		<span class="text-sm">Domaine d'activité</span>
 		<select id="activity" class="select select-bordered" [(ngModel)]="activity">
-			<option *ngFor="let activity of activitiesService.activities" >{{activity.name}}</option>
+			<option *ngFor="let activity of activitiesService.activities" [ngValue]="activity" >{{activity.name}}</option>
 		</select>
 	</div>
 	</div>
@@ -62,6 +61,5 @@
 	</div>
 	
 	<div class="divider">
-	
-		<label class="btn btn-outline btn-sm btn-ghost" (click)="onEditProspect()">Modifier le prospect (NE FONCTIONNE PAS ENCORE)</label>
+		<label class="btn btn-outline btn-sm btn-ghost" for="modal-prospect-edit-{{prospect.id}}" (click)="onEditProspect()">Modifier le prospect</label>
 </div>

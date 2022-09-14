@@ -4,10 +4,12 @@ import { EventDescriptionType } from 'src/app/constants/event-descriptions.type'
 import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { Prospect } from 'src/app/models/prospect.model';
+import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
+import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
 
 @Component({
   selector: 'app-add-reminder-modal',
@@ -18,7 +20,7 @@ export class AddReminderModalComponent implements OnInit {
 
   @Input() prospect!: Prospect;
   
-  date: Date = new Date;
+  date!: Date;
   priority: number = 1;
   description: string = "";
 
@@ -27,14 +29,19 @@ export class AddReminderModalComponent implements OnInit {
     private readonly eventsService: EventsService,
     private readonly authService: AuthService,
     private readonly prospectService: ProspectsService,
-    private readonly meetingsService: MeetingsService
+    private readonly meetingsService: MeetingsService,
+    private readonly bookmarksService: BookmarksService,
+    private readonly sentEmailsService: SentEmailsService
   ) { }
 
   ngOnInit(): void {
   }
-
   onCreateReminder() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
     this.remindersService.create({
       date: this.date,
       priority: this.priority,

@@ -4,9 +4,8 @@ import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
+import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
-import { ProspectsService } from '../prospects/prospects.service';
-import { RemindersService } from '../reminders/reminders.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +21,7 @@ export class MeetingsService {
     keyword: ""
   }
   constructor(
-    private http: HttpClient,
-    private prospectsService: ProspectsService,
-    private remindersService: RemindersService
+    private http: HttpClient
   ) { 
     this.loadMore();
   }
@@ -78,12 +75,26 @@ export class MeetingsService {
   }
 
   create(createMeetingDto: CreateMeetingDto) : Subscription {
-    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => {
-     
-    });
+    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => this.meetings.set(meeting.id, {...meeting, prospect: { ...meeting.prospect, stage: StageType.MEETING }}));
   }
 
   findAllByProspect(idProspect: number) {
     return this.http.get<Meeting[]>(`meetings/by-prospect/${idProspect}`);
+  }
+
+  updateByStage(idProspect: number, stage: { stage: StageType }) {
+    this.meetings.forEach(meeting => {
+      if(meeting.prospect.id == idProspect)
+        return meeting.prospect.stage = stage.stage
+      return meeting
+    });
+  }
+
+  updateLiveProspect(prospect: Prospect) {
+    this.meetings.forEach(meeting => {
+      if(meeting.prospect.id == prospect.id)
+        return meeting.prospect = prospect
+      return
+    })
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateSentEmailDto } from 'src/app/dto/sent-emails/create-sent-emails.dto';
+import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsSentEmails } from 'src/app/models/research-params-sent-emails.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
 
@@ -45,8 +46,22 @@ export class SentEmailsService {
   }
 
   create(createSentEmailDto: CreateSentEmailDto) : Subscription {
-    return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => {
-     
+    return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => this.sentEmails.set(sentEmail.id, { ...sentEmail, prospect: { ...sentEmail.prospect, stage: StageType.MAIL}}))
+  }
+
+  updateByStage(idProspect: number, stage: { stage: StageType }) {
+    this.sentEmails.forEach(sentEmail => {
+      if(sentEmail.prospect.id == idProspect)
+        return sentEmail.prospect.stage = stage.stage
+      return sentEmail
+    });
+  }
+
+  updateLiveProspect(prospect: Prospect) {
+    this.sentEmails.forEach(sentEmail => {
+      if(sentEmail.prospect.id == prospect.id)
+        return sentEmail.prospect = prospect
+      return
     })
   }
 

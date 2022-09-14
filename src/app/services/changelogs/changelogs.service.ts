@@ -11,6 +11,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.3",
+        date: new Date("2022-09-15T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug de l'édition de prospect (ne fonctionne parfaitement que sur la page de recherche), le reste il faut refresh pour voir les résultats"
+        ],
+        features: [
+          "Nouveau workflow fonctionnel"
+        ]
+      },
+      {
         version: "0.2B.1",
         date: new Date("2022-09-14T00:00:00.000Z"),
         bugs: [

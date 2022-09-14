@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateReminderDto } from 'src/app/dto/reminders/create-reminder.dto';
 import { UpdateReminderDto } from 'src/app/dto/reminders/update-reminder.dto';
+import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.model';
 
@@ -71,9 +72,7 @@ export class RemindersService {
   }
 
   create(createReminderDto: CreateReminderDto) : Subscription {
-    return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => {
-    
-    });
+    return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => this.reminders.set(reminder.id, { ...reminder, prospect: { ...reminder.prospect, stage: StageType.REMINDER }}));
   }
 
   update(idReminder: number, updateReminderDto: UpdateReminderDto) {
@@ -82,5 +81,21 @@ export class RemindersService {
 
   findAllByProspect(idProspect: number) {
     return this.http.get<Reminder[]>(`reminders/by-prospect/${idProspect}`);
+  }
+
+  updateLiveProspect(prospect: Prospect) {
+    this.reminders.forEach(reminder => {
+      if(reminder.prospect.id == prospect.id)
+        return reminder.prospect = prospect
+      return
+    })
+  }
+
+  updateByStage(idProspect: number, stage: { stage: StageType }) {
+    this.reminders.forEach(reminder => {
+      if(reminder.prospect.id == idProspect)
+        return reminder.prospect.stage = stage.stage
+      return reminder
+    });
   }
 }

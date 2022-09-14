@@ -5,10 +5,12 @@ import { EventType } from 'src/app/constants/event.type';
 import { MeetingType } from 'src/app/constants/meeting.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { Prospect } from 'src/app/models/prospect.model';
+import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
+import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
 
 @Component({
   selector: 'app-add-meetings-modal',
@@ -17,7 +19,7 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 })
 export class AddMeetingsModalComponent implements OnInit {
 
-  date: Date = new Date;
+  date!: Date;
   type: MeetingType = MeetingType.EXT;
   
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
@@ -29,7 +31,9 @@ export class AddMeetingsModalComponent implements OnInit {
     private readonly eventsService: EventsService,
     private readonly authService: AuthService,
     private readonly prospectsService: ProspectsService,
-    private readonly remindersService: RemindersService
+    private readonly remindersService: RemindersService,
+    private readonly bookmarksService: BookmarksService,
+    private readonly sentEmailsService: SentEmailsService
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +41,10 @@ export class AddMeetingsModalComponent implements OnInit {
 
   onCreateMeeting() {
     this.prospectsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
     this.meetingsService.create({
       type: this.type,
       date: this.date,
