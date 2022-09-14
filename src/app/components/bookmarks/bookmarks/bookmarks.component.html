@@ -6,7 +6,10 @@
   <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content">
   <app-bookmarks-research-bloc></app-bookmarks-research-bloc>
-  <app-liste-bookmarks></app-liste-bookmarks>
+  <div *ngFor="let bookmark of bookmarksService.bookmarks | keyvalue | slice:bookmarksService.researchParamsBookmarks.skip:bookmarksService.researchParamsBookmarks.skip + 20">
+    <app-prospect-tile [prospect]="bookmark.value.prospect" [bookmark]="bookmark.value" *ngIf="bookmark.value.prospect.stage == 1"></app-prospect-tile>
+  </div>
+  <app-no-result *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0"></app-no-result>
   <div class="divider" ></div>
     <div class="btn-group flex justify-center">
       <button class="btn btn-outline btn-ghost {{bookmarksService.researchParamsBookmarks.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
