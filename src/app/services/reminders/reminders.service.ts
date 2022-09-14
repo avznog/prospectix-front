@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateReminderDto } from 'src/app/dto/reminders/create-reminder.dto';
+import { UpdateReminderDto } from 'src/app/dto/reminders/update-reminder.dto';
 import { Reminder } from 'src/app/models/reminder.model';
 import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.model';
 
@@ -73,6 +74,10 @@ export class RemindersService {
     return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => {
     
     });
+  }
+
+  update(idReminder: number, updateReminderDto: UpdateReminderDto) {
+    return this.http.patch<Reminder>(`reminders/${idReminder}`, updateReminderDto).subscribe()
   }
 
   findAllByProspect(idProspect: number) {
