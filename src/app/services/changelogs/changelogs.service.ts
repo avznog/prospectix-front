@@ -17,6 +17,16 @@ export class ChangelogsService {
           
         ],
         features: [
+          "Modification du logo d'onglet & de login page"
+        ]
+      },
+      {
+        version: "0.2B.1",
+        date: new Date("2022-09-14T00:00:00.000Z"),
+        bugs: [
+          
+        ],
+        features: [
           "Ajout de la limite sur la liste de favoris"
         ]
       },
