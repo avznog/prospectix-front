@@ -40,9 +40,9 @@ export class ProspectTileComponent implements OnInit {
 
   constructor(
     private readonly prospectService: ProspectsService,
-    private readonly bookmarksService: BookmarksService,
+    public readonly bookmarksService: BookmarksService,
     private readonly eventsService: EventsService,
-    private readonly authService: AuthService,
+    public readonly authService: AuthService,
     private readonly phonesService: PhonesService,
     private readonly emailsService: EmailsService,
     private readonly websitesService: WebsitesService,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 export class ResearchProspectsComponent implements OnInit {
   constructor(
     public readonly prospectsService: ProspectsService,
+    public bookmarksService: BookmarksService
   ) { }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 <app-header></app-header>
 <div class="container mx-auto">
 <h1 class="ml-6 text-xl mb-5">Recherche de prospects</h1>
+<h1 class="ml-6 text-xl mb-5 {{bookmarksService.bookmarks.size > 30 ? 'text-error' : ''}}">{{bookmarksService.bookmarks.size}} / 30 prospects Favoris</h1>
 <div class="drawer drawer-end">
   <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content">
