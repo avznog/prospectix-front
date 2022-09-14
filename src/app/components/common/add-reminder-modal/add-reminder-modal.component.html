@@ -1,6 +1,6 @@
-<label for="modal-add-reminder" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+<label for="modal-add-reminder-{{prospect.id}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 <div class="form-control space-y-5">
-
+{{prospect.companyName}}
   <label class="text-2xl font-bold">Ajouter un rappel</label>
   <div class="divider"></div>
   <input class="datepicker" type="datetime-local" id="date" class="btn btn-outline btn-ghost " [(ngModel)]="date">
@@ -24,5 +24,5 @@
   <textarea class="textarea textarea-bordered textarea-ghost" placeholder="Description du rappel"
     [(ngModel)]="description"></textarea>
 
-  <label class="btn btn-outline btn-ghost" for="modal-add-reminder" (click)="onCreateReminder()">Créer le rappel</label>
+  <label class="btn btn-outline btn-ghost" for="modal-add-reminder-{{prospect.id}}" (click)="onCreateReminder()">Créer le rappel</label>
 </div>

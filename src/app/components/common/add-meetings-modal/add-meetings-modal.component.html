@@ -1,4 +1,4 @@
-<label for="modal-add-meeting" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+<label for="modal-add-meeting-{{prospect.id}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 <div class="form-control space-y-5">
   <label class="text-2xl font-bold">Ajouter un rendez-vous</label>
   <div class="divider"></div>
@@ -12,5 +12,5 @@
     </select>
 
   </div>
-  <label class="btn btn-outline btn-ghost" for="modal-add-meeting" (click)="onCreateMeeting()">Créer le rendez-vous</label>
+  <label class="btn btn-outline btn-ghost" for="modal-add-meeting-{{prospect.id}}" (click)="onCreateMeeting()">Créer le rendez-vous</label>
 </div>

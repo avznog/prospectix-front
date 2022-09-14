@@ -161,9 +161,9 @@
       <!-- Bouton de rappel  -->
       <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 3">
         <span *ngIf="prospect.reminders.length > 0" class="indicator-item badge ">{{prospect.reminders.length}}</span>
-        <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder">Rappel</label>
+        <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder-{{prospect.id}}">Rappel</label>
 
-        <input type="checkbox" id="modal-add-reminder" class="modal-toggle" />
+        <input type="checkbox" id="modal-add-reminder-{{prospect.id}}" class="modal-toggle" />
         <div class="modal">
           <div class="modal-box">
             <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
@@ -174,9 +174,9 @@
       <!-- Bouton de rendez-vous -->
       <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4">
         <span *ngIf="prospect.meetings.length > 0" class="indicator-item badge ">{{prospect.meetings.length}}</span>
-        <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-meeting">Rendez-vous</label>
+        <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
 
-        <input type="checkbox" id="modal-add-meeting" class="modal-toggle" />
+        <input type="checkbox" id="modal-add-meeting-{{prospect.id}}" class="modal-toggle" />
         <div class="modal">
           <div class="modal-box">
             <app-add-meetings-modal [prospect]="prospect"></app-add-meetings-modal>
