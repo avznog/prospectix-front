@@ -159,7 +159,7 @@
       </button>
 
       <!-- Bouton de rappel  -->
-      <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 3">
+      <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 ">
         <span *ngIf="prospect.reminders.length > 0" class="indicator-item badge ">{{prospect.reminders.length}}</span>
         <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder-{{prospect.id}}">Rappel</label>
 
@@ -185,7 +185,7 @@
       </div>
 
       <!-- Bouton Refus -->
-      <button class="btn btn-ghost btn-outline" (click)="onClickRefus()">
+      <button class="btn btn-ghost btn-outline" (click)="onClickRefus()" *ngIf="prospect.stage != 4 && prospect.stage != 3">
         Refus
       </button>
 

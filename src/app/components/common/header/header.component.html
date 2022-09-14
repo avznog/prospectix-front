@@ -1,19 +1,27 @@
 <div class="navbar bg-base-100" *ngIf="authService.loggedInSubject">
-  <div class="flex-1">
-    <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl indicator">Prospectix<span *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion" class="badge badge-secondary indicator-item"></span></a>
-    <div class="dropdown w-full" *ngIf="authService.currentUserSubject.getValue().admin">
-      <label tabindex="0" class="btn btn-ghost normal-case text-xs">Version</label>
-      <div class="dropdown-content w-full bg-base-100">
-          <div class="border card">
-            <div class="card-body">
-              <span class="text-xs">Dev par Benjamin GONZVA /w ❤️ (@ben.gonzva)</span>
-              <div class="divider"></div>
-              <app-changelogs class="w-full max-h-screen overflow-scroll"></app-changelogs>
-            </div>
-          </div> 
-      </div>
-    </div>
+  <div class="flex-1 ">
+    <!-- Prospectix button -->
+    <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl indicator">Prospectix<span *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion" class="badge badge-secondary indicator-item badge-xs"></span></a>
+
+    <!-- Versions button -->
+    <label for="modal-version" *ngIf="authService.currentUserSubject.getValue().admin" class="btn btn-ghost normal-case text-xs modal-button">Versions</label>
+    <input type="checkbox" id="modal-version" class="modal-toggle" />
+    <label for="modal-version" class="modal cursor-pointer">
+      <label class="modal-box max-w-screen-lg" for="">
+        <label for="modal-version" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+         <div class="w-full">
+          <span class="text-xl font-bold">Dev /w ❤️ by your pôle tech, started by Benjamin GONZVA</span>
+          <ul>
+            <li>2022-2023 : <a href="https://www.linkedin.com/in/benjamin-gonzva-828b071a2/" target="_blank" class="link-primary">Benjamin GONZVA</a></li>
+          </ul>
+          <div class="divider"></div>
+          <app-changelogs class="w-full max-h-screen"></app-changelogs>
+         </div>
+      </label>
+    </label>
   </div>
+
+  <!-- Right part of the header -->
     <ul class="menu-horizontal menu">
       <li><a routerLink="/prospects" class="text-xl font-medium">Recherche</a></li>
       <li><a routerLink="/bookmarks" class="text-xl font-medium">Mes prospects favoris</a></li>
