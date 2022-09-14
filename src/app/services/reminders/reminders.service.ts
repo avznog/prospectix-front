@@ -71,8 +71,7 @@ export class RemindersService {
 
   create(createReminderDto: CreateReminderDto) : Subscription {
     return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => {
-      reminder.prospect.stage = StageType.REMINDER;
-      this.reminders.set(reminder.prospect.id, reminder);
+    
     });
   }
 

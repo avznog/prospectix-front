@@ -120,8 +120,6 @@ export class ProspectTileComponent implements OnInit {
 
   onClickSentEmail() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
-    this.prospect.meetings.forEach(meeting => this.meetingsService.deleteMeeting(meeting.id));
-    this.prospect.reminders.forEach(reminder => this.remindersService.deleteReminder(reminder.id));
     this.sentEmailsService.create({
       sendingDate: new Date,
       message: "",

@@ -79,8 +79,7 @@ export class MeetingsService {
 
   create(createMeetingDto: CreateMeetingDto) : Subscription {
     return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => {
-      meeting.prospect.stage = StageType.MEETING;
-      this.meetings.set(meeting.prospect.id, meeting);
+     
     });
   }
 

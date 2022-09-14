@@ -37,7 +37,6 @@ export class AddMeetingsModalComponent implements OnInit {
 
   onCreateMeeting() {
     this.prospectsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
-    this.prospect.reminders.forEach(reminder => this.remindersService.deleteReminder(reminder.id));
     this.meetingsService.create({
       type: this.type,
       date: this.date,

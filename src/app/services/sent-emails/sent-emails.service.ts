@@ -46,8 +46,7 @@ export class SentEmailsService {
 
   create(createSentEmailDto: CreateSentEmailDto) : Subscription {
     return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => {
-      sentEmail.prospect.stage = StageType.MAIL;
-      this.sentEmails.set(sentEmail.prospect.id, sentEmail);
+     
     })
   }
 
