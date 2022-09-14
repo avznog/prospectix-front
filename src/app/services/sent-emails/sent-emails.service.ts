@@ -51,12 +51,4 @@ export class SentEmailsService {
     })
   }
 
-  updateByStage(idProspect: number, stage: StageType) {
-    this.sentEmails.forEach(sentEmail => {
-      if(sentEmail.prospect.id == idProspect)
-        return sentEmail.prospect.stage = stage
-      return sentEmail
-    })
-  }
-
 }
