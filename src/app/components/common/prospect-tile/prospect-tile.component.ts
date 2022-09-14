@@ -77,11 +77,7 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onCreateBookmark() {
-    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
-    this.sentEmailsService.updateByStage(this.prospect.id, StageType.BOOKMARK)
-    this.meetingsService.updateByStage(this.prospect.id, StageType.BOOKMARK);
-    this.remindersService.updateByStage(this.prospect.id, StageType.BOOKMARK)
-    this.bookmarksService.updateByStage(this.prospect.id, StageType.BOOKMARK)
+    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK} );
     const createBookmarkDto: CreateBookmarkDto = {
       prospect: this.prospect,
       creationDate: new Date()
@@ -100,10 +96,6 @@ export class ProspectTileComponent implements OnInit {
 
   onDeleteBookmark() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
-    this.sentEmailsService.updateByStage(this.prospect.id, StageType.RESEARCH)
-    this.meetingsService.updateByStage(this.prospect.id, StageType.RESEARCH);
-    this.remindersService.updateByStage(this.prospect.id, StageType.RESEARCH)
-    this.bookmarksService.updateByStage(this.prospect.id, StageType.RESEARCH)
     this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
     this.bookmarksService.deleteByProspect(this.prospect.id, this.bookmark.id);
     console.log("removed from bookmarks");
@@ -128,12 +120,8 @@ export class ProspectTileComponent implements OnInit {
 
   onClickSentEmail() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
-    this.sentEmailsService.updateByStage(this.prospect.id, StageType.MAIL)
-    this.meetingsService.updateByStage(this.prospect.id, StageType.MAIL);
-    this.remindersService.updateByStage(this.prospect.id, StageType.MAIL)
-    this.bookmarksService.updateByStage(this.prospect.id, StageType.MAIL)
-    // this.prospect.meetings.forEach(meeting => this.meetingsService.deleteMeeting(meeting.id));
-    // this.prospect.reminders.forEach(reminder => this.remindersService.deleteReminder(reminder.id));
+    this.prospect.meetings.forEach(meeting => this.meetingsService.deleteMeeting(meeting.id));
+    this.prospect.reminders.forEach(reminder => this.remindersService.deleteReminder(reminder.id));
     this.sentEmailsService.create({
       sendingDate: new Date,
       message: "",

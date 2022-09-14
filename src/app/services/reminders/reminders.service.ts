@@ -22,7 +22,7 @@ export class RemindersService {
   }
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) {
     this.loadMore();
    }
@@ -78,13 +78,5 @@ export class RemindersService {
 
   findAllByProspect(idProspect: number) {
     return this.http.get<Reminder[]>(`reminders/by-prospect/${idProspect}`);
-  }
-
-  updateByStage(idProspect: number, stage: StageType) {
-    this.reminders.forEach(reminder => {
-      if(reminder.prospect.id == idProspect)
-        return reminder.prospect.stage = stage
-      return reminder
-    })
   }
 }

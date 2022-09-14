@@ -71,12 +71,4 @@ export class BookmarksService {
       this.bookmarks.delete(bookmarkId);
     });
   }
-
-  updateByStage(idProspect: number, stage: StageType) {
-    this.bookmarks.forEach(bookmark => {
-      if(bookmark.prospect.id == idProspect)
-        return bookmark.prospect.stage = stage;
-      return bookmark
-    })
-  }
 }

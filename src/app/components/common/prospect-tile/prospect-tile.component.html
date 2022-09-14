@@ -158,9 +158,9 @@
       </button>
 
       <!-- Bouton de rappel  -->
-      <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 3 ">
+      <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 3">
         <span *ngIf="prospect.reminders.length > 0" class="indicator-item badge ">{{prospect.reminders.length}}</span>
-        <label tabindex="0" class="btn btn-ghost btn-outline modal-button {{meeting && meeting.done && 'btn-disabled'}}" for="modal-add-reminder">Rappel</label>
+        <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder">Rappel</label>
 
         <input type="checkbox" id="modal-add-reminder" class="modal-toggle" />
         <div class="modal">
@@ -184,7 +184,7 @@
       </div>
 
       <!-- Bouton Refus -->
-      <button class="btn btn-ghost btn-outline" (click)="onClickRefus()" *ngIf="prospect.stage == 0 || prospect.stage == 1">
+      <button class="btn btn-ghost btn-outline" (click)="onClickRefus()">
         Refus
       </button>
 

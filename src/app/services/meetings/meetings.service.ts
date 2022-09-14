@@ -84,14 +84,6 @@ export class MeetingsService {
     });
   }
 
-  updateByStage(idProspect: number, stage: StageType) {
-    this.meetings.forEach(meeting => {
-      if(meeting.prospect.id == idProspect)
-        return meeting.prospect.stage = stage
-      return meeting
-    })
-  }
-  
   findAllByProspect(idProspect: number) {
     return this.http.get<Meeting[]>(`meetings/by-prospect/${idProspect}`);
   }
