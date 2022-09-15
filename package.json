@@ -18,7 +18,7 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
-    "daisyui": "^2.19.1",
+    "daisyui": "^2.27.0",
     "feather-icons": "^4.29.0",
     "http": "^0.0.1-security",
     "jwt-decode": "^3.1.2",
