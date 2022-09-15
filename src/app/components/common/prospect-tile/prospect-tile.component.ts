@@ -104,6 +104,9 @@ export class ProspectTileComponent implements OnInit {
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
     this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
     this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
+    this.bookmarksService.delete(this.bookmark.id)
+    this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: false });
+
     console.log("removed from bookmarks");
     this.eventsService.create({
       type: EventType.DELETE_BOOKMARKS,

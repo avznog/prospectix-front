@@ -63,8 +63,8 @@ export class BookmarksService {
     return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => this.bookmarks.set(bookmark.id, { ...bookmark, prospect: { ...bookmark.prospect, stage: StageType.BOOKMARK, isBookmarked: true }}));
   }
 
-  deleteByProspect(prospectId: number, bookmarkId: number) {
-    this.http.delete<Bookmark>(`bookmarks/by-prospect/${prospectId}`).subscribe(() => this.bookmarks.delete(bookmarkId));
+  delete(bookmarkId: number) {
+    this.http.delete<Bookmark>(`bookmarks/${bookmarkId}`).subscribe(() => this.bookmarks.delete(bookmarkId));
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {

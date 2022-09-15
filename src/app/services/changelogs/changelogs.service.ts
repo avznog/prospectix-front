@@ -14,6 +14,15 @@ export class ChangelogsService {
         version: "0.3",
         date: new Date("2022-09-15T00:00:00.000Z"),
         bugs: [
+          "Résolution du bug de favoris"
+        ],
+        features: [
+        ]
+      },
+      {
+        version: "0.3",
+        date: new Date("2022-09-15T00:00:00.000Z"),
+        bugs: [
           "Résolution du bug de l'édition de prospect (ne fonctionne parfaitement que sur la page de recherche), le reste il faut refresh pour voir les résultats"
         ],
         features: [

@@ -90,12 +90,15 @@ export class ProspectsService {
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }) : Subscription {
-    if(stage.stage == StageType.ARCHIVED)
+    if(stage.stage == StageType.ARCHIVED){
       return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date(), disabled: true}).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
-    else if (stage.stage == StageType.BOOKMARK)
+    }
+    else if (stage.stage == StageType.BOOKMARK){
       return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: true }));  
-    else if (stage.stage == StageType.RESEARCH)
+    }
+    else if (stage.stage == StageType.RESEARCH) {
       return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: false }));  
+    }
     return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
   }
   
