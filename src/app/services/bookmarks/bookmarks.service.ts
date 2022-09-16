@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
@@ -16,13 +15,11 @@ export class BookmarksService {
   researchParamsBookmarks: ResearchParamsBookmarks = {
     keyword: '',
     skip: 0,
-    pseudo: this.authService.currentUserSubject.getValue().pseudo ?? ""
   };
   bookmarks = new Map<number, Bookmark>();
   
   constructor(
     private http: HttpClient,
-    private readonly authService: AuthService
   ) { 
     this.loadMore();
   }
@@ -53,7 +50,6 @@ export class BookmarksService {
       queryParameters = queryParameters.append("skip", this.researchParamsBookmarks.skip)
     
     queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword)
-    queryParameters = queryParameters.append("pseudo", this.researchParamsBookmarks.pseudo)
     queryParameters = queryParameters.append("take", 20);
 
     this.http.get<Bookmark[]>(`bookmarks/find-all-paginated/`, { params: queryParameters}).subscribe(bookmarks => bookmarks.forEach(bookmark => this.bookmarks.set(bookmark.id, bookmark)));

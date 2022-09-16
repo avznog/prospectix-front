@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
@@ -11,30 +10,20 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
   styleUrls: ['./bookmarks-research-bloc.component.scss']
 })
 export class BookmarksResearchBlocComponent implements OnInit {
-  keyword: string = "";
   activity: string = "";
   city: string = "";
-  pm: string = "";
 
   constructor(
     public readonly activitiesService: ActivitiesService,
     public readonly citiesService: CitiesService,
     public readonly pmService: ProjectManagersService,
     private readonly bookmarksService: BookmarksService,
-    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.pm = this.authService.currentUserSubject.getValue().pseudo;
+  
   }
-
-  onEditKeyword() {
-    this.bookmarksService.resetSearch({
-      ...this.bookmarksService.researchParamsBookmarks,
-      keyword: this.keyword
-    });
-  }
-
+  
   onEditActivity() {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
@@ -46,13 +35,6 @@ export class BookmarksResearchBlocComponent implements OnInit {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
       city: this.city == "allCities" ? "" : this.city
-    });
-  }
-
-  onEditPm() {
-    this.bookmarksService.resetSearch({
-      ...this.bookmarksService.researchParamsBookmarks,
-      pseudo: this.pm
     });
   }
 }

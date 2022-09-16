@@ -25,20 +25,6 @@ export class MeetingsResearchBlocComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onEditKeyword() {
-    this.meetingsService.resetSearch({
-      ...this.meetingsService.researchParamsMeeting,
-      keyword: this.keyword
-    });
-  }
-
-  onEditOldOrNew() {
-    this.meetingsService.resetSearch({
-      ...this.meetingsService.researchParamsMeeting,
-      oldOrNew: this.oldOrNew
-    });
-  }
-
   onEditDone() {
     this.meetingsService.resetSearch({
       ...this.meetingsService.researchParamsMeeting,

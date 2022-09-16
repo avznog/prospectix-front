@@ -4,5 +4,4 @@ export interface ResearchParamsBookmarks {
   skip: number;
   city?: string;
   activity?: string;
-  pseudo: string;
 }

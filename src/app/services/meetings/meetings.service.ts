@@ -16,9 +16,7 @@ export class MeetingsService {
   researchParamsMeeting: ResearchParamsMeeting = {
     take: 20,
     skip: 0,
-    done: "false",
-    oldOrNew: "new",
-    keyword: ""
+    done: "false"
   }
   constructor(
     private http: HttpClient
@@ -49,13 +47,8 @@ export class MeetingsService {
     if(this.researchParamsMeeting.type)
       queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
 
-    if(this.researchParamsMeeting.date)
-      queryParameters = queryParameters.append("date",this.researchParamsMeeting.date)
-
     queryParameters = queryParameters.append("skip", this.researchParamsMeeting.skip)
     queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
-    queryParameters = queryParameters.append("oldOrNew", this.researchParamsMeeting.oldOrNew)
-    queryParameters = queryParameters.append("keyword", this.researchParamsMeeting.keyword)
     queryParameters = queryParameters.append("take",20)
     
     return this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(meetings => meetings.forEach(meeting => this.meetings.set(meeting.id, meeting)));
