@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 
 @Component({
   selector: 'app-research-prospects',
@@ -11,8 +10,7 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
 export class ResearchProspectsComponent implements OnInit {
   constructor(
     public readonly prospectsService: ProspectsService,
-    public bookmarksService: BookmarksService,
-    public statisticsService: StatisticsService
+    public bookmarksService: BookmarksService
   ) { }
 
   ngOnInit(): void {
