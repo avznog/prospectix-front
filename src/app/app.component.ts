@@ -9,7 +9,7 @@ import { DataThemeService } from './services/common/data-theme.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'prospectix-front';
+  title = 'Prospectix';
   dataTheme: string = "";
   constructor(
     public authService: AuthService,
@@ -19,6 +19,7 @@ export class AppComponent {
   }
   
   ngOnInit() {
+    this.dataThemeService.sendData(localStorage.getItem("theme") || "")
   } 
 
 
