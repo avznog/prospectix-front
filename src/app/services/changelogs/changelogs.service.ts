@@ -15,6 +15,14 @@ export class ChangelogsService {
     console.log(this.authService.currentUserSubject.getValue().admin)
     this.changelogs = [
       {
+        version: "0.4.1",
+        date: new Date("2022-09-18T00:00:00.000Z"),
+        bugs: [
+          "Le tri par ville fonctionne désormais dans la page de recherche de prospect"
+        ],
+        features: [
+        ]
+      },{
         version: "0.4",
         date: new Date("2022-09-18T00:00:00.000Z"),
         bugs: [
