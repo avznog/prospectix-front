@@ -14,7 +14,8 @@ export class ProspectsService {
 
   prospects = new Map<number, Prospect>();
   researchParamsProspect : ResearchParamsProspect = {
-    skip: 0
+    skip: 0,
+    zipcode: -1
   };
 
   constructor(
@@ -40,16 +41,14 @@ export class ProspectsService {
   loadMore() {
     let queryParameters = new HttpParams();
       if(this.researchParamsProspect.activity)
-      queryParameters = queryParameters.append("activity", this.researchParamsProspect.activity)
-      
-      if(this.researchParamsProspect.city)
-      queryParameters = queryParameters.append("city", this.researchParamsProspect.city)
+        queryParameters = queryParameters.append("activity", this.researchParamsProspect.activity)
       
       if(this.researchParamsProspect.skip)
-      queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
+        queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
       
       queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword ?? "")
       queryParameters = queryParameters.append("take", 20);
+      queryParameters = queryParameters.append("zipcode", this.researchParamsProspect.zipcode)
       this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters }).subscribe(prospects => prospects.forEach(prospect => this.prospects.set(prospect.id, prospect)));
   }
 
