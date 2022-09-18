@@ -17,6 +17,7 @@ import { PhonesService } from 'src/app/services/phones/phones.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
 
 @Component({
@@ -48,7 +49,8 @@ export class ProspectTileComponent implements OnInit {
     private readonly websitesService: WebsitesService,
     private readonly meetingsService: MeetingsService,
     private readonly remindersService: RemindersService,
-    private readonly sentEmailsService: SentEmailsService
+    private readonly sentEmailsService: SentEmailsService,
+    private readonly statisticsService: StatisticsService
   ) { }
 
   ngOnInit(): void {
@@ -117,7 +119,14 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onClickRefus() {
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
+      totalCalls: this.statisticsService.statistic.totalCalls + 1,
+      totalNegativeAnswers: this.statisticsService.statistic.totalNegativeAnswers + 1,
+      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
+      weeklyNegativeAnswers: this.statisticsService.statistic.weeklyNegativeAnswers + 1
+    });
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
+
     this.eventsService.create({
       type: EventType.NEGATIVE_ANSWER,
       prospect: this.prospect,
@@ -128,6 +137,12 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onClickSentEmail() {
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
+      totalCalls: this.statisticsService.statistic.totalCalls + 1,
+      totalSentEmails: this.statisticsService.statistic.totalSentEmails + 1,
+      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
+      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
+    });
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });

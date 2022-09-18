@@ -8,6 +8,7 @@ import { MailsComponent } from './components/mails/mails/mails.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
 import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
+import { StatisticsComponent } from './components/statistics/statistics/statistics.component';
 import { UsersComponent } from './components/users/users/users.component';
 import { AdminGuard } from './guards/admin.guard';
 import { LoggedGuard } from './guards/logged.guard';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path:"goals", component: GoalsComponent, canActivate: [LoggedGuard, AdminGuard] },
   { path: "bookmarks", component: BookmarksComponent, canActivate: [LoggedGuard] },
   { path: "mails", component: MailsComponent, canActivate: [LoggedGuard] },
+  { path: "statistics", component: StatisticsComponent, canActivate: [LoggedGuard] },
   { path:"", pathMatch: "full", redirectTo: "dashboard" },
   { path: "**", pathMatch: "full", redirectTo: "dashboard"},
 ];

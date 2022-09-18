@@ -2,6 +2,7 @@
   <div class="flex-1 ">
     <!-- Prospectix button -->
     <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl indicator">Prospectix<span *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion" class="badge badge-secondary indicator-item badge-xs"></span></a>
+    <a routerLink="/statistics" class="btn btn-ghost normal-case text-xl font-medium">Statistiques</a>
 
     <!-- Versions button -->
     <label for="modal-version" class="btn btn-ghost normal-case text-xs modal-button">Versions</label>
