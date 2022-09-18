@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Changelog } from 'src/app/models/changelog.model';
 
 @Injectable({
@@ -7,9 +8,24 @@ import { Changelog } from 'src/app/models/changelog.model';
 export class ChangelogsService {
   changelogs: Changelog[] = [];
   localVersion: string = "";
-  constructor() {
+  constructor(
+    private readonly authService: AuthService
+  ) {
     this.localVersion = localStorage.getItem("version") ?? "";
+    console.log(this.authService.currentUserSubject.getValue().admin)
     this.changelogs = [
+      {
+        version: "0.4",
+        date: new Date("2022-09-18T00:00:00.000Z"),
+        bugs: [
+          
+        ],
+        features: [
+          "Ajout du système de statistiques",
+          "Changement du header / ajout d'icônes",
+          this.authService.currentUserSubject.getValue().admin ? "Modification de la page de version pour cacher les informations sensibles aux cdp" : ""
+        ]
+      },
       {
         version: "0.3",
         date: new Date("2022-09-15T00:00:00.000Z"),
@@ -165,10 +181,10 @@ export class ChangelogsService {
         date: new Date("2022-09-03T00:00:00.000Z"),
         bugs: [
           "Réduction de la taille du bouton version",
-          "Suppression du bouton version pour les CDP"
+          this.authService.currentUserSubject.getValue().admin ? "Suppression du bouton version pour les CDP" : ""
         ],
         features: [
-          "Modification du nombre d'éléments pour les pages recherche, rappels, rendez-vous, favoris, utilisateurs, objectifs : 2 > 20"
+          this.authService.currentUserSubject.getValue().admin ? "Modification du nombre d'éléments pour les pages recherche, rappels, rendez-vous, favoris, utilisateurs, objectifs : 2 > 20" : "Modification du nombre d'éléments pour les pages recherche, rappels, rendez-vous, favoris, utilisateurs : 2 > 20"
         ]
       },
       {
@@ -179,7 +195,7 @@ export class ChangelogsService {
         ],
         features: [
           "Ajout du dashboard",
-          "Tri des goals / reminders du dashboard pour n'afficher que ceux du CDP connecté"
+          this.authService.currentUserSubject.getValue().admin ? "Tri des goals / reminders du dashboard pour n'afficher que ceux du CDP connecté" : ""
         ]
       },
       {
@@ -211,7 +227,7 @@ export class ChangelogsService {
         ],
         features: [
           "Ajout des fonctionnalités d'ajout de rendez-vous / rappels",
-          "Ajout de la pagination dans les pages: Recherche, rappels, rendez-vous, favoris, utilisateurs, objectifs",
+          this.authService.currentUserSubject.getValue().admin ? "Ajout de la pagination dans les pages: Recherche, rappels, rendez-vous, favoris, utilisateurs, objectifs": "Ajout de la pagination dans les pages: Recherche, rappels, rendez-vous, favoris, utilisateurs",
           "Ajout de l'actualisation en temps réel des données",
           "Ajout des thèmes daisyUI"
         ]
@@ -247,7 +263,7 @@ export class ChangelogsService {
           "Page de rappels - front moche",
           "Page de rendez-vous - front moche",
           "Page de gestion des utilisateurs - front moche",
-          "page de gestion des objectifs - front moche"
+          this.authService.currentUserSubject.getValue().admin ? "page de gestion des objectifs - front moche" : ""
         ]
       },
     ];
