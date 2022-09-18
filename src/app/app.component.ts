@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(
     public authService: AuthService,
     public readonly dataThemeService: DataThemeService,
-    public readonly changelogsService: ChangelogsService  
+    public readonly changelogsService: ChangelogsService
   ) { 
   }
   

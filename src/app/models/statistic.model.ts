@@ -13,4 +13,5 @@ export interface Statistic {
   weeklyMeetings: number;
   weeklySentEmails: number;
   weeklyNegativeAnswers: number;
+  isReseted: boolean;
 }
