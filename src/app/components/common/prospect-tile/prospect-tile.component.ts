@@ -127,11 +127,14 @@ export class ProspectTileComponent implements OnInit {
     });
 
     (this.prospect.stage == 2) && this.statisticsService.update({
-      totalReminders: this.statisticsService.statistic.totalReminders + 1,
-      weeklyReminders: this.statisticsService.statistic.weeklyReminders + 1
+      totalNegativeAnswers: this.statisticsService.statistic.totalNegativeAnswers + 1,
+      weeklyNegativeAnswers: this.statisticsService.statistic.weeklyNegativeAnswers + 1
     });
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
-
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
     this.eventsService.create({
       type: EventType.NEGATIVE_ANSWER,
       prospect: this.prospect,
@@ -149,10 +152,11 @@ export class ProspectTileComponent implements OnInit {
       weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
     });
 
-    (this.prospect.stage == 2) && this.statisticsService.update({
-      totalSentEmails: this.statisticsService.statistic.totalReminders + 1,
+    (this.prospect.stage == 2 || this.prospect.stage == 3) && this.statisticsService.update({
+      totalSentEmails: this.statisticsService.statistic.weeklySentEmails + 1,
       weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
     });
+
 
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
