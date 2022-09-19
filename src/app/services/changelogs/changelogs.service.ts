@@ -18,6 +18,15 @@ export class ChangelogsService {
         version: "0.4.2",
         date: new Date("2022-09-19T00:00:00.000Z"),
         bugs: [
+        ],
+        features: [
+          "Ajout du système d'historique de statistiques"
+        ]
+      },
+      {
+        version: "0.4.2",
+        date: new Date("2022-09-19T00:00:00.000Z"),
+        bugs: [
           "Changement du système de reset de stats"
         ],
         features: [
