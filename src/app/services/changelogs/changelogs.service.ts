@@ -15,7 +15,7 @@ export class ChangelogsService {
     console.log(this.authService.currentUserSubject.getValue().admin)
     this.changelogs = [
       {
-        version: "0.4.2",
+        version: "0.4.3",
         date: new Date("2022-09-19T00:00:00.000Z"),
         bugs: [
         ],
