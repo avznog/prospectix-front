@@ -15,6 +15,15 @@ export class ChangelogsService {
     console.log(this.authService.currentUserSubject.getValue().admin)
     this.changelogs = [
       {
+        version: "0.4.2",
+        date: new Date("2022-09-19T00:00:00.000Z"),
+        bugs: [
+          "Changement du système de reset de stats"
+        ],
+        features: [
+        ]
+      },
+      {
         version: "0.4.1",
         date: new Date("2022-09-18T00:00:00.000Z"),
         bugs: [
@@ -22,7 +31,8 @@ export class ChangelogsService {
         ],
         features: [
         ]
-      },{
+      },
+      {
         version: "0.4",
         date: new Date("2022-09-18T00:00:00.000Z"),
         bugs: [

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { isToday, startOfWeek } from 'date-fns';
+import { daysInWeek, isToday, startOfWeek } from 'date-fns';
+import differenceInDays from 'date-fns/esm/differenceInDays';
 import { UpdateStatisticDto } from 'src/app/dto/statistics/update-statistic.dto';
 import { Statistic } from 'src/app/models/statistic.model';
 
@@ -29,18 +30,15 @@ export class StatisticsService {
 
   // Reseting the stats on the first day of the week
   checkAndResetWeek() {
-    if(isToday(startOfWeek(new Date(), { weekStartsOn: 1})) && !this.statistic.isReseted) {
+    if(Math.abs((new Date().getDate() - new Date(this.statistic.lastReset).getDate())) > 6){
+      console.log("stat reseted")
       this.update({
         weeklyCalls: 0,
         weeklyMeetings: 0,
         weeklyNegativeAnswers: 0,
         weeklyReminders: 0,
         weeklySentEmails: 0,
-        isReseted: true
-      });
-    } else if (!isToday(startOfWeek(new Date(), { weekStartsOn: 1})) && this.statistic.isReseted) {
-      this.update({
-        isReseted: false
+        lastReset: new Date()
       });
     }
   }

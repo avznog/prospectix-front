@@ -12,5 +12,5 @@ export interface CreateStatisticDto {
   weeklySentEmails: number;
   weeklyNegativeAnswers: number;
   pm: ProjectManager;
-  isReseted: boolean;
+  lastReset: Date;
 }
