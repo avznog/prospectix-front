@@ -49,6 +49,11 @@ export class AddMeetingsModalComponent implements OnInit {
       weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
     });
     
+    (this.prospect.stage == 2) && this.statisticsService.update({
+      totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
+      weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
+    });
+
     this.prospectsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });

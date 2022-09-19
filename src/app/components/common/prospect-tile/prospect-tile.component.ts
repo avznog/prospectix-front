@@ -125,6 +125,11 @@ export class ProspectTileComponent implements OnInit {
       weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
       weeklyNegativeAnswers: this.statisticsService.statistic.weeklyNegativeAnswers + 1
     });
+
+    (this.prospect.stage == 2) && this.statisticsService.update({
+      totalReminders: this.statisticsService.statistic.totalReminders + 1,
+      weeklyReminders: this.statisticsService.statistic.weeklyReminders + 1
+    });
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
 
     this.eventsService.create({
@@ -143,6 +148,12 @@ export class ProspectTileComponent implements OnInit {
       weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
       weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
     });
+
+    (this.prospect.stage == 2) && this.statisticsService.update({
+      totalSentEmails: this.statisticsService.statistic.totalReminders + 1,
+      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
+    });
+
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
