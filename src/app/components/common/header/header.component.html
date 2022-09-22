@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100" *ngIf="authService.loggedInSubject">
+<div class="navbar bg-base-100 w=full" *ngIf="authService.loggedInSubject">
   <div class="flex-1 ">
     <!-- Prospectix button -->
     <a routerLink="/dashboard" class="btn btn-ghost normal-case text-xl indicator">Prospectix<span *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion" class="badge badge-secondary indicator-item badge-xs"></span></a>
@@ -63,7 +63,7 @@
         <label tabindex="0" class="btn btn-ghost text-xl font-medium">Admin</label>
         <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60">
           <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/users" class="w-full">Users</a></li>
-          <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li>
+          <!-- <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li> -->
         </ul>
       </div>
       <li class="dropdown dropdown-end">
