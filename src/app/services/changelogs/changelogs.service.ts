@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.4.4",
+        date: new Date("2022-09-21T00:00:00.000Z"),
+        bugs: [
+          "fix du bug de recherche par ville / domaine d'activité de la page de recherche"
+        ],
+        features: [
+         
+        ]
+      },
+      {
         version: "0.4.3",
         date: new Date("2022-09-19T00:00:00.000Z"),
         bugs: [
