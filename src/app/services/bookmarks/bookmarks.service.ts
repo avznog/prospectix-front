@@ -16,7 +16,7 @@ export class BookmarksService {
     keyword: '',
     skip: 0,
     zipcode: -1000,
-    activity: "allActivities"
+    activity: "allActivities",
   };
   bookmarks = new Map<number, Bookmark>();
   

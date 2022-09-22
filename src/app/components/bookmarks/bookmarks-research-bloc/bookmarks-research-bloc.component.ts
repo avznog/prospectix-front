@@ -12,6 +12,7 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
 export class BookmarksResearchBlocComponent implements OnInit {
   activity: string = "allActivities";
   zipcode: number = -1000;
+  keyword: string = "";
 
   constructor(
     public readonly activitiesService: ActivitiesService,
@@ -35,6 +36,13 @@ export class BookmarksResearchBlocComponent implements OnInit {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
       zipcode: this.zipcode
+    });
+  }
+
+  onEditKeyword() {
+    this.bookmarksService.resetSearch({
+      ...this.bookmarksService.researchParamsBookmarks,
+      keyword: this.keyword
     });
   }
 }

@@ -12,6 +12,15 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.4.5",
+        date: new Date("2022-09-21T00:00:00.000Z"),
+        bugs: [
+           ],
+        features: [
+         "Ajout d'un champ de recherche pour les pages recherche et favoris: le champ désactive le tri des villes / domaines et vice versa"
+        ]
+      },
+      {
         version: "0.4.4",
         date: new Date("2022-09-21T00:00:00.000Z"),
         bugs: [

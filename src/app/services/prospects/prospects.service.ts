@@ -16,7 +16,8 @@ export class ProspectsService {
   researchParamsProspect : ResearchParamsProspect = {
     skip: 0,
     zipcode: -1000,
-    activity: "allActivities"
+    activity: "allActivities",
+    keyword: ""
   };
 
   constructor(

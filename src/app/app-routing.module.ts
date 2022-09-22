@@ -21,7 +21,7 @@ const routes: Routes = [
   { path:"reminders", component: RemindersComponent, canActivate: [LoggedGuard] },
   { path:"meetings", component: MeetingsComponent, canActivate: [LoggedGuard] },
   { path:"prospects", component: ResearchProspectsComponent, canActivate: [LoggedGuard] },
-  { path:"goals", component: GoalsComponent, canActivate: [LoggedGuard, AdminGuard] },
+  // { path:"goals", component: GoalsComponent, canActivate: [LoggedGuard, AdminGuard] },
   { path: "bookmarks", component: BookmarksComponent, canActivate: [LoggedGuard] },
   { path: "mails", component: MailsComponent, canActivate: [LoggedGuard] },
   { path: "statistics", component: StatisticsComponent, canActivate: [LoggedGuard] },

@@ -1,7 +1,7 @@
 <div [attr.data-theme]="dataThemeService.dataTheme">
   <router-outlet class="container mx-auto"></router-outlet>
 </div>
-<div class="toast toast-end text-sm"
+<div class="toast toast-end text-sm bg-green-500"
   *ngIf="changelogsService.changelogs[0].version != changelogsService.localVersion && authService.currentUserSubject.getValue()">
   <div class="alert alert-info alert-sm ">Une nouvelle version est disponible <span class="btn btn-outline btn-sm"
       (click)="changelogsService.updateVersion()">
