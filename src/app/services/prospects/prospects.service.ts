@@ -15,7 +15,8 @@ export class ProspectsService {
   prospects = new Map<number, Prospect>();
   researchParamsProspect : ResearchParamsProspect = {
     skip: 0,
-    zipcode: -1
+    zipcode: -1000,
+    activity: "allActivities"
   };
 
   constructor(

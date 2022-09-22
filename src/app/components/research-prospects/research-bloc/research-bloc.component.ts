@@ -34,7 +34,7 @@ export class ResearchBlocComponent implements OnInit {
   onEditActivity() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      activity: this.formActivity == "allActivities" ? "" : this.formActivity
+      activity: this.formActivity
     });
   }
 
