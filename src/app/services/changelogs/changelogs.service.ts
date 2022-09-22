@@ -15,7 +15,8 @@ export class ChangelogsService {
         version: "0.4.4",
         date: new Date("2022-09-21T00:00:00.000Z"),
         bugs: [
-          "fix du bug de recherche par ville / domaine d'activité de la page de recherche"
+          "fix du bug de recherche par ville / domaine d'activité de la page de recherche",
+          "Fix du bug de recherche par ville / domaine d'activité de la page de favoris"
         ],
         features: [
          

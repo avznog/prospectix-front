@@ -10,8 +10,8 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
   styleUrls: ['./bookmarks-research-bloc.component.scss']
 })
 export class BookmarksResearchBlocComponent implements OnInit {
-  activity: string = "";
-  city: string = "";
+  activity: string = "allActivities";
+  zipcode: number = -1000;
 
   constructor(
     public readonly activitiesService: ActivitiesService,
@@ -27,14 +27,14 @@ export class BookmarksResearchBlocComponent implements OnInit {
   onEditActivity() {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      activity: this.activity == "allActivities" ? "" : this.activity
+      activity: this.activity
     });
   }
 
   onEditCity() {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      city: this.city == "allCities" ? "" : this.city
+      zipcode: this.zipcode
     });
   }
 }
