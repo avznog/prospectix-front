@@ -46,6 +46,8 @@ import { MailsComponent } from './components/mails/mails/mails.component';
 import { MailsResearchBlocComponent } from './components/mails/mails-research-bloc/mails-research-bloc.component';
 import { ProspectTileComponent } from './components/common/prospect-tile/prospect-tile.component';
 import { StatisticsComponent } from './components/statistics/statistics/statistics.component';
+import { AddBookmarkModalComponent } from './components/common/add-bookmark-modal/add-bookmark-modal.component';
+import { AddMailModalComponent } from './components/common/add-mail-modal/add-mail-modal.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,9 @@ import { StatisticsComponent } from './components/statistics/statistics/statisti
     MailsComponent,
     MailsResearchBlocComponent,
     ProspectTileComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    AddBookmarkModalComponent,
+    AddMailModalComponent
   ],
   imports: [
     BrowserModule,

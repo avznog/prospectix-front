@@ -1,0 +1,9 @@
+<div class="card max-w-screen-sm">
+    <div class="card-title">Ajouter un mail à {{prospect.companyName}} ?</div>
+    <div class="card-body ">
+        <div class="inline-flex space-x-5">
+            <label class="btn btn-outline btn-ghost w-1/2" for="add-mail-modal-{{prospect.id}}">Annuler</label>
+            <label class="btn btn-outline btn-ghost w-1/2 btn-success" for="add-mail-modal-{{prospect.id}}" (click)="onClickSentEmail()">Ajouter un mail</label>
+        </div>
+    </div>
+</div>

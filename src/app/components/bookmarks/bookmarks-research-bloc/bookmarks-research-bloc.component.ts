@@ -13,6 +13,7 @@ export class BookmarksResearchBlocComponent implements OnInit {
   activity: string = "allActivities";
   zipcode: number = -1000;
   keyword: string = "";
+  orderByDate: boolean = false;
 
   constructor(
     public readonly activitiesService: ActivitiesService,

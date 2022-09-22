@@ -62,6 +62,15 @@ export class BookmarksService {
     this.http.delete<Bookmark>(`bookmarks/${bookmarkId}`).subscribe(() => this.bookmarks.delete(bookmarkId));
   }
 
+  updateNbNo(idProspect: number) {
+    this.bookmarks.forEach(bookmark => {
+      if(bookmark.prospect.id == idProspect){
+        return bookmark.prospect.nbNo = bookmark.prospect.nbNo + 1
+      }
+      return bookmark
+    })
+  }
+
   updateByStage(idProspect: number, stage: { stage: StageType }) {
     this.bookmarks.forEach(bookmark => {
       if(bookmark.prospect.id == idProspect)

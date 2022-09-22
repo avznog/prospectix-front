@@ -70,6 +70,7 @@ export class ProspectTileComponent implements OnInit {
 
   onChangeNbNo() {
       this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
+      this.bookmarksService.updateNbNo(this.prospect.id);
       this.eventsService.create({
         type: EventType.NO_ANSWER,
         prospect: this.prospect,
@@ -78,27 +79,6 @@ export class ProspectTileComponent implements OnInit {
       });
   }
 
-  onCreateBookmark() {
-    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK} );
-    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
-    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
-    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
-    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.BOOKMARK });
-    const createBookmarkDto: CreateBookmarkDto = {
-      prospect: this.prospect,
-      creationDate: new Date()
-    };
-    this.bookmarksService.create(createBookmarkDto);
-    this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: true });
-
-    this.eventsService.create({
-      type: EventType.ADD_BOOKMARKS,
-      prospect: this.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.ADD_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
-    });
-    console.log("added to bookmarks");
-  }
 
   onDeleteBookmark() {
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.RESEARCH });
@@ -141,44 +121,7 @@ export class ProspectTileComponent implements OnInit {
       date: new Date,
       description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-    this.prospectService.disable(this.prospect.id);
-  }
-
-  onClickSentEmail() {
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-      totalCalls: this.statisticsService.statistic.totalCalls + 1,
-      totalSentEmails: this.statisticsService.statistic.totalSentEmails + 1,
-      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
-    });
-
-    (this.prospect.stage == 2 || this.prospect.stage == 3) && this.statisticsService.update({
-      totalSentEmails: this.statisticsService.statistic.weeklySentEmails + 1,
-      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
-    });
-
-
-    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
-    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
-    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
-    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
-    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
-    this.sentEmailsService.create({
-      sendingDate: new Date,
-      message: "",
-      object: "",
-      prospect: this.prospect,
-      pm: this.authService.currentUserSubject.getValue()
-    });
-
-    this.eventsService.create({
-      type: EventType.ADD_SENT_EMAIL,
-      date: new Date,
-      description: EventDescriptionType.ADD_SENT_EMAIL,
-      pm: this.authService.currentUserSubject.getValue(),
-      prospect: this.prospect
-    });
-    console.log("email compatibilisé")
+    // this.prospectService.disable(this.prospect.id);
   }
 
   onMarkMeetingDone() {
@@ -201,6 +144,10 @@ export class ProspectTileComponent implements OnInit {
       description: `${EventDescriptionType.DONE_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     return this.remindersService.markDone(this.reminder.id);
+  }
+
+  onClickPasPertinent() {
+    this.prospectService.disable(this.prospect.id);
   }
 
   onClickDrawer() {

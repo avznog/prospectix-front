@@ -33,10 +33,24 @@
           </label>
         </label>
 
-        <!-- Button Bookmark -->
-        <div *ngIf="prospect.stage == 0 || prospect.stage == 1"
-          class="btn btn-ghost btn-outline btn-sm {{bookmarksService.bookmarks.size > 30 && prospect.stage == 0 ? 'btn-disabled' : ''}} {{prospect.isBookmarked ? 'bg-warning' : 'bg-error'}}"
-          (click)="prospect.isBookmarked ? onDeleteBookmark() : onCreateBookmark()">
+       
+        <!-- button add bookmark -->
+        <label for="add-bookmark-modal-{{prospect.id}}" class="btn btn-ghost btn-outline btn-sm modal-button bg-error" *ngIf="prospect.stage == 0">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="warning" stroke="currentColor">
+            <path
+              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        </label>
+
+        <input type="checkbox" id="add-bookmark-modal-{{prospect.id}}" class="modal-toggle" />
+        <label for="add-bookmark-modal-{{prospect.id}}" class="modal cursor-pointer">
+          <label class="modal-box relative max-w-screen-xs" for="add-bookmark-modal-{{prospect.id}}">
+            <app-add-bookmark-modal [prospect]="prospect" [bookmark]="bookmark"></app-add-bookmark-modal>
+          </label>
+        </label>
+
+        <!-- Button delete Bookmark -->
+        <div *ngIf="prospect.stage == 1" class="btn btn-ghost btn-outline btn-sm bg-warning" (click)="onDeleteBookmark() ">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="warning" stroke="currentColor">
             <path
               d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -89,7 +103,7 @@
         <!-- Page rendez-vous -->
         <div *ngIf="meeting" class="space-x-5">
           <span class="badge badge-secondary">{{meeting.type}}</span>
-          Rendez-vous le {{meeting.date | date:" EEEE dd MMMM YYYY"}}
+          Rendez-vous le {{meeting.date | date:"EEEE dd MMMM YYYY"}} à {{meeting.date | date:"HH:mm"}}
 
           <div class="tooltip" *ngIf="!meeting.done" data-tip="Rendez-vous effectué" (click)="onMarkMeetingDone()">
             <label class="btn btn-circle btn-success">
@@ -189,10 +203,20 @@
         Refus
       </button>
 
-      <!-- Bouton Mail -->
-      <button class="btn btn-ghost btn-outline" (click)="onClickSentEmail()" *ngIf="prospect.stage != 4">
+      <!-- button mail -->
+      <label for="add-mail-modal-{{prospect.id}}" class="btn btn-ghost btn-outline" *ngIf="prospect.stage != 4">
         Mail
-      </button>
+      </label>
+
+      <input type="checkbox" id="add-mail-modal-{{prospect.id}}" class="modal-toggle" />
+      <label for="add-mail-modal-{{prospect.id}}" class="modal cursor-pointer">
+        <label class="modal-box relative max-w-screen-xs" for="add-mail-modal-{{prospect.id}}">
+          <app-add-mail-modal [prospect]="prospect"></app-add-mail-modal>
+        </label>
+      </label>
+
+      <!-- Pas pertinent -->
+      <label class="btn btn-ghost btn-outline" (click)="onClickPasPertinent()" *ngIf="prospect.stage == 0">Non Pertinent</label>
 
       <!-- Commentaire -->
       <div class="w-1/2">

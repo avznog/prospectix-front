@@ -12,6 +12,21 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.5",
+        date: new Date("2022-09-21T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug de la non-incrémentation des pas de réponse dans la page Favoris"
+           ],
+        features: [
+         "Ajout d'un pop up de confirmation de l'ajout d'un favori (uniquement pour l'AJOUT)",
+         "Ajout d'un pop up de confirmation de l'ajout d'un mail",
+         "Ajout de l'heure d'un rendez-vous",
+         "Changement de la puce de nouvelle version: elle est maintenant au dessus du bouton \"Version\"",
+         "Ajout d'un bouton \"Non pertinent\" sur la page de recherche de prospect dans le cas ou le prospect n'est pas pertinent ",
+         "Inversion du sens d'affichage de l'historique du prospect: le plus récent en haut"
+        ]
+      },
+      {
         version: "0.4.5",
         date: new Date("2022-09-21T00:00:00.000Z"),
         bugs: [
