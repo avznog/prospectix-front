@@ -27,8 +27,8 @@ import { MeetingsComponent } from './components/meetings/meetings/meetings.compo
 import { ProspectEditComponent } from './components/prospect-edit/prospect-edit.component';
 import { RemindersResearchBlocComponent } from './components/reminders/reminders-research-bloc/reminders-research-bloc.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
-import { ResearchBlocComponent } from './components/research-prospects/research-bloc/research-bloc.component';
-import { ResearchProspectsComponent } from './components/research-prospects/research-prospects/research-prospects.component';
+import { ResearchBlocComponent } from './components/research/research-bloc/research-bloc.component';
+import { ResearchComponent } from './components/research/research/research.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
 import { UsersComponent } from './components/users/users/users.component';
@@ -48,6 +48,7 @@ import { ProspectTileComponent } from './components/common/prospect-tile/prospec
 import { StatisticsComponent } from './components/statistics/statistics/statistics.component';
 import { AddBookmarkModalComponent } from './components/common/add-bookmark-modal/add-bookmark-modal.component';
 import { AddMailModalComponent } from './components/common/add-mail-modal/add-mail-modal.component';
+import { DisableProspectModalComponent } from './components/common/disable-prospect-modal/disable-prospect-modal.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { AddMailModalComponent } from './components/common/add-mail-modal/add-ma
     RemindersResearchBlocComponent,
     MeetingsComponent,
     MeetingsResearchBlocComponent,
-    ResearchProspectsComponent,
+    ResearchComponent,
     ResearchBlocComponent,
     UsersComponent,
     ListUsersComponent,
@@ -88,7 +89,8 @@ import { AddMailModalComponent } from './components/common/add-mail-modal/add-ma
     ProspectTileComponent,
     StatisticsComponent,
     AddBookmarkModalComponent,
-    AddMailModalComponent
+    AddMailModalComponent,
+    DisableProspectModalComponent
   ],
   imports: [
     BrowserModule,

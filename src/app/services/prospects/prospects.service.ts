@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ReasonDisabledType } from 'src/app/constants/reasonDisabled.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
@@ -103,8 +104,8 @@ export class ProspectsService {
     return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
   }
   
-  disable(idProspect: number) : Subscription {
-    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}`).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: StageType.ARCHIVED, disabled: true }));
+  disable(idProspect: number, reason: ReasonDisabledType) : Subscription {
+    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}/${reason}`,).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: StageType.ARCHIVED, disabled: true }));
   }
 
   addProspectsBase() {

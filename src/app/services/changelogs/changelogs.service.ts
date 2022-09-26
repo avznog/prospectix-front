@@ -12,6 +12,22 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.6",
+        date: new Date("2022-09-26T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug de la non actualisation de la disparition d'un prospect si on clique sur disabled",
+          "Résolution d'un bug de chargement des utilisateurs",
+          "Suppression du bouton \"Version\" pour les chefs de projet",
+          "Résolution du bug d'affichage de la liste de sélection du type de rendez-vous",
+          "Résolution du bug d'affichage du bouton rappel et refus sur la page rechercher"
+           ],
+        features: [
+          "Changement du placement du bouton \"rendez-vous / rappel effectué\“",
+          "Modification de la position et du contenu du bouton \"Non pertinent\" et ajout d'un modal et d'un type de suppression",
+          "Le champ de recherche permet inclut maintenant les domaines d'activité"
+        ]
+      },
+      {
         version: "0.5",
         date: new Date("2022-09-21T00:00:00.000Z"),
         bugs: [

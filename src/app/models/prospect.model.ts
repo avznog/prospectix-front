@@ -1,3 +1,4 @@
+import { ReasonDisabledType } from "../constants/reasonDisabled.type";
 import { StageType } from "../constants/stage.type";
 import { Activity } from "./activity.model";
 import { Bookmark } from "./bookmark.model";
@@ -30,4 +31,5 @@ export interface Prospect {
     events: Event[];
     stage: StageType;
     archived: Date;
+    reasonDisabled: ReasonDisabledType;
 }

@@ -4,7 +4,7 @@
     <!-- Header card -->
     <div class="card-title w-full">
 
-      <div class="space-x-4 w-2/3 inline-flex">
+      <div class="space-x-4 inline-flex {{prospect.stage == 0 || prospect.stage == 1 ? 'w-full': 'w-2/3'}}">
         <!-- Title -->
         <div class="w-2/3">{{prospect.companyName}} - {{prospect.activity.name}}</div>
        <div class="{{prospect.stage == 0 || prospect.stage == 1 ? 'w-full' : 'w-1/3'}} space-x-3">
@@ -66,8 +66,25 @@
           </svg>
         </label>
       </div>
+
+      <!-- Bouton prospect Pas pertinent (suppriemr) -->
+      <label class="btn btn-ghost btn-outline hover:bg-error btn-sm modal-button" for="disable-prospect-modal-{{prospect.id}}" *ngIf="prospect.stage == 0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+        </svg>        
+      </label>
+
+      <input type="checkbox" id="disable-prospect-modal-{{prospect.id}}" class="modal-toggle" />
+        <label for="disable-prospect-modal-{{prospect.id}}" class="modal cursor-pointer">
+          <label class="modal-box relative max-w-screen-md text-sm" for="">
+            <app-disable-prospect-modal [prospect]="prospect"></app-disable-prospect-modal>
+          </label>
+        </label>
+
+
+
        </div>
-      <div class="h-full w-1/2">
+      <div class="h-full {{prospect.stage == 0 ? '': 'w-1/2'}}">
 
         <!-- Page mails -->
         <div *ngIf="sentEmail">
@@ -87,17 +104,7 @@
               class="mask mask-star-2 {{reminder.priority == 3 ? 'bg-accent' : reminder.priority == 2 ? 'bg-primary' : 'bg-secondary'}}"
               disabled *ngIf="reminder.priority == 3">
           </div>
-          Rappel défini au {{reminder.date | date: "EEEE dd MMMM YYYY"}} à {{reminder.date |date:"hh:mm:ss"}}
-          <div class="tooltip" *ngIf="!reminder.done" data-tip="Rappel effectué" (click)="onMarkReminderDone()">
-
-            <label class="btn btn-circle btn-success">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </label>
-          </div>
+          Rappel défini au {{reminder.date | date: "EEEE dd MMMM YYYY"}} à {{reminder.date |date:"hh:mm"}}
         </div>
 
         <!-- Page rendez-vous -->
@@ -105,18 +112,9 @@
           <span class="badge badge-secondary">{{meeting.type}}</span>
           Rendez-vous le {{meeting.date | date:"EEEE dd MMMM YYYY"}} à {{meeting.date | date:"HH:mm"}}
 
-          <div class="tooltip" *ngIf="!meeting.done" data-tip="Rendez-vous effectué" (click)="onMarkMeetingDone()">
-            <label class="btn btn-circle btn-success">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </label>
-          </div>
-
         </div>
       </div>
+        
     </div>
 
     <!-- Address -->
@@ -173,40 +171,53 @@
       </button>
 
       <!-- Bouton de rappel  -->
-      <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 ">
-        <span *ngIf="prospect.reminders.length > 0" class="indicator-item badge ">{{prospect.reminders.length}}</span>
-        <label tabindex="0" class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder-{{prospect.id}}">Rappel</label>
 
-        <input type="checkbox" id="modal-add-reminder-{{prospect.id}}" class="modal-toggle" />
-        <div class="modal">
-          <div class="modal-box">
-            <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
-          </div>
+      <label tabindex="0" *ngIf="prospect.stage == 0 || prospect.stage == 1 " class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder-{{prospect.id}}">Rappel</label>
+
+      <input type="checkbox" id="modal-add-reminder-{{prospect.id}}" class="modal-toggle" />
+      <div class="modal">
+        <div class="modal-box">
+          <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
         </div>
-
       </div>
-      <!-- Bouton de rendez-vous -->
-      <div class="indicator" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4">
-        <span *ngIf="prospect.meetings.length > 0" class="indicator-item badge ">{{prospect.meetings.length}}</span>
-        <label tabindex="0" class="btn btn-ghost btn-outline modal-button {{prospect.stage == 4 ? 'btn-disabled' : ''}}" for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
 
+      <!-- Bouton de rendez-vous -->
+        <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4" tabindex="0" class="btn btn-outline btn-ghost modal-button {{prospect.stage == 4 ? 'btn-disabled' : ''}}" for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
         <input type="checkbox" id="modal-add-meeting-{{prospect.id}}" class="modal-toggle" />
         <div class="modal">
           <div class="modal-box">
             <app-add-meetings-modal [prospect]="prospect"></app-add-meetings-modal>
           </div>
         </div>
-      </div>
 
       <!-- Bouton Refus -->
-      <button class="btn btn-ghost btn-outline" (click)="onClickRefus()" *ngIf="prospect.stage != 4 && prospect.stage != 3">
+      <label class="btn btn-ghost btn-outline" (click)="onClickRefus()" *ngIf="prospect.stage != 4 && prospect.stage != 3">
         Refus
-      </button>
+      </label>
 
       <!-- button mail -->
       <label for="add-mail-modal-{{prospect.id}}" class="btn btn-ghost btn-outline" *ngIf="prospect.stage != 4">
         Mail
       </label>
+
+      <!-- Bouton rappel effectué -->
+      <label class="btn btn-success btn-outline" (click)="onMarkReminderDone()" *ngIf="prospect.stage == 2 && !reminder.done">Rappel effectué
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </label>
+
+      <!-- Bouton rendez-vous effectué -->
+      <label class="btn btn-outline btn-success" *ngIf="prospect.stage == 3 && !meeting.done" (click)="onMarkMeetingDone()">Rendez-vous effectué
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </label>
+
 
       <input type="checkbox" id="add-mail-modal-{{prospect.id}}" class="modal-toggle" />
       <label for="add-mail-modal-{{prospect.id}}" class="modal cursor-pointer">
@@ -214,9 +225,6 @@
           <app-add-mail-modal [prospect]="prospect"></app-add-mail-modal>
         </label>
       </label>
-
-      <!-- Pas pertinent -->
-      <label class="btn btn-ghost btn-outline" (click)="onClickPasPertinent()" *ngIf="prospect.stage == 0">Non Pertinent</label>
 
       <!-- Commentaire -->
       <div class="w-1/2">

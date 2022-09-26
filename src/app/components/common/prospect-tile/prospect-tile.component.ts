@@ -146,10 +146,6 @@ export class ProspectTileComponent implements OnInit {
     return this.remindersService.markDone(this.reminder.id);
   }
 
-  onClickPasPertinent() {
-    this.prospectService.disable(this.prospect.id);
-  }
-
   onClickDrawer() {
     this.eventsService.updateEvents(this.prospect.id);
   }

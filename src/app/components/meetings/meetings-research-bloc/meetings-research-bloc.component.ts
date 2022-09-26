@@ -14,7 +14,7 @@ export class MeetingsResearchBlocComponent implements OnInit {
   keyword: string = "";
   oldOrNew: string = "new";
   done: boolean = false;
-  type: string = "";
+  type: string = "Tous les types";
   dateDown: Date = new Date;
   dateUp: Date = new Date;
 
@@ -23,6 +23,7 @@ export class MeetingsResearchBlocComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.type = "allTypes";
   }
 
   onEditDone() {
