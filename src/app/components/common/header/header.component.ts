@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { ChangelogsService } from 'src/app/services/changelogs/changelogs.service';
@@ -11,11 +12,15 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
 })
 export class HeaderComponent implements OnInit {
 
+  @Input("class") class = "";
+  scrolling = false;
+
   constructor(
     public authService: AuthService,
     public readonly changelogsService: ChangelogsService,
     public readonly statisticsService: StatisticsService,
-    public readonly bookmarksService: BookmarksService
+    public readonly bookmarksService: BookmarksService,
+    public readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -23,5 +28,10 @@ export class HeaderComponent implements OnInit {
   
   logout() {
     this.authService.logout();
+  }
+
+  @HostListener("window:scroll")
+  public onScroll(event: Event) {
+    this.scrolling = document.documentElement.scrollTop > 10
   }
 }

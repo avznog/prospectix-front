@@ -1,5 +1,11 @@
 <div [attr.data-theme]="dataThemeService.dataTheme">
-  <router-outlet class="container mx-auto"></router-outlet>
+  <app-header class="fixed top-0 w-full z-50"></app-header>
+  <div class="container mx-auto h-screen max-h-screen flex flex-col">
+    <app-header class="invisible"></app-header>
+    <div class="flex-grow flex">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
 <div class="toast toast-end text-sm"
   *ngIf="changelogsService.changelogs[0].version != changelogsService.localVersion && authService.currentUserSubject.getValue()">
