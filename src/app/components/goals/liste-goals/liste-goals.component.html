@@ -15,7 +15,7 @@
       <td>{{goal.value.id}}</td>
       <td>{{goal.value.pm.pseudo}}</td>
       <td>{{goal.value.title}}</td>
-      <td>{{goal.value.deadline | date:"dd:mm:yyyy"}}</td>
+      <td>{{goal.value.deadline | frenchDatePipe}}</td>
       <td>{{goal.value.currentStep}}/{{goal.value.totalSteps}}</td>
       <td>
         <label for="edit-goal-modal" class="btn btn-ghost btn-outline w-full" >

@@ -88,7 +88,7 @@
 
         <!-- Page mails -->
         <div *ngIf="sentEmail">
-          Mail envoyé le {{sentEmail.sendingDate | date: "EEEE dd MMMM YYYY"}}
+          Mail envoyé le {{sentEmail.sendingDate | frenchDatePipe}}
         </div>
 
         <!-- Page rappels -->
@@ -104,13 +104,13 @@
               class="mask mask-star-2 {{reminder.priority == 3 ? 'bg-accent' : reminder.priority == 2 ? 'bg-primary' : 'bg-secondary'}}"
               disabled *ngIf="reminder.priority == 3">
           </div>
-          Rappel défini au {{reminder.date | date: "EEEE dd MMMM YYYY"}} à {{reminder.date |date:"hh:mm"}}
+          Rappel défini au {{reminder.date | frenchDatePipe}} à {{reminder.date |date:"hh:mm"}}
         </div>
 
         <!-- Page rendez-vous -->
         <div *ngIf="meeting" class="space-x-5">
           <span class="badge badge-secondary">{{meeting.type}}</span>
-          Rendez-vous le {{meeting.date | date:"EEEE dd MMMM YYYY"}} à {{meeting.date | date:"HH:mm"}}
+          Rendez-vous le {{meeting.date | frenchDatePipe}} à {{meeting.date | date:"HH:mm"}}
 
         </div>
       </div>

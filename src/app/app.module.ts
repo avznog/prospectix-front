@@ -49,6 +49,8 @@ import { StatisticsComponent } from './components/statistics/statistics/statisti
 import { AddBookmarkModalComponent } from './components/common/add-bookmark-modal/add-bookmark-modal.component';
 import { AddMailModalComponent } from './components/common/add-mail-modal/add-mail-modal.component';
 import { DisableProspectModalComponent } from './components/common/disable-prospect-modal/disable-prospect-modal.component';
+import { FrenchDatePipePipe } from './pipes/french-date-pipe.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,8 @@ import { DisableProspectModalComponent } from './components/common/disable-prosp
     StatisticsComponent,
     AddBookmarkModalComponent,
     AddMailModalComponent,
-    DisableProspectModalComponent
+    DisableProspectModalComponent,
+    FrenchDatePipePipe
   ],
   imports: [
     BrowserModule,
@@ -101,6 +104,7 @@ import { DisableProspectModalComponent } from './components/common/disable-prosp
   ],
   bootstrap: [AppComponent],
   providers: [
+    DatePipe,
 
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -1,7 +1,7 @@
 <div class="card bg-base-100 w-96 shadow-xl">
   <div class="card-body">
     <h2 class="card-title">{{goal.title}}</h2>
-    <span class="badge badge-secondary">{{goal.deadline | date:"dd/mm/yyyy"}}</span>
+    <span class="badge badge-secondary">{{goal.deadline | frenchDatePipe}}</span>
     <progress class="progress progress-primary w-56" value={{goal.currentStep}} max={{goal.totalSteps}}></progress>
     <span>
       {{goal.currentStep}} / {{goal.totalSteps}}

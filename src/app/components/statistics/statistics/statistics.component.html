@@ -91,7 +91,7 @@
         </div>
         <div class="stat-title font-bold">Appels</div>
         <div class="stat-value">{{statisticsService.statistic.weeklyCalls}}</div>
-        <div class="stat-desc">{{startOfWeek | date:"EEE dd MMM YYYY"}} - {{endOfWeek | date:"EEE dd MMM YYYY"}}</div>
+        <div class="stat-desc">{{startOfWeek | date:"EEE dd MMM YYYY" | frenchDatePipe}} - {{endOfWeek | date:"EEE dd MMM YYYY"}}</div>
       </div>
 
       <!-- Nombre de rappels sur la semaine-->
