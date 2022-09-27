@@ -1,6 +1,6 @@
 <div [attr.data-theme]="dataThemeService.dataTheme">
   <app-header *ngIf="router.url != '/login'" class="fixed top-0 w-full z-50"></app-header>
-  <div class="container mx-auto h-screen max-h-screen flex flex-col">
+  <div class="container mx-auto min-h-screen flex flex-col">
     <app-header *ngIf="router.url != '/login'" class="invisible"></app-header>
     <div class="">
       <router-outlet></router-outlet>
