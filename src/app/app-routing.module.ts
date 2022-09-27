@@ -16,7 +16,7 @@ import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, children: [], canActivate: [LoginGuard] },
-  { path:"dashboard", component: DashboardComponent, canActivate: [LoggedGuard] },
+  // { path:"dashboard", component: DashboardComponent, canActivate: [LoggedGuard] },
   { path:"users", component: UsersComponent, canActivate: [LoggedGuard, AdminGuard] },
   { path:"reminders", component: RemindersComponent, canActivate: [LoggedGuard] },
   { path:"meetings", component: MeetingsComponent, canActivate: [LoggedGuard] },
@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: "bookmarks", component: BookmarksComponent, canActivate: [LoggedGuard] },
   { path: "mails", component: MailsComponent, canActivate: [LoggedGuard] },
   { path: "statistics", component: StatisticsComponent, canActivate: [LoggedGuard] },
-  { path:"", pathMatch: "full", redirectTo: "dashboard" },
-  { path: "**", pathMatch: "full", redirectTo: "dashboard"},
+  { path:"", pathMatch: "full", redirectTo: "statistics" },
+  { path: "**", pathMatch: "full", redirectTo: "statistics"},
 ];
 
 @NgModule({

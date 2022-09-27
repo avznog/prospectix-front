@@ -1,5 +1,4 @@
-<!-- <app-header></app-header> -->
-<div class="container mx-auto">
+
   <div class="drawer drawer-end">
     <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
@@ -7,13 +6,14 @@
       <div *ngFor="let reminder of remindersService.reminders | keyvalue | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
         <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect" *ngIf="reminder.value.prospect.stage == 2"></app-prospect-tile>
       </div>
-      <app-no-result *ngIf="remindersService.reminders && remindersService.reminders.size <= 0"></app-no-result>    
-      <div class="divider" ></div>
+      <app-no-result *ngIf="remindersService.reminders && remindersService.reminders.size <= 0"></app-no-result> 
+      <div class="fixed z-50 bottom-0 bg-base-100 w-full border-t border-neutral-100">
       <div class="btn-group flex justify-center">
         <button class="btn btn-outline btn-ghost {{remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
         <button class="btn btn-outline btn-ghost">Page {{remindersService.researchParamsReminder.skip / 20 + 1}}</button>
         <button class="btn btn-outline btn-ghost {{remindersService.reminders && remindersService.reminders.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
       </div>
+    </div>
     </div>
     <div class="drawer-side">
       <label for="drawer-prospect-history" class="drawer-overlay"></label>
@@ -22,4 +22,3 @@
       </div>
     </div>
   </div>
-</div>
