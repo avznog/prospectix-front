@@ -4,9 +4,19 @@
     <app-header *ngIf="router.url != '/login'" class="invisible"></app-header>
     <div class="">
       <router-outlet></router-outlet>
+      
     </div>
+    <div class="invisible" *ngIf="router.url != '/login'">
+      <div class="btn-group">
+        <button class="btn btn-outline btn-ghost" >«</button>
+        <button class="btn btn-outline btn-ghost"></button>
+        <button class="btn btn-outline btn-ghost">»</button>
+      </div> 
+    </div>
+
   </div>
-  <div class="invisible"></div>
+  
+
 </div>
 <div class="toast toast-end text-sm"
   *ngIf="changelogsService.changelogs[0].version != changelogsService.localVersion && authService.currentUserSubject.getValue()">
