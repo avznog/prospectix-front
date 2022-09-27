@@ -1,6 +1,6 @@
-<div class="drawer drawer-end">
+<div class="drawer drawer-end bg-base-100" >
   <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content">
+  <div class="drawer-content ">
     <app-research-bloc></app-research-bloc>
     <div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
       <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>

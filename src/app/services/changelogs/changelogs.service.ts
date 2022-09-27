@@ -12,8 +12,18 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.6.2",
+        date: new Date("2022-09-27T00:00:00.000Z"),
+        bugs: [
+          "Résolution de bugs de design / themes"
+           ],
+        features: [
+          
+        ]
+      },
+      {
         version: "0.6.1",
-        date: new Date("2022-09-26T00:00:00.000Z"),
+        date: new Date("2022-09-27T00:00:00.000Z"),
         bugs: [
           "Résolution du bug d'affichage de chaque page (trop collées à gauche)",
           "Résolution du bug de page scrollable (le header et les boutons de page restent maintenant fixes)",
@@ -27,7 +37,7 @@ export class ChangelogsService {
         version: "0.6",
         date: new Date("2022-09-26T00:00:00.000Z"),
         bugs: [
-          "Résolution du bug de la non actualisation de la disparition d'un prospect si on clique sur disabled",
+          "Résolution du bug de la non actualisation de la disparition d'un prospect si on clique sur le bouton non pertiennt",
           "Résolution d'un bug de chargement des utilisateurs",
           "Suppression du bouton \"Version\" pour les chefs de projet",
           "Résolution du bug d'affichage de la liste de sélection du type de rendez-vous",
