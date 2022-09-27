@@ -49,8 +49,9 @@ import { StatisticsComponent } from './components/statistics/statistics/statisti
 import { AddBookmarkModalComponent } from './components/common/add-bookmark-modal/add-bookmark-modal.component';
 import { AddMailModalComponent } from './components/common/add-mail-modal/add-mail-modal.component';
 import { DisableProspectModalComponent } from './components/common/disable-prospect-modal/disable-prospect-modal.component';
-import { FrenchDatePipePipe } from './pipes/french-date-pipe.pipe';
 import { DatePipe } from '@angular/common';
+import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
+import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { DatePipe } from '@angular/common';
     AddBookmarkModalComponent,
     AddMailModalComponent,
     DisableProspectModalComponent,
-    FrenchDatePipePipe
+    FrenchDatePipePipe,
+    ShortFrenchDatePipe
   ],
   imports: [
     BrowserModule,

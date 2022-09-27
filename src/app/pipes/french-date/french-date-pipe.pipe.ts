@@ -11,7 +11,6 @@ export class FrenchDatePipePipe implements PipeTransform {
   ) { }
   transform(value: Date | null | string, ...args: unknown[]): unknown {
     let date = this.datePipe.transform(value, "EEEE dd MMMM YYYY");
-    console.log(this.datePipe.transform(value, "EEEE dd MMMM YYYY"))
 
     if (date?.includes("Monday"))
       date = date.replace("Monday", "Lundi")
@@ -33,27 +32,6 @@ export class FrenchDatePipePipe implements PipeTransform {
 
     else if (date?.includes("Sunday"))
       date = date.replace("Sunday", "Dimanche")
-
-    if (date?.includes("Mon"))
-      date = date.replace("Mon", "Lun")
-
-    else if (date?.includes("Tue"))
-      date = date.replace("Tue", "Mar")
-
-    else if (date?.includes("Wed"))
-      date = date.replace("Wed", "Mer")
-
-    else if (date?.includes("Thu"))
-      date = date.replace("Thu", "Jeu")
-      
-    else if (date?.includes("Fri"))
-      date = date.replace("Fri", "Ven")
-
-    else if (date?.includes("Sat"))
-      date = date.replace("Sat", "Sam")
-
-    else if (date?.includes("Sun"))
-      date = date.replace("Sun", "Dim")
 
     if (date?.includes("January"))
       date = date.replace("January", "Janvier")

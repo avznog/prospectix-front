@@ -1,4 +1,5 @@
-import { FrenchDatePipePipe } from './french-date-pipe.pipe';
+import { FrenchDatePipePipe } from "../french-date/french-date-pipe.pipe";
+
 
 describe('FrenchDatePipePipe', () => {
   it('create an instance', () => {

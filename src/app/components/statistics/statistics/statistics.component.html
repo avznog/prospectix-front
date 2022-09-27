@@ -91,7 +91,7 @@
         </div>
         <div class="stat-title font-bold">Appels</div>
         <div class="stat-value">{{statisticsService.statistic.weeklyCalls}}</div>
-        <div class="stat-desc">{{startOfWeek | date:"EEE dd MMM YYYY" | frenchDatePipe}} - {{endOfWeek | date:"EEE dd MMM YYYY"}}</div>
+        <div class="stat-desc">{{startOfWeek | shortFrenchDate}} - {{endOfWeek | shortFrenchDate}}</div>
       </div>
 
       <!-- Nombre de rappels sur la semaine-->
@@ -105,7 +105,7 @@
         </div>
         <div class="stat-title font-bold">Rappels</div>
         <div class="stat-value">{{statisticsService.statistic.weeklyReminders}}</div>
-        <div class="stat-desc">{{startOfWeek | date:"EEE dd MMM YYYY"}} - {{endOfWeek | date:"EEE dd MMM YYYY"}}</div>
+        <div class="stat-desc">{{startOfWeek | shortFrenchDate}} - {{endOfWeek | shortFrenchDate}}</div>
       </div>
 
       <!-- nombre de rendez-vous sur la semaine-->
@@ -120,7 +120,7 @@
         </div>
         <div class="stat-title font-bold">Rendez-vous</div>
         <div class="stat-value">{{statisticsService.statistic.weeklyMeetings}}</div>
-        <div class="stat-desc">{{startOfWeek | date:"EEE dd MMM YYYY"}} - {{endOfWeek | date:"EEE dd MMM YYYY"}}</div>
+        <div class="stat-desc">{{startOfWeek | shortFrenchDate}} - {{endOfWeek | shortFrenchDate}}</div>
       </div>
 
       <!-- Nombre de mails  sur la semaine-->
@@ -134,7 +134,7 @@
         </div>
         <div class="stat-title font-bold">Mails</div>
         <div class="stat-value">{{statisticsService.statistic.weeklySentEmails}}</div>
-        <div class="stat-desc">{{startOfWeek | date:"EEE dd MMM YYYY"}} - {{endOfWeek | date:"EEE dd MMM YYYY"}}</div>
+        <div class="stat-desc">{{startOfWeek | shortFrenchDate}} - {{endOfWeek | shortFrenchDate}}</div>
       </div>
 
       <!-- Nombre de refus sur la semaine-->
@@ -148,7 +148,7 @@
         </div>
         <div class="stat-title font-bold">Refus</div>
         <div class="stat-value">{{statisticsService.statistic.weeklyNegativeAnswers}}</div>
-        <div class="stat-desc">{{startOfWeek | date:"EEE dd MMM YYYY"}} - {{endOfWeek | date:"EEE dd MMM YYYY"}}</div>
+        <div class="stat-desc">{{startOfWeek | shortFrenchDate}} - {{endOfWeek | shortFrenchDate}}</div>
       </div>
     </div>
   </div>
@@ -163,8 +163,8 @@
         <div tabindex="0-{{statHistory.value.id}}"
           class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
           <input type="checkbox" />
-          <div class="collapse-title text-xl font-medium">{{statHistory.value.startDate | date:"EEE dd MMM YYYY"}} au
-            {{statHistory.value.endDate | date:"EEE dd MMM YYYY"}}</div>
+          <div class="collapse-title text-xl font-medium">{{statHistory.value.startDate | shortFrenchDate}} au
+            {{statHistory.value.endDate | shortFrenchDate}}</div>
           <div class="stats shadow w-full collapse-content">
             <!-- nombre d'appels sur la semaine -->
             <div class="stat">
