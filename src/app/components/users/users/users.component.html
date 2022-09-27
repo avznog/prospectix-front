@@ -1,4 +1,6 @@
-
+<!-- <app-header></app-header> -->
+<div class="container mx-auto">
+  <h1 class="ml-6 text-xl">Utilisateurs</h1>
   <input type="checkbox" id="add-user-modal" class="modal-toggle" />
   <div class="modal">
     <app-create-user></app-create-user>
@@ -15,7 +17,7 @@
     </div>
   </div>
 
-  <div class="fixed bottom-0 z-5 border-neutral-100 border-t w-full bg-base-100">
+  <div class="divider"></div>
 
   <div class="btn-group justify-center">
     <button class="btn btn-ghost btn-outline {{usersService.researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}"
@@ -25,4 +27,5 @@
       class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}"
       (click)="pageUp()">»</button>
   </div>
-  </div>
+
+</div>

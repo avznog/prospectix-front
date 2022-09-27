@@ -16,14 +16,12 @@ import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, children: [], canActivate: [LoginGuard] },
-  // { path:"dashboard", component: DashboardComponent, canActivate: [LoggedGuard] },
-  // TODO: activate when dashboard is created
+  { path:"dashboard", component: DashboardComponent, canActivate: [LoggedGuard] },
   { path:"users", component: UsersComponent, canActivate: [LoggedGuard, AdminGuard] },
   { path:"reminders", component: RemindersComponent, canActivate: [LoggedGuard] },
   { path:"meetings", component: MeetingsComponent, canActivate: [LoggedGuard] },
   { path:"prospects", component: ResearchComponent, canActivate: [LoggedGuard] },
   // { path:"goals", component: GoalsComponent, canActivate: [LoggedGuard, AdminGuard] },
-  // TODO: activate when goals are created
   { path: "bookmarks", component: BookmarksComponent, canActivate: [LoggedGuard] },
   { path: "mails", component: MailsComponent, canActivate: [LoggedGuard] },
   { path: "statistics", component: StatisticsComponent, canActivate: [LoggedGuard] },

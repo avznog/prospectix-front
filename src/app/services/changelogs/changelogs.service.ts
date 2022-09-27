@@ -12,18 +12,6 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
-        version: "0.6.1",
-        date: new Date("2022-09-26T00:00:00.000Z"),
-        bugs: [
-          "Résolution du bug d'affichage de chaque page (trop collées à gauche)",
-          "Résolution du bug de page scrollable (le header et les boutons de page restent maintenant fixes)",
-          
-           ],
-        features: [
-          "Ajout de la mise en surbrillance de la page active dans le header"
-        ]
-      },
-      {
         version: "0.6",
         date: new Date("2022-09-26T00:00:00.000Z"),
         bugs: [

@@ -1,18 +1,17 @@
 <div class="drawer drawer-end">
 <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
-<div class="drawer-content">
+<div class="drawer-content overflowcl">
 <app-bookmarks-research-bloc></app-bookmarks-research-bloc>
 <div *ngFor="let bookmark of bookmarksService.bookmarks | keyvalue | slice:bookmarksService.researchParamsBookmarks.skip:bookmarksService.researchParamsBookmarks.skip + 20">
   <app-prospect-tile [prospect]="bookmark.value.prospect" [bookmark]="bookmark.value" *ngIf="bookmark.value.prospect.stage == 1"></app-prospect-tile>
 </div>
 <app-no-result *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0"></app-no-result>
-<div class="fixed bottom-0 z-5 border-neutral-100 border-t w-full bg-base-100">
-  <div class="btn-group justify-center">
+<div class="divider" ></div>
+  <div class="btn-group flex justify-center">
     <button class="btn btn-outline btn-ghost {{bookmarksService.researchParamsBookmarks.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
     <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 20 + 1}}</button>
     <button class="btn btn-outline btn-ghost {{bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
-</div>
 </div>
 <div class="drawer-side">
   <label for="drawer-prospect-history" class="drawer-overlay"></label>
