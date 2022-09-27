@@ -8,12 +8,13 @@
         <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect" *ngIf="reminder.value.prospect.stage == 2"></app-prospect-tile>
       </div>
       <app-no-result *ngIf="remindersService.reminders && remindersService.reminders.size <= 0"></app-no-result>    
-      <div class="divider" ></div>
-      <div class="btn-group flex justify-center">
+      <div class="fixed bottom-0 z-5 border-neutral-100 border-t w-full bg-base-100">
+      <div class="btn-group justify-center">
         <button class="btn btn-outline btn-ghost {{remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
         <button class="btn btn-outline btn-ghost">Page {{remindersService.researchParamsReminder.skip / 20 + 1}}</button>
         <button class="btn btn-outline btn-ghost {{remindersService.reminders && remindersService.reminders.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
       </div>
+    </div>
     </div>
     <div class="drawer-side">
       <label for="drawer-prospect-history" class="drawer-overlay"></label>

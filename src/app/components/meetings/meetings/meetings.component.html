@@ -1,5 +1,4 @@
-<!-- <app-header></app-header> -->
-<div class="mx-auto container">
+
   <div class="drawer drawer-end">
     <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
@@ -8,7 +7,7 @@
         <app-prospect-tile *ngIf="meeting.value.prospect.stage == 3" [prospect]="meeting.value.prospect" [meeting]="meeting.value"></app-prospect-tile>
       </div>
       <app-no-result *ngIf="meetingsService.meetings && meetingsService.meetings.size <= 0"></app-no-result>
-      <div class="divider"></div>
+      <div class="fixed bottom-0 z-5 border-neutral-100 border-t w-full bg-base-100">
       <div class="btn-group flex justify-center">
         <button
           class="btn btn-outline btn-ghost {{meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}"
@@ -19,6 +18,7 @@
           (click)="pageUp()">»</button>
       </div>
     </div>
+    </div>
     <div class="drawer-side">
       <label for="drawer-prospect-history" class="drawer-overlay"></label>
       <div class="menu p-4 overflow-y-auto w-100 bg-base-100 text-base-content">
@@ -26,4 +26,3 @@
       </div>
     </div>
   </div>
-</div>
