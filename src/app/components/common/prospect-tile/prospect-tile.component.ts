@@ -98,32 +98,6 @@ export class ProspectTileComponent implements OnInit {
     });
   }
 
-  onClickRefus() {
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-      totalCalls: this.statisticsService.statistic.totalCalls + 1,
-      totalNegativeAnswers: this.statisticsService.statistic.totalNegativeAnswers + 1,
-      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-      weeklyNegativeAnswers: this.statisticsService.statistic.weeklyNegativeAnswers + 1
-    });
-
-    (this.prospect.stage == 2) && this.statisticsService.update({
-      totalNegativeAnswers: this.statisticsService.statistic.totalNegativeAnswers + 1,
-      weeklyNegativeAnswers: this.statisticsService.statistic.weeklyNegativeAnswers + 1
-    });
-    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
-    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
-    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
-    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
-    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
-    this.eventsService.create({
-      type: EventType.NEGATIVE_ANSWER,
-      prospect: this.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
-    });
-    // this.prospectService.disable(this.prospect.id);
-  }
-
   onMarkMeetingDone() {
     console.log("meeting marked done");
     this.eventsService.create({

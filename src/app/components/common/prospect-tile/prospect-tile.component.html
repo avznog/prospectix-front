@@ -176,7 +176,11 @@
 
 
         <!-- Bouton Refus -->
-        <label class="btn btn-ghost btn-primary btn-outline btn-sm" (click)="onClickRefus()"
+        <!-- <label class="btn btn-ghost btn-primary btn-outline btn-sm" (click)="onClickRefus()"
+          *ngIf="prospect.stage != 4 && prospect.stage != 3">
+          Refus
+        </label> -->
+        <label for="confirm-refus-{{prospect.id}}" class="btn btn-sm btn-primary btn-ghost btn-outline"
           *ngIf="prospect.stage != 4 && prospect.stage != 3">
           Refus
         </label>
@@ -243,25 +247,33 @@
 
 <!-- modal to add meeting -->
 <input type="checkbox" id="modal-add-meeting-{{prospect.id}}" class="modal-toggle" />
-<div class="modal">
-  <div class="modal-box">
+<label class="modal cursor-pointer" for="modal-add-meeting-{{prospect.id}}">
+  <label class="modal-box" for="">
     <app-add-meetings-modal [prospect]="prospect"></app-add-meetings-modal>
-  </div>
-</div>
+  </label>
+</label>
 
 <!-- Modal to add reminder -->
 
 <input type="checkbox" id="modal-add-reminder-{{prospect.id}}" class="modal-toggle" />
-<div class="modal">
-  <div class="modal-box">
+<label class="modal cursor-pointer" for="modal-add-reminder-{{prospect.id}}">
+  <label class="modal-box" for="">
     <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
-  </div>
-</div>
+  </label>
+</label>
 
 <!-- modal button prospect pas pertinent (trash) -->
 <input type="checkbox" id="disable-prospect-modal-{{prospect.id}}" class="modal-toggle" />
 <label for="disable-prospect-modal-{{prospect.id}}" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-md text-sm" for="">
     <app-disable-prospect-modal [prospect]="prospect"></app-disable-prospect-modal>
+  </label>
+</label>
+
+<!-- modal button refus -->
+<input type="checkbox" id="confirm-refus-{{prospect.id}}" class="modal-toggle">
+<label for="confirm-refus-{{prospect.id}}" class="modal cursor-pointer">
+  <label class="modal-box relative max-w-screen-md text-sm" for="">
+    <app-confirm-refus [prospect]="prospect"></app-confirm-refus>
   </label>
 </label>

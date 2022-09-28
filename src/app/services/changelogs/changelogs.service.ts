@@ -12,6 +12,15 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.7.1",
+        date: new Date("2022-09-28T00:00:00.000Z"),
+        bugs: [
+           ],
+        features: [
+          "Ajout d'un pop up de confirmation suite au clic du bouton refus"
+        ]
+      },
+      {
         version: "0.7",
         date: new Date("2022-09-28T00:00:00.000Z"),
         bugs: [

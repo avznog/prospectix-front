@@ -52,6 +52,7 @@ import { DisableProspectModalComponent } from './components/common/disable-prosp
 import { DatePipe } from '@angular/common';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
+import { ConfirmRefusComponent } from './components/common/confirm-refus/confirm-refus.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
     AddMailModalComponent,
     DisableProspectModalComponent,
     FrenchDatePipePipe,
-    ShortFrenchDatePipe
+    ShortFrenchDatePipe,
+    ConfirmRefusComponent
   ],
   imports: [
     BrowserModule,

@@ -93,7 +93,7 @@ export class ProspectsService {
 
   updateByStage(idProspect: number, stage: { stage: StageType }) : Subscription {
     if(stage.stage == StageType.ARCHIVED){
-      return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date(), disabled: true}).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
+      return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date() }).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
     }
     else if (stage.stage == StageType.BOOKMARK){
       return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: true }));  
