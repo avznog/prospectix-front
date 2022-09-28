@@ -109,16 +109,16 @@ export class ProspectTileComponent implements OnInit {
     return this.meetingsService.markDone(this.meeting.id);
   }
 
-  onMarkReminderDone() {
-    console.log("reminder marked done");
-    this.eventsService.create({
-      type: EventType.DONE_REMINDER,
-      prospect: this.reminder.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.DONE_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
-    });
-    return this.remindersService.markDone(this.reminder.id);
-  }
+  // onMarkReminderDone() {
+  //   console.log("reminder marked done");
+  //   this.eventsService.create({
+  //     type: EventType.DONE_REMINDER,
+  //     prospect: this.reminder.prospect,
+  //     date: new Date,
+  //     description: `${EventDescriptionType.DONE_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
+  //   });
+  //   return this.remindersService.markDone(this.reminder.id);
+  // }
 
   onClickDrawer() {
     this.eventsService.updateEvents(this.prospect.id);

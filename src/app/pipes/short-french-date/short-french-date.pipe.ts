@@ -68,7 +68,6 @@ export class ShortFrenchDatePipe implements PipeTransform {
     else if (date?.includes("December"))
       date = date.replace("December", "Déc")
     return date;
-    return null;
   }
 
 }

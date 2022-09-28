@@ -71,7 +71,6 @@ export class FrenchDatePipePipe implements PipeTransform {
 
 
     return date;
-    return null
   }
 
 }

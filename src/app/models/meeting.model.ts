@@ -9,4 +9,5 @@ export interface Meeting {
   done: boolean;
   pm: ProjectManager;
   prospect: Prospect;
+  creationDate: Date;
 }

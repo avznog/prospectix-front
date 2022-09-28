@@ -57,7 +57,8 @@ export class AddReminderModalComponent implements OnInit {
       priority: this.priority,
       done: false,
       description: this.description,
-      prospect: this.prospect
+      prospect: this.prospect,
+      creationDate: new Date
     });
 
     this.eventsService.create({

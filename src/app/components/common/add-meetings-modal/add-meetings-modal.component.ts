@@ -5,6 +5,7 @@ import { EventType } from 'src/app/constants/event.type';
 import { MeetingType } from 'src/app/constants/meeting.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { Prospect } from 'src/app/models/prospect.model';
+import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
@@ -25,6 +26,7 @@ export class AddMeetingsModalComponent implements OnInit {
   
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
   @Input() prospect!: Prospect;
+  @Input() reminder!: Reminder;
   
 
   constructor(
@@ -42,6 +44,7 @@ export class AddMeetingsModalComponent implements OnInit {
   }
 
   onCreateMeeting() {
+    this.reminder && this.onMarkReminderDone();
     (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
       totalCalls: this.statisticsService.statistic.totalCalls + 1,
       totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
@@ -65,6 +68,7 @@ export class AddMeetingsModalComponent implements OnInit {
       date: this.date,
       done: false,
       prospect: this.prospect,
+      creationDate: new Date
     });
 
     this.eventsService.create({
@@ -76,5 +80,16 @@ export class AddMeetingsModalComponent implements OnInit {
 
     
     console.log("meeting created !");
+  }
+
+  onMarkReminderDone() {
+    console.log("reminder marked done");
+    this.eventsService.create({
+      type: EventType.DONE_REMINDER,
+      prospect: this.reminder.prospect,
+      date: new Date,
+      description: `${EventDescriptionType.DONE_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
+    });
+    return this.remindersService.markDone(this.reminder.id);
   }
 }

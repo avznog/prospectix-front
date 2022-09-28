@@ -8,4 +8,5 @@ export interface CreateReminderDto {
   done: boolean;
   prospect: Prospect;
   pm?: ProjectManager;
+  creationDate: Date;
 }

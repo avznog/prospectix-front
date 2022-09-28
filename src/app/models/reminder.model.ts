@@ -9,4 +9,5 @@ export interface Reminder {
   pm: ProjectManager;
   prospect: Prospect;
   done: boolean;
+  creationDate: Date;
 }
