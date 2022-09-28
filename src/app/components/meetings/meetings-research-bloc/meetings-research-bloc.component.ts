@@ -11,12 +11,8 @@ export class MeetingsResearchBlocComponent implements OnInit {
 
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
 
-  keyword: string = "";
-  oldOrNew: string = "new";
-  done: boolean = false;
+  done: boolean | string = "";
   type: string = "Tous les types";
-  dateDown: Date = new Date;
-  dateUp: Date = new Date;
 
   constructor(
     public meetingsService: MeetingsService
@@ -24,6 +20,7 @@ export class MeetingsResearchBlocComponent implements OnInit {
 
   ngOnInit(): void {
     this.type = "allTypes";
+    this.done = this.meetingsService.researchParamsMeeting.done == "true" ? true : false
   }
 
   onEditDone() {
@@ -38,12 +35,6 @@ export class MeetingsResearchBlocComponent implements OnInit {
       ...this.meetingsService.researchParamsMeeting,
       type: this.type != "allTypes" ? this.type : ""
     });
-  }
-
-  onEditDateDown() {
-  }
-
-  onEditDateUp() {
   }
 
 }

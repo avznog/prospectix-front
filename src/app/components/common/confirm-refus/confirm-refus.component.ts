@@ -11,6 +11,7 @@ import { EventType } from 'src/app/constants/event.type';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Reminder } from 'src/app/models/reminder.model';
 @Component({
   selector: 'app-confirm-refus',
   templateUrl: './confirm-refus.component.html',
@@ -19,6 +20,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class ConfirmRefusComponent implements OnInit {
 
   @Input() prospect!: Prospect;
+  @Input() reminder!: Reminder;
+
   constructor(
     private readonly statisticsService: StatisticsService,
     private readonly prospectService: ProspectsService,
@@ -35,6 +38,7 @@ export class ConfirmRefusComponent implements OnInit {
 
   
   onClickRefus() {
+    this.prospect.stage == 2 && this.onMarkReminderDone();
     (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
       totalCalls: this.statisticsService.statistic.totalCalls + 1,
       totalNegativeAnswers: this.statisticsService.statistic.totalNegativeAnswers + 1,
@@ -58,6 +62,17 @@ export class ConfirmRefusComponent implements OnInit {
       description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     // this.prospectService.disable(this.prospect.id);
+  }
+
+  onMarkReminderDone() {
+    console.log("reminder marked done");
+    this.eventsService.create({
+      type: EventType.DONE_REMINDER,
+      prospect: this.reminder.prospect,
+      date: new Date,
+      description: `${EventDescriptionType.DONE_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
+    });
+    return this.remindersService.markDone(this.reminder.id);
   }
 
 }

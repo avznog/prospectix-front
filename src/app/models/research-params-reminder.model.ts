@@ -3,7 +3,7 @@ export interface ResearchParamsReminder {
     skip: number;
     priority: number;
     orderByPriority?: string;
-    done: string;
+    done: string | boolean;
     date?: string;
     oldOrNew: string;
     keyword: string;

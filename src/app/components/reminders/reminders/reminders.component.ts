@@ -12,7 +12,6 @@ export class RemindersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(typeof(this.remindersService.researchParamsReminder.done))
   }
 
   pageUp() {

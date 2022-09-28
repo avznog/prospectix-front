@@ -44,7 +44,7 @@ export class AddMeetingsModalComponent implements OnInit {
   }
 
   onCreateMeeting() {
-    this.reminder && this.onMarkReminderDone();
+    this.prospect.stage == 2 && this.onMarkReminderDone();
     (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
       totalCalls: this.statisticsService.statistic.totalCalls + 1,
       totalMeetings: this.statisticsService.statistic.totalMeetings + 1,

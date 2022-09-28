@@ -9,70 +9,28 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 })
 export class RemindersResearchBlocComponent implements OnInit {
 
-  keyword: string = "";
-  oldOrNew: string = "new";
-  done: string = "";
-  orderByPriority: string = "";
+  done: string | boolean = "";
   priority: number = 0;
-  date: Date = new Date;
-  dateDown: Date = new Date;
-  dateUp: Date = new Date;
 
   constructor(
     private remindersService: RemindersService
   ) { }
 
   ngOnInit(): void {
-  }
-
-  onEditOrderByPriority() : void {
-    
-    this.remindersService.resetSearch({
-      ...this.remindersService.researchParamsReminder,
-      orderByPriority: this.orderByPriority ? 'true' : 'false'
-    });
+    this.done = this.remindersService.researchParamsReminder.done == "true" || this.remindersService.researchParamsReminder.done == true ? true: false
   }
 
   onEditPriority() : void {
-    console.log(this.priority)
     this.remindersService.resetSearch({
       ...this.remindersService.researchParamsReminder,
       priority: this.priority
     });
   }
 
-  onEditDate() : void {
-    this.remindersService.resetSearch({
-      ...this.remindersService.researchParamsReminder,
-      date: this.date ? `${this.date}T22:00:00:000Z` : ""
-    })
-  }
-
-  onEditDateDown() : void {
-  }
-
-  onEditDateUp() : void {
-  }
-
   onEditDone() : void {
-    console.log(typeof(this.remindersService.researchParamsReminder.done))
     this.remindersService.resetSearch({
       ...this.remindersService.researchParamsReminder,
       done: this.done
     })
-  }
-
-  onEditOldOrNew() : void {
-    this.remindersService.resetSearch({
-      ...this.remindersService.researchParamsReminder,
-      oldOrNew: this.oldOrNew
-    });
-  }
-
-  onEditKeyword() : void {
-    this.remindersService.resetSearch({
-      ...this.remindersService.researchParamsReminder,
-      keyword: this.keyword
-    });
   }
 }

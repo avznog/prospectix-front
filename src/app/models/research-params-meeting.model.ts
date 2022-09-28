@@ -1,6 +1,6 @@
 export interface ResearchParamsMeeting {
     take?: number;
     skip: number;
-    done: string;
+    done: string | boolean;
     type?: string
 }

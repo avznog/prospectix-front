@@ -13,6 +13,7 @@ import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.mo
 export class MeetingsService {
 
   meetings = new Map<number, Meeting>();
+  meetingsDone = new Map<number, Meeting>();
   researchParamsMeeting: ResearchParamsMeeting = {
     take: 20,
     skip: 0,
@@ -22,11 +23,12 @@ export class MeetingsService {
     private http: HttpClient
   ) { 
     this.loadMore();
+    this.loadMeetingsDone();
   }
 
 
   resetSearch(researchParamsMeeting: ResearchParamsMeeting) {
-    this.meetings.clear();
+    this.researchParamsMeeting.done == true || this.researchParamsMeeting.done == 'true' ? this.meetingsDone.clear() : this.meetings.clear();
     this.updateSearchParameters({
       ...researchParamsMeeting,
       take: 20,
@@ -36,9 +38,8 @@ export class MeetingsService {
 
   updateSearchParameters(researchParamsMeeting: ResearchParamsMeeting) {
     if(researchParamsMeeting != this.researchParamsMeeting)
-      console.log("not same search")
       this.researchParamsMeeting = researchParamsMeeting;
-      this.loadMore();
+      this.researchParamsMeeting.done == true || this.researchParamsMeeting.done == 'true' ? this.loadMeetingsDone() : this.loadMore();
   }
 
   loadMore() {
@@ -55,12 +56,25 @@ export class MeetingsService {
   
   }
 
+  loadMeetingsDone() {
+    let queryParameters = new HttpParams();
+    queryParameters = queryParameters.append("skip",this.researchParamsMeeting.skip)
+    queryParameters = queryParameters.append("take",20)
+    if(this.researchParamsMeeting.type)
+      queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
+    
+    return this.http.get<Meeting[]>(`meetings/find-all-meetings-done`, { params: queryParameters}).subscribe(meetings => meetings.forEach(meeting => this.meetingsDone.set(meeting.id, meeting)));
+  }
+
   deleteMeeting(idMeeting: number) : Subscription {
     return this.http.delete<Meeting>(`meetings/delete/${idMeeting}`).subscribe(() => this.meetings.delete(idMeeting));
   }
 
   markDone(idMeeting : number) : Subscription {
-    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe(() => this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true }));
+    return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe(() => {
+      this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true })
+      this.meetingsDone.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true});
+    });
   }
 
   markUndone(idMeeting: number) : Subscription {

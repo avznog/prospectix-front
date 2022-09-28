@@ -33,7 +33,7 @@ export class RemindersService {
 
 
   resetSearch(researchParamsReminder: ResearchParamsReminder) {
-    this.reminders.clear();
+    this.researchParamsReminder.done == true || this.researchParamsReminder.done == 'true' ? this.remindersDone.clear() : this.reminders.clear();
     this.updateSearchParameters({
       ...researchParamsReminder,
       skip: 0
@@ -43,7 +43,7 @@ export class RemindersService {
   updateSearchParameters(researchParamsReminder: ResearchParamsReminder) {
     if(researchParamsReminder != this.researchParamsReminder)
       this.researchParamsReminder = researchParamsReminder;
-      this.loadMore();
+      this.researchParamsReminder.done == true || this.researchParamsReminder.done == 'true' ? this.loadRemindersDone() : this.loadMore();
   }
 
   loadMore() {
@@ -67,7 +67,7 @@ export class RemindersService {
 
   loadRemindersDone() {
     let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("priority",0)
+    queryParameters = queryParameters.append("priority",this.researchParamsReminder.priority)
     queryParameters = queryParameters.append("take",20)
     queryParameters = queryParameters.append("skip",0)
     return this.http.get<Reminder[]>(`reminders/find-all-reminders-done`, {params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.remindersDone.set(reminder.id, reminder)));
@@ -78,7 +78,10 @@ export class RemindersService {
   }
 
   markDone(idReminder: number) : Subscription {
-    return this.http.get<Reminder>(`reminders/mark-done/${idReminder}`).subscribe(() => this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, done: true }));
+    return this.http.get<Reminder>(`reminders/mark-done/${idReminder}`).subscribe(() => {
+      this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, done: true })
+      this.remindersDone.set(idReminder, { ...this.reminders.get(idReminder)!, done: true });
+    });
   }
 
   create(createReminderDto: CreateReminderDto) : Subscription {

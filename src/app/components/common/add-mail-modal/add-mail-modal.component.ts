@@ -3,7 +3,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
+import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
+import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
@@ -20,6 +22,9 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
 export class AddMailModalComponent implements OnInit {
 
   @Input() prospect!: Prospect;
+  @Input() reminder!: Reminder;
+  @Input() meeting!: Meeting;
+
   constructor(
     private readonly prospectService: ProspectsService,
     private readonly statisticsService: StatisticsService,
@@ -36,6 +41,8 @@ export class AddMailModalComponent implements OnInit {
   }
 
   onClickSentEmail() {
+    this.prospect.stage == 2 && this.onMarkReminderDone();
+    this.prospect.stage == 3 && this.onMarkMeetingDone();
     (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
       totalCalls: this.statisticsService.statistic.totalCalls + 1,
       totalSentEmails: this.statisticsService.statistic.totalSentEmails + 1,
@@ -70,6 +77,28 @@ export class AddMailModalComponent implements OnInit {
       prospect: this.prospect
     });
     console.log("email compatibilisé")
+  }
+
+  onMarkReminderDone() {
+    console.log("reminder marked done");
+    this.eventsService.create({
+      type: EventType.DONE_REMINDER,
+      prospect: this.reminder.prospect,
+      date: new Date,
+      description: `${EventDescriptionType.DONE_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
+    });
+    return this.remindersService.markDone(this.reminder.id);
+  }
+
+  onMarkMeetingDone() {
+    console.log("meeting marked done");
+    this.eventsService.create({
+      type: EventType.DONE_MEETING,
+      prospect: this.meeting.prospect,
+      date: new Date,
+      description: `${EventDescriptionType.DONE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
+    });
+    return this.meetingsService.markDone(this.meeting.id);
   }
 
 }

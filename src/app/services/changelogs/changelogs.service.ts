@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.7.2",
+        date: new Date("2022-09-28T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug ou un rappel / rendez-vous se supprimait si l'on effectuait dessus une action de qualification: les rappels / rendez-vous effectués s'affichent maintenant tous"
+           ],
+        features: [
+          "Suppression des boutons RDV / rappel effectué: le compte s'effectue automatiquement avec l'action suivante", 
+        ]
+      },
+      {
         version: "0.7.1",
         date: new Date("2022-09-28T00:00:00.000Z"),
         bugs: [
