@@ -11,7 +11,6 @@ export class ShortFrenchDatePipe implements PipeTransform {
   ) {}
   transform(value: Date | null | string, ...args: unknown[]): unknown {
     let date = this.datePipe.transform(value, "EEE dd MMMM YYYY", "fr-FR")
-    console.log(date)
     if (date?.includes("Mon"))
       date = date.replace("Mon", "Lun")
 

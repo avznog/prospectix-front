@@ -156,7 +156,7 @@
     </div>
 
 
-    <div class="divider"></div>
+    <!-- <div class="divider p"></div> -->
 
 
 
@@ -165,14 +165,14 @@
 
       <!-- Bouton Pas de réponse -->
       <button *ngIf="prospect.stage == 0 || prospect.stage == 1" (click)="onChangeNbNo()"
-        class="btn btn-ghost btn-outline indicator">
+        class="btn btn-ghost btn-primary btn-sm btn-outline indicator">
         <span *ngIf="prospect.nbNo > 0" class="indicator-item badge">{{prospect.nbNo}}</span>Pas de réponse<span
           *ngIf="prospect.nbNo> 0">s</span>
       </button>
 
       <!-- Bouton de rappel  -->
 
-      <label tabindex="0" *ngIf="prospect.stage == 0 || prospect.stage == 1 " class="btn btn-ghost btn-outline modal-button" for="modal-add-reminder-{{prospect.id}}">Rappel</label>
+      <label tabindex="0" *ngIf="prospect.stage == 0 || prospect.stage == 1 " class="btn btn-primary btn-sm btn-ghost btn-outline modal-button" for="modal-add-reminder-{{prospect.id}}">Rappel</label>
 
       <input type="checkbox" id="modal-add-reminder-{{prospect.id}}" class="modal-toggle" />
       <div class="modal">
@@ -182,7 +182,7 @@
       </div>
 
       <!-- Bouton de rendez-vous -->
-        <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4" tabindex="0" class="btn btn-outline btn-ghost modal-button {{prospect.stage == 4 ? 'btn-disabled' : ''}}" for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
+        <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4" tabindex="0" class="btn btn-primary btn-sm btn-outline btn-ghost modal-button {{prospect.stage == 4 ? 'btn-disabled' : ''}}" for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
         <input type="checkbox" id="modal-add-meeting-{{prospect.id}}" class="modal-toggle" />
         <div class="modal">
           <div class="modal-box">
@@ -191,17 +191,17 @@
         </div>
 
       <!-- Bouton Refus -->
-      <label class="btn btn-ghost btn-outline" (click)="onClickRefus()" *ngIf="prospect.stage != 4 && prospect.stage != 3">
+      <label class="btn btn-ghost btn-primary btn-outline btn-sm" (click)="onClickRefus()" *ngIf="prospect.stage != 4 && prospect.stage != 3">
         Refus
       </label>
 
       <!-- button mail -->
-      <label for="add-mail-modal-{{prospect.id}}" class="btn btn-ghost btn-outline" *ngIf="prospect.stage != 4">
+      <label for="add-mail-modal-{{prospect.id}}" class="btn btn-sm btn-primary btn-ghost btn-outline" *ngIf="prospect.stage != 4">
         Mail
       </label>
 
       <!-- Bouton rappel effectué -->
-      <label class="btn btn-success btn-outline" (click)="onMarkReminderDone()" *ngIf="prospect.stage == 2 && !reminder.done">Rappel effectué
+      <label class="btn btn-sm btn-success btn-outline" (click)="onMarkReminderDone()" *ngIf="prospect.stage == 2 && !reminder.done">Rappel effectué
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
           stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -210,7 +210,7 @@
       </label>
 
       <!-- Bouton rendez-vous effectué -->
-      <label class="btn btn-outline btn-success" *ngIf="prospect.stage == 3 && !meeting.done" (click)="onMarkMeetingDone()">Rendez-vous effectué
+      <label class="btn btn-sm btn-outline btn-success" *ngIf="prospect.stage == 3 && !meeting.done" (click)="onMarkMeetingDone()">Rendez-vous effectué
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
           stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -228,9 +228,8 @@
 
       <!-- Commentaire -->
       <div class="w-1/2">
-        <textarea class="textarea textarea-bordered max-h-1.5 w-full" [(ngModel)]="comment"
+        <input class="input input-sm input-bordered w-full" [(ngModel)]="comment"
           placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
-              </textarea>
       </div>
     </div>
   </div>
