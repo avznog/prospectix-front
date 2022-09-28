@@ -55,6 +55,7 @@ export class RemindersResearchBlocComponent implements OnInit {
   }
 
   onEditDone() : void {
+    console.log(typeof(this.remindersService.researchParamsReminder.done))
     this.remindersService.resetSearch({
       ...this.remindersService.researchParamsReminder,
       done: this.done

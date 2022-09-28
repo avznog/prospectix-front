@@ -14,6 +14,7 @@ import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.
 export class RemindersService {
 
   reminders = new Map<number, Reminder>();
+  remindersDone = new Map<number, Reminder>();
   researchParamsReminder: ResearchParamsReminder = {
     take: 20,
     skip: 0,
@@ -27,6 +28,7 @@ export class RemindersService {
     private http: HttpClient
   ) {
     this.loadMore();
+    this.loadRemindersDone()
    }
 
 
@@ -61,6 +63,14 @@ export class RemindersService {
     queryParameters = queryParameters.append("take", 20);
     
     return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.reminders.set(reminder.id, reminder)));
+  }
+
+  loadRemindersDone() {
+    let queryParameters = new HttpParams();
+    queryParameters = queryParameters.append("priority",0)
+    queryParameters = queryParameters.append("take",20)
+    queryParameters = queryParameters.append("skip",0)
+    return this.http.get<Reminder[]>(`reminders/find-all-reminders-done`, {params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.remindersDone.set(reminder.id, reminder)));
   }
 
   deleteReminder(idReminder: number) : Subscription {
