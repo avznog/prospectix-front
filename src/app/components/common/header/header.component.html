@@ -1,4 +1,4 @@
-<div [class]="'navbar bg-base-300 transition-all '+class+' '+(scrolling && 'border-neutral-100 border-b')"
+<div [class]="'navbar bg-primary transition-all text-base-300 '+class+' '+(scrolling && 'border-neutral-100 border-b')"
   *ngIf="authService.loggedInSubject">
 
   <!-- left part of navbar -->
@@ -10,7 +10,7 @@
     <!-- Button statistics -->
     <li>
       <a routerLink="/statistics"
-        class=" normal-case bg-opacity-0 text-xl font-medium cursor-pointer  hover:text-primary-focus  {{router.url == '/statistics' && 'text-primary'}}">
+        class=" normal-case bg-opacity-0 text-xl font-medium cursor-pointer   hover:text-primary-content  {{router.url == '/statistics' && 'text-accent'}}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
@@ -23,7 +23,7 @@
     <!-- Versions button -->
     <li>
       <label *ngIf="authService.currentUserSubject.getValue().admin" for="modal-version"
-        class="bg-opacity-0 hover:text-primary-focus btn btn-ghost hover:bg-opacity-0 normal-case text-xs modal-button indicator">Versions<span
+        class="bg-opacity-0  hover:text-primary-content btn btn-ghost hover:bg-opacity-0 normal-case text-xs modal-button indicator">Versions<span
           *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion"
           class="badge badge-secondary indicator-item badge-xs"></span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -53,7 +53,7 @@
     <!-- page recherche -->
     <li>
       <a routerLink="/prospects"
-        class="bg-opacity-0 text-xl font-medium hover:text-primary-focus {{router.url == '/prospects' && 'text-primary'}}">Recherche
+        class="bg-opacity-0 text-xl font-medium  hover:text-primary-content {{router.url == '/prospects' && 'text-accent'}}">Recherche
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -65,7 +65,7 @@
     <!-- page Favoris -->
     <li>
       <a routerLink="/bookmarks"
-        class="bg-opacity-0 text-xl font-medium hover:text-primary-focus {{router.url == '/bookmarks' && 'text-primary'}}">Favoris
+        class="bg-opacity-0 text-xl font-medium  hover:text-primary-content {{router.url == '/bookmarks' && 'text-accent'}}">Favoris
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,7 +77,7 @@
     <!-- page Rappels -->
     <li>
       <a routerLink="/reminders"
-        class="bg-opacity-0 text-xl font-medium hover:text-primary-focus {{router.url == '/reminders' && 'text-primary'}}">Rappels
+        class="bg-opacity-0 text-xl font-medium  hover:text-primary-content {{router.url == '/reminders' && 'text-accent'}}">Rappels
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -89,7 +89,7 @@
     <!-- Page rendez-vous -->
     <li>
       <a routerLink="/meetings"
-        class="bg-opacity-0 text-xl font-medium hover:text-primary-focus {{router.url == '/meetings' && 'text-primary'}}">Rendez-vous
+        class="bg-opacity-0 text-xl font-medium  hover:text-primary-content {{router.url == '/meetings' && 'text-accent'}}">Rendez-vous
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -101,7 +101,7 @@
     <!-- Page mails -->
     <li>
       <a routerLink="/mails"
-        class="bg-opacity-0 text-xl font-medium hover:text-primary-focus {{router.url == '/mails' && 'text-primary'}}">Mails
+        class="bg-opacity-0 text-xl font-medium  hover:text-primary-content {{router.url == '/mails' && 'text-accent'}}">Mails
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -113,12 +113,12 @@
     <!-- Dropdown admin -->
     <div *ngIf="authService.currentUserSubject.getValue().admin" class="dropdown dropdown-end">
       <label tabindex="0"
-        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:text-primary-focus {{router.url == '/users' && 'text-primary'}}">{{router.url
+        class="btn btn-ghost bg-opacity-0 text-xl font-medium  hover:text-primary-content {{router.url == '/users' && 'text-accent'}}">{{router.url
         == "/users" ? 'User' : 'Admin'}}</label>
       <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60 outline outline-1">
         <!-- Page users -->
         <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/users"
-            class="w-full hover:text-primary-focus bg-opacity-0">Users</a></li>
+            class="w-full  hover:text-primary-content bg-opacity-0">Users</a></li>
         <!-- <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li> -->
       </ul>
     </div>
@@ -140,7 +140,7 @@
   </ul>
 </div>
 
-<!-- MODALS -->
+<!-- MODALS -->$
 
 <!-- modal version -->
 <input type="checkbox" id="modal-version" class="modal-toggle" />

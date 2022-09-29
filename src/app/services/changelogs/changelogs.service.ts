@@ -12,8 +12,19 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.8",
+        date: new Date("2022-09-29T00:00:00.000Z"),
+        bugs: [
+          
+           ],
+        features: [
+          "Refonte du design de la tuile",
+          "Refonte des couleurs du header (temporaire)"
+        ]
+      },
+      {
         version: "0.7.3",
-        date: new Date("2022-09-28T00:00:00.000Z"),
+        date: new Date("2022-09-29T00:00:00.000Z"),
         bugs: [
           "La recherche est mainteannt sauvegardée si l'on change de page.",
           "Pour rechercher, il faut maintenant appuyer sur entrée"

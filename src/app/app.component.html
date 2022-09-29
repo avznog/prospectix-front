@@ -1,6 +1,6 @@
-<div [attr.data-theme]="dataThemeService.dataTheme">
+<div [attr.data-theme]="dataThemeService.dataTheme" class="bg-base-300">
   <app-header *ngIf="router.url != '/login'" class="fixed top-0 w-full z-50"></app-header>
-  <div class="container mx-auto min-h-screen flex flex-col bg-base-100">
+  <div class="container mx-auto min-h-screen flex flex-col bg-base-300">
     <app-header *ngIf="router.url != '/login'" class="invisible"></app-header>
     <div class="">
       <router-outlet></router-outlet>
@@ -15,8 +15,6 @@
     </div>
 
   </div>
-  
-
 </div>
 <div class="toast toast-end text-sm"
   *ngIf="changelogsService.changelogs[0].version != changelogsService.localVersion && authService.currentUserSubject.getValue()">
