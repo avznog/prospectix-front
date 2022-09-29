@@ -18,7 +18,7 @@ export class ChangelogsService {
           
            ],
         features: [
-          "La zone de commentaires est mainteant 'riszable'"
+          "La taille de la zone de commentaire est maintenant ajustable"
         ]
       },
       {
