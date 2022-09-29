@@ -1,9 +1,9 @@
 <div class="space-y-5 self-center">
-  <div class="card shadow-lg p-5 space-y-5">
+  <div class="card shadow-lg p-5 space-y-5 w-fit">
     <label class="card-title self-center">Statistiques personnelles</label>
     <!-- STATISTIQUES TOTALES -->
     <p class="text-xl pb-0 font-bold">Sur toute l'année</p>
-    <div class="stats shadow-md w-screen">
+    <div class="stats shadow-md w-full">
       <!-- nombre total d'appels -->
       <div class="stat w-1/5">
         <div class="stat-figure text-secondary">
@@ -150,13 +150,9 @@
         <div class="stat-desc">{{startOfWeek | shortFrenchDate}} - {{endOfWeek | shortFrenchDate}}</div>
       </div>
     </div>
-  </div>
 
-
-  <!-- Historique des statistiques -->
-  <div class="card shadow-lg shadow-current p-5">
     <label class="card-title">Historique des Stats</label>
-    <div class="card-body">
+    <div class="card-body w-full">
 
       <div *ngFor="let statHistory of statsHistoryService.statsHistory | keyvalue">
         <div tabindex="0-{{statHistory.value.id}}"
@@ -164,7 +160,7 @@
           <input type="checkbox" />
           <div class="collapse-title text-xl font-medium">{{statHistory.value.startDate | shortFrenchDate}} au
             {{statHistory.value.endDate | shortFrenchDate}}</div>
-          <div class="stats shadow w-full collapse-content">
+          <div class="stats shadow collapse-content ">
             <!-- nombre d'appels sur la semaine -->
             <div class="stat">
               <div class="stat-figure text-secondary">
@@ -235,4 +231,10 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Historique des statistiques -->
+  <!-- <div class="card shadow-lg shadow-current">
+   
+  </div> -->
 </div>

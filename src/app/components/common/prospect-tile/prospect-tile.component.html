@@ -95,7 +95,7 @@
               class="mask mask-star-2 {{reminder.priority == 3 ? 'bg-accent' : reminder.priority == 2 ? 'bg-primary' : 'bg-secondary'}}"
               disabled *ngIf="reminder.priority == 3">
           </div>
-          Rappel défini au {{reminder.date | frenchDatePipe}} à {{reminder.date |date:"hh:mm"}}
+          Rappel {{reminder.done ? 'effectué le' : 'défini au'}} {{reminder.date | frenchDatePipe}} à {{reminder.date |date:"hh:mm"}}
 
         </div>
 
@@ -176,10 +176,6 @@
 
 
         <!-- Bouton Refus -->
-        <!-- <label class="btn btn-ghost btn-primary btn-outline btn-sm" (click)="onClickRefus()"
-          *ngIf="prospect.stage != 4 && prospect.stage != 3">
-          Refus
-        </label> -->
         <label for="confirm-refus-{{prospect.id}}" class="btn btn-sm btn-primary btn-ghost btn-outline {{reminder && reminder.done ? 'btn-disabled' : ''}}"
           *ngIf="prospect.stage != 4 && prospect.stage != 3">
           Refus
@@ -194,8 +190,9 @@
       </div>
       <!-- Commentaire -->
       <div class="w-1/2">
-        <input class="input input-sm input-bordered w-full" [(ngModel)]="comment"
+        <textarea class="input input-sm input-bordered w-full" [(ngModel)]="comment"
           placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
+          </textarea>
       </div>
     </div>
   </div>

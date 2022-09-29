@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.7.3",
+        date: new Date("2022-09-28T00:00:00.000Z"),
+        bugs: [
+          
+           ],
+        features: [
+          "La zone de commentaires est mainteant 'riszable'"
+        ]
+      },
+      {
         version: "0.7.2",
         date: new Date("2022-09-28T00:00:00.000Z"),
         bugs: [
