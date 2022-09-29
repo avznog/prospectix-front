@@ -20,6 +20,7 @@ export class ResearchBlocComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+      this.formKeyword = this.prospectsService.researchParamsProspect.keyword;
   }
 
   onEditCity() {

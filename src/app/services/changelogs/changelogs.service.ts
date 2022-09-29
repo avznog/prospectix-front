@@ -15,7 +15,8 @@ export class ChangelogsService {
         version: "0.7.3",
         date: new Date("2022-09-28T00:00:00.000Z"),
         bugs: [
-          
+          "La recherche est mainteannt sauvegardée si l'on change de page.",
+          "Pour rechercher, il faut maintenant appuyer sur entrée"
            ],
         features: [
           "La taille de la zone de commentaire est maintenant ajustable"

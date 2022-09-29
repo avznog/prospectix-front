@@ -23,7 +23,7 @@ export class BookmarksResearchBlocComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  
+    this.keyword = this.bookmarksService.researchParamsBookmarks.keyword;  
   }
   
   onEditActivity() {

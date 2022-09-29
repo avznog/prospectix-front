@@ -1,5 +1,5 @@
 export interface ResearchParamsProspect {
-  keyword?: string;
+  keyword: string;
   take?: number;
   skip: number;
   zipcode: number;

@@ -1,10 +1,10 @@
-<div class="inline-flex justify-items-center items-end space-x-5 mb-5">
+<div class="inline-flex justify-items-center items-end space-x-5 mb-5 w-full">
   <!-- Search a prospect - overrides the other filters -->
-  <div class="form-control w-full max-w-xs">
+  <div class="form-control w-full">
     <label class="label" for="search">
       <span class="label-text">Recherche</span>
     </label>
-    <input type="search" [(ngModel)]="keyword" (keyup)="onEditKeyword()" placeholder="Recherche"
+    <input type="search" [(ngModel)]="keyword" (keyup.enter)="onEditKeyword()" placeholder="Recherche (entrée pour valider)"
       class="input input-bordered w-full max-w-xs" />
   </div>
 

@@ -5,7 +5,7 @@
       <label class="label" for="search">
           <span class="label-text">Recherche</span>
       </label>
-      <input type="search" [(ngModel)]="keyword" (keyup)="onEditKeyword()" placeholder="Recherche"
+      <input type="search" [(ngModel)]="keyword" (keyup.enter)="onEditKeyword()" placeholder="Recherche"
           class="input input-bordered w-full max-w-xs" />
   </div>
 
