@@ -1,5 +1,5 @@
 <div class="card shadow-md bg-base-100 mb-5">
-  <div class="card-body w-full pb-3 pt-3">
+  <div class="card-body w-full ">
     <!-- FULL BAR TITLE -->
     <div class="card-title w-full m-0 p-0">
       <!-- 1/2 NAME -->
@@ -112,7 +112,7 @@
     <div class="w-full inline-flex pb-0">
 
       <!-- INLINE FLEX 2/3 ADDRESS CONTACT ACTIONS-->
-      <div class="w-2/3 space-y-1">
+      <div class="w-2/3 space-y-3">
 
         <!-- FULL ADDRESS -->
         <div class="w-full">
@@ -124,7 +124,7 @@
           <div class="btn-group">
 
             <!-- Phone -->
-            <label class="btn btn-sm btn-ghost btn-outline hover:text-primary hover:bg-opacity-0" *ngIf="phone"
+            <label class="btn btn-sm btn-primary btn-outline hover:text-base-100" *ngIf="phone"
               (click)="onClickPhone()">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -135,7 +135,7 @@
             </label>
 
             <!-- Mail -->
-            <label class="btn btn-sm btn-ghost btn-outline hover:text-primary hover:bg-opacity-0" *ngIf="email"
+            <label class="btn btn-sm btn-primary btn-outline hover:text-base-100 " *ngIf="email"
               (click)="onClickEmail()">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -145,7 +145,7 @@
               </svg> {{email}}</label>
 
             <!-- Website -->
-            <label class="btn btn-sm btn-ghost btn-outline hover:text-primary hover:bg-opacity-0" *ngIf="website"
+            <label class="btn btn-sm btn-primary btn-outline hover:text-base-100" *ngIf="website"
               (click)="onClickWebsite()">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -162,34 +162,34 @@
           <div class="btn-group">
             <!-- Bouton Pas de réponse -->
             <label *ngIf="prospect.stage == 0 || prospect.stage == 1" (click)="onChangeNbNo()"
-              class="btn btn-primary btn-md indicator">
+              class="btn btn-primary text-base-100 btn-md indicator">
               <span *ngIf="prospect.nbNo > 0" class="indicator-item badge">{{prospect.nbNo}}</span>Pas de réponse<span
                 *ngIf="prospect.nbNo> 0">s</span>
             </label>
 
             <!-- Bouton de rappel  -->
             <label tabindex="0" *ngIf="prospect.stage == 0 || prospect.stage == 1 "
-              class="btn btn-primary btn-md modal-button"
+              class="btn btn-primary text-base-100 btn-md modal-button"
               for="modal-add-reminder-{{prospect.id}}">Rappel</label>
 
 
             <!-- Bouton de rendez-vous -->
             <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4"
               tabindex="0"
-              class="btn btn-primary btn-md modal-button {{prospect.stage == 4 || (reminder && reminder.done) ? 'btn-disabled' : ''}}"
+              class="btn btn-primary text-base-100 btn-md modal-button {{prospect.stage == 4 || (reminder && reminder.done) ? 'btn-disabled' : ''}}"
               for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
 
 
             <!-- Bouton Refus -->
             <label for="confirm-refus-{{prospect.id}}"
-              class="btn btn-md btn-primary {{reminder && reminder.done ? 'btn-disabled' : ''}}"
+              class="btn btn-md text-base-100 btn-primary {{reminder && reminder.done ? 'btn-disabled' : ''}}"
               *ngIf="prospect.stage != 4 && prospect.stage != 3">
               Refus
             </label>
 
             <!-- button mail -->
             <label for="add-mail-modal-{{prospect.id}}"
-              class="rounded btn btn-md btn-primary {{(reminder && reminder.done) ? 'btn-disabled' : ''}}"
+              class="rounded text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) ? 'btn-disabled' : ''}}"
               *ngIf="prospect.stage != 4">
               Mail
             </label>
