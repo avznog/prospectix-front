@@ -126,33 +126,31 @@
             <!-- Phone -->
             <label class="btn btn-sm btn-primary btn-outline hover:text-base-100" *ngIf="phone"
               (click)="onClickPhone()">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3 stroke-current" fill="none" stroke-width="1.5" viewBox="0 0 24 24" >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path
                   d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-              </svg> {{phone}}
+              </svg> {{phone | slice:0:17}}
             </label>
 
             <!-- Mail -->
             <label class="btn btn-sm btn-primary btn-outline hover:text-base-100 " *ngIf="email"
               (click)="onClickEmail()">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3 stroke-current" viewBox="0 0 24 24" stroke-width="1.5"
+                 fill="none" >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <polyline points="3 7 12 13 21 7" />
-              </svg> {{email}}</label>
+              </svg> {{email | slice:0:50}}</label>
 
             <!-- Website -->
             <label class="btn btn-sm btn-primary btn-outline hover:text-base-100" *ngIf="website"
               (click)="onClickWebsite()">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <circle cx="10" cy="10" r="7" />
                 <line x1="21" y1="21" x2="15" y2="15" />
-              </svg> {{website}}</label>
+              </svg> {{website | slice:0:50}}</label>
 
           </div>
         </div>
