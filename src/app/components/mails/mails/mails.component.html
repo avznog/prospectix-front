@@ -8,12 +8,10 @@
         *ngIf="sentEmail.value.prospect.stage == 4"></app-prospect-tile>
     </div>
     <app-no-result *ngIf="sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0"></app-no-result>
-    <div class="fixed z-50 bottom-0 bg-base-100 w-full border-t border-neutral-100">
-      <div class="btn-group flex justify-center">
-        <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.skip <= 0 ? 'btn-disabled' : '' }}" (click)="pageDown()">«</button>
-        <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 +1 }}</button>
-        <button class="btn btn-outline btn-ghost {{sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
-      </div>
+    <div class="btn-group pb-5 justify-center">
+      <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.skip <= 0 ? 'btn-disabled' : '' }}" (click)="pageDown()">«</button>
+      <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 +1 }}</button>
+      <button class="btn btn-outline btn-ghost {{sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
     </div>
   </div>
   <div class="drawer-side">

@@ -19,7 +19,8 @@ export class ChangelogsService {
            ],
         features: [
          "Refonte du design des boutons de la tuile",
-         "Refonte graphique"
+         "Refonte graphique",
+         "Refonte de la page de statistics"
         ]
       },
       {

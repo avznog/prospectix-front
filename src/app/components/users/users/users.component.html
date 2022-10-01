@@ -17,13 +17,10 @@
     </div>
   </div>
 
-  <div class="fixed z-50 bottom-0 bg-base-100 w-full border-t border-neutral-100">
-
-  <div class="btn-group justify-center">
+  <div class="btn-group justify-center pb-5">
     <button class="btn btn-ghost btn-outline {{usersService.researchParamsUsers.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
     <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 20 + 1}}</button>
     <button class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
 
-</div>
 </div>
