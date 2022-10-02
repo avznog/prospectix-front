@@ -16,7 +16,8 @@ export class ChangelogsService {
         date: new Date("2022-10-03T00:00:00.000Z"),
         bugs: [
           "Résolution du bug des boutons de pages qui s'affichaient trop sur la gauche lorsque la page est vide",
-          "Résolution du bug de marges sur la page de login"
+          "Résolution du bug de marges sur la page de login",
+          "Résolution du bug de clic sur le bouton de thème (le bouton de thème n'était pas cliquable de partout)"
            ],
         features: [
           "Update du design des boutons de la tuile / désactivation si le mail n'existe pas",
