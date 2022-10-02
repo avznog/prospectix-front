@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { ChangelogsService } from './services/changelogs/changelogs.service';
 import { DataThemeService } from './services/common/data-theme.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,7 +22,4 @@ export class AppComponent {
   ngOnInit() {
     this.dataThemeService.sendData(localStorage.getItem("theme") || "")
   } 
-
-
-
 }

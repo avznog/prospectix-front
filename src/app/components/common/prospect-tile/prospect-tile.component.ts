@@ -3,7 +3,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
-import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
@@ -17,7 +16,6 @@ import { PhonesService } from 'src/app/services/phones/phones.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
-import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
 
 @Component({
@@ -39,6 +37,9 @@ export class ProspectTileComponent implements OnInit {
   email: string = "";
   website: string = "";
 
+  emailShown: boolean = false;
+  websiteShown: boolean = false;
+
   constructor(
     private readonly prospectService: ProspectsService,
     public readonly bookmarksService: BookmarksService,
@@ -50,7 +51,6 @@ export class ProspectTileComponent implements OnInit {
     private readonly meetingsService: MeetingsService,
     private readonly remindersService: RemindersService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly statisticsService: StatisticsService
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +58,8 @@ export class ProspectTileComponent implements OnInit {
     this.email = this.prospect.email.email;
     this.website = this.prospect.website.website;
     this.comment = this.prospect.comment;
+    this.emailShown = false;
+    this.websiteShown = false;
   }
 
   onClickButtonGoogle() {
@@ -119,7 +121,8 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onClickEmail() {
-    window.open(`mailto:${this.email}`, "_blank")
+    // TODO : copier le mail
+    // window.open(`mailto:${this.email}`, "_blank")
   }
 
   onClickWebsite() {

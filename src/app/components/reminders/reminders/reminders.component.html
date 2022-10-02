@@ -15,7 +15,7 @@
         </div>
       </div>
     <!-- <app-no-result *ngIf="(remindersService.reminders && remindersService.reminders.size <= 0 && remindersService.researchParamsReminder.done == 'false' || remindersService.researchParamsReminder.done == false) || (remindersService.remindersDone && remindersService.remindersDone.size <= 0)"></app-no-result>  -->
-    <div class="btn-group justify-center pb-5">
+    <div class="btn-group justify-center pb-5 w-full">
       <button class="btn btn-outline btn-ghost {{remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
       <button class="btn btn-outline btn-ghost">Page {{remindersService.researchParamsReminder.skip / 20 + 1}}</button>
       <button class="btn btn-outline btn-ghost " (click)="pageUp()">»</button>

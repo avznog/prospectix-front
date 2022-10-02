@@ -12,6 +12,20 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.9.2",
+        date: new Date("2022-10-03T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug des boutons de pages qui s'affichaient trop sur la gauche lorsque la page est vide"
+           ],
+        features: [
+          "Update du design des boutons de la tuile / désactivation si le mail n'existe pas",
+          "Ajout de l'appartition du mail / website au survol",
+          "Changement de l'endroit du bouton pas de réponse",
+          "Modification de l'emplacement des options de filtrage des rappels et des rendez-vous",
+          "Modification du header / thème / ajout d'un blur"
+        ]
+      },
+      {
         version: "0.9",
         date: new Date("2022-10-01T00:00:00.000Z"),
         bugs: [
