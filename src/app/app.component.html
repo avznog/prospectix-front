@@ -1,6 +1,6 @@
-<div [attr.data-theme]="dataThemeService.dataTheme" class="bg-base-300">
+<div [attr.data-theme]="dataThemeService.dataTheme" class="{{authService.currentUserSubject.getValue() ? 'bg-base-300' : 'bg-gradient-to-br from-primary to-secondary'}}">
   <app-header *ngIf="router.url != '/login'" class="fixed top-0 w-full z-50"></app-header>
-  <div class="container mx-auto min-h-screen flex flex-col bg-base-300">
+  <div class="container mx-auto min-h-screen flex flex-col {{authService.currentUserSubject.getValue() ? 'bg-base-300' : ''}}">
     <app-header *ngIf="router.url != '/login'" class="invisible"></app-header>
     <div class="">
       <router-outlet></router-outlet>
