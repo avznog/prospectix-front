@@ -19,7 +19,8 @@ export class ChangelogsService {
           "Résolution de bug où les champs apparaissaient violets au lieu de blanc dans la tuile et sur le login"
            ],
         features: [
-         "Ajout des boutons 'Passage en PRO' et 'Effectué' pour les rendez-vous"
+         "Ajout des boutons 'Passage en PRO' et 'Effectué' pour les rendez-vous",
+         "Update du theme de jisep"
         ]
       },
       {
