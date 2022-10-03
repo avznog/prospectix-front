@@ -15,7 +15,7 @@ export class ChangelogsService {
         version: "0.9.3",
         date: new Date("2022-10-03T00:00:00.000Z"),
         bugs: [
-          "Résolution d'un bug invisible sur la page d'accueil"
+          "Résolution d'un bug invisible sur la page de login"
            ],
         features: [
          "Ajout des boutons 'Passage en PRO' et 'Effectué' pour les rendez-vous"
