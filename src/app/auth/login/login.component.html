@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center bg-opacity-0 h-screen w-full">
-    <div class="card w-1/2 bg-base-100 shadow-xl">
+    <div class="card w-1/2 bg-base-100 shadow-xl rounded-t-3xl">
       
         <div class="card-body">
           <div class="inline-flex">
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="card-actions justify-center">
-                    <button class="btn btn-primary" [disabled]="loading" type="submit">
+                    <button class="btn btn-primary text-base-100" [disabled]="loading" type="submit">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                         Se connecter
                     </button>

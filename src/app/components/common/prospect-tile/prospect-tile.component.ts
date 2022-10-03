@@ -39,6 +39,7 @@ export class ProspectTileComponent implements OnInit {
 
   emailShown: boolean = false;
   websiteShown: boolean = false;
+  phoneOn: boolean = false;
 
   constructor(
     private readonly prospectService: ProspectsService,
@@ -60,6 +61,7 @@ export class ProspectTileComponent implements OnInit {
     this.comment = this.prospect.comment;
     this.emailShown = false;
     this.websiteShown = false;
+    this.phoneOn = false;
   }
 
   onClickButtonGoogle() {

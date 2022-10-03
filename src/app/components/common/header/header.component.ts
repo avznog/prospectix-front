@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { ChangelogsService } from 'src/app/services/changelogs/changelogs.service';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit {
     public readonly changelogsService: ChangelogsService,
     public readonly statisticsService: StatisticsService,
     public readonly bookmarksService: BookmarksService,
-    public readonly router: Router
+    public readonly router: Router,
+    public dataThemeService: DataThemeService
   ) { }
 
   ngOnInit(): void {
