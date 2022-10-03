@@ -4,7 +4,7 @@
       <div data-theme="light" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'light' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Melki': 'light'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Melki': 'light'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -34,7 +34,7 @@
       <div data-theme="dark" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'dark' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Bustin': 'dark'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Bustin': 'dark'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -49,7 +49,7 @@
       <div data-theme="cupcake" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'cupcake' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Préhu👸🏻': 'cupcake'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Préhu👸🏻': 'cupcake'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -65,7 +65,7 @@
       <div data-theme="bumblebee" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'bumblebee' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Gonzva 👑': 'bumblebee'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Gonzva 👑': 'bumblebee'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -97,7 +97,7 @@
       <div data-theme="corporate" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'corporate' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Chapurlat': 'corporate'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Chapurlat': 'corporate'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -113,7 +113,7 @@
       <div data-theme="synthwave" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'synthwave' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Rouge': 'synthwave'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Rouge': 'synthwave'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -129,7 +129,7 @@
       <div data-theme="retro" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'retro' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Itart-Longueville': 'retro'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Itart-Longueville': 'retro'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -145,7 +145,7 @@
       <div data-theme="cyberpunk" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'cyberpunk' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Lambert': 'cyberpunk'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Lambert': 'cyberpunk'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -161,7 +161,7 @@
       <div data-theme="valentine" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'valentine' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Chardonnens': 'valentine'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Chardonnens': 'valentine'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -193,7 +193,7 @@
       <div data-theme="garden" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'garden' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Vigneron': 'garden'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Vigneron': 'garden'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -209,7 +209,7 @@
       <div data-theme="forest" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'forest' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'La Forest': 'forest'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'La Forest': 'forest'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -225,7 +225,7 @@
       <div data-theme="aqua" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'aqua' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Bidault': 'aqua'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Bidault': 'aqua'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -257,7 +257,7 @@
       <div data-theme="pastel" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'pastel' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Giordan': 'pasteil'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Giordan': 'pasteil'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -305,7 +305,7 @@
       <div data-theme="black" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'black' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Gradus': 'black'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Gradus': 'black'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -321,7 +321,7 @@
       <div data-theme="luxury" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'luxury' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Lendais': 'luxury'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Lendais': 'luxury'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -433,7 +433,7 @@
       <div data-theme="night" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'night' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Pinat': 'night'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Pinat': 'night'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>
@@ -449,7 +449,7 @@
       <div data-theme="coffee" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'coffee' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
           <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue().admin ? 'Godfroy': 'coffee'}}</div>
+            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Godfroy': 'coffee'}}</div>
             <div class="flex flex-shrink-0 flex-wrap gap-1">
               <div class="bg-primary w-2 rounded"></div>
               <div class="bg-secondary w-2 rounded"></div>

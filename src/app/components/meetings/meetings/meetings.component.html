@@ -5,15 +5,13 @@
     <app-meetings-research-bloc></app-meetings-research-bloc>
     <div
       *ngIf="meetingsService.researchParamsMeeting.done == true || meetingsService.researchParamsMeeting.done == 'true'">
-      <div
-        *ngFor="let meeting of meetingsService.meetingsDone | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
+      <div *ngFor="let meeting of meetingsService.meetingsDone | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
         <app-prospect-tile [prospect]="meeting.value.prospect" [meeting]="meeting.value"></app-prospect-tile>
       </div>
     </div>
     <div
       *ngIf="meetingsService.researchParamsMeeting.done == false || meetingsService.researchParamsMeeting.done == 'false'">
-      <div
-        *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
+      <div *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
         <app-prospect-tile *ngIf="meeting.value.prospect.stage == 3" [prospect]="meeting.value.prospect"
           [meeting]="meeting.value"></app-prospect-tile>
       </div>

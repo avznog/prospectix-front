@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.9.3",
+        date: new Date("2022-10-03T00:00:00.000Z"),
+        bugs: [
+          "Résolution d'un bug invisible sur la page d'accueil"
+           ],
+        features: [
+         "Ajout des boutons 'Passage en PRO' et 'Effectué' pour les rendez-vous"
+        ]
+      },
+      {
         version: "0.9.2",
         date: new Date("2022-10-03T00:00:00.000Z"),
         bugs: [

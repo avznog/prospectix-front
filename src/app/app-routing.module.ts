@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: "bookmarks", component: BookmarksComponent, canActivate: [LoggedGuard] },
   { path: "mails", component: MailsComponent, canActivate: [LoggedGuard] },
   { path: "statistics", component: StatisticsComponent, canActivate: [LoggedGuard] },
-  { path:"", pathMatch: "full", redirectTo: "statistics" },
-  { path: "**", pathMatch: "full", redirectTo: "statistics"},
+  { path:"", pathMatch: "full", redirectTo: "prospects" },
+  { path: "**", pathMatch: "full", redirectTo: "prospects"},
 ];
 
 @NgModule({

@@ -22,7 +22,7 @@
 
     <!-- Versions button -->
     <li>
-      <label *ngIf="authService.currentUserSubject.getValue().admin" for="modal-version"
+      <label *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin" for="modal-version"
         class="bg-opacity-0 hover:text-primary btn btn-ghost hover:bg-opacity-0 normal-case text-xs modal-button indicator">Versions<span
           *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion"
           class="badge badge-secondary indicator-item badge-xs"></span>
@@ -111,15 +111,15 @@
     </li>
 
     <!-- Dropdown admin -->
-    <div *ngIf="authService.currentUserSubject.getValue().admin" class="dropdown dropdown-end">
+    <div *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin" class="dropdown dropdown-end">
       <label tabindex="0"
         class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:text-primary{{router.url == '/users' && 'text-primary'}}">{{router.url
         == "/users" ? 'User' : 'Admin'}}</label>
       <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60 outline outline-1">
         <!-- Page users -->
-        <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/users"
+        <li *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"><a routerLink="/users"
             class="w-full hover:text-primary bg-opacity-0">Users</a></li>
-        <!-- <li *ngIf="authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li> -->
+        <!-- <li *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li> -->
       </ul>
     </div>
     
@@ -162,7 +162,8 @@
     <div class="w-full">
       <span class="text-xl font-bold">Dev /w ❤️ by your pôle tech, started by Benjamin GONZVA <a
           href="https://www.instagram.com/ben.gonzva/" target="_blank" class="link-primary font-thin"
-          *ngIf="authService.currentUserSubject.getValue().admin">(@ben.gonzva)</a></span>
+          *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin">(@ben.gonzva)
+        </a></span>
       <ul>
         <li>2022-2023 : <a href="https://www.linkedin.com/in/benjamin-gonzva-828b071a2/" target="_blank"
             class="link-primary">Benjamin GONZVA</a></li>

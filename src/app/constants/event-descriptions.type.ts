@@ -11,5 +11,6 @@ export enum EventDescriptionType {
   DELETE_BOOKMARKS = "Supprimé des favoris par",
   CREATION = "Création du prospect par",
   NEGATIVE_ANSWER = "Le prospect a exprimé un refus à",
-  NO_ANSWER = "Pas de réponse du prospect à"
+  NO_ANSWER = "Pas de réponse du prospect à",
+  PASSAGE_PRO = "Passage en pro avec",
 }

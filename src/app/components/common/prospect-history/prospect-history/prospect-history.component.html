@@ -13,6 +13,7 @@
   (event.type == 'DONE_REMINDER' && '🎯') || 
   (event.type == 'DONE_MEETING' && '🤝') ||
   (event.type == 'NO_ANSWER' && '💬') ||
+  (event.type == 'PASSAGE_PRO' && '📝') ||
   (event.type == 'NEGATIVE_ANSWER' && '🗑') "
   class="
     step
@@ -28,6 +29,7 @@
     {{event.type == 'DELETE_BOOKMARKS' ? 'step-warning' : ''}}
     {{event.type == 'DELETE_SENT_EMAIL' ? 'step-error' : ''}}
     {{event.type == 'NEGATIVE_ANSWER' ? 'step-error' : ''}}
+    {{event.type == 'PASSAGE_PRO' ? 'step-success' : ''}}
     {{event.type == 'NO_ANSWER' ? 'step-error' : ''}}
     "
     *ngFor="let event of eventsService.events; let index = index">{{event.date | date:"dd MMMM" }} - {{event.description}}</li>

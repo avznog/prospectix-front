@@ -54,6 +54,8 @@ import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
 import { ConfirmRefusComponent } from './components/common/confirm-refus/confirm-refus.component';
 import { StatsSmallCardComponent } from './components/common/stats-small-card/stats-small-card.component';
+import { ConfirmProComponent } from './components/common/confirm-pro/confirm-pro.component';
+import { MarkMeetingDoneAndOutComponent } from './components/common/mark-meeting-done-and-out/mark-meeting-done-and-out.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { StatsSmallCardComponent } from './components/common/stats-small-card/st
     FrenchDatePipePipe,
     ShortFrenchDatePipe,
     ConfirmRefusComponent,
-    StatsSmallCardComponent
+    StatsSmallCardComponent,
+    ConfirmProComponent,
+    MarkMeetingDoneAndOutComponent,
   ],
   imports: [
     BrowserModule,
