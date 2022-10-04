@@ -1,11 +1,10 @@
-<div [attr.data-theme]="dataThemeService.dataTheme" class="{{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300' : 'bg-base-300' : router.url == '/login' ? 'bg-gradient-to-br from-primary to-accent' : 'bg-gradient-to-br from-primary to-secondary'}}">
+<div [attr.data-theme]="dataThemeService.dataTheme" class="{{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300' : 'bg-base-300' : router.url == '/login' && dataThemeService.dataTheme == 'jisep' ? 'bg-gradient-to-tr from-accent to-secondary' : 'bg-gradient-to-br from-primary to-secondary'}}">
   <app-header *ngIf="router.url != '/login'" class="fixed top-0 w-full z-50"></app-header>
   <div class="container mx-auto min-h-screen flex flex-col {{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300': 'bg-base-300' : ''}}">
-    <app-header *ngIf="router.url != '/login'" class="invisible"></app-header>
-    <div class="">
-      <router-outlet></router-outlet>
-    </div>
-
+  <app-header *ngIf="router.url != '/login'" class="invisible"></app-header>
+  <div class="">
+    <router-outlet></router-outlet>
+  </div>
   </div>
 </div>
 <div class="toast toast-end text-sm"
