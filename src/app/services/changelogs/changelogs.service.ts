@@ -20,7 +20,8 @@ export class ChangelogsService {
            ],
         features: [
          "Ajout des boutons 'Passage en PRO' et 'Effectué' pour les rendez-vous",
-         "Update du theme de jisep"
+         "Update du theme de jisep",
+         "Create thème Junior ISEP"
         ]
       },
       {

@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{html,ts,js}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+       
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
