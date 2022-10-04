@@ -12,6 +12,7 @@ import { EventDescriptionType } from 'src/app/constants/event-descriptions.type'
 import { StageType } from 'src/app/constants/stage.type';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Reminder } from 'src/app/models/reminder.model';
+import { ToastsService } from 'src/app/services/toasts/toasts.service';
 @Component({
   selector: 'app-confirm-refus',
   templateUrl: './confirm-refus.component.html',
@@ -30,7 +31,8 @@ export class ConfirmRefusComponent implements OnInit {
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
     private readonly eventsService: EventsService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly toastsService: ToastsService
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +63,11 @@ export class ConfirmRefusComponent implements OnInit {
       date: new Date,
       description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-    // this.prospectService.disable(this.prospect.id);
+    
+    this.toastsService.addToast({
+      type: "alert-error",
+      message: "Refus confirmé"
+    });
   }
 
   onMarkReminderDone() {

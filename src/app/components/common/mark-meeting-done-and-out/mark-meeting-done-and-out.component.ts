@@ -11,6 +11,7 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
   selector: 'app-mark-meeting-done-and-out',
@@ -28,7 +29,8 @@ export class MarkMeetingDoneAndOutComponent implements OnInit {
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
     private readonly eventsService: EventsService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly toastsService: ToastsService
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +52,11 @@ export class MarkMeetingDoneAndOutComponent implements OnInit {
       description: EventDescriptionType.DONE_MEETING,
       pm: this.authService.currentUserSubject.getValue(),
       prospect: this.prospect
+    });
+
+    this.toastsService.addToast({
+      type: "alert-success",
+      message: "Rendez-vous effectué"
     });
     console.log("Rendez-vous marqué comme effectué")
   }

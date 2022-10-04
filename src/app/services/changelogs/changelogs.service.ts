@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.10",
+        date: new Date("2022-10-04T00:00:00.000Z"),
+        bugs: [
+          "Rectification de la couleur de l'alerte de nouvelle version"
+           ],
+        features: [
+          "Ajout des notifications d'action (taost en bas à droite de l'écran)"
+        ]
+      },
+      {
         version: "0.9.3",
         date: new Date("2022-10-03T00:00:00.000Z"),
         bugs: [

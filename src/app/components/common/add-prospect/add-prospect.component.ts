@@ -7,6 +7,7 @@ import { ActivitiesService } from 'src/app/services/activities/activities.servic
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { CountriesService } from 'src/app/services/countries/countries.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
+import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
   selector: 'app-add-prospect',
@@ -19,7 +20,8 @@ export class AddProspectComponent implements OnInit {
     public readonly activitiesService: ActivitiesService,
     public readonly citiesService: CitiesService,
     public readonly countriesService: CountriesService,
-    private readonly prospectService: ProspectsService
+    private readonly prospectService: ProspectsService,
+    private readonly toastsService: ToastsService
   ) { }
 
   // City
@@ -70,6 +72,11 @@ export class AddProspectComponent implements OnInit {
       nbNo: 0,
       disabled: false,
       isBookmarked: false
+    });
+
+    this.toastsService.addToast({
+      type: "alert-success",
+      message: "Prospect ajouté"
     });
   }
 

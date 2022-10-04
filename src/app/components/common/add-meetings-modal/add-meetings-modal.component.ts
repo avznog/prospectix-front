@@ -13,6 +13,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
 import { StatisticsService } from 'src/app/services/statistics/statistics.service';
+import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
   selector: 'app-add-meetings-modal',
@@ -37,7 +38,8 @@ export class AddMeetingsModalComponent implements OnInit {
     private readonly remindersService: RemindersService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly statisticsService: StatisticsService
+    private readonly statisticsService: StatisticsService,
+    private readonly toastsService: ToastsService
   ) { }
 
   ngOnInit(): void {
@@ -77,9 +79,12 @@ export class AddMeetingsModalComponent implements OnInit {
       date: new Date,
       description: `${EventDescriptionType.ADD_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-
-    
     console.log("meeting created !");
+
+    this.toastsService.addToast({
+      type: "alert-info",
+      message: "Rendez-vous ajouté"
+    })
   }
 
   onMarkReminderDone() {

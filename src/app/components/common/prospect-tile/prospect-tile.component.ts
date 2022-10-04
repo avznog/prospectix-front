@@ -16,6 +16,7 @@ import { PhonesService } from 'src/app/services/phones/phones.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { ToastsService } from 'src/app/services/toasts/toasts.service';
 import { WebsitesService } from 'src/app/services/websites/websites.service';
 
 @Component({
@@ -52,6 +53,7 @@ export class ProspectTileComponent implements OnInit {
     private readonly meetingsService: MeetingsService,
     private readonly remindersService: RemindersService,
     private readonly sentEmailsService: SentEmailsService,
+    private readonly toastsService: ToastsService
   ) { }
 
   ngOnInit(): void {
@@ -100,6 +102,10 @@ export class ProspectTileComponent implements OnInit {
       date: new Date,
       description: `${EventDescriptionType.DELETE_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
+    this.toastsService.addToast({
+      type: "alert-error",
+      message: "Supprimé des favorisé"
+    })
   }
 
   onClickDrawer() {
@@ -108,14 +114,26 @@ export class ProspectTileComponent implements OnInit {
 
   onChangePhone() {
     this.phonesService.update(this.prospect, { ...this.prospect.phone, number: this.phone });
+    this.toastsService.addToast({
+      type: "alert-info",
+      message: "Numéro de téléphone changé"
+    })
   }
 
   onChangeEmail() {
     this.emailsService.update(this.prospect, { ...this.prospect.email, email: this.email});
+    this.toastsService.addToast({
+      type: "alert-info",
+      message: "Email changé"
+    })
   }
 
   onChangeWebsite() {
     this.websitesService.update(this.prospect, { ...this.prospect.website, website: this.website });
+    this.toastsService.addToast({
+      type: "alert-info",
+      message: "Site internet changé"
+    })
   }
 
   onClickPhone() {
