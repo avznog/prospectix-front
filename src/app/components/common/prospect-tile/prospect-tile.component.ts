@@ -65,7 +65,7 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onClickButtonGoogle() {
-      window.open(`http://www.google.fr/search?q=${this.prospect.companyName}`, "_blank");
+      window.open(`http://www.google.fr/search?q=${this.prospect.companyName.replace('&','%26')}`, "_blank");
   }
 
   onChangeComment() {    

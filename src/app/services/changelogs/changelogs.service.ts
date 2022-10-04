@@ -16,7 +16,8 @@ export class ChangelogsService {
         date: new Date("2022-10-03T00:00:00.000Z"),
         bugs: [
           "Résolution d'un bug invisible sur la page de login",
-          "Résolution de bug où les champs apparaissaient violets au lieu de blanc dans la tuile et sur le login"
+          "Résolution de bug où les champs apparaissaient violets au lieu de blanc dans la tuile et sur le login",
+          "Résolution du bug de recherche google lorsqu'il y avait un & dans le nom du prospect"
            ],
         features: [
          "Ajout des boutons 'Passage en PRO' et 'Effectué' pour les rendez-vous",
