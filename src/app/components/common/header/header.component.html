@@ -10,7 +10,7 @@
     <!-- Button statistics -->
     <li>
       <a routerLink="/statistics"
-        class=" normal-case bg-opacity-0 text-xl font-medium cursor-pointer {{dataThemeService.dataTheme == 'jisep' ? router.url == '/statistics' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/statistics' ? 'text-primary stroke-primary' : 'hover:text-primary hover:stroke-primary stroke-neutral'}}">
+        class=" normal-case bg-opacity-0 text-xl font-medium cursor-pointer {{dataThemeService.dataTheme == 'jisep' ? router.url == '/statistics' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/statistics' ? 'text-primary stroke-primary' : 'hover:text-primary hover:stroke-primary stroke-current'}}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
           class="w-6 h-6 ">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
@@ -23,7 +23,7 @@
     <!-- Versions button -->
     <li>
       <label *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin" for="modal-version"
-        class="bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': 'hover:text-primary stroke-neutral'}} normal-case text-xs modal-button indicator">Versions<span
+        class="bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': 'hover:text-primary stroke-current'}} normal-case text-xs modal-button indicator">Versions<span
           *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion"
           class="badge badge-secondary indicator-item badge-xs"></span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -37,7 +37,7 @@
 
     <!-- number of bookmarks -->
     <label data-tip="Mes Favoris"
-      class="text-xs normal-case inline-flex align-baseline tooltip tooltip-bottom">{{bookmarksService.bookmarks.size}}
+      class="text-xs normal-case inline-flex align-baseline tooltip tooltip-bottom stroke-current">{{bookmarksService.bookmarks.size}}
       / 50
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
         class="w-4 h-4">
@@ -53,7 +53,7 @@
     <!-- page recherche -->
     <li>
       <a routerLink="/prospects"
-        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/prospects' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/prospects' ? 'text-primary stroke-current' : 'hover:text-primary stroke-neutral hover:stroke-primary'}}" >Recherche
+        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/prospects' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/prospects' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current hover:stroke-primary'}}" >Recherche
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
           class="w-6 h-6 stroke-inherit">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -65,7 +65,7 @@
     <!-- page Favoris -->
     <li>
       <a routerLink="/bookmarks"
-        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/bookmarks' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/bookmarks' ? 'text-primary stroke-current' : 'hover:text-primary stroke-neutral hover:stroke-primary'}}">Favoris
+        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/bookmarks' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/bookmarks' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current hover:stroke-primary'}}">Favoris
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
           class="w-6 h-6 ">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,7 +77,7 @@
     <!-- page Rappels -->
     <li>
       <a routerLink="/reminders"
-        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/reminders' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/reminders' ? 'text-primary stroke-current' : 'hover:text-primary stroke-neutral hover:stroke-primary'}}">Rappels
+        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/reminders' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/reminders' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current hover:stroke-primary'}}">Rappels
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
           class="w-6 h-6 ">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -89,7 +89,7 @@
     <!-- Page rendez-vous -->
     <li>
       <a routerLink="/meetings"
-        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/meetings' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/meetings' ? 'text-primary stroke-current' : 'hover:text-primary stroke-neutral hover:stroke-primary'}}">Rendez-vous
+        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/meetings' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/meetings' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current hover:stroke-primary'}}">Rendez-vous
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
           class="w-6 h-6 ">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -101,7 +101,7 @@
     <!-- Page mails -->
     <li>
       <a routerLink="/mails"
-        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/mails' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/mails' ? 'text-primary stroke-current' : 'hover:text-primary hover:stroke-primary stroke-neutral'}}">Mails
+        class="bg-opacity-0 text-xl font-medium {{dataThemeService.dataTheme == 'jisep' ? router.url == '/mails' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/mails' ? 'text-primary stroke-current' : 'hover:text-primary hover:stroke-primary stroke-current'}}">Mails
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
           class="w-6 h-6 ">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -113,18 +113,18 @@
     <!-- Dropdown admin -->
     <div *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin && authService.currentUserSubject.getValue().pseudo == 'bgonzva' || 'lmelki' || 'tchardonnens' || 'glambert'" class="dropdown dropdown-end">
       <label tabindex="0"
-        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/users' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-neutral'}}">{{router.url
+        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
         == "/users" ? 'User' : 'Admin'}}</label>
       <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60 outline outline-1">
         <!-- Page users -->
         <li *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"><a routerLink="/users"
-            class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-neutral': router.url == '/users' ? 'text-primary stroke-current' : 'hover:text-primary stroke-neutral'}}">Users</a></li>
+            class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current'}}">Users</a></li>
         <!-- <li *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li> -->
       </ul>
     </div>
     
     <li class="dropdown dropdown-end">
-      <div tabindex="0" class="bg-opacity-0 hover:stroke-primary stroke-neutral">
+      <div tabindex="0" class="bg-opacity-0 hover:stroke-primary stroke-current">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
         class="w-6 stroke-inherit ">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -139,7 +139,7 @@
     </li>
 
     <!-- Bouton déconnexion -->
-    <li (click)="logout()" class="text-xs stroke-neutral hover:stroke-error">
+    <li (click)="logout()" class="text-xs stroke-current hover:stroke-error">
       <a class="bg-opacity-0">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-inherit" viewBox="0 0 24 24" stroke-width="1.5"
           fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -160,7 +160,7 @@
   <label class="modal-box max-w-screen-lg" for="">
     <label for="modal-version" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
     <div class="w-full">
-      <span class="text-xl font-bold">Dev /w ❤️ by your pôle tech, started by Benjamin GONZVA <a
+      <span class="text-xl font-bold stroke-current">Dev /w ❤️ by your pôle tech, started by Benjamin GONZVA <a
           href="https://www.instagram.com/ben.gonzva/" target="_blank" class="link-primary font-thin"
           *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin">(@ben.gonzva)
         </a></span>
