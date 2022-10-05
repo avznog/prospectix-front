@@ -111,13 +111,13 @@
     </li>
 
     <!-- Dropdown admin -->
-    <div *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin && authService.currentUserSubject.getValue().pseudo == 'bgonzva' || 'lmelki' || 'tchardonnens' || 'glambert'" class="dropdown dropdown-end">
-      <label tabindex="0"
+    <div *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin && (authService.currentUserSubject.getValue().pseudo == 'bgonzva' || authService.currentUserSubject.getValue().pseudo == 'lmelki' || authService.currentUserSubject.getValue().pseudo == 'tchardonnens' || authService.currentUserSubject.getValue().pseudo == 'glambert')" class="dropdown dropdown-end">
+      <label tabindex="0" 
         class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
         == "/users" ? 'User' : 'Admin'}}</label>
       <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60 outline outline-1">
         <!-- Page users -->
-        <li *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"><a routerLink="/users"
+        <li><a routerLink="/users"
             class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current'}}">Users</a></li>
         <!-- <li *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li> -->
       </ul>
