@@ -27,7 +27,7 @@
         </label>
         <select id="city" name="city" [(ngModel)]="formZipcode" (change)="onEditCity()" class="select select-bordered">
             <option [defaultSelected]="'Toutes les villes'" [value]="-1000">Toutes les villes</option>
-            <option *ngFor="let city of citiesService.cities" [ngValue]="city.zipcode">{{city.name}} : {{city.zipcode}}</option>
+            <option *ngFor="let city of citiesService.cities" [ngValue]="city.zipcode">{{city.name}} : {{city.zipcode}} ({{citiesService.countCities.get(city.id)}})</option>
         </select>
     </div>
 

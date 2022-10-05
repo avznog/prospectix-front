@@ -18,7 +18,8 @@ export class ChangelogsService {
           
            ],
         features: [
-          "Ajout du compte des domaines d'activités"
+          "Ajout du compte des domaines d'activités",
+          "Ajout du compte pour les villes"
         ]
       },
       {
