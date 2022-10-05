@@ -13,14 +13,13 @@ import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.
 })
 export class RemindersService {
 
+  nbReminders: number = 0;
   reminders = new Map<number, Reminder>();
   remindersDone = new Map<number, Reminder>();
   researchParamsReminder: ResearchParamsReminder = {
     take: 20,
     skip: 0,
     done: "false",
-    oldOrNew: "new",
-    keyword: "",
     priority: 0
   }
 
@@ -49,17 +48,9 @@ export class RemindersService {
   loadMore() {
     let queryParameters = new HttpParams();
     queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority)
-    
-    if(this.researchParamsReminder.orderByPriority)
-      queryParameters = queryParameters.append("orderByPriority", this.researchParamsReminder.orderByPriority)
-    
-    if(this.researchParamsReminder.date && this.researchParamsReminder.date != "")
-      queryParameters = queryParameters.append("date",this.researchParamsReminder.date)
-
+  
     queryParameters = queryParameters.append("skip", this.researchParamsReminder.skip)      
     queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
-    queryParameters = queryParameters.append("oldOrNew", this.researchParamsReminder.oldOrNew)
-    queryParameters = queryParameters.append("keyword",this.researchParamsReminder.keyword)
     queryParameters = queryParameters.append("take", 20);
     
     return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.reminders.set(reminder.id, reminder)));
@@ -110,5 +101,14 @@ export class RemindersService {
         return reminder.prospect.stage = stage.stage
       return reminder
     });
+  }
+
+  countReminders() {
+    let queryParameters = new HttpParams();
+    queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority)
+    queryParameters = queryParameters.append("skip", this.researchParamsReminder.skip)      
+    queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
+    queryParameters = queryParameters.append("take", 20);
+    return this.http.get<number>(`reminders/count-prospects`, { params: queryParameters }).subscribe(nbReminders => this.nbReminders = nbReminders);
   }
 }

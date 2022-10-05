@@ -8,8 +8,8 @@
     <app-no-result *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
     <div class="btn-group justify-center pb-5 w-full">
       <button class="btn btn-outline btn-ghost {{prospectsService.researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-      <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 20 + 1}}</button>
-      <button class="btn btn-outline btn-ghost {{prospectsService.prospects && prospectsService.prospects.size > 0 ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
+      <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 20 + 1}} / {{(prospectsService.nbProspects / 20 + 1).toFixed()}}</button>
+      <button class="btn btn-outline btn-ghost {{(prospectsService.researchParamsProspect.skip + 20 < prospectsService.nbProspects )? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
     </div>
   </div> 
   <div class="drawer-side">

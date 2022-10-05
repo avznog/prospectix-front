@@ -5,7 +5,6 @@ import { ReasonDisabledType } from 'src/app/constants/reasonDisabled.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
-import { Activity } from 'src/app/models/activity.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 
@@ -15,6 +14,7 @@ import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.
 export class ProspectsService {
 
   prospects = new Map<number, Prospect>();
+  nbProspects: number = 0;
   researchParamsProspect : ResearchParamsProspect = {
     skip: 0,
     zipcode: -1000,
@@ -54,6 +54,7 @@ export class ProspectsService {
       queryParameters = queryParameters.append("take", 20);
       queryParameters = queryParameters.append("zipcode", this.researchParamsProspect.zipcode)
       this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters }).subscribe(prospects => prospects.forEach(prospect => this.prospects.set(prospect.id, prospect)));
+      this.countProspects();
   }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
@@ -107,6 +108,20 @@ export class ProspectsService {
   
   disable(idProspect: number, reason: ReasonDisabledType) : Subscription {
     return this.http.get<Prospect[]>(`prospects/disable/${idProspect}/${reason}`,).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: StageType.ARCHIVED, disabled: true }));
+  }
+
+  countProspects() {
+    let queryParameters = new HttpParams();
+    if(this.researchParamsProspect.activity)
+      queryParameters = queryParameters.append("activity", this.researchParamsProspect.activity)
+    
+    if(this.researchParamsProspect.skip)
+      queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
+    
+    queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword ?? "")
+    queryParameters = queryParameters.append("take", 20);
+    queryParameters = queryParameters.append("zipcode", this.researchParamsProspect.zipcode);
+    return this.http.get<number>(`prospects/count-prospects`, { params: queryParameters }).subscribe(nbProspects => this.nbProspects = nbProspects);
   }
 
   addProspectsBase() {

@@ -12,6 +12,7 @@ import { SentEmail } from 'src/app/models/sent-email.model';
 })
 export class SentEmailsService {
 
+  nbSentEmails: number = 0;
   sentEmails = new Map<number, SentEmail>();
   researchParamsSentEmails : ResearchParamsSentEmails = {
     take: 20,
@@ -63,6 +64,10 @@ export class SentEmailsService {
         return sentEmail.prospect = prospect
       return
     })
+  }
+
+  countSentEmails() {
+    return this.http.get<number>(`sent-emails/find-sent-emails`).subscribe(nbSentEmails => this.sentEmails = this.sentEmails);
   }
 
 }

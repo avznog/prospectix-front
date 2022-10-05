@@ -12,6 +12,7 @@ import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.mo
 })
 export class MeetingsService {
 
+  nbMeetings: number = 0;
   meetings = new Map<number, Meeting>();
   meetingsDone = new Map<number, Meeting>();
   researchParamsMeeting: ResearchParamsMeeting = {
@@ -52,8 +53,8 @@ export class MeetingsService {
     queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
     queryParameters = queryParameters.append("take",20)
     
-    return this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(meetings => meetings.forEach(meeting => this.meetings.set(meeting.id, meeting)));
-  
+    this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(meetings => meetings.forEach(meeting => this.meetings.set(meeting.id, meeting)));
+    this.countMeetings();
   }
 
   loadMeetingsDone() {
@@ -103,5 +104,18 @@ export class MeetingsService {
         return meeting.prospect = prospect
       return
     })
+  }
+
+  countMeetings() {
+    let queryParameters = new HttpParams();
+
+    if(this.researchParamsMeeting.type)
+      queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
+
+    queryParameters = queryParameters.append("skip", this.researchParamsMeeting.skip)
+    queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
+    queryParameters = queryParameters.append("take",20);
+
+    return this.http.get<number>(`meetings/count-meetings`, { params: queryParameters }).subscribe(nbMeetings => this.nbMeetings = nbMeetings);
   }
 }

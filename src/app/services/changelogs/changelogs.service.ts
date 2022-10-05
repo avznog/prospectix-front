@@ -15,11 +15,12 @@ export class ChangelogsService {
         version: "0.10.1",
         date: new Date("2022-10-05T00:00:00.000Z"),
         bugs: [
-          
+          "Résolution du bug qui faisait que l'on pouvait avancer dans la pagination aussi loin que l'on veut"
            ],
         features: [
           "Ajout du compte des domaines d'activités",
-          "Ajout du compte pour les villes"
+          "Ajout du compte pour les villes",
+          
         ]
       },
       {

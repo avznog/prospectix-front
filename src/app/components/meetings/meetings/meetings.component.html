@@ -5,13 +5,15 @@
     <app-meetings-research-bloc></app-meetings-research-bloc>
     <div
       *ngIf="meetingsService.researchParamsMeeting.done == true || meetingsService.researchParamsMeeting.done == 'true'">
-      <div *ngFor="let meeting of meetingsService.meetingsDone | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
+      <div
+        *ngFor="let meeting of meetingsService.meetingsDone | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
         <app-prospect-tile [prospect]="meeting.value.prospect" [meeting]="meeting.value"></app-prospect-tile>
       </div>
     </div>
     <div
       *ngIf="meetingsService.researchParamsMeeting.done == false || meetingsService.researchParamsMeeting.done == 'false'">
-      <div *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
+      <div
+        *ngFor="let meeting of meetingsService.meetings | keyvalue | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
         <app-prospect-tile *ngIf="meeting.value.prospect.stage == 3" [prospect]="meeting.value.prospect"
           [meeting]="meeting.value"></app-prospect-tile>
       </div>
@@ -22,8 +24,8 @@
       <button
         class="btn btn-outline btn-ghost {{meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}"
         (click)="pageDown()">«</button>
-      <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 20 + 1}}</button>
-      <button class="btn btn-outline btn-ghost" (click)="pageUp()">»</button>
+      <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 20 + 1}} / {{ (meetingsService.nbMeetings / 20 + 1).toFixed() }}</button>
+      <button class="btn btn-outline btn-ghost {{(meetingsService.researchParamsMeeting.done == false || meetingsService.researchParamsMeeting.done == 'false') ? (meetingsService.researchParamsMeeting.skip + 20 < meetingsService.nbMeetings) ? '' : 'btn-disabled' : ''}} " (click)="pageUp()">»</button>
     </div>
   </div>
   <div class="drawer-side">

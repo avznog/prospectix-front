@@ -12,6 +12,7 @@ import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmark
 })
 export class BookmarksService {
 
+  nbBookmarks: number = 0;
   researchParamsBookmarks: ResearchParamsBookmarks = {
     keyword: '',
     skip: 0,
@@ -50,8 +51,8 @@ export class BookmarksService {
     
     queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword)
     queryParameters = queryParameters.append("take", 20);
-
     this.http.get<Bookmark[]>(`bookmarks/find-all-paginated/`, { params: queryParameters}).subscribe(bookmarks => bookmarks.forEach(bookmark => this.bookmarks.set(bookmark.id, bookmark)));
+    this.countBookmarks();
   }
 
   create(createBookmarkDto: CreateBookmarkDto) : Subscription {
@@ -85,5 +86,18 @@ export class BookmarksService {
         return bookmark.prospect = prospect
       return
     })
+  }
+
+  countBookmarks() {
+    let queryParameters = new HttpParams();
+      queryParameters = queryParameters.append("activity", this.researchParamsBookmarks.activity)
+      queryParameters = queryParameters.append("zipcode", this.researchParamsBookmarks.zipcode)
+
+    if(this.researchParamsBookmarks.skip)
+      queryParameters = queryParameters.append("skip", this.researchParamsBookmarks.skip)
+  
+    queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword)
+    queryParameters = queryParameters.append("take", 20);
+    return this.http.get<number>(`bookmarks/count-bookmarks`, { params: queryParameters}).subscribe(nbBookmarks => this.nbBookmarks = nbBookmarks);
   }
 }

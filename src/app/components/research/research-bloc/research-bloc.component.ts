@@ -35,7 +35,6 @@ export class ResearchBlocComponent implements OnInit {
       ...this.prospectsService.researchParamsProspect,
       activity: this.formActivity
     });
-    console.log(this.formActivity)
   }
 
   onEditKeyword() {
