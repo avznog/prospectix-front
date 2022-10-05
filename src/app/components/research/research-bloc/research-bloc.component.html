@@ -16,7 +16,7 @@
         <select id="activity" name="activity" [(ngModel)]="formActivity" (change)="onEditActivity()"
             class="select select-bordered">
             <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'activité</option>
-            <option *ngFor="let activity of activitiesService.activities">{{activity.name}}</option>
+            <option *ngFor="let activity of activitiesService.activities" [value]="activity.name">{{activity.name}}  ({{activitiesService.countActvities.get(activity.id)}})</option>
         </select>
     </div>
 

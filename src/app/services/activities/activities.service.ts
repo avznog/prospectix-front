@@ -8,11 +8,13 @@ import { Activity } from 'src/app/models/activity.model';
 })
 export class ActivitiesService {
 
-  activities: Activity[] = []
+  activities: Activity[] = [];
+  countActvities = new Map<number, number>();
   constructor(
     private http: HttpClient
   ) { 
     this.findAll().subscribe(activities => this.activities = activities);
+    this.countForDomains().subscribe(activities => activities.forEach(activity => this.countActvities.set(activity.id, activity.count)));
   }
 
   findAll() {
@@ -21,5 +23,9 @@ export class ActivitiesService {
 
   add(createActivityDto: CreateActivityDto) {
     return this.http.post<Activity>("activities/add", createActivityDto).subscribe(activity => this.activities.push(activity));
+  }
+
+  countForDomains() {
+    return this.http.get<{id: number, count: number}[]>(`prospects/count-for-domains`);
   }
 }

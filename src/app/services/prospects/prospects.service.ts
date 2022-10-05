@@ -5,6 +5,7 @@ import { ReasonDisabledType } from 'src/app/constants/reasonDisabled.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
+import { Activity } from 'src/app/models/activity.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 

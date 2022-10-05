@@ -16,7 +16,7 @@ export class ResearchBlocComponent implements OnInit {
   constructor(
     public readonly activitiesService: ActivitiesService,
     public readonly citiesService: CitiesService,
-    public readonly prospectsService: ProspectsService
+    public readonly prospectsService: ProspectsService,
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +35,7 @@ export class ResearchBlocComponent implements OnInit {
       ...this.prospectsService.researchParamsProspect,
       activity: this.formActivity
     });
+    console.log(this.formActivity)
   }
 
   onEditKeyword() {
