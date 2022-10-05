@@ -23,23 +23,11 @@ export class AddProspectComponent implements OnInit {
     private readonly prospectService: ProspectsService,
     private readonly toastsService: ToastsService
   ) { }
-
-  // City
-  addCityDisabled = false;
-  city: City = {} as City;
-  addCity: string = "";
-  addZipcode: number = Number();
-
-  // Activity
-  addActivityDisabled = false;
-  activity: Activity = {} as Activity;
-  addActivity: string = "";
-
-  // Country
-  addCountryDisabled = false;
-  country: Country = {} as Country;
-  addCountry: string = "";
   
+  city: City = {} as City;  
+  activity: Activity = {} as Activity;
+  country: Country = {} as Country;
+
   // Prospect
   companyName: string = "";
   address: string = "";
@@ -49,13 +37,16 @@ export class AddProspectComponent implements OnInit {
   comment: string = "";
 
   ngOnInit(): void {
+    this.city = this.citiesService.cities[0];
+    this.activity = this.activitiesService.activities[0];
+    this.country = this.countriesService.countries[0];
   }
 
   onCreateProspect() {
     this.prospectService.create({
-      activity: !this.activity.name ? { name: this.addActivity } : this.activity,
-      city: !this.city.name ? { name: this.addCity, zipcode: this.addZipcode } : this.city,
-      country: !this.country.name ? { name: this.addCountry } : this.country,
+      activity: this.activity,
+      city: this.city,
+      country: this.country,
       stage: StageType.RESEARCH,
       phone: {
         number: this.phone
@@ -80,35 +71,7 @@ export class AddProspectComponent implements OnInit {
     });
   }
 
-  onAddCity() {
-    this.citiesService.create({
-      name: this.addCity,
-      zipcode: this.addZipcode
-    });
+  onChangeCity() {
+    console.log(this.city)
   }
-
-  onEditAddCity() {
-    this.citiesService.cities.filter(city => city.name.toLowerCase() == this.addCity.toLowerCase() || city.zipcode == this.addZipcode).length == 0 ? this.addCityDisabled = false : this.addCityDisabled = true;
-  }
-
-  onAddActivity() {
-    this.activitiesService.add({
-      name: this.addActivity
-    });
-  }
-
-  onEditAddActivity() {
-    this.activitiesService.activities.filter(activity => activity.name.toLowerCase() == this.addActivity.toLowerCase()).length == 0 ? this.addActivityDisabled = false : this.addActivityDisabled = true;
-  }
-
-  onAddCountry() {
-    this.countriesService.add({
-      name: this.addCountry
-    });
-  }
-
-  onEditAddCountry() {
-    this.countriesService.countries.filter(country => country.name.toLowerCase() == this.addCountry.toLowerCase()).length == 0 ? this.addCountryDisabled = false : this.addCountryDisabled = true;
-  }
-
 }

@@ -104,7 +104,7 @@ export class ProspectTileComponent implements OnInit {
     });
     this.toastsService.addToast({
       type: "alert-error",
-      message: "Supprimé des favorisé"
+      message: "supprimé des favoris"
     })
   }
 

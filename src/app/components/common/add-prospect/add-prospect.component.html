@@ -36,22 +36,6 @@
         <option *ngFor="let activity of activitiesService.activities" [ngValue]="activity" [defaultSelected]="activity">{{activity.name}}</option>
       </select>
 
-      <!-- dropdown add activity -->
-      <div class="dropdown dropdown-right">
-        <label class="btn btn-ghost btn-outline" tabindex="0">+</label>
-        <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
-          <div class="card-body">
-            <div class="card-title">Ajouter un domaine d'activité</div>
-
-            <input type="text" class="input input-ghost outline outline-1" placeholder="Domaine d'activité" [(ngModel)]="addActivity" (input)="onEditAddActivity()">
-            
-            <label tabindex="0" class="btn {{addActivityDisabled ? 'btn-disabled' : ''}}" (click)="onAddActivity()">Ajouter</label>
-            <div class="alert alert-error shadow-lg" *ngIf="addActivityDisabled">
-              <span>Attention ! Ce domaine d'activité existe déjà dans la base</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -68,21 +52,7 @@
           <option *ngFor="let city of citiesService.cities" [ngValue]="city" [defaultSelected]="city">{{city.name}} : {{city.zipcode}}</option>
         </select>
 
-        <!-- dropdown add city -->
-        <div class="dropdown dropdown-right">
-          <label tabindex="0" class="btn btn-ghost btn-outline">+</label>
-          <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
-            <div class="card-body ">
-              <div class="card-title">Ajouter une ville</div>
-              <input type="text" class="input input-ghost outline-1 outline" placeholder="Ville" [(ngModel)]="addCity" (input)="onEditAddCity()">
-              <input type="text" class="input outline outline-1" placeholder="Code postal" [(ngModel)]="addZipcode" (input)="onEditAddCity()">
-              <label tabindex="0" class="btn {{addCityDisabled ? 'btn-disabled' : ''}}" (click)="onAddCity()">Ajouter</label>
-              <div class="alert alert-error shadow-lg" *ngIf="addCityDisabled">
-                <span>Attention ! Cette ville existe déjà dans la base</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      
       </div>
   </div>
 
@@ -99,20 +69,6 @@
           <option *ngFor="let country of countriesService.countries" [ngValue]="country" [defaultSelected]="country">{{country.name}}</option>
       </select>
 
-      <!-- dropdown add country -->
-      <div class="dropdown dropdown-right">
-        <label tabindex="0" class="btn btn-ghost btn-outline">+</label>
-        <div tabindex="0" class="dropdown-content card card-compact outline-1 bg-white outline">
-          <div class="card-body">
-            <div class="card-title">Ajouter un Pays</div>
-            <input type="text" class="input input-ghost outline-1 outline" placeholder="Pays" [(ngModel)]="addCountry" (input)="onEditAddCountry()">
-            <label tabindex="0" class="btn {{addCountryDisabled ? 'btn-disabled' : ''}}" (click)="onAddCountry()">Ajouter</label>
-            <div class="alert alert-error shadow-lg" *ngIf="addCountryDisabled">
-              <span>Attention ! Ce pays existe déjà dans la base</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
