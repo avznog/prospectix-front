@@ -12,7 +12,6 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
-import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
@@ -28,7 +27,6 @@ export class AddMailModalComponent implements OnInit {
 
   constructor(
     private readonly prospectService: ProspectsService,
-    private readonly statisticsService: StatisticsService,
     private readonly remindersService: RemindersService,
     private readonly meetingsService: MeetingsService,
     private readonly bookmarksService: BookmarksService,
@@ -45,17 +43,17 @@ export class AddMailModalComponent implements OnInit {
   onClickSentEmail() {
     this.prospect.stage == 2 && this.onMarkReminderDone();
     this.prospect.stage == 3 && this.onMarkMeetingDone();
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-      totalCalls: this.statisticsService.statistic.totalCalls + 1,
-      totalSentEmails: this.statisticsService.statistic.totalSentEmails + 1,
-      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
-    });
+    // (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
+    //   totalCalls: this.statisticsService.statistic.totalCalls + 1,
+    //   totalSentEmails: this.statisticsService.statistic.totalSentEmails + 1,
+    //   weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
+    //   weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
+    // });
 
-    (this.prospect.stage == 2 || this.prospect.stage == 3) && this.statisticsService.update({
-      totalSentEmails: this.statisticsService.statistic.weeklySentEmails + 1,
-      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
-    });
+    // (this.prospect.stage == 2 || this.prospect.stage == 3) && this.statisticsService.update({
+    //   totalSentEmails: this.statisticsService.statistic.weeklySentEmails + 1,
+    //   weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
+    // });
 
 
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });

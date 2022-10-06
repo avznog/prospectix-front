@@ -12,7 +12,6 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
-import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
@@ -38,7 +37,6 @@ export class AddMeetingsModalComponent implements OnInit {
     private readonly remindersService: RemindersService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly statisticsService: StatisticsService,
     private readonly toastsService: ToastsService
   ) { }
 
@@ -47,17 +45,17 @@ export class AddMeetingsModalComponent implements OnInit {
 
   onCreateMeeting() {
     this.prospect.stage == 2 && this.onMarkReminderDone();
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-      totalCalls: this.statisticsService.statistic.totalCalls + 1,
-      totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
-      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-      weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
-    });
+    // (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
+    //   totalCalls: this.statisticsService.statistic.totalCalls + 1,
+    //   totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
+    //   weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
+    //   weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
+    // });
     
-    (this.prospect.stage == 2) && this.statisticsService.update({
-      totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
-      weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
-    });
+    // (this.prospect.stage == 2) && this.statisticsService.update({
+    //   totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
+    //   weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
+    // });
 
     this.prospectsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
