@@ -7,6 +7,7 @@ import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { CallsService } from 'src/app/services/calls/calls.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -33,8 +34,8 @@ export class AddMailModalComponent implements OnInit {
     private readonly sentEmailsService: SentEmailsService,
     private readonly authService: AuthService,
     private readonly eventsService: EventsService,
-    private readonly toastsService: ToastsService
-
+    private readonly toastsService: ToastsService,
+    private readonly callsService: CallsService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +55,12 @@ export class AddMailModalComponent implements OnInit {
     //   totalSentEmails: this.statisticsService.statistic.weeklySentEmails + 1,
     //   weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
     // });
+
+    // counting as a call
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.callsService.createForMe({
+      prospect: this.prospect,
+      date: new Date
+    });
 
 
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });

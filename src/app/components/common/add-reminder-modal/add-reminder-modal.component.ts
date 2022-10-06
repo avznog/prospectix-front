@@ -5,6 +5,7 @@ import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { Prospect } from 'src/app/models/prospect.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { CallsService } from 'src/app/services/calls/calls.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -33,7 +34,8 @@ export class AddReminderModalComponent implements OnInit {
     private readonly meetingsService: MeetingsService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly callsService: CallsService,
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +48,13 @@ export class AddReminderModalComponent implements OnInit {
     //   weeklyReminders: this.statisticsService.statistic.weeklyReminders + 1,
     //   weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1
     // });
+
+    // Counting as a call
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.callsService.createForMe({
+      prospect: this.prospect,
+      date: new Date
+    });
+
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });

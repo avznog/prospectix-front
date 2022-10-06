@@ -7,6 +7,7 @@ import { StageType } from 'src/app/constants/stage.type';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { CallsService } from 'src/app/services/calls/calls.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -37,7 +38,8 @@ export class AddMeetingsModalComponent implements OnInit {
     private readonly remindersService: RemindersService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly callsService: CallsService
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +58,11 @@ export class AddMeetingsModalComponent implements OnInit {
     //   totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
     //   weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
     // });
+
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.callsService.createForMe({
+      prospect: this.prospect,
+      date: new Date
+    });
 
     this.prospectsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
