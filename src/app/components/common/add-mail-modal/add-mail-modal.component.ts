@@ -7,12 +7,12 @@ import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
-import { CallsService } from 'src/app/services/calls/calls.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class AddMailModalComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly eventsService: EventsService,
     private readonly toastsService: ToastsService,
-    private readonly callsService: CallsService
+    private readonly statisticsService: StatisticsService
   ) { }
 
   ngOnInit(): void {
@@ -44,20 +44,9 @@ export class AddMailModalComponent implements OnInit {
   onClickSentEmail() {
     this.prospect.stage == 2 && this.onMarkReminderDone();
     this.prospect.stage == 3 && this.onMarkMeetingDone();
-    // (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-    //   totalCalls: this.statisticsService.statistic.totalCalls + 1,
-    //   totalSentEmails: this.statisticsService.statistic.totalSentEmails + 1,
-    //   weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-    //   weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
-    // });
-
-    // (this.prospect.stage == 2 || this.prospect.stage == 3) && this.statisticsService.update({
-    //   totalSentEmails: this.statisticsService.statistic.weeklySentEmails + 1,
-    //   weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
-    // });
 
     // counting as a call
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.callsService.createForMe({
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
       prospect: this.prospect,
       date: new Date
     });

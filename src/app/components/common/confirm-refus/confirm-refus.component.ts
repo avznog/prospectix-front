@@ -6,13 +6,12 @@ import { StageType } from 'src/app/constants/stage.type';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
-import { CallsService } from 'src/app/services/calls/calls.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
-import { NegativeAnswersService } from 'src/app/services/negative-answers/negative-answers.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { ToastsService } from 'src/app/services/toasts/toasts.service';
 @Component({
   selector: 'app-confirm-refus',
@@ -33,8 +32,7 @@ export class ConfirmRefusComponent implements OnInit {
     private readonly eventsService: EventsService,
     private readonly authService: AuthService,
     private readonly toastsService: ToastsService,
-    private readonly callsService: CallsService,
-    private readonly negativeAnswersService: NegativeAnswersService
+    private readonly statisticsService: StatisticsService,
   ) { }
 
   ngOnInit(): void {
@@ -43,26 +41,15 @@ export class ConfirmRefusComponent implements OnInit {
   
   onClickRefus() {
     this.prospect.stage == 2 && this.onMarkReminderDone();
-    // (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-    //   totalCalls: this.statisticsService.statistic.totalCalls + 1,
-    //   totalNegativeAnswers: this.statisticsService.statistic.totalNegativeAnswers + 1,
-    //   weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-    //   weeklyNegativeAnswers: this.statisticsService.statistic.weeklyNegativeAnswers + 1
-    // });
-
-    // (this.prospect.stage == 2) && this.statisticsService.update({
-    //   totalNegativeAnswers: this.statisticsService.statistic.totalNegativeAnswers + 1,
-    //   weeklyNegativeAnswers: this.statisticsService.statistic.weeklyNegativeAnswers + 1
-    // });
 
     // Counting as a call
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.callsService.createForMe({
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
       prospect: this.prospect,
       date: new Date
     });
 
     // Counting as a refus 
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.negativeAnswersService.createForMe({
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createNegativeAnswerForMe({
       prospect: this.prospect,
       date: new Date
     });

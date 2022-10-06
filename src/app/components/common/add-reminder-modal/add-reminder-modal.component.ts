@@ -5,12 +5,12 @@ import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { Prospect } from 'src/app/models/prospect.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
-import { CallsService } from 'src/app/services/calls/calls.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
@@ -35,22 +35,16 @@ export class AddReminderModalComponent implements OnInit {
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
     private readonly toastsService: ToastsService,
-    private readonly callsService: CallsService,
+    private readonly statisticsService: StatisticsService,
   ) { }
 
   ngOnInit(): void {
   }
 
   onCreateReminder() {
-    // (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-    //   totalCalls: this.statisticsService.statistic.totalCalls + 1,
-    //   totalReminders: this.statisticsService.statistic.totalReminders + 1,
-    //   weeklyReminders: this.statisticsService.statistic.weeklyReminders + 1,
-    //   weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1
-    // });
 
     // Counting as a call
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.callsService.createForMe({
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
       prospect: this.prospect,
       date: new Date
     });
