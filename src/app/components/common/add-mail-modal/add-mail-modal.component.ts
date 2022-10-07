@@ -51,6 +51,8 @@ export class AddMailModalComponent implements OnInit {
       date: new Date
     });
 
+    // adding a count to the meetings
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createSentEmailForMe();
 
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL });

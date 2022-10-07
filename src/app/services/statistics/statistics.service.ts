@@ -22,18 +22,28 @@ export class StatisticsService {
     this.countAllCallsForMe();
     this.countAllNegativeAnswersForMe();
     this.countAllRemindersForMe();
+    this.countAllMeetingsForMe();
+    this.countAllSentEmailsForMe();
   }
 
   countAllRemindersForMe() {
-    return this.http.get<number>(`reminders/count-all-for-me`).subscribe(allMyReminders => this.allMyReminders = allMyReminders)
+    return this.http.get<number>(`reminders/count-all-for-me`).subscribe(allMyReminders => this.allMyReminders = allMyReminders);
+  }
+
+  countAllMeetingsForMe() {
+    return this.http.get<number>(`meetings/count-all-for-me`).subscribe(allMyMeetings => this.allMyMeetings = allMyMeetings);
   }
 
   countAllNegativeAnswersForMe() {
-    this.http.get<number>(`negative-answers/count-all-for-me`).subscribe(allMyNegativeAnswers => this.allMyNegativeAnswers = allMyNegativeAnswers);
+    return this.http.get<number>(`negative-answers/count-all-for-me`).subscribe(allMyNegativeAnswers => this.allMyNegativeAnswers = allMyNegativeAnswers);
+  }
+
+  countAllSentEmailsForMe() {
+    return this.http.get<number>(`sent-emails/count-all-for-me`).subscribe(allMySentEmails => this.allMySentEmails = allMySentEmails);
   }
   
   countAllCallsForMe() {
-    this.http.get<number>(`calls/count-all-for-me`).subscribe((allMyCalls) => this.allMyCalls = allMyCalls)
+    return this.http.get<number>(`calls/count-all-for-me`).subscribe((allMyCalls) => this.allMyCalls = allMyCalls)
   }
 
   // CREATION

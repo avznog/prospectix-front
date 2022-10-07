@@ -49,6 +49,9 @@ export class AddReminderModalComponent implements OnInit {
       date: new Date
     });
 
+    // Incremeting the reminders
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createReminderForMe();
+
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
