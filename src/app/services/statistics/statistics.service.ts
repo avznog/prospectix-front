@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateCallDto } from 'src/app/dto/calls/create-call.dto';
 import { CreateNegativeAnswerDto } from 'src/app/dto/negative-answers/create-negative-answer.dto';
@@ -15,6 +15,12 @@ export class StatisticsService {
   allMyNegativeAnswers: number = 0;
   allMyMeetings: number = 0;
   allMySentEmails: number = 0;
+  allCalls = [0,3,2,2,4];
+  allPseudos: [string] = [""];
+  all: [{
+    pseudo: string,
+    count: number
+  }] = [{pseudo: "",count: 0}];
 
   constructor(
     private http: HttpClient
@@ -24,8 +30,11 @@ export class StatisticsService {
     this.countAllRemindersForMe();
     this.countAllMeetingsForMe();
     this.countAllSentEmailsForMe();
+    this.countAllCalls({ dateDown: new Date("2022-07-01T00:00:00.000Z"), dateUp: new Date()}).subscribe(allCalls => this.all = allCalls
+    );
   }
 
+  // * Getting the separate count since the beginning of the year for all data
   countAllRemindersForMe() {
     return this.http.get<number>(`reminders/count-all-for-me`).subscribe(allMyReminders => this.allMyReminders = allMyReminders);
   }
@@ -43,10 +52,20 @@ export class StatisticsService {
   }
   
   countAllCallsForMe() {
-    return this.http.get<number>(`calls/count-all-for-me`).subscribe((allMyCalls) => this.allMyCalls = allMyCalls)
+    return this.http.get<number>(`calls/count-all-for-me`).subscribe(allMyCalls => this.allMyCalls = allMyCalls)
   }
 
-  // CREATION
+  // * Data for graphs
+  countAllCalls(interval: {dateDown: Date, dateUp: Date}) {
+    let queryParameters = new HttpParams();
+    if(interval){
+      queryParameters = queryParameters.append("dateDown", interval.dateDown.toISOString());
+      queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
+    }
+    return this.http.get<[{pseudo: string, count: number}]>(`calls/count-all`, { params: queryParameters })
+  }
+
+  // * CREATION and INCREMENTATION of counts
   createNegativeAnswerForMe(createNegativeAnswerDto: CreateNegativeAnswerDto) {
     this.http.post<NegativeAnswer>(`negative-answers/create-for-me`, createNegativeAnswerDto).subscribe(() => this.allMyNegativeAnswers += 1);
   }
