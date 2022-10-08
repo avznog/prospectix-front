@@ -8,7 +8,6 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
-  data = {datasets: [{data: this.statisticsService.allCalls}], labels: [this.statisticsService.allPseudos]}
   chart: any
   constructor(
     public readonly statisticsService: StatisticsService,

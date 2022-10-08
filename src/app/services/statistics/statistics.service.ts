@@ -15,12 +15,6 @@ export class StatisticsService {
   allMyNegativeAnswers: number = 0;
   allMyMeetings: number = 0;
   allMySentEmails: number = 0;
-  allCalls = [0,3,2,2,4];
-  allPseudos: [string] = [""];
-  all: [{
-    pseudo: string,
-    count: number
-  }] = [{pseudo: "",count: 0}];
 
   constructor(
     private http: HttpClient
@@ -30,8 +24,7 @@ export class StatisticsService {
     this.countAllRemindersForMe();
     this.countAllMeetingsForMe();
     this.countAllSentEmailsForMe();
-    this.countAllCalls({ dateDown: new Date("2022-07-01T00:00:00.000Z"), dateUp: new Date()}).subscribe(allCalls => this.all = allCalls
-    );
+    this.countAllCalls({ dateDown: new Date("2022-07-01T00:00:00.000Z"), dateUp: new Date()}).subscribe((data) => console.log(data));
   }
 
   // * Getting the separate count since the beginning of the year for all data
