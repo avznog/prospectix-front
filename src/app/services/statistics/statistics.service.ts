@@ -27,6 +27,14 @@ export class StatisticsService {
   allRemindersCount: [number] = [0];
   allRemindersPseudo: [string] = [""];
 
+  //all meetings
+  allMeetingsCount : [number] = [0];
+  allMeetingsPseudo: [string] = [""];
+
+  //all Sent Emails
+  allSentEmailsCount : [number] = [0];
+  allSentEmailsPseudo : [string] = [""];
+
   constructor(
     private http: HttpClient,
   ) {
@@ -79,12 +87,12 @@ export class StatisticsService {
         this.allCallsPseudo.push(call.pseudo);
       }
       )
-
       // Calling the chart
       this.createAllCallsChart();
     });
   }
 
+  // ? all reminders
   countAllReminders(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
     if (interval) {
@@ -104,6 +112,54 @@ export class StatisticsService {
       console.log(this.allRemindersCount)
       console.log(this.allRemindersPseudo)
       this.createAllRemindersChart();
+    });
+  }
+
+  // ? All meetings
+  countAllMeetings(interval: { dateDown: Date, dateUp: Date }) {
+    let queryParameters = new HttpParams();
+    if (interval) {
+      queryParameters = queryParameters.append("dateDown", interval.dateDown.toISOString());
+      queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
+    }
+    return this.http.get<[{ pseudo: string, count: number }]>(`meetings/count-all`, { params: queryParameters }).subscribe(allMeetings => {
+
+      // reseting the data so the chart does not print X times
+      this.allMeetingsCount = [0];
+      this.allMeetingsPseudo = [""]
+      this.allMeetingsCount.pop();
+      this.allMeetingsPseudo.pop();
+      allMeetings.forEach(meeting => {
+        this.allMeetingsCount.push(meeting.count);
+        this.allMeetingsPseudo.push(meeting.pseudo);
+      }
+      )
+      // Calling the chart
+      this.createAllMeetingsChart();
+    });
+  }
+
+  // ? All mails
+  countAllSentEmails(interval: { dateDown: Date, dateUp: Date }) {
+    let queryParameters = new HttpParams();
+    if (interval) {
+      queryParameters = queryParameters.append("dateDown", interval.dateDown.toISOString());
+      queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
+    }
+    return this.http.get<[{ pseudo: string, count: number }]>(`sent-emails/count-all`, { params: queryParameters }).subscribe(allSentEmails => {
+
+      // reseting the data so the chart does not print X times
+      this.allSentEmailsCount = [0];
+      this.allSentEmailsPseudo = [""]
+      this.allSentEmailsCount.pop();
+      this.allSentEmailsPseudo.pop();
+      allSentEmails.forEach(sentEmail => {
+        this.allSentEmailsCount.push(sentEmail.count);
+        this.allSentEmailsPseudo.push(sentEmail.pseudo);
+      }
+      )
+      // Calling the chart
+      this.createAllSentEmailsChart();
     });
   }
   
@@ -163,6 +219,48 @@ export class StatisticsService {
             data: this.allRemindersCount,
             backgroundColor: "blue",
             label: "Classement par nombre de rappels"
+          },
+        ]
+      },
+      options: {
+        aspectRatio: 3.5,
+      }
+    });
+  }
+
+  // ? Chart for all Meetings
+  createAllMeetingsChart() {
+    new Chart("allMeetings", {
+      type: 'bar',
+
+      data: {
+        labels: this.allMeetingsPseudo,
+        datasets: [
+          {
+            data: this.allMeetingsCount,
+            backgroundColor: "blue",
+            label: "Classement par nombre de Rendez-vous"
+          },
+        ]
+      },
+      options: {
+        aspectRatio: 3.5,
+      }
+    });
+  }
+
+  // ? Chart for all Sent Emails
+  createAllSentEmailsChart() {
+    new Chart("allSentEmails", {
+      type: 'bar',
+
+      data: {
+        labels: this.allSentEmailsPseudo,
+        datasets: [
+          {
+            data: this.allSentEmailsCount,
+            backgroundColor: "blue",
+            label: "Classement par nombre d'emails envoyés"
           },
         ]
       },
