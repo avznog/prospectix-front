@@ -1,81 +1,9 @@
-<div class="space-y-5 self-center">
-  <div class="card shadow-lg p-5 space-y-5">
-    <label class="card-title self-center">Statistiques personnelles</label>
-
-    <!-- STATISTIQUES SUR LA SEMAINE -->
-    <p class="text-xl pb-0 font-bold">Cette semaine</p>
-    <div class="inline-flex">
-      <div class="w-1/5 ">
-        <app-stats-small-card></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card></app-stats-small-card>
-      </div>
-    </div> 
-
-
-    <!-- STATISTIQUES TOTALES -->
-    <p class="text-xl pb-0 font-bold">Sur toute l'année</p>
-    <div class="inline-flex">
-      <div class="w-1/5 ">
-        <app-stats-small-card [title]="'Appels'" [value]="statisticsService.allMyCalls"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card [title]="'Rappels'" [value]="statisticsService.allMyReminders"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card [title]="'Rendez-vous'" [value]="statisticsService.allMyMeetings"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card [title]="'Mails'" [value]="statisticsService.allMySentEmails"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card [title]="'Refus'" [value]="statisticsService.allMyNegativeAnswers"></app-stats-small-card>
-      </div>
-    </div> 
-
-    <label class="card-title">Historique des Stats</label>
-    <div class="card-body w-full">
-      <canvas id="allCalls"></canvas>
-      <canvas id="allReminders"></canvas>
-      <canvas id="allMeetings"></canvas>
-      <canvas id="allSentEmails"></canvas>
-      <!-- <div *ngFor="let statHistory of statsHistoryService.statsHistory | keyvalue">
-        <div tabindex="0-{{statHistory.value.id}}"
-          class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
-          <input type="checkbox" />
-          <div class="collapse-title text-xl font-  medium">{{statHistory.value.startDate | shortFrenchDate}} au
-            {{statHistory.value.endDate | shortFrenchDate}}</div>
-          <div class="collapse-content">
-            <div class="inline-flex w-full">
-              <div class="w-1/5 ">
-                <app-stats-small-card [title]="'Appels'" [value]="statHistory.value.weeklyCalls"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Rappels'" [value]="statHistory.value.weeklyReminders"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Rendez-vous'" [value]="statHistory.value.weeklyMeetings"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Mails'" [value]="statHistory.value.weeklySentEmails"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Refus'" [value]="statHistory.value.weeklyNegativeAnswers"></app-stats-small-card>
-              </div>
-            </div> 
-          </div>
-        </div>
-      </div> -->
-    </div>
-  </div>
+<div class="tabs tabs-boxed bg-base-300 justify-center p-5">
+  <a class="tab hover:text-primary {{statsRoute == 'my-stats' ? 'tab-active' : ''}}" (click)="statsRoute = 'my-stats'">Statistiques personnelles</a> 
+  <a class="tab hover:text-primary {{statsRoute == 'ranking' ? 'tab-active' : ''}}" (click)="statsRoute = 'ranking'">Classements</a> 
+  <a class="tab hover:text-primary {{statsRoute == 'activity' ? 'tab-active' : ''}}" (click)="statsRoute = 'activity'">Activité</a>
 </div>
+
+<app-ranking *ngIf="statsRoute == 'ranking'"></app-ranking>
+<app-my-stats *ngIf="statsRoute == 'my-stats'"></app-my-stats>
+<app-activity *ngIf="statsRoute == 'activity'"></app-activity>

@@ -1,0 +1,43 @@
+<div class="w-full p-5 space-y-5">
+
+  <!-- STATISTIQUES SUR LA SEMAINE -->
+  <p class="text-xl pb-0 font-bold">Cette semaine</p>
+  <div class="inline-flex w-full">
+    <div class="w-1/5 ">
+      <app-stats-small-card></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card></app-stats-small-card>
+    </div>
+  </div>
+
+
+  <!-- STATISTIQUES TOTALES -->
+  <p class="text-xl pb-0 font-bold ">Sur toute l'année</p>
+  <div class="inline-flex w-full">
+    <div class="w-1/5 ">
+      <app-stats-small-card [title]="'Appels'" [value]="statisticsService.allMyCalls"></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card [title]="'Rappels'" [value]="statisticsService.allMyReminders"></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card [title]="'Rendez-vous'" [value]="statisticsService.allMyMeetings"></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card [title]="'Mails'" [value]="statisticsService.allMySentEmails"></app-stats-small-card>
+    </div>
+    <div class="w-1/5">
+      <app-stats-small-card [title]="'Refus'" [value]="statisticsService.allMyNegativeAnswers"></app-stats-small-card>
+    </div>
+  </div>
+</div>

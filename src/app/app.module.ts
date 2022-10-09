@@ -57,6 +57,9 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
 import { NgChartsModule } from 'ng2-charts';
+import { RankingComponent } from './components/statistics/ranking/ranking.component';
+import { MyStatsComponent } from './components/statistics/my-stats/my-stats.component';
+import { ActivityComponent } from './components/statistics/activity/activity.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,6 +107,9 @@ import { NgChartsModule } from 'ng2-charts';
     StatsSmallCardComponent,
     ConfirmProComponent,
     MarkMeetingDoneAndOutComponent,
+    RankingComponent,
+    MyStatsComponent,
+    ActivityComponent,
   ],
   imports: [
     BrowserModule,
