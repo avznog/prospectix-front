@@ -1,4 +1,15 @@
 <div class="w-full">
+  
+  <div class="inline-flex w-full p-5">
+    <label class="input-group w-1/3 input-group-sm">
+      <span class="bg-base-100">Date de départ</span>
+      <input type="date" class="datepicker input input-bordered input-sm" [(ngModel)]="dateDown" (change)="onChangeDate()"/>
+    </label>
+    <label class="input-group w-1/3 justify-end input-group-sm">
+      <span class="bg-base-100">Date de fin</span>
+      <input type="date" class="datepicker input input-bordered input-sm" [(ngModel)]="dateUp" (change)="onChangeDate()"/>
+    </label>
+  </div>
   <canvas id="allCalls" baseChart></canvas>
   <canvas id="allMeetings"></canvas>
   <canvas id="allReminders"></canvas>

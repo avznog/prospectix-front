@@ -1,6 +1,8 @@
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chart } from 'chart.js';
+import { lastDayOfWeek } from 'date-fns';
 import { CreateCallDto } from 'src/app/dto/calls/create-call.dto';
 import { CreateNegativeAnswerDto } from 'src/app/dto/negative-answers/create-negative-answer.dto';
 import { Call } from 'src/app/models/call.model';
@@ -100,7 +102,6 @@ export class StatisticsService {
       queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
     }
     return this.http.get<[{ pseudo: string, count: number}]>(`reminders/count-all`, { params: queryParameters }).subscribe(allReminders => {
-      console.log(allReminders)
       this.allRemindersCount = [0];
       this.allRemindersPseudo = [""];
       this.allRemindersCount.pop();
@@ -109,8 +110,6 @@ export class StatisticsService {
         this.allRemindersCount.push(reminder.count)
         this.allRemindersPseudo.push(reminder.pseudo)
       })
-      console.log(this.allRemindersCount)
-      console.log(this.allRemindersPseudo)
       this.createAllRemindersChart();
     });
   }

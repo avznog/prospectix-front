@@ -15,7 +15,11 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.statsRoute = localStorage.getItem("statsRoute") ?? "my-stats";
   }
   
-
+  onChangeStatPage(newPage: string) {
+    this.statsRoute = newPage;
+    localStorage.setItem("statsRoute",newPage);
+  }
 }
