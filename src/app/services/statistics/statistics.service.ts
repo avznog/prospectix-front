@@ -11,13 +11,22 @@ import { NegativeAnswer } from 'src/app/models/negative-answer.model';
 })
 export class StatisticsService {
 
+  // ! Personnal stats
   allMyReminders: number = 0;
   allMyCalls: number = 0;
   allMyNegativeAnswers: number = 0;
   allMyMeetings: number = 0;
   allMySentEmails: number = 0;
+
+  // ! All stats
+  // all calls
   allCallsCount: [number] = [0];
   allCallsPseudo: [string] = [""];
+
+  // all reminders
+  allRemindersCount: [number] = [0];
+  allRemindersPseudo: [string] = [""];
+
   constructor(
     private http: HttpClient,
   ) {
@@ -51,13 +60,14 @@ export class StatisticsService {
   }
 
   // * Data for graphs
+  // ? All calls
   countAllCalls(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
     if (interval) {
       queryParameters = queryParameters.append("dateDown", interval.dateDown.toISOString());
       queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
     }
-    return this.http.get<[{ pseudo: string, count: number }]>(`calls/count-all`, { params: queryParameters }).subscribe((allCalls) => {
+    return this.http.get<[{ pseudo: string, count: number }]>(`calls/count-all`, { params: queryParameters }).subscribe(allCalls => {
 
       // reseting the data so the chart does not print X times
       this.allCallsCount = [0];
@@ -74,6 +84,29 @@ export class StatisticsService {
       this.createAllCallsChart();
     });
   }
+
+  countAllReminders(interval: { dateDown: Date, dateUp: Date }) {
+    let queryParameters = new HttpParams();
+    if (interval) {
+      queryParameters = queryParameters.append("dateDown", interval.dateDown.toISOString());
+      queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
+    }
+    return this.http.get<[{ pseudo: string, count: number}]>(`reminders/count-all`, { params: queryParameters }).subscribe(allReminders => {
+      console.log(allReminders)
+      this.allRemindersCount = [0];
+      this.allRemindersPseudo = [""];
+      this.allRemindersCount.pop();
+      this.allRemindersPseudo.pop();
+      allReminders.forEach(reminder => {
+        this.allRemindersCount.push(reminder.count)
+        this.allRemindersPseudo.push(reminder.pseudo)
+      })
+      console.log(this.allRemindersCount)
+      console.log(this.allRemindersPseudo)
+      this.createAllRemindersChart();
+    });
+  }
+  
 
   // * CREATION and INCREMENTATION of counts
   createNegativeAnswerForMe(createNegativeAnswerDto: CreateNegativeAnswerDto) {
@@ -109,6 +142,27 @@ export class StatisticsService {
             data: this.allCallsCount,
             backgroundColor: "blue",
             label: "Classement par nombre d'appels"
+          },
+        ]
+      },
+      options: {
+        aspectRatio: 3.5,
+      }
+    });
+  }
+
+  // ? Chart for all Reminders
+  createAllRemindersChart() {
+    new Chart("allReminders", {
+      type: 'bar',
+
+      data: {
+        labels: this.allRemindersPseudo,
+        datasets: [
+          {
+            data: this.allRemindersCount,
+            backgroundColor: "blue",
+            label: "Classement par nombre de rappels"
           },
         ]
       },

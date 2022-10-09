@@ -12,6 +12,7 @@ export class StatisticsComponent implements OnInit {
 
   ) {
     this.statisticsService.countAllCalls({ dateDown: new Date("2022-07-01T00:00:00.000Z"), dateUp: new Date() })
+    this.statisticsService.countAllReminders({ dateDown: new Date("2022-07-01T00:00:00.000Z"), dateUp: new Date() })
   }
 
   ngOnInit(): void {
