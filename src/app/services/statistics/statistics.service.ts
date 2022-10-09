@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Chart } from 'chart.js';
 import { CreateCallDto } from 'src/app/dto/calls/create-call.dto';
 import { CreateNegativeAnswerDto } from 'src/app/dto/negative-answers/create-negative-answer.dto';
 import { Call } from 'src/app/models/call.model';
@@ -15,16 +16,17 @@ export class StatisticsService {
   allMyNegativeAnswers: number = 0;
   allMyMeetings: number = 0;
   allMySentEmails: number = 0;
-
+  allCallsCount: [number] = [0];
+  allCallsPseudo: [string] = [""];
   constructor(
-    private http: HttpClient
-  ) { 
+    private http: HttpClient,
+  ) {
     this.countAllCallsForMe();
     this.countAllNegativeAnswersForMe();
     this.countAllRemindersForMe();
     this.countAllMeetingsForMe();
     this.countAllSentEmailsForMe();
-    this.countAllCalls({ dateDown: new Date("2022-07-01T00:00:00.000Z"), dateUp: new Date()}).subscribe((data) => console.log(data));
+    
   }
 
   // * Getting the separate count since the beginning of the year for all data
@@ -49,13 +51,28 @@ export class StatisticsService {
   }
 
   // * Data for graphs
-  countAllCalls(interval: {dateDown: Date, dateUp: Date}) {
+  countAllCalls(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
-    if(interval){
+    if (interval) {
       queryParameters = queryParameters.append("dateDown", interval.dateDown.toISOString());
       queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
     }
-    return this.http.get<[{pseudo: string, count: number}]>(`calls/count-all`, { params: queryParameters })
+    return this.http.get<[{ pseudo: string, count: number }]>(`calls/count-all`, { params: queryParameters }).subscribe((allCalls) => {
+
+      // reseting the data so the chart does not print X times
+      this.allCallsCount = [0];
+      this.allCallsPseudo = [""]
+      this.allCallsCount.pop();
+      this.allCallsPseudo.pop();
+      allCalls.forEach(call => {
+        this.allCallsCount.push(call.count);
+        this.allCallsPseudo.push(call.pseudo);
+      }
+      )
+
+      // Calling the chart
+      this.createAllCallsChart();
+    });
   }
 
   // * CREATION and INCREMENTATION of counts
@@ -77,5 +94,27 @@ export class StatisticsService {
 
   createSentEmailForMe() {
     this.allMySentEmails += 1;
+  }
+
+  // ! Charts
+  // ? Chart for all calls
+  createAllCallsChart() {
+     new Chart("allCalls", {
+      type: 'bar',
+
+      data: {
+        labels: this.allCallsPseudo,
+        datasets: [
+          {
+            data: this.allCallsCount,
+            backgroundColor: "blue",
+            label: "Classement par nombre d'appels"
+          },
+        ]
+      },
+      options: {
+        aspectRatio: 3.5,
+      }
+    });
   }
 }
