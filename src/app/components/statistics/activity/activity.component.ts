@@ -12,7 +12,8 @@ export class ActivityComponent implements OnInit {
     private readonly statisticsService: StatisticsService
   ) { 
     this.statisticsService.countAllCalls({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() })
-    this.statisticsService.countAllCallsFromEveryOne();
+    this.statisticsService.countAllCallsForEveryOne();
+    this.statisticsService.countAllMeetingsForEveryOne()
 
   }
 

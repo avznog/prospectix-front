@@ -12,27 +12,28 @@ import { NegativeAnswer } from 'src/app/models/negative-answer.model';
 export class StatisticsService {
   currentPage: string = "my-stats"
 
-  // ! Personnal stats
+  //! Personnal stats
   allMyReminders: number = 0;
   allMyCalls: number = 0;
   allMyNegativeAnswers: number = 0;
   allMyMeetings: number = 0;
   allMySentEmails: number = 0;
 
-  // ! Personnal weekly stats
+  //! Personnal weekly stats
   weeklyCalls: number = 0;
   weeklyReminders: number = 0;
   weeklyMeetings: number = 0;
   weeklyNegativeAnswers: number = 0;
   weeklySentEmails: number = 0;
 
-  // ! All stats
+  //! All stats
   // all calls
   allCallsCount: [number] = [0];
   allCallsPseudo: [string] = [""];
 
-  // all calls from everyone
+  //! All Data for every one stats (activity page)
   allCallsForEveryone: {labels: string[], datasets: [{label: string, data: number[]}]} = {labels: ["lao","ding","data","..."], datasets: [{ label: "data is laoding...", data: [1,2,3,2,4]}]}
+  allMeetingsForEveryone: {labels: string[], datasets: [{label: string, data: number[]}]} = {labels: ["lao","ding","data","..."], datasets: [{ label: "data is laoding...", data: [1,2,3,2,4]}]}
 
   // all reminders
   allRemindersCount: [number] = [0];
@@ -49,7 +50,7 @@ export class StatisticsService {
   constructor(
     private http: HttpClient,
   ) {
-    // ! All stats
+    //! All stats
     this.countAllCallsForMe();
     this.countAllNegativeAnswersForMe();
     this.countAllRemindersForMe();
@@ -78,7 +79,7 @@ export class StatisticsService {
     return this.http.get<number>(`negative-answers/count-weekly-for-me`).subscribe(weeklyNegativeAnswers => this.weeklyNegativeAnswers = weeklyNegativeAnswers);
   }
 
-  // * Getting the separate count since the beginning of the year for all data
+  //* Getting the separate count since the beginning of the year for all data
   countAllRemindersForMe() {
     return this.http.get<number>(`reminders/count-all-for-me`).subscribe(allMyReminders => this.allMyReminders = allMyReminders);
   }
@@ -99,8 +100,8 @@ export class StatisticsService {
     return this.http.get<number>(`calls/count-all-for-me`).subscribe(allMyCalls => this.allMyCalls = allMyCalls)
   }
 
-  // * Data for graphs
-  // ? All calls
+  //* Data for graphs
+  //? All calls
   countAllCalls(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
     if (interval) {
@@ -126,7 +127,7 @@ export class StatisticsService {
       });
   }
 
-  // ? all reminders
+  //? all reminders
   countAllReminders(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
     if (interval) {
@@ -146,7 +147,7 @@ export class StatisticsService {
     });
   }
 
-  // ? All meetings
+  //? All meetings
   countAllMeetings(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
     if (interval) {
@@ -170,7 +171,7 @@ export class StatisticsService {
     });
   }
 
-  // ? All mails
+  //? All mails
   countAllSentEmails(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
     if (interval) {
@@ -194,16 +195,24 @@ export class StatisticsService {
     });
   }
 
-  // ? gettings all Calls from everyone
-  countAllCallsFromEveryOne() {
+  //? gettings all Calls for everyone
+  countAllCallsForEveryOne() {
     return this.http.get<{labels: [string], datasets: [{label: string, data: [number]}]}>(`calls/count-all-for-everyone`).subscribe(allCallsForEveryone => {
       this.allCallsForEveryone = allCallsForEveryone
       this.createAllCallForEveryoneChart()
     })
   }
+
+  //? gettings all meetings for everyone
+  countAllMeetingsForEveryOne() {
+    return this.http.get<{labels: [string], datasets: [{label: string, data: [number]}]}>(`meetings/count-all-for-everyone`).subscribe(allMeetingsForEveryone => {
+      this.allMeetingsForEveryone = allMeetingsForEveryone
+      this.createAllMeetingsForEveryoneChart()
+    })
+  }
   
 
-  // * CREATION and INCREMENTATION of counts
+  //* CREATION and INCREMENTATION of counts
   createNegativeAnswerForMe(createNegativeAnswerDto: CreateNegativeAnswerDto) {
     this.http.post<NegativeAnswer>(`negative-answers/create-for-me`, createNegativeAnswerDto).subscribe(() => this.allMyNegativeAnswers += 1);
   }
@@ -224,8 +233,8 @@ export class StatisticsService {
     this.allMySentEmails += 1;
   }
 
-  // ! Charts
-  // ? Chart for all calls
+  //! Charts
+  //? Chart for all calls
   createAllCallsChart() {
      new Chart("allCalls", {
       type: 'bar',
@@ -246,7 +255,7 @@ export class StatisticsService {
     });
   }
 
-  // ? Chart for all Reminders
+  //? Chart for all Reminders
   createAllRemindersChart() {
     new Chart("allReminders", {
       type: 'bar',
@@ -267,7 +276,7 @@ export class StatisticsService {
     });
   }
 
-  // ? Chart for all Meetings
+  //? Chart for all Meetings
   createAllMeetingsChart() {
     new Chart("allMeetings", {
       type: 'bar',
@@ -288,7 +297,7 @@ export class StatisticsService {
     });
   }
 
-  // ? Chart for all Sent Emails
+  //? Chart for all Sent Emails
   createAllSentEmailsChart() {
     new Chart("allSentEmails", {
       type: 'bar',
@@ -309,7 +318,7 @@ export class StatisticsService {
     });
   }
 
-  // ? Chart for dividing calls 
+  //? Chart for dividing calls 
   createPieChartAllCalls() {
     new Chart("pieChartAllCalls", {
       type: 'doughnut',
@@ -330,11 +339,22 @@ export class StatisticsService {
     });
   }
 
-  // ? Chart for call for everyone
+  //? Chart for call for everyone
   createAllCallForEveryoneChart() {
     new Chart("allCallsEveryoneLineChart", {
       type: "line",
       data: this.allCallsForEveryone,
+      options: {
+        aspectRatio: 3.3
+      }
+    })
+  }
+
+  //? Chart for meetings for everyone
+  createAllMeetingsForEveryoneChart() {
+    new Chart("allMeetingsEveryoneLineChart", {
+      type: "line",
+      data: this.allMeetingsForEveryone,
       options: {
         aspectRatio: 3.3
       }
