@@ -13,6 +13,13 @@ export class MyStatsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    // ! Weekly stats
+    this.statisticsService.countWeeklyCallsForMe();
+    this.statisticsService.countWeeklyMeetingsForMe();
+    this.statisticsService.countWeeklyRemindersForMe();
+    this.statisticsService.countWeeklyNegativeAnswersForMe();
+    this.statisticsService.countWeeklySentEmailsForMe();
   }
 
 }

@@ -1,8 +1,6 @@
-import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chart } from 'chart.js';
-import { lastDayOfWeek } from 'date-fns';
 import { CreateCallDto } from 'src/app/dto/calls/create-call.dto';
 import { CreateNegativeAnswerDto } from 'src/app/dto/negative-answers/create-negative-answer.dto';
 import { Call } from 'src/app/models/call.model';
@@ -12,6 +10,7 @@ import { NegativeAnswer } from 'src/app/models/negative-answer.model';
   providedIn: 'root'
 })
 export class StatisticsService {
+  currentPage: string = "my-stats"
 
   // ! Personnal stats
   allMyReminders: number = 0;
@@ -20,10 +19,20 @@ export class StatisticsService {
   allMyMeetings: number = 0;
   allMySentEmails: number = 0;
 
+  // ! Personnal weekly stats
+  weeklyCalls: number = 0;
+  weeklyReminders: number = 0;
+  weeklyMeetings: number = 0;
+  weeklyNegativeAnswers: number = 0;
+  weeklySentEmails: number = 0;
+
   // ! All stats
   // all calls
   allCallsCount: [number] = [0];
   allCallsPseudo: [string] = [""];
+
+  // all calls from everyone
+  allCallsForEveryone: {labels: string[], datasets: [{label: string, data: number[]}]} = {labels: ["lao","ding","data","..."], datasets: [{ label: "data is laoding...", data: [1,2,3,2,4]}]}
 
   // all reminders
   allRemindersCount: [number] = [0];
@@ -40,12 +49,33 @@ export class StatisticsService {
   constructor(
     private http: HttpClient,
   ) {
+    // ! All stats
     this.countAllCallsForMe();
     this.countAllNegativeAnswersForMe();
     this.countAllRemindersForMe();
     this.countAllMeetingsForMe();
     this.countAllSentEmailsForMe();
-    
+  }
+
+  //  * Getting the separate count since the last sunday
+  countWeeklyCallsForMe() {
+    return this.http.get<number>(`calls/count-weekly-for-me`).subscribe(weeklyCalls => this.weeklyCalls = weeklyCalls);
+  }
+
+  countWeeklyMeetingsForMe() {
+    return this.http.get<number>(`meetings/count-weekly-for-me`).subscribe(weeklyMeetings => this.weeklyMeetings = weeklyMeetings);
+  }
+
+  countWeeklyRemindersForMe() {
+    return this.http.get<number>(`reminders/count-weekly-for-me`).subscribe(weeklyReminders => this.weeklyReminders = weeklyReminders);
+  }
+
+  countWeeklySentEmailsForMe() {
+    return this.http.get<number>(`sent-emails/count-weekly-for-me`).subscribe(weeklySentEmails => this.weeklySentEmails = weeklySentEmails);
+  }
+
+  countWeeklyNegativeAnswersForMe() {
+    return this.http.get<number>(`negative-answers/count-weekly-for-me`).subscribe(weeklyNegativeAnswers => this.weeklyNegativeAnswers = weeklyNegativeAnswers);
   }
 
   // * Getting the separate count since the beginning of the year for all data
@@ -90,8 +120,10 @@ export class StatisticsService {
       }
       )
       // Calling the chart
-      this.createAllCallsChart();
-    });
+      this.currentPage == 'ranking' && this.createAllCallsChart();
+      
+      this.currentPage == 'activity' && this.createPieChartAllCalls()
+      });
   }
 
   // ? all reminders
@@ -160,6 +192,14 @@ export class StatisticsService {
       // Calling the chart
       this.createAllSentEmailsChart();
     });
+  }
+
+  // ? gettings all Calls from everyone
+  countAllCallsFromEveryOne() {
+    return this.http.get<{labels: [string], datasets: [{label: string, data: [number]}]}>(`calls/count-all-for-everyone`).subscribe(allCallsForEveryone => {
+      this.allCallsForEveryone = allCallsForEveryone
+      this.createAllCallForEveryoneChart()
+    })
   }
   
 
@@ -267,5 +307,37 @@ export class StatisticsService {
         aspectRatio: 3.5,
       }
     });
+  }
+
+  // ? Chart for dividing calls 
+  createPieChartAllCalls() {
+    new Chart("pieChartAllCalls", {
+      type: 'doughnut',
+      data: {
+        labels: 
+          this.allCallsPseudo
+        ,
+        datasets: [{
+          data: this.allCallsCount,
+          hoverOffset: 4,
+          
+        }],
+        
+      },
+      options: {
+        aspectRatio: 3.3
+      }
+    });
+  }
+
+  // ? Chart for call for everyone
+  createAllCallForEveryoneChart() {
+    new Chart("allCallsEveryoneLineChart", {
+      type: "line",
+      data: this.allCallsForEveryone,
+      options: {
+        aspectRatio: 3.3
+      }
+    })
   }
 }

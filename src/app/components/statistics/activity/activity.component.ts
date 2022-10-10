@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 
 @Component({
   selector: 'app-activity',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivityComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private readonly statisticsService: StatisticsService
+  ) { 
+    this.statisticsService.countAllCalls({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() })
+    this.statisticsService.countAllCallsFromEveryOne();
+
+  }
 
   ngOnInit(): void {
+    // this.statisticsService.countAllCalls({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() })
   }
 
 }

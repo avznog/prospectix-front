@@ -4,19 +4,19 @@
   <p class="text-xl pb-0 font-bold">Cette semaine</p>
   <div class="inline-flex w-full">
     <div class="w-1/5 ">
-      <app-stats-small-card></app-stats-small-card>
+      <app-stats-small-card [title]="'Appels'" [value]="statisticsService.weeklyCalls"></app-stats-small-card>
     </div>
     <div class="w-1/5">
-      <app-stats-small-card></app-stats-small-card>
+      <app-stats-small-card [title]="'Rappels'" [value]="statisticsService.weeklyReminders"></app-stats-small-card>
     </div>
     <div class="w-1/5">
-      <app-stats-small-card></app-stats-small-card>
+      <app-stats-small-card [title]="'Rendez-vous'" [value]="statisticsService.weeklyMeetings"></app-stats-small-card>
     </div>
     <div class="w-1/5">
-      <app-stats-small-card></app-stats-small-card>
+      <app-stats-small-card [title]="'Mails'" [value]="statisticsService.weeklySentEmails"></app-stats-small-card>
     </div>
     <div class="w-1/5">
-      <app-stats-small-card></app-stats-small-card>
+      <app-stats-small-card [title]="'Refus'" [value]="statisticsService.weeklyNegativeAnswers"></app-stats-small-card>
     </div>
   </div>
 

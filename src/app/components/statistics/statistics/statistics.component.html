@@ -1,9 +1,9 @@
 <div class="tabs tabs-boxed bg-base-300 justify-center p-5">
-  <a class="tab hover:text-primary {{statsRoute == 'my-stats' ? 'tab-active' : ''}}" (click)="onChangeStatPage('my-stats')">Statistiques personnelles</a> 
-  <a class="tab hover:text-primary {{statsRoute == 'ranking' ? 'tab-active' : ''}}" (click)="onChangeStatPage('ranking')">Classements</a> 
-  <a class="tab hover:text-primary {{statsRoute == 'activity' ? 'tab-active' : ''}}" (click)="onChangeStatPage('activity')">Activité</a>
+  <a class="tab hover:text-primary {{statisticsService.currentPage == 'my-stats' ? 'tab-active' : ''}}" (click)="onChangeStatPage('my-stats')">Statistiques personnelles</a> 
+  <a class="tab hover:text-primary {{statisticsService.currentPage == 'ranking' ? 'tab-active' : ''}}" (click)="onChangeStatPage('ranking')">Classements</a> 
+  <a class="tab hover:text-primary {{statisticsService.currentPage == 'activity' ? 'tab-active' : ''}}" (click)="onChangeStatPage('activity')">Activité</a>
 </div>
 
-<app-ranking *ngIf="statsRoute == 'ranking'"></app-ranking>
-<app-my-stats *ngIf="statsRoute == 'my-stats'"></app-my-stats>
-<app-activity *ngIf="statsRoute == 'activity'"></app-activity>
+<app-ranking *ngIf="statisticsService.currentPage == 'ranking'"></app-ranking>
+<app-my-stats *ngIf="statisticsService.currentPage == 'my-stats'"></app-my-stats>
+<app-activity *ngIf="statisticsService.currentPage == 'activity'"></app-activity>

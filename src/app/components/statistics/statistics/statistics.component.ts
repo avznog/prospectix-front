@@ -7,7 +7,6 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
-  statsRoute: string = "my-stats";
   constructor(
     public readonly statisticsService: StatisticsService,
 
@@ -15,11 +14,11 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.statsRoute = localStorage.getItem("statsRoute") ?? "my-stats";
+    this.statisticsService.currentPage = localStorage.getItem("statsRoute") ?? "my-stats";
   }
   
   onChangeStatPage(newPage: string) {
-    this.statsRoute = newPage;
+    this.statisticsService.currentPage = newPage;
     localStorage.setItem("statsRoute",newPage);
   }
 }
