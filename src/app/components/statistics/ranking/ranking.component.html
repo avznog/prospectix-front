@@ -1,17 +1,53 @@
 <div class="w-full">
-  
-  <div class="inline-flex w-full p-5">
-    <label class="input-group w-1/3 input-group-sm">
-      <span class="bg-base-100">Date de départ</span>
-      <input type="date" class="datepicker input input-bordered input-sm" [(ngModel)]="dateDown" (change)="onChangeDate()"/>
+  <div class="inline-flex w-full p-0 pb-1 pt-5">
+    <label class="w-1/2 justify-center inline-flex space-x-5 font-bold">
+      Date de départ
     </label>
-    <label class="input-group w-1/3 justify-end input-group-sm">
-      <span class="bg-base-100">Date de fin</span>
-      <input type="date" class="datepicker input input-bordered input-sm" [(ngModel)]="dateUp" (change)="onChangeDate()"/>
+    <label class="w-1/2 justify-center inline-flex space-x-5 font-bold">
+      Date de fin
     </label>
   </div>
-  <canvas id="allCalls" baseChart></canvas>
-  <canvas id="allMeetings"></canvas>
-  <canvas id="allReminders"></canvas>
-  <canvas id="allSentEmails"></canvas>
+  <div class="inline-flex w-full p-5 pt-0 space-x-5">
+    <label class="w-1/2 justify-center inline-flex space-x-5">
+      <input type="date" class="datepicker input w-full" [(ngModel)]="dateDown" (change)="onChangeDate()"/>
+    </label>
+    <label class="w-1/2 justify-center inline-flex space-x-5">
+      <input type="date" class="datepicker input w-full" [(ngModel)]="dateUp" (change)="onChangeDate()"/>
+      <label class="btn btn-outline" (click)="onClickToday()">Aujourd'hui</label>
+    </label>
+  </div>
+  <div class="space-y-5 p-5">
+    <div class="card bg-base-100">
+      <div class="card-title justify-center p-3">
+        Classement par nombre d'appels
+      </div>
+      <div class="card-body pt-0">
+        <canvas id="allCalls"></canvas>
+      </div>
+    </div>
+    <div class="card bg-base-100">
+      <div class="card-title justify-center p-3">
+        Classement par nombre de rendez-vous
+      </div>
+      <div class="card-body pt-0">
+        <canvas id="allMeetings"></canvas>
+      </div>
+    </div>
+    <div class="card bg-base-100">
+      <div class="card-title justify-center p-3">
+        Classement par nombre de rappels
+      </div>
+      <div class="card-body pt-0">
+        <canvas id="allReminders"></canvas>
+      </div>
+    </div>
+    <div class="card bg-base-100">
+      <div class="card-title justify-center p-3">
+        Classement par nombre d'emails envoyés
+      </div>
+      <div class="card-body pt-0">
+        <canvas id="allSentEmails"></canvas>
+      </div>
+    </div>
+  </div>
 </div>

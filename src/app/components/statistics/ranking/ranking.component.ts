@@ -8,10 +8,10 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
 })
 export class RankingComponent implements OnInit {
 
-  dateDown: Date = new Date("2022-01-07T00:00:00.000Z");
-  dateUp: Date = new Date();
+  dateDown: string = new Date(this.statisticsService.startDateForChartsInterval).toISOString();
+  dateUp: string = new Date().toISOString();
   constructor(
-    private readonly statisticsService: StatisticsService
+    private readonly statisticsService: StatisticsService,
   ) {
    }
 
@@ -23,10 +23,11 @@ export class RankingComponent implements OnInit {
   }
 
   onChangeDate() {
-  //   this.statisticsService.countAllCalls({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
-  //   this.statisticsService.countAllReminders({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
-  //   this.statisticsService.countAllMeetings({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
-  //   this.statisticsService.countAllSentEmails({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
+    this.statisticsService.updateRankingChartsByDate({ dateDown: new Date(this.dateDown == '' ? this.statisticsService.startDateForChartsInterval : this.dateDown), dateUp: (this.dateUp == "") ? new Date() : new Date(this.dateUp) })
   }
 
+  onClickToday() {
+    this.dateUp = new Date().toISOString();
+    this.onChangeDate();
+  }
 }

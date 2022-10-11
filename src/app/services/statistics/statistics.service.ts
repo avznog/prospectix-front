@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { CreateCallDto } from 'src/app/dto/calls/create-call.dto';
 import { CreateNegativeAnswerDto } from 'src/app/dto/negative-answers/create-negative-answer.dto';
@@ -11,7 +12,7 @@ import { NegativeAnswer } from 'src/app/models/negative-answer.model';
 })
 export class StatisticsService {
   currentPage: string = "my-stats"
-
+  startDateForChartsInterval: string = "2022-01-07T00:00:00.000Z";
   //! Personnal stats
   allMyReminders: number = 0;
   allMyCalls: number = 0;
@@ -47,8 +48,25 @@ export class StatisticsService {
   allSentEmailsCount : [number] = [0];
   allSentEmailsPseudo : [string] = [""];
 
+  //for radara chart
+  allStatsLoaded: boolean[] = [false, false, false, false];
+  dataForRadar: {labels: string[], datasets: [{label: string, data: number[]}]} = {labels: ["Appels","Rappels","Rendez-vous","Mails"], datasets: [{ label: "data is laoding...", data: [1,2,3,4]}]}
+
+  //! Charts
+  allCallsChart: any;
+  allRemindersChart: any;
+  allMeetingsChart: any;
+  allSentEmailsChart: any;
+  pieChartAllCalls: any;
+  allCallsEveryoneLineChart: any;
+  allMeetingsEveryoneLineChart: any;
+  allDataForEveryoneRadarChart: any;
+  primaryColor: string = "";
+  secondaryColor: string = "";
+
   constructor(
     private http: HttpClient,
+    private router: Router
   ) {
     //! All stats
     this.countAllCallsForMe();
@@ -56,6 +74,7 @@ export class StatisticsService {
     this.countAllRemindersForMe();
     this.countAllMeetingsForMe();
     this.countAllSentEmailsForMe();
+    
   }
 
   //  * Getting the separate count since the last sunday
@@ -123,7 +142,10 @@ export class StatisticsService {
       // Calling the chart
       this.currentPage == 'ranking' && this.createAllCallsChart();
       
-      this.currentPage == 'activity' && this.createPieChartAllCalls()
+      this.currentPage == 'activity' && this.createPieChartAllCalls();
+
+      this.currentPage == 'activity' && this.watchForAllStatsLoaded(0)
+
       });
   }
 
@@ -143,7 +165,8 @@ export class StatisticsService {
         this.allRemindersCount.push(reminder.count)
         this.allRemindersPseudo.push(reminder.pseudo)
       })
-      this.createAllRemindersChart();
+      this.currentPage == 'ranking' && this.createAllRemindersChart();
+      this.currentPage == 'activity' && !this.allStatsLoaded[1] && this.watchForAllStatsLoaded(1)
     });
   }
 
@@ -167,7 +190,8 @@ export class StatisticsService {
       }
       )
       // Calling the chart
-      this.createAllMeetingsChart();
+      this.currentPage == 'ranking' && this.createAllMeetingsChart();
+      this.currentPage == 'activity' && !this.allStatsLoaded[2] && this.watchForAllStatsLoaded(2)
     });
   }
 
@@ -191,7 +215,8 @@ export class StatisticsService {
       }
       )
       // Calling the chart
-      this.createAllSentEmailsChart();
+      this.currentPage == 'ranking' && this.createAllSentEmailsChart();
+      this.currentPage == 'activity' && !this.allStatsLoaded[3] && this.watchForAllStatsLoaded(3)
     });
   }
 
@@ -233,31 +258,63 @@ export class StatisticsService {
     this.allMySentEmails += 1;
   }
 
+  //! Update charts
+  updateAllCharts(primary: string, secondary: string) {
+    
+    (!this.allCallsChart && !this.allRemindersChart && !this.allMeetingsChart && !this.allSentEmailsChart) && (this.primaryColor = primary);
+    (this.router.url != "statistics" && this.allRemindersChart && this.allCallsChart && this.allMeetingsChart && this.allSentEmailsChart) && (this.primaryColor = primary);
+
+    this.allCallsChart && (this.allCallsChart.data.datasets[0].backgroundColor = primary);
+    this.allCallsChart && this.allCallsChart.update();
+    
+
+    this.allRemindersChart && (this.allRemindersChart.data.datasets[0].backgroundColor = primary);
+    this.allRemindersChart &&  this.allRemindersChart.update()
+
+    this.allMeetingsChart && (this.allMeetingsChart.data.datasets[0].backgroundColor = primary);
+    this.allMeetingsChart &&  this.allMeetingsChart.update()
+    
+    this.allSentEmailsChart && (this.allSentEmailsChart.data.datasets[0].backgroundColor = primary);
+    this.allSentEmailsChart &&  this.allSentEmailsChart.update()
+  }
+
+  updateRankingChartsByDate(interval: {dateDown: Date, dateUp: Date}) {
+    this.allCallsChart.destroy();
+    this.allRemindersChart.destroy();
+    this.allMeetingsChart.destroy();
+    this.allSentEmailsChart.destroy();
+    this.countAllCalls({ dateDown: new Date(interval.dateDown), dateUp: new Date(interval.dateUp) })
+    this.countAllReminders({ dateDown: new Date(interval.dateDown), dateUp: new Date(interval.dateUp) })
+    this.countAllMeetings({ dateDown: new Date(interval.dateDown), dateUp: new Date(interval.dateUp) })
+    this.countAllSentEmails({ dateDown: new Date(interval.dateDown), dateUp: new Date(interval.dateUp) })
+  }
+
   //! Charts
   //? Chart for all calls
   createAllCallsChart() {
-     new Chart("allCalls", {
+     this.allCallsChart = new Chart("allCalls", {
       type: 'bar',
-
       data: {
         labels: this.allCallsPseudo,
         datasets: [
           {
             data: this.allCallsCount,
-            backgroundColor: "blue",
-            label: "Classement par nombre d'appels"
+            backgroundColor: this.primaryColor,
+            label: "Prospects contactés",
           },
         ]
       },
       options: {
-        aspectRatio: 3.5,
+        aspectRatio: 5,
+        color: this.secondaryColor,
+        
       }
     });
   }
 
   //? Chart for all Reminders
   createAllRemindersChart() {
-    new Chart("allReminders", {
+    this.allRemindersChart = new Chart("allReminders", {
       type: 'bar',
 
       data: {
@@ -265,20 +322,20 @@ export class StatisticsService {
         datasets: [
           {
             data: this.allRemindersCount,
-            backgroundColor: "blue",
-            label: "Classement par nombre de rappels"
+            backgroundColor: this.primaryColor,
+            label: "Rappels effectués"
           },
         ]
       },
       options: {
-        aspectRatio: 3.5,
+        aspectRatio: 5,
       }
     });
   }
 
   //? Chart for all Meetings
   createAllMeetingsChart() {
-    new Chart("allMeetings", {
+    this.allMeetingsChart = new Chart("allMeetings", {
       type: 'bar',
 
       data: {
@@ -286,20 +343,20 @@ export class StatisticsService {
         datasets: [
           {
             data: this.allMeetingsCount,
-            backgroundColor: "blue",
-            label: "Classement par nombre de Rendez-vous"
+            backgroundColor: this.primaryColor,
+            label: "Rendez-vous décrochés"
           },
         ]
       },
       options: {
-        aspectRatio: 3.5,
+        aspectRatio: 5,
       }
     });
   }
 
   //? Chart for all Sent Emails
   createAllSentEmailsChart() {
-    new Chart("allSentEmails", {
+    this.allSentEmailsChart = new Chart("allSentEmails", {
       type: 'bar',
 
       data: {
@@ -307,57 +364,101 @@ export class StatisticsService {
         datasets: [
           {
             data: this.allSentEmailsCount,
-            backgroundColor: "blue",
-            label: "Classement par nombre d'emails envoyés"
+            backgroundColor: this.primaryColor,
+            label: "Mails envoyés"
           },
         ]
       },
       options: {
-        aspectRatio: 3.5,
+        aspectRatio: 5,
       }
     });
   }
 
   //? Chart for dividing calls 
   createPieChartAllCalls() {
-    new Chart("pieChartAllCalls", {
+    this.pieChartAllCalls = new Chart("pieChartAllCalls", {
       type: 'doughnut',
       data: {
         labels: 
-          this.allCallsPseudo
-        ,
+          this.allCallsPseudo,
         datasets: [{
           data: this.allCallsCount,
           hoverOffset: 4,
-          
         }],
-        
       },
       options: {
-        aspectRatio: 3.3
-      }
+        aspectRatio: 2,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          },
+        }
+      },
     });
+  }
+
+  //? Chart radar for all data for everyone
+  createAllDataForEveryoneRadarChart() {
+    this.allDataForEveryoneRadarChart = new Chart("allDataForEveryoneRadarChart", {
+      type: "radar",
+      data: this.dataForRadar,
+      options: {
+        aspectRatio: 2,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          },
+        }
+      }
+    })
   }
 
   //? Chart for call for everyone
   createAllCallForEveryoneChart() {
-    new Chart("allCallsEveryoneLineChart", {
+    this.allCallsEveryoneLineChart = new Chart("allCallsEveryoneLineChart", {
       type: "line",
       data: this.allCallsForEveryone,
       options: {
-        aspectRatio: 3.3
+        aspectRatio: 5
       }
     })
   }
 
   //? Chart for meetings for everyone
   createAllMeetingsForEveryoneChart() {
-    new Chart("allMeetingsEveryoneLineChart", {
+    this.allMeetingsEveryoneLineChart = new Chart("allMeetingsEveryoneLineChart", {
       type: "line",
       data: this.allMeetingsForEveryone,
       options: {
-        aspectRatio: 3.3
+        aspectRatio: 5
       }
     })
+  }
+
+  watchForAllStatsLoaded(id: number) {
+    this.countAllReminders({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
+    this.countAllMeetings({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
+    this.countAllSentEmails({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
+    this.allStatsLoaded[id] = true;
+    console.log(this.allStatsLoaded)
+    for(let s of this.allStatsLoaded){
+      if(!s){
+        return
+      }
+    }
+      this.dataForRadar.datasets = [{label: "", data: [9]}]
+      this.dataForRadar.datasets.pop();
+      let counter = 0;
+      
+      for(let pseudo of this.allCallsPseudo){
+        this.dataForRadar.datasets.push({
+          label: pseudo,
+          data: [this.allCallsCount[counter], this.allRemindersCount[counter], this.allMeetingsCount[counter], this.allSentEmailsCount[counter]]
+        })
+        counter += 1
+      }
+      this.createAllDataForEveryoneRadarChart();
+  
   }
 }
