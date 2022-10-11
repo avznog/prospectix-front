@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.10.2",
+        date: new Date("2022-10-115T00:00:00.000Z"),
+        bugs: [
+            "Résolution d'une partie du bug de calendrier du bouton d'ajout de date de rappel / rendez-vous"
+           ],
+        features: [
+          
+        ]
+      },
+      {
         version: "0.10.1",
         date: new Date("2022-10-05T00:00:00.000Z"),
         bugs: [
