@@ -28,6 +28,12 @@
       <input class="input input-bordered" type="checkbox" class="checkbox" [(ngModel)]="disabled" />
     </label>
 
+    <!-- statsEnabled ? -->
+    <label class="input-group">
+      <span>Afficher dans les statistiques ? </span>
+      <input class="input input-bordered" type="checkbox" class="checkbox" [(ngModel)]="statsEnabled" />
+    </label>
+
     <!-- Button -->
     <div class="modal-action">
       <label for="add-user-modal" (click)="onCreateUser()" class="btn btn-outline btn-ghost">Créer l'utilisateur</label>

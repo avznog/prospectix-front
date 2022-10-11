@@ -14,6 +14,7 @@ export interface ProjectManager {
   mail: string;
   tokenEmail: string;
   disabled: boolean;
+  statsEnabled: boolean;
   goals: Goal[];
   meetings: Meeting[];
   reminders: Reminder[];

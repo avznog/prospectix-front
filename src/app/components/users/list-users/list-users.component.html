@@ -5,6 +5,7 @@
       <th>Nom</th>
       <th>UID</th>
       <th>Email</th>
+      <th>Affiché dans les stats</th>
       <th>Admin</th>
       <th>Désactiver l'utilisateur</th>
       <th>Activer l'utilisateur</th>
@@ -16,6 +17,11 @@
     <td>{{user.value.name}}</td>
     <td>{{user.value.pseudo}}</td>
     <td>{{user.value.mail}}</td>
+    <td>
+      <label>
+        <input type="checkbox" class="checkbox" [checked]="user.value.statsEnabled ? true : false" (click)="onChangeStatsEnabled(user.value)"/>
+      </label>
+    </td>
     <td>
       <label>
         <input type="checkbox" class="checkbox" [checked]="user.value.admin ? true : false" (click)="onChangeAdmin(user.value)"/>

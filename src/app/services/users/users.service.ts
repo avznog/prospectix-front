@@ -58,4 +58,8 @@ export class UsersService {
   changeAdmin(userId: number,admin: boolean) : Subscription {
     return this.http.patch<ProjectManager>(`project-managers/${userId}`, {admin}).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, admin: admin}));
   }
+
+  changeStatsEnabled(userId: number, statsEnabled: boolean) : Subscription {
+    return this.http.patch<ProjectManager>(`project-managers/${userId}`, {statsEnabled}).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, statsEnabled: statsEnabled}));
+  }
 }
