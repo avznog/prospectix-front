@@ -13,7 +13,7 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "0.10.2",
-        date: new Date("2022-10-115T00:00:00.000Z"),
+        date: new Date("2022-10-11T00:00:00.000Z"),
         bugs: [
             "Résolution d'une partie du bug de calendrier du bouton d'ajout de date de rappel / rendez-vous"
            ],
