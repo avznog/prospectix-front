@@ -1,78 +1,9 @@
-<div class="space-y-5 self-center">
-  <div class="card shadow-lg p-5 space-y-5">
-    <label class="card-title self-center">Statistiques personnelles</label>
-
-    <!-- STATISTIQUES SUR LA SEMAINE -->
-    <p class="text-xl pb-0 font-bold">Cette semaine</p>
-    <div class="inline-flex">
-      <div class="w-1/5 ">
-        <app-stats-small-card [title]="'Appels'" [value]="statisticsService.statistic.weeklyCalls"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Rappels'" [value]="statisticsService.statistic.weeklyReminders"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Rendez-vous'" [value]="statisticsService.statistic.weeklyMeetings"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Mails'" [value]="statisticsService.statistic.weeklySentEmails"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Refus'" [value]="statisticsService.statistic.weeklyNegativeAnswers"></app-stats-small-card>
-      </div>
-    </div> 
-
-
-    <!-- STATISTIQUES TOTALES -->
-    <p class="text-xl pb-0 font-bold">Sur toute l'année</p>
-    <div class="inline-flex">
-      <div class="w-1/5 ">
-        <app-stats-small-card [title]="'Appels'" [value]="statisticsService.statistic.totalCalls"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Rappels'" [value]="statisticsService.statistic.totalReminders"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Rendez-vous'" [value]="statisticsService.statistic.totalMeetings"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Mails'" [value]="statisticsService.statistic.totalSentEmails"></app-stats-small-card>
-      </div>
-      <div class="w-1/5">
-        <app-stats-small-card  [title]="'Refus'" [value]="statisticsService.statistic.totalNegativeAnswers"></app-stats-small-card>
-      </div>
-    </div> 
-
-    <label class="card-title">Historique des Stats</label>
-    <div class="card-body w-full">
-
-      <div *ngFor="let statHistory of statsHistoryService.statsHistory | keyvalue">
-        <div tabindex="0-{{statHistory.value.id}}"
-          class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
-          <input type="checkbox" />
-          <div class="collapse-title text-xl font-medium">{{statHistory.value.startDate | shortFrenchDate}} au
-            {{statHistory.value.endDate | shortFrenchDate}}</div>
-          <div class="collapse-content">
-            <div class="inline-flex w-full">
-              <div class="w-1/5 ">
-                <app-stats-small-card [title]="'Appels'" [value]="statHistory.value.weeklyCalls"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Rappels'" [value]="statHistory.value.weeklyReminders"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Rendez-vous'" [value]="statHistory.value.weeklyMeetings"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Mails'" [value]="statHistory.value.weeklySentEmails"></app-stats-small-card>
-              </div>
-              <div class="w-1/5">
-                <app-stats-small-card  [title]="'Refus'" [value]="statHistory.value.weeklyNegativeAnswers"></app-stats-small-card>
-              </div>
-            </div> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="bg-base-300 inline-flex justify-center p-5 w-full btn-group">
+  <a class="btn btn-sm {{statisticsService.currentPage == 'my-stats' ? 'bg-primary' : 'hover:bg-primary'}} text-base-100" (click)="onChangeStatPage('my-stats')">Statistiques personnelles</a> 
+  <a class="btn btn-sm {{statisticsService.currentPage == 'ranking' ? 'bg-primary' : ' hover:bg-primary'}} text-base-100" (click)="onChangeStatPage('ranking')">Classements</a> 
+  <a class="btn btn-sm {{statisticsService.currentPage == 'activity' ? 'bg-primary' : 'hover:bg-primary'}} text-base-100" (click)="onChangeStatPage('activity')">Activité</a>
 </div>
+
+<app-ranking *ngIf="statisticsService.currentPage == 'ranking'"></app-ranking>
+<app-my-stats *ngIf="statisticsService.currentPage == 'my-stats'"></app-my-stats>
+<app-activity *ngIf="statisticsService.currentPage == 'activity'"></app-activity>

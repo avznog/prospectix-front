@@ -125,6 +125,6 @@ export class ProspectsService {
   }
 
   addProspectsBase() {
-    // return this.http.get("prospects/create-from-scrapper").subscribe();
+    return this.http.get("prospects/create-from-scrapper").subscribe();
   }
 }

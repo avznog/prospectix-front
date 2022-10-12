@@ -28,15 +28,14 @@ export class AddMailModalComponent implements OnInit {
 
   constructor(
     private readonly prospectService: ProspectsService,
-    private readonly statisticsService: StatisticsService,
     private readonly remindersService: RemindersService,
     private readonly meetingsService: MeetingsService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
     private readonly authService: AuthService,
     private readonly eventsService: EventsService,
-    private readonly toastsService: ToastsService
-
+    private readonly toastsService: ToastsService,
+    private readonly statisticsService: StatisticsService
   ) { }
 
   ngOnInit(): void {
@@ -45,18 +44,15 @@ export class AddMailModalComponent implements OnInit {
   onClickSentEmail() {
     this.prospect.stage == 2 && this.onMarkReminderDone();
     this.prospect.stage == 3 && this.onMarkMeetingDone();
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-      totalCalls: this.statisticsService.statistic.totalCalls + 1,
-      totalSentEmails: this.statisticsService.statistic.totalSentEmails + 1,
-      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
+
+    // counting as a call
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
+      prospect: this.prospect,
+      date: new Date
     });
 
-    (this.prospect.stage == 2 || this.prospect.stage == 3) && this.statisticsService.update({
-      totalSentEmails: this.statisticsService.statistic.weeklySentEmails + 1,
-      weeklySentEmails: this.statisticsService.statistic.weeklySentEmails + 1
-    });
-
+    // adding a count to the meetings
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createSentEmailForMe();
 
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL });

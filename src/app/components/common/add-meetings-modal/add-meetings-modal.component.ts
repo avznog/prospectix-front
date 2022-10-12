@@ -38,8 +38,8 @@ export class AddMeetingsModalComponent implements OnInit {
     private readonly remindersService: RemindersService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly statisticsService: StatisticsService,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly statisticsService: StatisticsService
   ) { }
 
   ngOnInit(): void {
@@ -47,17 +47,15 @@ export class AddMeetingsModalComponent implements OnInit {
 
   onCreateMeeting() {
     this.prospect.stage == 2 && this.onMarkReminderDone();
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.update({
-      totalCalls: this.statisticsService.statistic.totalCalls + 1,
-      totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
-      weeklyCalls: this.statisticsService.statistic.weeklyCalls + 1,
-      weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
+
+    // count as a call
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
+      prospect: this.prospect,
+      date: new Date
     });
-    
-    (this.prospect.stage == 2) && this.statisticsService.update({
-      totalMeetings: this.statisticsService.statistic.totalMeetings + 1,
-      weeklyMeetings: this.statisticsService.statistic.weeklyMeetings + 1
-    });
+
+    // Incrementing the meetings count
+    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createMeetingFroMe();
 
     this.prospectsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MEETING });

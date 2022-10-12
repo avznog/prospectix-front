@@ -12,7 +12,7 @@ export class UsersComponent implements OnInit {
   constructor(
     public readonly usersService: UsersService,
     public authService: AuthService,
-    // private prospectsService: ProspectsService
+    private prospectsService: ProspectsService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
   }
 
 
-  // onClickAddProspectsBase() {
-  //   this.prospectsService.addProspectsBase();
-  // }
+  onClickAddProspectsBase() {
+    this.prospectsService.addProspectsBase();
+  }
 }

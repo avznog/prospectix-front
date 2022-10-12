@@ -3,7 +3,7 @@
   <label class="text-2xl font-bold">Ajouter un rendez-vous</label>
   <div class="divider"></div>
   <!-- Date du RDV -->
-  <input class="datepicker" type="datetime-local" id="date" class="btn btn-outline btn-ghost hover:bg-opacity-0 hover:text-neutral" [(ngModel)]="date">
+  <input type="datetime-local" id="date" class="datepicker input input-bordered" [(ngModel)]="date">
   <!-- Type de RDV -->
   <div class="text-center">
     <select class="select select-bordered w-full" id="typeMeeting" name="typeMeeting" [(ngModel)]="type">

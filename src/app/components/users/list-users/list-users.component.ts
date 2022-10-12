@@ -31,4 +31,8 @@ export class ListUsersComponent implements OnInit {
   onChangeAdmin(user: ProjectManager) : Subscription {
     return this.usersService.changeAdmin(user.id,  user.admin ? false : true);
   }
+
+  onChangeStatsEnabled(user: ProjectManager) : Subscription {
+    return this.usersService.changeStatsEnabled(user.id, user.statsEnabled ? false : true);
+  }
 }

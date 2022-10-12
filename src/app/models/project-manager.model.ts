@@ -4,7 +4,6 @@ import { Goal } from "./goal.model";
 import { Meeting } from "./meeting.model";
 import { Reminder } from "./reminder.model";
 import { SentEmail } from "./sent-email.model";
-import { Statistic } from "./statistic.model";
 
 export interface ProjectManager {
   id: number;
@@ -15,11 +14,11 @@ export interface ProjectManager {
   mail: string;
   tokenEmail: string;
   disabled: boolean;
+  statsEnabled: boolean;
   goals: Goal[];
   meetings: Meeting[];
   reminders: Reminder[];
   sentEmails: SentEmail[];
   bookmarks: Bookmark[];
   events: Event[];
-  statistic: Statistic;
 }

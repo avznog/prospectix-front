@@ -14,6 +14,7 @@ export class CreateUserComponent implements OnInit {
   lastname: string = "";
   admin: boolean = false;
   disabled: boolean = false;
+  statsEnabled: boolean = false;
   constructor(
     private usersService: UsersService
   ) { }
@@ -29,7 +30,8 @@ export class CreateUserComponent implements OnInit {
       mail: `${this.firstname.charAt(0)}${this.lastname}@juniorisep.com`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '').trim(),
       tokenEmail: "",
       admin: this.admin,
-      disabled: this.disabled
+      disabled: this.disabled,
+      statsEnabled: this.statsEnabled
     });
   }
 }
