@@ -60,6 +60,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { RankingComponent } from './components/statistics/ranking/ranking.component';
 import { MyStatsComponent } from './components/statistics/my-stats/my-stats.component';
 import { ActivityComponent } from './components/statistics/activity/activity.component';
+import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,6 +111,7 @@ import { ActivityComponent } from './components/statistics/activity/activity.com
     RankingComponent,
     MyStatsComponent,
     ActivityComponent,
+    ProspectixLogoComponent,
   ],
   imports: [
     BrowserModule,

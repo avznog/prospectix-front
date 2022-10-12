@@ -3,8 +3,10 @@
       
         <div class="card-body">
           <div class="inline-flex">
-            <figure class="w-3/5"><img src="../../../assets/logo_jisep_phone.png"></figure>
             <div class="w-2/5">
+                <app-prospectix-logo></app-prospectix-logo>
+            </div>
+            <div class="w-3/5">
               <p class="text-2xl">Connexion</p>
             <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class=" justify-center w-full">
                 <div class="form-control w-full">

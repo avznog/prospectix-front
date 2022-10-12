@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
     public readonly bookmarksService: BookmarksService,
     public readonly router: Router,
     public dataThemeService: DataThemeService,
-    // public readonly statisticsService: StatisticsService
   ) { }
 
   ngOnInit(): void {
