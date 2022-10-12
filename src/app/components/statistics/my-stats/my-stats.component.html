@@ -40,4 +40,37 @@
       <app-stats-small-card [title]="'Refus'" [value]="statisticsService.allMyNegativeAnswers"></app-stats-small-card>
     </div>
   </div>
+
+  <label class="card-title">Historique des Stats</label>
+    <div class="card-body w-full">
+      <div *ngFor="let stat of statisticsService.byWeeksScale; let i = index">
+        <div tabindex="0-{{i}}"
+          class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-medium">
+            {{stat.dateDown | shortFrenchDate}} au {{stat.dateUp | shortFrenchDate}}
+          </div>
+          <div class="collapse-content">
+            <div class="inline-flex w-full">
+              <div class="inline-flex w-full">
+                <div class="w-1/5 ">
+                  <app-stats-small-card [title]="'Appels'" [value]="statisticsService.byWeeksCalls[statisticsService.byWeeksCalls.length -1 - i]"></app-stats-small-card>
+                </div>
+                <div class="w-1/5">
+                  <app-stats-small-card  [title]="'Rappels'" [value]="statisticsService.byWeeksReminders[statisticsService.byWeeksReminders.length - 1 - i]"></app-stats-small-card>
+                </div>
+                <div class="w-1/5">
+                  <app-stats-small-card  [title]="'Rendez-vous'" [value]="statisticsService.byWeeksMeetings[statisticsService.byWeeksMeetings.length - 1 - i]"></app-stats-small-card>
+                </div>
+                <div class="w-1/5">
+                  <app-stats-small-card  [title]="'Mails'" [value]="statisticsService.byWeeksSentEmails[statisticsService.byWeeksSentEmails.length - 1 - i]"></app-stats-small-card>
+                </div>
+                <div class="w-1/5">
+                  <app-stats-small-card  [title]="'Refus'" [value]="statisticsService.byWeeksNegativeAnswers[statisticsService.byWeeksNegativeAnswers.length - 1 - i]"></app-stats-small-card>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+    </div>
 </div>

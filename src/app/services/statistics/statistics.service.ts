@@ -27,6 +27,14 @@ export class StatisticsService {
   weeklyNegativeAnswers: number = 0;
   weeklySentEmails: number = 0;
 
+  //! Personnal history stats
+  byWeeksScale: {dateDown: Date, dateUp: Date}[] = [{dateDown: new Date, dateUp: new Date}];
+  byWeeksCalls: [number] = [0]
+  byWeeksReminders: [number] = [0]
+  byWeeksMeetings: [number] = [0]
+  byWeeksNegativeAnswers: [number] = [0]
+  byWeeksSentEmails: [number] = [0]
+  
   //! All stats
   // all calls
   allCallsCount: [number] = [0];
@@ -68,13 +76,8 @@ export class StatisticsService {
     private http: HttpClient,
     private router: Router
   ) {
-    //! All stats
-    this.countAllCallsForMe();
-    this.countAllNegativeAnswersForMe();
-    this.countAllRemindersForMe();
-    this.countAllMeetingsForMe();
-    this.countAllSentEmailsForMe();
-    
+   
+    this.countByWeeksCalls();
   }
 
   //  * Getting the separate count since the last sunday
@@ -117,6 +120,39 @@ export class StatisticsService {
   
   countAllCallsForMe() {
     return this.http.get<number>(`calls/count-all-for-me`).subscribe(allMyCalls => this.allMyCalls = allMyCalls)
+  }
+
+  countByWeeksCalls() {
+    return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`calls/count-all-by-weeks-for-me`).subscribe(data => {
+      this.byWeeksCalls.pop();
+      this.byWeeksScale.pop();
+      this.byWeeksScale = data.intervals.reverse();
+      this.byWeeksCalls = data.data;
+    })
+  }
+  countByWeeksReminders() {
+    return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`reminders/count-all-by-weeks-for-me`).subscribe(data => {
+      this.byWeeksReminders.pop();
+      this.byWeeksReminders = data.data;
+    })
+  }
+  countByWeeksMeetings() {
+    return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`meetings/count-all-by-weeks-for-me`).subscribe(data => {
+      this.byWeeksMeetings.pop();
+      this.byWeeksMeetings = data.data;
+    })
+  }
+  countByWeeksSentEmails() {
+    return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`sent-emails/count-all-by-weeks-for-me`).subscribe(data => {
+      this.byWeeksSentEmails.pop();
+      this.byWeeksSentEmails = data.data;
+    })
+  }
+  countByWeeksNegativeAnswers() {
+    return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`negative-answers/count-all-by-weeks-for-me`).subscribe(data => {
+      this.byWeeksNegativeAnswers.pop();
+      this.byWeeksNegativeAnswers = data.data;
+    })
   }
 
   //* Data for graphs
@@ -441,7 +477,6 @@ export class StatisticsService {
     this.countAllMeetings({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
     this.countAllSentEmails({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
     this.allStatsLoaded[id] = true;
-    console.log(this.allStatsLoaded)
     for(let s of this.allStatsLoaded){
       if(!s){
         return
@@ -459,6 +494,5 @@ export class StatisticsService {
         counter += 1
       }
       this.createAllDataForEveryoneRadarChart();
-  
   }
 }
