@@ -24,7 +24,7 @@ export class AppComponent {
   }
   
   ngOnInit() {
-    this.dataThemeService.sendData(localStorage.getItem("theme") || "");
+    this.dataThemeService.sendData(localStorage.getItem("theme") || "jisep");
     
   } 
 }

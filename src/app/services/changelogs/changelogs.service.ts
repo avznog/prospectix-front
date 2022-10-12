@@ -12,6 +12,17 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.11.1",
+        date: new Date("2022-10-12T00:00:00.000Z"),
+        bugs: [
+            
+           ],
+        features: [
+          "Nouveau LOGOOOOOOOOOOOO ❤️ (merci Armand)",
+          "Le logo s'adapte au thème actuel"
+        ]
+      },
+      {
         version: "0.11",
         date: new Date("2022-10-12T00:00:00.000Z"),
         bugs: [

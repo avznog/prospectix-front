@@ -25,8 +25,8 @@ export class DataThemeService {
 
   sendData(message: string) {
       this.subject.next(message);
-      this.primary = this.primaryColorsForCharts.get(message) ?? "light"
-      this.secondary = this.secondaryColorsForCharts.get(message) ?? "light"
+      this.primary = this.primaryColorsForCharts.get(message) ?? "jisep"
+      this.secondary = this.secondaryColorsForCharts.get(message) ?? "jisep"
       this.statisticsService.updateAllCharts(this.primary, this.secondary);
       
   }
