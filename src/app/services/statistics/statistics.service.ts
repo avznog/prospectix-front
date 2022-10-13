@@ -13,6 +13,7 @@ import { NegativeAnswer } from 'src/app/models/negative-answer.model';
 export class StatisticsService {
   currentPage: string = "my-stats"
   startDateForChartsInterval: string = "2022-01-07T00:00:00.000Z";
+  endDateForChartsInterval: string = "2024-01-07T00:00:00.000Z";
   //! Personnal stats
   allMyReminders: number = 0;
   allMyCalls: number = 0;
@@ -77,7 +78,7 @@ export class StatisticsService {
     private router: Router
   ) {
    
-    this.countByWeeksCalls();
+    // this.countByWeeksCalls();
   }
 
   //  * Getting the separate count since the last sunday

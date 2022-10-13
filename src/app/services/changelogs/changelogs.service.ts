@@ -12,6 +12,15 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.11.2",
+        date: new Date("2022-10-12T00:00:00.000Z"),
+        bugs: [
+            "Les statistiques de la page classement affichent désormais les rendez-vous et rappels obtenus mais pas forcément effectués"
+           ],
+        features: [
+        ]
+      },
+      {
         version: "0.11.1",
         date: new Date("2022-10-12T00:00:00.000Z"),
         bugs: [

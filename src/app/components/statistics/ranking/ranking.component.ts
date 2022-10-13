@@ -9,7 +9,7 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
 export class RankingComponent implements OnInit {
 
   dateDown: string = new Date(this.statisticsService.startDateForChartsInterval).toISOString();
-  dateUp: string = new Date().toISOString();
+  dateUp: string = new Date(this.statisticsService.endDateForChartsInterval).toISOString();
   constructor(
     private readonly statisticsService: StatisticsService,
   ) {
@@ -23,11 +23,11 @@ export class RankingComponent implements OnInit {
   }
 
   onChangeDate() {
-    this.statisticsService.updateRankingChartsByDate({ dateDown: new Date(this.dateDown == '' ? this.statisticsService.startDateForChartsInterval : this.dateDown), dateUp: (this.dateUp == "") ? new Date() : new Date(this.dateUp) })
+    this.statisticsService.updateRankingChartsByDate({ dateDown: new Date(this.dateDown == '' ? this.statisticsService.startDateForChartsInterval : this.dateDown), dateUp: new Date(this.dateUp == '' ? this.statisticsService.endDateForChartsInterval : this.dateUp) })
   }
 
   onClickToday() {
-    this.dateUp = new Date().toISOString();
+    this.dateUp = new Date(this.statisticsService.endDateForChartsInterval).toISOString();
     this.onChangeDate();
   }
 }
