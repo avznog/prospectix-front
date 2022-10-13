@@ -12,8 +12,17 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.11.3",
+        date: new Date("2022-10-13T00:00:00.000Z"),
+        bugs: [
+            "Remove drawer for history => replaced by modal"
+           ],
+        features: [
+        ]
+      },
+      {
         version: "0.11.2",
-        date: new Date("2022-10-12T00:00:00.000Z"),
+        date: new Date("2022-10-13T00:00:00.000Z"),
         bugs: [
             "Correction de bugs sur les stats, concernant les dates",
             "Résolution du bug de suppression du favoris"

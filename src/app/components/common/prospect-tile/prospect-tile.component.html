@@ -45,8 +45,8 @@
           </div>
 
           <!-- Button history -->
-          <label for="drawer-prospect-history"
-            class="drawer-button btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 "
+          <label for="prospect-history-{{prospect.id}}"
+            class="modal-button btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 "
             (click)="onClickDrawer()">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-inherit hover:bg-opacity-0" fill="none"
               viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -298,5 +298,13 @@
 <label for="mark-meeting-done-and-out-{{prospect.id}}" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-md text-sm" for="">
     <app-mark-meeting-done-and-out [prospect]="prospect" [meeting]="meeting"></app-mark-meeting-done-and-out>
+  </label>
+</label>
+
+<!-- modal button prospect history -->
+<input type="checkbox" id="prospect-history-{{prospect.id}}" class="modal-toggle">
+<label for="prospect-history-{{prospect.id}}" class="modal cursor-pointer">
+  <label class="modal-box relative max-w-screen-md text-sm" for="">
+    <app-prospect-history [prospect]="prospect && prospect"></app-prospect-history>
   </label>
 </label>

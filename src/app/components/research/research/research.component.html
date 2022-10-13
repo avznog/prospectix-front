@@ -1,21 +1,10 @@
-<div class="drawer drawer-end ">
-  <input id="drawer-prospect-history" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content overflowcl">
-    <app-research-bloc></app-research-bloc>
-    <div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
-      <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>
-    </div>
-    <app-no-result *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
-    <div class="btn-group justify-center pb-5 w-full">
-      <button class="btn btn-outline btn-ghost {{prospectsService.researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-      <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 20 + 1}} / {{(prospectsService.nbProspects / 20 + 1).toFixed()}}</button>
-      <button class="btn btn-outline btn-ghost {{(prospectsService.researchParamsProspect.skip + 20 < prospectsService.nbProspects )? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
-    </div>
-  </div> 
-  <div class="drawer-side">
-    <label for="drawer-prospect-history" class="drawer-overlay"></label>
-    <div class="menu p-4 overflow-y-auto w-100 bg-base-100 text-base-content">
-      <app-prospect-history></app-prospect-history>
-    </div>
-  </div>
+<app-research-bloc></app-research-bloc>
+<div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
+  <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>
+</div>
+<app-no-result *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
+<div class="btn-group justify-center pb-5 w-full">
+  <button class="btn btn-outline btn-ghost {{prospectsService.researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+  <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 20 + 1}} / {{(prospectsService.nbProspects / 20 + 1).toFixed()}}</button>
+  <button class="btn btn-outline btn-ghost {{(prospectsService.researchParamsProspect.skip + 20 < prospectsService.nbProspects )? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
 </div>
