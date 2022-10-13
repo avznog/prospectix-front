@@ -113,6 +113,6 @@
 
   <!-- Bouton créer le prospect -->
   <div class="flex justify-center">
-    <label class="btn btn-ghost btn-outline w-1/5" for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
+    <label class="btn btn-ghost btn-outline w-1/5 {{companyName == '' || phone == '' || address == '' ? 'btn-disabled' : ''}} " for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
   </div>
 </div>

@@ -18,6 +18,7 @@ export class ChangelogsService {
             "Remove drawer for history => replaced by modal"
            ],
         features: [
+          "Ajout d'un blocage du bouton d'ajout d'un prospect si les champs nom, adresse ou téléphone ne sont pas renseignés"
         ]
       },
       {
