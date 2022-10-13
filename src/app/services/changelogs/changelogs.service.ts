@@ -15,7 +15,8 @@ export class ChangelogsService {
         version: "0.11.2",
         date: new Date("2022-10-12T00:00:00.000Z"),
         bugs: [
-            "Correction de bugs sur les stats, concernant les dates"
+            "Correction de bugs sur les stats, concernant les dates",
+            "Résolution du bug de suppression du favoris"
            ],
         features: [
         ]

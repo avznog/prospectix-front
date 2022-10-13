@@ -93,7 +93,7 @@ export class ProspectsService {
     return this.http.patch<Prospect>(`prospects/all-prospect/${idProspect}`, updateProspectDto).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, ...updateProspectDto}));
   }
 
-  updateByStage(idProspect: number, stage: { stage: StageType }) : Subscription {
+  updateByStage(idProspect: number, stage: { stage: StageType }, prospect?: Prospect) : Subscription {
     if(stage.stage == StageType.ARCHIVED){
       return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date() }).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
     }
@@ -101,7 +101,9 @@ export class ProspectsService {
       return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: true }));  
     }
     else if (stage.stage == StageType.RESEARCH) {
-      return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: false }));  
+      console.log(this.prospects.get(idProspect))
+      console.log(prospect)
+      return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...prospect!, stage: stage.stage, isBookmarked: false }));  
     }
     return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
   }
