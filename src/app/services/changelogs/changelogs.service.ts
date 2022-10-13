@@ -15,7 +15,7 @@ export class ChangelogsService {
         version: "0.11.2",
         date: new Date("2022-10-12T00:00:00.000Z"),
         bugs: [
-            "Les statistiques de la page classement affichent désormais les rendez-vous et rappels obtenus mais pas forcément effectués"
+            "Correction de bugs sur les stats, concernant les dates"
            ],
         features: [
         ]

@@ -13,7 +13,7 @@ import { NegativeAnswer } from 'src/app/models/negative-answer.model';
 export class StatisticsService {
   currentPage: string = "my-stats"
   startDateForChartsInterval: string = "2022-01-07T00:00:00.000Z";
-  endDateForChartsInterval: string = "2024-01-07T00:00:00.000Z";
+  endDateForChartsInterval: string = new Date().toISOString();
   //! Personnal stats
   allMyReminders: number = 0;
   allMyCalls: number = 0;
@@ -77,8 +77,6 @@ export class StatisticsService {
     private http: HttpClient,
     private router: Router
   ) {
-   
-    // this.countByWeeksCalls();
   }
 
   //  * Getting the separate count since the last sunday
@@ -474,9 +472,9 @@ export class StatisticsService {
   }
 
   watchForAllStatsLoaded(id: number) {
-    this.countAllReminders({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
-    this.countAllMeetings({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
-    this.countAllSentEmails({ dateDown: new Date("2022-01-07T00:00:00.000Z"), dateUp: new Date() });
+    this.countAllReminders({ dateDown: new Date(this.startDateForChartsInterval), dateUp: new Date() });
+    this.countAllMeetings({ dateDown: new Date(this.startDateForChartsInterval), dateUp: new Date() });
+    this.countAllSentEmails({ dateDown: new Date(this.startDateForChartsInterval), dateUp: new Date() });
     this.allStatsLoaded[id] = true;
     for(let s of this.allStatsLoaded){
       if(!s){
