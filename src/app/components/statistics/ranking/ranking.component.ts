@@ -16,18 +16,18 @@ export class RankingComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.statisticsService.countAllCalls({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
-    this.statisticsService.countAllReminders({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
-    this.statisticsService.countAllMeetings({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
-    this.statisticsService.countAllSentEmails({ dateDown: new Date(this.dateDown), dateUp: new Date(this.dateUp) })
+    this.statisticsService.countAllCalls({ dateDown: new Date(this.dateDown), dateUp: new Date() })
+    this.statisticsService.countAllReminders({ dateDown: new Date(this.dateDown), dateUp: new Date() })
+    this.statisticsService.countAllMeetings({ dateDown: new Date(this.dateDown), dateUp: new Date() })
+    this.statisticsService.countAllSentEmails({ dateDown: new Date(this.dateDown), dateUp: new Date() })
   }
 
   onChangeDate() {
-    this.statisticsService.updateRankingChartsByDate({ dateDown: new Date(this.dateDown == '' ? this.statisticsService.startDateForChartsInterval : this.dateDown), dateUp: new Date(this.dateUp == '' ? this.statisticsService.endDateForChartsInterval : this.dateUp) })
+    this.statisticsService.updateRankingChartsByDate({ dateDown: new Date(this.dateDown == '' ? this.statisticsService.startDateForChartsInterval : this.dateDown), dateUp: this.dateUp == '' ? new Date() : new Date(this.dateUp) })
   }
 
   onClickToday() {
-    this.dateUp = new Date(this.statisticsService.endDateForChartsInterval).toISOString();
+    this.dateUp = new Date().toISOString();
     this.onChangeDate();
   }
 }
