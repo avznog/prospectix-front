@@ -3,12 +3,11 @@
       
         <div class="card-body">
           <div class="inline-flex">
-            <div class="w-2/5">
-                <app-prospectix-logo></app-prospectix-logo>
-            </div>
+            <figure class="w-2/5">
+                <img src="../../../assets/logo_text_couleur.png"/>
+            </figure>
             <div class="w-3/5">
-              <p class="text-2xl">Connexion</p>
-            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class=" justify-center w-full">
+            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class=" justify-center w-full space-y-3">
                 <div class="form-control w-full">
                     <label class="label" for="username">
                         <span class="label-text">
