@@ -12,6 +12,7 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { SlackService } from 'src/app/services/slack/slack.service';
 import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
@@ -39,7 +40,8 @@ export class AddMeetingsModalComponent implements OnInit {
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
     private readonly toastsService: ToastsService,
-    private readonly statisticsService: StatisticsService
+    private readonly statisticsService: StatisticsService,
+    private readonly slackService: SlackService
   ) { }
 
   ngOnInit(): void {
@@ -83,6 +85,9 @@ export class AddMeetingsModalComponent implements OnInit {
       type: "alert-info",
       message: "Rendez-vous ajouté"
     })
+
+    // ? Slack bot message for meeting
+    this.slackService.sendMeeting(this.prospect)
   }
 
   onMarkReminderDone() {

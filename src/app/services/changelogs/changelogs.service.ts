@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "0.11.4",
+        date: new Date("2022-10-14T00:00:00.000Z"),
+        bugs: [
+            
+           ],
+        features: [
+          "Ajout des notifications dans le canal slack lors de la création d'un rendez-vous"
+        ]
+      },
+      {
         version: "0.11.3",
         date: new Date("2022-10-13T00:00:00.000Z"),
         bugs: [
