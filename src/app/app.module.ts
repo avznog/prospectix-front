@@ -19,7 +19,6 @@ import { AddReminderModalComponent } from './components/common/add-reminder-moda
 import { ConfirmProComponent } from './components/common/confirm-pro/confirm-pro.component';
 import { ConfirmRefusComponent } from './components/common/confirm-refus/confirm-refus.component';
 import { DisableProspectModalComponent } from './components/common/disable-prospect-modal/disable-prospect-modal.component';
-import { HeaderComponent } from './components/common/header/header.component';
 import { MarkMeetingDoneAndOutComponent } from './components/common/mark-meeting-done-and-out/mark-meeting-done-and-out.component';
 import { NoResultComponent } from './components/common/no-result/no-result/no-result.component';
 import { ProspectHistoryComponent } from './components/common/prospect-history/prospect-history/prospect-history.component';
@@ -61,6 +60,7 @@ import { RankingComponent } from './components/statistics/ranking/ranking.compon
 import { MyStatsComponent } from './components/statistics/my-stats/my-stats.component';
 import { ActivityComponent } from './components/statistics/activity/activity.component';
 import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
+import { HeaderComponent } from './components/common/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
