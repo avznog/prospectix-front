@@ -1,0 +1,17 @@
+<app-reminders-research-bloc></app-reminders-research-bloc>
+<div *ngIf="remindersService.researchParamsReminder.done == true || remindersService.researchParamsReminder.done == 'true'">
+  <div *ngFor="let reminder of remindersService.remindersDone | keyvalue | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
+    <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect"></app-prospect-tile>
+  </div>
+</div>
+<div *ngIf="remindersService.researchParamsReminder.done == false || remindersService.researchParamsReminder.done == 'false'">
+  <div *ngFor="let reminder of remindersService.reminders | keyvalue | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
+    <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect" *ngIf="reminder.value.prospect.stage == 2"></app-prospect-tile>
+  </div>
+</div>
+<!-- <app-no-result *ngIf="(remindersService.reminders && remindersService.reminders.size <= 0 && remindersService.researchParamsReminder.done == 'false' || remindersService.researchParamsReminder.done == false) || (remindersService.remindersDone && remindersService.remindersDone.size <= 0)"></app-no-result>  -->
+<div class="btn-group justify-center pb-5 w-full">
+<button class="btn btn-outline btn-ghost {{ remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
+<button class="btn btn-outline btn-ghost">Page {{ remindersService.researchParamsReminder.skip / 20 + 1 }} / {{ (remindersService.nbReminders / 20 + 1).toFixed() }}</button>
+<button class="btn btn-outline btn-ghost {{(remindersService.researchParamsReminder.done == false || remindersService.researchParamsReminder.done == 'false') ? (remindersService.researchParamsReminder.skip + 20 < remindersService.nbReminders) ? '' : 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+</div>

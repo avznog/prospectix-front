@@ -1,0 +1,25 @@
+<!-- <app-header></app-header> -->
+<div class="container mx-auto">
+  <h1 class="ml-6 text-xl">Objectifs</h1>
+  <div class="card">
+    <div class="card-body">
+      <app-goal-research-bloc></app-goal-research-bloc>
+      <div class="divider"></div>
+      <app-liste-goals></app-liste-goals>
+    </div>
+    <div class="divider"></div>
+    <div class="btn-group flex justify-center">
+      <button class="btn btn-outline btn-ghost {{goalsService.researchParamsGoals.skip > 0 ? '' : 'btn-disabled'}}"
+        (click)="pageDown()">«</button>
+      <button class="btn btn-outline btn-ghost">Page {{goalsService.researchParamsGoals.skip / 20 + 1}}</button>
+      <button
+        class="btn btn-outline btn-ghost {{goalsService.goals && goalsService.goals.size <= 0 ? 'btn-disabled' : ''}}"
+        (click)="pageUp()">»</button>
+    </div>
+    <input type="checkbox" id="add-goal-modal" class="modal-toggle" />
+    <div class="modal">
+      <app-create-goal></app-create-goal>
+    </div>
+    <label for="add-goal-modal" class="btn modal-button btn-ghost btn-outline w-1/3 m-5">Ajouter un objectif</label>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="modal-box overflow-hidden">
+    <label for="add-goal-modal" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+    <h3 class="text-lg font-bold">Créer un objectif</h3>
+    <div class="divider"></div>
+    
+    <div class="space-y-5">
+
+      <!-- Titre de l'objectif -->
+      <label class="input-group">
+        <span>Titre</span>
+        <input class="input input-bordered" type="text" placeholder="Ex: Appels" [(ngModel)]="title"/>
+      </label>
+      
+
+      <!-- Chef de projet -->
+      <div class="form-control">
+          <select class="select select-bordered" [(ngModel)]="pmPseudo" >
+            <option disabled selected>Choisir un chef de projet</option>
+            <option *ngFor="let pm of pmService.projectManagers" [defaultSelected]="pm">{{pm.pseudo}}</option>
+          </select>
+      </div>
+
+      <!-- Description -->
+      <label class="input-group">
+        <span>Description</span>
+        <input class="input input-bordered" type="text" placeholder="Ex: Nombre d'appels par semaine" [(ngModel)]="description" />
+      </label>
+
+      <!-- Deadline -->
+      <label class="input-group">
+        <span>Deadline</span>
+        <input class="input input-bordered" type="date" [(ngModel)]="deadline" />
+      </label>
+
+      <!-- Redondant ? (idCyclic ?) -->
+      <label class="input-group">
+        <span>Redondant ?</span>
+        <input class="checkbox" type="checkbox" [(ngModel)]="isCyclic" />
+      </label>
+
+      <!-- TotalSteps -->
+      <label class="input-group">
+        <span>Nombre d'itérations</span>
+        <input class="input input-bordered" type="number" placeholder="Ex: 0" [(ngModel)]="totalSteps" />
+      </label>
+
+      <!-- Button -->
+      <div class="modal-action">
+        <label for="add-goal-modal" class="btn btn-outline btn-ghost right-2" (click)="createGoal()">Créer l'objectif</label>
+      </div>  
+    </div>
+  </div>

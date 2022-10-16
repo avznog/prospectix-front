@@ -1,0 +1,7 @@
+<h2 class="ml-6 text-2xl font-black mb-5">Mes Objectifs 🎯</h2>
+<div class="flex flex-row justify-around items-start">
+  <div *ngFor="let goal of goalsService.goals | keyvalue">
+    <app-dashboard-each-goal *ngIf="goal.value.pm.pseudo == authService.currentUserSubject.getValue().pseudo" [goal]="goal.value"></app-dashboard-each-goal>
+  </div>
+  
+</div>

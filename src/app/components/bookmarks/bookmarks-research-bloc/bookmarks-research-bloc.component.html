@@ -1,0 +1,35 @@
+<div class="inline-flex justify-items-center items-end space-x-5 mb-5 w-full">
+  <!-- Search a prospect - overrides the other filters -->
+  <div class="form-control w-full">
+    <label class="label" for="search">
+      <span class="label-text">Recherche</span>
+    </label>
+    <input type="search" [(ngModel)]="keyword" (keyup.enter)="onEditKeyword()" placeholder="Recherche (entrée pour valider)"
+      class="input input-bordered w-full max-w-xs" />
+  </div>
+
+  <!-- Select activity domain -->
+  <div class="form-control w-full max-w-xs">
+    <label class="label" for="activity">
+      <span class="label-text">Domaine d'activité</span>
+    </label>
+    <select id="activity" name="activity" [(ngModel)]="activity" (change)="onEditActivity()"
+      class="select select-bordered">
+      <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'activité
+      </option>
+      <option *ngFor="let activity of activitiesService.activities">{{activity.name}}</option>
+    </select>
+  </div>
+
+  <!-- Select city -->
+  <div class="form-control w-full max-w-xs">
+    <label class="label" for="city">
+      <span class="label-text">Ville</span>
+    </label>
+    <select id="city" name="city" [(ngModel)]="zipcode" (change)="onEditCity()" class="select select-bordered">
+      <option [defaultSelected]="'Toutes les villes'" [value]="-1000">Toutes les villes</option>
+      <option *ngFor="let city of citiesService.cities" [ngValue]="city.zipcode">{{city.name}} : {{city.zipcode}}
+      </option>
+    </select>
+  </div>
+</div>

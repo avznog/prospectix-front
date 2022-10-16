@@ -1,0 +1,12 @@
+<app-mails-research-bloc></app-mails-research-bloc>
+<div
+  *ngFor="let sentEmail of sentEmailsService.sentEmails | keyvalue | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
+  <app-prospect-tile [sentEmail]="sentEmail.value" [prospect]="sentEmail.value.prospect"
+    *ngIf="sentEmail.value.prospect.stage == 4"></app-prospect-tile>
+</div>
+<app-no-result *ngIf="sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0"></app-no-result>
+<div class="btn-group pb-5 justify-center w-full">
+  <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.skip <= 0 ? 'btn-disabled' : '' }}" (click)="pageDown()">«</button>
+  <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 +1 }} / {{ (sentEmailsService.nbSentEmails / 20 + 1).toFixed() }}</button>
+  <button class="btn btn-outline btn-ghost {{(sentEmailsService.researchParamsSentEmails.skip + 20 < sentEmailsService.nbSentEmails) ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
+</div>

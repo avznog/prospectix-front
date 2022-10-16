@@ -1,0 +1,44 @@
+<div class="card rounded">
+  <label for="prospect-history-{{prospect.id}}" class="btn btn-sm btn-circle absolute right-2 top-2 text-base-100">✕</label>
+  <div class="card-title"><span class="justify-center">Historique du prospect: {{prospect && prospect.companyName}}</span></div>
+  <div class="card-body">
+    <div class="rounded">
+      <ul class="steps steps-vertical">
+        <li 
+        
+        [attr.data-content]="
+        ((event.type == 'ADD_BOOKMARKS' || event.type == 'DELETE_BOOKMARKS') && '★') || 
+        (event.type == 'CREATION' && '🔆') || 
+        (event.type == 'ADD_REMINDER' && '🔔') || 
+        (event.type == 'ADD_MEETING' && '👥') || 
+        (event.type == 'ADD_SENT_EMAIL' && '📨') ||
+        (event.type == 'DELETE_REMINDER' && '🔕') ||
+        (event.type == 'DELETE_MEETING' && '🔥') ||
+        (event.type == 'DELETE_SENT_EMAIL' && '📮') ||
+        (event.type == 'DONE_REMINDER' && '🎯') || 
+        (event.type == 'DONE_MEETING' && '🤝') ||
+        (event.type == 'NO_ANSWER' && '💬') ||
+        (event.type == 'PASSAGE_PRO' && '📝') ||
+        (event.type == 'NEGATIVE_ANSWER' && '🗑') "
+        class="
+          step
+          {{event.type == 'CREATION' ? 'step-success' : ''}}
+          {{event.type == 'ADD_REMINDER' ? 'step-info' : ''}}
+          {{event.type == 'ADD_MEETING' ? 'step-info' : ''}}
+          {{event.type == 'ADD_SENT_EMAIL' ? 'step-info' : ''}}
+          {{event.type == 'ADD_BOOKMARKS' ? 'step-warning' : ''}}
+          {{event.type == 'DONE_REMINDER' ? 'step-success' : ''}}
+          {{event.type == 'DONE_MEETING' ? 'step-success' : ''}}
+          {{event.type == 'DELETE_REMINDER' ? 'step-error' : ''}}
+          {{event.type == 'DELETE_MEETING' ? 'step-error' : ''}}
+          {{event.type == 'DELETE_BOOKMARKS' ? 'step-warning' : ''}}
+          {{event.type == 'DELETE_SENT_EMAIL' ? 'step-error' : ''}}
+          {{event.type == 'NEGATIVE_ANSWER' ? 'step-error' : ''}}
+          {{event.type == 'PASSAGE_PRO' ? 'step-success' : ''}}
+          {{event.type == 'NO_ANSWER' ? 'step-error' : ''}}
+          "
+          *ngFor="let event of eventsService.events; let index = index">{{event.date | date:"dd MMMM" }} - {{event.description}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

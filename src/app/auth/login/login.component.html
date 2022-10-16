@@ -1,0 +1,47 @@
+<div class="flex justify-center items-center bg-opacity-0 h-screen w-full">
+    <div class="card w-1/2 bg-base-100 shadow-xl rounded-t-3xl">
+      
+        <div class="card-body">
+          <div class="inline-flex">
+            <figure class="w-2/5">
+                <img src="../../../assets/logo_text_couleur.png"/>
+            </figure>
+            <div class="w-3/5 place-self-center">
+            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class=" justify-center w-full space-y-3">
+                <div class="form-control w-full">
+                    <label class="label" for="username">
+                        <span class="label-text">
+                            Identifiant
+                        </span>
+                    </label> 
+                    <input type="text" formControlName="username" class="input input-bordered w-full" [ngClass]="{ 'is-invalid': submitted && loginForm.value['username'].errors }" />
+                    <div *ngIf="submitted && loginForm.value['username'].errors" class="invalid-feedback">
+                        <div *ngIf="loginForm.value['username'].errors.required">Username is required</div>
+                    </div>
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label" for="password">
+                        <span class="label-text">
+                            Mot de passe
+                        </span>
+                    </label>
+                    <input type="password" formControlName="password" class="input input-bordered w-full mb-5" [ngClass]="{ 'is-invalid': submitted && loginForm.value['password'].errors }" />
+                    <div *ngIf="submitted && loginForm.value['password'].errors" class="invalid-feedback">
+                      <div *ngIf="loginForm.value['password'].errors.required">Password is required</div>
+                  </div>
+                </div>
+
+                <div class="card-actions justify-center">
+                    <button class="btn btn-primary text-base-100" [disabled]="loading" type="submit">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Se connecter
+                    </button>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="bg-base-300 inline-flex justify-center p-5 w-full btn-group">
+  <a class="btn btn-sm {{statisticsService.currentPage == 'my-stats' ? 'bg-primary' : 'hover:bg-primary'}} text-base-100" (click)="onChangeStatPage('my-stats')">Statistiques personnelles</a> 
+  <a class="btn btn-sm {{statisticsService.currentPage == 'ranking' ? 'bg-primary' : ' hover:bg-primary'}} text-base-100" (click)="onChangeStatPage('ranking')">Classements</a> 
+  <a class="btn btn-sm {{statisticsService.currentPage == 'activity' ? 'bg-primary' : 'hover:bg-primary'}} text-base-100" (click)="onChangeStatPage('activity')">Activité</a>
+</div>
+
+<app-ranking *ngIf="statisticsService.currentPage == 'ranking'"></app-ranking>
+<app-my-stats *ngIf="statisticsService.currentPage == 'my-stats'"></app-my-stats>
+<app-activity *ngIf="statisticsService.currentPage == 'activity'"></app-activity>

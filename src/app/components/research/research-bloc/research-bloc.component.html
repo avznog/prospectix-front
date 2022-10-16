@@ -1,0 +1,51 @@
+<div class="inline-flex justify-items-center items-end space-x-5 mb-5 w-full">
+    <!-- Search a prospect - overrides the other filters -->
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="search">
+            <span class="label-text">Recherche</span>
+        </label>
+        <input type="search" [(ngModel)]="formKeyword" (keyup.enter)="onEditKeyword()" placeholder="Recherche (entrée pour valider)"
+            class="input input-bordered w-full max-w-xs" />
+    </div>
+
+    <!-- Select activity domain -->
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="activity">
+            <span class="label-text">Domaine d'activité</span>
+        </label>
+        <select id="activity" name="activity" [(ngModel)]="formActivity" (change)="onEditActivity()"
+            class="select select-bordered">
+            <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'activité</option>
+            <option *ngFor="let activity of activitiesService.activities" [value]="activity.name">{{activity.name}}  ({{activitiesService.countActvities.get(activity.id)}})</option>
+        </select>
+    </div>
+
+    <!-- Select city -->
+    <div class="form-control w-full max-w-xs">
+        <label class="label" for="city">
+            <span class="label-text">Ville</span>
+        </label>
+        <select id="city" name="city" [(ngModel)]="formZipcode" (change)="onEditCity()" class="select select-bordered">
+            <option [defaultSelected]="'Toutes les villes'" [value]="-1000">Toutes les villes</option>
+            <option *ngFor="let city of citiesService.cities" [ngValue]="city.zipcode">{{city.name}} : {{city.zipcode}} ({{citiesService.countCities.get(city.id)}})</option>
+        </select>
+    </div>
+
+    <!-- Ajouter un prospect -->
+    <label class="btn btn-ghost btn-outline modal-button" for="modal-add-prospect">Ajouter un prospect</label>
+    <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
+    <app-add-prospect class="modal"></app-add-prospect>
+</div>
+
+
+<input type="checkbox" id="my-modal" class="modal-toggle" />
+<div class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Recherche de prospects</h3>
+        <p class="py-4">We gotcha you! — Vous pouvez cherchez un prospect par son nom, son numéro de téléphone, mail,
+            site web, adresse ou encore par commentaire enregistré dans Prospectix</p>
+        <div class="modal-action">
+            <label for="my-modal" class="btn">Ok</label>
+        </div>
+    </div>
+</div>
