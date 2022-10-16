@@ -22,7 +22,7 @@
     "@swimlane/ngx-charts": "^20.1.0",
     "angular-fusioncharts": "^4.0.0",
     "chart.js": "^3.9.1",
-    "daisyui": "^2.27.0",
+    "daisyui": "^2.31.0",
     "date-fns": "^2.29.3",
     "feather-icons": "^4.29.0",
     "fusioncharts": "^3.19.0",
