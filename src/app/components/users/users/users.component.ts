@@ -38,6 +38,6 @@ export class UsersComponent implements OnInit {
   }
 
   onClickAddEvents() {
-    this.prospectsService.addEvents();
+    // this.prospectsService.addEvents();
   }
 }

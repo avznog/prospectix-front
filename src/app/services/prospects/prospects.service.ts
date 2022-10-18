@@ -131,6 +131,6 @@ export class ProspectsService {
   }
 
   addEvents() {
-    return this.http.get("prospects/add-events").subscribe();
+    // return this.http.get("prospects/add-events").subscribe();
   }
 }
