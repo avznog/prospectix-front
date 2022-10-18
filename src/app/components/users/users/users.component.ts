@@ -34,6 +34,6 @@ export class UsersComponent implements OnInit {
 
 
   onClickAddProspectsBase() {
-    this.prospectsService.addProspectsBase();
+    // this.prospectsService.addProspectsBase();
   }
 }
