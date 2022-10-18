@@ -13,7 +13,11 @@ export class SlackService {
     private http: HttpClient
   ) { }
 
-  sendMeeting(prospect: Prospect) {
-    this.http.post("slack/send-meeting", prospect).subscribe()
+  sendMeetingProd(prospect: Prospect) {
+    this.http.post("slack/send-meeting-prod", prospect).subscribe()
+  }
+
+  sendMeetingStaging(prospect: Prospect) {
+    this.http.post("slack/send-meeting-staging", prospect).subscribe()
   }
 }
