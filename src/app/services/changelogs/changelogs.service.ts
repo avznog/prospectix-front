@@ -18,8 +18,8 @@ export class ChangelogsService {
             
            ],
         features: [
-          "Déploiement officielle de la v1"
-          
+          "Déploiement officiel de la v1",
+          "Ajustement des heures pour les statistiques"
         ]
       },
       {
