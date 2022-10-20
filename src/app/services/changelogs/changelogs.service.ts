@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.0.1",
+        date: new Date("2022-10-20T00:00:00.000Z"),
+        bugs: [
+            
+           ],
+        features: [
+          "Ajout d'un message de survol pour la priorité"
+        ]
+      },
+      {
         version: "1.0",
         date: new Date("2022-10-17T00:00:00.000Z"),
         bugs: [
