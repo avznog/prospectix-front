@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Slack } from 'src/app/models/slack.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

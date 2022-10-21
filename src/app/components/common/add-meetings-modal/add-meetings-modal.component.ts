@@ -89,7 +89,7 @@ export class AddMeetingsModalComponent implements OnInit {
 
     // ? Slack bot message for meeting
     // ? Staging notifs
-      if(environment.apiUrl.includes("staging")) {
+    if(environment.apiUrl.includes("staging")) {
       this.slackService.sendMeetingStaging(this.prospect)
       // ? local notifs
     } else if (environment.apiUrl.includes("localhost")) {
@@ -99,6 +99,7 @@ export class AddMeetingsModalComponent implements OnInit {
     } else {
       this.slackService.sendMeetingProd(this.prospect)
     }
+    
   }
 
   onMarkReminderDone() {
