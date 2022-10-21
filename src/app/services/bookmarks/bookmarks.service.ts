@@ -12,6 +12,7 @@ import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmark
 })
 export class BookmarksService {
 
+  maxNbBookmarks: number = 50;
   nbBookmarks: number = 0;
   researchParamsBookmarks: ResearchParamsBookmarks = {
     keyword: '',
@@ -56,11 +57,17 @@ export class BookmarksService {
   }
 
   create(createBookmarkDto: CreateBookmarkDto) : Subscription {
-    return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => this.bookmarks.set(bookmark.id, { ...bookmark, prospect: { ...bookmark.prospect, stage: StageType.BOOKMARK, isBookmarked: true }}));
+    return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => {
+      this.bookmarks.set(bookmark.id, { ...bookmark, prospect: { ...bookmark.prospect, stage: StageType.BOOKMARK, isBookmarked: true }})
+      this.nbBookmarks += 1;
+    });
   }
 
   delete(bookmarkId: number) {
-    this.http.delete<Bookmark>(`bookmarks/${bookmarkId}`).subscribe(() => this.bookmarks.delete(bookmarkId));
+    this.http.delete<Bookmark>(`bookmarks/${bookmarkId}`).subscribe(() => {
+      this.bookmarks.delete(bookmarkId)
+      this.nbBookmarks -= 1;
+    });
   }
 
   updateNbNo(idProspect: number) {
