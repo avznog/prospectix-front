@@ -88,17 +88,7 @@ export class AddMeetingsModalComponent implements OnInit {
     })
 
     // ? Slack bot message for meeting
-    // ? Staging notifs
-    if(environment.apiUrl.includes("staging")) {
-      this.slackService.sendMeetingStaging(this.prospect)
-      // ? local notifs
-    } else if (environment.apiUrl.includes("localhost")) {
-      // ! remove notifs for local -> no spam
-      // this.slackService.sendMeetingStaging(this.prospect)
-      // ? Prod notifs
-    } else {
-      this.slackService.sendMeetingProd(this.prospect)
-    }
+   this.slackService.sendMeeting(this.prospect);
     
   }
 
