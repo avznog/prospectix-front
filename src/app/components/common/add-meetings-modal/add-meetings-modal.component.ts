@@ -15,7 +15,6 @@ import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.serv
 import { SlackService } from 'src/app/services/slack/slack.service';
 import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 import { ToastsService } from 'src/app/services/toasts/toasts.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-meetings-modal',
