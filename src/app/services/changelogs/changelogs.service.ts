@@ -12,16 +12,28 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.0.3",
+        date: new Date("2022-10-23T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug qui ne permettait pas de naviguer dans les pages de rappels / rendez-vous / mails",
+          "Résolution du bug qui affichait les dates de rappels au format anglais (sous 12h)",
+          
+          ],
+        features: [
+          "Ajout du classement chronologique des rappels et rendez-vous"
+        ]
+      },
+      {
         version: "1.0.2",
         date: new Date("2022-10-21T00:00:00.000Z"),
         bugs: [
           "Résolution du bug qui désactivait le bouton page supérieure sur les favoris lorsqu'on ajoute plus de 20 favoris (plus d'une page)",
           "Résolution du bug de favoris maximum -> définis à 50 favoris maximum"
-        ],
+          ],
         features: [
           
         ]
-        },
+      },
       {
         version: "1.0.1",
         date: new Date("2022-10-20T00:00:00.000Z"),

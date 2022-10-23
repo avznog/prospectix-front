@@ -29,4 +29,9 @@ export class MeetingsComponent implements OnInit {
       skip: this.meetingsService.researchParamsMeeting.skip + 20
     });
   }
+
+  // ? order chronological -> the furthest on top
+  asIsOrder() {
+    return -1;
+  }
 }

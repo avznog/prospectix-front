@@ -55,7 +55,7 @@ export class RemindersService {
     
     return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => {
       reminders.forEach(reminder => this.reminders.set(reminder.id, reminder))
-    this.countReminders()
+      this.countReminders()
   });
   }
 
@@ -118,9 +118,6 @@ export class RemindersService {
     queryParameters = queryParameters.append("skip", this.researchParamsReminder.skip)      
     queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
     queryParameters = queryParameters.append("take", 20);
-    return this.http.get<number>(`reminders/count-reminders`, { params: queryParameters }).subscribe(nbReminders => {
-      this.nbReminders = nbReminders
-      console.log(nbReminders)
-    });
+    return this.http.get<number>(`reminders/count-reminders`, { params: queryParameters }).subscribe(nbReminders => this.nbReminders = nbReminders);
   }
 }
