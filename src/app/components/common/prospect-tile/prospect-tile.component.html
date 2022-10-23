@@ -80,7 +80,7 @@
 
         <!-- 1/3 of 1/2 (3rd / 3) DATE REMINDER MEETING SENTEMAIL -->
         <div class="w-1/3 inline-flex justify-end" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 4">
-          <span *ngIf="reminder">{{reminder.date | date:"dd/MM/YYYY"}} à {{reminder.date |date:"hh:mm"}}</span>
+          <span *ngIf="reminder">{{reminder.date | date:"dd/MM/YYYY"}} à {{reminder.date | date:"HH:mm"}}</span>
           <span *ngIf="meeting">{{meeting.date | date:"dd/MM/YYYY"}} à {{meeting.date | date:"HH:mm"}}</span>
           <span *ngIf="sentEmail">{{sentEmail.sendingDate | date:"dd/MM/YYYY"}}</span>
         </div>

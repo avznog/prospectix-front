@@ -68,7 +68,10 @@ export class MeetingsService {
   }
 
   deleteMeeting(idMeeting: number) : Subscription {
-    return this.http.delete<Meeting>(`meetings/delete/${idMeeting}`).subscribe(() => this.meetings.delete(idMeeting));
+    return this.http.delete<Meeting>(`meetings/delete/${idMeeting}`).subscribe(() => {
+      this.meetings.delete(idMeeting)
+      this.nbMeetings -= 1;
+    });
   }
 
   markDone(idMeeting : number) : Subscription {
@@ -83,7 +86,10 @@ export class MeetingsService {
   }
 
   create(createMeetingDto: CreateMeetingDto) : Subscription {
-    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => this.meetings.set(meeting.id, {...meeting, prospect: { ...meeting.prospect, stage: StageType.MEETING }}));
+    return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => {
+      this.meetings.set(meeting.id, {...meeting, prospect: { ...meeting.prospect, stage: StageType.MEETING }})
+      this.nbMeetings += 1;
+    });
   }
 
   findAllByProspect(idProspect: number) {

@@ -6,6 +6,7 @@ import { CreateCallDto } from 'src/app/dto/calls/create-call.dto';
 import { CreateNegativeAnswerDto } from 'src/app/dto/negative-answers/create-negative-answer.dto';
 import { Call } from 'src/app/models/call.model';
 import { NegativeAnswer } from 'src/app/models/negative-answer.model';
+import { SlackService } from '../slack/slack.service';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +76,8 @@ export class StatisticsService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private readonly slackService: SlackService
   ) {
   }
 
@@ -278,6 +280,14 @@ export class StatisticsService {
   }
 
   createCallForMe(createCallDto: CreateCallDto) {
+    // ! Check Fraud -> if fraud send slack notif
+    let today = new Date();
+    if(today.getDay() == 0 || (today.getDay() == 6 && today.getHours() > 18) || ((today.getDay() != 0 && today.getDay() != 6) && today.getHours() > 20)) {
+      this.slackService.sendFraud(createCallDto.prospect)
+    } else {
+      console.log("good call")
+    }
+
     this.http.post<Call>(`calls/create-for-me`, createCallDto).subscribe(() => this.allMyCalls += 1);
   }
 
@@ -287,6 +297,12 @@ export class StatisticsService {
 
   createMeetingFroMe() {
     this.allMyMeetings += 1;
+    this.weeklyMeetings += 1;
+
+    // ! if 3rd meeting of the week => send slack champ in channel
+    if(this.weeklyMeetings == 3) {
+      this.slackService.sendChamp();
+    }
   }
 
   createSentEmailForMe() {
