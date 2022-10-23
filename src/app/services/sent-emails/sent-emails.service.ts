@@ -43,11 +43,17 @@ export class SentEmailsService {
     let queryParameters = new HttpParams();
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip);
     queryParameters = queryParameters.append("take", 20);
-    this.http.get<SentEmail[]>(`sent-emails/find-all-paginated`, { params: queryParameters }).subscribe(sentEmails => sentEmails.forEach(sentEmail => this.sentEmails.set(sentEmail.id, sentEmail)));
+    this.http.get<SentEmail[]>(`sent-emails/find-all-paginated`, { params: queryParameters }).subscribe(sentEmails => {
+      sentEmails.forEach(sentEmail => this.sentEmails.set(sentEmail.id, sentEmail))
+      this.countSentEmails()
+    });
   }
 
   create(createSentEmailDto: CreateSentEmailDto) : Subscription {
-    return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => this.sentEmails.set(sentEmail.id, { ...sentEmail, prospect: { ...sentEmail.prospect, stage: StageType.MAIL}}))
+    return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => {
+      this.sentEmails.set(sentEmail.id, { ...sentEmail, prospect: { ...sentEmail.prospect, stage: StageType.MAIL}})
+      this.nbSentEmails += 1;
+    })
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {
@@ -67,7 +73,7 @@ export class SentEmailsService {
   }
 
   countSentEmails() {
-    return this.http.get<number>(`sent-emails/find-sent-emails`).subscribe(nbSentEmails => this.sentEmails = this.sentEmails);
+    return this.http.get<number>(`sent-emails/count-sent-emails`).subscribe(nbSentEmails => this.nbSentEmails = nbSentEmails);
   }
 
 }

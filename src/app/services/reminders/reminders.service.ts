@@ -53,7 +53,10 @@ export class RemindersService {
     queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
     queryParameters = queryParameters.append("take", 20);
     
-    return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => reminders.forEach(reminder => this.reminders.set(reminder.id, reminder)));
+    return this.http.get<Reminder[]>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(reminders => {
+      reminders.forEach(reminder => this.reminders.set(reminder.id, reminder))
+    this.countReminders()
+  });
   }
 
   loadRemindersDone() {
@@ -65,7 +68,10 @@ export class RemindersService {
   }
 
   deleteReminder(idReminder: number) : Subscription {
-    return this.http.delete<Reminder>(`reminders/delete/${idReminder}`).subscribe(() => this.reminders.delete(idReminder));
+    return this.http.delete<Reminder>(`reminders/delete/${idReminder}`).subscribe(() => {
+      this.reminders.delete(idReminder)
+      this.nbReminders -= 1;
+    });
   }
 
   markDone(idReminder: number) : Subscription {
@@ -76,7 +82,10 @@ export class RemindersService {
   }
 
   create(createReminderDto: CreateReminderDto) : Subscription {
-    return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => this.reminders.set(reminder.id, { ...reminder, prospect: { ...reminder.prospect, stage: StageType.REMINDER }}));
+    return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => {
+      this.reminders.set(reminder.id, { ...reminder, prospect: { ...reminder.prospect, stage: StageType.REMINDER }})
+      this.nbReminders += 1;
+    });
   }
 
   update(idReminder: number, updateReminderDto: UpdateReminderDto) {
@@ -109,6 +118,9 @@ export class RemindersService {
     queryParameters = queryParameters.append("skip", this.researchParamsReminder.skip)      
     queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
     queryParameters = queryParameters.append("take", 20);
-    return this.http.get<number>(`reminders/count-prospects`, { params: queryParameters }).subscribe(nbReminders => this.nbReminders = nbReminders);
+    return this.http.get<number>(`reminders/count-reminders`, { params: queryParameters }).subscribe(nbReminders => {
+      this.nbReminders = nbReminders
+      console.log(nbReminders)
+    });
   }
 }
