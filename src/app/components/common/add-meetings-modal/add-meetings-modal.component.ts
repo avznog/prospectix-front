@@ -85,9 +85,6 @@ export class AddMeetingsModalComponent implements OnInit {
       type: "alert-info",
       message: "Rendez-vous ajouté"
     })
-
-    // ? Slack bot message for meeting
-   this.slackService.sendMeeting(this.prospect);
     
   }
 

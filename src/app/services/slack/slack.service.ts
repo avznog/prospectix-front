@@ -11,10 +11,6 @@ export class SlackService {
     private http: HttpClient
   ) { }
 
-  sendMeeting(prospect: Prospect) {
-    this.http.post("slack/send-meeting", prospect).subscribe()
-  }
-
   sendFraud(prospect: Prospect) {
     this.http.post("slack/send-fraud", prospect).subscribe()
   }
