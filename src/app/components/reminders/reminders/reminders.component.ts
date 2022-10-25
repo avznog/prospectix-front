@@ -27,4 +27,9 @@ export class RemindersComponent implements OnInit {
       skip: this.remindersService.researchParamsReminder.skip - 20
     });
   }
+  
+  // ? order chronological -> the furthest on top
+  asIsOrder() {
+    return -1;
+  }
  }

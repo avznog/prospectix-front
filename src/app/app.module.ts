@@ -1,8 +1,9 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import * as fr from '@angular/common/locales/fr'
 
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -123,7 +124,7 @@ import { HeaderComponent } from './components/common/header/header.component';
   ],
   bootstrap: [AppComponent],
   providers: [
-    
+    { provide: LOCALE_ID, useValue: 'fr-FR'},
     DatePipe,
 
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
@@ -137,4 +138,8 @@ import { HeaderComponent } from './components/common/header/header.component';
     { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
   ]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor() {
+    registerLocaleData(fr.default)
+  }
+}
