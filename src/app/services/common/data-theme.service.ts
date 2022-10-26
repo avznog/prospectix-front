@@ -28,12 +28,8 @@ export class DataThemeService {
 
   sendData(message: string) {
       this.subject.next(message);
-      // this.primary = this.primaryColorsForCharts.get(message) ?? "jisep"
-      // this.secondary = this.secondaryColorsForCharts.get(message) ?? "jisep"
-
-      // HALLOWEEN VERSION
-      this.primary == "halloween"
-      this.secondary == "halloween"
+      this.primary = this.primaryColorsForCharts.get(message) ?? "halloween"
+      this.secondary = this.secondaryColorsForCharts.get(message) ?? "halloween"
       this.statisticsService.updateAllCharts(this.primary, this.secondary);
       
   }
