@@ -171,6 +171,7 @@ export class StatisticsService {
       this.allCallsPseudo = [""]
       this.allCallsCount.pop();
       this.allCallsPseudo.pop();
+      allCalls = allCalls.sort((a,b) => (b.count - a.count))
       allCalls.forEach(call => {
         this.allCallsCount.push(call.count);
         this.allCallsPseudo.push(call.pseudo);
@@ -198,6 +199,7 @@ export class StatisticsService {
       this.allRemindersPseudo = [""];
       this.allRemindersCount.pop();
       this.allRemindersPseudo.pop();
+      allReminders = allReminders.sort((a,b) => (b.count - a.count))
       allReminders.forEach(reminder => {
         this.allRemindersCount.push(reminder.count)
         this.allRemindersPseudo.push(reminder.pseudo)
@@ -221,6 +223,8 @@ export class StatisticsService {
       this.allMeetingsPseudo = [""]
       this.allMeetingsCount.pop();
       this.allMeetingsPseudo.pop();
+
+      allMeetings = allMeetings.sort((a,b) => (b.count - a.count));
       allMeetings.forEach(meeting => {
         this.allMeetingsCount.push(meeting.count);
         this.allMeetingsPseudo.push(meeting.pseudo);
@@ -246,6 +250,8 @@ export class StatisticsService {
       this.allSentEmailsPseudo = [""]
       this.allSentEmailsCount.pop();
       this.allSentEmailsPseudo.pop();
+      
+      allSentEmails = allSentEmails.sort((a,b) => (b.count - a.count))
       allSentEmails.forEach(sentEmail => {
         this.allSentEmailsCount.push(sentEmail.count);
         this.allSentEmailsPseudo.push(sentEmail.pseudo);
@@ -357,8 +363,6 @@ export class StatisticsService {
       },
       options: {
         aspectRatio: 5,
-        color: this.secondaryColor,
-        
       }
     });
   }

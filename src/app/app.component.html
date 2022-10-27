@@ -1,5 +1,5 @@
-<!-- <div [attr.data-theme]="dataThemeService.dataTheme" class="{{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300' : 'bg-base-300' : router.url == '/login' && dataThemeService.dataTheme == 'jisep' ? 'bg-gradient-to-tr from-accent to-secondary' : 'bg-gradient-to-br from-primary to-secondary'}}"> -->
-  <div [attr.data-theme]="'halloween'" class="{{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300' : 'bg-base-300' : router.url == '/login' && dataThemeService.dataTheme == 'jisep' ? 'bg-gradient-to-tr from-accent to-secondary' : 'bg-gradient-to-br from-primary to-secondary'}}">
+<div [attr.data-theme]="dataThemeService.dataTheme" class="{{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300' : 'bg-base-300' : router.url == '/login' && dataThemeService.dataTheme == 'jisep' ? 'bg-gradient-to-tr from-accent to-secondary' : 'bg-gradient-to-br from-primary to-secondary'}}">
+  <!-- <div [attr.data-theme]="'halloween'" class="{{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300' : 'bg-base-300' : router.url == '/login' && dataThemeService.dataTheme == 'jisep' ? 'bg-gradient-to-tr from-accent to-secondary' : 'bg-gradient-to-br from-primary to-secondary'}}"> -->
   <app-header *ngIf="router.url != '/login'" class="fixed top-0 w-full z-50"></app-header>
   <div class="container mx-auto min-h-screen flex flex-col {{authService.currentUserSubject.getValue() ? dataThemeService.dataTheme == 'jisep' ? 'bg-base-300': 'bg-base-300' : ''}}">
   <app-header *ngIf="router.url != '/login'" class="invisible"></app-header>
@@ -17,8 +17,8 @@
     <span>{{toast.value.message}}</span>
   </div>
 </div>
-<!-- <div [attr.data-theme]="dataThemeService.dataTheme"> -->
-  <div [attr.data-theme]="'halloween'">
+<div [attr.data-theme]="dataThemeService.dataTheme">
+  <!-- <div [attr.data-theme]="'halloween'"> -->
   <div class="toast toast-end text-sm" 
   *ngIf="changelogsService.changelogs[0].version != changelogsService.localVersion && authService.currentUserSubject.getValue()">
   <div class="alert alert-info alert-sm">Une nouvelle version est disponible 
