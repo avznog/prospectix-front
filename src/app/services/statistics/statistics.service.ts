@@ -13,7 +13,7 @@ import { SlackService } from '../slack/slack.service';
 })
 export class StatisticsService {
   currentPage: string = "my-stats"
-  startDateForChartsInterval: string = "2022-01-07T00:00:00.000Z";
+  startDateForChartsInterval: string = "2022-11-07T00:00:00.000Z";
   endDateForChartsInterval: string = new Date().toISOString();
   //! Personnal stats
   allMyReminders: number = 0;
