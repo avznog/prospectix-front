@@ -16,11 +16,9 @@ export class DataThemeService {
     private readonly statisticsService: StatisticsService
   ) {
     this.getData().subscribe(data => {
-      // localStorage.setItem("theme",data)
-      // this.dataTheme = data
+      localStorage.setItem("theme",data)
+      this.dataTheme = data
 
-      // HALLOWEEN VERSION
-      this.dataTheme = "halloween"
     });
     this.setPrimaryColors();
     this.setSecondaryColors();
@@ -28,8 +26,8 @@ export class DataThemeService {
 
   sendData(message: string) {
       this.subject.next(message);
-      this.primary = this.primaryColorsForCharts.get(message) ?? "halloween"
-      this.secondary = this.secondaryColorsForCharts.get(message) ?? "halloween"
+      this.primary = this.primaryColorsForCharts.get(message) ?? "jisep"
+      this.secondary = this.secondaryColorsForCharts.get(message) ?? "jisep"
       this.statisticsService.updateAllCharts(this.primary, this.secondary);
       
   }
