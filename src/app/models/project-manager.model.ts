@@ -1,6 +1,5 @@
 import { Bookmark } from "./bookmark.model";
 import { Event } from "./event.model";
-import { Goal } from "./goal.model";
 import { Meeting } from "./meeting.model";
 import { Reminder } from "./reminder.model";
 import { SentEmail } from "./sent-email.model";
@@ -15,7 +14,6 @@ export interface ProjectManager {
   tokenEmail: string;
   disabled: boolean;
   statsEnabled: boolean;
-  goals: Goal[];
   meetings: Meeting[];
   reminders: Reminder[];
   sentEmails: SentEmail[];

@@ -118,7 +118,6 @@
         <!-- Page users -->
         <li><a routerLink="/users"
             class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current'}}">Users</a></li>
-        <!-- <li *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"><a routerLink="/goals" class="w-full">Gestion des objectifs</a></li> -->
       </ul>
     </div>
     

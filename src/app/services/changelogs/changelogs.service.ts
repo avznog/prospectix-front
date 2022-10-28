@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "2.0",
+        date: new Date("2022-10-23T00:00:00.000Z"), // ! COMPLETER AU FUR ET A MESURE -> 
+        bugs: [
+          ],
+        features: [
+          "Suppression de l'ancien dashboard et des anciens objectifs",
+          "Ajout d'une redirection par défaut vers la page des statistiques"
+        ]
+      },
+      {
         version: "1.1",
         date: new Date("2022-10-23T00:00:00.000Z"),
         bugs: [

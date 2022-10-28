@@ -13,7 +13,7 @@ export class AdminGuard implements CanActivate {
   ) {}
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return await this.auth.isLoggedIn() ? this.auth.currentUserSubject.getValue().admin : this.router.parseUrl("/dashboard");
+    return await this.auth.isLoggedIn() ? this.auth.currentUserSubject.getValue().admin : this.router.parseUrl("/statistics");
   }
   
 }

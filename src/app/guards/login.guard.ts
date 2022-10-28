@@ -13,7 +13,7 @@ export class LoginGuard implements CanActivate {
   ) { }
 
   public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return !await this.auth.isLoggedIn() || this.router.parseUrl("/dashboard")
+    return !await this.auth.isLoggedIn() || this.router.parseUrl("/statistics")
   }
   
 }
