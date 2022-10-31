@@ -20,6 +20,6 @@
   <button
     class="btn btn-outline btn-ghost {{meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}"
     (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 20 + 1}} / {{ (meetingsService.nbMeetings / 20 + 1).toFixed() }}</button>
+  <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 20 + 1}} / {{ meetingsService.nbMeetings <= 20 ? 1 : (meetingsService.nbMeetings / 20 + 1).toFixed() }}</button>
   <button class="btn btn-outline btn-ghost {{(meetingsService.researchParamsMeeting.done == false || meetingsService.researchParamsMeeting.done == 'false') ? (meetingsService.researchParamsMeeting.skip + 20 < meetingsService.nbMeetings) ? '' : 'btn-disabled' : ''}} " (click)="pageUp()">»</button>
 </div>

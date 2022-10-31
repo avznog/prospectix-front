@@ -78,6 +78,7 @@ export class RemindersService {
     return this.http.get<Reminder>(`reminders/mark-done/${idReminder}`).subscribe(() => {
       this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, done: true })
       this.remindersDone.set(idReminder, { ...this.reminders.get(idReminder)!, done: true });
+      this.nbReminders -= 1;
     });
   }
 
