@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { ChangelogsService } from './services/changelogs/changelogs.service';
 import { DataThemeService } from './services/common/data-theme.service';
-import { StatisticsService } from './services/statistics/statistics.service';
+import { RemindersService } from './services/reminders/reminders.service';
 import { ToastsService } from './services/toasts/toasts.service';
 @Component({
   selector: 'app-root',
@@ -19,12 +19,11 @@ export class AppComponent {
     public readonly changelogsService: ChangelogsService,
     public readonly router: Router,
     public readonly toastsService: ToastsService,
-    private readonly statisticsService: StatisticsService
+    public readonly remindersService: RemindersService
   ) { 
   }
   
   ngOnInit() {
     this.dataThemeService.sendData(localStorage.getItem("theme") || "jisep");
-    
   } 
 }
