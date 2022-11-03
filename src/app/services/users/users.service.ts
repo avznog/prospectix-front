@@ -62,4 +62,8 @@ export class UsersService {
   changeStatsEnabled(userId: number, statsEnabled: boolean) : Subscription {
     return this.http.patch<ProjectManager>(`project-managers/${userId}`, {statsEnabled}).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, statsEnabled: statsEnabled}));
   }
+
+  changeObjectived(userId: number, objectived: boolean) : Subscription {
+    return this.http.patch<ProjectManager>(`project-managers/${userId}`, { objectived }).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, objectived: objectived}));
+  }
 }

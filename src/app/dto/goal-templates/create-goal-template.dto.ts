@@ -1,4 +1,4 @@
-export interface CreateGoalTemplate {
+export interface CreateGoalTemplateDto {
   name: string;
   description: string;
   disabled: boolean;

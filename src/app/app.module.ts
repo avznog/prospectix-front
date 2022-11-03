@@ -52,6 +52,7 @@ import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interc
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
+import { GoalsComponent } from './components/goals/goals/goals.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,6 +94,7 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
     MyStatsComponent,
     ActivityComponent,
     ProspectixLogoComponent,
+    GoalsComponent,
   ],
   imports: [
     BrowserModule,

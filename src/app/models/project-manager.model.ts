@@ -21,4 +21,5 @@ export interface ProjectManager {
   bookmarks: Bookmark[];
   events: Event[];
   goals: Goal[];
+  objectived: boolean;
 }

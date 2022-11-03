@@ -1,4 +1,4 @@
-export interface UpdateGoalDto {
+export interface UpdateGoalTemplateDto {
   id?: number;
   name?: string;
   description?: string;
