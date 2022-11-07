@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.2",
+        date: new Date("2022-11-07T00:00:00.000Z"),
+        bugs: [
+
+          ],
+        features: [
+          "Ajout du support de la recherche par numéro de téléphone sur les pages rechercher et favoris"
+        ]
+      },
+      {
         version: "1.1",
         date: new Date("2022-10-23T00:00:00.000Z"),
         bugs: [
