@@ -15,6 +15,7 @@ export class ChangelogsService {
         version: "2.0",
         date: new Date("2022-10-23T00:00:00.000Z"), // ! COMPLETER AU FUR ET A MESURE -> 
         bugs: [
+          "Ajout d'un padding en bas de la page d'activité"
           ],
         features: [
           "Suppression de l'ancien dashboard et des anciens objectifs",
