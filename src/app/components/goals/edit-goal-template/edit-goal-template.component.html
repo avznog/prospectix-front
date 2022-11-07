@@ -1,0 +1,25 @@
+<div class="w-full">
+  <label for="edit-goal-template-modal-{{goalTemplate.id}}" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+  <h3 class="text-lg font-bold">Modifier l'objectif {{goalTemplate.name}}</h3>
+  <div class="divider"></div>
+  <div class="space-y-5">
+    <label class="input-group">
+      <span>Nom de l'objectif</span>
+      <input class="input input-bordered" type="text" [(ngModel)]="name" />
+    </label>
+
+    <label class="input-group">
+      <span>Description de l'objectif</span>
+      <textarea class="textarea textarea-bordered" [(ngModel)]="description"
+        placeholder="La description de l'objectif"></textarea>
+    </label>
+
+    <label class="input-group">
+      <span>Valeur par défaut</span>
+      <input class="input input-bordered" type="number" placeholder="Ex: 9" [(ngModel)]="default" />
+    </label>
+    <label
+      class="btn btn-outline btn-primary flex justify-center {{(name == '' || description == '' || default < 0 ? 'btn-disabled' : '')}}"
+      for="edit-goal-template-modal-{{goalTemplate.id}}" (click)="onEditTemplateGoal()">Ajouter l'objectif</label>
+  </div>
+</div>
