@@ -19,6 +19,7 @@ export class ChangelogsService {
           "Rectification du titre du graphe du classement des rappels : rappels effectués -> rappels créés"
           ],
         features: [
+          "Bouton de suppression du prospect ajouté dans la page des favoris",
           "Ajout de la possibilité de modifier l'heure d'un rappel (pas la date)",
           "Ajout du support de la recherche par numéro de téléphone sur les pages rechercher et favoris"
         ]

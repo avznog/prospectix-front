@@ -110,7 +110,7 @@
 
           <!-- Bouton prospect Pas pertinent (suppriemr) -->
           <label class="btn btn-primary btn-sm bg-base-100 text-primary modal-button hover:btn-error hover:text-base-100"
-            for="disable-prospect-modal-{{prospect.id}}" *ngIf="prospect.stage == 0">
+            for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" *ngIf="prospect.stage == 0 || prospect.stage == 1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
               stroke="currentColor" class="h-6 w-6 text-inherit  hover:bg-opacity-0">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -282,10 +282,10 @@
 </label>
 
 <!-- modal button prospect pas pertinent (trash) -->
-<input type="checkbox" id="disable-prospect-modal-{{prospect.id}}" class="modal-toggle" />
-<label for="disable-prospect-modal-{{prospect.id}}" class="modal cursor-pointer">
+<input type="checkbox" id="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="modal-toggle" />
+<label for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-md text-sm" for="">
-    <app-disable-prospect-modal [prospect]="prospect"></app-disable-prospect-modal>
+    <app-disable-prospect-modal [prospect]="prospect && prospect" [bookmark]="bookmark && bookmark"></app-disable-prospect-modal>
   </label>
 </label>
 
