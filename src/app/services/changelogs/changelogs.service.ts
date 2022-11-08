@@ -13,9 +13,10 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "1.2",
-        date: new Date("2022-11-07T00:00:00.000Z"),
+        date: new Date("2022-11-08T00:00:00.000Z"),
         bugs: [
-
+          "Résolution de bugs de padding sur la page d'activité pour le titre du graphique des rendez-vous décrochés",
+          "Rectification du titre du graphe du classement des rappels : rappels effectués -> rappels créés"
           ],
         features: [
           "Ajout du support de la recherche par numéro de téléphone sur les pages rechercher et favoris"
