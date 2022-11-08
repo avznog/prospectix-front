@@ -89,7 +89,7 @@ export class RemindersService {
   }
 
   update(idReminder: number, updateReminderDto: UpdateReminderDto) {
-    return this.http.patch<Reminder>(`reminders/${idReminder}`, updateReminderDto).subscribe()
+    return this.http.patch<Reminder>(`reminders/${idReminder}`, updateReminderDto).subscribe(() => this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, ...updateReminderDto}))
   }
 
   findAllByProspect(idProspect: number) {
