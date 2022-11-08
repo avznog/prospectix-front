@@ -115,6 +115,6 @@
 
   <!-- Bouton créer le prospect -->
   <div class="flex justify-center">
-    <label class="btn btn-ghost btn-outline w-1/5 {{companyName == '' || phone == '' || phone.length > 1 || address == '' || city == undefined || activity == undefined ? 'btn-disabled' : ''}} " for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
+    <label class="btn btn-ghost btn-outline w-1/5 {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || activity == undefined ? 'btn-disabled' : ''}} " for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
   </div>
 </div>
