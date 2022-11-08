@@ -1,6 +1,6 @@
-<div class="modal-box max-w-screen-xl space-y-4 overflow-y-scroll">
+<div class="">
   <label for="modal-add-prospect" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-  <div class="text-lg">Ajouter un prospect dans la base</div>
+  <div class="text-lg card-title">Ajouter un prospect dans la base</div>
   <div class="divider"></div>
 
   <div class="inline-flex space-x-5">
@@ -32,8 +32,9 @@
     <div class="inline-flex">
 
       <!-- select activity -->
-      <select id="activity" name="activity"[(ngModel)]="activity" class="select select-bordered" >
-        <option *ngFor="let activity of activitiesService.activities" [ngValue]="activity" [defaultSelected]="activity">{{activity.name}}</option>
+      <select id="activity" name="activity" [(ngModel)]="activity" class="select select-bordered" >
+        <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner un domaine d'activité</option>
+        <option *ngFor="let activity of activitiesService.activities" [ngValue]="activity">{{activity.name}}</option>
       </select>
 
     </div>
@@ -48,8 +49,9 @@
       <div class="inline-flex">
 
         <!-- select city -->
-        <select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
-          <option *ngFor="let city of citiesService.cities" [ngValue]="city" [defaultSelected]="city">{{city.name}} : {{city.zipcode}}</option>
+        <select id="city" name="city" [(ngModel)]="city"  class="select select-bordered">
+          <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner une ville</option>
+          <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
         </select>
 
       
@@ -65,8 +67,8 @@
     <div class="inline-flex">
 
       <!-- select country -->
-      <select id="country" name="country" [(ngModel)]="country" class="select select-bordered">
-          <option *ngFor="let country of countriesService.countries" [ngValue]="country" [defaultSelected]="country">{{country.name}}</option>
+      <select id="country" name="country" [(ngModel)]="country" class="select select-bordered" [disabled]="true">
+          <option *ngFor="let country of countriesService.countries" >{{country.name}}</option>
       </select>
 
     </div>
@@ -113,6 +115,6 @@
 
   <!-- Bouton créer le prospect -->
   <div class="flex justify-center">
-    <label class="btn btn-ghost btn-outline w-1/5 {{companyName == '' || phone == '' || address == '' ? 'btn-disabled' : ''}} " for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
+    <label class="btn btn-ghost btn-outline w-1/5 {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || activity == undefined ? 'btn-disabled' : ''}} " for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
   </div>
 </div>
