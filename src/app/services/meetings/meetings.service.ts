@@ -78,6 +78,7 @@ export class MeetingsService {
     return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe(() => {
       this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true })
       this.meetingsDone.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true});
+      this.nbMeetings -= 1;
     });
   }
 
