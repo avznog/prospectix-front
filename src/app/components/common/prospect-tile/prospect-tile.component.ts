@@ -142,6 +142,7 @@ export class ProspectTileComponent implements OnInit {
 
   onClickEmail() {
     // TODO : copier le mail
+    navigator.clipboard.writeText(this.email)
     // window.open(`mailto:${this.email}`, "_blank")
   }
 
