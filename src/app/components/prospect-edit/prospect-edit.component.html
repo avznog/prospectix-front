@@ -20,20 +20,40 @@
 	</div>
 	
 	<div class="inline-flex">
-		<!-- Ville -->
-	<div class="input-group">
-		<span class="text-sm">Ville</span>
-		<select id="city" class="select select-bordered" [(ngModel)]="city">
-			<option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
-		</select>
-	</div>
-	
-	<div class="input-group">
-		<span class="text-sm">Domaine d'activité</span>
-		<select id="activity" class="select select-bordered" [(ngModel)]="activity">
-			<option *ngFor="let activity of activitiesService.activities" [ngValue]="activity" >{{activity.name}}</option>
-		</select>
-	</div>
+		  <!-- Domaine d'activité du prospect -->
+		  <div class="form-control">
+			<label class="label" for="activity">
+				<span class="label-text">Domaine d'activité</span>
+			</label>
+			<div class="inline-flex">
+		
+			  <!-- select activity -->
+			  <select id="activity" name="activity" [(ngModel)]="activity" class="select select-bordered" >
+				<option selected [defaultSelected]="true" [ngValue]="undefined">Je ne change pas le domaine d'activité</option>
+				<option *ngFor="let activity of activitiesService.activities" [ngValue]="activity">{{activity.name}}</option>
+			  </select>
+		
+			</div>
+		  </div>
+		
+		
+		  <!-- Ville du prospect -->
+		  <div class="form-control">
+			  <label class="label" for="city">
+				  <span class="label-text">Ville</span>
+			  </label>
+			  <div class="inline-flex">
+		
+				<!-- select city -->
+				<select id="city" name="city" [(ngModel)]="city"  class="select select-bordered">
+				  <option selected [defaultSelected]="true" [ngValue]="undefined">Je ne change pas la ville</option>
+				  <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
+				</select>
+		
+			  
+			  </div>
+		  </div>
+		
 	</div>
 	
 	<div class="divider"></div>

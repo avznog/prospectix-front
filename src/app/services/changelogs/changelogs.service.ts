@@ -20,6 +20,7 @@ export class ChangelogsService {
           "Rectification du titre du graphe du classement des rappels : rappels effectués -> rappels créés"
           ],
         features: [
+          "Ajout du bouton de modification d'un prospect sur les pages rappels et mails",
           "Lorque l'on clique sur l'email, il est désormais copié dans le clipboard",
           "Suppression du bouton mail depuis un rendez-vous, et ajout du bouton rendez-vous depuis la page mail",
           "Bouton de suppression du prospect ajouté dans la page des favoris",
