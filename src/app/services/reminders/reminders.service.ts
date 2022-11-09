@@ -121,4 +121,13 @@ export class RemindersService {
     queryParameters = queryParameters.append("take", 20);
     return this.http.get<number>(`reminders/count-reminders`, { params: queryParameters }).subscribe(nbReminders => this.nbReminders = nbReminders);
   }
+
+  updateCommentProspect(id: number, newComment: string) {
+    this.reminders.forEach(reminder => {
+      if(reminder.prospect.id == id) {
+        return reminder.prospect.comment = newComment
+      }
+      return
+    })
+  }
 }

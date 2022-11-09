@@ -15,6 +15,7 @@ export class ChangelogsService {
         version: "1.3",
         date: new Date("2022-11-09T00:00:00.000Z"),
         bugs: [
+          "Résolution des bugs liés à l'encart de commentaire. Le commentaire est maintenant bien enregistré",
           "Résolution du bug de pagination qui affichait deux pages alors qu'une seule existait",
           "Résolution de bugs de padding sur la page d'activité pour le titre du graphique des rendez-vous décrochés",
           "Rectification du titre du graphe du classement des rappels : rappels effectués -> rappels créés"

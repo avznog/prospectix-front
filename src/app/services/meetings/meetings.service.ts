@@ -125,4 +125,13 @@ export class MeetingsService {
 
     return this.http.get<number>(`meetings/count-meetings`, { params: queryParameters }).subscribe(nbMeetings => this.nbMeetings = nbMeetings);
   }
+
+  updateCommentProspect(id: number, newComment: string) {
+    this.meetings.forEach(meeting => {
+      if(meeting.prospect.id == id) {
+        return meeting.prospect.comment = newComment
+      }
+      return
+    })
+  }
 }
