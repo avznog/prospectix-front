@@ -194,7 +194,7 @@
             <!-- Bouton de rendez-vous -->
             <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4"
               tabindex="0"
-              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md modal-button {{prospect.stage == 4 || (reminder && reminder.done) ? 'btn-disabled' : ''}}"
+              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md modal-button {{ (reminder && reminder.done) ? 'btn-disabled' : ''}}"
               for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
 
 
