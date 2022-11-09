@@ -218,7 +218,7 @@
             <!-- button mail -->
             <label for="add-mail-modal-{{prospect.id}}"
               class="rounded outline outline-1 outline-base-100 text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) ? 'btn-disabled' : ''}}"
-              *ngIf="prospect.stage != 4">
+              *ngIf="prospect.stage != 4 && prospect.stage != 3">
               Mail
             </label>
           </div>
