@@ -6,7 +6,6 @@
       <div class="w-1/2">
         {{prospect.companyName | slice:0:30}} - {{prospect.activity.name | slice:0:40}}
       </div>
-
       <!-- 1/2 REST -->
       <div class="w-1/2 inline-flex">
 
@@ -132,6 +131,7 @@
         </div>
       </div>
     </div>
+    <div class="font-extralight p-0 m-0 overflow-clip text-ellipsis" *ngIf="prospect.stage == 2 && reminder.description != ''">"{{reminder.description}}"</div>
     <div class="divider m-0 p-0"></div>
 
     <!-- FULL CONTENT OF CARD -->
