@@ -67,7 +67,7 @@
         </div>
 
         <!-- 1/3 of 1/2 (2nd / 3) STARS REMINDERS AND TYPE MEETING -->
-        <div class="w-1/3 inline-flex justify-center" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 6 || prospect.stage == 7">
+        <div class="w-1/4 inline-flex justify-center" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 6 || prospect.stage == 7">
 
           <!-- etoiles rappels -->
           <div class="rating " *ngIf="reminder">
@@ -89,7 +89,7 @@
         </div>
 
         <!-- 1/3 of 1/2 (3rd / 3) DATE REMINDER MEETING SENTEMAIL -->
-        <div class="{{prospect.stage == 4 ? 'w-2/3' : 'w-1/3'}} inline-flex justify-end space-x-5" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 4">
+        <div class="{{prospect.stage == 4 ? 'w-2/3' : 'w-1/2'}} inline-flex justify-end space-x-5" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 4">
            
           <div class="">
             <span *ngIf="reminder">{{reminder.date | date:"dd/MM/YYYY"}} à {{reminder.date | date:"HH:mm"}}</span>
@@ -131,7 +131,7 @@
         </div>
       </div>
     </div>
-    <div class="font-extralight p-0 m-0 overflow-clip text-ellipsis" *ngIf="prospect.stage == 2 && reminder.description != ''">"{{reminder.description}}"</div>
+    <div class="font-extralight p-0 m-0 overflow-clip text-ellipsis w-full" *ngIf="prospect.stage == 2 && reminder.description != ''">"{{reminder.description}}"</div>
     <div class="divider m-0 p-0"></div>
 
     <!-- FULL CONTENT OF CARD -->
