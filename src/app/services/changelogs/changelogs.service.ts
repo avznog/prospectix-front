@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.3.1",
+        date: new Date("2022-11-10T00:00:00.000Z"),
+        bugs: [
+         "Résolution du bug d'envoi de notif slack au 3e rdv"
+          ],
+        features: [
+          
+        ],
+      },
+      {
         version: "1.3",
         date: new Date("2022-11-09T00:00:00.000Z"),
         bugs: [
