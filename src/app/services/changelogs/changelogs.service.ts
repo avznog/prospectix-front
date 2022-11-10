@@ -27,6 +27,16 @@ export class ChangelogsService {
           "Bouton de suppression du prospect ajouté dans la page des favoris",
           "Ajout de la possibilité de modifier l'heure d'un rappel (pas la date)",
           "Ajout du support de la recherche par numéro de téléphone sur les pages rechercher et favoris"
+        ],
+      },
+      {
+        version: "1.2",
+        date: new Date("2022-11-08T00:00:00.000Z"),
+        bugs: [
+          "Résolution des bugs liés à l'ajout d'un prospect"
+          ],
+        features: [
+          
         ]
       },
       {

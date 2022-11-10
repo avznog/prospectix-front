@@ -33,19 +33,11 @@
 
     <!-- Ajouter un prospect -->
     <label class="btn btn-ghost btn-outline modal-button" for="modal-add-prospect">Ajouter un prospect</label>
-    <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
-    <app-add-prospect class="modal"></app-add-prospect>
+    
 </div>
-
-
-<input type="checkbox" id="my-modal" class="modal-toggle" />
-<div class="modal">
-    <div class="modal-box">
-        <h3 class="font-bold text-lg">Recherche de prospects</h3>
-        <p class="py-4">We gotcha you! — Vous pouvez cherchez un prospect par son nom, son numéro de téléphone, mail,
-            site web, adresse ou encore par commentaire enregistré dans Prospectix</p>
-        <div class="modal-action">
-            <label for="my-modal" class="btn">Ok</label>
-        </div>
-    </div>
-</div>
+<input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
+<label for="modal-add-prospect" class="modal cursor-pointer">
+    <label class="modal-box max-w-screen-xl space-y-4 overflow-y-scroll relative" for="">
+        <app-add-prospect></app-add-prospect>
+    </label>
+</label>

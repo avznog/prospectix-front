@@ -20,12 +20,12 @@ export class AddProspectComponent implements OnInit {
     public readonly activitiesService: ActivitiesService,
     public readonly citiesService: CitiesService,
     public readonly countriesService: CountriesService,
-    private readonly prospectService: ProspectsService,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly prospectService: ProspectsService
   ) { }
   
-  city: City = {} as City;  
-  activity: Activity = {} as Activity;
+  city!: City;  
+  activity!: Activity;
   country: Country = {} as Country;
 
   // Prospect
@@ -36,10 +36,11 @@ export class AddProspectComponent implements OnInit {
   website: string = "";
   comment: string = "";
 
-  ngOnInit(): void {
-    this.city = this.citiesService.cities[0];
-    this.activity = this.activitiesService.activities[0];
-    this.country = this.countriesService.countries[0];
+  ngOnInit(): void {  
+    this.country = {
+      name: "France",
+      id: 1
+    }
   }
 
   onCreateProspect() {
@@ -69,9 +70,5 @@ export class AddProspectComponent implements OnInit {
       type: "alert-success",
       message: "Prospect ajouté"
     });
-  }
-
-  onChangeCity() {
-    console.log(this.city)
   }
 }
