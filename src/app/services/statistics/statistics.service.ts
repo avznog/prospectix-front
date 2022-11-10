@@ -79,6 +79,7 @@ export class StatisticsService {
     private router: Router,
     private readonly slackService: SlackService
   ) {
+    this.countWeeklyMeetingsForMe()
   }
 
   //  * Getting the separate count since the last sunday
