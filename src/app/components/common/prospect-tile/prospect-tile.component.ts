@@ -71,7 +71,13 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onChangeComment() {    
-      this.comment != "" && this.prospectService.updateComment(this.prospect.id, { comment: this.comment });
+      this.comment != "" && (
+        this.prospectService.updateComment(this.prospect.id, { comment: this.comment }),
+        this.remindersService.updateCommentProspect(this.prospect.id, this.comment),
+        this.meetingsService.updateCommentProspect(this.prospect.id, this.comment),
+        this.sentEmailsService.updateCommentProspect(this.prospect.id, this.comment),
+        this.bookmarksService.updateCommentProspect(this.prospect.id, this.comment)
+        );
   }
 
   onChangeNbNo() {
@@ -142,6 +148,7 @@ export class ProspectTileComponent implements OnInit {
 
   onClickEmail() {
     // TODO : copier le mail
+    navigator.clipboard.writeText(this.email)
     // window.open(`mailto:${this.email}`, "_blank")
   }
 

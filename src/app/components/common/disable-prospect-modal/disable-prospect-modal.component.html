@@ -1,5 +1,5 @@
 <div class="card items-center">
-  <div class="card-title">Supprimer {{prospect.companyName}} ?</div>
+  <div class="card-title">Supprimer {{prospect && prospect.companyName || bookmark && bookmark.prospect.companyName}} ?</div>
   <div class="divider"></div>
   <div class="form-control">
     <div class="input-group">
@@ -11,8 +11,8 @@
   </div>
   <div class="card-body ">
       <div class="inline-flex space-x-5">
-          <label class="btn btn-outline btn-ghost w-1/2" for="disable-prospect-modal-{{prospect.id}}">Annuler</label>
-          <label class="btn btn-outline btn-ghost w-1/2 btn-error" for="disable-prospect-modal-{{prospect.id}}" (click)="onDisableProspect()">Supprimer le prospect</label>
+          <label class="btn btn-outline btn-ghost w-1/2" for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}">Annuler</label>
+          <label class="btn btn-outline btn-ghost w-1/2 btn-error" for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" (click)="onDisableProspect()">Supprimer le prospect</label>
       </div>
   </div>
 </div>

@@ -62,6 +62,7 @@ import { RankingComponent } from './components/statistics/ranking/ranking.compon
 import { MyStatsComponent } from './components/statistics/my-stats/my-stats.component';
 import { ActivityComponent } from './components/statistics/activity/activity.component';
 import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
+import { EditTimeReminderComponent } from './components/common/edit-time-reminder/edit-time-reminder.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,6 +114,7 @@ import { ProspectixLogoComponent } from './components/common/prospectix-logo/pro
     MyStatsComponent,
     ActivityComponent,
     ProspectixLogoComponent,
+    EditTimeReminderComponent,
   ],
   imports: [
     BrowserModule,

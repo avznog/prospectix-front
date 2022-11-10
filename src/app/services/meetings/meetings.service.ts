@@ -78,6 +78,7 @@ export class MeetingsService {
     return this.http.get<Meeting>(`meetings/mark-done/${idMeeting}`).subscribe(() => {
       this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true })
       this.meetingsDone.set(idMeeting, { ...this.meetings.get(idMeeting)!, done: true});
+      this.nbMeetings -= 1;
     });
   }
 
@@ -123,5 +124,14 @@ export class MeetingsService {
     queryParameters = queryParameters.append("take",20);
 
     return this.http.get<number>(`meetings/count-meetings`, { params: queryParameters }).subscribe(nbMeetings => this.nbMeetings = nbMeetings);
+  }
+
+  updateCommentProspect(id: number, newComment: string) {
+    this.meetings.forEach(meeting => {
+      if(meeting.prospect.id == id) {
+        return meeting.prospect.comment = newComment
+      }
+      return
+    })
   }
 }

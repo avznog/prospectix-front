@@ -107,4 +107,13 @@ export class BookmarksService {
     queryParameters = queryParameters.append("take", 20);
     return this.http.get<number>(`bookmarks/count-bookmarks`, { params: queryParameters}).subscribe(nbBookmarks => this.nbBookmarks = nbBookmarks);
   }
+
+  updateCommentProspect(idProspect: number, newComment: string) {
+    this.bookmarks.forEach(bookmark => {
+      if(bookmark.prospect.id == idProspect) {
+        return bookmark.prospect.comment = newComment
+      }
+      return
+    })
+  }
 }

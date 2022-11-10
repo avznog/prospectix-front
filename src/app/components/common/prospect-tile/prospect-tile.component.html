@@ -6,7 +6,6 @@
       <div class="w-1/2">
         {{prospect.companyName | slice:0:30}} - {{prospect.activity.name | slice:0:40}}
       </div>
-
       <!-- 1/2 REST -->
       <div class="w-1/2 inline-flex">
 
@@ -54,10 +53,21 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </label>
+          
+          <!-- Button edit time reminder -->
+          <label *ngIf="prospect.stage == 2 && reminder && !reminder.done" for="edit-time-reminder-{{reminder.id}}"
+            class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </label>
         </div>
 
         <!-- 1/3 of 1/2 (2nd / 3) STARS REMINDERS AND TYPE MEETING -->
-        <div class="w-1/3 inline-flex justify-center" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 6 || prospect.stage == 7">
+        <div class="w-1/4 inline-flex justify-center" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 6 || prospect.stage == 7">
 
           <!-- etoiles rappels -->
           <div class="rating " *ngIf="reminder">
@@ -79,14 +89,26 @@
         </div>
 
         <!-- 1/3 of 1/2 (3rd / 3) DATE REMINDER MEETING SENTEMAIL -->
-        <div class="w-1/3 inline-flex justify-end" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 4">
-          <span *ngIf="reminder">{{reminder.date | date:"dd/MM/YYYY"}} à {{reminder.date | date:"HH:mm"}}</span>
+        <div class="{{prospect.stage == 4 ? 'w-2/3' : 'w-1/2'}} inline-flex justify-end space-x-5" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 4">
+           
+          <div class="">
+            <span *ngIf="reminder">{{reminder.date | date:"dd/MM/YYYY"}} à {{reminder.date | date:"HH:mm"}}</span>
           <span *ngIf="meeting">{{meeting.date | date:"dd/MM/YYYY"}} à {{meeting.date | date:"HH:mm"}}</span>
           <span *ngIf="sentEmail">{{sentEmail.sendingDate | date:"dd/MM/YYYY"}}</span>
+          </div>
+          <!-- Button MODAL Edit prospect -->
+          <label for="modal-prospect-edit-{{prospect.id}}" *ngIf="prospect.stage == 2 || prospect.stage == 4"
+          class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+        </label>
         </div>
 
         <!-- 2/3 BUTTONS DELETE / EDIT FOR RESEARCH BOOKMARKS ONLY -->
-        <div class="w-2/3 space-x-5 inline-flex justify-end" *ngIf="prospect.stage == 0 || prospect.stage == 1">
+        <div class="w-2/3 space-x-5 inline-flex justify-end" *ngIf="prospect.stage == 0">
           <!-- Button MODAL Edit prospect -->
           <label for="modal-prospect-edit-{{prospect.id}}"
             class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
@@ -99,7 +121,7 @@
 
           <!-- Bouton prospect Pas pertinent (suppriemr) -->
           <label class="btn btn-primary btn-sm bg-base-100 text-primary modal-button hover:btn-error hover:text-base-100"
-            for="disable-prospect-modal-{{prospect.id}}" *ngIf="prospect.stage == 0">
+            for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" *ngIf="prospect.stage == 0 || prospect.stage == 1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
               stroke="currentColor" class="h-6 w-6 text-inherit  hover:bg-opacity-0">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -109,6 +131,7 @@
         </div>
       </div>
     </div>
+    <div class="font-extralight p-0 m-0 overflow-clip text-ellipsis w-full" *ngIf="prospect.stage == 2 && reminder.description != ''">"{{reminder.description}}"</div>
     <div class="divider m-0 p-0"></div>
 
     <!-- FULL CONTENT OF CARD -->
@@ -183,7 +206,7 @@
             <!-- Bouton de rendez-vous -->
             <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4"
               tabindex="0"
-              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md modal-button {{prospect.stage == 4 || (reminder && reminder.done) ? 'btn-disabled' : ''}}"
+              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md modal-button {{ (reminder && reminder.done) ? 'btn-disabled' : ''}}"
               for="modal-add-meeting-{{prospect.id}}">Rendez-vous</label>
 
 
@@ -207,7 +230,7 @@
             <!-- button mail -->
             <label for="add-mail-modal-{{prospect.id}}"
               class="rounded outline outline-1 outline-base-100 text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) ? 'btn-disabled' : ''}}"
-              *ngIf="prospect.stage != 4">
+              *ngIf="prospect.stage != 4 && prospect.stage != 3">
               Mail
             </label>
           </div>
@@ -233,7 +256,7 @@
 <input type="checkbox" id="modal-prospect-edit-{{prospect.id}}" class="modal-toggle" />
 <label for="modal-prospect-edit-{{prospect.id}}" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-lg" for="">
-    <app-prospect-edit [prospect]="prospect"></app-prospect-edit>
+    <app-prospect-edit [prospect]="prospect" [reminder]="reminder && reminder" [sentEmail]="sentEmail && sentEmail"></app-prospect-edit>
   </label>
 </label>
 
@@ -271,10 +294,10 @@
 </label>
 
 <!-- modal button prospect pas pertinent (trash) -->
-<input type="checkbox" id="disable-prospect-modal-{{prospect.id}}" class="modal-toggle" />
-<label for="disable-prospect-modal-{{prospect.id}}" class="modal cursor-pointer">
+<input type="checkbox" id="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="modal-toggle" />
+<label for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-md text-sm" for="">
-    <app-disable-prospect-modal [prospect]="prospect"></app-disable-prospect-modal>
+    <app-disable-prospect-modal [prospect]="prospect && prospect" [bookmark]="bookmark && bookmark"></app-disable-prospect-modal>
   </label>
 </label>
 
@@ -307,5 +330,13 @@
 <label for="prospect-history-{{prospect.id}}" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-md text-sm" for="">
     <app-prospect-history [prospect]="prospect && prospect"></app-prospect-history>
+  </label>
+</label>
+
+<!-- modal button edit time reminder -->
+<input *ngIf="reminder" type="checkbox" id="edit-time-reminder-{{reminder.id}}" class="modal-toggle">
+<label *ngIf="reminder" for="edit-time-reminder-{{reminder.id}}" class="modal cursor-pointer">
+  <label class="modal-box relative max-w-screen-md text-sm" for="">
+   <app-edit-time-reminder [reminder]="reminder && reminder"></app-edit-time-reminder>
   </label>
 </label>
