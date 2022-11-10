@@ -108,7 +108,7 @@
         </div>
 
         <!-- 2/3 BUTTONS DELETE / EDIT FOR RESEARCH BOOKMARKS ONLY -->
-        <div class="w-2/3 space-x-5 inline-flex justify-end" *ngIf="prospect.stage == 0">
+        <div class="w-2/3 space-x-5 inline-flex justify-end" *ngIf="prospect.stage == 0 || prospect.stage == 1">
           <!-- Button MODAL Edit prospect -->
           <label for="modal-prospect-edit-{{prospect.id}}"
             class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
