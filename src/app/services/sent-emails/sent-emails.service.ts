@@ -76,4 +76,13 @@ export class SentEmailsService {
     return this.http.get<number>(`sent-emails/count-sent-emails`).subscribe(nbSentEmails => this.nbSentEmails = nbSentEmails);
   }
 
+  updateCommentProspect(id: number, newComment: string) {
+    this.sentEmails.forEach(sentEmail => {
+      if(sentEmail.prospect.id == id) {
+        return sentEmail.prospect.comment = newComment
+      }
+      return
+    })
+  }
+
 }

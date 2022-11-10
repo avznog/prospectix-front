@@ -12,6 +12,24 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.3",
+        date: new Date("2022-11-09T00:00:00.000Z"),
+        bugs: [
+          "Résolution des bugs liés à l'encart de commentaire. Le commentaire est maintenant bien enregistré",
+          "Résolution du bug de pagination qui affichait deux pages alors qu'une seule existait",
+          "Résolution de bugs de padding sur la page d'activité pour le titre du graphique des rendez-vous décrochés",
+          "Rectification du titre du graphe du classement des rappels : rappels effectués -> rappels créés"
+          ],
+        features: [
+          "Ajout du bouton de modification d'un prospect sur les pages rappels et mails",
+          "Lorque l'on clique sur l'email, il est désormais copié dans le clipboard",
+          "Suppression du bouton mail depuis un rendez-vous, et ajout du bouton rendez-vous depuis la page mail",
+          "Bouton de suppression du prospect ajouté dans la page des favoris",
+          "Ajout de la possibilité de modifier l'heure d'un rappel (pas la date)",
+          "Ajout du support de la recherche par numéro de téléphone sur les pages rechercher et favoris"
+        ],
+      },
+      {
         version: "1.2",
         date: new Date("2022-11-08T00:00:00.000Z"),
         bugs: [

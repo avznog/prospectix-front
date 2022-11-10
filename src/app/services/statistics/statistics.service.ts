@@ -378,7 +378,7 @@ export class StatisticsService {
           {
             data: this.allRemindersCount,
             backgroundColor: this.primaryColor,
-            label: "Rappels effectués"
+            label: "Rappels créés"
           },
         ]
       },

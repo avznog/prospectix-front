@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
+import { Reminder } from 'src/app/models/reminder.model';
+import { SentEmail } from 'src/app/models/sent-email.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
@@ -18,8 +20,11 @@ import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.serv
 export class ProspectEditComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-  activity: Activity = {} as Activity;
-  city: City = {} as City;
+  @Input() sentEmail!: SentEmail;
+  @Input() reminder!: Reminder;
+
+  activity!: Activity;
+  city!: City;
   phone: string = "";
   email: string = "";
   website: string = "";
@@ -44,16 +49,16 @@ export class ProspectEditComponent implements OnInit {
     this.phone = this.prospect.phone.number;
     this.website = this.prospect.website.website;
     this.email = this.prospect.email.email;
-    this.city = this.prospect.city;
-    this.activity = this.prospect.activity;
+    // this.city = this.prospect.city;
+    // this.activity = this.prospect.activity;
   }
 
   onEditProspect() {
     const edit = {
     companyName: this.companyName,
     streetAddress: this.streetAddress,
-    city: this.city,
-    activity: this.activity,
+    city: this.city == undefined ? this.prospect.city || this.reminder.prospect.city || this.sentEmail.prospect.city : this.city,
+    activity: this.activity == undefined ? this.prospect.activity || this.reminder.prospect.activity || this.sentEmail.prospect.activity : this.activity,
     phone: {
       id: this.prospect.phone.id,
       number: this.phone
@@ -67,11 +72,19 @@ export class ProspectEditComponent implements OnInit {
       email: this.email
     }
   };
+  console.log(this.city)
 
     this.prospectsService.updateAllProspect(this.prospect.id, edit);
     this.remindersService.updateLiveProspect({ ...this.prospect, ...edit });
     this.meetingsService.updateLiveProspect({ ...this.prospect, ...edit });
     this.bookmarksService.updateLiveProspect({ ...this.prospect, ...edit });
     this.sentEmailService.updateLiveProspect({ ...this.prospect, ...edit })
+    if(this.reminder) {
+      this.remindersService.reminders.set(this.reminder.id, { ...this.reminder, prospect: { ...this.reminder.prospect, ...edit}})
+    }
+
+    if(this.sentEmail) {
+      this.sentEmailService.sentEmails.set(this.sentEmail.id, { ...this.sentEmail, prospect: { ...this.sentEmail.prospect, ...edit}})
+    }
   }
 }

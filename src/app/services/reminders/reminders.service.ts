@@ -78,6 +78,7 @@ export class RemindersService {
     return this.http.get<Reminder>(`reminders/mark-done/${idReminder}`).subscribe(() => {
       this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, done: true })
       this.remindersDone.set(idReminder, { ...this.reminders.get(idReminder)!, done: true });
+      this.nbReminders -= 1;
     });
   }
 
@@ -89,7 +90,7 @@ export class RemindersService {
   }
 
   update(idReminder: number, updateReminderDto: UpdateReminderDto) {
-    return this.http.patch<Reminder>(`reminders/${idReminder}`, updateReminderDto).subscribe()
+    return this.http.patch<Reminder>(`reminders/${idReminder}`, updateReminderDto).subscribe(() => this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, ...updateReminderDto}))
   }
 
   findAllByProspect(idProspect: number) {
@@ -119,5 +120,14 @@ export class RemindersService {
     queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
     queryParameters = queryParameters.append("take", 20);
     return this.http.get<number>(`reminders/count-reminders`, { params: queryParameters }).subscribe(nbReminders => this.nbReminders = nbReminders);
+  }
+
+  updateCommentProspect(id: number, newComment: string) {
+    this.reminders.forEach(reminder => {
+      if(reminder.prospect.id == id) {
+        return reminder.prospect.comment = newComment
+      }
+      return
+    })
   }
 }
