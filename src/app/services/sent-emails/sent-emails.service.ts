@@ -6,6 +6,7 @@ import { CreateSentEmailDto } from 'src/app/dto/sent-emails/create-sent-emails.d
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsSentEmails } from 'src/app/models/research-params-sent-emails.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class SentEmailsService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) { 
     this.loadMore();
   }
@@ -53,6 +55,10 @@ export class SentEmailsService {
     return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => {
       this.sentEmails.set(sentEmail.id, { ...sentEmail, prospect: { ...sentEmail.prospect, stage: StageType.MAIL}})
       this.nbSentEmails += 1;
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Mail envoyé à ${createSentEmailDto.prospect.companyName}`
+      });
     })
   }
 

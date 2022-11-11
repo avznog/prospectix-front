@@ -7,6 +7,7 @@ import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class ProspectsService {
 
   constructor(
     private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) { 
     this.loadMore();
   }
@@ -58,7 +60,13 @@ export class ProspectsService {
   }
 
   create(createProspectDto: CreateProspectDto) : Subscription {
-    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe(prospect => this.prospects.set(prospect.id, prospect));
+    return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe(prospect => {
+      this.prospects.set(prospect.id, prospect)
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `${createProspectDto.companyName} ajouté`
+      });
+    });
   }
 
   updateStreetAddress(idProspect: number, streetAddress: { streetAddress: string }) {
@@ -78,7 +86,13 @@ export class ProspectsService {
   }
 
   updateIsBookmarked(idProspect: number, isBookmarked: { isBookmarked: boolean }) : Subscription {
-    return this.http.patch<Prospect>(`prospects/${idProspect}`, isBookmarked).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, isBookmarked: isBookmarked.isBookmarked }));
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, isBookmarked).subscribe(() => {
+      this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, isBookmarked: isBookmarked.isBookmarked })
+      isBookmarked.isBookmarked && this.toastsService.addToast({
+        type: "alert-warning",
+        message: `${this.prospects.get(idProspect)!.companyName} ajouté aux favoris`
+      });
+    });
   }
 
   updateByCity(idProspect: number, cityName: string) : Subscription {
@@ -90,12 +104,24 @@ export class ProspectsService {
   }
 
   updateAllProspect(idProspect: number, updateProspectDto: UpdateProspectDto) : Subscription {
-    return this.http.patch<Prospect>(`prospects/all-prospect/${idProspect}`, updateProspectDto).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, ...updateProspectDto}));
+    return this.http.patch<Prospect>(`prospects/all-prospect/${idProspect}`, updateProspectDto).subscribe(() => {
+      this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, ...updateProspectDto})
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `${this.prospects.get(idProspect)?.companyName} mis à jour`
+      })
+    });
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }, prospect?: Prospect) : Subscription {
     if(stage.stage == StageType.ARCHIVED){
-      return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date() }).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
+      return this.http.patch<Prospect>(`prospects/${idProspect}`, {stage: stage.stage, archived: new Date() }).subscribe(() => {
+        this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage })
+        this.toastsService.addToast({
+          type: "alert-error",
+          message: `Refus pris pris en compte`
+        });
+      });
     }
     else if (stage.stage == StageType.BOOKMARK){
       return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage, isBookmarked: true }));  
@@ -103,11 +129,29 @@ export class ProspectsService {
     else if (stage.stage == StageType.RESEARCH) {
       return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...prospect!, stage: stage.stage, isBookmarked: false }));  
     }
-    return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage }));
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, stage).subscribe(() => {
+      this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: stage.stage })
+
+      stage.stage == StageType.PRO && this.toastsService.addToast({
+        type: "alert-success",
+        message: `Rendez-vous converti en PRO`
+      });
+
+      stage.stage == StageType.MEETING_DONE_AND_OUT && this.toastsService.addToast({
+        type: "alert-success",
+        message: `Rendez-vous effectué`
+      });
+    });
   }
   
   disable(idProspect: number, reason: ReasonDisabledType) : Subscription {
-    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}/${reason}`,).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: StageType.ARCHIVED, disabled: true }));
+    return this.http.get<Prospect[]>(`prospects/disable/${idProspect}/${reason}`,).subscribe(() => {
+      this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, stage: StageType.ARCHIVED, disabled: true })
+      this.toastsService.addToast({
+        type: "alert-error",
+        message: `${this.prospects.get(idProspect)!.companyName} supprimé`
+      })
+    });
   }
 
   countProspects() {

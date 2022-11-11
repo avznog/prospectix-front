@@ -12,7 +12,6 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
-import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
   selector: 'app-add-bookmark-modal',
@@ -31,7 +30,6 @@ export class AddBookmarkModalComponent implements OnInit {
     private readonly sentEmailsService: SentEmailsService,
     private readonly eventsService: EventsService,
     private readonly authService: AuthService,
-    private readonly toastsService: ToastsService
   ) { }
 
   ngOnInit(): void {
@@ -56,13 +54,6 @@ export class AddBookmarkModalComponent implements OnInit {
       date: new Date,
       description: `${EventDescriptionType.ADD_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-
-    this.toastsService.addToast({
-      type: "alert-warning",
-      message: "Prospect ajouté en favoris"
-    });
-
-    console.log("added to bookmarks");
   }
 
 }

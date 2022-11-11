@@ -12,7 +12,6 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
 import { StatisticsService } from 'src/app/services/statistics/statistics.service';
-import { ToastsService } from 'src/app/services/toasts/toasts.service';
 @Component({
   selector: 'app-confirm-refus',
   templateUrl: './confirm-refus.component.html',
@@ -31,7 +30,6 @@ export class ConfirmRefusComponent implements OnInit {
     private readonly sentEmailsService: SentEmailsService,
     private readonly eventsService: EventsService,
     private readonly authService: AuthService,
-    private readonly toastsService: ToastsService,
     private readonly statisticsService: StatisticsService,
   ) { }
 
@@ -60,6 +58,7 @@ export class ConfirmRefusComponent implements OnInit {
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
     this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
     this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
+    
     this.eventsService.create({
       type: EventType.NEGATIVE_ANSWER,
       prospect: this.prospect,
@@ -67,10 +66,7 @@ export class ConfirmRefusComponent implements OnInit {
       description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     
-    this.toastsService.addToast({
-      type: "alert-error",
-      message: "Refus confirmé"
-    });
+    
   }
 
   onMarkReminderDone() {

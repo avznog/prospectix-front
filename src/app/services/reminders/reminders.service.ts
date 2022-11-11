@@ -7,6 +7,7 @@ import { UpdateReminderDto } from 'src/app/dto/reminders/update-reminder.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.model';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class RemindersService {
   }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) {
     this.loadMore();
     this.loadRemindersDone()
@@ -86,6 +88,10 @@ export class RemindersService {
     return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => {
       this.reminders.set(reminder.id, { ...reminder, prospect: { ...reminder.prospect, stage: StageType.REMINDER }})
       this.nbReminders += 1;
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Rappel avec ${createReminderDto.prospect.companyName} ajouté`
+      });
     });
   }
 

@@ -6,6 +6,7 @@ import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class BookmarksService {
   
   constructor(
     private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) { 
     this.loadMore();
   }
@@ -65,8 +67,13 @@ export class BookmarksService {
 
   delete(bookmarkId: number) {
     this.http.delete<Bookmark>(`bookmarks/${bookmarkId}`).subscribe(() => {
+      const name = this.bookmarks.get(bookmarkId)!.prospect.companyName;
       this.bookmarks.delete(bookmarkId)
       this.nbBookmarks -= 1;
+      this.toastsService.addToast({
+        type: "alert-error",
+        message: `${name} supprimé des favoris`
+      })
     });
   }
 

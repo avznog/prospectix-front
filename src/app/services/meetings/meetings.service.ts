@@ -6,6 +6,7 @@ import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class MeetingsService {
     done: "false"
   }
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) { 
     this.loadMore();
     this.loadMeetingsDone();
@@ -90,6 +92,10 @@ export class MeetingsService {
     return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => {
       this.meetings.set(meeting.id, {...meeting, prospect: { ...meeting.prospect, stage: StageType.MEETING }})
       this.nbMeetings += 1;
+      this.toastsService.addToast({
+        type: "alert-info",
+        message: `Rendez-vous décroché avec ${createMeetingDto.prospect.companyName}`
+      })
     });
   }
 
@@ -99,8 +105,9 @@ export class MeetingsService {
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {
     this.meetings.forEach(meeting => {
-      if(meeting.prospect.id == idProspect)
+      if(meeting.prospect.id == idProspect) {
         return meeting.prospect.stage = stage.stage
+      }
       return meeting
     });
   }

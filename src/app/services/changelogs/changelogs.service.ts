@@ -18,7 +18,8 @@ export class ChangelogsService {
           ],
         features: [
           "Suppression de l'ancien dashboard et des anciens objectifs",
-          "Ajout d'une redirection par défaut vers la page des statistiques"
+          "Ajout d'une redirection par défaut vers la page des statistiques",
+          "Les notifications en bas de l'écran apparaissent maintenant une fois que l'action est bien enregistrée en base"
         ]
       },
       {

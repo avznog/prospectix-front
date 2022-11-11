@@ -11,7 +11,6 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
 import { StatisticsService } from 'src/app/services/statistics/statistics.service';
-import { ToastsService } from 'src/app/services/toasts/toasts.service';
 
 @Component({
   selector: 'app-add-reminder-modal',
@@ -34,7 +33,6 @@ export class AddReminderModalComponent implements OnInit {
     private readonly meetingsService: MeetingsService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly toastsService: ToastsService,
     private readonly statisticsService: StatisticsService,
   ) { }
 
@@ -73,10 +71,5 @@ export class AddReminderModalComponent implements OnInit {
       date: new Date,
       description: `${EventDescriptionType.ADD_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
     })
-
-    this.toastsService.addToast({
-      type: "alert-success",
-      message: "Rappel ajouté"
-    });
   }
 }
