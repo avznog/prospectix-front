@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CreateUserDto } from 'src/app/dto/users/create-user.dto';
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
+import { ToastsService } from "../toasts/toasts.service";
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,8 @@ export class UsersService {
     take: 20
   }
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) { 
     this.loadMore();
   }
@@ -64,6 +66,12 @@ export class UsersService {
   }
 
   changeObjectived(userId: number, objectived: boolean) : Subscription {
-    return this.http.patch<ProjectManager>(`project-managers/${userId}`, { objectived }).subscribe(() => this.users.set(userId, { ...this.users.get(userId)!, objectived: objectived}));
+    return this.http.patch<ProjectManager>(`project-managers/${userId}`, { objectived }).subscribe(() => {
+      this.users.set(userId, { ...this.users.get(userId)!, objectived: objectived});
+      this.toastsService.addToast({
+        type: objectived ? "alert-success" : "alert-error",
+        message: `${this.users.get(userId)!.pseudo} ${objectived ? 'ajouté aux' : 'supprimé des'} objectifs`
+      })
+    });
   }
 }

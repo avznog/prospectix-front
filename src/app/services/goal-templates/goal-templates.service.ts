@@ -6,6 +6,7 @@ import { UpdateGoalTemplateDto } from 'src/app/dto/goal-templates/update-goal-te
 import { GoalTemplate } from 'src/app/models/goal-template.model';
 import { Goal } from 'src/app/models/goal.model';
 import { ProjectManagersService } from 'src/app/services/project-managers/project-managers.service';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class GoalTemplatesService {
 
   constructor(
     private http: HttpClient,
-    private pmService: ProjectManagersService
+    private pmService: ProjectManagersService,
+    private readonly toastsService: ToastsService
   ) { 
     this.laodGoalTemplates().subscribe(goalTemplates => goalTemplates.forEach(goalTemplate => this.goalTemplates.set(goalTemplate.id, goalTemplate)))
   }
@@ -26,7 +28,13 @@ export class GoalTemplatesService {
   }
 
   toggleDisabled(goalTemplate: KeyValue<number, GoalTemplate>) {
-    return this.http.patch<GoalTemplate>(`goal-templates/${goalTemplate.value.id}`, {disabled: !goalTemplate.value.disabled}).subscribe(() => this.goalTemplates.set(goalTemplate.key, { ...goalTemplate.value, disabled: !goalTemplate.value.disabled }))
+    return this.http.patch<GoalTemplate>(`goal-templates/${goalTemplate.value.id}`, {disabled: !goalTemplate.value.disabled}).subscribe(() => {
+      this.goalTemplates.set(goalTemplate.key, { ...goalTemplate.value, disabled: !goalTemplate.value.disabled })
+      this.toastsService.addToast({
+        type: !goalTemplate.value.disabled ? "alert-error" : "alert-success",
+        message: `Objectif Template ${goalTemplate.value.name} ${!goalTemplate.value.disabled ? 'désactivé' : 'activé'}`
+      })
+    })
   }
 
   create(createGoalTemplateDto: CreateGoalTemplateDto) {
@@ -52,12 +60,19 @@ export class GoalTemplatesService {
   }
 
   udpate(id: number, updateGoalTemplateDto: UpdateGoalTemplateDto) {
-    return this.http.patch<GoalTemplate>(`goal-templates/${id}`, updateGoalTemplateDto).subscribe(() => this.goalTemplates.set(id, { ...this.goalTemplates.get(id)!, ...updateGoalTemplateDto}))
+    return this.http.patch<GoalTemplate>(`goal-templates/${id}`, updateGoalTemplateDto).subscribe(() => {
+      this.goalTemplates.set(id, { ...this.goalTemplates.get(id)!, ...updateGoalTemplateDto})
+      this.toastsService.addToast({
+        type: "alert-info",
+        message: `Objectif ${this.goalTemplates.get(id)!.name} modifié`
+      })
+    })
   }
 
   delete(id: number) {
     return this.http.delete(`goal-templates/${id}`).subscribe(() => {
 
+      const name = this.goalTemplates.get(id)!.name;
       // Removing the goal tempalte from the list of all goal templates
       this.goalTemplates.delete(id);
 
@@ -70,6 +85,11 @@ export class GoalTemplatesService {
           }
         })
         this.pmService.pmGoals.set(pm, g);
+      })
+
+      this.toastsService.addToast({
+        type: "alert-error",
+        message: `Objectif ${name} supprimé`
       })
     })
   }
