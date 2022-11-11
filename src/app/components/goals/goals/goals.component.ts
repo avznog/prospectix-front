@@ -37,4 +37,8 @@ export class GoalsComponent implements OnInit {
   asIsOrder() {
     return 1;
   }
+
+  onChangeGoalValue(pm: ProjectManager, goal: Goal, value: any) {
+    this.goalsService.udpateValue(pm, goal, { value: value.target.value})
+  }
 }
