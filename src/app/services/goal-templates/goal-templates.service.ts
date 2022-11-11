@@ -57,13 +57,19 @@ export class GoalTemplatesService {
 
   delete(id: number) {
     return this.http.delete(`goal-templates/${id}`).subscribe(() => {
+
+      // Removing the goal tempalte from the list of all goal templates
       this.goalTemplates.delete(id);
-      this.pmService.pmGoals.forEach(pmGoal => {
-        pmGoal.forEach(goal => {
-          if(goal.goalTemplate.id == id) {
-            // this.pmService.pmGoals.delete()
+
+      // Removig the goals where they are linked to the goal tmepaltes
+      this.pmService.pmGoals.forEach((goals, pm) => {
+        let g : Goal[] = [];
+        goals.forEach(goal => {
+          if(goal.goalTemplate.id != id) {
+            g.push(goal)
           }
         })
+        this.pmService.pmGoals.set(pm, g);
       })
     })
   }

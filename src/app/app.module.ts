@@ -55,6 +55,7 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { AddGoalTemplateComponent } from './components/goals/add-goal-template/add-goal-template.component';
 import { EditGoalTemplateComponent } from './components/goals/edit-goal-template/edit-goal-template.component';
+import { DeleteGoalTemplateComponent } from './components/goals/delete-goal-template/delete-goal-template.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +100,7 @@ import { EditGoalTemplateComponent } from './components/goals/edit-goal-template
     GoalsComponent,
     AddGoalTemplateComponent,
     EditGoalTemplateComponent,
+    DeleteGoalTemplateComponent,
   ],
   imports: [
     BrowserModule,

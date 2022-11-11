@@ -33,10 +33,6 @@ export class GoalsComponent implements OnInit {
     this.goalsService.updateDisable(pm, goal, { disabled: goal.disabled})
   }
 
-  onDeleteGoalTemplate(id: number) {
-    this.goalTemplatesService.delete(id);
-  }
-
   // ? order by id
   asIsOrder() {
     return 1;
