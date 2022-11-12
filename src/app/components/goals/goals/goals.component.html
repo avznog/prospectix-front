@@ -1,7 +1,7 @@
 <!-- ! All objectives for the pm -->
 <div class="p-5 space-y-5">
-  <div class="overflow-auto">
-    <table class="table w-full">
+  <div class="overflow-y-hidden">
+    <table class="table w-full ">
 
       <!-- ! Header  -->
       <thead>
@@ -25,11 +25,20 @@
 
           <!-- Each goal value -->
           <td *ngFor="let goal of pmGoal.value">
-            <div class="space-x-5 justify-center flex">
+            <div class="space-x-5 justify-center inline-flex">
               <input class="input input-primary" type="number" [disabled]="goal.goalTemplate.disabled || goal.disabled"
                 [defaultValue]="goal.value" (keyup.enter)="onChangeGoalValue(pmGoal.key, goal, $event)">
-              <input type="checkbox" class="toggle toggle-primary" [checked]="!goal.disabled"
-                [disabled]="goal.goalTemplate.disabled" (change)="toggleDisableGoal(pmGoal.key, goal)">
+              <div class="block">
+                <div>
+                  <input type="checkbox" class="toggle toggle-primary" [checked]="!goal.disabled"
+                    [disabled]="goal.goalTemplate.disabled" (change)="toggleDisableGoal(pmGoal.key, goal)">
+                </div>
+                <div data-tip="Bouton de favoris" class="tooltip tooltip-bottom">
+                  <input type="checkbox" class="toggle toggle-primary" [checked]="goal.important"
+                    [disabled]="goal.goalTemplate.disabled"
+                    (change)="onToogleGoalImportant(pmGoal, goal, !goal.important)">
+                </div>
+              </div>
             </div>
         </tr>
       </tbody>
@@ -88,7 +97,8 @@
           </td>
           <td>
             <!-- ? modal remove goal template button -->
-            <label class="btn btn-outline btn-sm btn-error hover:stroke-base-100 stroke-error modal-button" for="delete-goal-template-modal-{{goalTemplate.key}}">
+            <label class="btn btn-outline btn-sm btn-error hover:stroke-base-100 stroke-error modal-button"
+              for="delete-goal-template-modal-{{goalTemplate.key}}">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
                 stroke="text-inherit" class="h-6 w-6 text-inherit  hover:bg-opacity-0">
                 <path stroke-linecap="round" stroke-linejoin="round"

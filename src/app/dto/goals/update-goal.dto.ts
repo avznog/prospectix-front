@@ -6,5 +6,6 @@ export interface UpdateGoalDto {
   goalTemplate?: GoalTemplate;
   disabled?: boolean;
   value?: number;
+  important?: boolean;
   pm?: ProjectManager;
 }

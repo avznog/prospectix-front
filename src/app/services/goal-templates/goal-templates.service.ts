@@ -43,8 +43,6 @@ export class GoalTemplatesService {
       this.goalTemplates.set(data.goalTemplate.id, data.goalTemplate);
       
       // Setting the goals of the front
-      console.log(data)
-      console.log(this.pmService.pmGoals)
       for(let pmGoal of this.pmService.pmGoals) {
         for(let goal of data.goals) {
           if(pmGoal[0].id == goal.pm.id) {
