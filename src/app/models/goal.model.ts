@@ -5,7 +5,6 @@ export interface Goal {
   id: number;
   disabled: boolean;
   value: number;
-  important: boolean;
   pm: ProjectManager;
   goalTemplate: GoalTemplate;
 }

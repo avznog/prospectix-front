@@ -28,17 +28,8 @@
             <div class="space-x-5 justify-center inline-flex">
               <input class="input input-primary" type="number" [disabled]="goal.goalTemplate.disabled || goal.disabled"
                 [defaultValue]="goal.value" (keyup.enter)="onChangeGoalValue(pmGoal.key, goal, $event)">
-              <div class="block">
-                <div>
-                  <input type="checkbox" class="toggle toggle-primary" [checked]="!goal.disabled"
-                    [disabled]="goal.goalTemplate.disabled" (change)="toggleDisableGoal(pmGoal.key, goal)">
-                </div>
-                <div data-tip="Bouton de favoris" class="tooltip tooltip-bottom">
-                  <input type="checkbox" class="toggle toggle-primary" [checked]="goal.important"
-                    [disabled]="goal.goalTemplate.disabled"
-                    (change)="onToogleGoalImportant(pmGoal, goal, !goal.important)">
-                </div>
-              </div>
+                <input type="checkbox" class="toggle toggle-primary" [checked]="!goal.disabled"
+                [disabled]="goal.goalTemplate.disabled" (change)="toggleDisableGoal(pmGoal.key, goal)">
             </div>
         </tr>
       </tbody>

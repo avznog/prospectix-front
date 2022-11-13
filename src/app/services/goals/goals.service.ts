@@ -53,24 +53,4 @@ export class GoalsService {
       })
     })
   }
-
-  updateImportant(pm: ProjectManager, goal: Goal, updateGoalDto: UpdateGoalDto) {
-    return this.http.patch<Goal>(`goals/${goal.id}`, updateGoalDto).subscribe(() => {
-      this.goals.set(pm, { ...this.goals.get(pm)!, important: updateGoalDto.important!})
-      let g = this.pmService.pmGoals.get(pm)!;
-      let goalsOfPm: Goal[] = [];
-      g.forEach(gl => {
-        if(gl.id == goal.id) {
-          goalsOfPm.push({ ...gl, important: updateGoalDto.important! })
-        } else {
-          goalsOfPm.push(gl)
-        }
-      });
-      this.pmService.pmGoals.set(pm, goalsOfPm);
-      this.toastsService.addToast({
-        type: updateGoalDto.important ? "alert-success" : "alert-error",
-        message: `Objectif ${goal.goalTemplate.name} ${updateGoalDto.important ? 'ajouté aux' : 'supprimé des'} objectifs favoris de ${pm.pseudo}`
-      })
-    })
-  }
 }

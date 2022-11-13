@@ -41,8 +41,4 @@ export class GoalsComponent implements OnInit {
   onChangeGoalValue(pm: ProjectManager, goal: Goal, value: any) {
     this.goalsService.udpateValue(pm, goal, { value: value.target.value})
   }
-
-  onToogleGoalImportant(pmGoal: KeyValue<ProjectManager, Goal[]>, goal: Goal, important: boolean) {
-    this.goalsService.updateImportant(pmGoal.key, goal, { important: important})
-  }
 }
