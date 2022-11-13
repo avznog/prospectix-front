@@ -28,7 +28,7 @@
             <div class="space-x-5 justify-center inline-flex">
               <input class="input input-primary" type="number" [disabled]="goal.goalTemplate.disabled || goal.disabled"
                 [defaultValue]="goal.value" (keyup.enter)="onChangeGoalValue(pmGoal.key, goal, $event)">
-                <input type="checkbox" class="toggle toggle-primary" [checked]="!goal.disabled"
+              <input type="checkbox" class="toggle toggle-primary" [checked]="!goal.disabled"
                 [disabled]="goal.goalTemplate.disabled" (change)="toggleDisableGoal(pmGoal.key, goal)">
             </div>
         </tr>
@@ -47,6 +47,7 @@
           <th>Objectif</th>
           <th>Description</th>
           <th>Valeur par défaut</th>
+          <th>Favori</th>
           <th>Actif</th>
           <th>Modifier</th>
           <th>Supprimer</th>
@@ -56,18 +57,34 @@
       <!-- ! Body -->
       <tbody>
         <tr *ngFor="let goalTemplate of goalTemplatesService.goalTemplates | keyvalue">
+
+          <!--  ? name -->
           <th>{{goalTemplate.value.name}}</th>
+
+          <!-- ? description -->
           <td class="w-1/2"><textarea class="textarea textarea-ghost w-full textarea-bordered hover:cursor-default"
               [disabled]="true">{{goalTemplate.value.description}}</textarea></td>
+
+          <!-- ? valeur par défaut -->
           <td>{{goalTemplate.value.default}}</td>
+
+          <!-- ? Favori -->
           <td>
-            <!-- ? checkbox disabled -->
+            <input type="checkbox" [checked]="goalTemplate.value.important"
+              class="checkbox {{goalTemplate.value.important ? 'checkbox-primary' : ''}}"
+              (change)="onChangeImportant(goalTemplate)" />
+          </td>
+
+          <!-- ? Actif -->
+          <td>
             <input type="checkbox" [checked]="!goalTemplate.value.disabled"
               class="checkbox {{!goalTemplate.value.disabled ? 'checkbox-primary' : ''}}"
               (change)="onChangeDisabledTemplate(goalTemplate)" />
           </td>
+
+          <!-- ? bouton modifier -->
           <td>
-            <!-- ? edit goal template modal button -->
+
             <label class="btn btn-outline btn-primary btn-sm hover:stroke-base-100 stroke-primary modal-button"
               for="edit-goal-template-modal-{{goalTemplate.key}}">
               <svg xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +95,7 @@
               </svg>
             </label>
 
-            <!-- ? modal button edit goal template -->
+            <!-- modal bouton modifier -->
             <input type="checkbox" id="edit-goal-template-modal-{{goalTemplate.key}}" class="modal-toggle">
             <label for="edit-goal-template-modal-{{goalTemplate.key}}" class="modal cursor-pointer">
               <label class="modal-box" for="">
@@ -86,8 +103,10 @@
               </label>
             </label>
           </td>
+
+          <!-- ? bouton supprimer -->
           <td>
-            <!-- ? modal remove goal template button -->
+
             <label class="btn btn-outline btn-sm btn-error hover:stroke-base-100 stroke-error modal-button"
               for="delete-goal-template-modal-{{goalTemplate.key}}">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" fill="none"

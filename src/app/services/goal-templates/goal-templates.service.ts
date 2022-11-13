@@ -91,4 +91,23 @@ export class GoalTemplatesService {
       })
     })
   }
+
+  toggleImportant(goalTemplateId: number, updateGoalTemplateDto: UpdateGoalTemplateDto) {
+    return this.http.patch<GoalTemplate>(`goal-templates/${goalTemplateId}`, updateGoalTemplateDto).subscribe(() => {
+      this.goalTemplates.set(goalTemplateId, { ...this.goalTemplates.get(goalTemplateId)!, important: updateGoalTemplateDto.important!});
+      this.pmService.pmGoals.forEach(goals => {
+        goals.forEach(goal => {
+          if(goal.goalTemplate.id == goalTemplateId) {
+            return goal.goalTemplate.important = updateGoalTemplateDto.important!
+          }
+          return
+        })
+      })
+
+      this.toastsService.addToast({
+        type: updateGoalTemplateDto.important! ? "alert-success" : "alert-error",
+        message: `${this.goalTemplates.get(goalTemplateId)!.name} ${updateGoalTemplateDto.important! ? 'ajouté aux' : 'supprimé des'} objectifs principaux`
+      })
+    })
+  }
 }

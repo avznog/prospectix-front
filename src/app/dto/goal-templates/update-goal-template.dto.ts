@@ -4,4 +4,5 @@ export interface UpdateGoalTemplateDto {
   description?: string;
   disabled?: boolean;
   default?: number;
+  important?: boolean;
 }
