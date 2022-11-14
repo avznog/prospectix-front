@@ -12,6 +12,17 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.3.2",
+        date: new Date("2022-11-14T00:00:00.000Z"),
+        bugs: [
+         "Résolution du bug d'affichage des statistiques à partir du lundi",
+         "Résolution du bug d'affichage de l'historique des statistiques"
+          ],
+        features: [
+          
+        ],
+      },
+      {
         version: "1.3.1",
         date: new Date("2022-11-10T00:00:00.000Z"),
         bugs: [
