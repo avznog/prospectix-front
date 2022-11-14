@@ -107,7 +107,7 @@
           <!-- ? bouton supprimer -->
           <td>
 
-            <label class="btn btn-outline btn-sm btn-error hover:stroke-base-100 stroke-error modal-button"
+            <label class="btn btn-outline btn-sm btn-error hover:stroke-base-100 stroke-error modal-button" *ngIf="goalTemplate.value.name != 'Appels' && goalTemplate.value.name != 'Rendez-vous'"
               for="delete-goal-template-modal-{{goalTemplate.key}}">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
                 stroke="text-inherit" class="h-6 w-6 text-inherit  hover:bg-opacity-0">

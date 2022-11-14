@@ -48,12 +48,12 @@ export class GoalTemplatesService {
           if(pmGoal[0].id == goal.pm.id) {
             let g = pmGoal[1];
             g.push(goal)
-            console.log(goal)
             // Add default value for new goal template
             this.pmService.pmGoals.set(pmGoal[0], g);
           }
         }
       }
+      this.pmService.updateMyGoals();
     })
   }
 
@@ -85,6 +85,7 @@ export class GoalTemplatesService {
         this.pmService.pmGoals.set(pm, g);
       })
 
+      this.pmService.updateMyGoals();
       this.toastsService.addToast({
         type: "alert-error",
         message: `Objectif ${name} supprimé`
@@ -103,6 +104,7 @@ export class GoalTemplatesService {
           return
         })
       })
+      this.pmService.updateMyGoals();
 
       this.toastsService.addToast({
         type: updateGoalTemplateDto.important! ? "alert-success" : "alert-error",

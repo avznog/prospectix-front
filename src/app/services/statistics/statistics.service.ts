@@ -79,6 +79,8 @@ export class StatisticsService {
     private router: Router,
     private readonly slackService: SlackService
   ) {
+    this.countWeeklyCallsForMe()
+    this.countWeeklyMeetingsForMe();
   }
 
   //  * Getting the separate count since the last sunday
@@ -294,7 +296,10 @@ export class StatisticsService {
       console.log("good call")
     }
 
-    this.http.post<Call>(`calls/create-for-me`, createCallDto).subscribe(() => this.allMyCalls += 1);
+    this.http.post<Call>(`calls/create-for-me`, createCallDto).subscribe(() => {
+      this.allMyCalls += 1
+      this.weeklyCalls += 1
+    });
   }
 
   createReminderForMe() {

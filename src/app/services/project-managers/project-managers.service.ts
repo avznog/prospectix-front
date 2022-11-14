@@ -1,6 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { GoalTemplate } from 'src/app/models/goal-template.model';
 import { Goal } from 'src/app/models/goal.model';
 import { ProjectManager } from 'src/app/models/project-manager.model';
@@ -10,11 +11,19 @@ import { ProjectManager } from 'src/app/models/project-manager.model';
 })
 export class ProjectManagersService {
 
+  myCallsGoal: Goal = {
+    goalTemplate: {} as GoalTemplate
+  } as Goal;
+  myMeetingsGoal: Goal = {
+    goalTemplate: {} as GoalTemplate
+  } as Goal;
+  myGoals: Goal[] = [];
   projectManagers: ProjectManager[] = [];
   pmGoals = new Map<ProjectManager, Goal[]>();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly authService: AuthService
   ) { 
     this.findAll().subscribe(projectManagers => {
       this.projectManagers = projectManagers
@@ -24,6 +33,7 @@ export class ProjectManagersService {
         this.pmGoals.set(pm, pm.goals)
 
       })
+      this.updateMyGoals();
     });
   }
 
@@ -43,6 +53,7 @@ export class ProjectManagersService {
         }
       })
     }
+    this.updateMyGoals();
   }
 
   toggleDisabledPmGoalsTemplate(goalTemplate: KeyValue<number, GoalTemplate>) {
@@ -54,6 +65,7 @@ export class ProjectManagersService {
         return
       })
     })
+    this.updateMyGoals();
   }
 
   toggleDisableGoal(pm: ProjectManager, goal: Goal) {
@@ -65,9 +77,19 @@ export class ProjectManagersService {
       return
     });
     this.pmGoals.set(pm, goals!);
+    this.updateMyGoals();
   }
 
   checkGoals(pm: ProjectManager) {
-    this.http.get<Goal[]>(`goals/check/${pm.id}`).subscribe(goals => this.pmGoals.set(pm, goals));
+    this.http.get<Goal[]>(`goals/check/${pm.id}`).subscribe(goals => {
+      this.pmGoals.set(pm, goals)
+      this.updateMyGoals();
+    });
+  }
+
+  updateMyGoals() {
+    this.myGoals = this.pmGoals.get(this.projectManagers.find(pm => pm.pseudo == this.authService.currentUserSubject.getValue().pseudo)!)!
+    this.myCallsGoal = this.myGoals.find(goal => goal.goalTemplate.name == "Appels")!
+    this.myMeetingsGoal = this.myGoals.find(goal => goal.goalTemplate.name == "Rendez-vous")!
   }
 }
