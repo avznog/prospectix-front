@@ -79,7 +79,26 @@ export class StatisticsService {
     private router: Router,
     private readonly slackService: SlackService
   ) {
-    this.countWeeklyMeetingsForMe()
+     // ! Weekly stats
+     this.countWeeklyCallsForMe();
+     this.countWeeklyMeetingsForMe();
+     this.countWeeklyRemindersForMe();
+     this.countWeeklyNegativeAnswersForMe();
+     this.countWeeklySentEmailsForMe();
+ 
+     //! All stats
+     this.countAllCallsForMe();
+     this.countAllNegativeAnswersForMe();
+     this.countAllRemindersForMe();
+     this.countAllMeetingsForMe();
+     this.countAllSentEmailsForMe();
+ 
+     //! History stats (by weeks)
+     this.countByWeeksCalls();
+     this.countByWeeksReminders();
+     this.countByWeeksMeetings();
+     this.countByWeeksSentEmails();
+     this.countByWeeksNegativeAnswers();
   }
 
   //  * Getting the separate count since the last sunday
@@ -138,18 +157,21 @@ export class StatisticsService {
       this.byWeeksReminders = data.data;
     })
   }
+
   countByWeeksMeetings() {
     return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`meetings/count-all-by-weeks-for-me`).subscribe(data => {
       this.byWeeksMeetings.pop();
       this.byWeeksMeetings = data.data;
     })
   }
+
   countByWeeksSentEmails() {
     return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`sent-emails/count-all-by-weeks-for-me`).subscribe(data => {
       this.byWeeksSentEmails.pop();
       this.byWeeksSentEmails = data.data;
     })
   }
+
   countByWeeksNegativeAnswers() {
     return this.http.get<{intervals: [{dateDown: Date, dateUp: Date}], data: [number]}>(`negative-answers/count-all-by-weeks-for-me`).subscribe(data => {
       this.byWeeksNegativeAnswers.pop();
@@ -157,7 +179,7 @@ export class StatisticsService {
     })
   }
 
-  //* Data for graphs
+  // ! Data for graphs
   //? All calls
   countAllCalls(interval: { dateDown: Date, dateUp: Date }) {
     let queryParameters = new HttpParams();
@@ -281,25 +303,31 @@ export class StatisticsService {
   }
   
 
-  //* CREATION and INCREMENTATION of counts
+  // ! CREATION and INCREMENTATION of counts
   createNegativeAnswerForMe(createNegativeAnswerDto: CreateNegativeAnswerDto) {
-    this.http.post<NegativeAnswer>(`negative-answers/create-for-me`, createNegativeAnswerDto).subscribe(() => this.allMyNegativeAnswers += 1);
+    this.http.post<NegativeAnswer>(`negative-answers/create-for-me`, createNegativeAnswerDto).subscribe(() => {
+      this.allMyNegativeAnswers += 1;
+      this.weeklyNegativeAnswers += 1;
+    });
   }
 
   createCallForMe(createCallDto: CreateCallDto) {
     // ! Check Fraud -> if fraud send slack notif
     let today = new Date();
-    if(today.getDay() == 0 || (today.getDay() == 6 && today.getHours() > 18) || ((today.getDay() != 0 && today.getDay() != 6) && today.getHours() > 20)) {
-      this.slackService.sendFraud(createCallDto.prospect)
-    } else {
-      console.log("good call")
-    }
 
-    this.http.post<Call>(`calls/create-for-me`, createCallDto).subscribe(() => this.allMyCalls += 1);
+    // ? Checking fraud on :  week day pas 20:00, saturday pas 18:00, sunday any Hour, any day before 08:00
+    if(today.getDay() == 0 || (today.getDay() == 6 && today.getHours() > 18) || ((today.getDay() != 0 && today.getDay() != 6) && today.getHours() > 20) || today.getHours() < 8) {
+      this.slackService.sendFraud(createCallDto.prospect)
+    }
+    this.http.post<Call>(`calls/create-for-me`, createCallDto).subscribe(() => {
+      this.allMyCalls += 1
+      this.weeklyCalls += 1;
+    });
   }
 
   createReminderForMe() {
     this.allMyReminders += 1;
+    this.weeklyReminders += 1;
   }
 
   createMeetingFroMe() {
@@ -314,6 +342,7 @@ export class StatisticsService {
 
   createSentEmailForMe() {
     this.allMySentEmails += 1;
+    this.weeklyMeetings += 1;
   }
 
   //! Update charts
