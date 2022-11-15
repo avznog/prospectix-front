@@ -6,12 +6,4 @@
     </label>
     <input class="toggle {{sent ? 'toggle-primary' : ''}}" type="checkbox" id="sentEmailSent" [(ngModel)]="sent" (change)="onEditSent()" />
   </div>
-
-  <!--  Date of sentEmail -->
-  <div class="form-control min-w-fit">
-    <label class="label" for="typeMeeting">
-      <span class="label-text">Date de l'envoi</span>
-    </label>
-    <input type="datetime-local" class="input input-bordered" [(ngModel)]="sendingDate" (change)="onChangeSendingDate()">
-  </div>
 </div>

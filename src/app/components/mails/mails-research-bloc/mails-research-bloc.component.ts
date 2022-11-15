@@ -9,7 +9,6 @@ import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.serv
 export class MailsResearchBlocComponent implements OnInit {
 
   sent: boolean = false;
-  sendingDate: Date | "" = "";
 
   constructor(
     private readonly sentEmailsService: SentEmailsService
@@ -21,16 +20,6 @@ export class MailsResearchBlocComponent implements OnInit {
 
   onEditSent() {
     this.sentEmailsService.resetSearch({
-      date: this.sendingDate == "" ? "" : this.sendingDate.toISOString(),
-      sent: this.sent,
-      take: 20,
-      skip: 0
-    })
-  }
-
-  onChangeSendingDate() {
-    this.sentEmailsService.resetSearch({
-      date: this.sendingDate == "" ? "" : this.sendingDate.toISOString(),
       sent: this.sent,
       take: 20,
       skip: 0

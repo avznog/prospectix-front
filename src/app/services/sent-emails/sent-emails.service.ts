@@ -21,7 +21,6 @@ export class SentEmailsService {
     take: 20,
     skip: 0,
     sent: false,
-    date: ""
   };
 
   constructor(
@@ -57,7 +56,6 @@ export class SentEmailsService {
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip);
     queryParameters = queryParameters.append("take", 20);
     queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    queryParameters = queryParameters.append("date", this.researchParamsSentEmails.date)
     this.http.get<SentEmail[]>(`sent-emails/find-all-paginated`, { params: queryParameters }).subscribe(sentEmails => {
       sentEmails.forEach(sentEmail => this.sentEmails.set(sentEmail.id, sentEmail))
       this.countSentEmails()
@@ -71,7 +69,6 @@ export class SentEmailsService {
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip)
     queryParameters = queryParameters.append("take", 20),
     queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    queryParameters = queryParameters.append("date",this.researchParamsSentEmails.date)
     this.http.get<SentEmail[]>(`sent-emails/find-all-paginated-sent`, { params: queryParameters }).subscribe(sentEmailsSent => {
       sentEmailsSent.forEach(sentEmailSent => this.sentEmailsSent.set(sentEmailSent.id, sentEmailSent));
       this.countSentEmailsSent();
@@ -127,7 +124,6 @@ export class SentEmailsService {
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip);
     queryParameters = queryParameters.append("take", 20);
     queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    queryParameters = queryParameters.append("date", this.researchParamsSentEmails.date)
     return this.http.get<number>(`sent-emails/count-sent-emails`, { params: queryParameters }).subscribe(nbSentEmails => {
       this.nbSentEmails = nbSentEmails
     });
@@ -138,7 +134,6 @@ export class SentEmailsService {
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip)
     queryParameters = queryParameters.append("take", 20),
     queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    queryParameters = queryParameters.append("date",this.researchParamsSentEmails.date)
     return this.http.get<number>(`sent-emails/count-sent-emails-sent`, { params: queryParameters }).subscribe(nbSentEmailsSent => {
       
       this.nbSentEmailsSent = nbSentEmailsSent
