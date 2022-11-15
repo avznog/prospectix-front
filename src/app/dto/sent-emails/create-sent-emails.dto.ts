@@ -4,7 +4,9 @@ import { Prospect } from "src/app/models/prospect.model";
 export interface CreateSentEmailDto {
   object: string;
   message: string;
-  sendingDate: Date;
+  sendingDate?: Date;
+  date: Date;
   prospect: Prospect;
   pm: ProjectManager;
+  sent: boolean;
 }

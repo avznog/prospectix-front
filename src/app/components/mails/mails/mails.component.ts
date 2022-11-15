@@ -28,4 +28,9 @@ export class MailsComponent implements OnInit {
       skip: this.sentEmailsService.researchParamsSentEmails.skip + 20
     })
   }
+
+  // ? order chronological -> the furthest on top
+  asIsOrder() {
+    return -1;
+  }
 }

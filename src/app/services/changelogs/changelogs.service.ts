@@ -12,6 +12,17 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.3.3",
+        date: new Date("2022-11-15T00:00:00.000Z"),
+        bugs: [
+         
+          ],
+        features: [
+          "Ajout de la possibilité de d'indiquer un mail comme non effectué puis effectué"
+          
+        ],
+      },
+      {
         version: "1.3.2",
         date: new Date("2022-11-14T00:00:00.000Z"),
         bugs: [

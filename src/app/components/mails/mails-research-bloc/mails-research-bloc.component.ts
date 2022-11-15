@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
 
 @Component({
   selector: 'app-mails-research-bloc',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MailsResearchBlocComponent implements OnInit {
 
-  constructor() { }
+  sent: boolean = false;
+  sendingDate: Date | "" = "";
+
+  constructor(
+    private readonly sentEmailsService: SentEmailsService
+  ) { }
 
   ngOnInit(): void {
+    this.sent = this.sentEmailsService.researchParamsSentEmails.sent;
+  }
+
+  onEditSent() {
+    this.sentEmailsService.resetSearch({
+      date: this.sendingDate == "" ? "" : this.sendingDate.toISOString(),
+      sent: this.sent,
+      take: 20,
+      skip: 0
+    })
+  }
+
+  onChangeSendingDate() {
+    this.sentEmailsService.resetSearch({
+      date: this.sendingDate == "" ? "" : this.sendingDate.toISOString(),
+      sent: this.sent,
+      take: 20,
+      skip: 0
+    })
   }
 
 }

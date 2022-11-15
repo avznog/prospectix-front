@@ -1,12 +1,16 @@
 <app-mails-research-bloc></app-mails-research-bloc>
-<div
-  *ngFor="let sentEmail of sentEmailsService.sentEmails | keyvalue | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
-  <app-prospect-tile [sentEmail]="sentEmail.value" [prospect]="sentEmail.value.prospect"
-    *ngIf="sentEmail.value.prospect.stage == 4"></app-prospect-tile>
+<div *ngIf="sentEmailsService.researchParamsSentEmails.sent">
+  <div *ngFor="let sentEmailSent of sentEmailsService.sentEmailsSent | keyvalue: asIsOrder | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
+    <app-prospect-tile *ngIf="sentEmailSent.value.prospect.stage == 8" [prospect]="sentEmailSent.value.prospect" [sentEmail]="sentEmailSent.value"></app-prospect-tile>
+  </div>
 </div>
-<app-no-result *ngIf="sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0"></app-no-result>
+<div *ngIf="!sentEmailsService.researchParamsSentEmails.sent">
+  <div *ngFor="let sentEmail of sentEmailsService.sentEmails | keyvalue: asIsOrder | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
+    <app-prospect-tile *ngIf="sentEmail.value.prospect.stage == 4" [prospect]="sentEmail.value.prospect" [sentEmail]="sentEmail.value"></app-prospect-tile>
+  </div>
+</div>
 <div class="btn-group pb-5 justify-center w-full">
   <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.skip <= 0 ? 'btn-disabled' : '' }}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 +1 }} / {{ (sentEmailsService.nbSentEmails / 20 + 1).toFixed() }}</button>
-  <button class="btn btn-outline btn-ghost {{(sentEmailsService.researchParamsSentEmails.skip + 20 < sentEmailsService.nbSentEmails) ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
+  <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 + 1}} / {{( !sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.nbSentEmails : sentEmailsService.nbSentEmailsSent) <= 20 ? 1 : (( !sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.nbSentEmails : sentEmailsService.nbSentEmailsSent) / 20 + 1).toFixed() }}</button>
+  <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.researchParamsSentEmails.skip + 20 < sentEmailsService.nbSentEmailsSent  ? '' : 'btn-disabled' :  sentEmailsService.researchParamsSentEmails.skip + 20 < sentEmailsService.nbSentEmails ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
 </div>

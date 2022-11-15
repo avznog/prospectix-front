@@ -103,10 +103,22 @@ export class RemindersService {
         return reminder.prospect = prospect
       return
     })
+
+    this.remindersDone.forEach(reminder => {
+      if(reminder.prospect.id == prospect.id)
+        return reminder.prospect = prospect
+      return
+    })
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {
     this.reminders.forEach(reminder => {
+      if(reminder.prospect.id == idProspect)
+        return reminder.prospect.stage = stage.stage
+      return reminder
+    });
+
+    this.remindersDone.forEach(reminder => {
       if(reminder.prospect.id == idProspect)
         return reminder.prospect.stage = stage.stage
       return reminder
@@ -124,6 +136,13 @@ export class RemindersService {
 
   updateCommentProspect(id: number, newComment: string) {
     this.reminders.forEach(reminder => {
+      if(reminder.prospect.id == id) {
+        return reminder.prospect.comment = newComment
+      }
+      return
+    })
+
+    this.remindersDone.forEach(reminder => {
       if(reminder.prospect.id == id) {
         return reminder.prospect.comment = newComment
       }
