@@ -13,7 +13,6 @@ export class MeetingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.meetingsService.meetings)
   }
 
   pageDown() {

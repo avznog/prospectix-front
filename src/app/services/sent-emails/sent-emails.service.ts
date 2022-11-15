@@ -134,11 +134,7 @@ export class SentEmailsService {
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip)
     queryParameters = queryParameters.append("take", 20),
     queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    return this.http.get<number>(`sent-emails/count-sent-emails-sent`, { params: queryParameters }).subscribe(nbSentEmailsSent => {
-      
-      this.nbSentEmailsSent = nbSentEmailsSent
-      console.log(nbSentEmailsSent)
-    });
+    return this.http.get<number>(`sent-emails/count-sent-emails-sent`, { params: queryParameters }).subscribe(nbSentEmailsSent => this.nbSentEmailsSent = nbSentEmailsSent);
   }
 
   updateCommentProspect(id: number, newComment: string) {

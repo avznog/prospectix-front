@@ -1,10 +1,10 @@
 <div class="card">
-  <div class="card-title justify-center"><span class="justify-center">Mail envoyé à {{prospect.email.email ? prospect.email.email : prospect.companyName }} {{prospect.email.email && '(' + prospect.companyName + ')'}} ?</span>
+  <div class="card-title justify-center"><span class="justify-center">Envoyer le mail à {{prospect.email.email ? prospect.email.email : prospect.companyName }} {{prospect.email.email && '(' + prospect.companyName + ')'}} ?</span>
   </div>
   <div class="card-body ">
     <div class="inline-flex space-x-5">
       <label class="btn btn-outline btn-ghost w-1/2" for="mark-sentEmail-sent-{{prospect.id}}">Annuler</label>
-      <label class="btn btn-outline btn-ghost w-1/2 btn-success" for="mark-sentEmail-sent-{{prospect.id}}" (click)="onClickMarkSentEmailSent()">Mail envoyé</label>
+      <label class="btn btn-outline btn-ghost w-1/2 btn-success" for="mark-sentEmail-sent-{{prospect.id}}" (click)="onClickMarkSentEmailSent()">Envoyer le mail</label>
     </div>
   </div>
 </div>
