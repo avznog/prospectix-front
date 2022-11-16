@@ -9,4 +9,6 @@ export interface SentEmail {
   object: string;
   message: string;
   sendingDate: Date;
+  date: Date;
+  sent: boolean;
 }

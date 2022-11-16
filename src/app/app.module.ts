@@ -63,6 +63,7 @@ import { ActivityComponent } from './components/statistics/activity/activity.com
 import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { EditTimeReminderComponent } from './components/common/edit-time-reminder/edit-time-reminder.component';
+import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-sent/mark-sent-email-sent.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,6 +116,7 @@ import { EditTimeReminderComponent } from './components/common/edit-time-reminde
     ActivityComponent,
     ProspectixLogoComponent,
     EditTimeReminderComponent,
+    MarkSentEmailSentComponent,
   ],
   imports: [
     BrowserModule,
