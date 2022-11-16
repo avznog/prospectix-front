@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-title justify-center"><span class="justify-center">Modifier la date et l'heure du {{reminder && 'rappel' || meeting && 'rendez-vous'}} avec {{prospect.companyName}}</span>
+  </div>
+  <div class="card-body ">
+    <div class="input-group flex justify-center">
+      <span id="date" >Je change mon {{reminder && 'rappel' || meeting && 'rendez-vous'}} au </span>
+      <input for="date" class="input input-bordered" type="datetime-local" [(ngModel)]="date" >
+    </div>
+    <div class="inline-flex space-x-5 pb-0 pt-5">
+      <label class="btn btn-outline btn-ghost w-1/2" for="edit-date-reminder-meeting-{{prospect.id}}">Annuler</label>
+      <label class="btn btn-outline btn-ghost w-1/2 btn-primary {{!date ? 'btn-disabled' : ''}}" for="edit-date-reminder-meeting-{{prospect.id}}" (click)="onClickChangeDate()">Changer la date et l'heure du {{reminder && 'rappel' || meeting && 'rendez-vous'}}</label>
+    </div>
+  </div>
+</div>

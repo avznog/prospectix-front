@@ -55,7 +55,7 @@
           </label>
           
           <!-- Button edit time reminder -->
-          <label *ngIf="prospect.stage == 2 && reminder && !reminder.done" for="edit-time-reminder-{{reminder.id}}"
+          <label *ngIf="(prospect.stage == 2 && reminder && !reminder.done) || (prospect.stage == 3 && meeting && !meeting.done)" for="edit-date-reminder-meeting-{{prospect.id}}"
             class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
               class="w-6 h-6">
@@ -356,9 +356,9 @@
 </label>
 
 <!-- modal button edit time reminder -->
-<input *ngIf="reminder" type="checkbox" id="edit-time-reminder-{{reminder.id}}" class="modal-toggle">
-<label *ngIf="reminder" for="edit-time-reminder-{{reminder.id}}" class="modal cursor-pointer">
+<input *ngIf="reminder || meeting" type="checkbox" id="edit-date-reminder-meeting-{{prospect.id}}" class="modal-toggle">
+<label *ngIf="reminder || meeting" for="edit-date-reminder-meeting-{{prospect.id}}" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-md text-sm" for="">
-   <app-edit-time-reminder [reminder]="reminder && reminder"></app-edit-time-reminder>
+   <app-edit-date-reminder-meeting [prospect]="prospect" [reminder]="reminder && reminder" [meeting]="meeting && meeting"></app-edit-date-reminder-meeting>
   </label>
 </label>

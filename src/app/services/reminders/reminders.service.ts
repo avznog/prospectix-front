@@ -7,6 +7,7 @@ import { UpdateReminderDto } from 'src/app/dto/reminders/update-reminder.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.model';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class RemindersService {
   }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) {
     this.loadMore();
     this.loadRemindersDone()
@@ -90,7 +92,13 @@ export class RemindersService {
   }
 
   update(idReminder: number, updateReminderDto: UpdateReminderDto) {
-    return this.http.patch<Reminder>(`reminders/${idReminder}`, updateReminderDto).subscribe(() => this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, ...updateReminderDto}))
+    return this.http.patch<Reminder>(`reminders/${idReminder}`, updateReminderDto).subscribe(() => {
+      this.reminders.set(idReminder, { ...this.reminders.get(idReminder)!, ...updateReminderDto})
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Rappel avec ${this.reminders.get(idReminder)!.prospect.companyName} mis à jour`
+      })
+    })
   }
 
   findAllByProspect(idProspect: number) {

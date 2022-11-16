@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
+import { UpdateMeetingDto } from 'src/app/dto/meetings/update-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,8 @@ export class MeetingsService {
     done: "false"
   }
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly toastsService: ToastsService
   ) { 
     this.loadMore();
     this.loadMeetingsDone();
@@ -95,6 +98,16 @@ export class MeetingsService {
 
   findAllByProspect(idProspect: number) {
     return this.http.get<Meeting[]>(`meetings/by-prospect/${idProspect}`);
+  }
+
+  update(idMeeting: number, updateMeetingDto: UpdateMeetingDto) {
+    return this.http.patch<Meeting>(`meetings/${idMeeting}`, updateMeetingDto).subscribe(() => {
+      this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, ...updateMeetingDto})
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Rendez-vous avec ${this.meetings.get(idMeeting)!.prospect.companyName} mis à jour`
+      })
+    })
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {
