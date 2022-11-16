@@ -12,6 +12,17 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.4.1",
+        date: new Date("2022-11-17T00:00:00.000Z"),
+        bugs: [
+         
+          ],
+        features: [
+          "Ajout de la possibilité de modifier la date du rappel",
+          "Ajout de la possibilité de modifier la date et l'heure du rendez-vous"
+        ],
+      },
+      {
         version: "1.4",
         date: new Date("2022-11-16T00:00:00.000Z"),
         bugs: [

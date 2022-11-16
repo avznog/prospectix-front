@@ -62,7 +62,7 @@ import { RankingComponent } from './components/statistics/ranking/ranking.compon
 import { MyStatsComponent } from './components/statistics/my-stats/my-stats.component';
 import { ActivityComponent } from './components/statistics/activity/activity.component';
 import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
-import { EditTimeReminderComponent } from './components/common/edit-time-reminder/edit-time-reminder.component';
+import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
 import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-sent/mark-sent-email-sent.component';
 @NgModule({
   declarations: [
@@ -115,7 +115,7 @@ import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-
     MyStatsComponent,
     ActivityComponent,
     ProspectixLogoComponent,
-    EditTimeReminderComponent,
+    EditDateReminderMeetingComponent,
     MarkSentEmailSentComponent,
   ],
   imports: [
