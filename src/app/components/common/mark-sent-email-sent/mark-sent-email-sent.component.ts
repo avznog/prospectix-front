@@ -46,7 +46,7 @@ export class MarkSentEmailSentComponent implements OnInit {
     this.eventsService.create({
       type: EventType.MARK_MAIL_SENT,
       date: new Date,
-      description: EventDescriptionType.MARK_MAIL_SENT,
+      description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo}`,
       pm: this.authService.currentUserSubject.getValue(),
       prospect: this.prospect
     });

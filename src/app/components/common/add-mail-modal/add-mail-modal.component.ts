@@ -71,7 +71,7 @@ export class AddMailModalComponent implements OnInit {
     this.eventsService.create({
       type: EventType.ADD_SENT_EMAIL,
       date: new Date,
-      description: EventDescriptionType.ADD_SENT_EMAIL,
+      description: `${EventDescriptionType.ADD_SENT_EMAIL} ${this.authService.currentUserSubject.getValue().pseudo}`,
       pm: this.authService.currentUserSubject.getValue(),
       prospect: this.prospect
     });
