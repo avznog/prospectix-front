@@ -24,7 +24,7 @@ export class DisableProspectModalComponent implements OnInit {
   @Input() prospect!: Prospect;
   @Input() bookmark!: Bookmark;
 
-  reasonDisabledType = [ReasonDisabledType.ENTREPRISE_FERMEE, ReasonDisabledType.GRAND_GROUPE, ReasonDisabledType.MAL_ATTRIBUE];
+  reasonDisabledType = [ReasonDisabledType.ENTREPRISE_FERMEE, ReasonDisabledType.GRAND_GROUPE, ReasonDisabledType.MAL_ATTRIBUE, ReasonDisabledType.HOLDINGS];
   reason: ReasonDisabledType = ReasonDisabledType.MAL_ATTRIBUE;
 
   constructor(

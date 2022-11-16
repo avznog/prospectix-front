@@ -12,13 +12,14 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
-        version: "1.3.3",
-        date: new Date("2022-11-15T00:00:00.000Z"),
+        version: "1.4",
+        date: new Date("2022-11-16T00:00:00.000Z"),
         bugs: [
          "Résolution du bug d'affichage des dates de rendez-vous et rappels effectués"
           ],
         features: [
-          "Ajout d'une page \"mails envoyés\": il est désormais possible d'envoyer un mail plus tard"
+          "Ajout d'une page \"mails envoyés\": il est désormais possible d'envoyer un mail plus tard",
+          "Ajout de la raison \"Holdings\" pour la suppression d'un prospect"
         ],
       },
       {
