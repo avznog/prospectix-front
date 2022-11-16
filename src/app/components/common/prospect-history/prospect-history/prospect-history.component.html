@@ -19,7 +19,8 @@
         (event.type == 'DONE_MEETING' && '🤝') ||
         (event.type == 'NO_ANSWER' && '💬') ||
         (event.type == 'PASSAGE_PRO' && '📝') ||
-        (event.type == 'NEGATIVE_ANSWER' && '🗑') "
+        (event.type == 'NEGATIVE_ANSWER' && '🗑') ||
+        (event.type == 'MARK_MAIL_SENT' && '✉️') " 
         class="
           step
           {{event.type == 'CREATION' ? 'step-success' : ''}}
@@ -36,6 +37,7 @@
           {{event.type == 'NEGATIVE_ANSWER' ? 'step-error' : ''}}
           {{event.type == 'PASSAGE_PRO' ? 'step-success' : ''}}
           {{event.type == 'NO_ANSWER' ? 'step-error' : ''}}
+          {{event.type == 'MARK_MAIL_SENT' ? 'step-success' : ''}}
           "
           *ngFor="let event of eventsService.events; let index = index">{{event.date | date:"dd MMMM" }} - {{event.description}}</li>
       </ul>

@@ -4,7 +4,7 @@
     <label for="remindersDone" class="label cursor-pointer">
       <span class="label-text">Rappels effectués</span>
     </label>
-    <input class="toggle" type="checkbox" id="remindersDone" [(ngModel)]="done"
+    <input class="toggle {{done ? 'toggle-primary' : ''}}" type="checkbox" id="remindersDone" [(ngModel)]="done"
       (change)="onEditDone()" checked />
   </div>
 

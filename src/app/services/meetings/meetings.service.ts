@@ -103,10 +103,23 @@ export class MeetingsService {
         return meeting.prospect.stage = stage.stage
       return meeting
     });
+
+    this.meetingsDone.forEach(meetingDone => {
+      if(meetingDone.prospect.id == idProspect) {
+        return meetingDone.prospect.stage = stage.stage
+      }
+      return meetingDone
+    })
   }
 
   updateLiveProspect(prospect: Prospect) {
     this.meetings.forEach(meeting => {
+      if(meeting.prospect.id == prospect.id)
+        return meeting.prospect = prospect
+      return
+    })
+
+    this.meetingsDone.forEach(meeting => {
       if(meeting.prospect.id == prospect.id)
         return meeting.prospect = prospect
       return
@@ -133,5 +146,13 @@ export class MeetingsService {
       }
       return
     })
+    
+    this.meetingsDone.forEach(meeting => {
+      if(meeting.prospect.id == id) {
+        return meeting.prospect.comment = newComment
+      }
+      return
+    })
+    
   }
 }

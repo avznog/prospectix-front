@@ -5,7 +5,7 @@
     <div class="input-group">
       <label class="text-md label" for="select-disable-options">Pour quelle raison ?</label>
       <select id="select-disable-options" [(ngModel)]="reason">
-        <option *ngFor="let reason of reasonDisabledType" [ngValue]="reason">{{ reason == 0 ? 'Grand groupe' : reason == 1 ? 'Numéro non / mal attribué' : 'Entreprise fermée' }}</option>
+        <option *ngFor="let reason of reasonDisabledType" [ngValue]="reason">{{ reason == 0 ? 'Grand groupe' : reason == 1 ? 'Numéro non / mal attribué' : reason == 2 ? 'Entreprise fermée' : 'Holdings'}}</option>
       </select>
     </div>
   </div>

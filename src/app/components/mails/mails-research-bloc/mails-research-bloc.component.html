@@ -1,1 +1,9 @@
-<div class="pt-5"></div>
+<div class="flex flex-row justify-start space-x-10 items-start m-0 mb-5">
+  <!-- done -->
+  <div class="form-control min-w-fit">
+    <label class="label" for="sentEmailSent">
+      <span class="label-text">Emails envoyés</span>
+    </label>
+    <input class="toggle {{sent ? 'toggle-primary' : ''}}" type="checkbox" id="sentEmailSent" [(ngModel)]="sent" (change)="onEditSent()" />
+  </div>
+</div>

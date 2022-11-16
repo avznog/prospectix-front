@@ -60,11 +60,12 @@ export class AddMailModalComponent implements OnInit {
     this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.sentEmailsService.create({
-      sendingDate: new Date,
+      date: new Date,
       message: "",
       object: "",
       prospect: this.prospect,
-      pm: this.authService.currentUserSubject.getValue()
+      pm: this.authService.currentUserSubject.getValue(),
+      sent: false,
     });
 
     this.eventsService.create({
