@@ -6,6 +6,5 @@ export interface GoalTemplate {
   description: string;
   default: number;
   disabled: boolean;
-  important: boolean;
   goals: Goal[];
 }

@@ -4,32 +4,29 @@
     
     <div class="flex p-5 justify-around w-full space-x-5">
       <div class="block text-center card bg-base-300 p-5" >
-        <div class="radial-progress {{statisticsService.weeklyCalls >= pmService.myCallsGoal.value ? 'text-success' : statisticsService.weeklyCalls > pmService.myCallsGoal.value / 4 ? 'text-warning' : 'text-error'}} mask-circle bg-primary mask border-4 border-primary" style="--value:{{statisticsService.weeklyCalls/pmService.myCallsGoal.value * 100}};"></div>
+        <div class="radial-progress {{statisticsService.weeklyCalls >= pmService.myCallsGoal.value ? 'text-success' : 'text-primary'}}" style="--value:{{statisticsService.weeklyCalls/pmService.myCallsGoal.value * 100}};"></div>
         <div class="p-3 font-extrabold">{{pmService.myCallsGoal.goalTemplate.name}} : {{statisticsService.weeklyCalls}}/{{pmService.myCallsGoal.value}}</div>
       </div>
 
       <div class="block text-center card bg-base-300 p-5">
-        <div class="radial-progress {{statisticsService.weeklyMeetings >= pmService.myMeetingsGoal.value ? 'text-success' : statisticsService.weeklyMeetings > pmService.myMeetingsGoal.value / 4 ? 'text-warning' : 'text-error'}} mask-circle bg-primary mask border-4 border-primary" style="--value:{{statisticsService.weeklyMeetings/pmService.myMeetingsGoal.value * 100}};"></div>
+        <div class="radial-progress {{statisticsService.weeklyMeetings >= pmService.myMeetingsGoal.value ? 'text-success' : 'text-primary'}} " style="--value:{{statisticsService.weeklyMeetings/pmService.myMeetingsGoal.value * 100}};"></div>
         <div class="p-3 font-extrabold">{{pmService.myMeetingsGoal.goalTemplate.name}} : {{statisticsService.weeklyMeetings}}/{{pmService.myMeetingsGoal.value}}</div>
       </div>
-      <!-- <div class="block text-center w-1/3 card bg-base-300 p-5">
-        <div class="radial-progress text-success border-1 border-primary" style="--value:{{2/1 * 100}};">2/1</div>
-        <div class="p-3 font-extrabold">Rendez-vous : 2/1</div>
-      </div>
-
-      <div class="block text-center w-1/3 card bg-base-300 p-5">
-        <div class="radial-progress text-warning border-1 border-primary" style="--value:{{125/200 * 100}};">125/200</div>
-        <div class="p-3 font-extrabold">Linkedin</div>
-      </div> -->
     </div>
   </div>
 </div>
-<!-- <div class="card p-5">
-  <div class="card-body bg-base-100 rounded-3xl">
-    <div class="card-title justify-center w-full inline-flex">Tous mes objectifs</div>
-    <label class="font-extrabold" for="appels">{{pmService.myCallsGoal.goalTemplate.name}} : {{statisticsService.weeklyCalls}} / {{pmService.myCallsGoal.value}}</label><progress id="appels" class="progress progress-success bg-base-300" value="{{statisticsService.weeklyCalls/pmService.myCallsGoal.value * 100}}" max="{{pmService.myMeetingsGoal.value}}"></progress>
-      <label class="font-extrabold" for="appels">{{pmService.myMeetingsGoal.goalTemplate.name}} : {{statisticsService.weeklyMeetings}} / {{pmService.myMeetingsGoal.value}}</label><progress id="appels" class="progress progress-success bg-base-300" value="{{statisticsService.weeklyMeetings/pmService.myMeetingsGoal.value * 100}}" max=""></progress>
-      
-     <label class="font-extrabold" for="appels">Linkedin : 150/200</label><progress id="appels" class="progress progress-warning bg-base-300" value="150" max="200"></progress> 
+<div class="card-title justify-center w-full inline-flex">Tous mes objectifs</div>
+
+<div class="flex flex-wrap justify-around">
+  <div class="card p-5 max-w-screen-sm w-1/2" *ngFor="let goal of goalsService.myGoals | keyvalue">
+    <div class="card-body bg-base-100 rounded-3xl">
+      <div class="card-title justify-center">{{goal.value.goalTemplate.name}}</div>
+      <label class="font-extralight italic justify-center flex">
+        {{goal.value.goalTemplate.description}}
+      </label>
+      <label class="justify-center self-center btn-lg btn btn-sm btn-secondary btn-outline btn-circle btn-disabled bg-base-100">
+        {{goal.value.value}}
+      </label>
+    </div>
   </div>
-</div> -->
+</div>

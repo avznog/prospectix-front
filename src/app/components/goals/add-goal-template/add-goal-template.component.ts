@@ -12,7 +12,6 @@ export class AddGoalTemplateComponent implements OnInit {
   description: string = "";
   default: number = 0;
   disabled: boolean = false;
-  important: boolean = false;
 
   constructor(
     private readonly goalTemplatesService: GoalTemplatesService
@@ -27,7 +26,6 @@ export class AddGoalTemplateComponent implements OnInit {
         description: this.description,
         default: this.default,
         disabled: this.disabled,
-        important: this.important
       });
   }
 }

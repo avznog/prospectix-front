@@ -47,7 +47,6 @@
           <th>Objectif</th>
           <th>Description</th>
           <th>Valeur par défaut</th>
-          <th>Favori</th>
           <th>Actif</th>
           <th>Modifier</th>
           <th>Supprimer</th>
@@ -67,13 +66,6 @@
 
           <!-- ? valeur par défaut -->
           <td>{{goalTemplate.value.default}}</td>
-
-          <!-- ? Favori -->
-          <td>
-            <input type="checkbox" [checked]="goalTemplate.value.important"
-              class="checkbox {{goalTemplate.value.important ? 'checkbox-primary' : ''}}"
-              (change)="onChangeImportant(goalTemplate)" />
-          </td>
 
           <!-- ? Actif -->
           <td>
