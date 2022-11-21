@@ -88,8 +88,12 @@ export class ProjectManagersService {
   }
 
   updateMyGoals() {
-    this.myGoals = this.pmGoals.get(this.projectManagers.find(pm => pm.pseudo == this.authService.currentUserSubject.getValue().pseudo)!)!
-    this.myCallsGoal = this.myGoals.find(goal => goal.goalTemplate.name == "Appels")!
-    this.myMeetingsGoal = this.myGoals.find(goal => goal.goalTemplate.name == "Rendez-vous")!
+    for(let pmGoal of this.pmGoals) {
+      if(pmGoal[0].id == this.authService.currentUserSubject.getValue().id ) {
+          this.myGoals = this.pmGoals.get(pmGoal[0])!
+          this.myCallsGoal = this.myGoals.find(goal => goal.goalTemplate.name == "Appels")!
+          this.myMeetingsGoal = this.myGoals.find(goal => goal.goalTemplate.name == "Rendez-vous")!
+      }
+    }
   }
 }

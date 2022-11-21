@@ -107,8 +107,8 @@
       *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin && (authService.currentUserSubject.getValue().pseudo == 'bgonzva' || authService.currentUserSubject.getValue().pseudo == 'lmelki' || authService.currentUserSubject.getValue().pseudo == 'tchardonnens' || authService.currentUserSubject.getValue().pseudo == 'glambert')"
       class="dropdown dropdown-end">
       <label tabindex="0"
-        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
-        == "/users" ? 'User' : router.url == "/goals" ? 'Objectifs' : 'Admin'}}</label>
+        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
+        == "/users" ? 'User' : router.url == "/goals" ? 'Objectifs' : router.url == '/watchtower' ? 'Tour de contrôle' : 'Admin'}}</label>
       <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60 outline outline-1">
 
         <!-- ? Page users -->
@@ -120,6 +120,13 @@
         <li routerLink="/goals">
           <a 
             class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/goals' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/goals' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current '}}">Objectifs
+          </a>
+        </li>
+
+        <!-- ? page Tour de controle -->
+        <li routerLink="/watchtower">
+          <a 
+            class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current '}}">Tour de contrôle des objectifs
           </a>
         </li>
       </ul>

@@ -57,6 +57,7 @@ import { AddGoalTemplateComponent } from './components/goals/add-goal-template/a
 import { EditGoalTemplateComponent } from './components/goals/edit-goal-template/edit-goal-template.component';
 import { DeleteGoalTemplateComponent } from './components/goals/delete-goal-template/delete-goal-template.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { WatchtowerComponent } from './components/goals/watchtower/watchtower.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,6 +104,7 @@ import { DashboardComponent } from './components/dashboard/dashboard/dashboard.c
     EditGoalTemplateComponent,
     DeleteGoalTemplateComponent,
     DashboardComponent,
+    WatchtowerComponent,
   ],
   imports: [
     BrowserModule,
