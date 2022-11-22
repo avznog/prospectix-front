@@ -1,4 +1,4 @@
-<div class="card bg-base-100 mb-5" *ngFor="let pm of pmService.pmGoals | keyvalue">
+<div class="card bg-base-100 mb-5  card-compact" *ngFor="let pm of pmService.pmGoals | keyvalue">
   <div class="card-body">
     <div class="card-title">{{pm.key.firstname}} {{pm.key.name}}
     </div>
@@ -8,18 +8,22 @@
           <div class="stats shadow m-5 bg-base-300">
             <div class="stat">
               <div class="stat-title">{{goal.goalTemplate.name}}</div>
-              <div class="stat-value"><span
-                  *ngIf="goal.goalTemplate.name == 'Rendez-vous'">{{statisticsService.weeklyAllMeetingsCount.get(pm.key.id)}}
-                  / </span><span
-                  *ngIf="goal.goalTemplate.name == 'Appels'">{{statisticsService.weeklyAllCallsCount.get(pm.key.id)}} /
-                </span>{{goal.value}}</div>
-              <div class="stat-desc"><progress
+              <div class="stat-value">
+                <span *ngIf="goal.goalTemplate.name == 'Rendez-vous'">{{statisticsService.weeklyAllMeetingsCount.get(pm.key.id)}} / </span>
+                <span  *ngIf="goal.goalTemplate.name == 'Appels'">{{statisticsService.weeklyAllCallsCount.get(pm.key.id)}} / </span>{{goal.value}}
+              </div>
+              <div class="stat-desc">
+                <progress
                   *ngIf="goal.goalTemplate.name == 'Rendez-vous' || goal.goalTemplate.name == 'Appels'"
-                  class="progress-primary progress w-56 "
+                  class="progress-primary progress w-56 bg-base-100 {{goal.goalTemplate.name == 'Rendez-vous' && statisticsService.weeklyAllMeetingsCount.get(pm.key.id)! || goal.goalTemplate.name == 'Appels' && statisticsService.weeklyAllCallsCount.get(pm.key.id)! >= goal.value ? 'progress-success' : 'progress-primary'}}"
                   value="{{goal.goalTemplate.name == 'Rendez-vous' ? statisticsService.weeklyAllMeetingsCount.get(pm.key.id) : statisticsService.weeklyAllCallsCount.get(pm.key.id)}}"
-                  max="{{goal.value}}"></progress><span
+                  max="{{goal.value}}">
+                </progress>
+                <span
                   *ngIf="goal.goalTemplate.name != 'Rendez-vous' && goal.goalTemplate.name != 'Appels'"
-                  class="text-extralight">{{goal.goalTemplate.description}}</span></div>
+                  class="text-extralight">{{goal.goalTemplate.description}}
+                </span>
+              </div>
             </div>
           </div>
         </ng-container>

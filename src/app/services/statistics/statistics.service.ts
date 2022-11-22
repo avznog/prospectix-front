@@ -326,7 +326,6 @@ export class StatisticsService {
   // ! Count all Calls / meetings for everyone for the current week
   countWeeklyAllCalls() {
     this.http.get<{id: number, count: number}[]>(`calls/count-weekly-all`).subscribe(weeklyAllCalls => {
-      console.log(weeklyAllCalls)
       this.weeklyAllCallsCount.clear();
       weeklyAllCalls.forEach(weeklyCall => {
         this.weeklyAllCallsCount.set(weeklyCall.id, weeklyCall.count)

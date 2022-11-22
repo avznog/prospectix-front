@@ -60,6 +60,23 @@ export class GoalTemplatesService {
   udpate(id: number, updateGoalTemplateDto: UpdateGoalTemplateDto) {
     return this.http.patch<GoalTemplate>(`goal-templates/${id}`, updateGoalTemplateDto).subscribe(() => {
       this.goalTemplates.set(id, { ...this.goalTemplates.get(id)!, ...updateGoalTemplateDto})
+      
+      // ? change pmgoals
+      // ? change mygoals
+
+      this.pmService.pmGoals.forEach((pmGoal, pm) => {
+        let g : Goal[] = [];
+        g.pop()
+        pmGoal.forEach((goal,pm) => {
+          if(goal.goalTemplate.id == id) {
+            g.push({ ...goal, goalTemplate: {...goal.goalTemplate, ...updateGoalTemplateDto}});
+          } else {
+            g.push(goal)
+          }
+        })
+        this.pmService.pmGoals.set(pm, g)
+      })
+console.log(this.pmService.pmGoals)
       this.toastsService.addToast({
         type: "alert-info",
         message: `Objectif ${this.goalTemplates.get(id)!.name} modifié`

@@ -17,7 +17,6 @@ export class WatchtowerComponent implements OnInit {
   ngOnInit(): void {
     this.statisticsService.countWeeklyAllCalls();
     this.statisticsService.countWeeklyAllMeetings();
-
   }
 
 }
