@@ -64,6 +64,7 @@ import { ProspectixLogoComponent } from './components/common/prospectix-logo/pro
 import { HeaderComponent } from './components/common/header/header.component';
 import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
 import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-sent/mark-sent-email-sent.component';
+import { AddCityComponent } from './components/common/add-city/add-city.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,6 +118,7 @@ import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-
     ProspectixLogoComponent,
     EditDateReminderMeetingComponent,
     MarkSentEmailSentComponent,
+    AddCityComponent,
   ],
   imports: [
     BrowserModule,
