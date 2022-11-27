@@ -15,7 +15,7 @@ export class ChangelogsService {
         version: "1.5",
         date: new Date("2022-11-27T00:00:00.000Z"),
         bugs: [
-         
+         "Résolution de compte de l'historique des stats"
           ],
         features: [
          "Possibilité d'ajouter une ville"
