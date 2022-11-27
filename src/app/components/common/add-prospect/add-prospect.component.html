@@ -10,7 +10,7 @@
       <label class="label">
         <span class="label-text">Nom du prospect</span>
       </label>
-      <input type="text" class="input input-bordered" [(ngModel)]="companyName" placeholder="Ex: ISEP"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="companyName" placeholder="Ex: ISEP" />
     </div>
 
     <!-- Adresse du prospect -->
@@ -18,62 +18,63 @@
       <label class="label">
         <span class="label-text">Adresse</span>
       </label>
-      <input type="text" class="input input-bordered" [(ngModel)]="address" placeholder="Ex: 22 rue notre Dame des Champs"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="address"
+        placeholder="Ex: 22 rue notre Dame des Champs" />
     </div>
-   
 
-</div>
-<div class="inline-flex space-x-5">
-   <!-- Domaine d'activité du prospect -->
-   <div class="form-control">
-    <label class="label" for="activity">
-        <span class="label-text">Domaine d'activité</span>
-    </label>
-    <div class="inline-flex">
 
-      <!-- select activity -->
-      <select id="activity" name="activity" [(ngModel)]="activity" class="select select-bordered" >
-        <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner un domaine d'activité</option>
-        <option *ngFor="let activity of activitiesService.activities" [ngValue]="activity">{{activity.name}}</option>
-      </select>
-
-    </div>
   </div>
+  <div class="inline-flex space-x-5">
+    <!-- Domaine d'activité du prospect -->
+    <div class="form-control">
+      <label class="label" for="activity">
+        <span class="label-text">Domaine d'activité</span>
+      </label>
+      <div class="inline-flex">
+
+        <!-- select activity -->
+        <select id="activity" name="activity" [(ngModel)]="activity" class="select select-bordered">
+          <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner un domaine d'activité</option>
+          <option *ngFor="let activity of activitiesService.activities" [ngValue]="activity">{{activity.name}}</option>
+        </select>
+
+      </div>
+    </div>
 
 
-  <!-- Ville du prospect -->
-  <div class="form-control">
+    <!-- Ville du prospect -->
+    <div class="form-control">
       <label class="label" for="city">
-          <span class="label-text">Ville</span>
+        <span class="label-text">Ville</span>
       </label>
       <div class="inline-flex">
 
         <!-- select city -->
-        <select id="city" name="city" [(ngModel)]="city"  class="select select-bordered">
+        <select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
           <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner une ville</option>
           <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
         </select>
 
-      
+
       </div>
-  </div>
+    </div>
 
 
-  <!-- Pays du prospect -->
-  <div class="form-control">
-    <label class="label" for="country">
+    <!-- Pays du prospect -->
+    <div class="form-control">
+      <label class="label" for="country">
         <span class="label-text">Pays</span>
-    </label>
-    <div class="inline-flex">
+      </label>
+      <div class="inline-flex">
 
-      <!-- select country -->
-      <select id="country" name="country" [(ngModel)]="country" class="select select-bordered" [disabled]="true">
-          <option *ngFor="let country of countriesService.countries" >{{country.name}}</option>
-      </select>
+        <!-- select country -->
+        <select id="country" name="country" [(ngModel)]="country" class="select select-bordered" [disabled]="true">
+          <option *ngFor="let country of countriesService.countries">{{country.name}}</option>
+        </select>
 
+      </div>
     </div>
   </div>
-</div>
 
 
   <div class="inline-flex space-x-5">
@@ -90,7 +91,7 @@
       <label class="label">
         <span class="label-text">Email</span>
       </label>
-      <input type="text" class="input input-bordered" [(ngModel)]="email" placeholder="Ex: accueil@juniorisep.com"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="email" placeholder="Ex: accueil@juniorisep.com" />
     </div>
 
     <!-- Site internet du prospect -->
@@ -98,23 +99,36 @@
       <label class="label">
         <span class="label-text">Site internet</span>
       </label>
-      <input type="text" class="input input-bordered" [(ngModel)]="website" placeholder="Ex: www.juniorisep.com"/>
+      <input type="text" class="input input-bordered" [(ngModel)]="website" placeholder="Ex: www.juniorisep.com" />
     </div>
   </div>
 
-   <!-- Commentaire sur le prospect -->
-   <div class="form-control">
+  <!-- Commentaire sur le prospect -->
+  <div class="form-control">
     <label class="label">
       <span class="label-text">Commentaire</span>
     </label>
-    <textarea class="textarea outline-1 outline h-1/3" placeholder="Commentaire sur le prospect" [(ngModel)]="comment"></textarea>
+    <textarea class="textarea outline-1 outline h-1/3" placeholder="Commentaire sur le prospect"
+      [(ngModel)]="comment"></textarea>
   </div>
 
 
   <div class="divider"></div>
 
+  <!-- Bouton ajouter une ville -->
+  <label class="btn btn-ghost btn-outline float float-left modal-button" for="add-city-modal">Ajouter une ville</label>
+
   <!-- Bouton créer le prospect -->
-  <div class="flex justify-center">
-    <label class="btn btn-ghost btn-outline w-1/5 {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || activity == undefined ? 'btn-disabled' : ''}} " for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
-  </div>
+  <label
+    class="btn btn-ghost btn-outline justify-center float float-right {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || activity == undefined ? 'btn-disabled' : ''}} "
+    for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
 </div>
+
+
+<!-- modal button add city -->
+<input type="checkbox" id="add-city-modal" class="modal-toggle">
+<label for="add-city-modal" class="modal cursor-pointer">
+  <label class="modal-box relative max-w-screen-md text-sm" for="">
+    <app-add-city></app-add-city>
+  </label>
+</label>
