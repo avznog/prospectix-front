@@ -2,7 +2,7 @@
 
   <div class="form-control min-w-fit">
     <label for="remindersDone" class="label cursor-pointer">
-      <span class="label-text">Rappels effectués</span>
+      <span class="label-text">{{done ? 'Rappels effectués' : 'Rappels à faire'}}</span>
     </label>
     <input class="toggle {{done ? 'toggle-primary' : ''}}" type="checkbox" id="remindersDone" [(ngModel)]="done"
       (change)="onEditDone()" checked />

@@ -2,7 +2,7 @@
   <!-- done -->
   <div class="form-control min-w-fit">
     <label class="label" for="meetingsDone">
-      <span class="label-text">RDV effectués</span>
+      <span class="label-text">{{done ? 'RDV effectués' : 'RDV à faire'}}</span>
     </label>
     <input class="toggle {{done ? 'toggle-primary' : '' }}" type="checkbox" id="meetingsDone" [(ngModel)]="done" (change)="onEditDone()" />
   </div>

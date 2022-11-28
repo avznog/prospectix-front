@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "1.5.1",
+        date: new Date("2022-11-28T00:00:00.000Z"),
+        bugs: [
+         "Résolution du bug d'envoi des notifs slack sur les canaux champions"
+          ],
+        features: [
+         "Changement des phrases d'affichage sur les coches de la zone de recherche des pages Rappels, Rendez-vous et Emails"
+        ],
+      },
+      {
         version: "1.5",
         date: new Date("2022-11-27T00:00:00.000Z"),
         bugs: [

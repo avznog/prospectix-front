@@ -85,6 +85,11 @@ export class AddMeetingsModalComponent implements OnInit {
       type: "alert-info",
       message: "Rendez-vous ajouté"
     })
+
+    // ! if 3rd meeting of the week => send slack champ in channel
+    if(this.statisticsService.weeklyMeetings == 3) {
+      this.slackService.sendChamp();
+    }
     
   }
 
