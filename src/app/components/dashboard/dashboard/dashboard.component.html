@@ -1,6 +1,45 @@
-<!-- <app-header></app-header> -->
-<div class="container mx-auto max-h-full">
-  <h1 class="ml-6 text-xl mb-5">Mon Dashboard</h1>
-  <app-dashboard-liste-goals></app-dashboard-liste-goals>
-  <app-dashboard-liste-reminders></app-dashboard-liste-reminders>
+<div *ngIf="authService.currentUserSubject.getValue().objectived">
+  <div class="p-5 card" *ngIf="pmService.myCallsGoal && pmService.myMeetingsGoal">
+    <div class="card-body bg-base-100 rounded-3xl">
+      <div class="card-title justify-center w-full inline-flex">Mes objectifs principaux</div>
+      
+      <div class="flex p-5 justify-around w-full space-x-5" *ngIf="pmService.myCallsGoal && pmService.myMeetingsGoal">
+        <div class="block text-center aspect-square card bg-base-300 p-5 {{statisticsService.weeklyCalls >= pmService.myCallsGoal.value ? 'outline-success' : 'outline-primary'}} outline-1 outline" >
+          <div class="radial-progress {{statisticsService.weeklyCalls >= pmService.myCallsGoal.value ? 'text-success' : 'text-primary'}}" style="--value:{{statisticsService.weeklyCalls/pmService.myCallsGoal.value * 100}};">{{statisticsService.weeklyCalls}}/{{pmService.myCallsGoal.value}}</div>
+          <div class="p-3 font-extrabold">{{pmService.myCallsGoal.goalTemplate.name}}</div>
+        </div>
+  
+        <div class="block text-center card bg-base-300 p-5 {{statisticsService.weeklyMeetings >= pmService.myMeetingsGoal.value ? 'outline-success' : 'outline-primary'}} outline-1 outline">
+          <div class="radial-progress {{statisticsService.weeklyMeetings >= pmService.myMeetingsGoal.value ? 'text-success' : 'text-primary'}} " style="--value:{{statisticsService.weeklyMeetings/pmService.myMeetingsGoal.value * 100}};">{{statisticsService.weeklyMeetings}}/{{pmService.myMeetingsGoal.value}}</div>
+          <div class="p-3 font-extrabold">{{pmService.myMeetingsGoal.goalTemplate.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!pmService.myCallsGoal || !pmService.myMeetingsGoal" class="m-5 flex justify-center">
+    <span>Vos objectifs principaux ne sont pas définis</span>
+  </div>
+  <div class="m-5" *ngIf="goalsService.myGoals.size > 0">
+    <div class="card-title justify-center w-full inline-flex">Tous mes objectifs</div>
+  
+  <div class="flex flex-wrap justify-around">
+    <div class="card p-5 max-w-screen-sm aspect-auto" *ngFor="let goal of goalsService.myGoals | keyvalue">
+      <div class="card-body bg-base-100 rounded-3xl">
+        <div class="card-title justify-center">{{goal.value.goalTemplate.name}}</div>
+        <label class="font-extralight italic justify-center flex">
+          {{goal.value.goalTemplate.description}}
+        </label>
+        <label class="justify-center self-center btn-lg btn btn-sm btn-secondary btn-outline btn-circle btn-disabled bg-base-100">
+          {{goal.value.value}}
+        </label>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div *ngIf="goalsService.myGoals.size <= 0" class="m-5 flex justify-center">
+    <span>Vous n'avez aucun objectif secondaire</span>
+  </div>
+</div>
+<div *ngIf="!authService.currentUserSubject.getValue()" class="m-5 flex justify-center">
+  <span>Vous n'avez aucun objectif secondaire</span>
 </div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListeGoalsComponent } from './liste-goals.component';
+import { WatchtowerComponent } from './watchtower.component';
 
-describe('ListeGoalsComponent', () => {
-  let component: ListeGoalsComponent;
-  let fixture: ComponentFixture<ListeGoalsComponent>;
+describe('WatchtowerComponent', () => {
+  let component: WatchtowerComponent;
+  let fixture: ComponentFixture<WatchtowerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListeGoalsComponent ]
+      declarations: [ WatchtowerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListeGoalsComponent);
+    fixture = TestBed.createComponent(WatchtowerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

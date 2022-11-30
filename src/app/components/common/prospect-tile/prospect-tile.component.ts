@@ -108,38 +108,10 @@ export class ProspectTileComponent implements OnInit {
       date: new Date,
       description: `${EventDescriptionType.DELETE_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
-    this.toastsService.addToast({
-      type: "alert-error",
-      message: "supprimé des favoris"
-    })
   }
 
   onClickDrawer() {
     this.eventsService.updateEvents(this.prospect.id);
-  }
-
-  onChangePhone() {
-    this.phonesService.update(this.prospect, { ...this.prospect.phone, number: this.phone });
-    this.toastsService.addToast({
-      type: "alert-info",
-      message: "Numéro de téléphone changé"
-    })
-  }
-
-  onChangeEmail() {
-    this.emailsService.update(this.prospect, { ...this.prospect.email, email: this.email});
-    this.toastsService.addToast({
-      type: "alert-info",
-      message: "Email changé"
-    })
-  }
-
-  onChangeWebsite() {
-    this.websitesService.update(this.prospect, { ...this.prospect.website, website: this.website });
-    this.toastsService.addToast({
-      type: "alert-info",
-      message: "Site internet changé"
-    })
   }
 
   onClickPhone() {

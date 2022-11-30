@@ -15,10 +15,11 @@ export interface ProjectManager {
   tokenEmail: string;
   disabled: boolean;
   statsEnabled: boolean;
-  goals: Goal[];
   meetings: Meeting[];
   reminders: Reminder[];
   sentEmails: SentEmail[];
   bookmarks: Bookmark[];
   events: Event[];
+  goals: Goal[];
+  objectived: boolean;
 }

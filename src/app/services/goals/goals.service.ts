@@ -1,68 +1,67 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { CreateGoalDto } from 'src/app/dto/goals/create-goal.dto';
+import { AuthService } from 'src/app/auth/auth.service';
+import { UpdateGoalDto } from 'src/app/dto/goals/update-goal.dto';
 import { Goal } from 'src/app/models/goal.model';
-import { ResearchParamsGoals } from 'src/app/models/research-params-goals.model';
+import { ProjectManager } from 'src/app/models/project-manager.model';
+import { ProjectManagersService } from '../project-managers/project-managers.service';
+import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoalsService {
 
-  goals = new Map<number, Goal>();
-  researchParamsGoals: ResearchParamsGoals = {
-    take: 20,
-    skip: 0,
-    pseudo: '',
-    keyword: ''
-  }
+  goals = new Map<ProjectManager, Goal>();
+  myGoals = new Map<number, Goal>();
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly pmService: ProjectManagersService,
+    private readonly toastsService: ToastsService,
+    private readonly authService: AuthService
   ) { 
-    this.loadMore();
   }
 
-  resetSearch(researchParamsGoals: ResearchParamsGoals) {
-    this.goals.clear();
-    this.updateSearchParameters({
-      ...researchParamsGoals,
-      skip: 0
+  findAll() {
+    return this.http.get<Goal[]>(`goals/find-all`).subscribe(goals => {
+      this.myGoals.clear();
+      goals.forEach(goal => {
+        this.goals.set(goal.pm, goal)
+        if((goal.pm.id == this.authService.currentUserSubject.getValue().id ) && (goal.goalTemplate.name != "Appels") && (goal.goalTemplate.name != "Rendez-vous") && !goal.goalTemplate.disabled && !goal.disabled ) {
+            this.myGoals.set(goal.id, goal)
+        }
+      })
+
     });
   }
 
-  updateSearchParameters(researchParamsGoals: ResearchParamsGoals) {
-    if(researchParamsGoals != this.researchParamsGoals)
-      this.researchParamsGoals = researchParamsGoals;
-      this.loadMore();
-  }
-
-  loadMore() {
-    let queryParameters = new HttpParams();
-      queryParameters = queryParameters.appendAll({
-        "take": this.researchParamsGoals.take,
-        "skip": this.researchParamsGoals.skip,
-        "pseudo": this.researchParamsGoals.pseudo,
-        "keyword": this.researchParamsGoals.keyword
+  updateDisable(pm: ProjectManager, goal: Goal, updateGoalDto: UpdateGoalDto) {
+    return this.http.patch<Goal>(`goals/${goal.id}`, updateGoalDto).subscribe(() => {
+      this.goals.set(pm, { ...this.goals.get(pm)!, disabled: updateGoalDto.disabled!})
+      this.toastsService.addToast({
+        type: updateGoalDto.disabled! ? "alert-error" : "alert-success",
+        message: `Objectif ${goal.goalTemplate.name} ${updateGoalDto.disabled! ? 'désactivé' : 'activé'} pour ${pm.pseudo}`
       })
-    this.http.get<Goal[]>(`goals/find-all-paginated/`, { params: queryParameters }).subscribe(goals => goals.forEach(goal => this.goals.set(goal.id, goal)));
+    })
   }
 
-  createForPm(createGoalDto: CreateGoalDto, pseudoPm: string) : Subscription {
-    createGoalDto.currentStep = 0;
-    return this.http.post<Goal>(`goals/for-pm/${pseudoPm}`, createGoalDto).subscribe(goal => this.goals.set(goal.id, goal));
-  }
-
-  createForCurrentPm(createGoalDto: CreateGoalDto) : Subscription {
-    createGoalDto.currentStep = 0;
-    return this.http.post<Goal>("goals/for-current-pm", createGoalDto).subscribe(goal => this.goals.set(goal.id, goal));
-  }
-
-  editGoal(goal: Goal) : Subscription {
-    return this.http.patch<Goal>(`goals/${goal.id}`, goal).subscribe(() => this.goals.set(goal.id, goal));
-  }
-
-  deleteGoal(id: number) : Subscription {
-    return this.http.delete<Goal>(`goals/${id}`).subscribe(() => this.goals.delete(id));
+  udpateValue(pm: ProjectManager, goal: Goal, updateGoalDto: UpdateGoalDto) {
+    return this.http.patch<Goal>(`goals/${goal.id}`, updateGoalDto).subscribe(() => {
+      this.goals.set(pm, { ...this.goals.get(pm)!, value: updateGoalDto.value! })
+      let g = this.pmService.pmGoals.get(pm)!;
+      let goalsOfPm: Goal[] = [];
+      g.forEach(gl => {
+        if(gl.id == goal.id) {
+          goalsOfPm.push({ ...gl, value: updateGoalDto.value! })
+        } else {
+          goalsOfPm.push(gl)
+        }
+      });
+      this.pmService.pmGoals.set(pm, goalsOfPm);
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Valeur de ${goal.goalTemplate.name} pour ${pm.pseudo} modifiée à ${updateGoalDto.value!}`
+      })
+    })
   }
 }
