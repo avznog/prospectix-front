@@ -66,7 +66,7 @@
               <progress
               *ngIf="(goal.goalTemplate.name == 'Rendez-vous' || goal.goalTemplate.name == 'Appels') && !goal.disabled && !goal.goalTemplate.disabled"
               class="justify-center progress-primary progress w-56 bg-base-300 {{goal.goalTemplate.name == 'Rendez-vous' && statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id)! || goal.goalTemplate.name == 'Appels' && statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)! >= goal.value ? 'progress-success' : 'progress-primary'}}"
-              value="{{goal.goalTemplate.name == 'Rendez-vous' ? statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id) : statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)}}"
+              value="{{goal.goalTemplate.name == 'Rendez-vous' ? statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id)! : statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)! }}"
               max="{{goal.value}}">
             </progress>
             <span class="align-middle" *ngIf="!goal.disabled && !goal.goalTemplate.disabled">
