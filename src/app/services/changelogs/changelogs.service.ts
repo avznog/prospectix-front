@@ -13,13 +13,17 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "2.0",
-        date: new Date("2022-10-23T00:00:00.000Z"), // ! COMPLETER AU FUR ET A MESURE -> 
+        date: new Date("2022-10-30T00:00:00.000Z"), // ! COMPLETER AU FUR ET A MESURE -> 
         bugs: [
           ],
         features: [
           "Suppression de l'ancien dashboard et des anciens objectifs",
           "Ajout d'une redirection par défaut vers la page des statistiques",
-          "Les notifications en bas de l'écran apparaissent maintenant une fois que l'action est bien enregistrée en base"
+          "Les notifications en bas de l'écran apparaissent maintenant une fois que l'action est bien enregistrée en base",
+          "Ajout du fonctionnement des obejctifs",
+          "[OBJECTIFS]: Page dashboard: le cdp a accès à tous ses objectifs",
+          "[OBJECTIFS]: Page tour de contrôle: les administrateurs ont accès à une page de surveillance de tous les objectifs Appels et Rendez-vous des cdp",
+          "[OBJECTIFS]: Page objectifs: les administrateurs peuvent définir des objectifs aux chefs de projets"
         ]
       },
       {
