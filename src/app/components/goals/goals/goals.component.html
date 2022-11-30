@@ -69,7 +69,7 @@
 
           <!-- ? Actif -->
           <td>
-            <input type="checkbox" [checked]="!goalTemplate.value.disabled"
+            <input type="checkbox" [checked]="!goalTemplate.value.disabled" *ngIf="goalTemplate.value.name != 'Appels' && goalTemplate.value.name != 'Rendez-vous'"
               class="checkbox {{!goalTemplate.value.disabled ? 'checkbox-primary' : ''}}"
               (change)="onChangeDisabledTemplate(goalTemplate)" />
           </td>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GoalTemplatesService } from 'src/app/services/goal-templates/goal-templates.service';
 import { ProjectManagersService } from 'src/app/services/project-managers/project-managers.service';
 import { StatisticsService } from 'src/app/services/statistics/statistics.service';
 
@@ -11,7 +12,8 @@ export class WatchtowerComponent implements OnInit {
 
   constructor(
     public readonly pmService: ProjectManagersService,
-    public readonly statisticsService: StatisticsService
+    public readonly statisticsService: StatisticsService,
+    public readonly goalTemplatesService: GoalTemplatesService  
   ) { }
 
   ngOnInit(): void {
