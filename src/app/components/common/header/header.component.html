@@ -103,7 +103,7 @@
 
     <!-- ! Dropdown admin -->
     <div
-      *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin && (authService.currentUserSubject.getValue().pseudo == 'bgonzva' || authService.currentUserSubject.getValue().pseudo == 'lmelki' || authService.currentUserSubject.getValue().pseudo == 'tchardonnens' || authService.currentUserSubject.getValue().pseudo == 'glambert')"
+      *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"
       class="dropdown dropdown-end">
       <label tabindex="0"
         class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url

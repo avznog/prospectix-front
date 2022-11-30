@@ -20,6 +20,7 @@ export class ChangelogsService {
           "Suppression de l'ancien dashboard et des anciens objectifs",
           "Ajout d'une redirection par défaut vers la page des statistiques",
           "Les notifications en bas de l'écran apparaissent maintenant une fois que l'action est bien enregistrée en base",
+          "Ajout de l'accès au panel administrateur à tous les admins",
           "Ajout du fonctionnement des obejctifs",
           "[OBJECTIFS]: Page dashboard: le cdp a accès à tous ses objectifs",
           "[OBJECTIFS]: Page tour de contrôle: les administrateurs ont accès à une page de surveillance de tous les objectifs Appels et Rendez-vous des cdp",
