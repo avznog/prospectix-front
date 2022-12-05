@@ -87,7 +87,7 @@ export class ProspectTileComponent implements OnInit {
         type: EventType.NO_ANSWER,
         prospect: this.prospect,
         date: new Date,
-        description: `${EventDescriptionType.NO_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
+        description: `${EventDescriptionType.NO_ANSWER} à ${new Date().getHours()}:${new Date().getMinutes()} à ${this.authService.currentUserSubject.getValue().pseudo}`
       });
   }
 
