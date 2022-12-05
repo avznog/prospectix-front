@@ -1,5 +1,5 @@
 <div *ngIf="authService.currentUserSubject.getValue().objectived">
-  <div class="p-5 card" *ngIf="pmService.myCallsGoal && pmService.myMeetingsGoal">
+  <div class="p-5 card" *ngIf="pmService.myCallsGoal && pmService.myMeetingsGoal && !pmService.myCallsGoal.disabled && !pmService.myMeetingsGoal.disabled">
     <div class="card-body bg-base-100 rounded-3xl">
       <div class="card-title justify-center w-full inline-flex">Mes objectifs principaux</div>
       
@@ -16,8 +16,11 @@
       </div>
     </div>
   </div>
+  <div *ngIf="pmService.myCallsGoal.disabled || pmService.myMeetingsGoal.disabled">
+    <label class="font-extralight flex justify-center p-5">Vos objectifs Appels & Rendez-vous ne sont pas activés</label>
+  </div>
   <div *ngIf="!pmService.myCallsGoal || !pmService.myMeetingsGoal" class="m-5 flex justify-center">
-    <span>Vos objectifs principaux ne sont pas définis</span>
+    <label class="font-extralight">Vos objectifs principaux ne sont pas définis</label>
   </div>
   <div class="m-5" *ngIf="goalsService.myGoals.size > 0">
     <div class="card-title justify-center w-full inline-flex">Tous mes objectifs</div>
@@ -37,9 +40,9 @@
   </div>
   </div>
   <div *ngIf="goalsService.myGoals.size <= 0" class="m-5 flex justify-center">
-    <span>Vous n'avez aucun objectif secondaire</span>
+    <label class="font-extralight">Vous n'avez aucun objectif secondaire</label>
   </div>
 </div>
-<div *ngIf="!authService.currentUserSubject.getValue()" class="m-5 flex justify-center">
-  <span>Vous n'avez aucun objectif secondaire</span>
+<div *ngIf="!authService.currentUserSubject.getValue().objectived" class="m-5 flex justify-center">
+  <label class="font-extralight">Vos objectifs ne sont activés</label>
 </div>
