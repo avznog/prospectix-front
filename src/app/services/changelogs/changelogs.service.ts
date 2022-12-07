@@ -28,6 +28,16 @@ export class ChangelogsService {
         ]
       },
       {
+        version: "1.6",
+        date: new Date("2022-12-07T00:00:00.000Z"),
+        bugs: [
+         
+          ],
+        features: [
+         "Ajout des thèmes et logos Noël"
+        ],
+      },
+      {
         version: "1.5.1",
         date: new Date("2022-11-28T00:00:00.000Z"),
         bugs: [
