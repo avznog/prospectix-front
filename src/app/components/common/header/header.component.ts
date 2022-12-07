@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
   @Input("class") class = "";
   scrolling = false;
+  today: Date = new Date()
 
   constructor(
     public authService: AuthService,
