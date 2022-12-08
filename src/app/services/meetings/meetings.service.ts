@@ -7,6 +7,7 @@ import { UpdateMeetingDto } from 'src/app/dto/meetings/update-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
+import { SlackService } from '../slack/slack.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -24,7 +25,8 @@ export class MeetingsService {
   }
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly slackService: SlackService
   ) { 
     this.loadMore();
     this.loadMeetingsDone();
@@ -97,6 +99,9 @@ export class MeetingsService {
         type: "alert-info",
         message: `Rendez-vous décroché avec ${createMeetingDto.prospect.companyName}`
       })
+
+      this.http.get<number>(`meetings/count-weekly-for-me`).subscribe(count => count == 3 && this.slackService.sendChamp())
+      
     });
   }
 
