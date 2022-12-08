@@ -62,6 +62,10 @@ export class StatisticsService {
   allStatsLoaded: boolean[] = [false, false, false, false];
   dataForRadar: {labels: string[], datasets: [{label: string, data: number[]}]} = {labels: ["Appels","Rappels","Rendez-vous","Mails"], datasets: [{ label: "data is laoding...", data: [1,2,3,4]}]}
 
+  // ! CurrentWeekCalls and Metings by PM
+  weeklyAllCallsCount = new Map<number, number>();
+  weeklyAllMeetingsCount = new Map<number, number>();
+
   //! Charts
   allCallsChart: any;
   allRemindersChart: any;
@@ -99,6 +103,8 @@ export class StatisticsService {
      this.countByWeeksMeetings();
      this.countByWeeksSentEmails();
      this.countByWeeksNegativeAnswers();
+    this.countWeeklyCallsForMe()
+    this.countWeeklyMeetingsForMe();
   }
 
   //  * Getting the separate count since the last sunday
@@ -240,7 +246,6 @@ export class StatisticsService {
       queryParameters = queryParameters.append("dateUp", interval.dateUp.toISOString());
     }
     return this.http.get<[{ pseudo: string, count: number }]>(`meetings/count-all`, { params: queryParameters }).subscribe(allMeetings => {
-
       // reseting the data so the chart does not print X times
       this.allMeetingsCount = [0];
       this.allMeetingsPseudo = [""]
@@ -319,9 +324,10 @@ export class StatisticsService {
     if(today.getDay() == 0 || (today.getDay() == 6 && today.getHours() > 18) || ((today.getDay() != 0 && today.getDay() != 6) && today.getHours() > 20) || today.getHours() < 8) {
       this.slackService.sendFraud(createCallDto.prospect)
     }
+
     this.http.post<Call>(`calls/create-for-me`, createCallDto).subscribe(() => {
       this.allMyCalls += 1
-      this.weeklyCalls += 1;
+      this.weeklyCalls += 1
     });
   }
 
@@ -333,16 +339,31 @@ export class StatisticsService {
   createMeetingFroMe() {
     this.allMyMeetings += 1;
     this.weeklyMeetings += 1;
-
-    // ! if 3rd meeting of the week => send slack champ in channel
-    if(this.weeklyMeetings == 3) {
-      this.slackService.sendChamp();
-    }
   }
 
   createSentEmailForMe() {
     this.allMySentEmails += 1;
     this.weeklyMeetings += 1;
+  }
+
+  // ! Count all Calls / meetings for everyone for the current week
+  countWeeklyAllCalls() {
+    this.http.get<{id: number, count: number}[]>(`calls/count-weekly-all`).subscribe(weeklyAllCalls => {
+      this.weeklyAllCallsCount.clear();
+      weeklyAllCalls.forEach(weeklyCall => {
+        this.weeklyAllCallsCount.set(weeklyCall.id, weeklyCall.count)
+      })
+    })
+  }
+
+  countWeeklyAllMeetings() {
+    this.http.get<{id: number, count: number}[]>(`meetings/count-weekly-all`).subscribe(weeklyAllMeetings => {
+      console.log(weeklyAllMeetings)
+      this.weeklyAllMeetingsCount.clear();
+      weeklyAllMeetings.forEach(weeklyMeeting => {
+        this.weeklyAllMeetingsCount.set(weeklyMeeting.id, weeklyMeeting.count)
+      })
+    })
   }
 
   //! Update charts

@@ -6,6 +6,7 @@
       <th>UID</th>
       <th>Email</th>
       <th>Affiché dans les stats</th>
+      <th>Dans les objectifs</th>
       <th>Admin</th>
       <th>Désactiver l'utilisateur</th>
       <th>Activer l'utilisateur</th>
@@ -20,6 +21,11 @@
     <td>
       <label>
         <input type="checkbox" class="checkbox" [checked]="user.value.statsEnabled ? true : false" (click)="onChangeStatsEnabled(user.value)"/>
+      </label>
+    </td>
+    <td>
+      <label>
+        <input type="checkbox" class="checkbox" [checked]="user.value.objectived" (click)="onChangeObjectived(user.value)"/>
       </label>
     </td>
     <td>

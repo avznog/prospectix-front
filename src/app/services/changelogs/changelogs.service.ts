@@ -11,14 +11,52 @@ export class ChangelogsService {
   ) {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
+      {       
+        version: "2.0",
+        date: new Date("2022-10-30T00:00:00.000Z"),
+        bugs: [
+          "Le bug du canal slack \"Champion\" devrait (enfin) être résolu"
+          ],
+        features: [
+          "Ajout de l'horaire d'un pas de réponse dans la description de lévènement",
+          "Suppression de l'ancien dashboard et des anciens objectifs",
+          "Ajout d'une redirection par défaut vers la page des statistiques",
+          "Les notifications en bas de l'écran apparaissent maintenant une fois que l'action est bien enregistrée en base",
+          "Ajout de l'accès au panel administrateur à tous les admins",
+          "Ajout du fonctionnement des obejctifs",
+          "[OBJECTIFS]: Page dashboard: le cdp a accès à tous ses objectifs",
+          "[OBJECTIFS]: Page tour de contrôle: les administrateurs ont accès à une page de surveillance de tous les objectifs Appels et Rendez-vous des cdp",
+          "[OBJECTIFS]: Page objectifs: les administrateurs peuvent définir des objectifs aux chefs de projets",
+          "[OBJECTIFS]: Notifications: les notifications de recap de la semaines sont adaptées en fonction des objectifs Appels et Rendez-vous"
+        ]
+      },
+      {
+        version: "1.6",
+        date: new Date("2022-12-07T00:00:00.000Z"),
+        bugs: [
+         
+          ],
+        features: [
+         "Ajout des thèmes et logos Noël"
+        ],
+      },
+      {
+        version: "1.5.2",
+        date: new Date("2022-11-28T00:00:00.000Z"),
+        bugs: [
+         "Résolution du bug d'envoi des notifs slack sur les canaux champions"
+          ],
+        features: [
+         "Changement des phrases d'affichage sur les coches de la zone de recherche des pages Rappels, Rendez-vous et Emails"
+        ],
+      },
       {
         version: "1.5.1",
         date: new Date("2022-12-01T00:00:00.000Z"),
         bugs: [
-         "Résolution du bug d'affichage des stats de la semaine lors d'une semaine sur deux mois"
+          "Résolution du bug d'affichage des stats de la semaine lors d'une semaine sur deux mois"
           ],
         features: [
-         
         ],
       },
       {
@@ -99,8 +137,8 @@ export class ChangelogsService {
           "Résolution des bugs liés à l'ajout d'un prospect"
           ],
         features: [
-          
         ]
+        
       },
       {
         version: "1.1",

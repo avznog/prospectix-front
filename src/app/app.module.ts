@@ -1,10 +1,11 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import * as fr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import * as fr from '@angular/common/locales/fr'
 
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,18 +25,9 @@ import { MarkMeetingDoneAndOutComponent } from './components/common/mark-meeting
 import { NoResultComponent } from './components/common/no-result/no-result/no-result.component';
 import { ProspectHistoryComponent } from './components/common/prospect-history/prospect-history/prospect-history.component';
 import { ProspectTileComponent } from './components/common/prospect-tile/prospect-tile.component';
+import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
 import { StatsSmallCardComponent } from './components/common/stats-small-card/stats-small-card.component';
 import { ThemePickerComponent } from './components/common/theme-picker/theme-picker.component';
-import { DashboardEachGoalComponent } from './components/dashboard/dashboard-each-goal/dashboard-each-goal.component';
-import { DashboardEachReminderComponent } from './components/dashboard/dashboard-each-reminder/dashboard-each-reminder.component';
-import { DashboardListeGoalsComponent } from './components/dashboard/dashboard-liste-goals/dashboard-liste-goals.component';
-import { DashboardListeRemindersComponent } from './components/dashboard/dashboard-liste-reminders/dashboard-liste-reminders.component';
-import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
-import { CreateGoalComponent } from './components/goals/create-goal/create-goal.component';
-import { EditGoalComponent } from './components/goals/edit-goal/edit-goal.component';
-import { GoalResearchBlocComponent } from './components/goals/goal-research-bloc/goal-research-bloc.component';
-import { GoalsComponent } from './components/goals/goals/goals.component';
-import { ListeGoalsComponent } from './components/goals/liste-goals/liste-goals.component';
 import { MailsResearchBlocComponent } from './components/mails/mails-research-bloc/mails-research-bloc.component';
 import { MailsComponent } from './components/mails/mails/mails.component';
 import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
@@ -45,6 +37,9 @@ import { RemindersResearchBlocComponent } from './components/reminders/reminders
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
 import { ResearchBlocComponent } from './components/research/research-bloc/research-bloc.component';
 import { ResearchComponent } from './components/research/research/research.component';
+import { ActivityComponent } from './components/statistics/activity/activity.component';
+import { MyStatsComponent } from './components/statistics/my-stats/my-stats.component';
+import { RankingComponent } from './components/statistics/ranking/ranking.component';
 import { StatisticsComponent } from './components/statistics/statistics/statistics.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
@@ -56,15 +51,16 @@ import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interc
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
-import { NgChartsModule } from 'ng2-charts';
-import { RankingComponent } from './components/statistics/ranking/ranking.component';
-import { MyStatsComponent } from './components/statistics/my-stats/my-stats.component';
-import { ActivityComponent } from './components/statistics/activity/activity.component';
-import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
 import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-sent/mark-sent-email-sent.component';
 import { AddCityComponent } from './components/common/add-city/add-city.component';
+import { GoalsComponent } from './components/goals/goals/goals.component';
+import { AddGoalTemplateComponent } from './components/goals/add-goal-template/add-goal-template.component';
+import { EditGoalTemplateComponent } from './components/goals/edit-goal-template/edit-goal-template.component';
+import { DeleteGoalTemplateComponent } from './components/goals/delete-goal-template/delete-goal-template.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { WatchtowerComponent } from './components/goals/watchtower/watchtower.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,14 +73,7 @@ import { AddCityComponent } from './components/common/add-city/add-city.componen
     UsersComponent,
     ListUsersComponent,
     CreateUserComponent,
-    ListeGoalsComponent,
-    GoalsComponent,
-    EditGoalComponent,
-    DashboardComponent,
     HeaderComponent,
-    CreateGoalComponent,
-    DashboardListeGoalsComponent,
-    DashboardEachGoalComponent,
     LoginComponent,
     AddReminderModalComponent,
     AddMeetingsModalComponent,
@@ -94,11 +83,8 @@ import { AddCityComponent } from './components/common/add-city/add-city.componen
     BookmarksResearchBlocComponent,
     ProspectHistoryComponent,
     ThemePickerComponent,
-    GoalResearchBlocComponent,
     ChangelogsComponent,
     NoResultComponent,
-    DashboardListeRemindersComponent,
-    DashboardEachReminderComponent,
     MailsComponent,
     MailsResearchBlocComponent,
     ProspectTileComponent,
@@ -119,6 +105,12 @@ import { AddCityComponent } from './components/common/add-city/add-city.componen
     EditDateReminderMeetingComponent,
     MarkSentEmailSentComponent,
     AddCityComponent,
+    GoalsComponent,
+    AddGoalTemplateComponent,
+    EditGoalTemplateComponent,
+    DeleteGoalTemplateComponent,
+    DashboardComponent,
+    WatchtowerComponent,
   ],
   imports: [
     BrowserModule,

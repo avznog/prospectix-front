@@ -2,7 +2,7 @@
   <!-- done -->
   <div class="form-control min-w-fit">
     <label class="label" for="sentEmailSent">
-      <span class="label-text">Emails envoyés</span>
+      <span class="label-text">{{sent ? 'Emails envoyés' : 'Emails à envoyer'}}</span>
     </label>
     <input class="toggle {{sent ? 'toggle-primary' : ''}}" type="checkbox" id="sentEmailSent" [(ngModel)]="sent" (change)="onEditSent()" />
   </div>

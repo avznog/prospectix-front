@@ -7,6 +7,7 @@ import { UpdateMeetingDto } from 'src/app/dto/meetings/update-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
+import { SlackService } from '../slack/slack.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -24,7 +25,8 @@ export class MeetingsService {
   }
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly slackService: SlackService
   ) { 
     this.loadMore();
     this.loadMeetingsDone();
@@ -93,6 +95,13 @@ export class MeetingsService {
     return this.http.post<Meeting>(`meetings`, createMeetingDto).subscribe(meeting => {
       this.meetings.set(meeting.id, {...meeting, prospect: { ...meeting.prospect, stage: StageType.MEETING }})
       this.nbMeetings += 1;
+      this.toastsService.addToast({
+        type: "alert-info",
+        message: `Rendez-vous décroché avec ${createMeetingDto.prospect.companyName}`
+      })
+
+      this.http.get<number>(`meetings/count-weekly-for-me`).subscribe(count => count == 3 && this.slackService.sendChamp())
+      
     });
   }
 
@@ -112,8 +121,9 @@ export class MeetingsService {
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {
     this.meetings.forEach(meeting => {
-      if(meeting.prospect.id == idProspect)
+      if(meeting.prospect.id == idProspect) {
         return meeting.prospect.stage = stage.stage
+      }
       return meeting
     });
 

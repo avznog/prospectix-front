@@ -79,6 +79,10 @@ export class SentEmailsService {
     return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => {
       this.sentEmails.set(sentEmail.id, { ...sentEmail, prospect: { ...sentEmail.prospect, stage: StageType.MAIL}})
       this.nbSentEmails += 1;
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Mail envoyé à ${createSentEmailDto.prospect.companyName}`
+      });
     })
   }
 

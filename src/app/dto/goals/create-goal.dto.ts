@@ -1,8 +1,9 @@
+import { GoalTemplate } from "src/app/models/goal-template.model";
+import { ProjectManager } from "src/app/models/project-manager.model";
+
 export interface CreateGoalDto {
-  isCyclic: boolean;
-  deadline: Date;
-  title: string;
-  totalSteps: number;
-  currentStep: number;
-  description: string;
+  goalTemplate: GoalTemplate;
+  disabled: boolean;
+  value: number;
+  pm: ProjectManager;
 }

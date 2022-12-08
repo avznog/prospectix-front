@@ -88,6 +88,10 @@ export class RemindersService {
     return this.http.post<Reminder>(`reminders`, createReminderDto).subscribe(reminder => {
       this.reminders.set(reminder.id, { ...reminder, prospect: { ...reminder.prospect, stage: StageType.REMINDER }})
       this.nbReminders += 1;
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Rappel avec ${createReminderDto.prospect.companyName} ajouté`
+      });
     });
   }
 
