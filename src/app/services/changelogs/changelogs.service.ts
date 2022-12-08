@@ -15,6 +15,7 @@ export class ChangelogsService {
         version: "2.0",
         date: new Date("2022-10-30T00:00:00.000Z"),
         bugs: [
+          "Le bug du canal slack \"Champion\" devrait (enfin) être résolu"
           ],
         features: [
           "Ajout de l'horaire d'un pas de réponse dans la description de lévènement",
@@ -25,7 +26,8 @@ export class ChangelogsService {
           "Ajout du fonctionnement des obejctifs",
           "[OBJECTIFS]: Page dashboard: le cdp a accès à tous ses objectifs",
           "[OBJECTIFS]: Page tour de contrôle: les administrateurs ont accès à une page de surveillance de tous les objectifs Appels et Rendez-vous des cdp",
-          "[OBJECTIFS]: Page objectifs: les administrateurs peuvent définir des objectifs aux chefs de projets"
+          "[OBJECTIFS]: Page objectifs: les administrateurs peuvent définir des objectifs aux chefs de projets",
+          "[OBJECTIFS]: Notifications: les notifications de recap de la semaines sont adaptées en fonction des objectifs Appels et Rendez-vous"
         ]
       },
       {
