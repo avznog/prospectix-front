@@ -1,5 +1,4 @@
-<!-- <app-header></app-header> -->
-<div class="container mx-auto">
+
   <input type="checkbox" id="add-user-modal" class="modal-toggle" />
   <div class="modal">
     <app-create-user></app-create-user>
@@ -13,6 +12,7 @@
 <!-- <div class="btn btn-primary" *ngIf="authService.currentUserSubject.getValue().pseudo == 'bgonzva'" (click)="onClickAddEvents()">
   Ajouter events
 </div> -->
+<label class="btn" (click)="onClickEventGoogle()">Evenement google</label>
   <div class="card">
     <div class="card-body">
       <app-list-users></app-list-users>
@@ -24,5 +24,3 @@
     <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 20 + 1}}</button>
     <button class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
-
-</div>

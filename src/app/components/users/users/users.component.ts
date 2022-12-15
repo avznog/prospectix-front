@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { GoogleService } from 'src/app/services/google/google.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
@@ -12,7 +13,8 @@ export class UsersComponent implements OnInit {
   constructor(
     public readonly usersService: UsersService,
     public authService: AuthService,
-    private prospectsService: ProspectsService
+    private prospectsService: ProspectsService,
+    private readonly googleService: GoogleService
   ) { }
 
   ngOnInit(): void {
@@ -39,5 +41,9 @@ export class UsersComponent implements OnInit {
 
   onClickAddEvents() {
     // this.prospectsService.addEvents();
+  }
+
+  onClickEventGoogle() {
+    this.googleService.addEvent()
   }
 }
