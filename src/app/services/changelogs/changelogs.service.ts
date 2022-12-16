@@ -12,8 +12,20 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.0",
+        date: new Date("2022-12-18T00:00:00.000Z"), // ! TO CHANGE WHILST WORKING ON VERSION 3.0
+        bugs: [
+          
+          ],
+        features: [
+          "Ajout de l'implémentation de Google",
+          "[GOOGLE]: Lors de la création d'un rendez-vous par un chef de projet, le rendez-vous s'ajoute automatiquement dans l'agenda Google",
+          "[GOOGLE]: Un rendez-vous créé envoie une notification au mail du client et au chef de projet. Si le rendez-vous est en distanciel, l'invitation génère un lien Google Meet"
+        ]
+      },
+      {
         version: "2.0",
-        date: new Date("2022-10-30T00:00:00.000Z"),
+        date: new Date("2022-12-08T00:00:00.000Z"),
         bugs: [
           "Le bug du canal slack \"Champion\" devrait (enfin) être résolu"
           ],
