@@ -62,6 +62,7 @@ import { DeleteGoalTemplateComponent } from './components/goals/delete-goal-temp
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { WatchtowerComponent } from './components/goals/watchtower/watchtower.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MailTemplatesComponent } from './components/mail-templates/mail-templates/mail-templates.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,6 +113,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     DeleteGoalTemplateComponent,
     DashboardComponent,
     WatchtowerComponent,
+    MailTemplatesComponent,
   ],
   imports: [
     BrowserModule,
