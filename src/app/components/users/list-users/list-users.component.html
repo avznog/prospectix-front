@@ -5,6 +5,7 @@
       <th>Nom</th>
       <th>UID</th>
       <th>Email</th>
+      <th>Tél</th>
       <th>Affiché dans les stats</th>
       <th>Dans les objectifs</th>
       <th>Admin</th>
@@ -18,6 +19,7 @@
     <td>{{user.value.name}}</td>
     <td>{{user.value.pseudo}}</td>
     <td>{{user.value.mail}}</td>
+    <td>{{user.value.phone}}</td>
     <td>
       <label>
         <input type="checkbox" class="checkbox" [checked]="user.value.statsEnabled ? true : false" (click)="onChangeStatsEnabled(user.value)"/>

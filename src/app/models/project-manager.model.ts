@@ -12,6 +12,7 @@ export interface ProjectManager {
   name: string;
   firstname: string;
   mail: string;
+  phone: string;
   tokenEmail: string;
   disabled: boolean;
   statsEnabled: boolean;
