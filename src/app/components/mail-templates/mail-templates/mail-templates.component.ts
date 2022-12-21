@@ -31,12 +31,14 @@ export class MailTemplatesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.currentTemplate = localStorage.getItem("currentTemplate") != 'creation' ? JSON.parse(localStorage.getItem("currentTemplate")!) : 'creation' ?? 'creation';
   }
 
   changeTemplate(mailTemplate: MailTemplate | "creation") {
     this.editMode = false;
     this.currentTemplate = mailTemplate;
     this.htmlContent = "";
+    localStorage.setItem("currentTemplate", JSON.stringify(mailTemplate));
   }
 
   onCreateTemplate() {
