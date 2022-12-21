@@ -1,1 +1,42 @@
-<p>mail-templates works!</p>
+<div class="p-5">
+  <div class="w-full inline-flex p-5 m-5 pt-0 min-h-screen space-x-2">
+    <div class="card w-1/5 bg-base-100">
+      <ul class="menu bg-base-100 rounded-box h-full p-5">
+        <li class="hover-bordered {{currentTemplate == 'creation' && 'bordered'}}" (click)="changeTemplate('creation')">
+          <b>Créer un mail template</b>
+        </li>
+        <li
+          class="{{currentTemplate != 'creation' && currentTemplate.id == mailTemplate.key ? 'bordered' : ''}}"
+          *ngFor="let mailTemplate of mailTemplatesService.myTemplates | keyvalue"
+          (click)="changeTemplate(mailTemplate.value)"><a>{{mailTemplate.value.name}}</a></li>
+      </ul>
+    </div>
+    <div class="w-4/5 bg-base-100 card">
+      <div class="card-body">
+        <!-- ? creation MODE -->
+        <div *ngIf="currentTemplate == 'creation'" class="h-full">
+          <label class="input-group justify-center p-5">
+            <span class="justify-center">Créer le template</span>
+            <input class="justify-center" type="text" placeholder="...nom du template" class="input input-bordered"
+              [(ngModel)]="name" />
+          </label>
+
+          <angular-editor [placeholder]="editorConfig.placeholder ?? ''" [(ngModel)]="htmlContent"
+            [config]="editorConfig"></angular-editor>
+          <div class="flex justify-center">
+            <label class="btn btn-outline m-5 {{name == '' && 'btn-disabled'}}" (click)="onCreateTemplate()">Créer le
+              template</label>
+          </div>
+
+
+        </div>
+        <!-- ? visualisation mode -->
+        <div *ngIf="currentTemplate != 'creation'">
+          <div class="card-title justify-center">Aperçu</div>
+          <app-display-mail-template [mail_content]="currentTemplate.content"></app-display-mail-template>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

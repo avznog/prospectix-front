@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgChartsModule } from 'ng2-charts';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,7 @@ import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { ChangelogsComponent } from './components/changelogs/changelogs.component';
 import { AddBookmarkModalComponent } from './components/common/add-bookmark-modal/add-bookmark-modal.component';
+import { AddCityComponent } from './components/common/add-city/add-city.component';
 import { AddMailModalComponent } from './components/common/add-mail-modal/add-mail-modal.component';
 import { AddMeetingsModalComponent } from './components/common/add-meetings-modal/add-meetings-modal.component';
 import { AddProspectComponent } from './components/common/add-prospect/add-prospect.component';
@@ -21,14 +23,24 @@ import { AddReminderModalComponent } from './components/common/add-reminder-moda
 import { ConfirmProComponent } from './components/common/confirm-pro/confirm-pro.component';
 import { ConfirmRefusComponent } from './components/common/confirm-refus/confirm-refus.component';
 import { DisableProspectModalComponent } from './components/common/disable-prospect-modal/disable-prospect-modal.component';
+import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { MarkMeetingDoneAndOutComponent } from './components/common/mark-meeting-done-and-out/mark-meeting-done-and-out.component';
+import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-sent/mark-sent-email-sent.component';
 import { NoResultComponent } from './components/common/no-result/no-result/no-result.component';
 import { ProspectHistoryComponent } from './components/common/prospect-history/prospect-history/prospect-history.component';
 import { ProspectTileComponent } from './components/common/prospect-tile/prospect-tile.component';
 import { ProspectixLogoComponent } from './components/common/prospectix-logo/prospectix-logo.component';
 import { StatsSmallCardComponent } from './components/common/stats-small-card/stats-small-card.component';
 import { ThemePickerComponent } from './components/common/theme-picker/theme-picker.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { AddGoalTemplateComponent } from './components/goals/add-goal-template/add-goal-template.component';
+import { DeleteGoalTemplateComponent } from './components/goals/delete-goal-template/delete-goal-template.component';
+import { EditGoalTemplateComponent } from './components/goals/edit-goal-template/edit-goal-template.component';
+import { GoalsComponent } from './components/goals/goals/goals.component';
+import { WatchtowerComponent } from './components/goals/watchtower/watchtower.component';
+import { DisplayMailTemplateComponent } from './components/mail-templates/display-mail-template/display-mail-template.component';
+import { MailTemplatesComponent } from './components/mail-templates/mail-templates/mail-templates.component';
 import { MailsResearchBlocComponent } from './components/mails/mails-research-bloc/mails-research-bloc.component';
 import { MailsComponent } from './components/mails/mails/mails.component';
 import { MeetingsResearchBlocComponent } from './components/meetings/meetings-research-bloc/meetings-research-bloc.component';
@@ -52,17 +64,6 @@ import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interc
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
-import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
-import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-sent/mark-sent-email-sent.component';
-import { AddCityComponent } from './components/common/add-city/add-city.component';
-import { GoalsComponent } from './components/goals/goals/goals.component';
-import { AddGoalTemplateComponent } from './components/goals/add-goal-template/add-goal-template.component';
-import { EditGoalTemplateComponent } from './components/goals/edit-goal-template/edit-goal-template.component';
-import { DeleteGoalTemplateComponent } from './components/goals/delete-goal-template/delete-goal-template.component';
-import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
-import { WatchtowerComponent } from './components/goals/watchtower/watchtower.component';
-import { AngularEditorModule } from '@kolkov/angular-editor';
-import { MailTemplatesComponent } from './components/mail-templates/mail-templates/mail-templates.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,6 +115,7 @@ import { MailTemplatesComponent } from './components/mail-templates/mail-templat
     DashboardComponent,
     WatchtowerComponent,
     MailTemplatesComponent,
+    DisplayMailTemplateComponent,
   ],
   imports: [
     BrowserModule,
