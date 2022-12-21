@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-title justify-center"><span class="justify-center">Confirmer la suppression du mail template {{mailTemplate.name}} ?</span>
+  </div>
+  <div class="card-body ">
+    <div class="inline-flex space-x-5">
+      <label class="btn btn-outline btn-ghost w-1/2" for="delete-mail-template-modal-{{mailTemplate.id}}">Annuler</label>
+      <label class="btn btn-outline btn-ghost w-1/2 btn-error" for="delete-mail-template-modal-{{mailTemplate.id}}" (click)="onDeleteMailTemplate()">Supprimer</label>
+    </div>
+  </div>
+</div>

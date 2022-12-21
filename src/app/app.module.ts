@@ -64,6 +64,7 @@ import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interc
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
+import { ConfirmDeleteMailTemplateComponent } from './components/common/confirm-delete-mail-template/confirm-delete-mail-template.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,6 +117,7 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
     WatchtowerComponent,
     MailTemplatesComponent,
     DisplayMailTemplateComponent,
+    ConfirmDeleteMailTemplateComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MailTemplate } from 'src/app/models/mail-template.model';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'app-mail-templates',
   templateUrl: './mail-templates.component.html',
   styleUrls: ['./mail-templates.component.scss'],
@@ -36,6 +36,7 @@ export class MailTemplatesComponent implements OnInit {
   changeTemplate(mailTemplate: MailTemplate | "creation") {
     this.editMode = false;
     this.currentTemplate = mailTemplate;
+    this.htmlContent = "";
   }
 
   onCreateTemplate() {
@@ -50,9 +51,5 @@ export class MailTemplatesComponent implements OnInit {
       content: this.htmlContent,
     }) && (this.currentTemplate.content = this.htmlContent);
     
-   }
-
-   onClickDelete() {
-    this.currentTemplate != 'creation' && this.mailTemplatesService.delete(this.currentTemplate.id)
    }
 }
