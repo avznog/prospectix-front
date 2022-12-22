@@ -1,6 +1,6 @@
 import { Prospect } from "src/app/models/prospect.model";
 
-export interface sendMailDto {
+export interface sendEmailDto {
   clientName: string;
   mailTemplateId: number;
   prospect: Prospect;

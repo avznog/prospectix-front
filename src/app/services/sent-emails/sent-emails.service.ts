@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateSentEmailDto } from 'src/app/dto/sent-emails/create-sent-emails.dto';
-import { sendMailDto } from 'src/app/dto/sent-emails/send-mail.dto';
+import { sendEmailDto } from 'src/app/dto/sent-emails/send-email.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsSentEmails } from 'src/app/models/research-params-sent-emails.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
@@ -87,8 +87,8 @@ export class SentEmailsService {
     })
   }
 
-  send(sendMailDto: sendMailDto, idSentEmail: number) {
-    return this.http.post(`sent-emails/send/${idSentEmail}`, sendMailDto).subscribe(() => {
+  send(sendEmailDto: sendEmailDto, idSentEmail: number) {
+    return this.http.post(`sent-emails/send/${idSentEmail}`, sendEmailDto).subscribe(() => {
       this.sentEmails.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true})
       this.sentEmailsSent.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
       this.nbSentEmailsSent += 1;
