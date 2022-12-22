@@ -91,7 +91,7 @@
           <!-- * rendez-vous effectué -> PAS passé en pro -->
           <span class="btn btn-sm btn-secondary btn-outline btn-disabled bg-base-100" *ngIf="meeting && meeting.done && prospect.stage == 7">Rendez-vous effectué</span>
 
-          <span class="btn btn-sm btn-secondary btn-outline btn-disabled bg-base-100" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8">Email envoyé</span>
+          <span class="btn btn-sm btn-secondary btn-outline btn-disabled bg-base-100 indicator" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8"><span class="badge truncate indicator-item badge-secondary">{{sentEmail.templateName}}</span>Email envoyé</span>
         </div>
         <!-- 1/3 of 1/2 (3rd / 3) DATE REMINDER MEETING SENTEMAIL -->
         <div class="{{prospect.stage == 4 ? 'w-2/3' : 'w-1/2'}} inline-flex justify-end space-x-5" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 4 || prospect.stage == 8 || meeting || reminder">

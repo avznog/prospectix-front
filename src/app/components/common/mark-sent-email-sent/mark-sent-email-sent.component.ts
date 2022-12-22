@@ -43,7 +43,13 @@ export class MarkSentEmailSentComponent implements OnInit {
   onClickMarkSentEmailSent() {
     // ! TODO : update email if changes
     console.log(this.chosenTemplate)
-    this.sentEmailsService.markSent(this.sentEmail.id);
+    this.sentEmailsService.send({
+      clientName: this.clientName,
+      mailTemplateId: this.chosenTemplate.id,
+      prospect: this.prospect
+    },
+    this.sentEmail.id);
+
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
@@ -53,7 +59,7 @@ export class MarkSentEmailSentComponent implements OnInit {
     this.eventsService.create({
       type: EventType.MARK_MAIL_SENT,
       date: new Date,
-      description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo}`,
+      description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo} avec le template ${this.chosenTemplate.name}`,
       pm: this.authService.currentUserSubject.getValue(),
       prospect: this.prospect
     });
