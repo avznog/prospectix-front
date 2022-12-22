@@ -18,6 +18,7 @@ export class ChangelogsService {
           
           ],
         features: [
+          "Ajout de la possibilité de modifier un utilisateur",
           "Ajout de l'implémentation de Google",
           "Ajout de l'implémentation des template de mails. Prospectix prend maintenant en charge l'envoi de mail",
           "[GOOGLE]: Lors de la création d'un rendez-vous par un chef de projet, le rendez-vous s'ajoute automatiquement dans l'agenda Google",
