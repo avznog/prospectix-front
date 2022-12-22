@@ -1,10 +1,34 @@
 <div class="card">
-  <div class="card-title justify-center"><span class="justify-center">Envoyer le mail à {{prospect.email.email ? prospect.email.email : prospect.companyName }} {{prospect.email.email && '(' + prospect.companyName + ')'}} ?</span>
-  </div>
   <div class="card-body ">
-    <div class="inline-flex space-x-5">
+  <div class="card-title justify-center p-5 pt-0">
+    <span class="justify-center">Envoyer le mail à {{prospect.companyName}} ?</span>
+  </div>
+  
+  <div class="space-y-5">
+    <div class="input-group ">
+      <span class="w-1/3">Destinataire</span>
+      <input type="email" class="input input-bordered" [disabled]="true" value="{{prospect.email.email}}"/>
+    </div>
+
+    <div class="input-group ">
+      <span class="w-1/3">Bonjour ...</span>
+      <input type="text" class="input input-bordered " placeholder="M. Leblanc" [(ngModel)]="clientName" />
+    </div>
+
+    <div class="input-group w-full">
+      <span class="w-1/3">Template</span>
+      <select class="select select-bordered w-fit" [(ngModel)]="chosenTemplate">
+        <option selected [ngValue]="undefined">Choisir un template</option>
+        <option *ngFor="let mailTemplate of mailTemplatesService.myTemplates | keyvalue" [ngValue]="mailTemplate.value" >{{mailTemplate.value.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  
+    <div class="inline-flex space-x-5 p-5">
       <label class="btn btn-outline btn-ghost w-1/2" for="mark-sentEmail-sent-{{prospect.id}}">Annuler</label>
-      <label class="btn btn-outline btn-ghost w-1/2 btn-success" for="mark-sentEmail-sent-{{prospect.id}}" (click)="onClickMarkSentEmailSent()">Envoyer le mail</label>
+      <label class="btn btn-outline btn-ghost w-1/2 btn-success {{(!chosenTemplate || clientName == '') && 'btn-disabled'}}" for="mark-sentEmail-sent-{{prospect.id}}"
+        (click)="onClickMarkSentEmailSent()">Envoyer le mail</label>
     </div>
   </div>
 </div>

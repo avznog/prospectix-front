@@ -13,14 +13,17 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "3.0",
-        date: new Date("2022-12-18T00:00:00.000Z"), // ! TO CHANGE WHILST WORKING ON VERSION 3.0
+        date: new Date("2022-12-22T00:00:00.000Z"), // ! TO CHANGE WHILST WORKING ON VERSION 3.0
         bugs: [
           
           ],
         features: [
           "Ajout de l'implémentation de Google",
+          "Ajout de l'implémentation des template de mails. Prospectix prend maintenant en charge l'envoi de mail",
           "[GOOGLE]: Lors de la création d'un rendez-vous par un chef de projet, le rendez-vous s'ajoute automatiquement dans l'agenda Google",
-          "[GOOGLE]: Un rendez-vous créé envoie une notification au mail du client et au chef de projet. Si le rendez-vous est en distanciel, l'invitation génère un lien Google Meet"
+          "[GOOGLE]: Un rendez-vous créé envoie une notification au mail du client et au chef de projet. Si le rendez-vous est en distanciel, l'invitation génère un lien Google Meet",
+          "[MAILS]: Il est désomais possible de créer des templates de mails, dans une page réservée.",
+          "[MAILS]: L'envoi de mails se fait désormais avec les templates. Pour envoyer un mail, il faut choisir le template à envoyer"
         ]
       },
       {
