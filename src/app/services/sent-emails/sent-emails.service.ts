@@ -101,6 +101,20 @@ export class SentEmailsService {
     })
   }
 
+  sendSeparately(idSentEmail: number, object: string) {
+    return this.http.post(`sent-emails/send-separately/${idSentEmail}`, { object: object }).subscribe(() => {
+      this.sentEmails.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true})
+      this.sentEmailsSent.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
+      this.nbSentEmailsSent += 1;
+      this.nbSentEmails -= 1;
+
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Mail envoyé à ${this.sentEmailsSent.get(idSentEmail)!.prospect.companyName}`
+      })
+    })
+  }
+
   updateByStage(idProspect: number, stage: { stage: StageType }) {
     this.sentEmails.forEach(sentEmail => {
       if(sentEmail.prospect.id == idProspect)

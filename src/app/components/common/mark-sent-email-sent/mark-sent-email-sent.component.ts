@@ -66,4 +66,21 @@ export class MarkSentEmailSentComponent implements OnInit {
       prospect: this.prospect
     });
   }
+
+  onClickSendMailSeparately() {
+    this.sentEmailsService.sendSeparately(this.sentEmail.id, this.object);
+    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+
+    this.eventsService.create({
+      type: EventType.MARK_MAIL_SENT,
+      date: new Date,
+      description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo} séparément`,
+      pm: this.authService.currentUserSubject.getValue(),
+      prospect: this.prospect
+    });
+  }
 }

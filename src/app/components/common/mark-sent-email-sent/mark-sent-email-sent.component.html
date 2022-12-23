@@ -36,9 +36,10 @@
 
   
     <div class="inline-flex space-x-5 p-5">
-      <label class="btn btn-outline btn-ghost w-1/2" for="mark-sentEmail-sent-{{prospect.id}}">Annuler</label>
-      <label class="btn btn-outline btn-ghost w-1/2 btn-success {{(!chosenTemplate || clientName == '' || object == '') && 'btn-disabled'}}" for="mark-sentEmail-sent-{{prospect.id}}"
+      <label class="btn btn-outline btn-ghost w-1/3 btn-error" for="mark-sentEmail-sent-{{prospect.id}}">Annuler</label>
+      <label class="btn btn-outline btn-ghost w-1/3 btn-success {{(!chosenTemplate || clientName == '' || object == '') && 'btn-disabled'}}" for="mark-sentEmail-sent-{{prospect.id}}"
         (click)="onClickMarkSentEmailSent()">Envoyer le mail</label>
+      <label class="btn btn-outline btn-ghost w-1/3 btn-warning {{object == '' ? 'btn-disabled' : ''}}" (click)="onClickSendMailSeparately()">Mail envoyé séparément</label>
     </div>
   </div>
 </div>
