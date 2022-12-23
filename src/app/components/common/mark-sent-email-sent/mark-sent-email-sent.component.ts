@@ -24,7 +24,9 @@ export class MarkSentEmailSentComponent implements OnInit {
   @Input() sentEmail!: SentEmail;
   @Input() prospect!: Prospect;
   clientName: string =  "";
-  chosenTemplate: MailTemplate = undefined as unknown as MailTemplate
+  chosenTemplate: MailTemplate = undefined as unknown as MailTemplate;
+  object: string = "";
+  withPlaquette: boolean = true;
 
   constructor(
     private readonly prospectService: ProspectsService,
@@ -41,12 +43,12 @@ export class MarkSentEmailSentComponent implements OnInit {
   }
 
   onClickMarkSentEmailSent() {
-    // ! TODO : update email if changes
-    console.log(this.chosenTemplate)
     this.sentEmailsService.send({
       clientName: this.clientName,
       mailTemplateId: this.chosenTemplate.id,
-      prospect: this.prospect
+      prospect: this.prospect,
+      object: this.object,
+      withPlaquette: this.withPlaquette
     },
     this.sentEmail.id);
 
