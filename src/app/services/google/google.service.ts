@@ -22,12 +22,12 @@ export class GoogleService {
 
       logged && this.toastsService.addToast({
         type: "alert-success",
-        message: `Vous vous êtes connectés à votre compte Google`
+        message: `Vous vous êtes connecté à votre compte Google`
       })
 
       !logged && this.toastsService.addToast({
         type: "alert-error",
-        message: `Vous n'êtes pas connectés à votre compte Google`
+        message: `Vous n'êtes pas connecté à votre compte Google`
       })
     })
   }
@@ -38,7 +38,7 @@ export class GoogleService {
 
       (logged == 0 || logged == 1 ) && this.toastsService.addToast({
         type: "alert-error",
-        message: `Vous vous êtes déconnectés de votre compte Google`
+        message: `Vous vous êtes déconnecté de votre compte Google`
       })
     })
   }
@@ -49,7 +49,7 @@ export class GoogleService {
       if(logged) {
         this.toastsService.addToast({
           type: "alert-success",
-          message: `Vous êtes connectés à votre compte Google`
+          message: `Vous êtes connecté à votre compte Google`
         });
       } else {
         this.toastsService.addToast({
