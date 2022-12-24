@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
+import { AccountComponent } from './components/account/account/account.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: "dashboard", component: DashboardComponent, canActivate: [LoggedGuard] },
   { path: "watchtower", component: WatchtowerComponent, canActivate: [LoggedGuard, AdminGuard] },
   { path: "mailTemplates", component: MailTemplatesComponent, canActivate: [LoggedGuard] },
+  { path: "account", component: AccountComponent, canActivate: [LoggedGuard] },
   { path: "", pathMatch: "full", redirectTo: "dashboard" },
   { path: "**", pathMatch: "full", redirectTo: "dashboard"},
 ];

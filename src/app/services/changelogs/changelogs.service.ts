@@ -13,12 +13,13 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "3.0",
-        date: new Date("2022-12-22T00:00:00.000Z"), // ! TO CHANGE WHILST WORKING ON VERSION 3.0
+        date: new Date("2022-12-24T00:00:00.000Z"), // ! TO CHANGE WHILST WORKING ON VERSION 3.0
         bugs: [
           
           ],
         features: [
           "Ajout de la possibilité de modifier un utilisateur",
+          "Ajout d'une page 'Mon Compte'. Il est possible de visualiser ses informations et de se connecter / déconnecter / vérifier la connexion à Google",
           "Ajout de l'implémentation de Google",
           "Ajout de l'implémentation des template de mails. Prospectix prend maintenant en charge l'envoi de mail",
           "[GOOGLE]: Lors de la création d'un rendez-vous par un chef de projet, le rendez-vous s'ajoute automatiquement dans l'agenda Google",
