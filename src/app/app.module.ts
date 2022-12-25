@@ -67,6 +67,7 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
 import { ConfirmDeleteMailTemplateComponent } from './components/common/confirm-delete-mail-template/confirm-delete-mail-template.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { AccountComponent } from './components/account/account/account.component';
+import { EditMyInfosComponent } from './components/common/edit-my-infos/edit-my-infos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -122,6 +123,7 @@ import { AccountComponent } from './components/account/account/account.component
     ConfirmDeleteMailTemplateComponent,
     EditUserComponent,
     AccountComponent,
+    EditMyInfosComponent,
   ],
   imports: [
     BrowserModule,

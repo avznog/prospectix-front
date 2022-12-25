@@ -132,6 +132,8 @@ export class UsersService {
         type: "alert-info",
         message: `Utilisateur ${this.users.get(id)!.pseudo} modifié`
       });
+
+      this.authService.refreshUser();
     })
   }
 }

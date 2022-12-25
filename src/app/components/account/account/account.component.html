@@ -31,7 +31,16 @@
         <label class="btn btn-error w-full {{googleService.logged ? '' : 'btn-disabled'}}" (click)="onClickGoogleLogout()">Se déconnecter de Google</label>
         <label class="btn btn-warning w-full " (click)="onCheckGoogleLogged()">Vérifier la connexion à google</label>
         <label class="btn btn-success w-full {{googleService.logged ? 'btn-disabled' : ''}}" (click)="onConnectGoogle()">Me connecter à Google</label>
+        <label class="btn btn-info w-full" for="edit-my-infos">Modifier mes informations</label>
       </div>
     </div>
   </div>
 </div>
+
+<!-- modal button edit informations -->
+<input type="checkbox" id="edit-my-infos" class="modal-toggle">
+<label for="edit-my-infos" class="modal cursor-pointer">
+  <label class="modal-box rela tive max-w-screen-md text-sm" for="">
+   <app-edit-my-infos></app-edit-my-infos>
+  </label>
+</label>
