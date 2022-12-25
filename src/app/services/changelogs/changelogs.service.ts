@@ -13,7 +13,7 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "3.0",
-        date: new Date("2022-12-24T00:00:00.000Z"), // ! TO CHANGE WHILST WORKING ON VERSION 3.0
+        date: new Date("2022-12-25T00:00:00.000Z"),
         bugs: [
           
           ],
