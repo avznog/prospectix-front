@@ -53,20 +53,6 @@ module.exports = {
           "warning":"#FBBD23",
           "error":"#F87272"
         }
-      },
-      {
-        noel: {
-          "primary": "#723132",
-          "secondary":"#0032BA",
-          "accent":"#FFDF4F",
-          "neutral":"#0E3397",
-          "base-100":"#146B3A",
-          "base-300":"#165B33",
-          "info":"#3ABFF8",
-          "success":"#36D399",
-          "warning":"#FBBD23",
-          "error":"#F87272"
-        }
       }
     ]
   }
