@@ -6,5 +6,6 @@ export interface CreateUserDto {
   admin: boolean;
   disabled: boolean;
   mail: string;
+  phone: string;
   statsEnabled: boolean;
 }

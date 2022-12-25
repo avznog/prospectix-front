@@ -3,10 +3,12 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
+import { MailTemplate } from 'src/app/models/mail-template.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
+import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
@@ -21,6 +23,10 @@ export class MarkSentEmailSentComponent implements OnInit {
 
   @Input() sentEmail!: SentEmail;
   @Input() prospect!: Prospect;
+  clientName: string =  "";
+  chosenTemplate: MailTemplate = undefined as unknown as MailTemplate;
+  object: string = "";
+  withPlaquette: boolean = true;
 
   constructor(
     private readonly prospectService: ProspectsService,
@@ -30,13 +36,22 @@ export class MarkSentEmailSentComponent implements OnInit {
     private readonly sentEmailsService: SentEmailsService,
     private readonly eventsService: EventsService,
     private readonly authService: AuthService,
+    public readonly mailTemplatesService: MailTemplatesService
   ) { }
 
   ngOnInit(): void {
   }
 
   onClickMarkSentEmailSent() {
-    this.sentEmailsService.markSent(this.sentEmail.id);
+    this.sentEmailsService.send({
+      clientName: this.clientName,
+      mailTemplateId: this.chosenTemplate.id,
+      prospect: this.prospect,
+      object: this.object,
+      withPlaquette: this.withPlaquette
+    },
+    this.sentEmail.id);
+
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
     this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
@@ -46,7 +61,24 @@ export class MarkSentEmailSentComponent implements OnInit {
     this.eventsService.create({
       type: EventType.MARK_MAIL_SENT,
       date: new Date,
-      description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo}`,
+      description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo} avec le template ${this.chosenTemplate.name}`,
+      pm: this.authService.currentUserSubject.getValue(),
+      prospect: this.prospect
+    });
+  }
+
+  onClickSendMailSeparately() {
+    this.sentEmailsService.sendSeparately(this.sentEmail.id, this.object);
+    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+
+    this.eventsService.create({
+      type: EventType.MARK_MAIL_SENT,
+      date: new Date,
+      description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo} séparément`,
       pm: this.authService.currentUserSubject.getValue(),
       prospect: this.prospect
     });
