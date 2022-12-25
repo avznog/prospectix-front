@@ -17,7 +17,6 @@ export class GoogleService {
 
   checkLogged() {
     return this.http.get<boolean>(`google/check-logged`).subscribe(logged => {
-      console.log(logged)
       this.logged = logged;
 
       logged && this.toastsService.addToast({
