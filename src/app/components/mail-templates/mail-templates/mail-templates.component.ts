@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AuthService } from 'src/app/auth/auth.service';
 import { MailTemplate } from 'src/app/models/mail-template.model';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 @Component({
@@ -15,7 +16,7 @@ export class MailTemplatesComponent implements OnInit {
     enableToolbar: true,
     height: '50vh',
     minHeight: '10vh',
-    placeholder: 'Ecrivez votre mail ici, la forme sera conservée.',
+    placeholder: 'Ecrivez votre mail ici, la forme sera conservée. Le \"Bonjour M. Nom du client\" sera mis automatiquement, ne le mettez donc pas dans votre template.',
     toolbarHiddenButtons: [
       ['undo', 'redo'],
       ['fontSize', 'insertImage', 'insertVideo']
@@ -27,7 +28,8 @@ export class MailTemplatesComponent implements OnInit {
   name: string = ""
   editMode: boolean = false;
   constructor(
-    public readonly mailTemplatesService: MailTemplatesService
+    public readonly mailTemplatesService: MailTemplatesService,
+    public readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

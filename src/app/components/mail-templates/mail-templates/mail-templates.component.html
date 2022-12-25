@@ -11,11 +11,14 @@
           class="bg-base-300 {{currentTemplate != 'creation' && currentTemplate.id == mailTemplate.key ? 'bordered' : ''}}"
           *ngFor="let mailTemplate of mailTemplatesService.myTemplates | keyvalue"
           (click)="changeTemplate(mailTemplate.value)"><a>{{mailTemplate.value.name}}</a></li>
-        <li class="menu-title"><span>Tous les templates</span></li>
-        <li
-          class="bg-base-300 indicator w-full {{currentTemplate != 'creation' && currentTemplate.id == mailTemplate.key ? 'bordered' : ''}}"
-          *ngFor="let mailTemplate of mailTemplatesService.allTemplates | keyvalue"
-          (click)="changeTemplate(mailTemplate.value)"><div class="inline-flex"><label class="badge badge-secondary badge-sm pb-1">{{mailTemplate.value.pm.pseudo}}</label><a>{{mailTemplate.value.name}}</a></div></li>
+          <ng-container  *ngIf="authService.currentUserSubject.getValue().admin">
+            <li class="menu-title"><span>Tous les templates</span></li>
+            <li
+              class="bg-base-300 indicator w-full {{currentTemplate != 'creation' && currentTemplate.id == mailTemplate.key ? 'bordered' : ''}}"
+              *ngFor="let mailTemplate of mailTemplatesService.allTemplates | keyvalue"
+              (click)="changeTemplate(mailTemplate.value)"><div class="inline-flex"><label class="badge badge-secondary badge-sm pb-1">{{mailTemplate.value.pm.pseudo}}</label><a>{{mailTemplate.value.name}}</a></div></li>
+          </ng-container>
+        
       </ul>
     </div>
     <div class="w-4/5 bg-base-100 card {{currentTemplate != 'creation' && 'h-[85vh]'}}">
