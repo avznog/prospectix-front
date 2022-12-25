@@ -113,27 +113,39 @@ export class UsersService {
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return this.http.patch<ProjectManager>(`project-managers/${id}`, updateUserDto).subscribe(() => {
+      console.log("1")
       this.users.set(id, { ...this.users.get(id)!, ...updateUserDto });
+      console.log("2")
       this.pmService.projectManagers.forEach(pm => {
         if(pm.id == id) {
           return { ...pm, updateUserDto }
         }
         return pm
       });
-      this.pmService.pmGoals.forEach((goals, pm) => {
-        if(pm.id == id) {
-          const g = goals;
-          this.pmService.pmGoals.delete(pm);
-          this.pmService.pmGoals.set({ ...pm, ...updateUserDto }, g);
-        }
-      });
+      console.log("3")
+      const BreakError = {};
+      try {
+        
+        this.pmService.pmGoals.forEach((goals, pm) => {
+          if(pm.id == id) {
+            const g = goals;
+            this.pmService.pmGoals.delete(pm);
+            this.pmService.pmGoals.set({ ...pm, ...updateUserDto }, g);
+            throw BreakError 
+          }
+        });
+      } catch (error) {
+        if(error !== BreakError) { throw error }
+      }
+      console.log("4")
 
       this.toastsService.addToast({
         type: "alert-info",
         message: `Utilisateur ${this.users.get(id)!.pseudo} modifié`
       });
-
+      console.log("5")
       this.authService.refreshUser();
+      console.log("6")
     })
   }
 }
