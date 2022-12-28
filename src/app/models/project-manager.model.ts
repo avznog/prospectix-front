@@ -14,7 +14,7 @@ export interface ProjectManager {
   firstname: string;
   mail: string;
   phone: string;
-  tokenEmail: string;
+  tokenGoogle: string;
   disabled: boolean;
   statsEnabled: boolean;
   meetings: Meeting[];

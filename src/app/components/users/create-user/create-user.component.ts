@@ -30,7 +30,7 @@ export class CreateUserComponent implements OnInit {
       pseudo: `${this.firstname.charAt(0)}${this.lastname}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '').trim(),
       mail: `${this.firstname.charAt(0)}${this.lastname}@juniorisep.com`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '').trim(),
       phone: this.phone,
-      tokenEmail: "",
+      tokenGoogle: "",
       admin: this.admin,
       disabled: this.disabled,
       statsEnabled: this.statsEnabled
