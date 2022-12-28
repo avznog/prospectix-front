@@ -42,12 +42,8 @@ export class GoogleService {
     })
   }
 
-  test() {
-    return this.http.get("google/test").subscribe(res => console.log(res))
-  }
-
    authenticate() {
-    return this.http.get<{url: string}>('google/autah').subscribe(url => {
+    return this.http.get<{url: string}>('google/auth').subscribe(url => {
       window.open(url.url)
       console.log(url)
     })
