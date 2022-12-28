@@ -42,20 +42,45 @@ export class GoogleService {
     })
   }
 
-  authenticate() {
-    this.http.get<boolean>(`google/auth`).subscribe(logged => {
-      this.logged = logged;
-      if(logged) {
-        this.toastsService.addToast({
-          type: "alert-success",
-          message: `Vous êtes connecté à votre compte Google`
-        });
+  test() {
+    return this.http.get("google/test").subscribe(res => console.log(res))
+  }
+
+   authenticate() {
+    return this.http.get<{url: string}>('google/autah').subscribe(url => {
+      window.open(url.url)
+      console.log(url)
+    })
+  }
+
+  oauth2callback(code: string) {
+    return this.http.get<boolean>(`google/oauth2callback/${code}`).subscribe(res => {
+      if(res) {
+        this.logged = true;
+        console.log("success")
       } else {
-        this.toastsService.addToast({
-          type: "alert-error",
-          message: `La connexion à votre compte Google a échoué`
-        })
+        this.logged = false;
+        console.log("failed")
       }
     })
   }
+
+  // // authenticate() {
+  //   this.http.get(`google/auth`).subscribe(logged => {
+  //     // window.open(logged)
+  //     console.log(logged)
+  //     // this.logged = logged;
+  //     // if(logged) {
+  //     //   this.toastsService.addToast({
+  //     //     type: "alert-success",
+  //     //     message: `Vous êtes connecté à votre compte Google`
+  //     //   });
+  //     // } else {
+  //     //   this.toastsService.addToast({
+  //     //     type: "alert-error",
+  //     //     message: `La connexion à votre compte Google a échoué`
+  //     //   })
+  //     // }
+  //   })
+  // }
 }
