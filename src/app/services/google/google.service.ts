@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -10,7 +11,8 @@ export class GoogleService {
   logged: boolean = false;
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly authService: AuthService
   ) { 
     this.checkLogged();
   }
@@ -44,13 +46,13 @@ export class GoogleService {
 
    authenticate() {
     return this.http.get<{url: string}>('google/auth').subscribe(url => {
-      window.open(url.url)
-      console.log(url)
+      window.open(url.url, "_blank", "width=800, height=600")
     })
   }
 
   oauth2callback(code: string) {
     return this.http.get<boolean>(`google/oauth2callback/${code}`).subscribe(res => {
+      window.close()
       if(res) {
         this.logged = true;
         console.log("success")
@@ -58,25 +60,7 @@ export class GoogleService {
         this.logged = false;
         console.log("failed")
       }
-    })
+      this.authService.refreshUser()
+    });
   }
-
-  // // authenticate() {
-  //   this.http.get(`google/auth`).subscribe(logged => {
-  //     // window.open(logged)
-  //     console.log(logged)
-  //     // this.logged = logged;
-  //     // if(logged) {
-  //     //   this.toastsService.addToast({
-  //     //     type: "alert-success",
-  //     //     message: `Vous êtes connecté à votre compte Google`
-  //     //   });
-  //     // } else {
-  //     //   this.toastsService.addToast({
-  //     //     type: "alert-error",
-  //     //     message: `La connexion à votre compte Google a échoué`
-  //     //   })
-  //     // }
-  //   })
-  // }
 }
