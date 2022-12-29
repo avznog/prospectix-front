@@ -1,5 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
