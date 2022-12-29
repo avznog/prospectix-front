@@ -15,5 +15,4 @@ export class Oauth2callbackComponent implements OnInit {
   ngOnInit(): void {
     this.googleService.oauth2callback(window.location.href.split("?code=")[1]);
   }
-
 }

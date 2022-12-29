@@ -45,20 +45,28 @@ export class GoogleService {
   }
 
    authenticate() {
+    localStorage.setItem("locationBeforeGoogleAuth", document.location.href)
     return this.http.get<{url: string}>('google/auth').subscribe(url => {
-      window.open(url.url, "_blank", "width=800, height=600")
+      window.open(url.url, "_self")
     })
   }
 
   oauth2callback(code: string) {
     return this.http.get<boolean>(`google/oauth2callback/${code}`).subscribe(res => {
-      window.close()
+      document.location.href = localStorage.getItem("locationBeforeGoogleAuth") ?? ""
       if(res) {
         this.logged = true;
-        console.log("success")
+        this.toastsService.addToast({
+          type: 'alert-success',
+          message: 'Authentification Google Réussie'
+        })
+        
       } else {
         this.logged = false;
-        console.log("failed")
+        this.toastsService.addToast({
+          type: 'alert-error',
+          message: 'Authentification Google échouée'
+        })
       }
       this.authService.refreshUser()
     });
