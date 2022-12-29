@@ -68,6 +68,7 @@ import { ConfirmDeleteMailTemplateComponent } from './components/common/confirm-
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { AccountComponent } from './components/account/account/account.component';
 import { EditMyInfosComponent } from './components/common/edit-my-infos/edit-my-infos.component';
+import { Oauth2callbackComponent } from './components/google/oauth2callback/oauth2callback.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -124,6 +125,7 @@ import { EditMyInfosComponent } from './components/common/edit-my-infos/edit-my-
     EditUserComponent,
     AccountComponent,
     EditMyInfosComponent,
+    Oauth2callbackComponent,
   ],
   imports: [
     BrowserModule,

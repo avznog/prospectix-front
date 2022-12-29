@@ -41,5 +41,6 @@
         (click)="onClickMarkSentEmailSent()">Envoyer le mail</label>
       <label class="btn btn-outline btn-ghost w-1/3 btn-warning {{object == '' ? 'btn-disabled' : ''}}" (click)="onClickSendMailSeparately()">Mail envoyé séparément</label>
     </div>
+    <label class="label text-sm font-extralight text-error flex justify-center" *ngIf="!googleService.logged">Vous n'êtes pas connecté à Google</label>
   </div>
 </div>

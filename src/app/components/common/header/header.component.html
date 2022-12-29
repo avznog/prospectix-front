@@ -1,6 +1,6 @@
 <div
   [class]="'navbar bg-primary bg-opacity-5 transition-all'+class+' '+(scrolling && 'shadow backdrop-blur-3xl bg-primary bg-opacity-5')"
-  *ngIf="authService.loggedInSubject">
+  *ngIf="authService.loggedInSubject && !router.url.includes('oauth2callback')">
 
   <!-- left part of navbar -->
   <div class="flex-1 menu horizontal space-x-2">

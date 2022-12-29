@@ -6,6 +6,7 @@ import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.c
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
 import { WatchtowerComponent } from './components/goals/watchtower/watchtower.component';
+import { Oauth2callbackComponent } from './components/google/oauth2callback/oauth2callback.component';
 import { MailTemplatesComponent } from './components/mail-templates/mail-templates/mail-templates.component';
 import { MailsComponent } from './components/mails/mails/mails.component';
 import { MeetingsComponent } from './components/meetings/meetings/meetings.component';
@@ -14,6 +15,7 @@ import { ResearchComponent } from './components/research/research/research.compo
 import { StatisticsComponent } from './components/statistics/statistics/statistics.component';
 import { UsersComponent } from './components/users/users/users.component';
 import { AdminGuard } from './guards/admin.guard';
+import { GoogleGuard } from './guards/google.guard';
 import { LoggedGuard } from './guards/logged.guard';
 import { LoginGuard } from './guards/login.guard';
 
@@ -31,6 +33,7 @@ const routes: Routes = [
   { path: "watchtower", component: WatchtowerComponent, canActivate: [LoggedGuard, AdminGuard] },
   { path: "mailTemplates", component: MailTemplatesComponent, canActivate: [LoggedGuard] },
   { path: "account", component: AccountComponent, canActivate: [LoggedGuard] },
+  { path: "oauth2callback", component: Oauth2callbackComponent, canActivate: [LoggedGuard, GoogleGuard] },
   { path: "", pathMatch: "full", redirectTo: "dashboard" },
   { path: "**", pathMatch: "full", redirectTo: "dashboard"},
 ];

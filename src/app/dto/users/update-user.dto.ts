@@ -2,7 +2,7 @@ export interface UpdateUserDto {
   firstname?: string;
   name?: string;
   pseudo?: string;
-  tokenEmail?: string;
+  tokenGoogle?: string;
   admin?: boolean;
   disabled?: boolean;
   mail?: string;

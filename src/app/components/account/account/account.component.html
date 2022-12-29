@@ -30,7 +30,7 @@
       <div class="w-1/2 space-y-5 ">
         <label class="btn btn-error w-full {{googleService.logged ? '' : 'btn-disabled'}}" (click)="onClickGoogleLogout()">Se déconnecter de Google</label>
         <label class="btn btn-warning w-full " (click)="onCheckGoogleLogged()">Vérifier la connexion à google</label>
-        <label class="btn btn-success w-full {{googleService.logged ? 'btn-disabled' : ''}}" (click)="onConnectGoogle()">Me connecter à Google</label>
+        <label class="btn btn-success w-full {{googleService.logged ? 'btn-disabled' : ''}}" (click)="googleService.authenticate()">Me connecter à Google</label>
         <label class="btn btn-info w-full" for="edit-my-infos">Modifier mes informations</label>
       </div>
     </div>

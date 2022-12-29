@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -10,7 +11,8 @@ export class GoogleService {
   logged: boolean = false;
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly authService: AuthService
   ) { 
     this.checkLogged();
   }
@@ -42,20 +44,31 @@ export class GoogleService {
     })
   }
 
-  authenticate() {
-    this.http.get<boolean>(`google/auth`).subscribe(logged => {
-      this.logged = logged;
-      if(logged) {
+   authenticate() {
+    localStorage.setItem("locationBeforeGoogleAuth", document.location.href)
+    return this.http.get<{url: string}>('google/auth').subscribe(url => {
+      window.open(url.url, "_self")
+    })
+  }
+
+  oauth2callback(code: string) {
+    return this.http.get<boolean>(`google/oauth2callback/${code}`).subscribe(res => {
+      document.location.href = localStorage.getItem("locationBeforeGoogleAuth") ?? ""
+      if(res) {
+        this.logged = true;
         this.toastsService.addToast({
-          type: "alert-success",
-          message: `Vous êtes connecté à votre compte Google`
-        });
+          type: 'alert-success',
+          message: 'Authentification Google Réussie'
+        })
+        
       } else {
+        this.logged = false;
         this.toastsService.addToast({
-          type: "alert-error",
-          message: `La connexion à votre compte Google a échoué`
+          type: 'alert-error',
+          message: 'Authentification Google échouée'
         })
       }
-    })
+      this.authService.refreshUser()
+    });
   }
 }
