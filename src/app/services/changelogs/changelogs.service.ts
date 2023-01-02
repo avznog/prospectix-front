@@ -13,9 +13,9 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "3.0",
-        date: new Date("2022-12-28T00:00:00.000Z"),
+        date: new Date("2023-01-02T00:00:00.000Z"),
         bugs: [
-          
+          "Résolution des bugs liés à Sentry + modification des messages d'erreur + ajout direct des informations en contexte"
           ],
         features: [
           "Ajout de la possibilité de modifier un utilisateur",
