@@ -18,6 +18,7 @@ export class ChangelogsService {
           "Résolution des bugs liés à Sentry + modification des messages d'erreur + ajout direct des informations en contexte"
           ],
         features: [
+          "Rework de la structure du back => del Modules",
           "Ajout de la possibilité de modifier un utilisateur",
           "Ajout d'une page 'Mon Compte'. Il est possible de visualiser ses informations et de se connecter / déconnecter / vérifier la connexion à Google",
           "Ajout de l'implémentation des template de mails. Prospectix prend maintenant en charge l'envoi de mail",
