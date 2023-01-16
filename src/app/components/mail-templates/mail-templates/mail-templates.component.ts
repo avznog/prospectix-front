@@ -1,32 +1,18 @@
-import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MailTemplate } from 'src/app/models/mail-template.model';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-mail-templates',
   templateUrl: './mail-templates.component.html',
   styleUrls: ['./mail-templates.component.scss'],
 })
 export class MailTemplatesComponent implements OnInit {
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    enableToolbar: true,
-    height: '50vh',
-    minHeight: '10vh',
-    placeholder: 'Ecrivez votre mail ici, la forme sera conservée. Le \"Bonjour M. Nom du client\" sera mis automatiquement, ne le mettez donc pas dans votre template.',
-    toolbarHiddenButtons: [
-      ['undo', 'redo'],
-      ['fontSize', 'insertImage', 'insertVideo']
-    ],
-    
-  };
   htmlContent: string = ""
   currentTemplate: MailTemplate | "creation" = "creation";
   name: string = ""
   editMode: boolean = false;
+  placeholder: string = `Ecrivez votre mail ici, la forme sera conservée. Le "Bonjour M. Nom du client" sera mis automatiquement, ne le mettez donc pas dans votre template.`
   constructor(
     public readonly mailTemplatesService: MailTemplatesService,
     public readonly authService: AuthService

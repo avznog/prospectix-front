@@ -46,9 +46,7 @@
             <input class="justify-center" type="text" placeholder="...nom du template" class="input input-bordered"
               [(ngModel)]="name" />
           </label>
-
-          <angular-editor [placeholder]="editorConfig.placeholder ?? ''" [(ngModel)]="htmlContent"
-            [config]="editorConfig"></angular-editor>
+            <quill-editor class="h-3/5 w-full" [(ngModel)]="htmlContent" [placeholder]="placeholder"></quill-editor>
           <div class="flex justify-center">
             <label class="btn btn-outline m-5 {{name == '' && 'btn-disabled'}}" (click)="onCreateTemplate()">Créer le
               template</label>
@@ -57,10 +55,10 @@
 
         </div>
         <!-- ? visualisation mode -->
-        <div *ngIf="currentTemplate != 'creation'">
+        <div *ngIf="currentTemplate != 'creation'" class="h-full">
           
           <app-display-mail-template *ngIf="!editMode" [mail_content]="currentTemplate.content"></app-display-mail-template>
-          <angular-editor *ngIf="editMode" [placeholder]="editorConfig.placeholder ?? ''" [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+          <quill-editor *ngIf="editMode" class="h-3/5 w-full" [(ngModel)]="htmlContent" [placeholder]="placeholder"></quill-editor>
         </div>
 
       </div>
