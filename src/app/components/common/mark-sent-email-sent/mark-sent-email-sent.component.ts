@@ -52,7 +52,7 @@ export class MarkSentEmailSentComponent implements OnInit {
         clientName: this.clientName,
         mailTemplateId: this.chosenTemplate.id,
         prospect: this.prospect,
-        object: this.object,
+        object: "[Junior ISEP] " + this.object,
         withPlaquette: this.withPlaquette
       },
       this.sentEmail.id);
