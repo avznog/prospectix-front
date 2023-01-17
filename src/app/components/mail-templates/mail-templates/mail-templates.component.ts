@@ -33,6 +33,12 @@ export class MailTemplatesComponent implements OnInit {
     this.mailTemplatesService.create({
       name: this.name,
       content: this.htmlContent
+    }).add(() => {
+      this.mailTemplatesService.myTemplates.forEach((value, key) => {
+        if(value.name == this.name) {
+          this.changeTemplate(value);
+        }
+      })
     });
    }
 
