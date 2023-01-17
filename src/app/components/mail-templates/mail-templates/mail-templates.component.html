@@ -48,6 +48,7 @@
         </label>
         <div class="card-title justify-center flex w-full"><span class="justify-center mb-5"><span *ngIf="authService.currentUserSubject.getValue().admin && currentTemplate.pm.id != authService.currentUserSubject.getValue().id" class="btn btn-md btn-secondary btn-outline btn-disabled mr-5 bg-transparent">{{currentTemplate.pm.pseudo}}</span>{{editMode ? 'Modifier' :
             'Aperçu'}} {{currentTemplate.name}}</span></div>
+        <label class="btn btn-sm btn-outline btn-primary mr-5" (click)="onSendTestMail()">M'envoyer un mail test</label>
         <label class="btn btn-outline flex float-right btn-sm btn-primary"
           *ngIf="mailTemplatesService.myTemplates.has(currentTemplate.id)"
           (click)="editMode && updateMailTemplate();editMode = !editMode; htmlContent = currentTemplate.content">
