@@ -29,10 +29,11 @@
       </ul>
     </div>
 
-    <!-- ? panel de droite -->
+    <!-- ! panel de droite -->
     <div class="w-4/5 bg-base-100 card {{currentTemplate != 'creation' && 'h-[85vh]'}}">
-      <!-- ? Vizualisation mode -->
-      <div class="inline-flex w-full p-5 bg-primary bg-opacity-10" *ngIf="currentTemplate != 'creation'">
+
+      <!-- ! HEADER -->
+      <div class="inline-flex w-full p-5 pb-0 bg-primary bg-opacity-10" *ngIf="currentTemplate != 'creation'">
         <label for="delete-mail-template-modal-{{currentTemplate.id}}"
           *ngIf="mailTemplatesService.myTemplates.has(currentTemplate.id)"
           class="modal-button btn btn-outline flex float-left btn-sm btn-error"
@@ -59,9 +60,10 @@
         </label>
       </div>
 
+      <!-- ! CONTENT -->
       <div class="card-body overflow-y-scroll">
 
-        <!-- ? creation MODE -->
+        <!-- ! creation MODE -->
         <div *ngIf="currentTemplate == 'creation'" class="h-full">
           <div class="flex justify-center">
             <span class="font-extralight">N'écrivez que le contenu du mail. La mention "Bonjour M. NOM DU CLIENT" ainsi que la signature Junior ISEP seront implémentées automatiquement.</span>
@@ -77,20 +79,25 @@
               template</label>
           </div>
 
-
         </div>
-        <div *ngIf="currentTemplate != 'creation'" class="h-full">
-        <!-- ? visualisation mode -->
 
-          <app-display-mail-template *ngIf="!editMode" [mail_content]="currentTemplate.content">
-          </app-display-mail-template>
+        <!-- ! VIZUALISATION / MODIFICATION MODE -->
+        <div *ngIf="currentTemplate != 'creation'" class="h-full">
+
+        <!-- ? visualisation mode -->
+          <div class="h-full" *ngIf="!editMode">
+            <app-display-mail-template [mail_content]="currentTemplate.content" [mailTemplate]="currentTemplate">
+            </app-display-mail-template>
+          </div>
 
           <!--  ? modification mode  -->
-          <div class="flex justify-center p-5">
-            <span class="font-extralight">N'écrivez que le contenu du mail. La mention "Bonjour M. NOM DU CLIENT" ainsi que la signature Junior ISEP seront implémentées automatiquement.</span>
+          <div *ngIf="editMode" class="h-full">
+            <div class="flex justify-center p-5">
+              <span class="font-extralight">N'écrivez que le contenu du mail. La mention "Bonjour M. NOM DU CLIENT" ainsi que la signature Junior ISEP seront implémentées automatiquement.</span>
+            </div>
+            <quill-editor class="h-3/5 w-full" [(ngModel)]="htmlContent" [placeholder]="placeholder">
+            </quill-editor>
           </div>
-          <quill-editor *ngIf="editMode" class="h-3/5 w-full" [(ngModel)]="htmlContent" [placeholder]="placeholder">
-          </quill-editor>
         </div>
 
       </div>
