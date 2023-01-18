@@ -89,14 +89,19 @@ export class SentEmailsService {
 
   send(sendEmailDto: sendEmailDto, idSentEmail: number) {
     return this.http.post(`sent-emails/send/${idSentEmail}`, sendEmailDto).subscribe(() => {
-      this.sentEmails.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true})
-      this.sentEmailsSent.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
-      this.nbSentEmailsSent += 1;
-      this.nbSentEmails -= 1;
+      idSentEmail != -1 && this.sentEmails.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
+      idSentEmail != -1 && this.sentEmailsSent.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
+      idSentEmail != -1 && (this.nbSentEmailsSent += 1);
+      idSentEmail != -1 && (this.nbSentEmails -= 1);
 
-      this.toastsService.addToast({
+      idSentEmail != -1 && this.toastsService.addToast({
         type: "alert-success",
         message: `Mail envoyé à ${this.sentEmailsSent.get(idSentEmail)!.prospect.companyName}`
+      })
+
+      idSentEmail == -1 && this.toastsService.addToast({
+        type: "alert-success",
+        message: `Mail test envoyé`
       })
     })
   }
