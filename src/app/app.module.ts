@@ -149,7 +149,7 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
           [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
           [{ 'color': [] }, { 'background': [] }],
           [{ 'font': [] }],
-          [{ 'align': [] }],
+          [{ 'align': ["justify"] }],
           ['clean'],
           ['link']
         ]
