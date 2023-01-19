@@ -29,6 +29,8 @@ export class MarkSentEmailSentComponent implements OnInit {
   chosenTemplate: MailTemplate = undefined as unknown as MailTemplate;
   object: string = "";
   withPlaquette: boolean = true;
+  correctEmail : boolean = false;
+  email: string = "";
 
   constructor(
     private readonly prospectService: ProspectsService,
@@ -40,18 +42,27 @@ export class MarkSentEmailSentComponent implements OnInit {
     private readonly authService: AuthService,
     public readonly mailTemplatesService: MailTemplatesService,
     public readonly googleService: GoogleService,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly prospectsService: ProspectsService,
   ) { }
 
   ngOnInit(): void {
+    this.email = this.prospect.email.email;
   }
 
   onClickMarkSentEmailSent() {
     if(this.googleService.logged) {
+      this.updateEmailOnProspect();
       this.sentEmailsService.send({
         clientName: this.clientName,
         mailTemplateId: this.chosenTemplate.id,
-        prospect: this.prospect,
+        prospect: {
+          ...this.prospect,
+          email: {
+            id: this.prospect.email.id,
+            email: this.email
+          }
+        },
         object: "[Junior ISEP] " + this.object,
         withPlaquette: this.withPlaquette
       },
@@ -80,6 +91,7 @@ export class MarkSentEmailSentComponent implements OnInit {
   }
 
   onClickSendMailSeparately() {
+    this.updateEmailOnProspect();
     this.sentEmailsService.sendSeparately(this.sentEmail.id, this.object);
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
@@ -94,5 +106,26 @@ export class MarkSentEmailSentComponent implements OnInit {
       pm: this.authService.currentUserSubject.getValue(),
       prospect: this.prospect
     });
+  }
+
+  checkFormatEmail() {
+    new RegExp("[a-z0-9]+@[a-z]+\.[a-z]{2,3}").test(this.email) ? this.correctEmail = true : this.correctEmail = false;
+  }
+
+  updateEmailOnProspect() {
+    const edit = {
+      email: {
+        id: this.prospect.email.id,
+        email: this.email
+      }
+    };
+  
+    this.prospectsService.updateAllProspect(this.prospect.id, edit);
+    this.remindersService.updateLiveProspect({ ...this.prospect, ...edit });
+    this.meetingsService.updateLiveProspect({ ...this.prospect, ...edit });
+    this.bookmarksService.updateLiveProspect({ ...this.prospect, ...edit });
+    this.sentEmailsService.updateLiveProspect({ ...this.prospect, ...edit });
+    this.sentEmailsService.sentEmails.set(this.sentEmail.id, { ...this.sentEmail, prospect: { ...this.sentEmail.prospect, ...edit}})
+
   }
 }

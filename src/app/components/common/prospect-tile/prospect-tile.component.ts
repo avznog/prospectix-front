@@ -37,7 +37,6 @@ export class ProspectTileComponent implements OnInit {
   emailShown: boolean = false;
   websiteShown: boolean = false;
   phoneOn: boolean = false;
-  correctEmail : boolean = false;
 
   constructor(
     private readonly prospectService: ProspectsService,
@@ -57,7 +56,6 @@ export class ProspectTileComponent implements OnInit {
     this.emailShown = false;
     this.websiteShown = false;
     this.phoneOn = false;
-    this.checkFormatEmail();
   }
 
   onClickButtonGoogle() {
@@ -122,7 +120,4 @@ export class ProspectTileComponent implements OnInit {
     window.open(`${this.website.includes("http") ? this.website : 'http://' + this.website}`, "_blank")
   }
 
-  checkFormatEmail() {
-    (this.prospect.email.email && this.prospect.email.email != '') && new RegExp("[a-z0-9]+@[a-z]+\.[a-z]{2,3}").test(this.prospect.email.email) ? this.correctEmail = true : this.correctEmail = false
-  }
 }

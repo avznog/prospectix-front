@@ -242,7 +242,7 @@
             </label>
 
             <!-- Bouton mail envoyé -->
-            <label for="mark-sentEmail-sent-{{prospect.id}}" class="outline outline-1 outline-base-100 text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) || (meeting && meeting.done) || (prospect.stage == 4 && (!prospect.email.email || (prospect.email.email == '')) || !this.correctEmail)? 'btn-disabled' : ''}}" *ngIf="prospect.stage == 4">
+            <label for="mark-sentEmail-sent-{{prospect.id}}" class="outline outline-1 outline-base-100 text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) || (meeting && meeting.done) ? 'btn-disabled' : ''}}" *ngIf="prospect.stage == 4">
               Envoyer le mail
             </label>
 
