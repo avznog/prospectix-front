@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.0.1",
+        date: new Date("2023-01-19T00:00:00.000Z"),
+        bugs: [
+          
+          ],
+        features: [
+          "Adaptation du mail template pour mobile: responsive"
+        ]
+      },
+      {
         version: "3.0",
         date: new Date("2023-01-19T00:00:00.000Z"),
         bugs: [
