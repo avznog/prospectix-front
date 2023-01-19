@@ -31,6 +31,7 @@ export class MarkSentEmailSentComponent implements OnInit {
   withPlaquette: boolean = true;
   correctEmail : boolean = false;
   email: string = "";
+  emailGotChanged: boolean = false;
 
   constructor(
     private readonly prospectService: ProspectsService,
@@ -48,11 +49,12 @@ export class MarkSentEmailSentComponent implements OnInit {
 
   ngOnInit(): void {
     this.email = this.prospect.email.email;
+    this.checkFormatEmail();
   }
 
   onClickMarkSentEmailSent() {
     if(this.googleService.logged) {
-      this.updateEmailOnProspect();
+      this.emailGotChanged && this.updateEmailOnProspect();
       this.sentEmailsService.send({
         clientName: this.clientName,
         mailTemplateId: this.chosenTemplate.id,
@@ -91,7 +93,7 @@ export class MarkSentEmailSentComponent implements OnInit {
   }
 
   onClickSendMailSeparately() {
-    this.updateEmailOnProspect();
+    this.emailGotChanged && this.updateEmailOnProspect();
     this.sentEmailsService.sendSeparately(this.sentEmail.id, this.object);
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
     this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
@@ -109,6 +111,7 @@ export class MarkSentEmailSentComponent implements OnInit {
   }
 
   checkFormatEmail() {
+    console.log(this.emailGotChanged)
     new RegExp("[a-z0-9]+@[a-z]+\.[a-z]{2,3}").test(this.email) ? this.correctEmail = true : this.correctEmail = false;
   }
 

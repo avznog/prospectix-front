@@ -108,7 +108,7 @@ export class ProspectsService {
       this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, ...updateProspectDto})
       this.toastsService.addToast({
         type: "alert-success",
-        message: `${this.prospects.get(idProspect)?.companyName} mis à jour`
+        message: `${this.prospects.get(idProspect)?.companyName ?? 'Prospect'} mis à jour`
       })
     });
   }
