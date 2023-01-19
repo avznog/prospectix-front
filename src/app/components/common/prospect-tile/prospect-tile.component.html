@@ -91,7 +91,13 @@
           <!-- * rendez-vous effectué -> PAS passé en pro -->
           <span class="btn btn-sm btn-secondary btn-outline btn-disabled bg-base-100" *ngIf="meeting && meeting.done && prospect.stage == 7">Rendez-vous effectué</span>
 
-          <span class="btn btn-sm btn-secondary btn-outline btn-disabled bg-base-100" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8">Email envoyé</span>
+          <!-- ? sent email object & template -->
+          <div class="indicator tooltip" data-tip="Objet du mail sans la mention [Junior ISEP]">
+            <label class="btn btn-sm text-xs text-secondary btn-outline btn-disabled bg-base-100 max-h-fit" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8">
+              <span class="badge indicator-item truncate badge-primary badge-sm">{{sentEmail.templateName}}</span>
+              {{(sentEmail.object == '' ? 'Email envoyé' : sentEmail.object.replace("[Junior ISEP]", "")) | slice:0:30}}
+            </label>
+          </div>
         </div>
         <!-- 1/3 of 1/2 (3rd / 3) DATE REMINDER MEETING SENTEMAIL -->
         <div class="{{prospect.stage == 4 ? 'w-2/3' : 'w-1/2'}} inline-flex justify-end space-x-5" *ngIf="prospect.stage == 2 || prospect.stage == 3 || prospect.stage == 4 || prospect.stage == 8 || meeting || reminder">
@@ -293,7 +299,7 @@
 <!-- modal mark mail done -->
 <input type="checkbox" id="mark-sentEmail-sent-{{prospect.id}}" class="modal-toggle" />
 <label for="mark-sentEmail-sent-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-xs" for="mark-sentEmail-sent-{{prospect.id}}">
+  <label class="modal-box relative max-w-screen-xs" for="">
     <app-mark-sent-email-sent [prospect]="prospect" [sentEmail]="sentEmail"></app-mark-sent-email-sent>
   </label>
 </label>

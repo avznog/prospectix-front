@@ -12,4 +12,5 @@
 
   </div>
   <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}} " for="modal-add-meeting-{{prospect.id}}" (click)="onCreateMeeting()">Créer le rendez-vous</label>
+  <label class="label text-sm font-extralight text-error" *ngIf="!googleService.logged">Vous n'êtes pas connecté à Google</label>
 </div>

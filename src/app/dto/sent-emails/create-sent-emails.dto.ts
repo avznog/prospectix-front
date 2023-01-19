@@ -3,7 +3,7 @@ import { Prospect } from "src/app/models/prospect.model";
 
 export interface CreateSentEmailDto {
   object: string;
-  message: string;
+  templateName: string;
   sendingDate?: Date;
   date: Date;
   prospect: Prospect;

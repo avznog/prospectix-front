@@ -1,0 +1,47 @@
+<div class="card ">
+  <div class="card-body flex justify-center">
+    <label for="edit-user-modal-{{user.id}}"
+      class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+    <label class="card-title">Modifier un utilisateur</label>
+    <div class="divider"></div>
+    <div class="space-y-5">
+
+      <!-- Firstname -->
+      <label class="input-group">
+        <span>Prénom</span>
+        <input class="input input-bordered" type="text" placeholder="Ex: Benjamin" [(ngModel)]="firstname" />
+      </label>
+
+      <!-- Lastname -->
+      <label class="input-group">
+        <span>Nom</span>
+        <input class="input input-bordered" type="text" placeholder="Ex: Gonzva" [(ngModel)]="lastname" />
+      </label>
+
+      <!-- Tel -->
+      <label class="input-group">
+        <span>Pseudo</span>
+        <input class="input input-bordered" type="text" placeholder="bgonzva" [(ngModel)]="pseudo" />
+      </label>
+
+      <!-- Tel -->
+      <label class="input-group">
+        <span>Email</span>
+        <input class="input input-bordered" type="email" placeholder="bgonzva@juniorisep.com" [(ngModel)]="email" (input)="onCheckEmail()"/>
+      </label>
+
+      <!-- Tel -->
+      <label class="input-group">
+        <span>Téléphone portable</span>
+        <input class="input input-bordered" type="text" placeholder="Ex: 06 54 34 23 32" [(ngModel)]="phone"
+          maxlength="14" />
+      </label>
+
+      <!-- Button -->
+      <div class="modal-action">
+        <label for="edit-user-modal-{{user.id}}" (click)="onEditUser()" class="btn btn-outline btn-ghost {{emailCorrect ? '' : 'btn-disabled'}}">Modifier
+          l'utilisateur</label>
+      </div>
+    </div>
+  </div>
+</div>
