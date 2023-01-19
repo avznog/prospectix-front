@@ -91,10 +91,11 @@
           <!-- * rendez-vous effectué -> PAS passé en pro -->
           <span class="btn btn-sm btn-secondary btn-outline btn-disabled bg-base-100" *ngIf="meeting && meeting.done && prospect.stage == 7">Rendez-vous effectué</span>
 
-          <div class="indicator">
-            <label class="btn btn-sm text-secondary btn-outline btn-disabled bg-base-100" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8">
-              <span class="badge truncate indicator-item badge-primary badge-sm">{{sentEmail.templateName}}</span>
-              {{sentEmail.object == '' ? 'Email envoyé' : sentEmail.object}}
+          <!-- ? sent email object & template -->
+          <div class="indicator tooltip" data-tip="Objet du mail sans la mention [Junior ISEP]">
+            <label class="btn btn-sm text-xs text-secondary btn-outline btn-disabled bg-base-100 max-h-fit" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8">
+              <span class="badge indicator-item truncate badge-primary badge-sm">{{sentEmail.templateName}}</span>
+              {{(sentEmail.object == '' ? 'Email envoyé' : sentEmail.object.replace("[Junior ISEP]", "")) | slice:0:30}}
             </label>
           </div>
         </div>

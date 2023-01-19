@@ -111,7 +111,6 @@ export class MarkSentEmailSentComponent implements OnInit {
   }
 
   checkFormatEmail() {
-    console.log(this.emailGotChanged)
     new RegExp("[a-z0-9]+@[a-z]+\.[a-z]{2,3}").test(this.email) ? this.correctEmail = true : this.correctEmail = false;
   }
 
