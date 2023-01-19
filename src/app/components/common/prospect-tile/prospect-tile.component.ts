@@ -9,11 +9,15 @@ import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { EmailsService } from 'src/app/services/emails/emails.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
+import { PhonesService } from 'src/app/services/phones/phones.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { ToastsService } from 'src/app/services/toasts/toasts.service';
+import { WebsitesService } from 'src/app/services/websites/websites.service';
 
 @Component({
   selector: 'app-prospect-tile',
@@ -43,9 +47,13 @@ export class ProspectTileComponent implements OnInit {
     public readonly bookmarksService: BookmarksService,
     private readonly eventsService: EventsService,
     public readonly authService: AuthService,
+    private readonly phonesService: PhonesService,
+    private readonly emailsService: EmailsService,
+    private readonly websitesService: WebsitesService,
     private readonly meetingsService: MeetingsService,
     private readonly remindersService: RemindersService,
-    private readonly sentEmailsService: SentEmailsService
+    private readonly sentEmailsService: SentEmailsService,
+    private readonly toastsService: ToastsService
   ) { }
 
   ngOnInit(): void {
@@ -119,5 +127,4 @@ export class ProspectTileComponent implements OnInit {
   onClickWebsite() {
     window.open(`${this.website.includes("http") ? this.website : 'http://' + this.website}`, "_blank")
   }
-
 }

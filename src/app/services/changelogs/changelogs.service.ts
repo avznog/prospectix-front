@@ -11,29 +11,9 @@ export class ChangelogsService {
   ) {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
-      {
-        version: "3.0",
-        date: new Date("2023-01-19T00:00:00.000Z"),
-        bugs: [
-          "Résolution des bugs liés à Sentry + modification des messages d'erreur + ajout direct des informations en contexte"
-          ],
-        features: [
-          "Rework de la structure du back => del Modules",
-          "Ajout de la possibilité de modifier un utilisateur",
-          "Ajout d'une page 'Mon Compte'. Il est possible de visualiser ses informations et de se connecter / déconnecter / vérifier la connexion à Google",
-          "Ajout de l'implémentation des template de mails. Prospectix prend maintenant en charge l'envoi de mail",
-          "[MAILS]: Il est désomais possible de créer des templates de mails, dans une page réservée. Les administrateurs ont accès aux templates de tous les chefs de projets.",
-          "[MAILS]: L'envoi de mails se fait désormais avec les templates. Pour envoyer un mail, il faut choisir le template à envoyer, le sujet, et le nom du client. Il est possible de marquer un mail comme envoyé séparément.",
-          "[MAILS]: Le nom du template est désormais visible dans les mails envoyés et dans l'historique du prospect",
-          "Ajout de l'implémentation de Google",
-          "[GOOGLE]: Lors de la création d'un rendez-vous par un chef de projet, le rendez-vous s'ajoute automatiquement dans l'agenda Google",
-          "[GOOGLE]: Un rendez-vous créé envoie une notification au mail du client et au chef de projet. Si le rendez-vous est en distanciel, l'invitation génère un lien Google Meet",
-          "[GOOGLE]: Chaque chef de projet peut se connecter avec son compte JUNIORISEP depuis la page Mon Compte. Les tokens (gérés par Google) durent une semaine." 
-        ]
-      },
-      {
+      {       
         version: "2.0",
-        date: new Date("2022-12-08T00:00:00.000Z"),
+        date: new Date("2022-10-30T00:00:00.000Z"),
         bugs: [
           "Le bug du canal slack \"Champion\" devrait (enfin) être résolu"
           ],

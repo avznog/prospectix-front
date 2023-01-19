@@ -1,10 +1,11 @@
-
+<!-- <app-header></app-header> -->
+<div class="container mx-auto">
   <input type="checkbox" id="add-user-modal" class="modal-toggle" />
   <div class="modal">
     <app-create-user></app-create-user>
   </div>
-  <div class="flex p-5 justify-around">
-    <label for="add-user-modal" class="btn modal-button btn-outline">Ajouter un utilisateur</label>
+  <div class="flex justify-end">
+    <label for="add-user-modal" class="btn modal-button btn-outline w-1/4">Ajouter un utilisateur</label>
   </div>
   <!-- <div class="btn btn-primary" *ngIf="authService.currentUserSubject.getValue().pseudo == 'bgonzva'" (click)="onClickAddProspectsBase()">
   Ajouter les prospects base
@@ -14,7 +15,7 @@
 </div> -->
   <div class="card">
     <div class="card-body">
-      <app-list-users class="overflow-x-scroll"></app-list-users>
+      <app-list-users></app-list-users>
     </div>
   </div>
 
@@ -23,3 +24,5 @@
     <button class="btn btn-ghost btn-outline">Page {{usersService.researchParamsUsers.skip / 20 + 1}}</button>
     <button class="btn btn-ghost btn-outline {{usersService.users && usersService.users.size <= 0 ? 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
   </div>
+
+</div>

@@ -3,10 +3,8 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from "src/app/auth/auth.service";
 import { CreateUserDto } from 'src/app/dto/users/create-user.dto';
-import { UpdateUserDto } from "src/app/dto/users/update-user.dto";
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { ResearchParamsUsers } from 'src/app/models/research-params-users.model';
-import { ProjectManagersService } from "../project-managers/project-managers.service";
 import { ToastsService } from "../toasts/toasts.service";
 @Injectable({
   providedIn: 'root'
@@ -21,8 +19,7 @@ export class UsersService {
   constructor(
     private http: HttpClient,
     private readonly toastsService: ToastsService,
-    private readonly authService: AuthService,
-    private readonly pmService: ProjectManagersService
+    private readonly authService: AuthService
   ) { 
     this.loadMore();
   }
@@ -109,37 +106,5 @@ export class UsersService {
         message: `${this.users.get(userId)!.pseudo} ${objectived ? 'ajouté aux' : 'supprimé des'} objectifs`
       })
     });
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.http.patch<ProjectManager>(`project-managers/${id}`, updateUserDto).subscribe(() => {
-      this.users.set(id, { ...this.users.get(id)!, ...updateUserDto });
-      this.pmService.projectManagers.forEach(pm => {
-        if(pm.id == id) {
-          return { ...pm, updateUserDto }
-        }
-        return pm
-      });
-      const BreakError = {};
-      try {
-        
-        this.pmService.pmGoals.forEach((goals, pm) => {
-          if(pm.id == id) {
-            const g = goals;
-            this.pmService.pmGoals.delete(pm);
-            this.pmService.pmGoals.set({ ...pm, ...updateUserDto }, g);
-            throw BreakError 
-          }
-        });
-      } catch (error) {
-        if(error !== BreakError) { throw error }
-      }
-
-      this.toastsService.addToast({
-        type: "alert-info",
-        message: `Utilisateur ${this.users.get(id)!.pseudo} modifié`
-      });
-      this.authService.refreshUser();
-    })
   }
 }

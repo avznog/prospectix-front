@@ -72,6 +72,7 @@ export class ProspectEditComponent implements OnInit {
       email: this.email
     }
   };
+  console.log(this.city)
 
     this.prospectsService.updateAllProspect(this.prospect.id, edit);
     this.remindersService.updateLiveProspect({ ...this.prospect, ...edit });

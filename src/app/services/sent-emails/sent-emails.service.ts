@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateSentEmailDto } from 'src/app/dto/sent-emails/create-sent-emails.dto';
-import { sendEmailDto } from 'src/app/dto/sent-emails/send-email.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsSentEmails } from 'src/app/models/research-params-sent-emails.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
@@ -87,35 +86,16 @@ export class SentEmailsService {
     })
   }
 
-  send(sendEmailDto: sendEmailDto, idSentEmail: number) {
-    return this.http.post(`sent-emails/send/${idSentEmail}`, sendEmailDto).subscribe(() => {
-      idSentEmail != -1 && this.sentEmails.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
-      idSentEmail != -1 && this.sentEmailsSent.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
-      idSentEmail != -1 && (this.nbSentEmailsSent += 1);
-      idSentEmail != -1 && (this.nbSentEmails -= 1);
-
-      idSentEmail != -1 && this.toastsService.addToast({
-        type: "alert-success",
-        message: `Mail envoyé à ${this.sentEmailsSent.get(idSentEmail)!.prospect.companyName}`
-      })
-
-      idSentEmail == -1 && this.toastsService.addToast({
-        type: "alert-success",
-        message: `Mail test envoyé`
-      })
-    })
-  }
-
-  sendSeparately(idSentEmail: number, object: string) {
-    return this.http.post(`sent-emails/send-separately/${idSentEmail}`, { object: object }).subscribe(() => {
-      this.sentEmails.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true})
-      this.sentEmailsSent.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
+  markSent(id: number) {
+    return this.http.get<SentEmail>(`sent-emails/mark-sent/${id}`).subscribe(() => {
+      this.sentEmails.set(id, { ...this.sentEmails.get(id)!, sent: true})
+      this.sentEmailsSent.set(id, { ...this.sentEmails.get(id)!, sent: true});
       this.nbSentEmailsSent += 1;
       this.nbSentEmails -= 1;
 
       this.toastsService.addToast({
         type: "alert-success",
-        message: `Mail envoyé à ${this.sentEmailsSent.get(idSentEmail)!.prospect.companyName}`
+        message: `Mail envoyé à ${this.sentEmailsSent.get(id)!.prospect.companyName}`
       })
     })
   }

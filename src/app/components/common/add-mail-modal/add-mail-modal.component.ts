@@ -59,7 +59,7 @@ export class AddMailModalComponent implements OnInit {
     this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
     this.sentEmailsService.create({
       date: new Date,
-      templateName: "",
+      message: "",
       object: "",
       prospect: this.prospect,
       pm: this.authService.currentUserSubject.getValue(),
