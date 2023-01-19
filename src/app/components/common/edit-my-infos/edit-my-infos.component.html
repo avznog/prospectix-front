@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-title justify-center">Modifier mes informations personnelles</div>
+    <div class="input-group p-5 justify-center">
+      <span>Téléphone</span>
+      <input type="text" class="input input-bordered" maxlength="14" [(ngModel)]="phone" placeholder="Format: 06 54 43 34 23">
+    </div>
+    <div class="flex justify-center">
+      <label class="btn btn-outline w-1/2 {{this.phone ? '' : 'btn-disabled'}}" (click)="onEditInfos()" for="edit-my-infos">Modifier mes informations</label>
+    </div>
+  </div>
+</div>

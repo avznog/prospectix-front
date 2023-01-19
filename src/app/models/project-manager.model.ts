@@ -1,6 +1,7 @@
 import { Bookmark } from "./bookmark.model";
 import { Event } from "./event.model";
 import { Goal } from "./goal.model";
+import { MailTemplate } from "./mail-template.model";
 import { Meeting } from "./meeting.model";
 import { Reminder } from "./reminder.model";
 import { SentEmail } from "./sent-email.model";
@@ -12,7 +13,8 @@ export interface ProjectManager {
   name: string;
   firstname: string;
   mail: string;
-  tokenEmail: string;
+  phone: string;
+  tokenGoogle: string;
   disabled: boolean;
   statsEnabled: boolean;
   meetings: Meeting[];
@@ -22,4 +24,5 @@ export interface ProjectManager {
   events: Event[];
   goals: Goal[];
   objectived: boolean;
+  mailTemplates: MailTemplate[];
 }
