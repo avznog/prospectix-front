@@ -64,7 +64,7 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
+                  "replace": "src/environments/environment.dev.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
@@ -85,7 +85,7 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
+                  "replace": "src/environments/environment.dev.ts",
                   "with": "src/environments/environment.staging.ts"
                 }
               ],
