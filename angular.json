@@ -110,6 +110,9 @@
             },
             "development": {
               "browserTarget": "prospectix-front:build:development"
+            },
+            "staging": {
+              "browserTarget": "prospectix-front:build:staging"
             }
           },
           "defaultConfiguration": "development"
