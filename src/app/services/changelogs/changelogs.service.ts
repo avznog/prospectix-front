@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.0.2",
+        date: new Date("2023-01-22T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug de non affichage du style lors de l'envoi d'un mail"
+          ],
+        features: [
+          "Ajout de la possibilité de laisser le champ \"Bonjour...\" vide lors de l'envoi d'un mail"
+        ]
+      },
+      {
         version: "3.0.1",
         date: new Date("2023-01-19T00:00:00.000Z"),
         bugs: [
