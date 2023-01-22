@@ -1,4 +1,4 @@
-<label for="modal-add-reminder-{{prospect.id}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+<label for="{{prospect ? 'modal-add-reminder-{{prospect.id}}' : 'create-prospect-reminder'}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 <div class="form-control space-y-5">
   <label class="text-2xl font-bold">Ajouter un rappel</label>
   <div class="divider"></div>
@@ -22,5 +22,5 @@
 
   <textarea class="textarea textarea-bordered textarea-ghost" placeholder="Description du rappel"
     [(ngModel)]="description"></textarea>
-  <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}}" for="modal-add-reminder-{{prospect.id}}" (click)="onCreateReminder()">Créer le rappel</label>
+  <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}}" for="{{prospect ? 'modal-add-reminder-{{prospect.id}}' : 'modal-add-prospect'}}"  (click)="onCreateReminder()">Créer le rappel</label>
 </div>

@@ -1,13 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
-import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
-import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
-import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
@@ -28,8 +24,6 @@ export class AddBookmarkModalComponent implements OnInit {
     private readonly meetingsService: MeetingsService,
     public readonly bookmarksService: BookmarksService,
     private readonly sentEmailsService: SentEmailsService,
-    private readonly eventsService: EventsService,
-    private readonly authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -47,13 +41,6 @@ export class AddBookmarkModalComponent implements OnInit {
     };
     this.bookmarksService.create(createBookmarkDto);
     this.prospectService.updateIsBookmarked(this.prospect.id, { isBookmarked: true });
-
-    this.eventsService.create({
-      type: EventType.ADD_BOOKMARKS,
-      prospect: this.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.ADD_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
-    });
   }
 
 }

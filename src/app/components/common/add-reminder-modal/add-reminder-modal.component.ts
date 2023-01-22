@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
-import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
-import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
+import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
-import { EventsService } from 'src/app/services/events/events.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
@@ -20,15 +17,14 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
 export class AddReminderModalComponent implements OnInit {
 
   @Input() prospect!: Prospect;
-  
+  @Input() createProspectDto!: CreateProspectDto;
+
   date!: Date;
   priority: number = 1;
   description: string = "";
 
   constructor(
     private readonly remindersService: RemindersService,
-    private readonly eventsService: EventsService,
-    private readonly authService: AuthService,
     private readonly prospectService: ProspectsService,
     private readonly meetingsService: MeetingsService,
     private readonly bookmarksService: BookmarksService,
@@ -41,35 +37,46 @@ export class AddReminderModalComponent implements OnInit {
 
   onCreateReminder() {
 
-    // Counting as a call
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
-      prospect: this.prospect,
-      date: new Date
-    });
+    if (this.prospect) {
+      // Counting as a call
+      (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
+        prospect: this.prospect,
+        date: new Date
+      });
 
-    // Incremeting the reminders
-    (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createReminderForMe();
+      // Incremeting the reminders
+      (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createReminderForMe();
 
-    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
-    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
-    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
-    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
-    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
-    
-    this.remindersService.create({
-      date: this.date,
-      priority: this.priority,
-      done: false,
-      description: this.description,
-      prospect: this.prospect,
-      creationDate: new Date
-    });
+      this.prospectService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+      this.remindersService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+      this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+      this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
+      this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.REMINDER });
 
-    this.eventsService.create({
-      type: EventType.ADD_REMINDER,
-      prospect: this.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.ADD_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
-    })
+      this.remindersService.create({
+        date: this.date,
+        priority: this.priority,
+        done: false,
+        description: this.description,
+        prospect: this.prospect,
+        creationDate: new Date
+      });
+
+      
+    } else if (this.createProspectDto) {
+
+      this.prospectService.create(
+        this.createProspectDto,
+        {
+          date: this.date,
+          priority: this.priority,
+          done: false,
+          description: this.description,
+          prospect: {} as Prospect,
+          creationDate: new Date
+        },
+        undefined
+        )
+    }
   }
 }

@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.0.3",
+        date: new Date("2023-01-22T00:00:00.000Z"),
+        bugs: [
+          
+          ],
+        features: [
+          "Ajout de la possibilité de classifier un prospect dès sa création"
+        ]
+      },
+      {
         version: "3.0.2",
         date: new Date("2023-01-22T00:00:00.000Z"),
         bugs: [

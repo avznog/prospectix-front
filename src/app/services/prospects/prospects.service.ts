@@ -1,12 +1,23 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { ReasonDisabledType } from 'src/app/constants/reasonDisabled.type';
 import { StageType } from 'src/app/constants/stage.type';
+import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
+import { CreateReminderDto } from 'src/app/dto/reminders/create-reminder.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
+import { BookmarksService } from '../bookmarks/bookmarks.service';
+import { EventsService } from '../events/events.service';
+import { MeetingsService } from '../meetings/meetings.service';
+import { RemindersService } from '../reminders/reminders.service';
+import { SentEmailsService } from '../sent-emails/sent-emails.service';
+import { StatisticsService } from '../statistics/statistics.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -25,7 +36,14 @@ export class ProspectsService {
 
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly bookmarkService: BookmarksService,
+    private readonly authService: AuthService,
+    private readonly remindersService: RemindersService,
+    private readonly sentEmailsService: SentEmailsService,
+    private readonly meetingsService: MeetingsService,
+    private readonly statisticsService: StatisticsService,
+    private readonly eventsService: EventsService
   ) { 
     this.loadMore();
   }
@@ -59,13 +77,106 @@ export class ProspectsService {
       this.countProspects();
   }
 
-  create(createProspectDto: CreateProspectDto) : Subscription {
+  create(createProspectDto: CreateProspectDto, createReminderDto?: CreateReminderDto, createMeetingDto?: CreateMeetingDto) : Subscription {
+    if(createProspectDto.stage == 5) {
+      createProspectDto.archived = new Date();
+    }
     return this.http.post<Prospect>(`prospects/create`, createProspectDto).subscribe(prospect => {
       this.prospects.set(prospect.id, prospect)
-      this.toastsService.addToast({
-        type: "alert-success",
-        message: `${createProspectDto.companyName} ajouté`
-      });
+
+      // ! depending on which category the prospect is sent to 
+      switch (createProspectDto.stage) {
+
+        // ? research
+        case 0:
+          this.toastsService.addToast({
+            type: "alert-success",
+            message: `${createProspectDto.companyName} ajouté`
+          });
+        break;
+
+        // ? bookmarks
+        case 1:
+          this.bookmarkService.create({
+            creationDate: new Date(),
+            prospect: prospect,
+          });
+        break;
+
+        // ? reminder
+        case 2:
+          createReminderDto!.prospect = prospect
+          this.remindersService.create(createReminderDto!)
+          this.statisticsService.createCallForMe({
+            prospect: prospect,
+            date: new Date
+          });
+    
+          this.statisticsService.createReminderForMe();
+        break;
+
+        // ? meeting
+        case 3:
+          createMeetingDto!.prospect = prospect;
+          this.meetingsService.create(createMeetingDto!)
+          this.statisticsService.createCallForMe({
+            prospect: prospect,
+            date: new Date
+          });
+          this.statisticsService.createMeetingFroMe();
+
+        break;
+
+        // ? mail
+        case 4:
+          // 
+          this.sentEmailsService.create({
+            date: new Date,
+            templateName: "",
+            object: "",
+            prospect: prospect,
+            pm: this.authService.currentUserSubject.getValue(),
+            sent: false,
+          });
+
+          this.statisticsService.createCallForMe({
+            prospect: prospect,
+            date: new Date
+          });
+
+          this.statisticsService.createSentEmailForMe();
+
+        break;
+      
+        // ? refus
+        case 5:
+          this.eventsService.create({
+            type: EventType.NEGATIVE_ANSWER,
+            prospect: prospect,
+            date: new Date,
+            description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
+          });
+
+          this.statisticsService.createCallForMe({
+            prospect: prospect,
+            date: new Date
+          });
+
+          this.statisticsService.createNegativeAnswerForMe({
+            prospect: prospect,
+            date: new Date
+          });
+
+          this.toastsService.addToast({
+            type: "alert-error",
+            message: `Refus pris pris en compte`
+          }); 
+        break;
+          
+        default:
+          break;
+      }
+      
     });
   }
 
@@ -88,10 +199,6 @@ export class ProspectsService {
   updateIsBookmarked(idProspect: number, isBookmarked: { isBookmarked: boolean }) : Subscription {
     return this.http.patch<Prospect>(`prospects/${idProspect}`, isBookmarked).subscribe(() => {
       this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, isBookmarked: isBookmarked.isBookmarked })
-      isBookmarked.isBookmarked && this.toastsService.addToast({
-        type: "alert-warning",
-        message: `${this.prospects.get(idProspect)!.companyName} ajouté aux favoris`
-      });
     });
   }
 
