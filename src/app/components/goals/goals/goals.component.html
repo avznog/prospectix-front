@@ -8,6 +8,7 @@
       <thead>
         <tr>
           <th>Chef de Projet</th>
+          <th>Photo</th>
           <!-- ? Name of the goal (goaltempalte name) -->
           <th *ngFor="let goalTemplate of goalTemplatesService.goalTemplates | keyvalue">
             <div class="flex justify-center space-x-5">
@@ -23,6 +24,7 @@
 
           <!-- Name of CDP -->
           <th>{{pmGoal.key.firstname}} {{pmGoal.key.name.toUpperCase()}}</th>
+          <th class=" bg-base-100 align-baseline w-10"><img [src]="pmGoal.key.profilePictureLink != '' ? pmGoal.key.profilePictureLink  : 'https://ssl.gstatic.com/s2/profiles/images/silhouette200.png'" class="h-full w-full rounded-full border border-solid border-primary"></th>
 
           <!-- Each goal value -->
           <td *ngFor="let goal of pmGoal.value">
