@@ -18,7 +18,8 @@ export class ChangelogsService {
           
           ],
         features: [
-          "Ajout de la possibilité de classifier un prospect dès sa création"
+          "Ajout de la possibilité de classifier un prospect dès sa création",
+          "Ajout des photos de profils: sur la page mon compte, dans la liste des utilisateurs, dans la liste des objectifs (watchtower) et dans la signature du template mail"
         ]
       },
       {

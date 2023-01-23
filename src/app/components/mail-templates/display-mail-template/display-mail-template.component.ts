@@ -10,7 +10,9 @@ export class DisplayMailTemplateComponent implements OnInit {
 
   @Input() mail_content: string = ""
   @Input() mailTemplate: MailTemplate = {} as MailTemplate;
-  constructor() { }
+
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
