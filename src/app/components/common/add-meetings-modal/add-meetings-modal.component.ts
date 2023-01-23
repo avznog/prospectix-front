@@ -4,6 +4,7 @@ import { EventDescriptionType } from 'src/app/constants/event-descriptions.type'
 import { EventType } from 'src/app/constants/event.type';
 import { MeetingType } from 'src/app/constants/meeting.type';
 import { StageType } from 'src/app/constants/stage.type';
+import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
@@ -29,6 +30,7 @@ export class AddMeetingsModalComponent implements OnInit {
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
   @Input() prospect!: Prospect;
   @Input() reminder!: Reminder;
+  @Input() createProspectDto: CreateProspectDto = {} as CreateProspectDto;
   
 
   constructor(
@@ -49,7 +51,8 @@ export class AddMeetingsModalComponent implements OnInit {
 
   onCreateMeeting() {
     if(this.googleService.logged){
-      this.prospect.stage == 2 && this.onMarkReminderDone();
+      if(this.prospect) {
+        this.prospect.stage == 2 && this.onMarkReminderDone();
 
       // count as a call
       (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createCallForMe({
@@ -73,13 +76,20 @@ export class AddMeetingsModalComponent implements OnInit {
         prospect: this.prospect,
         creationDate: new Date
       });
-  
-      this.eventsService.create({
-        type: EventType.ADD_MEETING,
-        prospect: this.prospect,
-        date: new Date,
-        description: `${EventDescriptionType.ADD_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
-      });
+
+      } else if (this.createProspectDto) {
+        this.prospectsService.create(
+          this.createProspectDto,
+          undefined,
+          {
+            type: this.type,
+            date: this.date,
+            done: false,
+            prospect: this.prospect,
+            creationDate: new Date
+          }
+        )
+      }
   
     } else {
       this.toastsService.addToast({

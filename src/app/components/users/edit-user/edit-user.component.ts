@@ -16,6 +16,7 @@ export class EditUserComponent implements OnInit {
   pseudo: string = "";
   email: string = "";
   emailCorrect: boolean = false;
+  profilePictureLink: string = "";
 
   constructor(
     private readonly usersService: UsersService
@@ -27,6 +28,7 @@ export class EditUserComponent implements OnInit {
     this.phone = this.user.phone;
     this.pseudo = this.user.pseudo;
     this.email = this.user.mail;
+    this.profilePictureLink = this.user.profilePictureLink;
     this.onCheckEmail();
   }
 
@@ -36,7 +38,8 @@ export class EditUserComponent implements OnInit {
       name: this.lastname,
       phone: this.phone,
       pseudo: this.pseudo,
-      mail: this.email
+      mail: this.email,
+      profilePictureLink: this.profilePictureLink
     });
   }
 

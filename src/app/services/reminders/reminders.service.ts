@@ -1,12 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateReminderDto } from 'src/app/dto/reminders/create-reminder.dto';
 import { UpdateReminderDto } from 'src/app/dto/reminders/update-reminder.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { ResearchParamsReminder } from 'src/app/models/research-params-reminder.model';
+import { EventsService } from '../events/events.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -26,7 +30,9 @@ export class RemindersService {
 
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) {
     this.loadMore();
     this.loadRemindersDone()
@@ -92,6 +98,13 @@ export class RemindersService {
         type: "alert-success",
         message: `Rappel avec ${createReminderDto.prospect.companyName} ajouté`
       });
+
+      this.eventsService.create({
+        type: EventType.ADD_REMINDER,
+        prospect: reminder.prospect,
+        date: new Date,
+        description: `${EventDescriptionType.ADD_REMINDER} ${this.authService.currentUserSubject.getValue().pseudo}`
+      })
     });
   }
 

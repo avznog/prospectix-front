@@ -1,11 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateBookmarkDto } from 'src/app/dto/bookmarks/create-bookmark.dto';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsBookmarks } from 'src/app/models/research-params-bookmarks.model';
+import { EventsService } from '../events/events.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -25,7 +29,9 @@ export class BookmarksService {
   
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { 
     this.loadMore();
   }
@@ -62,6 +68,19 @@ export class BookmarksService {
     return this.http.post<Bookmark>(`bookmarks`, createBookmarkDto).subscribe(bookmark => {
       this.bookmarks.set(bookmark.id, { ...bookmark, prospect: { ...bookmark.prospect, stage: StageType.BOOKMARK, isBookmarked: true }})
       this.nbBookmarks += 1;
+
+      this.toastsService.addToast({
+        type: "alert-warning",
+        message: `${createBookmarkDto.prospect.companyName} ajouté aux favoris`
+      });
+
+      // creating the bookmark
+      this.eventsService.create({
+        type: EventType.ADD_BOOKMARKS,
+        prospect: bookmark.prospect,
+        date: new Date,
+        description: `${EventDescriptionType.ADD_BOOKMARKS} ${this.authService.currentUserSubject.getValue().pseudo}`
+      });
     });
   }
 

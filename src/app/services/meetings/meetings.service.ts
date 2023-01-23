@@ -1,12 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { UpdateMeetingDto } from 'src/app/dto/meetings/update-meeting.dto';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsMeeting } from 'src/app/models/research-params-meeting.model';
+import { EventsService } from '../events/events.service';
 import { SlackService } from '../slack/slack.service';
 import { ToastsService } from '../toasts/toasts.service';
 
@@ -26,7 +30,9 @@ export class MeetingsService {
   constructor(
     private http: HttpClient,
     private readonly toastsService: ToastsService,
-    private readonly slackService: SlackService
+    private readonly slackService: SlackService,
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { 
     this.loadMore();
     this.loadMeetingsDone();
@@ -102,6 +108,12 @@ export class MeetingsService {
 
       this.http.get<number>(`meetings/count-weekly-for-me`).subscribe(count => count == 3 && this.slackService.sendChamp())
       
+      this.eventsService.create({
+        type: EventType.ADD_MEETING,
+        prospect: meeting.prospect,
+        date: new Date,
+        description: `${EventDescriptionType.ADD_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
+      });
     });
   }
 

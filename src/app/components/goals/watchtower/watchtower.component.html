@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th>Chef de Projet</th>
+          <th>Photo</th>
           <!-- ? Name of the goal (goaltempalte name) -->
           <th *ngFor="let goalTemplate of goalTemplatesService.goalTemplates | keyvalue">
             <ng-container *ngIf="goalTemplate.value.name == 'Appels' || goalTemplate.value.name == 'Rendez-vous'">
@@ -23,28 +24,36 @@
 
           <!-- Name of CDP -->
           <th>{{pmGoal.key.firstname}} {{pmGoal.key.name.toUpperCase()}}</th>
+          <td class="bg-base-100 align-baseline w-10"><img
+              [src]="pmGoal.key.profilePictureLink != '' ? pmGoal.key.profilePictureLink  : 'https://ssl.gstatic.com/s2/profiles/images/silhouette200.png'"
+              class="h-full w-full rounded-full border border-solid border-primary"></td>
           <!-- Each goal value -->
           <td *ngFor="let goal of pmGoal.value">
-           <ng-container *ngIf="goal.goalTemplate.name == 'Appels' || goal.goalTemplate.name == 'Rendez-vous'">
-            <div class="space-x-5 justify-center align-middle block w-full ">
-              <span class="align-middle" *ngIf="!goal.disabled && !goal.goalTemplate.disabled"> {{goal.goalTemplate.name == 'Rendez-vous' ? statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id) : statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)}}</span>
-              <progress
-              *ngIf="(goal.goalTemplate.name == 'Rendez-vous' || goal.goalTemplate.name == 'Appels') && !goal.disabled && !goal.goalTemplate.disabled"
-              class="justify-center progress-primary progress w-56 bg-base-300 {{goal.goalTemplate.name == 'Rendez-vous' && statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id)! || goal.goalTemplate.name == 'Appels' && statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)! >= goal.value ? 'progress-success' : 'progress-primary'}}"
-              value="{{goal.goalTemplate.name == 'Rendez-vous' ? statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id)! : statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)! }}"
-              max="{{goal.value}}">
-            </progress>
-            <span class="align-middle" *ngIf="!goal.disabled && !goal.goalTemplate.disabled">
-              {{goal.value}}
-            </span>
-            </div>
-            <svg *ngIf="goal.disabled || goal.goalTemplate.disabled" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-            </svg>
-           </ng-container>
-           
-          
-            </td>
+            <ng-container *ngIf="goal.goalTemplate.name == 'Appels' || goal.goalTemplate.name == 'Rendez-vous'">
+              <div class="space-x-5 justify-center align-middle block w-full">
+                <span class="align-middle" *ngIf="!goal.disabled && !goal.goalTemplate.disabled">
+                  {{goal.goalTemplate.name == 'Rendez-vous' ?
+                  statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id) :
+                  statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)}}</span>
+                <progress
+                  *ngIf="(goal.goalTemplate.name == 'Rendez-vous' || goal.goalTemplate.name == 'Appels') && !goal.disabled && !goal.goalTemplate.disabled"
+                  class="justify-center progress-primary progress w-56 bg-base-300 {{goal.goalTemplate.name == 'Rendez-vous' && statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id)! || goal.goalTemplate.name == 'Appels' && statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)! >= goal.value ? 'progress-success' : 'progress-primary'}}"
+                  value="{{goal.goalTemplate.name == 'Rendez-vous' ? statisticsService.weeklyAllMeetingsCount.get(pmGoal.key.id)! : statisticsService.weeklyAllCallsCount.get(pmGoal.key.id)! }}"
+                  max="{{goal.value}}">
+                </progress>
+                <span class="align-middle" *ngIf="!goal.disabled && !goal.goalTemplate.disabled">
+                  {{goal.value}}
+                </span>
+              </div>
+              <svg *ngIf="goal.disabled || goal.goalTemplate.disabled" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+              </svg>
+            </ng-container>
+
+
+          </td>
         </tr>
       </tbody>
     </table>

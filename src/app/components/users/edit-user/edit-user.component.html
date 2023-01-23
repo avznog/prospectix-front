@@ -18,13 +18,13 @@
         <input class="input input-bordered" type="text" placeholder="Ex: Gonzva" [(ngModel)]="lastname" />
       </label>
 
-      <!-- Tel -->
+      <!-- Pseudo -->
       <label class="input-group">
         <span>Pseudo</span>
         <input class="input input-bordered" type="text" placeholder="bgonzva" [(ngModel)]="pseudo" />
       </label>
 
-      <!-- Tel -->
+      <!-- Email -->
       <label class="input-group">
         <span>Email</span>
         <input class="input input-bordered" type="email" placeholder="bgonzva@juniorisep.com" [(ngModel)]="email" (input)="onCheckEmail()"/>
@@ -35,6 +35,12 @@
         <span>Téléphone portable</span>
         <input class="input input-bordered" type="text" placeholder="Ex: 06 54 34 23 32" [(ngModel)]="phone"
           maxlength="14" />
+      </label>
+
+      <!-- Photo de profil -->
+      <label class="input-group">
+        <span>Lien de la photo de profil</span>
+        <input class="input input-bordered" type="url" placeholder="https://maphotodeprofil.com" [(ngModel)]="profilePictureLink"/>
       </label>
 
       <!-- Button -->

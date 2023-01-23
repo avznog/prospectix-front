@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th></th>
+      <th>Photo</th>
       <th>Nom</th>
       <th>UID</th>
       <th>Email</th>
@@ -19,6 +20,7 @@
       *ngFor="let user of usersService.users | keyvalue | slice:usersService.researchParamsUsers.skip:usersService.researchParamsUsers.skip + 20"
       class="hover">
       <td>{{user.value.id}}</td>
+      <td class=" bg-base-100 align-baseline w-full h-fit"><img [src]="user.value.profilePictureLink != '' ? user.value.profilePictureLink  : 'https://ssl.gstatic.com/s2/profiles/images/silhouette200.png'" class="h-full w-full rounded-full border border-solid border-primary"></td>
       <td>{{user.value.name}}</td>
       <td>{{user.value.pseudo}}</td>
       <td>{{user.value.mail}}</td>

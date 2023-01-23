@@ -49,7 +49,7 @@ export class AddMailModalComponent implements OnInit {
       date: new Date
     });
 
-    // adding a count to the meetings
+    // adding a count to the sentemails
     (this.prospect.stage == 0 || this.prospect.stage == 1) && this.statisticsService.createSentEmailForMe();
 
     this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL });
@@ -64,14 +64,6 @@ export class AddMailModalComponent implements OnInit {
       prospect: this.prospect,
       pm: this.authService.currentUserSubject.getValue(),
       sent: false,
-    });
-
-    this.eventsService.create({
-      type: EventType.ADD_SENT_EMAIL,
-      date: new Date,
-      description: `${EventDescriptionType.ADD_SENT_EMAIL} ${this.authService.currentUserSubject.getValue().pseudo}`,
-      pm: this.authService.currentUserSubject.getValue(),
-      prospect: this.prospect
     });
   }
 

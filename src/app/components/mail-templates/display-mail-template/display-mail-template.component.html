@@ -135,6 +135,7 @@
     .mcnImage,
     .mcnRetinaImage {
       vertical-align: bottom;
+      border: solid 1px #6c61a8;
     }
 
     .mcnTextContent {
@@ -1084,11 +1085,9 @@
 
 
                                               <img alt=""
-                                                src="../../../../assets/logo_jisep.png"
+                                                src="{{mailTemplate.pm.profilePictureLink == '' ? '../../../../assets/logo_jisep.png' : mailTemplate.pm.profilePictureLink}}"
                                                 style="max-width: 400px;border-radius: 50%;"
-                                                class="mcnImage" width="132">
-
-
+                                                class="mcnImage" width="110">
 
                                             </td>
                                           </tr>

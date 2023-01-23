@@ -119,16 +119,43 @@
   <label class="btn btn-ghost btn-outline float float-left modal-button" for="add-city-modal">Ajouter une ville</label>
 
   <!-- Bouton créer le prospect -->
-  <label
-    class="btn btn-ghost btn-outline justify-center float float-right {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || activity == undefined ? 'btn-disabled' : ''}} "
-    for="modal-add-prospect" (click)="onCreateProspect()">Créer le prospect</label>
-</div>
+    <label
+    class="btn btn-ghost btn-outline float float-right justify-center modal-button {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || activity == undefined || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
+     (click)="onCreateProspect() " for="{{stage == 2 ? 'create-prospect-reminder' : stage == 3 ? 'create-prospect-meeting' : 'modal-add-prospect'}}">{{stage == 0 ? 'Créer le prospect' : stage == 1 ? 'Ajouter aux favoris' : stage == 2 ? 'Définir le rappel' : stage == 3 ? 'Définir le rendez-vous' : stage == 4 ? 'Ajouter aux mails' : stage == 5 ? 'Marquer comme refus' : 'Créer le prospect'}}</label>
 
+  <!-- select stage -->
+  <select class="select select-bordered float-right mr-5" [(ngModel)]="stage">
+    <option [ngValue]="0">Recherche</option>
+    <option [ngValue]="1">Favori</option>
+    <option [ngValue]="2">Rappel</option>
+    <option [ngValue]="3">Rendez-vous</option>
+    <option [ngValue]="4">Mail</option>
+    <option [ngValue]="5">Refus</option>
+  </select>
+
+  <label class="float float-right btn btn-outline btn-warning font-extralight btn-disabled bg-base-100 mr-5" *ngIf="stage == 1">{{bookmarksService.nbBookmarks + ' / ' +  bookmarksService.maxNbBookmarks + ' Favoris'}}</label>
+</div>
 
 <!-- modal button add city -->
 <input type="checkbox" id="add-city-modal" class="modal-toggle">
 <label for="add-city-modal" class="modal cursor-pointer">
   <label class="modal-box relative max-w-screen-md text-sm" for="">
     <app-add-city></app-add-city>
+  </label>
+</label>
+
+<!-- modal button create reminder Prospect -->
+<input type="checkbox" id="create-prospect-reminder" class="modal-toggle">
+<label *ngIf="stage == 2" for="create-prospect-reminder" class="modal cursor-pointer">
+  <label class="modal-box relative max-w-screen-md text-sm" for="">
+    <app-add-reminder-modal [createProspectDto]="createProspectDto"></app-add-reminder-modal>
+  </label>
+</label>
+
+<!-- modal button create Meeting prospect -->
+<input type="checkbox" id="create-prospect-meeting" class="modal-toggle">
+<label *ngIf="stage == 3" for="create-prospect-meeting" class="modal cursor-pointer">
+  <label class="modal-box relative max-w-screen-md text-sm" for="">
+    <app-add-meetings-modal [createProspectDto]="createProspectDto"></app-add-meetings-modal>
   </label>
 </label>

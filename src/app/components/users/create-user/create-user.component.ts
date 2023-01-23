@@ -16,6 +16,8 @@ export class CreateUserComponent implements OnInit {
   admin: boolean = false;
   disabled: boolean = false;
   statsEnabled: boolean = false;
+  profilePictureLink: string = "";
+
   constructor(
     private usersService: UsersService
   ) { }
@@ -33,7 +35,8 @@ export class CreateUserComponent implements OnInit {
       tokenGoogle: "",
       admin: this.admin,
       disabled: this.disabled,
-      statsEnabled: this.statsEnabled
+      statsEnabled: this.statsEnabled,
+      profilePictureLink: this.profilePictureLink
     });
   }
 }

@@ -1,12 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
+import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateSentEmailDto } from 'src/app/dto/sent-emails/create-sent-emails.dto';
 import { sendEmailDto } from 'src/app/dto/sent-emails/send-email.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsSentEmails } from 'src/app/models/research-params-sent-emails.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
+import { EventsService } from '../events/events.service';
 import { ToastsService } from '../toasts/toasts.service';
 
 @Injectable({
@@ -26,7 +30,9 @@ export class SentEmailsService {
 
   constructor(
     private http: HttpClient,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly eventsService: EventsService,
+    private readonly authService: AuthService
   ) { 
     this.loadMore();
     this.loadMoreSent();
@@ -82,7 +88,15 @@ export class SentEmailsService {
       this.nbSentEmails += 1;
       this.toastsService.addToast({
         type: "alert-success",
-        message: `Mail envoyé à ${createSentEmailDto.prospect.companyName}`
+        message: `${sentEmail.prospect.companyName} ajouté aux mails`
+      });
+
+      this.eventsService.create({
+        type: EventType.ADD_SENT_EMAIL,
+        date: new Date,
+        description: `${EventDescriptionType.ADD_SENT_EMAIL} ${this.authService.currentUserSubject.getValue().pseudo}`,
+        pm: this.authService.currentUserSubject.getValue(),
+        prospect: sentEmail.prospect
       });
     })
   }

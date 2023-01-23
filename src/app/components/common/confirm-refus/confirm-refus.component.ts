@@ -59,13 +59,6 @@ export class ConfirmRefusComponent implements OnInit {
     this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
     this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.ARCHIVED });
     
-    this.eventsService.create({
-      type: EventType.NEGATIVE_ANSWER,
-      prospect: this.prospect,
-      date: new Date,
-      description: `${EventDescriptionType.NEGATIVE_ANSWER} ${this.authService.currentUserSubject.getValue().pseudo}`
-    });
-    
     
   }
 
