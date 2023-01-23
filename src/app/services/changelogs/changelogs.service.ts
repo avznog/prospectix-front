@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.1",
+        date: new Date("2023-01-23T00:00:00.000Z"),
+        bugs: [
+          
+          ],
+        features: [
+          "Evolution vers yarn 3.3.1"
+        ]
+      },
+      {
         version: "3.0.3",
         date: new Date("2023-01-22T00:00:00.000Z"),
         bugs: [
