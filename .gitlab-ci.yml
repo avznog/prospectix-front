@@ -15,6 +15,8 @@ build-prod:
     paths:
       - .yarn/
       - yarn.lock
+  before_script:
+    - yarn set version berry
   script:
     - yarn install --immutable
     - yarn run build --configuration production
@@ -34,6 +36,8 @@ build-staging:
     paths:
       - .yarn/
       - yarn.lock
+  before_script:
+    - yarn set version berry
   script:
     - yarn install --immutable
     - yarn run build --configuration staging
@@ -42,6 +46,28 @@ build-staging:
       - dist/
   only:
     - staging
+
+build-dev:
+  stage: build
+  image: node:16.13-alpine
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn/
+      - yarn.lock
+  before_script:
+    - yarn set version berry
+  script:
+    - yarn install --immutable
+    - yarn run build --configuration staging
+  artifacts:
+    paths:
+      - dist/
+  except:
+    - staging
+    - master
 
 # DOCKER STAGE
 docker-staging:
@@ -68,6 +94,17 @@ docker-prod:
   dependencies:
     - build-prod
   only:
+    - master
+
+docker-dev:
+  stage: docker
+  image: docker:latest
+  script:
+    - docker build --tag $CI_REGISTRY_IMAGE:prod .
+  dependencies:
+    - build-dev
+  except:
+    - staging
     - master
 
 #DEPLOY STAGE
