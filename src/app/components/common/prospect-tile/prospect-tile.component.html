@@ -1,20 +1,20 @@
-<div class="card shadow-md bg-base-100 mb-5">
-  <div class="card-body w-full ">
+<div class="mb-5 shadow-md card bg-base-100">
+  <div class="w-full card-body ">
     <!-- FULL BAR TITLE -->
-    <div class="card-title w-full m-0 p-0">
+    <div class="w-full p-0 m-0 card-title">
       <!-- 1/2 NAME -->
       <div class="w-1/2">
         {{prospect.companyName | slice:0:30}} - {{prospect.activity.name | slice:0:40}}
       </div>
       <!-- 1/2 REST -->
-      <div class="w-1/2 inline-flex">
+      <div class="inline-flex w-1/2">
 
         <!-- 1/3 of 1/2 BUTTONS GOOGLE BOOKMARKS HISTORY -->
         <div class="w-1/3 space-x-5">
           <!-- Button search google -->
           <div (click)="onClickButtonGoogle()"
             class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
               fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -26,7 +26,7 @@
             <label for="add-bookmark-modal-{{prospect.id}}" 
             class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button {{bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks ? 'btn-disabled' : ''}}">
             <svg xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-inherit hover:stroke-primary fill-base-100 stroke-primary hover:text-base-100 hover:bg-opacity-0" stroke-width="1.5"
+              class="w-6 h-6 text-inherit hover:stroke-primary fill-base-100 stroke-primary hover:text-base-100 hover:bg-opacity-0" stroke-width="1.5"
               viewBox="0 0 20 20">
               <path
                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -48,7 +48,7 @@
           <label for="prospect-history-{{prospect.id}}"
             class="modal-button btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 "
             (click)="onClickDrawer()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-inherit hover:bg-opacity-0" fill="none"
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-inherit hover:bg-opacity-0" fill="none"
               viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -67,7 +67,7 @@
         </div>
 
         <!-- 1/3 of 1/2 (2nd / 3) STARS REMINDERS AND TYPE MEETING -->
-          <div class="w-1/4 inline-flex justify-center" *ngIf="prospect.stage != 0 && prospect.stage != 1">
+          <div class="inline-flex justify-center w-1/4" *ngIf="prospect.stage != 0 && prospect.stage != 1">
           <!-- etoiles rappels -->
           <div class="rating " *ngIf="reminder">
             <input type="radio" name="rating-priority"
@@ -93,8 +93,8 @@
 
           <!-- ? sent email object & template -->
           <div class="indicator tooltip" data-tip="Objet du mail sans la mention [Junior ISEP]">
-            <label class="btn btn-sm text-xs text-secondary btn-outline btn-disabled bg-base-100 max-h-fit" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8">
-              <span class="badge indicator-item truncate badge-primary badge-sm">{{sentEmail.templateName}}</span>
+            <label class="text-xs btn btn-sm text-secondary btn-outline btn-disabled bg-base-100 max-h-fit" *ngIf="sentEmail && sentEmail.sent && prospect.stage == 8">
+              <span class="truncate badge indicator-item badge-primary badge-sm">{{sentEmail.templateName}}</span>
               {{(sentEmail.object == '' ? 'Email envoyé' : sentEmail.object.replace("[Junior ISEP]", "")) | slice:0:30}}
             </label>
           </div>
@@ -114,7 +114,7 @@
           <!-- Button MODAL Edit prospect -->
           <label for="modal-prospect-edit-{{prospect.id}}" *ngIf="(prospect.stage == 2 || prospect.stage == 4) && !(reminder && reminder.done) && !(meeting && meeting.done)"
           class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -123,11 +123,11 @@
         </div>
 
         <!-- 2/3 BUTTONS DELETE / EDIT FOR RESEARCH BOOKMARKS ONLY -->
-        <div class="w-2/3 space-x-5 inline-flex justify-end" *ngIf="prospect.stage == 0 || prospect.stage == 1">
+        <div class="inline-flex justify-end w-2/3 space-x-5" *ngIf="prospect.stage == 0 || prospect.stage == 1">
           <!-- Button MODAL Edit prospect -->
           <label for="modal-prospect-edit-{{prospect.id}}"
             class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
               fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -138,7 +138,7 @@
           <label class="btn btn-primary btn-sm bg-base-100 text-primary modal-button hover:btn-error hover:text-base-100"
             for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" *ngIf="prospect.stage == 0 || prospect.stage == 1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
-              stroke="currentColor" class="h-6 w-6 text-inherit  hover:bg-opacity-0">
+              stroke="currentColor" class="w-6 h-6 text-inherit hover:bg-opacity-0">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>
@@ -146,11 +146,11 @@
         </div>
       </div>
     </div>
-    <div class="font-extralight p-0 m-0 overflow-clip text-ellipsis w-full" *ngIf="prospect.stage == 2 && reminder.description != ''">"{{reminder.description}}"</div>
-    <div class="divider m-0 p-0"></div>
+    <div class="w-full p-0 m-0 font-extralight overflow-clip text-ellipsis" *ngIf="prospect.stage == 2 && reminder.description != ''">"{{reminder.description}}"</div>
+    <div class="p-0 m-0 divider"></div>
 
     <!-- FULL CONTENT OF CARD -->
-    <div class="w-full inline-flex pb-0">
+    <div class="inline-flex w-full pb-0">
 
       <!-- INLINE FLEX 2/3 ADDRESS CONTACT ACTIONS-->
       <div class="w-2/3 space-y-3">
@@ -261,8 +261,8 @@
       <!-- 1/3 COMMENT -->
       <div class="w-1/3">
         <!-- FULL COMMENT -->
-        <div class="h-full w-full">
-          <textarea class="input input-sm input-bordered w-full bg-base-300 h-full placeholder:text-primary placeholder:opacity-30 " [(ngModel)]="comment"
+        <div class="w-full h-full">
+          <textarea class="w-full h-full input input-sm input-bordered bg-base-300 placeholder:text-primary placeholder:opacity-30 " [(ngModel)]="comment"
             placeholder="Modifier le commentaire (autosave)" (change)="onChangeComment()">
           </textarea>
         </div>
@@ -274,39 +274,39 @@
 <!-- ! MODALS -->
 <!-- modal button edit prospect -->
 <input type="checkbox" id="modal-prospect-edit-{{prospect.id}}" class="modal-toggle" />
-<label for="modal-prospect-edit-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-lg" for="">
+<label for="modal-prospect-edit-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative max-w-screen-lg modal-box" for="">
     <app-prospect-edit [prospect]="prospect" [reminder]="reminder && reminder" [sentEmail]="sentEmail && sentEmail"></app-prospect-edit>
   </label>
 </label>
 
 <!-- modal button add bookmarks -->
 <input type="checkbox" id="add-bookmark-modal-{{prospect.id}}" class="modal-toggle" />
-<label for="add-bookmark-modal-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-xs" for="add-bookmark-modal-{{prospect.id}}">
+<label for="add-bookmark-modal-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative modal-box max-w-screen-xs" for="add-bookmark-modal-{{prospect.id}}">
     <app-add-bookmark-modal [prospect]="prospect" [bookmark]="bookmark"></app-add-bookmark-modal>
   </label>
 </label>
 
 <!-- modal to add mail -->
 <input type="checkbox" id="add-mail-modal-{{prospect.id}}" class="modal-toggle" />
-<label for="add-mail-modal-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-xs" for="add-mail-modal-{{prospect.id}}">
+<label for="add-mail-modal-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative modal-box max-w-screen-xs" for="add-mail-modal-{{prospect.id}}">
     <app-add-mail-modal [prospect]="prospect" [reminder]="reminder" [meeting]="meeting"></app-add-mail-modal>
   </label>
 </label>
 
 <!-- modal mark mail done -->
 <input type="checkbox" id="mark-sentEmail-sent-{{prospect.id}}" class="modal-toggle" />
-<label for="mark-sentEmail-sent-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-xs" for="">
+<label for="mark-sentEmail-sent-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative modal-box max-w-screen-xs" for="">
     <app-mark-sent-email-sent [prospect]="prospect" [sentEmail]="sentEmail"></app-mark-sent-email-sent>
   </label>
 </label>
 
 <!-- modal to add meeting -->
 <input type="checkbox" id="modal-add-meeting-{{prospect.id}}" class="modal-toggle" />
-<label class="modal cursor-pointer" for="modal-add-meeting-{{prospect.id}}">
+<label class="cursor-pointer modal" for="modal-add-meeting-{{prospect.id}}">
   <label class="modal-box" for="">
     <app-add-meetings-modal [prospect]="prospect" [reminder]="reminder"></app-add-meetings-modal>
   </label>
@@ -315,7 +315,7 @@
 <!-- Modal to add reminder -->
 
 <input type="checkbox" id="modal-add-reminder-{{prospect.id}}" class="modal-toggle" />
-<label class="modal cursor-pointer" for="modal-add-reminder-{{prospect.id}}">
+<label class="cursor-pointer modal" for="modal-add-reminder-{{prospect.id}}">
   <label class="modal-box" for="">
     <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
   </label>
@@ -323,48 +323,48 @@
 
 <!-- modal button prospect pas pertinent (trash) -->
 <input type="checkbox" id="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="modal-toggle" />
-<label for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-md text-sm" for="">
+<label for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="cursor-pointer modal">
+  <label class="relative max-w-screen-md text-sm modal-box" for="">
     <app-disable-prospect-modal [prospect]="prospect && prospect" [bookmark]="bookmark && bookmark"></app-disable-prospect-modal>
   </label>
 </label>
 
 <!-- modal button refus -->
 <input type="checkbox" id="confirm-refus-{{prospect.id}}" class="modal-toggle">
-<label for="confirm-refus-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-md text-sm" for="">
+<label for="confirm-refus-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative max-w-screen-md text-sm modal-box" for="">
     <app-confirm-refus [prospect]="prospect" [reminder]="reminder"></app-confirm-refus>
   </label>
 </label>
 
 <!-- modal button passage en pro -->
 <input type="checkbox" id="confirm-pro-{{prospect.id}}" class="modal-toggle">
-<label for="confirm-pro-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-md text-sm" for="">
+<label for="confirm-pro-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative max-w-screen-md text-sm modal-box" for="">
     <app-confirm-pro [prospect]="prospect" [meeting]="meeting"></app-confirm-pro>
   </label>
 </label>
 
 <!-- modal button meeting effectué -->
 <input type="checkbox" id="mark-meeting-done-and-out-{{prospect.id}}" class="modal-toggle">
-<label for="mark-meeting-done-and-out-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-md text-sm" for="">
+<label for="mark-meeting-done-and-out-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative max-w-screen-md text-sm modal-box" for="">
     <app-mark-meeting-done-and-out [prospect]="prospect" [meeting]="meeting"></app-mark-meeting-done-and-out>
   </label>
 </label>
 
 <!-- modal button prospect history -->
 <input type="checkbox" id="prospect-history-{{prospect.id}}" class="modal-toggle">
-<label for="prospect-history-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-md text-sm" for="">
+<label for="prospect-history-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative max-w-screen-md text-sm modal-box" for="">
     <app-prospect-history [prospect]="prospect && prospect"></app-prospect-history>
   </label>
 </label>
 
 <!-- modal button edit time reminder -->
 <input *ngIf="reminder || meeting" type="checkbox" id="edit-date-reminder-meeting-{{prospect.id}}" class="modal-toggle">
-<label *ngIf="reminder || meeting" for="edit-date-reminder-meeting-{{prospect.id}}" class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-md text-sm" for="">
+<label *ngIf="reminder || meeting" for="edit-date-reminder-meeting-{{prospect.id}}" class="cursor-pointer modal">
+  <label class="relative max-w-screen-md text-sm modal-box" for="">
    <app-edit-date-reminder-meeting [prospect]="prospect" [reminder]="reminder && reminder" [meeting]="meeting && meeting"></app-edit-date-reminder-meeting>
   </label>
 </label>
