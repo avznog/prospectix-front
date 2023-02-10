@@ -6,5 +6,5 @@ export interface sendEmailDto {
   prospect: Prospect;
   object: string;
   withPlaquetteJisep: boolean;
-  withPlaquetteSkisep: boolean;
+  withPlaquetteSkema: boolean;
 }

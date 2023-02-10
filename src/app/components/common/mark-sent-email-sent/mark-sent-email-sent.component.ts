@@ -29,7 +29,7 @@ export class MarkSentEmailSentComponent implements OnInit {
   chosenTemplate: MailTemplate = undefined as unknown as MailTemplate;
   object: string = "";
   withPlaquetteJisep: boolean = true;
-  withPlaquetteSkisep: boolean = true;
+  withPlaquetteSkema: boolean = true;
   correctEmail : boolean = false;
   email: string = "";
   emailGotChanged: boolean = false;
@@ -68,7 +68,7 @@ export class MarkSentEmailSentComponent implements OnInit {
         },
         object: "[Junior ISEP] " + this.object,
         withPlaquetteJisep: this.withPlaquetteJisep,
-        withPlaquetteSkisep: this.withPlaquetteSkisep
+        withPlaquetteSkema: this.withPlaquetteSkema
       },
       this.sentEmail.id);
   
