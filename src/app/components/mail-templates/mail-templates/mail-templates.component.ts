@@ -57,7 +57,8 @@ export class MailTemplatesComponent implements OnInit {
       clientName: "M. Taliafiko",
       mailTemplateId: this.currentTemplate != 'creation' ? this.currentTemplate.id : 0,
       object: "[TEST] Retour sur notre appel",
-      withPlaquette: true,
+      withPlaquetteJisep: true,
+      withPlaquetteSkisep: true,
       prospect: {
         "id": 256,
         "companyName": "S.a.e.m.o La Roseraie",
