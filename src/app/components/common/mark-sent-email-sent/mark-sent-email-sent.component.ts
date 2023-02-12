@@ -28,10 +28,12 @@ export class MarkSentEmailSentComponent implements OnInit {
   clientName: string =  "";
   chosenTemplate: MailTemplate = undefined as unknown as MailTemplate;
   object: string = "";
-  withPlaquette: boolean = true;
+  withPlaquetteJisep: boolean = true;
+  withPlaquetteSkema: boolean = true;
   correctEmail : boolean = false;
   email: string = "";
   emailGotChanged: boolean = false;
+  contentModified: string = "";
 
   constructor(
     private readonly prospectService: ProspectsService,
@@ -55,7 +57,7 @@ export class MarkSentEmailSentComponent implements OnInit {
   onClickMarkSentEmailSent() {
     if(this.googleService.logged) {
       this.emailGotChanged && this.updateEmailOnProspect();
-      this.sentEmailsService.send({
+      const sendEmailDto = {
         clientName: this.clientName,
         mailTemplateId: this.chosenTemplate.id,
         prospect: {
@@ -66,9 +68,17 @@ export class MarkSentEmailSentComponent implements OnInit {
           }
         },
         object: "[Junior ISEP] " + this.object,
-        withPlaquette: this.withPlaquette
-      },
-      this.sentEmail.id);
+        withPlaquetteJisep: this.withPlaquetteJisep,
+        withPlaquetteSkema: this.withPlaquetteSkema
+      };
+
+      let emailToSend = undefined;
+      if(this.contentModified != this.chosenTemplate.content) {
+        emailToSend = { ...sendEmailDto, mailTemplateModified: this.contentModified};
+      } else {
+        emailToSend = sendEmailDto;
+      }
+      this.sentEmailsService.send(emailToSend, this.sentEmail.id);
   
       this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
       this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
@@ -130,4 +140,8 @@ export class MarkSentEmailSentComponent implements OnInit {
     this.sentEmailsService.sentEmails.set(this.sentEmail.id, { ...this.sentEmail, prospect: { ...this.sentEmail.prospect, ...edit}})
 
   }
+
+  templateChanged() {
+    this.chosenTemplate && (this.contentModified = this.chosenTemplate.content);
+  } 
 }

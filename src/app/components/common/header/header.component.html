@@ -3,13 +3,15 @@
   *ngIf="authService.loggedInSubject && !router.url.includes('oauth2callback')">
 
   <!-- left part of navbar -->
-  <div class="flex-1 menu horizontal space-x-2">
+  <div class="flex-1 space-x-2 menu horizontal">
 
     <!-- Prospectix logo button -->
       <!-- <app-prospectix-logo [class]="'w-10 h-10'"></app-prospectix-logo> -->
-      <img class="h-10" src="../../../../assets/logo_ligne_couleur.png"> <!-- ? default logo -->
+      <!-- <img class="h-10" src="../../../../assets/logo_ligne_couleur.png"> --> <!-- ? default logo -->
       <!-- <img class="h-10" src="../../../../assets/logo_ligne_couleur_xmax.png">  <!-- ? Xmas logo -->
       <!-- <img class="h-10" src="../../../../assets/logo_ligne_couleur_halloween.png"> --> <!-- ? halloween version -->
+      <img class="h-10" src="../../../../assets/logo_ligne_couleur_valentine.png"> <!-- ? valentine version -->
+      
 
     <!-- ! Versions button -->
     <li>
@@ -117,7 +119,7 @@
       <label tabindex="0"
         class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
         == "/users" ? 'User' : router.url == "/goals" ? 'Objectifs' : router.url == '/watchtower' ? 'Tour de contrôle' : 'Admin'}}</label>
-      <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 w-60 outline outline-1">
+      <ul tabindex="0" class="p-2 mt-4 shadow menu dropdown-content bg-base-100 rounded-box w-60 outline outline-1">
 
         <!-- ? Page users -->
         <li routerLink="/users"><a 
@@ -149,7 +151,7 @@
           </path>
         </svg>
       </div>
-      <div class="dropdown-content bg-opacity-0">
+      <div class="bg-opacity-0 dropdown-content">
         <app-theme-picker></app-theme-picker>
       </div>
 
@@ -158,7 +160,7 @@
     <!-- ! Boutton mon compte -->
     <li routerLink="account" class="{{dataThemeService.dataTheme == 'jisep' ? router.url == '/account' ? 'border-secondary' : 'hover:border-secondary border-neutral': router.url == '/account' ? 'border-primary' : 'hover:border-primary border-neutral'}}">
       <a class="bg-opacity-0 border-inherit">
-        <img [src]="authService.currentUserSubject.getValue().profilePictureLink != '' ? authService.currentUserSubject.getValue().profilePictureLink  : 'https://ssl.gstatic.com/s2/profiles/images/silhouette200.png'" class="w-6 h-6 rounded-full border-solid border-inherit border">        
+        <img [src]="authService.currentUserSubject.getValue().profilePictureLink != '' ? authService.currentUserSubject.getValue().profilePictureLink  : 'https://ssl.gstatic.com/s2/profiles/images/silhouette200.png'" class="w-6 h-6 border border-solid rounded-full border-inherit">        
       </a>
     </li>
 
@@ -181,12 +183,12 @@
 
 <!-- modal version -->
 <input type="checkbox" id="modal-version" class="modal-toggle" />
-<label for="modal-version" class="modal cursor-pointer">
-  <label class="modal-box max-w-screen-lg" for="">
-    <label for="modal-version" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+<label for="modal-version" class="cursor-pointer modal">
+  <label class="max-w-screen-lg modal-box" for="">
+    <label for="modal-version" class="absolute btn btn-sm btn-circle right-2 top-2">✕</label>
     <div class="w-full">
       <span class="text-xl font-bold stroke-current">Dev /w ❤️ by your pôle tech, started by Benjamin GONZVA <a
-          href="https://www.instagram.com/ben.gonzva/" target="_blank" class="link-primary font-thin"
+          href="https://www.instagram.com/ben.gonzva/" target="_blank" class="font-thin link-primary"
           *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin">(@ben.gonzva)
         </a></span>
       <ul>
