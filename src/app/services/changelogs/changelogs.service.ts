@@ -12,6 +12,18 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.1.1",
+        date: new Date("2023-02-12T00:00:00.000Z"),
+        bugs: [
+          "Résolution du bug qui ne justifiait pas le texte lors de l'envoi d'un mail",
+          "Résolution du bug qui affichait deux fois le header d'un mail"
+          ],
+        features: [
+          "Ajout de la possiblité de modifier le contenu du template depuis la page d'envoi de mail",
+          "Ajout de la plaquette de Skema Conseil (en pièce jointe d'un mail)"
+        ]
+      },
+      {
         version: "3.1",
         date: new Date("2023-01-23T00:00:00.000Z"),
         bugs: [
