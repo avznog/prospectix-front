@@ -10,8 +10,8 @@ import { StatisticsService } from 'src/app/services/statistics/statistics.servic
 })
 export class WatchtowerComponent implements OnInit {
 
-  dateDown: Date = new Date();
-  dateUp: Date = new Date();
+  weeks: {dateDown: Date, dateUp: Date}[] = []
+  interv: {dateDown: Date, dateUp: Date} | undefined = { dateDown: new Date(), dateUp: new Date() }
   constructor(
     public readonly pmService: ProjectManagersService,
     public readonly statisticsService: StatisticsService,
@@ -21,26 +21,21 @@ export class WatchtowerComponent implements OnInit {
   ngOnInit(): void {
     this.statisticsService.countWeeklyAllCalls();
     this.statisticsService.countWeeklyAllMeetings();
-    this.dateDown = this.getMonday();
-    this.statisticsService.countAllCallsByWeeksForWatchtower({ dateDown: this.dateDown, dateUp: this.dateUp })
-    this.statisticsService.countAllMeetingsByWeeksForWatchtower({ dateDown: this.dateDown, dateUp: this.dateUp })
+    this.interv = {dateDown: this.getMonday(new Date()), dateUp: new Date()};
+    this.statisticsService.countAllCallsByWeeksForWatchtower({ dateDown: this.interv.dateDown, dateUp: this.interv.dateUp })
+    this.statisticsService.countAllMeetingsByWeeksForWatchtower({ dateDown: this.interv.dateDown, dateUp: this.interv.dateUp })
+    this.getWeeks()
+    this.interv = undefined;
   }
 
-  onClickCurrentWeek() {
-    this.dateDown = this.getMonday();
-    this.dateUp = new Date();
-    this.statisticsService.countAllCallsByWeeksForWatchtower({ dateDown: this.dateDown, dateUp: this.dateUp })
-    this.statisticsService.countAllMeetingsByWeeksForWatchtower({ dateDown: this.dateDown, dateUp: this.dateUp })
+  thisWeek() {
+    this.interv = {dateDown: this.getMonday(new Date()), dateUp: new Date()};
+    this.statisticsService.countAllCallsByWeeksForWatchtower({ dateDown: this.interv.dateDown, dateUp: this.interv.dateUp })
+    this.statisticsService.countAllMeetingsByWeeksForWatchtower({ dateDown: this.interv.dateDown, dateUp: this.interv.dateUp })
+    this.interv = undefined;
   }
 
-  onChangeDate() {
-    this.statisticsService.countAllCallsByWeeksForWatchtower({dateDown: this.dateDown, dateUp: this.dateUp})
-    this.statisticsService.countAllMeetingsByWeeksForWatchtower({ dateDown: this.dateDown, dateUp: this.dateUp })
-
-  }
-
-  getMonday() {
-    const today = new Date();
+  getMonday(today: Date) {
     //  ? getting the monday of the week
     // const monday = new Date(today.setDate(firstd));
     const date = new Date(today);
@@ -51,4 +46,18 @@ export class WatchtowerComponent implements OnInit {
     return new Date(date.setDate(diff));
   }
 
+  getWeeks() {
+    this.weeks = [];
+    this.weeks.pop();
+    let firstDate = this.getMonday(new Date(this.statisticsService.startDateForChartsInterval));
+    while(firstDate < new Date()) {
+      const monday = new Date(firstDate);
+      const sunday = new Date(new Date(firstDate).setDate(firstDate.getDate() + 6));
+      monday.setHours(1,0,0,0)
+      sunday.setHours(23,59,59,999)
+      this.weeks.push({dateDown: monday, dateUp: sunday})
+      firstDate = new Date(firstDate.setDate(firstDate.getDate() + 7))
+    }
+    this.weeks.sort(interval => +interval.dateDown + +interval.dateUp)
+  }
 }

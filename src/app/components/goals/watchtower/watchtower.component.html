@@ -1,20 +1,16 @@
 <div class="p-5 space-y-5">
-  <div class="inline-flex w-full p-0 pt-5 pb-1">
-    <label class="inline-flex justify-center w-1/2 space-x-5 font-bold">
-      Date de départ
+  <div class="justify-center float ">
+    <label class="label" for="week">
+      <span class="label-text">Semaine</span>
     </label>
-    <label class="inline-flex justify-center w-1/2 space-x-5 font-bold">
-      Date de fin
-    </label>
-  </div>
-  <div class="inline-flex w-full p-5 pt-0 space-x-5">
-    <label class="inline-flex justify-center w-1/2 space-x-5">
-      <input type="date" class="w-full datepicker input" [(ngModel)]="dateDown" (change)="onChangeDate()"/>
-    </label>
-    <label class="inline-flex justify-center w-1/2 space-x-5">
-      <input type="date" class="w-full datepicker input" [(ngModel)]="dateUp" (change)="onChangeDate()"/>
-      <label class="btn btn-outline" (click)="onClickCurrentWeek()">Cette semaine</label>
-    </label>
+    <div class="inline-flex">
+      <!-- select week -->
+      <select id="week" name="week" class="select select-bordered" [(ngModel)]="interv" (change)="interv ? statisticsService.countAllCallsByWeeksForWatchtower(interv) && statisticsService.countAllMeetingsByWeeksForWatchtower(interv) : thisWeek();">
+        <option selected [defaultSelected]="true" [ngValue]="undefined">Cette semaine</option>
+        <option *ngFor="let week of weeks" [ngValue]="{dateDown: week.dateDown, dateUp: week.dateUp}" >{{week.dateDown | date}} - {{week.dateUp | date}}</option>
+      </select>
+
+    </div>
   </div>
 
   <div class="overflow-y-hidden">
