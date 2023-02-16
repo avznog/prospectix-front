@@ -78,6 +78,10 @@ export class StatisticsService {
   primaryColor: string = "";
   secondaryColor: string = "";
 
+  // ! for watchtower
+  currentCallsWeekForWatchtower = new Map<number, number>();
+  currentMeetingsWeekForWatchtower = new Map<number, number>();
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -214,6 +218,28 @@ export class StatisticsService {
       this.currentPage == 'activity' && this.watchForAllStatsLoaded(0)
 
       });
+  }
+
+  countAllCallsByWeeksForWatchtower(interval: {dateDown: Date, dateUp: Date}) {
+    let httpParameters = new HttpParams();
+    httpParameters = httpParameters.append("dateDown", new Date(interval.dateDown).toISOString())
+    httpParameters = httpParameters.append("dateUp", new Date(interval.dateUp).toISOString());
+    return this.http.get<{id: number, count: number}[]>(`calls/count-calls-for-week-all-pm`, { params: httpParameters }).subscribe(response => {
+      response.forEach(element => {
+        this.currentCallsWeekForWatchtower.set(element.id, element.count)
+      })
+    })
+  }
+
+  countAllMeetingsByWeeksForWatchtower(interval: {dateDown: Date, dateUp: Date}) {
+    let httpParameters = new HttpParams();
+    httpParameters = httpParameters.append("dateDown", new Date(interval.dateDown).toISOString())
+    httpParameters = httpParameters.append("dateUp", new Date(interval.dateUp).toISOString());
+    return this.http.get<{id: number, count: number}[]>(`meetings/count-meetings-for-week-all-pm`, { params: httpParameters }).subscribe(response => {
+      response.forEach(element => {
+        this.currentMeetingsWeekForWatchtower.set(element.id, element.count)
+      })
+    })
   }
 
   //? all reminders
@@ -358,7 +384,6 @@ export class StatisticsService {
 
   countWeeklyAllMeetings() {
     this.http.get<{id: number, count: number}[]>(`meetings/count-weekly-all`).subscribe(weeklyAllMeetings => {
-      console.log(weeklyAllMeetings)
       this.weeklyAllMeetingsCount.clear();
       weeklyAllMeetings.forEach(weeklyMeeting => {
         this.weeklyAllMeetingsCount.set(weeklyMeeting.id, weeklyMeeting.count)
