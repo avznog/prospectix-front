@@ -12,6 +12,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.1.2",
+        date: new Date("2023-02-16T00:00:00.000Z"),
+        bugs: [
+          ],
+        features: [
+          "Suppression du logo de la saint Valentin",
+          "Ajout du tri par semaines pour la tour de contrôle"
+        ]
+      },
+      {
         version: "3.1.1",
         date: new Date("2023-02-12T00:00:00.000Z"),
         bugs: [
