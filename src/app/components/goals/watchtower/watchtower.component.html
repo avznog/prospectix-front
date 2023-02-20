@@ -5,7 +5,7 @@
     </label>
     <div class="inline-flex">
       <!-- select week -->
-      <select id="week" name="week" class="select select-bordered" [(ngModel)]="interv" (change)="interv ? statisticsService.countAllCallsByWeeksForWatchtower(interv) && statisticsService.countAllMeetingsByWeeksForWatchtower(interv) : thisWeek();">
+      <select id="week" name="week" class="select select-bordered" [(ngModel)]="interv" (change)="setH(); interv ? statisticsService.countAllCallsByWeeksForWatchtower(interv) && statisticsService.countAllMeetingsByWeeksForWatchtower(interv) : thisWeek();">
         <option selected [defaultSelected]="true" [ngValue]="undefined">Cette semaine</option>
         <option *ngFor="let week of weeks" [ngValue]="{dateDown: week.dateDown, dateUp: week.dateUp}" >{{week.dateDown | date}} - {{week.dateUp | date}}</option>
       </select>

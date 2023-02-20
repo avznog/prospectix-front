@@ -43,7 +43,7 @@ export class WatchtowerComponent implements OnInit {
     // 👇️ day of month - day of week (-6 if Sunday), otherwise +1
     const diff = date.getDate() - day + (day === 0 ? -6 : 1);
 
-    return new Date(date.setDate(diff));
+    return new Date(new Date(date.setDate(diff)).setHours(1,0,0,0));
   }
 
   getWeeks() {
@@ -59,5 +59,9 @@ export class WatchtowerComponent implements OnInit {
       firstDate = new Date(firstDate.setDate(firstDate.getDate() + 7))
     }
     this.weeks.sort(interval => +interval.dateDown + +interval.dateUp)
+  }
+
+  setH() {
+    this.interv && (this.interv.dateDown = new Date(this.interv.dateDown.setHours(1,0,0,0)));
   }
 }
