@@ -121,7 +121,7 @@ export class MarkSentEmailSentComponent implements OnInit {
   }
 
   checkFormatEmail() {
-    new RegExp("[a-z0-9]+@[a-z]+\.[a-z]{2,3}").test(this.email) ? this.correctEmail = true : this.correctEmail = false;
+    new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g).test(this.email) ? this.correctEmail = true : this.correctEmail = false;
   }
 
   updateEmailOnProspect() {
