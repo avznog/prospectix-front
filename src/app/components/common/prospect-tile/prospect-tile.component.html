@@ -4,7 +4,7 @@
     <div class="w-full p-0 m-0 card-title">
       <!-- 1/2 NAME -->
       <div class="w-1/2">
-        {{prospect.companyName | slice:0:30}} - {{prospect.activity.name | slice:0:40}}
+        {{prospect.activity.weight ?? 'NA'}}. {{prospect.companyName | slice:0:30}} - {{prospect.activity.name | slice:0:40}}
       </div>
       <!-- 1/2 REST -->
       <div class="inline-flex w-1/2">

@@ -362,7 +362,7 @@ export class StatisticsService {
     this.weeklyReminders += 1;
   }
 
-  createMeetingFroMe() {
+  createMeetingForMe() {
     this.allMyMeetings += 1;
     this.weeklyMeetings += 1;
   }

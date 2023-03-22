@@ -61,7 +61,7 @@ export class AddMeetingsModalComponent implements OnInit {
       });
   
       // Incrementing the meetings count
-      this.statisticsService.createMeetingFroMe();
+      this.statisticsService.createMeetingForMe();
   
       this.prospectsService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
       this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MEETING });
