@@ -1,3 +1,4 @@
 export interface CreateActivityDto {
-    name: string;
+	name: string;
+	weight: number;
 }
