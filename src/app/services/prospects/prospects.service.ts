@@ -10,7 +10,6 @@ import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { UpdateProspectDto } from 'src/app/dto/prospects/update-prospects.dto';
 import { CreateReminderDto } from 'src/app/dto/reminders/create-reminder.dto';
-import { Activity } from 'src/app/models/activity.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsProspect } from 'src/app/models/research-params-prospect.model';
 import { BookmarksService } from '../bookmarks/bookmarks.service';
@@ -194,11 +193,7 @@ export class ProspectsService {
   }
 
   updateNbNo(idProspect: number, nbNo: { nbNo: number }) : Subscription {
-    return this.http.patch<Prospect>(`prospects/${idProspect}`, nbNo).subscribe(() => {
-      this.http.get<Activity>(`activities/adjustWeightNbNo/${this.prospects.get(idProspect)!.activity.id}`).subscribe(activity => {
-        this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, nbNo: nbNo.nbNo})
-      })
-    });
+    return this.http.patch<Prospect>(`prospects/${idProspect}`, nbNo).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, nbNo: nbNo.nbNo }));
   }
 
   updateIsBookmarked(idProspect: number, isBookmarked: { isBookmarked: boolean }) : Subscription {
