@@ -12,6 +12,15 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.2",
+        date: new Date("2023-03-31T00:00:00.000Z"),
+        bugs: [
+          ],
+        features: [
+          "Ajout de la fonctionnnalité de notation / qualification d'un prospect : chaque catégorie de prospect a un poids (entre 0 et 1). Selon l'action qu'un utilisateur effectue sur un prospect, il affine le poids de la catégorie de ce dernier"
+        ]
+      },
+      {
         version: "3.1.2",
         date: new Date("2023-02-16T00:00:00.000Z"),
         bugs: [
