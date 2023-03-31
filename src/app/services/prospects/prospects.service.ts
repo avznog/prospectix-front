@@ -123,7 +123,7 @@ export class ProspectsService {
             prospect: prospect,
             date: new Date
           });
-          this.statisticsService.createMeetingFroMe();
+          this.statisticsService.createMeetingForMe();
 
         break;
 

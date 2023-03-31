@@ -72,7 +72,8 @@ export class MailTemplatesComponent implements OnInit {
         "reasonDisabled": ReasonDisabledType.ENTREPRISE_FERMEE,
         "activity": {
           "id": -1,
-          "name": ""
+          "name": "",
+          "weight": 0
         },
         "city": {
           "id": 2,
