@@ -13,6 +13,8 @@ export class ResearchBlocComponent implements OnInit {
   formActivity: string = "allActivities";
   formZipcode: number = -1000;
 
+  mainActivity: string | null = "null";
+
   constructor(
     public readonly activitiesService: ActivitiesService,
     public readonly citiesService: CitiesService,

@@ -1,43 +1,65 @@
-<div class="inline-flex justify-items-center items-end space-x-5 mb-5 w-full">
+<div class="inline-flex p-5 space-x-5">
     <!-- Search a prospect - overrides the other filters -->
-    <div class="form-control w-full max-w-xs">
+    <div class="w-1/5">
         <label class="label" for="search">
             <span class="label-text">Recherche</span>
         </label>
         <input type="search" [(ngModel)]="formKeyword" (keyup.enter)="onEditKeyword()" placeholder="Recherche (entrée pour valider)"
-            class="input input-bordered w-full max-w-xs" />
+            class="w-full max-w-xs input input-bordered" />
     </div>
 
     <!-- Select activity domain -->
-    <div class="form-control w-full max-w-xs">
-        <label class="label" for="activity">
-            <span class="label-text">Domaine d'activité</span>
-        </label>
-        <select id="activity" name="activity" [(ngModel)]="formActivity" (change)="onEditActivity()"
-            class="select select-bordered">
-            <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'activité</option>
-            <option *ngFor="let activity of activitiesService.activities" [value]="activity.name">{{activity.name}}  ({{activitiesService.countActvities.get(activity.id)}})</option>
-        </select>
-    </div>
+    
+        <!-- ? Primary -->
+        <div class="w-1/5">
+            <label class="label" for="activity">
+                <span class="w-full label-text">Domaine d'activité Primaire</span>
+            </label>
+            <!-- <select id="activity" name="activity" [(ngModel)] class="select select-bordered"> -->
+            <select id="activity" name="activity" [(ngModel)]="mainActivity" class="w-full select select-bordered">
+                <option [ngValue]="null">Domaines primaires</option>
+                <!-- <option *ngFor="let activity of activitiesService.activities" [value]="activity.name">{{activity.name}}  ({{activitiesService.countActvities.get(activity.id)}})</option> -->
+                <option [ngValue]="'Restaurantion / Alimentation'" class="max-w-fit">Restaurantion / Alimentation</option>
+                <option [ngValue]="'Services aux particuliers'">Services aux particuliers</option>
+                <option>Services aux entreprises</option>
+                <option>Immobilier</option>
+                <option>Art / décoration</option>
+                <option>Services divers</option>
+            </select>
+        </div>
+        
+        <!-- ? Secondary  -->
+        <div *ngIf="mainActivity != null" class="w-1/5">
+            <label class="label" for="activity">
+                <span class="label-text">Domaine d'activité</span>
+            </label>
+            <select id="activity" name="activity" 
+                class="w-full select select-bordered">
+                <!-- <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'ùezklhfjkezlrjfmlkerzjfklerzjflkjzermfkjezrmkfjmerzkjfmekrzjlactivité</option> -->
+                <!-- <option *ngFor="let activity of activitiesService.activities" [value]="activity.name">{{activity.name}}  ({{activitiesService.countActvities.get(activity.id)}})</option> -->
+                <option>Mes domaines secondaires</option>
+            </select>
+        </div>
 
     <!-- Select city -->
-    <div class="form-control w-full max-w-xs">
+    <div class="w-1/10">
         <label class="label" for="city">
             <span class="label-text">Ville</span>
         </label>
-        <select id="city" name="city" [(ngModel)]="formZipcode" (change)="onEditCity()" class="select select-bordered">
+        <select id="city" name="city" [(ngModel)]="formZipcode" (change)="onEditCity()" class="w-full select select-bordered">
             <option [defaultSelected]="'Toutes les villes'" [value]="-1000">Toutes les villes</option>
             <option *ngFor="let city of citiesService.cities" [ngValue]="city.zipcode">{{city.name}} : {{city.zipcode}} ({{citiesService.countCities.get(city.id)}})</option>
         </select>
     </div>
 
     <!-- Ajouter un prospect -->
-    <label class="btn btn-ghost btn-outline modal-button" for="modal-add-prospect">Ajouter un prospect</label>
-    
+    <div class="pt-9 w-1/10">
+        <label class="btn btn-ghost btn-outline modal-button form-control" for="modal-add-prospect">Ajouter un prospect</label>
+    </div>    
 </div>
 <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
-<label for="modal-add-prospect" class="modal cursor-pointer">
-    <label class="modal-box max-w-screen-xl space-y-4 overflow-y-scroll relative" for="">
+<label for="modal-add-prospect" class="cursor-pointer modal">
+    <label class="relative max-w-screen-xl space-y-4 overflow-y-scroll modal-box" for="">
         <app-add-prospect></app-add-prospect>
     </label>
 </label>
