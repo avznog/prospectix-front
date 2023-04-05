@@ -30,7 +30,7 @@ export class ProspectsService {
   researchParamsProspect : ResearchParamsProspect = {
     skip: 0,
     zipcode: -1000,
-    activity: "allActivities",
+    secondaryActivity: "allActivities",
     keyword: ""
   };
 
@@ -64,8 +64,8 @@ export class ProspectsService {
 
   loadMore() {
     let queryParameters = new HttpParams();
-      if(this.researchParamsProspect.activity)
-        queryParameters = queryParameters.append("activity", this.researchParamsProspect.activity)
+      if(this.researchParamsProspect.secondaryActivity)
+        queryParameters = queryParameters.append("secondaryActivity", this.researchParamsProspect.secondaryActivity)
       
       if(this.researchParamsProspect.skip)
         queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
@@ -193,7 +193,7 @@ export class ProspectsService {
   }
 
   updateNbNo(idProspect: number, nbNo: { nbNo: number }) : Subscription {
-    this.http.get(`activities/adjustWeightNbNo/${this.prospects.get(idProspect)!.activity.id}`).subscribe();
+    this.http.get(`secondary-activities/adjustWeightNbNo/${this.prospects.get(idProspect)!.secondaryActivity.id}`).subscribe();
     return this.http.patch<Prospect>(`prospects/${idProspect}`, nbNo).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, nbNo: nbNo.nbNo }));
   }
 
@@ -208,7 +208,7 @@ export class ProspectsService {
   }
 
   updateByActivity(idProspect: number, activityName: string) : Subscription {
-    return this.http.get<Prospect>(`prospects/by-activity/${idProspect}/${activityName}`).subscribe();
+    return this.http.get<Prospect>(`prospects/by-secondary-activity/${idProspect}/${activityName}`).subscribe();
   }
 
   updateAllProspect(idProspect: number, updateProspectDto: UpdateProspectDto) : Subscription {
@@ -264,8 +264,8 @@ export class ProspectsService {
 
   countProspects() {
     let queryParameters = new HttpParams();
-    if(this.researchParamsProspect.activity)
-      queryParameters = queryParameters.append("activity", this.researchParamsProspect.activity)
+    if(this.researchParamsProspect.secondaryActivity)
+      queryParameters = queryParameters.append("secondaryActivity", this.researchParamsProspect.secondaryActivity)
     
     if(this.researchParamsProspect.skip)
       queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)

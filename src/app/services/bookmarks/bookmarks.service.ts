@@ -23,7 +23,7 @@ export class BookmarksService {
     keyword: '',
     skip: 0,
     zipcode: -1000,
-    activity: "allActivities",
+    secondaryActivity: "allActivities",
   };
   bookmarks = new Map<number, Bookmark>();
   
@@ -52,7 +52,7 @@ export class BookmarksService {
 
   loadMore() {
     let queryParameters = new HttpParams();
-      queryParameters = queryParameters.append("activity", this.researchParamsBookmarks.activity)
+      queryParameters = queryParameters.append("secondaryActivity", this.researchParamsBookmarks.secondaryActivity)
       queryParameters = queryParameters.append("zipcode", this.researchParamsBookmarks.zipcode)
     
     if(this.researchParamsBookmarks.skip)
@@ -123,7 +123,7 @@ export class BookmarksService {
 
   countBookmarks() {
     let queryParameters = new HttpParams();
-      queryParameters = queryParameters.append("activity", this.researchParamsBookmarks.activity)
+      queryParameters = queryParameters.append("secondaryActivity", this.researchParamsBookmarks.secondaryActivity)
       queryParameters = queryParameters.append("zipcode", this.researchParamsBookmarks.zipcode)
 
     if(this.researchParamsBookmarks.skip)

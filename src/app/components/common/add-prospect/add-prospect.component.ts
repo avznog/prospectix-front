@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
-import { Activity } from 'src/app/models/activity.model';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { City } from 'src/app/models/city.model';
 import { Country } from 'src/app/models/country.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
@@ -26,7 +26,7 @@ export class AddProspectComponent implements OnInit {
   ) { }
   
   city!: City;  
-  activity!: Activity;
+  secondaryActivity!: SecondaryActivity;
   country: Country = {} as Country;
   stage: StageType = StageType.BOOKMARK;
   createProspectDto: CreateProspectDto = {} as CreateProspectDto
@@ -48,7 +48,7 @@ export class AddProspectComponent implements OnInit {
 
   onCreateProspect() {
     (this.stage != 2 && this.stage != 3) && this.prospectService.create({
-      activity: this.activity,
+      secondaryActivity: this.secondaryActivity,
       city: this.city,
       country: this.country,
       stage: this.stage,
@@ -71,7 +71,7 @@ export class AddProspectComponent implements OnInit {
 
     (this.stage == 2 || this.stage == 3) && (
       this.createProspectDto = {
-        activity: this.activity,
+        secondaryActivity: this.secondaryActivity,
         city: this.city,
         country: this.country,
         stage: this.stage,

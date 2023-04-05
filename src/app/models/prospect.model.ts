@@ -1,6 +1,6 @@
 import { ReasonDisabledType } from "../constants/reasonDisabled.type";
 import { StageType } from "../constants/stage.type";
-import { Activity } from "./activity.model";
+import { SecondaryActivity } from "./secondary-activity.model";
 import { Bookmark } from "./bookmark.model";
 import { City } from "./city.model";
 import { Country } from "./country.model";
@@ -18,7 +18,7 @@ export interface Prospect {
     comment: string;
     nbNo: number;
     disabled: boolean;
-    activity: Activity;
+    secondaryActivity: SecondaryActivity;
     city: City;
     country: Country;
     phone: Phone;

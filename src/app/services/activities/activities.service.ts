@@ -1,28 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateActivityDto } from 'src/app/dto/activities/create-activity.dto';
-import { Activity } from 'src/app/models/activity.model';
+import { CreateSecondaryActivityDto } from 'src/app/dto/secondary-activities/create-secondary-activity.dto';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivitiesService {
 
-  activities: Activity[] = [];
-  countActvities = new Map<number, number>();
+  secondaryActivities: SecondaryActivity[] = [];
+  countSecondaryActvities = new Map<number, number>();
   constructor(
     private http: HttpClient
   ) { 
-    this.findAll().subscribe(activities => this.activities = activities);
-    this.countForDomains().subscribe(activities => activities.forEach(activity => this.countActvities.set(activity.id, activity.count)));
+    this.findAll().subscribe(secondaryActivities => this.secondaryActivities = secondaryActivities);
+    this.countForDomains().subscribe(secondaryActivities => secondaryActivities.forEach(secondaryActivity => this.countSecondaryActvities.set(secondaryActivity.id, secondaryActivity.count)));
   }
 
   findAll() {
-    return this.http.get<Activity[]>("activities");
+    return this.http.get<SecondaryActivity[]>("secondary-activities");
   }
 
-  add(createActivityDto: CreateActivityDto) {
-    return this.http.post<Activity>("activities/add", createActivityDto).subscribe(activity => this.activities.push(activity));
+  add(createSecondaryActivityDto: CreateSecondaryActivityDto) {
+    return this.http.post<SecondaryActivity>("secondary-activities/add", createSecondaryActivityDto).subscribe(secondaryActivity => this.secondaryActivities.push(secondaryActivity));
   }
 
   countForDomains() {

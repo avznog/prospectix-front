@@ -70,10 +70,16 @@ export class MailTemplatesComponent implements OnInit {
         "stage": 0,
         "archived": new Date(),
         "reasonDisabled": ReasonDisabledType.ENTREPRISE_FERMEE,
-        "activity": {
+        "secondaryActivity": {
           "id": -1,
           "name": "",
-          "weight": 0
+          "weight": 0,
+          "primaryActivity": {
+            "id": -1,
+            "name": "",
+            "weight": 0,
+            "secondaryActivities": [],
+          }
         },
         "city": {
           "id": 2,

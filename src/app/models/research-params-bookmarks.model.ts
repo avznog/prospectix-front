@@ -3,5 +3,5 @@ export interface ResearchParamsBookmarks {
   take?: number;
   skip: number;
   zipcode: number;
-  activity: string;
+  secondaryActivity: string;
 }

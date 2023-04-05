@@ -10,7 +10,7 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
   styleUrls: ['./bookmarks-research-bloc.component.scss']
 })
 export class BookmarksResearchBlocComponent implements OnInit {
-  activity: string = "allActivities";
+  secondaryActivity: string = "allActivities";
   zipcode: number = -1000;
   keyword: string = "";
   orderByDate: boolean = false;
@@ -29,7 +29,7 @@ export class BookmarksResearchBlocComponent implements OnInit {
   onEditActivity() {
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      activity: this.activity
+      secondaryActivity: this.secondaryActivity
     });
   }
 

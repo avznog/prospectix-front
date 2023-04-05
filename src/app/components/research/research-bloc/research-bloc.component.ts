@@ -10,7 +10,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 })
 export class ResearchBlocComponent implements OnInit {
   formKeyword: string = "";
-  formActivity: string = "allActivities";
+  formSecondaryActivity: string = "allActivities";
   formZipcode: number = -1000;
 
   mainActivity: string | null = "null";
@@ -35,7 +35,7 @@ export class ResearchBlocComponent implements OnInit {
   onEditActivity() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      activity: this.formActivity
+      secondaryActivity: this.formSecondaryActivity
     });
   }
 

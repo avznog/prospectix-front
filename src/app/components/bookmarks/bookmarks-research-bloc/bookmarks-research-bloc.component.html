@@ -1,28 +1,28 @@
-<div class="inline-flex justify-items-center items-end space-x-5 mb-5 w-full">
+<div class="inline-flex items-end w-full mb-5 space-x-5 justify-items-center">
   <!-- Search a prospect - overrides the other filters -->
-  <div class="form-control w-full">
+  <div class="w-full form-control">
     <label class="label" for="search">
       <span class="label-text">Recherche</span>
     </label>
     <input type="search" [(ngModel)]="keyword" (keyup.enter)="onEditKeyword()" placeholder="Recherche (entrée pour valider)"
-      class="input input-bordered w-full max-w-xs" />
+      class="w-full max-w-xs input input-bordered" />
   </div>
 
   <!-- Select activity domain -->
-  <div class="form-control w-full max-w-xs">
+  <div class="w-full max-w-xs form-control">
     <label class="label" for="activity">
       <span class="label-text">Domaine d'activité</span>
     </label>
-    <select id="activity" name="activity" [(ngModel)]="activity" (change)="onEditActivity()"
+    <select id="activity" name="activity" [(ngModel)]="secondaryActivity" (change)="onEditActivity()"
       class="select select-bordered">
       <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'activité
       </option>
-      <option *ngFor="let activity of activitiesService.activities">{{activity.name}}</option>
+      <option *ngFor="let activity of activitiesService.secondaryActivities">{{activity.name}}</option>
     </select>
   </div>
 
   <!-- Select city -->
-  <div class="form-control w-full max-w-xs">
+  <div class="w-full max-w-xs form-control">
     <label class="label" for="city">
       <span class="label-text">Ville</span>
     </label>

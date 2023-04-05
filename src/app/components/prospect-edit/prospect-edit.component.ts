@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Activity } from 'src/app/models/activity.model';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
@@ -23,7 +23,7 @@ export class ProspectEditComponent implements OnInit {
   @Input() sentEmail!: SentEmail;
   @Input() reminder!: Reminder;
 
-  activity!: Activity;
+  secondaryActivity!: SecondaryActivity;
   city!: City;
   phone: string = "";
   email: string = "";
@@ -58,7 +58,7 @@ export class ProspectEditComponent implements OnInit {
     companyName: this.companyName,
     streetAddress: this.streetAddress,
     city: this.city == undefined ? this.prospect.city || this.reminder.prospect.city || this.sentEmail.prospect.city : this.city,
-    activity: this.activity == undefined ? this.prospect.activity || this.reminder.prospect.activity || this.sentEmail.prospect.activity : this.activity,
+    activity: this.secondaryActivity == undefined ? this.prospect.secondaryActivity || this.reminder.prospect.secondaryActivity || this.sentEmail.prospect.secondaryActivity : this.secondaryActivity,
     phone: {
       id: this.prospect.phone.id,
       number: this.phone

@@ -1,6 +1,6 @@
-<label for="modal-prospect-edit-{{prospect.id}}" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+<label for="modal-prospect-edit-{{prospect.id}}" class="absolute btn btn-sm btn-circle btn-ghost btn-outline right-2 top-2">✕</label>
 
-<h1 class="text-xl mb-5">{{prospect.companyName}}</h1>
+<h1 class="mb-5 text-xl">{{prospect.companyName}}</h1>
 
 <div class="divider"></div>
 <div class="space-y-5">
@@ -28,9 +28,9 @@
 			<div class="inline-flex">
 		
 			  <!-- select activity -->
-			  <select id="activity" name="activity" [(ngModel)]="activity" class="select select-bordered" >
+			  <select id="activity" name="activity" [(ngModel)]="secondaryActivity" class="select select-bordered" >
 				<option selected [defaultSelected]="true" [ngValue]="undefined">Je ne change pas le domaine d'activité</option>
-				<option *ngFor="let activity of activitiesService.activities" [ngValue]="activity">{{activity.name}}</option>
+				<option *ngFor="let activity of activitiesService.secondaryActivities" [ngValue]="activity">{{activity.name}}</option>
 			  </select>
 		
 			</div>
@@ -59,23 +59,23 @@
 	<div class="divider"></div>
 	
 	<!-- Boutons informations phone / mail / website -->
-	<div class="inline-flex space-x-5 w-full">
+	<div class="inline-flex w-full space-x-5">
 		<!-- Phone -->
 		<div class="input-group">
 			<span class="text-sm">Téléphone</span>
-			<input type="text" placeholder="Téléphone" class="input input-bordered w-full" [(ngModel)]="phone">
+			<input type="text" placeholder="Téléphone" class="w-full input input-bordered" [(ngModel)]="phone">
 		</div>
 	
 		<!-- Mail -->
 		<div class="input-group">
 			<span class="text-sm">Email</span>
-			<input class="input input-bordered w-full" placeholder="Email" type="email" [(ngModel)]="email">
+			<input class="w-full input input-bordered" placeholder="Email" type="email" [(ngModel)]="email">
 		</div>
 	
 		<!-- Website -->
 		<div class="input-group">
 			<span class="text-sm">Site internet</span>
-			<input class="input input-bordered w-full" placeholder="Site internet" type="text" [(ngModel)]="website">
+			<input class="w-full input input-bordered" placeholder="Site internet" type="text" [(ngModel)]="website">
 		</div>
 	
 	</div>
