@@ -13,31 +13,23 @@
         <!-- ? Primary -->
         <div class="w-1/5">
             <label class="label" for="activity">
-                <span class="w-full label-text">Domaine d'activité Primaire</span>
+                <span class="w-full label-text">Domaine d'activité primaires</span>
             </label>
             <!-- <select id="activity" name="activity" [(ngModel)] class="select select-bordered"> -->
-            <select id="activity" name="activity" [(ngModel)]="mainActivity" class="w-full select select-bordered">
+            <select id="activity" name="activity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="c()">
                 <option [ngValue]="null">Domaines primaires</option>
-                <!-- <option *ngFor="let activity of activitiesService.activities" [value]="activity.name">{{activity.name}}  ({{activitiesService.countActvities.get(activity.id)}})</option> -->
-                <option [ngValue]="'Restaurantion / Alimentation'" class="max-w-fit">Restaurantion / Alimentation</option>
-                <option [ngValue]="'Services aux particuliers'">Services aux particuliers</option>
-                <option>Services aux entreprises</option>
-                <option>Immobilier</option>
-                <option>Art / décoration</option>
-                <option>Services divers</option>
+                <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
             </select>
         </div>
         
-        <!-- ? Secondary  -->
-        <div *ngIf="mainActivity != null" class="w-1/5">
+        <!-- ? Secondary domains-->
+        <div *ngIf="primaryActivity != null" class="w-1/5">
             <label class="label" for="activity">
-                <span class="label-text">Domaine d'activité</span>
+                <span class="label-text">Domaine secondaires</span>
             </label>
-            <select id="activity" name="activity" 
-                class="w-full select select-bordered">
-                <!-- <option [defaultSelected]="'Tous les domaines d\'activite'" [value]="'allActivities'">Tous les domaines d'ùezklhfjkezlrjfmlkerzjfklerzjflkjzermfkjezrmkfjmerzkjfmekrzjlactivité</option> -->
-                <!-- <option *ngFor="let activity of activitiesService.activities" [value]="activity.name">{{activity.name}}  ({{activitiesService.countActvities.get(activity.id)}})</option> -->
-                <option>Mes domaines secondaires</option>
+            <select id="activity" name="activity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity">
+                <option [ngValue]="null">Mes domaines secondaires</option>
+                <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities">{{secondaryActivity.name}}</option>
             </select>
         </div>
 

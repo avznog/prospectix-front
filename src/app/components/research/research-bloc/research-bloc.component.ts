@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PrimaryActivity } from 'src/app/models/primary-activity.model';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -13,7 +15,8 @@ export class ResearchBlocComponent implements OnInit {
   formSecondaryActivity: string = "allActivities";
   formZipcode: number = -1000;
 
-  mainActivity: string | null = "null";
+  primaryActivity: PrimaryActivity | null = null;
+  secondaryActivity: SecondaryActivity | null = null;
 
   constructor(
     public readonly activitiesService: ActivitiesService,
@@ -46,4 +49,7 @@ export class ResearchBlocComponent implements OnInit {
     });
   }
 
+  c() {
+    console.log(this.primaryActivity)
+  }
 }
