@@ -9,6 +9,7 @@ import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { CountriesService } from 'src/app/services/countries/countries.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
+import { PrimaryActivity } from 'src/app/models/primary-activity.model';
 
 @Component({
   selector: 'app-add-prospect',
@@ -26,7 +27,10 @@ export class AddProspectComponent implements OnInit {
   ) { }
   
   city!: City;  
-  secondaryActivity!: SecondaryActivity;
+
+  primaryActivity: PrimaryActivity | null = null;
+  secondaryActivity: SecondaryActivity | null = null;
+
   country: Country = {} as Country;
   stage: StageType = StageType.BOOKMARK;
   createProspectDto: CreateProspectDto = {} as CreateProspectDto
@@ -47,8 +51,9 @@ export class AddProspectComponent implements OnInit {
   }
 
   onCreateProspect() {
+    console.log(this.secondaryActivity);
     (this.stage != 2 && this.stage != 3) && this.prospectService.create({
-      secondaryActivity: this.secondaryActivity,
+      secondaryActivity: this.secondaryActivity!,
       city: this.city,
       country: this.country,
       stage: this.stage,
@@ -71,7 +76,7 @@ export class AddProspectComponent implements OnInit {
 
     (this.stage == 2 || this.stage == 3) && (
       this.createProspectDto = {
-        secondaryActivity: this.secondaryActivity,
+        secondaryActivity: this.secondaryActivity!,
         city: this.city,
         country: this.country,
         stage: this.stage,
