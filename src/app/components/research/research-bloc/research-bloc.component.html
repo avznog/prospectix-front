@@ -16,7 +16,7 @@
                 <span class="w-full label-text">Domaine d'activité primaires</span>
             </label>
             <!-- <select id="activity" name="activity" [(ngModel)] class="select select-bordered"> -->
-            <select id="activity" name="activity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="c()">
+            <select id="activity" name="activity" [(ngModel)]="primaryActivity" class="w-full select select-bordered">
                 <option [ngValue]="null">Domaines primaires</option>
                 <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
             </select>

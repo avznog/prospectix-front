@@ -48,8 +48,4 @@ export class ResearchBlocComponent implements OnInit {
       keyword: this.formKeyword
     });
   }
-
-  c() {
-    console.log(this.primaryActivity)
-  }
 }

@@ -1,4 +1,5 @@
-<label for="modal-prospect-edit-{{prospect.id}}" class="absolute btn btn-sm btn-circle btn-ghost btn-outline right-2 top-2">✕</label>
+<label for="modal-prospect-edit-{{prospect.id}}"
+	class="absolute btn btn-sm btn-circle btn-ghost btn-outline right-2 top-2">✕</label>
 
 <h1 class="mb-5 text-xl">{{prospect.companyName}}</h1>
 
@@ -10,7 +11,7 @@
 			<span class="text-sm">Nom</span>
 			<input class="input input-bordered" placeholder="Nom du prospect" type="text" [(ngModel)]="companyName">
 		</div>
-	
+
 		<!-- streetAddress -->
 		<div class="input-group">
 			<span class="text-sm">Adresse</span>
@@ -18,46 +19,54 @@
 		</div>
 		<!-- Select city -->
 	</div>
-	
+
 	<div class="inline-flex">
-		  <!-- Domaine d'activité du prospect -->
-		  <div class="form-control">
-			<label class="label" for="activity">
-				<span class="label-text">Domaine d'activité</span>
-			</label>
-			<div class="inline-flex">
-		
-			  <!-- select activity -->
-			  <select id="activity" name="activity" [(ngModel)]="secondaryActivity" class="select select-bordered" >
-				<option selected [defaultSelected]="true" [ngValue]="undefined">Je ne change pas le domaine d'activité</option>
-				<option *ngFor="let activity of activitiesService.secondaryActivities" [ngValue]="activity">{{activity.name}}</option>
-			  </select>
-		
-			</div>
-		  </div>
-		
-		
-		  <!-- Ville du prospect -->
-		  <div class="form-control">
-			  <label class="label" for="city">
-				  <span class="label-text">Ville</span>
-			  </label>
-			  <div class="inline-flex">
-		
-				<!-- select city -->
-				<select id="city" name="city" [(ngModel)]="city"  class="select select-bordered">
-				  <option selected [defaultSelected]="true" [ngValue]="undefined">Je ne change pas la ville</option>
-				  <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
+		<div class="inline-flex space-x-5">
+			<!-- Domaine d'activité du prospect -->
+			<div class="form-control">
+				<label class="label" for="primaryActivity">
+					<span class="label-text">Domaine d'activité primaire</span>
+				</label>
+				<!-- select activity -->
+				<select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity"
+					class="select select-bordered">
+					<option [ngValue]="null">Je ne change pas le domaine d'activité </option>
+					<option *ngFor="let primaryActivity of activitiesService.primaryActivities" [ngValue]="primaryActivity">
+						{{primaryActivity.name}}
+					</option>
 				</select>
-		
-			  
-			  </div>
-		  </div>
-		
+
+
+			</div>
+			<div class="form-control" *ngIf="primaryActivity">
+				<label class="label" for="secondaryActivity">
+					<span class="label-text">Domaine secondaire</span>
+				</label>
+				<select id="secondaryActivity" name="secondaryActivity" [(ngModel)]="secondaryActivity"
+					class="select select-bordered">
+					<option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}
+					</option>
+				</select>
+			</div>
+		</div>
 	</div>
-	
+	<!-- Ville du prospect -->
+	<div class="form-control">
+		<label class="label" for="city">
+			<span class="label-text">Ville</span>
+		</label>
+		<div class="inline-flex">
+
+			<!-- select city -->
+			<select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
+				<option selected [defaultSelected]="true" [ngValue]="undefined">Je ne change pas la ville</option>
+				<option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
+			</select>
+		</div>
+	</div>
+
 	<div class="divider"></div>
-	
+
 	<!-- Boutons informations phone / mail / website -->
 	<div class="inline-flex w-full space-x-5">
 		<!-- Phone -->
@@ -65,21 +74,22 @@
 			<span class="text-sm">Téléphone</span>
 			<input type="text" placeholder="Téléphone" class="w-full input input-bordered" [(ngModel)]="phone">
 		</div>
-	
+
 		<!-- Mail -->
 		<div class="input-group">
 			<span class="text-sm">Email</span>
 			<input class="w-full input input-bordered" placeholder="Email" type="email" [(ngModel)]="email">
 		</div>
-	
+
 		<!-- Website -->
 		<div class="input-group">
 			<span class="text-sm">Site internet</span>
 			<input class="w-full input input-bordered" placeholder="Site internet" type="text" [(ngModel)]="website">
 		</div>
-	
+
 	</div>
-	
+
 	<div class="divider">
-		<label class="btn btn-outline btn-sm btn-ghost" for="modal-prospect-edit-{{prospect.id}}" (click)="onEditProspect()">Modifier le prospect</label>
-</div>
+		<label class="btn btn-outline btn-sm btn-ghost" for="modal-prospect-edit-{{prospect.id}}"
+			(click)="onEditProspect()">Modifier le prospect</label>
+	</div>
