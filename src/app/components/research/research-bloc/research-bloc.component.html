@@ -12,11 +12,10 @@
     
         <!-- ? Primary -->
         <div class="w-1/5">
-            <label class="label" for="activity">
-                <span class="w-full label-text">Domaine d'activité primaires</span>
+            <label class="label" for="primaryActivity">
+                <span class="w-full label-text">Tous les domaines primaires</span>
             </label>
-            <!-- <select id="activity" name="activity" [(ngModel)] class="select select-bordered"> -->
-            <select id="activity" name="activity" [(ngModel)]="primaryActivity" class="w-full select select-bordered">
+            <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered">
                 <option [ngValue]="null">Domaines primaires</option>
                 <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
             </select>
@@ -24,10 +23,10 @@
         
         <!-- ? Secondary domains-->
         <div *ngIf="primaryActivity != null" class="w-1/5">
-            <label class="label" for="activity">
-                <span class="label-text">Domaine secondaires</span>
+            <label class="label" for="secondaryActivity">
+                <span class="label-text">Tous les domaines secondaires</span>
             </label>
-            <select id="activity" name="activity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity">
+            <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity">
                 <option [ngValue]="null">Mes domaines secondaires</option>
                 <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities">{{secondaryActivity.name}}</option>
             </select>
