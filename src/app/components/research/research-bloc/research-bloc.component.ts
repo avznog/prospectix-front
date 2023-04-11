@@ -11,10 +11,8 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
   styleUrls: ['./research-bloc.component.scss']
 })
 export class ResearchBlocComponent implements OnInit {
-  formKeyword: string = "";
-  formSecondaryActivity: string = "allActivities";
-  formZipcode: number = -1000;
-
+  keyword: string | null = null;
+  zipcode: number | null = null;
   primaryActivity: PrimaryActivity | null = null;
   secondaryActivity: SecondaryActivity | null = null;
 
@@ -25,27 +23,47 @@ export class ResearchBlocComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.formKeyword = this.prospectsService.researchParamsProspect.keyword;
+      this.keyword = this.prospectsService.researchParamsProspect.keyword;
   }
 
   onEditCity() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      zipcode: this.formZipcode
+      zipcode: this.zipcode,
+      keyword: null,
+      secondaryActivity: null,
+      primaryActivity: null
     })
   }
-
-  onEditActivity() {
+  onPrimaryActivityChange() {
+    console.log("changed")
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      secondaryActivity: this.formSecondaryActivity
+      zipcode: null,
+      keyword: null,
+      secondaryActivity: null,
+      primaryActivity: this.primaryActivity!.name
+    });
+  }
+
+  onSecondaryActivityChange() {
+    console.log("changed ")
+    this.prospectsService.resetSearch({
+      ...this.prospectsService.researchParamsProspect,
+      zipcode: null,
+      keyword: null,
+      secondaryActivity: this.secondaryActivity!.name,
+      primaryActivity: this.primaryActivity!.name
     });
   }
 
   onEditKeyword() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      keyword: this.formKeyword
+      keyword: this.keyword,
+      zipcode: null,
+      secondaryActivity: null,
+      primaryActivity: null
     });
   }
 }

@@ -22,7 +22,6 @@ export class ResearchComponent implements OnInit {
       ...this.prospectsService.researchParamsProspect,
       skip: this.prospectsService.researchParamsProspect.skip + 20
     });
-    console.log(this.prospectsService.prospects)
   }
 
   pageDown() {

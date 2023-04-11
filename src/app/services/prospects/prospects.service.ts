@@ -29,9 +29,10 @@ export class ProspectsService {
   nbProspects: number = 0;
   researchParamsProspect : ResearchParamsProspect = {
     skip: 0,
-    zipcode: -1000,
-    secondaryActivity: "allActivities",
-    keyword: ""
+    zipcode: null,
+    secondaryActivity: null,
+    primaryActivity: null,
+    keyword: null
   };
 
   constructor(
@@ -64,17 +65,17 @@ export class ProspectsService {
 
   loadMore() {
     let queryParameters = new HttpParams();
-      if(this.researchParamsProspect.secondaryActivity)
-        queryParameters = queryParameters.append("secondaryActivity", this.researchParamsProspect.secondaryActivity)
-      
-      if(this.researchParamsProspect.skip)
-        queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
-      
-      queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword ?? "")
       queryParameters = queryParameters.append("take", 20);
-      queryParameters = queryParameters.append("zipcode", this.researchParamsProspect.zipcode)
-      this.http.get<Prospect[]>(`prospects/find-all-paginated/`, { params: queryParameters }).subscribe(prospects => prospects.forEach(prospect => this.prospects.set(prospect.id, prospect)));
-      this.countProspects();
+      this.researchParamsProspect.skip && (queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip));
+      this.researchParamsProspect.keyword && (queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword));
+      this.researchParamsProspect.zipcode && (queryParameters = queryParameters.append("zipcode", this.researchParamsProspect.zipcode));
+      this.researchParamsProspect.primaryActivity && (queryParameters = queryParameters.append("primaryActivity", this.researchParamsProspect.primaryActivity));
+      this.researchParamsProspect.secondaryActivity && (queryParameters = queryParameters.append("secondaryActivity", this.researchParamsProspect.secondaryActivity));
+      console.log(this.researchParamsProspect)
+      this.http.get<{prospects: Prospect[], count: number}>(`prospects/find-all-paginated/`, { params: queryParameters }).subscribe(data => {
+        data.prospects.forEach(prospect => this.prospects.set(prospect.id, prospect));
+        this.nbProspects = data.count;
+      });
   }
 
   create(createProspectDto: CreateProspectDto, createReminderDto?: CreateReminderDto, createMeetingDto?: CreateMeetingDto) : Subscription {
@@ -260,20 +261,6 @@ export class ProspectsService {
         message: `${this.prospects.get(idProspect)!.companyName} supprimé`
       })
     });
-  }
-
-  countProspects() {
-    let queryParameters = new HttpParams();
-    if(this.researchParamsProspect.secondaryActivity)
-      queryParameters = queryParameters.append("secondaryActivity", this.researchParamsProspect.secondaryActivity)
-    
-    if(this.researchParamsProspect.skip)
-      queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip)
-    
-    queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword ?? "")
-    queryParameters = queryParameters.append("take", 20);
-    queryParameters = queryParameters.append("zipcode", this.researchParamsProspect.zipcode);
-    return this.http.get<number>(`prospects/count-prospects`, { params: queryParameters }).subscribe(nbProspects => this.nbProspects = nbProspects);
   }
 
   addProspectsBase() {

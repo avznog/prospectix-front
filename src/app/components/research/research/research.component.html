@@ -3,7 +3,7 @@
   <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>
 </div>
 <app-no-result *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
-<div class="btn-group justify-center pb-5 w-full">
+<div class="justify-center w-full pb-5 btn-group">
   <button class="btn btn-outline btn-ghost {{prospectsService.researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
   <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 20 + 1}} / {{(prospectsService.nbProspects / 20 + 1).toFixed()}}</button>
   <button class="btn btn-outline btn-ghost {{(prospectsService.researchParamsProspect.skip + 20 < prospectsService.nbProspects )? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>

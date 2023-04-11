@@ -1,7 +1,8 @@
 export interface ResearchParamsProspect {
-  keyword: string;
+  keyword: string | null;
   take?: number;
   skip: number;
-  zipcode: number;
-  secondaryActivity?: string;
+  zipcode: number | null;
+  secondaryActivity: string | null;
+  primaryActivity: string | null;
 }
