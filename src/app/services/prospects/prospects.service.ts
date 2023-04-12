@@ -195,6 +195,7 @@ export class ProspectsService {
 
   updateNbNo(idProspect: number, nbNo: { nbNo: number }) : Subscription {
     this.http.get(`secondary-activities/adjustWeightNbNo/${this.prospects.get(idProspect)!.secondaryActivity.id}`).subscribe();
+    this.http.get(`primary-activities/adjustWeightNbNo/${this.prospects.get(idProspect)!.secondaryActivity.primaryActivity.id}`).subscribe();
     return this.http.patch<Prospect>(`prospects/${idProspect}`, nbNo).subscribe(() => this.prospects.set(idProspect, { ...this.prospects.get(idProspect)!, nbNo: nbNo.nbNo }));
   }
 
