@@ -27,43 +27,76 @@ export class ResearchBlocComponent implements OnInit {
   }
 
   onEditCity() {
-    this.prospectsService.resetSearch({
+    this.zipcode ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       zipcode: this.zipcode,
       keyword: null,
       secondaryActivity: null,
       primaryActivity: null
-    })
+    }) : 
+      this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
+      this.onPrimaryActivityChange() : 
+        this.keyword ? 
+        this.onEditKeyword() : 
+        this.prospectsService.resetSearch({
+          ...this.prospectsService.researchParamsProspect,
+          keyword: null,
+          zipcode: null,
+          secondaryActivity: null,
+          primaryActivity: null,
+        })
+    
   }
   onPrimaryActivityChange() {
-    console.log("changed")
-    this.prospectsService.resetSearch({
+    this.primaryActivity ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       zipcode: null,
       keyword: null,
       secondaryActivity: null,
       primaryActivity: this.primaryActivity!.name
-    });
+    }) : 
+      this.zipcode ? 
+      this.onEditCity() :
+        this.keyword ? 
+        this.onEditKeyword() :
+          this.prospectsService.resetSearch({
+            ...this.prospectsService.researchParamsProspect,
+            keyword: null,
+            zipcode: null,
+            secondaryActivity: null,
+            primaryActivity: null,
+          })
   }
 
   onSecondaryActivityChange() {
-    console.log("changed ")
+    this.secondaryActivity ?
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       zipcode: null,
       keyword: null,
       secondaryActivity: this.secondaryActivity!.name,
       primaryActivity: this.primaryActivity!.name
-    });
+    }) : this.onPrimaryActivityChange() 
   }
 
   onEditKeyword() {
-    this.prospectsService.resetSearch({
+    this.keyword ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       keyword: this.keyword,
       zipcode: null,
       secondaryActivity: null,
       primaryActivity: null
-    });
+    }) :
+      this.zipcode ? 
+      this.onEditCity() :
+        this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
+        this.onPrimaryActivityChange() :
+        this.prospectsService.resetSearch({
+          ...this.prospectsService.researchParamsProspect,
+          keyword: null,
+          zipcode: null,
+          secondaryActivity: null,
+          primaryActivity: null,
+        });
   }
 }
