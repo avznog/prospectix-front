@@ -1,6 +1,6 @@
 
-  <div class="p-5 m-5 card">
-    <div class="flex justify-center border rounded-3xl card-body border-error ">
+  <div class=" card">
+    <div class="flex justify-center border rounded-3xl card-body border-error bg-base-100">
     
       <div class="chat chat-start">
         <div class="chat-image avatar">
@@ -19,17 +19,8 @@
           </div>
           
         </div>
-        <div class="chat-bubble">{{currentErrorMessage == '' ? "Essaie d'autre catégories, tu trouveras surement mieux ..." : currentErrorMessage}}</div>
+        <div class="chat-bubble">{{router.url == '/bookmarks' ? "Non, c'est normal ! Tu dois ajouter des favoris pour qu'ils apparaissent ici !" :   currentErrorMessage == '' ? "Essaie d'autre catégories, tu trouveras surement mieux ..." : currentErrorMessage}}</div>
       </div>
     </div>
   </div>
-    <!-- <div class="justify-center w-full card bg-error text-primary-content">
-      <div class="card-body">
-        <h2 class="card-title text-info-content">Plus/Pas de résultat</h2>
-        <div class="flex flex-row justify-around">
-          <div class="radial-progress text-info-content" style="--value:100;">100%</div>
-        </div>
-        <p class="text-info-content">Aucun résultat à afficher</p>
-      </div>
-    </div> -->
   

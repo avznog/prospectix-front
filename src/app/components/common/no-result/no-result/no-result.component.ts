@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class NoResultComponent implements OnInit {
   ];
   currentErrorMessage : string = "Essaie d'autre catégories, tu trouveras surement mieux ...";
   constructor(
-    public readonly authService: AuthService
+    public readonly authService: AuthService,
+    public readonly router: Router
   ) { 
     const randomIndex = Math.floor(Math.random() * this.listErrorMessages.length);
     this.currentErrorMessage =  this.listErrorMessages[randomIndex];

@@ -44,6 +44,7 @@
 				</label>
 				<select id="secondaryActivity" name="secondaryActivity" [(ngModel)]="secondaryActivity"
 					class="select select-bordered">
+					<option [ngValue]="null">Domaines secondaires</option>
 					<option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}
 					</option>
 				</select>

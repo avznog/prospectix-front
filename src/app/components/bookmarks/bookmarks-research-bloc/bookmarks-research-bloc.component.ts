@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PrimaryActivity } from 'src/app/models/primary-activity.model';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
@@ -10,9 +12,10 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
   styleUrls: ['./bookmarks-research-bloc.component.scss']
 })
 export class BookmarksResearchBlocComponent implements OnInit {
-  secondaryActivity: string = "allActivities";
-  zipcode: number = -1000;
-  keyword: string = "";
+  keyword: string | null = null;
+  zipcode: number | null = null;
+  secondaryActivity: SecondaryActivity | null = null;
+  primaryActivity: PrimaryActivity | null = null;
   orderByDate: boolean = false;
 
   constructor(
@@ -26,24 +29,77 @@ export class BookmarksResearchBlocComponent implements OnInit {
     this.keyword = this.bookmarksService.researchParamsBookmarks.keyword;  
   }
   
-  onEditActivity() {
-    this.bookmarksService.resetSearch({
+  onEditCity() {
+    this.zipcode ? this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      secondaryActivity: this.secondaryActivity
-    });
+      zipcode: this.zipcode,
+      keyword: null,
+      secondaryActivity: null,
+      primaryActivity: null
+    }) : 
+      this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
+      this.onPrimaryActivityChange() : 
+        this.keyword ? 
+        this.onEditKeyword() : 
+        this.bookmarksService.resetSearch({
+          ...this.bookmarksService.researchParamsBookmarks,
+          keyword: null,
+          zipcode: null,
+          secondaryActivity: null,
+          primaryActivity: null,
+        })
+    
+  }
+  onPrimaryActivityChange() {
+    this.primaryActivity ? this.bookmarksService.resetSearch({
+      ...this.bookmarksService.researchParamsBookmarks,
+      zipcode: null,
+      keyword: null,
+      secondaryActivity: null,
+      primaryActivity: this.primaryActivity!.name
+    }) : 
+      this.zipcode ? 
+      this.onEditCity() :
+        this.keyword ? 
+        this.onEditKeyword() :
+          this.bookmarksService.resetSearch({
+            ...this.bookmarksService.researchParamsBookmarks,
+            keyword: null,
+            zipcode: null,
+            secondaryActivity: null,
+            primaryActivity: null,
+          })
   }
 
-  onEditCity() {
+  onSecondaryActivityChange() {
+    this.secondaryActivity ?
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      zipcode: this.zipcode
-    });
+      zipcode: null,
+      keyword: null,
+      secondaryActivity: this.secondaryActivity!.name,
+      primaryActivity: this.primaryActivity!.name
+    }) : this.onPrimaryActivityChange() 
   }
 
   onEditKeyword() {
-    this.bookmarksService.resetSearch({
+    this.keyword ? this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      keyword: this.keyword
-    });
+      keyword: this.keyword,
+      zipcode: null,
+      secondaryActivity: null,
+      primaryActivity: null
+    }) :
+      this.zipcode ? 
+      this.onEditCity() :
+        this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
+        this.onPrimaryActivityChange() :
+        this.bookmarksService.resetSearch({
+          ...this.bookmarksService.researchParamsBookmarks,
+          keyword: null,
+          zipcode: null,
+          secondaryActivity: null,
+          primaryActivity: null,
+        });
   }
 }
