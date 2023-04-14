@@ -4,4 +4,5 @@ export interface CreatePrimaryActivityDto {
   name: string;
   weight: number;
   secondaryActivity: SecondaryActivity;
+  weightCount: number;
 }

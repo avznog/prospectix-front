@@ -5,4 +5,5 @@ export interface PrimaryActivity {
   name: string;
   weight: number;
   secondaryActivities: SecondaryActivity[];
+  weightCount: number;
 }

@@ -77,11 +77,13 @@ export class MailTemplatesComponent implements OnInit {
           "name": "",
           "weight": 0,
           "version": "1",
+          "weightCount": 0,
           "primaryActivity": {
             "id": -1,
             "name": "",
             "weight": 0,
             "secondaryActivities": [],
+            "weightCount": 0
           }
         },
         "city": {
