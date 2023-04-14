@@ -51,7 +51,6 @@ export class AddProspectComponent implements OnInit {
   }
 
   onCreateProspect() {
-    console.log(this.secondaryActivity);
     (this.stage != 2 && this.stage != 3) && this.prospectService.create({
       secondaryActivity: this.secondaryActivity!,
       city: this.city,
@@ -67,11 +66,13 @@ export class AddProspectComponent implements OnInit {
         website: this.website
       },
       companyName: this.companyName,
+      dateScraped: new Date,
+      version: "Manual Add",
       streetAddress: this.address,
       comment: this.comment,
       nbNo: 0,
       disabled: false,
-      isBookmarked: false
+      isBookmarked: false,
     });
 
     (this.stage == 2 || this.stage == 3) && (
@@ -94,7 +95,9 @@ export class AddProspectComponent implements OnInit {
         comment: this.comment,
         nbNo: 0,
         disabled: false,
-        isBookmarked: false
+        isBookmarked: false,
+        version: "Manuel Add",
+        dateScraped: new Date
       }
     )
   }

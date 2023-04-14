@@ -60,6 +60,8 @@ export class ProspectEditComponent implements OnInit {
     streetAddress: this.streetAddress,
     city: this.city == undefined ? this.prospect.city || this.reminder.prospect.city || this.sentEmail.prospect.city : this.city,
     secondaryActivity: !this.primaryActivity || !this.secondaryActivity ? (this.prospect.secondaryActivity || this.reminder.prospect.secondaryActivity || this.sentEmail.prospect.secondaryActivity) : { ...this.secondaryActivity, primaryActivity: this.primaryActivity },
+    version: this.prospect.version || this.reminder.prospect.version || this.sentEmail.prospect.version,
+    dateScraped: this.prospect.dateScraped || this.reminder.prospect.dateScraped || this.sentEmail.prospect.dateScraped,
     phone: {
       id: this.prospect.phone.id,
       number: this.phone

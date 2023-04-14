@@ -14,7 +14,11 @@ export class CitiesService {
     private http: HttpClient,
     private readonly toastsService: ToastsService
   ) {
-    this.findAll().subscribe(cities => this.cities = cities)
+    this.findAll().subscribe(cities => {
+      this.cities = cities;
+      // this.cities = cities.filter((city, index, array) => index == array.findIndex(city2 => city2.zipcode == city.zipcode ))
+      // console.log(cities.filter((city, index, cities) => index == cities.findIndex(city2 => city2.zipcode == city.zipcode )))
+    })
    }
 
   findAll() {

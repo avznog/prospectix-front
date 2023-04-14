@@ -5,4 +5,5 @@ export interface SecondaryActivity {
   name: string;
   weight: number;
   primaryActivity: PrimaryActivity;
+  version: string;
 }

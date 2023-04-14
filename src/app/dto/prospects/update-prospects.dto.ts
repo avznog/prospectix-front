@@ -18,4 +18,6 @@ export interface UpdateProspectDto {
   nbNo?: number;
   disabled?: boolean;
   isBookmarked?: boolean;
+  version?: string;
+  dateScraped?: Date;
 }

@@ -20,5 +20,7 @@ export interface CreateProspectDto {
   disabled: boolean;
   isBookmarked: boolean;
   stage: StageType;
+  version: string;
+  dateScraped: Date;
   archived?: Date;
 }
