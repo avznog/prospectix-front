@@ -28,7 +28,7 @@
           </label>
           <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity" (change)="onSecondaryActivityChange()">
               <option [ngValue]="null">Domaines secondaires</option>
-              <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities">{{secondaryActivity.name}}</option>
+              <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}</option>
           </select>
       </div>
 
