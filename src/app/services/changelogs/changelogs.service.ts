@@ -12,6 +12,22 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "3.3",
+        date: new Date("2023-04-17T00:00:00.000Z"),
+        bugs: [
+          ],
+        features: [
+          "Création d'activités primaires et secondaires. Dix activités primaires regroupent maintenant l'entièreté des activitiés.",
+          "Changement de l'interface de recherche et de la méthode de recherche de prospects. Il y a maintenant la possibilité de rechercher par activité primaire & par activité secondaire",
+          "Changement des méthodes de recherche des prospects",
+          "Les villes s'affichent désormais par nom au lieu de s'afficher par zipcode. Néanmoins, lorsque l'on veut modifier / ajouter des villes, il est possible de sélectionner une ville selon son zipcode",
+          "Les activités & villes affichées ne sont que celles qui ont au moins 500 prospects",
+          "Ajout d'attributs 'version' & 'dateScraped' pour les prospects / activités primaires / activités secondaires / villes pour pouvoir traquer les différentes modifications de base",
+          "Modification du 'Poids' de chaque catégorie (IA) : maintenant, les catégories primaires ont aussi un 'Poids'. Aussi, le nombre d'appels est aussi enregistré afin de pouvoir pondéré les résultats",
+          "Refactor le code de compte des rendez-vous / meetings / sentEmails"
+        ]
+      },
+      {
         version: "3.2",
         date: new Date("2023-03-31T00:00:00.000Z"),
         bugs: [
