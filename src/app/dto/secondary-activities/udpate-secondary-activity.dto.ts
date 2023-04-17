@@ -4,4 +4,5 @@ export interface UpdateSecondaryActivityDto {
   name?: string;
   weight?: number;
   primaryActivity?: PrimaryActivity;
+  dateScraped?: Date;
 }

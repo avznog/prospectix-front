@@ -6,4 +6,6 @@ export interface PrimaryActivity {
   weight: number;
   secondaryActivities: SecondaryActivity[];
   weightCount: number;
+  version: string;
+  dateScraped: Date;
 }

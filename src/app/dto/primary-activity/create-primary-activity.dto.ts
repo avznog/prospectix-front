@@ -5,4 +5,6 @@ export interface CreatePrimaryActivityDto {
   weight: number;
   secondaryActivity: SecondaryActivity;
   weightCount: number;
+  version: string;
+  dateScraped: Date;
 }

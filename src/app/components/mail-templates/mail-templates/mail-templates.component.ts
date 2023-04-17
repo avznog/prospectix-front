@@ -78,18 +78,23 @@ export class MailTemplatesComponent implements OnInit {
           "weight": 0,
           "version": "1",
           "weightCount": 0,
+          "dateScraped": new Date,
           "primaryActivity": {
             "id": -1,
             "name": "",
             "weight": 0,
             "secondaryActivities": [],
-            "weightCount": 0
+            "weightCount": 0,
+            "dateScraped": new Date,
+            "version": ""
           }
         },
         "city": {
           "id": 2,
           "name": "Angers",
-          "zipcode": 49000
+          "zipcode": 49000,
+          "dateScraped": new Date,
+          "version": ""
         },
         "country": {
           "id": 1,

@@ -29,7 +29,9 @@ export class AddCityComponent implements OnInit {
   onAddCity() {
     this.citiesService.create({
       name: this.name,
-      zipcode: this.zipcode
+      zipcode: this.zipcode,
+      version: "Manually added",
+      dateScraped: new Date
     });
   }
 }

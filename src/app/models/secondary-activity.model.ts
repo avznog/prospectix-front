@@ -7,4 +7,5 @@ export interface SecondaryActivity {
   primaryActivity: PrimaryActivity;
   version: string;
   weightCount: number;
+  dateScraped: Date;
 }
