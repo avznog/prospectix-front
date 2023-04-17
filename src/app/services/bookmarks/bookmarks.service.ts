@@ -22,7 +22,7 @@ export class BookmarksService {
   researchParamsBookmarks: ResearchParamsBookmarks = {
     keyword: null,
     skip: 0,
-    zipcode: null,
+    cityName: null,
     secondaryActivity: null,
     primaryActivity: null
   };
@@ -56,7 +56,7 @@ export class BookmarksService {
     queryParameters = queryParameters.append("take", 20);
     this.researchParamsBookmarks.skip && (queryParameters = queryParameters.append("skip", this.researchParamsBookmarks.skip));
     this.researchParamsBookmarks.keyword && (queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword));
-    this.researchParamsBookmarks.zipcode && (queryParameters = queryParameters.append("zipcode", this.researchParamsBookmarks.zipcode));
+    this.researchParamsBookmarks.cityName && (queryParameters = queryParameters.append("cityName", this.researchParamsBookmarks.cityName));
     this.researchParamsBookmarks.primaryActivity && (queryParameters = queryParameters.append("primaryActivity", this.researchParamsBookmarks.primaryActivity));
     this.researchParamsBookmarks.secondaryActivity && (queryParameters = queryParameters.append("secondaryActivity", this.researchParamsBookmarks.secondaryActivity));
 

@@ -13,7 +13,7 @@ import { ProjectManagersService } from 'src/app/services/project-managers/projec
 })
 export class BookmarksResearchBlocComponent implements OnInit {
   keyword: string | null = null;
-  zipcode: number | null = null;
+  cityName: string | null = null;
   secondaryActivity: SecondaryActivity | null = null;
   primaryActivity: PrimaryActivity | null = null;
   orderByDate: boolean = false;
@@ -30,9 +30,9 @@ export class BookmarksResearchBlocComponent implements OnInit {
   }
   
   onEditCity() {
-    this.zipcode ? this.bookmarksService.resetSearch({
+    this.cityName ? this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      zipcode: this.zipcode,
+      cityName: this.cityName,
       keyword: null,
       secondaryActivity: null,
       primaryActivity: null
@@ -44,7 +44,7 @@ export class BookmarksResearchBlocComponent implements OnInit {
         this.bookmarksService.resetSearch({
           ...this.bookmarksService.researchParamsBookmarks,
           keyword: null,
-          zipcode: null,
+          cityName: null,
           secondaryActivity: null,
           primaryActivity: null,
         })
@@ -53,19 +53,19 @@ export class BookmarksResearchBlocComponent implements OnInit {
   onPrimaryActivityChange() {
     this.primaryActivity ? this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      zipcode: null,
+      cityName: null,
       keyword: null,
       secondaryActivity: null,
       primaryActivity: this.primaryActivity!.name
     }) : 
-      this.zipcode ? 
+      this.cityName ? 
       this.onEditCity() :
         this.keyword ? 
         this.onEditKeyword() :
           this.bookmarksService.resetSearch({
             ...this.bookmarksService.researchParamsBookmarks,
             keyword: null,
-            zipcode: null,
+            cityName: null,
             secondaryActivity: null,
             primaryActivity: null,
           })
@@ -75,7 +75,7 @@ export class BookmarksResearchBlocComponent implements OnInit {
     this.secondaryActivity ?
     this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
-      zipcode: null,
+      cityName: null,
       keyword: null,
       secondaryActivity: this.secondaryActivity!.name,
       primaryActivity: this.primaryActivity!.name
@@ -86,18 +86,18 @@ export class BookmarksResearchBlocComponent implements OnInit {
     this.keyword ? this.bookmarksService.resetSearch({
       ...this.bookmarksService.researchParamsBookmarks,
       keyword: this.keyword,
-      zipcode: null,
+      cityName: null,
       secondaryActivity: null,
       primaryActivity: null
     }) :
-      this.zipcode ? 
+      this.cityName ? 
       this.onEditCity() :
         this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
         this.onPrimaryActivityChange() :
         this.bookmarksService.resetSearch({
           ...this.bookmarksService.researchParamsBookmarks,
           keyword: null,
-          zipcode: null,
+          cityName: null,
           secondaryActivity: null,
           primaryActivity: null,
         });

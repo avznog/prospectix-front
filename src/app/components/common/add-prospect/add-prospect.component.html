@@ -35,7 +35,7 @@
 				<select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity"
 					class="select select-bordered">
 					<option [ngValue]="null">Sélectionner un domaine d'activité primaire</option>
-					<option *ngFor="let primaryActivity of activitiesService.primaryActivities" [ngValue]="primaryActivity">
+					<option *ngFor="let primaryActivity of activitiesService.primaryActivitiesWithoutLimit" [ngValue]="primaryActivity">
 						{{primaryActivity.name}}
 					</option>
 				</select>
@@ -66,7 +66,7 @@
         <!-- select city -->
         <select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
           <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner une ville</option>
-          <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
+          <option *ngFor="let city of citiesService.citiesByZipcode" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
         </select>
 
 

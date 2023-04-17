@@ -2,7 +2,7 @@ export interface ResearchParamsProspect {
   keyword: string | null;
   take?: number;
   skip: number;
-  zipcode: number | null;
+  cityName: string | null;
   secondaryActivity: string | null;
   primaryActivity: string | null;
 }

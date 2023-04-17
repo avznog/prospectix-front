@@ -12,7 +12,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 })
 export class ResearchBlocComponent implements OnInit {
   keyword: string | null = null;
-  zipcode: number | null = null;
+  cityName: string | null = null;
   primaryActivity: PrimaryActivity | null = null;
   secondaryActivity: SecondaryActivity | null = null;
 
@@ -27,9 +27,9 @@ export class ResearchBlocComponent implements OnInit {
   }
 
   onEditCity() {
-    this.zipcode ? this.prospectsService.resetSearch({
+    this.cityName ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      zipcode: this.zipcode,
+      cityName: this.cityName,
       keyword: null,
       secondaryActivity: null,
       primaryActivity: null
@@ -41,7 +41,7 @@ export class ResearchBlocComponent implements OnInit {
         this.prospectsService.resetSearch({
           ...this.prospectsService.researchParamsProspect,
           keyword: null,
-          zipcode: null,
+          cityName: null,
           secondaryActivity: null,
           primaryActivity: null,
         })
@@ -50,19 +50,19 @@ export class ResearchBlocComponent implements OnInit {
   onPrimaryActivityChange() {
     this.primaryActivity ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      zipcode: null,
+      cityName: null,
       keyword: null,
       secondaryActivity: null,
       primaryActivity: this.primaryActivity!.name
     }) : 
-      this.zipcode ? 
+      this.cityName ? 
       this.onEditCity() :
         this.keyword ? 
         this.onEditKeyword() :
           this.prospectsService.resetSearch({
             ...this.prospectsService.researchParamsProspect,
             keyword: null,
-            zipcode: null,
+            cityName: null,
             secondaryActivity: null,
             primaryActivity: null,
           })
@@ -72,7 +72,7 @@ export class ResearchBlocComponent implements OnInit {
     this.secondaryActivity ?
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      zipcode: null,
+      cityName: null,
       keyword: null,
       secondaryActivity: this.secondaryActivity!.name,
       primaryActivity: this.primaryActivity!.name
@@ -83,18 +83,18 @@ export class ResearchBlocComponent implements OnInit {
     this.keyword ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       keyword: this.keyword,
-      zipcode: null,
+      cityName: null,
       secondaryActivity: null,
       primaryActivity: null
     }) :
-      this.zipcode ? 
+      this.cityName ? 
       this.onEditCity() :
         this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
         this.onPrimaryActivityChange() :
         this.prospectsService.resetSearch({
           ...this.prospectsService.researchParamsProspect,
           keyword: null,
-          zipcode: null,
+          cityName: null,
           secondaryActivity: null,
           primaryActivity: null,
         });

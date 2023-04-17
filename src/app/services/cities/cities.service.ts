@@ -10,19 +10,26 @@ import { ToastsService } from '../toasts/toasts.service';
 export class CitiesService {
 
   cities: City[] = [];
+  citiesByZipcode: City[] = [];
+  
   constructor(
     private http: HttpClient,
     private readonly toastsService: ToastsService
   ) {
-    this.findAll().subscribe(cities => {
-      this.cities = cities;
-      // this.cities = cities.filter((city, index, array) => index == array.findIndex(city2 => city2.zipcode == city.zipcode ))
-      // console.log(cities.filter((city, index, cities) => index == cities.findIndex(city2 => city2.zipcode == city.zipcode )))
-    })
+    this.findAll()
+    this.findAllByZipcode()
    }
 
   findAll() {
-    return this.http.get<City[]>("cities");
+    return this.http.get<[City]>(`cities/find-all`).subscribe(cities => {
+      this.cities = cities.filter((city, index, array) => array.findIndex((c) => c.name === city.name) === index)
+    })
+  }
+
+  findAllByZipcode() {
+    return this.http.get<[City]>(`cities/find-all-by-zipcode`).subscribe(citiesByZipcode => {
+      this.citiesByZipcode = citiesByZipcode;
+    })
   }
 
   create(createCityDto: CreateCityDto) {
