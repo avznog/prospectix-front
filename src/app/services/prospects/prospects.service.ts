@@ -71,7 +71,7 @@ export class ProspectsService {
     this.researchParamsProspect.cityName && (queryParameters = queryParameters.append("cityName", this.researchParamsProspect.cityName));
     this.researchParamsProspect.primaryActivity && (queryParameters = queryParameters.append("primaryActivity", this.researchParamsProspect.primaryActivity));
     this.researchParamsProspect.secondaryActivity && (queryParameters = queryParameters.append("secondaryActivity", this.researchParamsProspect.secondaryActivity));
-    
+
     this.http.get<{prospects: Prospect[], count: number}>(`prospects/find-all-paginated/`, { params: queryParameters }).subscribe(data => {
       data.prospects.forEach(prospect => this.prospects.set(prospect.id, prospect));
       this.nbProspects = data.count;

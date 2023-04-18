@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ReasonDisabledType } from 'src/app/constants/reasonDisabled.type';
+import { VersionCityType, VersionPrimaryActivityType, VersionProspectType, VersionSecondaryActivityType } from 'src/app/constants/versions.type';
 import { MailTemplate } from 'src/app/models/mail-template.model';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
@@ -70,13 +71,13 @@ export class MailTemplatesComponent implements OnInit {
         "stage": 0,
         "archived": new Date(),
         "reasonDisabled": ReasonDisabledType.ENTREPRISE_FERMEE,
-        "version": "1",
+        "version": VersionProspectType.MANUALLY_ADDED,
         "dateScraped": new Date,
         "secondaryActivity": {
           "id": -1,
           "name": "",
           "weight": 0,
-          "version": "1",
+          "version": VersionSecondaryActivityType.MANUALLY_ADDED,
           "weightCount": 0,
           "dateScraped": new Date,
           "primaryActivity": {
@@ -86,7 +87,7 @@ export class MailTemplatesComponent implements OnInit {
             "secondaryActivities": [],
             "weightCount": 0,
             "dateScraped": new Date,
-            "version": ""
+            "version": VersionPrimaryActivityType.MANUALLY_ADDED
           }
         },
         "city": {
@@ -94,7 +95,7 @@ export class MailTemplatesComponent implements OnInit {
           "name": "Angers",
           "zipcode": 49000,
           "dateScraped": new Date,
-          "version": ""
+          "version": VersionCityType.MANUALLY_ADDED
         },
         "country": {
           "id": 1,

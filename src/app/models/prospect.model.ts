@@ -10,6 +10,7 @@ import { Meeting } from "./meeting.model";
 import { Phone } from "./phone.model";
 import { Reminder } from "./reminder.model";
 import { Website } from "./website.model";
+import { VersionProspectType } from "../constants/versions.type";
 
 export interface Prospect {
   id: number;
@@ -32,6 +33,6 @@ export interface Prospect {
   stage: StageType;
   archived: Date;
   reasonDisabled: ReasonDisabledType;
-  version: string;
+  version: VersionProspectType;
   dateScraped: Date;
 }

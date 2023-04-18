@@ -1,3 +1,4 @@
+import { VersionPrimaryActivityType } from "src/app/constants/versions.type";
 import { SecondaryActivity } from "src/app/models/secondary-activity.model";
 
 export interface UpdatePrimaryActivityDto {
@@ -5,6 +6,6 @@ export interface UpdatePrimaryActivityDto {
   weight?: number;
   secondaryActivity?: SecondaryActivity;
   weightCount?: number;
-  version?: string;
+  version?: VersionPrimaryActivityType;
   dateScraped?: Date;
 }

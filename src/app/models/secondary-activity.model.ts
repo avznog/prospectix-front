@@ -1,3 +1,4 @@
+import { VersionSecondaryActivityType } from "../constants/versions.type";
 import { PrimaryActivity } from "./primary-activity.model";
 
 export interface SecondaryActivity {
@@ -5,7 +6,7 @@ export interface SecondaryActivity {
   name: string;
   weight: number;
   primaryActivity: PrimaryActivity;
-  version: string;
+  version: VersionSecondaryActivityType;
   weightCount: number;
   dateScraped: Date;
 }

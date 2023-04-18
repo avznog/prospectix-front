@@ -1,6 +1,8 @@
+import { VersionCityType } from "src/app/constants/versions.type";
+
 export interface CreateCityDto {
     name: string;
     zipcode: number;
-    version: string;
+    version: VersionCityType;
     dateScraped: Date;
 }

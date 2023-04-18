@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VersionCityType } from 'src/app/constants/versions.type';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class AddCityComponent implements OnInit {
     this.citiesService.create({
       name: this.name,
       zipcode: this.zipcode,
-      version: "Manually added",
+      version: VersionCityType.MANUALLY_ADDED,
       dateScraped: new Date
     });
   }

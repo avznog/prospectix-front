@@ -5,6 +5,7 @@ import { CreateCountryDto } from "../countries/create-country.dto";
 import { CreateEmailDto } from "../emails/create-email.dto";
 import { CreatePhoneDto } from "../phones/create-phone.dto";
 import { CreateWebsiteDto } from "../websites/create-website.dto";
+import { VersionProspectType } from "src/app/constants/versions.type";
 
 export interface CreateProspectDto {
   companyName: string;
@@ -20,7 +21,7 @@ export interface CreateProspectDto {
   disabled: boolean;
   isBookmarked: boolean;
   stage: StageType;
-  version: string;
+  version: VersionProspectType;
   dateScraped: Date;
   archived?: Date;
 }

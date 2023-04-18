@@ -4,6 +4,7 @@ import { Country } from "src/app/models/country.model";
 import { Email } from "src/app/models/email.model";
 import { Phone } from "src/app/models/phone.model";
 import { Website } from "src/app/models/website.model";
+import { VersionProspectType } from "src/app/constants/versions.type";
 
 export interface UpdateProspectDto {
   companyName?: string;
@@ -18,6 +19,6 @@ export interface UpdateProspectDto {
   nbNo?: number;
   disabled?: boolean;
   isBookmarked?: boolean;
-  version?: string;
+  version?: VersionProspectType;
   dateScraped?: Date;
 }

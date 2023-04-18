@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { AccountComponent } from './components/account/account/account.component';
+import { BackofficeSearchComponent } from './components/backoffice-search/backoffice-search/backoffice-search.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { GoalsComponent } from './components/goals/goals/goals.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: "mailTemplates", component: MailTemplatesComponent, canActivate: [LoggedGuard] },
   { path: "account", component: AccountComponent, canActivate: [LoggedGuard] },
   { path: "oauth2callback", component: Oauth2callbackComponent, canActivate: [LoggedGuard, GoogleGuard] },
+  { path: "backoffice-search", component: BackofficeSearchComponent, canActivate: [LoggedGuard, AdminGuard]},
   { path: "", pathMatch: "full", redirectTo: "dashboard" },
   { path: "**", pathMatch: "full", redirectTo: "dashboard"},
 ];

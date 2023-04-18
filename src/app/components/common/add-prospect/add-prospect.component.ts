@@ -10,6 +10,7 @@ import { CitiesService } from 'src/app/services/cities/cities.service';
 import { CountriesService } from 'src/app/services/countries/countries.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { PrimaryActivity } from 'src/app/models/primary-activity.model';
+import { VersionProspectType } from 'src/app/constants/versions.type';
 
 @Component({
   selector: 'app-add-prospect',
@@ -67,7 +68,7 @@ export class AddProspectComponent implements OnInit {
       },
       companyName: this.companyName,
       dateScraped: new Date,
-      version: "Manual Add",
+      version: VersionProspectType.MANUALLY_ADDED,
       streetAddress: this.address,
       comment: this.comment,
       nbNo: 0,
@@ -96,7 +97,7 @@ export class AddProspectComponent implements OnInit {
         nbNo: 0,
         disabled: false,
         isBookmarked: false,
-        version: "Manuel Add",
+        version: VersionProspectType.MANUALLY_ADDED,
         dateScraped: new Date
       }
     )
