@@ -13,7 +13,7 @@ export class ChangelogsService {
     this.changelogs = [
       {
         version: "3.3",
-        date: new Date("2023-04-17T00:00:00.000Z"),
+        date: new Date("2023-04-18T00:00:00.000Z"),
         bugs: [
           ],
         features: [
@@ -24,7 +24,8 @@ export class ChangelogsService {
           "Les activités & villes affichées ne sont que celles qui ont au moins 500 prospects",
           "Ajout d'attributs 'version' & 'dateScraped' pour les prospects / activités primaires / activités secondaires / villes pour pouvoir traquer les différentes modifications de base",
           "Modification du 'Poids' de chaque catégorie (IA) : maintenant, les catégories primaires ont aussi un 'Poids'. Aussi, le nombre d'appels est aussi enregistré afin de pouvoir pondéré les résultats",
-          "Refactor le code de compte des rendez-vous / meetings / sentEmails"
+          "Refactor le code de compte des rendez-vous / meetings / sentEmails",
+          "Ajout d'une nouvelle page au backoffice : il est désormais possible de choisir la version de prospect / ville / activités secondaires - primaires que l'on veut rechercher"
         ]
       },
       {
