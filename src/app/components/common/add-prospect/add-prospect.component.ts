@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
-import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { City } from 'src/app/models/city.model';
 import { Country } from 'src/app/models/country.model';
+import { PrimaryActivity } from 'src/app/models/primary-activity.model';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { CountriesService } from 'src/app/services/countries/countries.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
-import { PrimaryActivity } from 'src/app/models/primary-activity.model';
-import { VersionProspectType } from 'src/app/constants/versions.type';
+import { SearchParamsService } from 'src/app/services/search-params/search-params.service';
 
 @Component({
   selector: 'app-add-prospect',
@@ -21,10 +21,11 @@ export class AddProspectComponent implements OnInit {
 
   constructor(
     private readonly prospectService: ProspectsService,
+    private readonly searchParamsService: SearchParamsService,
     public readonly activitiesService: ActivitiesService,
     public readonly citiesService: CitiesService,
     public readonly countriesService: CountriesService,
-    public readonly bookmarksService: BookmarksService
+    public readonly bookmarksService: BookmarksService,
   ) { }
   
   city!: City;  
@@ -68,7 +69,7 @@ export class AddProspectComponent implements OnInit {
       },
       companyName: this.companyName,
       dateScraped: new Date,
-      version: VersionProspectType.MANUALLY_ADDED,
+      version: this.searchParamsService.searchParams.versionProspect,
       streetAddress: this.address,
       comment: this.comment,
       nbNo: 0,
@@ -97,7 +98,7 @@ export class AddProspectComponent implements OnInit {
         nbNo: 0,
         disabled: false,
         isBookmarked: false,
-        version: VersionProspectType.MANUALLY_ADDED,
+        version: this.searchParamsService.searchParams.versionProspect,
         dateScraped: new Date
       }
     )
