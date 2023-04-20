@@ -117,8 +117,8 @@
       *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"
       class="dropdown dropdown-end">
       <label tabindex="0"
-        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
-        == "/users" ? 'User' : router.url == "/goals" ? 'Objectifs' : router.url == '/watchtower' ? 'Tour de contrôle' : 'Admin'}}</label>
+        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' || router.url == '/backoffice-search' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' || router.url == '/backoffice-search' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
+        == "/users" ? 'User' : router.url == "/goals" ? 'Objectifs' : router.url == '/watchtower' ? 'Tour de contrôle' : router.url == '/backoffice-search' ? 'Gestion des versions' : 'Admin'}}</label>
       <ul tabindex="0" class="p-2 mt-4 shadow menu dropdown-content bg-base-100 rounded-box w-60 outline outline-1">
 
         <!-- ? Page users -->
@@ -137,6 +137,13 @@
         <li routerLink="/watchtower">
           <a 
             class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current '}}">Tour de contrôle des objectifs
+          </a>
+        </li>
+
+        <!-- ? page gestion des versions-->
+        <li routerLink="/backoffice-search">
+          <a 
+            class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/backoffice-search' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/backoffice-search' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current '}}">Gestion des versions
           </a>
         </li>
       </ul>

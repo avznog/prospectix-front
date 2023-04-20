@@ -64,8 +64,10 @@ export class MeetingsService {
     queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
     queryParameters = queryParameters.append("take",20)
     
-    this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(meetings => meetings.forEach(meeting => this.meetings.set(meeting.id, meeting)));
-    this.countMeetings();
+    this.http.get<{meetings: Meeting[], count: number}>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(data => {
+      data.meetings.forEach(meeting => this.meetings.set(meeting.id, meeting));
+      this.nbMeetings = data.count;
+    });
   }
 
   loadMeetingsDone() {
@@ -75,7 +77,7 @@ export class MeetingsService {
     if(this.researchParamsMeeting.type)
       queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
     
-    return this.http.get<Meeting[]>(`meetings/find-all-meetings-done`, { params: queryParameters}).subscribe(meetings => meetings.forEach(meeting => this.meetingsDone.set(meeting.id, meeting)));
+    return this.http.get<{meetingsDone: Meeting[], count: number}>(`meetings/find-all-meetings-done`, { params: queryParameters}).subscribe(data => data.meetingsDone.forEach(meeting => this.meetingsDone.set(meeting.id, meeting)));
   }
 
   deleteMeeting(idMeeting: number) : Subscription {
@@ -159,19 +161,6 @@ export class MeetingsService {
         return meeting.prospect = prospect
       return
     })
-  }
-
-  countMeetings() {
-    let queryParameters = new HttpParams();
-
-    if(this.researchParamsMeeting.type)
-      queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
-
-    queryParameters = queryParameters.append("skip", this.researchParamsMeeting.skip)
-    queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
-    queryParameters = queryParameters.append("take",20);
-
-    return this.http.get<number>(`meetings/count-meetings`, { params: queryParameters }).subscribe(nbMeetings => this.nbMeetings = nbMeetings);
   }
 
   updateCommentProspect(id: number, newComment: string) {

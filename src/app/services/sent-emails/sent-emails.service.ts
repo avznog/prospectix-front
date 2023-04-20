@@ -36,8 +36,6 @@ export class SentEmailsService {
   ) { 
     this.loadMore();
     this.loadMoreSent();
-    this.countSentEmails()
-    this.countSentEmailsSent()
   }
 
   // ! sent emails not Sent yet
@@ -63,9 +61,9 @@ export class SentEmailsService {
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip);
     queryParameters = queryParameters.append("take", 20);
     queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    this.http.get<SentEmail[]>(`sent-emails/find-all-paginated`, { params: queryParameters }).subscribe(sentEmails => {
-      sentEmails.forEach(sentEmail => this.sentEmails.set(sentEmail.id, sentEmail))
-      this.countSentEmails()
+    this.http.get<{sentEmails: SentEmail[], count: number}>(`sent-emails/find-all-paginated`, { params: queryParameters }).subscribe(data => {
+      data.sentEmails.forEach(sentEmail => this.sentEmails.set(sentEmail.id, sentEmail))
+      this.nbSentEmails = data.count;
     });
   }
 
@@ -76,9 +74,9 @@ export class SentEmailsService {
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip)
     queryParameters = queryParameters.append("take", 20),
     queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    this.http.get<SentEmail[]>(`sent-emails/find-all-paginated-sent`, { params: queryParameters }).subscribe(sentEmailsSent => {
-      sentEmailsSent.forEach(sentEmailSent => this.sentEmailsSent.set(sentEmailSent.id, sentEmailSent));
-      this.countSentEmailsSent();
+    this.http.get<{sentEmailsSent: SentEmail[], count: number}>(`sent-emails/find-all-paginated-sent`, { params: queryParameters }).subscribe(data => {
+      data.sentEmailsSent.forEach(sentEmailSent => this.sentEmailsSent.set(sentEmailSent.id, sentEmailSent));
+      this.nbSentEmailsSent = data.count;
     })
   }
   
@@ -155,24 +153,6 @@ export class SentEmailsService {
         return sentEmail.prospect = prospect
       return
     })
-  }
-
-  countSentEmails() {
-    let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip);
-    queryParameters = queryParameters.append("take", 20);
-    queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    return this.http.get<number>(`sent-emails/count-sent-emails`, { params: queryParameters }).subscribe(nbSentEmails => {
-      this.nbSentEmails = nbSentEmails
-    });
-  }
-
-  countSentEmailsSent() {
-    let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip)
-    queryParameters = queryParameters.append("take", 20),
-    queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    return this.http.get<number>(`sent-emails/count-sent-emails-sent`, { params: queryParameters }).subscribe(nbSentEmailsSent => this.nbSentEmailsSent = nbSentEmailsSent);
   }
 
   updateCommentProspect(id: number, newComment: string) {

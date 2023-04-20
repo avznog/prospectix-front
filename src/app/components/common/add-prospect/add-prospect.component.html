@@ -25,21 +25,35 @@
 
   </div>
   <div class="inline-flex space-x-5">
-    <!-- Domaine d'activité du prospect -->
-    <div class="form-control">
-      <label class="label" for="activity">
-        <span class="label-text">Domaine d'activité</span>
-      </label>
-      <div class="inline-flex">
+    <div class="inline-flex space-x-5">
+			<!-- Domaine d'activité du prospect -->
+			<div class="form-control">
+				<label class="label" for="primaryActivity">
+					<span class="label-text">Domaine d'activité primaire</span>
+				</label>
+				<!-- select activity -->
+				<select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity"
+					class="select select-bordered">
+					<option [ngValue]="null">Sélectionner un domaine d'activité primaire</option>
+					<option *ngFor="let primaryActivity of activitiesService.primaryActivitiesWithoutLimit" [ngValue]="primaryActivity">
+						{{primaryActivity.name}}
+					</option>
+				</select>
 
-        <!-- select activity -->
-        <select id="activity" name="activity" [(ngModel)]="activity" class="select select-bordered">
-          <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner un domaine d'activité</option>
-          <option *ngFor="let activity of activitiesService.activities" [ngValue]="activity">{{activity.name}}</option>
-        </select>
 
-      </div>
-    </div>
+			</div>
+			<div class="form-control" *ngIf="primaryActivity">
+				<label class="label" for="secondaryActivity">
+					<span class="label-text">Domaine secondaire</span>
+				</label>
+				<select id="secondaryActivity" name="secondaryActivity" [(ngModel)]="secondaryActivity"
+					class="select select-bordered">
+          <option [ngValue]="null">Sélectionner un domaine secondaire</option>
+					<option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}
+					</option>
+				</select>
+			</div>
+		</div>
 
 
     <!-- Ville du prospect -->
@@ -52,7 +66,7 @@
         <!-- select city -->
         <select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
           <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner une ville</option>
-          <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
+          <option *ngFor="let city of citiesService.citiesByZipcode" [ngValue]="city">{{city.name}} : {{city.zipcode}}</option>
         </select>
 
 
@@ -120,7 +134,7 @@
 
   <!-- Bouton créer le prospect -->
     <label
-    class="btn btn-ghost btn-outline float float-right justify-center modal-button {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || activity == undefined || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
+    class="btn btn-ghost btn-outline float float-right justify-center modal-button {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || secondaryActivity == null || primaryActivity == null || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
      (click)="onCreateProspect() " for="{{stage == 2 ? 'create-prospect-reminder' : stage == 3 ? 'create-prospect-meeting' : 'modal-add-prospect'}}">{{stage == 0 ? 'Créer le prospect' : stage == 1 ? 'Ajouter aux favoris' : stage == 2 ? 'Définir le rappel' : stage == 3 ? 'Définir le rendez-vous' : stage == 4 ? 'Ajouter aux mails' : stage == 5 ? 'Marquer comme refus' : 'Créer le prospect'}}</label>
 
   <!-- select stage -->

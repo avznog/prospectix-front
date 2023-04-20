@@ -69,6 +69,7 @@ import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interc
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
+import { BackofficeSearchComponent } from './components/backoffice-search/backoffice-search/backoffice-search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,6 +127,7 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
     AccountComponent,
     EditMyInfosComponent,
     Oauth2callbackComponent,
+    BackofficeSearchComponent,
   ],
   imports: [
     BrowserModule,

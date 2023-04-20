@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Activity } from 'src/app/models/activity.model';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { City } from 'src/app/models/city.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
@@ -11,6 +11,7 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { PrimaryActivity } from 'src/app/models/primary-activity.model';
 
 @Component({
   selector: 'app-prospect-edit',
@@ -23,7 +24,9 @@ export class ProspectEditComponent implements OnInit {
   @Input() sentEmail!: SentEmail;
   @Input() reminder!: Reminder;
 
-  activity!: Activity;
+  primaryActivity: PrimaryActivity | null = null;
+  secondaryActivity: SecondaryActivity | null = null;
+
   city!: City;
   phone: string = "";
   email: string = "";
@@ -49,8 +52,6 @@ export class ProspectEditComponent implements OnInit {
     this.phone = this.prospect.phone.number;
     this.website = this.prospect.website.website;
     this.email = this.prospect.email.email;
-    // this.city = this.prospect.city;
-    // this.activity = this.prospect.activity;
   }
 
   onEditProspect() {
@@ -58,7 +59,9 @@ export class ProspectEditComponent implements OnInit {
     companyName: this.companyName,
     streetAddress: this.streetAddress,
     city: this.city == undefined ? this.prospect.city || this.reminder.prospect.city || this.sentEmail.prospect.city : this.city,
-    activity: this.activity == undefined ? this.prospect.activity || this.reminder.prospect.activity || this.sentEmail.prospect.activity : this.activity,
+    secondaryActivity: !this.primaryActivity || !this.secondaryActivity ? (this.prospect.secondaryActivity || this.reminder.prospect.secondaryActivity || this.sentEmail.prospect.secondaryActivity) : { ...this.secondaryActivity, primaryActivity: this.primaryActivity },
+    version: this.prospect.version || this.reminder.prospect.version || this.sentEmail.prospect.version,
+    dateScraped: this.prospect.dateScraped || this.reminder.prospect.dateScraped || this.sentEmail.prospect.dateScraped,
     phone: {
       id: this.prospect.phone.id,
       number: this.phone

@@ -1,0 +1,81 @@
+<div class="w-full p-5">
+  <div class="flex justify-center w-full">
+    <span class="justify-center italic text-center font-extralight">Page de gestion des paramètres de recherche des
+      prospects.
+      Vous pouvez ici régler les versions des prospects, de domaines d'activité, de villes... Par exemple, si on a
+      Prospects = V1 et Domaines d'activité = V2, alors lors d'une recherche, le chef de projet récupèrera les prospects
+      venant de la première version de scraping et les domaines d'activité de la deuxième</span>
+  </div>
+
+<!-- ? main block -->
+  <div class="inline-flex w-full m-5 space-x-5 shadow-md card bg-base-100">
+    <div class="inline-flex w-full card-body">
+      <!-- ? title -->
+      <div class="justify-center w-full text-center card-title">
+        Panneau de modification
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ? cards -->
+      <div class="inline-flex w-full h-1/4">
+
+        <!-- ? prospect card -->
+        <div class="flex justify-center w-1/4 m-2 shadow-2xl card h-44">
+          <div class="self-center align-baseline">
+            <div class="justify-center w-full card-title">Prospects </div>
+            <div class="flex justify-center w-full dropdown dropdown-bottom">
+              <label tabindex="0" class="m-1 btn btn-outline btn-primary">{{searchParamsService.searchParams.versionProspect}}</label>
+              <ul tabindex="0" class="p-2 border shadow dropdown-content border-primary menu bg-base-100 rounded-box w-52">
+                <li *ngFor="let p of versionsProspects | keyvalue"><a (click)="searchParamsService.update(1, {versionProspect: p.value})">{{p.value}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ? city card -->
+        <div class="flex justify-center w-1/4 m-2 shadow-2xl card h-44">
+          <div class="self-center align-baseline">
+            <div class="justify-center w-full card-title">Villes</div>
+            <div class="flex justify-center w-full dropdown dropdown-bottom">
+              <label tabindex="1" class="m-1 btn btn-outline btn-primary">{{searchParamsService.searchParams.versionCity}}</label>
+              <ul tabindex="1" class="p-2 border shadow dropdown-content border-primary menu bg-base-100 rounded-box w-52">
+                <li *ngFor="let c of versionsCity | keyvalue"><a (click)="searchParamsService.update(1, {versionCity: c.value})">{{c.value}}</a></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ? primary activity card -->
+        <div class="flex justify-center w-1/4 m-2 shadow-2xl card h-44">
+          <div class="self-center align-baseline">
+            <div class="justify-center w-full card-title">Domaines d'activité primaires</div>
+            <div class="flex justify-center w-full dropdown dropdown-bottom">
+              <label tabindex="2" class="m-1 btn btn-outline btn-primary">{{searchParamsService.searchParams.versionPrimaryActivity}}</label>
+              <ul tabindex="2" class="p-2 border shadow dropdown-content border-primary menu bg-base-100 rounded-box w-52">
+                <li *ngFor="let pa of versionsPrimaryAcitivity | keyvalue"><a  (click)="searchParamsService.update(1, {versionPrimaryActivity: pa.value})">{{pa.value}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ? secondary activity card -->
+        <div class="flex justify-center w-1/4 m-2 shadow-2xl card h-44">
+          <div class="self-center align-baseline">
+            <div class="justify-center w-full card-title">Domaines d'activité secondaires</div>
+            <div class="flex justify-center w-full dropdown dropdown-bottom ">
+              <label tabindex="3" class="m-1 btn btn-outline btn-primary">{{searchParamsService.searchParams.versionSecondaryActivity}}</label>
+              <ul tabindex="3" class="p-2 border shadow dropdown-content border-primary menu bg-base-100 rounded-box w-52">
+                <li *ngFor="let sa of versionSecondaryActivity | keyvalue"><a (click)="searchParamsService.update(1, {versionSecondaryActivity: sa.value})">{{sa.value}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>

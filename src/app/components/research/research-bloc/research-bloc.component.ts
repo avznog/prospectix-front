@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PrimaryActivity } from 'src/app/models/primary-activity.model';
+import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
@@ -9,9 +11,10 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
   styleUrls: ['./research-bloc.component.scss']
 })
 export class ResearchBlocComponent implements OnInit {
-  formKeyword: string = "";
-  formActivity: string = "allActivities";
-  formZipcode: number = -1000;
+  keyword: string | null = null;
+  cityName: string | null = null;
+  primaryActivity: PrimaryActivity | null = null;
+  secondaryActivity: SecondaryActivity | null = null;
 
   constructor(
     public readonly activitiesService: ActivitiesService,
@@ -20,28 +23,80 @@ export class ResearchBlocComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.formKeyword = this.prospectsService.researchParamsProspect.keyword;
+      this.keyword = this.prospectsService.researchParamsProspect.keyword;
   }
 
   onEditCity() {
-    this.prospectsService.resetSearch({
+    this.cityName ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      zipcode: this.formZipcode
-    })
+      cityName: this.cityName,
+      keyword: null,
+      secondaryActivity: null,
+      primaryActivity: null
+    }) : 
+      this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
+      this.onPrimaryActivityChange() : 
+        this.keyword ? 
+        this.onEditKeyword() : 
+        this.prospectsService.resetSearch({
+          ...this.prospectsService.researchParamsProspect,
+          keyword: null,
+          cityName: null,
+          secondaryActivity: null,
+          primaryActivity: null,
+        })
+    
+  }
+  onPrimaryActivityChange() {
+    this.primaryActivity ? this.prospectsService.resetSearch({
+      ...this.prospectsService.researchParamsProspect,
+      cityName: null,
+      keyword: null,
+      secondaryActivity: null,
+      primaryActivity: this.primaryActivity!.name
+    }) : 
+      this.cityName ? 
+      this.onEditCity() :
+        this.keyword ? 
+        this.onEditKeyword() :
+          this.prospectsService.resetSearch({
+            ...this.prospectsService.researchParamsProspect,
+            keyword: null,
+            cityName: null,
+            secondaryActivity: null,
+            primaryActivity: null,
+          })
   }
 
-  onEditActivity() {
+  onSecondaryActivityChange() {
+    this.secondaryActivity ?
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      activity: this.formActivity
-    });
+      cityName: null,
+      keyword: null,
+      secondaryActivity: this.secondaryActivity!.name,
+      primaryActivity: this.primaryActivity!.name
+    }) : this.onPrimaryActivityChange() 
   }
 
   onEditKeyword() {
-    this.prospectsService.resetSearch({
+    this.keyword ? this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      keyword: this.formKeyword
-    });
+      keyword: this.keyword,
+      cityName: null,
+      secondaryActivity: null,
+      primaryActivity: null
+    }) :
+      this.cityName ? 
+      this.onEditCity() :
+        this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
+        this.onPrimaryActivityChange() :
+        this.prospectsService.resetSearch({
+          ...this.prospectsService.researchParamsProspect,
+          keyword: null,
+          cityName: null,
+          secondaryActivity: null,
+          primaryActivity: null,
+        });
   }
-
 }
