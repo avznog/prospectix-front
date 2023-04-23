@@ -37,7 +37,8 @@
                 "glob": "**/*",
                 "input": "./node_modules/@kolkov/angular-editor/assets/",
                 "output": "./assets/fonts/"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss",
@@ -46,7 +47,9 @@
               "./node_modules/quill/dist/quill.snow.css",
               "./node_modules/katex/dist/katex.min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -133,7 +136,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss",
