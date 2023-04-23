@@ -70,6 +70,7 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
 import { BackofficeSearchComponent } from './components/backoffice-search/backoffice-search/backoffice-search.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -156,6 +157,12 @@ import { BackofficeSearchComponent } from './components/backoffice-search/backof
         ]
       },
       suppressGlobalRegisterWarning: true
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     })
   ],
   bootstrap: [AppComponent],
