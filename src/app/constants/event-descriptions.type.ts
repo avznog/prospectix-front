@@ -13,5 +13,6 @@ export enum EventDescriptionType {
   NEGATIVE_ANSWER = "Le prospect a exprimé un refus à",
   NO_ANSWER = "Pas de réponse du prospect à",
   PASSAGE_PRO = "Passage en pro avec",
-  MARK_MAIL_SENT = "Mail envoyé par"
+  MARK_MAIL_SENT = "Mail envoyé par",
+  UPDATE_PROSPECT = "Prospect mis à jour"
 }

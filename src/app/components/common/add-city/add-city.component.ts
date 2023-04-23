@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VersionCityType } from 'src/app/constants/versions.type';
 import { CitiesService } from 'src/app/services/cities/cities.service';
+import { SearchParamsService } from 'src/app/services/search-params/search-params.service';
 
 @Component({
   selector: 'app-add-city',
@@ -13,7 +14,8 @@ export class AddCityComponent implements OnInit {
   zipcode: number = 0;
   disabled: boolean = true;
   constructor(
-    public readonly citiesService: CitiesService
+    public readonly citiesService: CitiesService,
+    private readonly searchParamsService: SearchParamsService
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class AddCityComponent implements OnInit {
     this.citiesService.create({
       name: this.name,
       zipcode: this.zipcode,
-      version: VersionCityType.MANUALLY_ADDED,
+      version: this.searchParamsService.searchParams.versionCity,
       dateScraped: new Date
     });
   }

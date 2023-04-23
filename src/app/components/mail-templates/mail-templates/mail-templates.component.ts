@@ -71,13 +71,13 @@ export class MailTemplatesComponent implements OnInit {
         "stage": 0,
         "archived": new Date(),
         "reasonDisabled": ReasonDisabledType.ENTREPRISE_FERMEE,
-        "version": VersionProspectType.MANUALLY_ADDED,
+        "version": VersionProspectType.V2,
         "dateScraped": new Date,
         "secondaryActivity": {
           "id": -1,
           "name": "",
           "weight": 0,
-          "version": VersionSecondaryActivityType.MANUALLY_ADDED,
+          "version": VersionSecondaryActivityType.V2,
           "weightCount": 0,
           "dateScraped": new Date,
           "primaryActivity": {
@@ -87,7 +87,7 @@ export class MailTemplatesComponent implements OnInit {
             "secondaryActivities": [],
             "weightCount": 0,
             "dateScraped": new Date,
-            "version": VersionPrimaryActivityType.MANUALLY_ADDED
+            "version": VersionPrimaryActivityType.V2
           }
         },
         "city": {
@@ -95,7 +95,7 @@ export class MailTemplatesComponent implements OnInit {
           "name": "Angers",
           "zipcode": 49000,
           "dateScraped": new Date,
-          "version": VersionCityType.MANUALLY_ADDED
+          "version": VersionCityType.V2
         },
         "country": {
           "id": 1,

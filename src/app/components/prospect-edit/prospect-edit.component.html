@@ -31,7 +31,7 @@
 				<select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity"
 					class="select select-bordered">
 					<option [ngValue]="null">Je ne change pas le domaine d'activité </option>
-					<option *ngFor="let primaryActivity of activitiesService.primaryActivitiesWithoutLimit" [ngValue]="primaryActivity">
+					<option *ngFor="let primaryActivity of activitiesService.primaryActivities" [ngValue]="primaryActivity">
 						{{primaryActivity.name}}
 					</option>
 				</select>

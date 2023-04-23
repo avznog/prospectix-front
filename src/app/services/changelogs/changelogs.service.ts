@@ -21,11 +21,12 @@ export class ChangelogsService {
           "[Rework Activités] - Changement de l'interface de recherche et de la méthode de recherche de prospects. Il y a maintenant la possibilité de rechercher par activité primaire & par activité secondaire",
           "[Rework Activités] - Changement des méthodes de recherche des prospects",
           "[Rework Villes] - Les villes s'affichent désormais par nom au lieu de s'afficher par zipcode. Néanmoins, lorsque l'on veut modifier / ajouter des villes, il est possible de sélectionner une ville selon son zipcode",
-          "[Rework Activités / Villes] - Les activités & villes affichées ne sont que celles qui ont au moins 500 prospects",
           "[Rework Activités / Villes] - Ajout d'attributs 'version' & 'dateScraped' pour les prospects / activités primaires / activités secondaires / villes pour pouvoir traquer les différentes modifications de base",
+          "[Rework Activités / Villes] - Lorsque l'on ajoute ou edit un prospect, les villes / domains d'activités disponibles sont les mêmes que ceux de la recherche",
           "[Rework Poids] - Modification du 'Poids' de chaque catégorie (IA) : maintenant, les catégories primaires ont aussi un 'Poids'. Aussi, le nombre d'appels est aussi enregistré afin de pouvoir pondéré les résultats",
           "Refactor du code de compte des rendez-vous / meetings / sentEmails",
-          "Ajout d'une nouvelle page au backoffice : il est désormais possible de choisir la version de prospect / ville / activités secondaires - primaires que l'on veut rechercher"
+          "Ajout d'une nouvelle page au backoffice : il est désormais possible de choisir la version de prospect / ville / activités secondaires - primaires que l'on veut rechercher",
+          "Ajout d'un type d'évènement : Mise à jour de prospect, pour lorsqu'un prospect est mis à jour à la suite d'un scraping"
         ]
       },
       {

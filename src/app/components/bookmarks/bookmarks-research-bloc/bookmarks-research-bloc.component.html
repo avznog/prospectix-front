@@ -1,4 +1,4 @@
-<div class="inline-flex p-5 space-x-5">
+<div class="inline-flex w-full p-5 space-x-5">
   <!-- Search a prospect - overrides the other filters -->
   <div class="w-1/4">
     <label class="label" for="search">
@@ -39,7 +39,7 @@
     </label>
     <select id="city" name="city" [(ngModel)]="cityName" (change)="onEditCity()" class="select select-bordered">
       <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les villes</option>
-      <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}} : {{city.zipcode}}
+      <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}} - {{city.zipcode.toFixed() | slice:0:2}}
       </option>
     </select>
   </div>
