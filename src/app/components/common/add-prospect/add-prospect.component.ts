@@ -54,7 +54,10 @@ export class AddProspectComponent implements OnInit {
 
   onCreateProspect() {
     (this.stage != 2 && this.stage != 3) && this.prospectService.create({
-      secondaryActivity: this.secondaryActivity!,
+      secondaryActivity: {
+        ...this.secondaryActivity!,
+        primaryActivity: this.primaryActivity!
+      },
       city: this.city,
       country: this.country,
       stage: this.stage,
@@ -79,7 +82,10 @@ export class AddProspectComponent implements OnInit {
 
     (this.stage == 2 || this.stage == 3) && (
       this.createProspectDto = {
-        secondaryActivity: this.secondaryActivity!,
+        secondaryActivity: {
+          ...this.secondaryActivity!,
+          primaryActivity: this.primaryActivity!
+        },
         city: this.city,
         country: this.country,
         stage: this.stage,
