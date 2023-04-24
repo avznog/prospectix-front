@@ -95,7 +95,8 @@ export class MailTemplatesComponent implements OnInit {
           "name": "Angers",
           "zipcode": 49000,
           "dateScraped": new Date,
-          "version": VersionCityType.V2
+          "version": VersionCityType.V2,
+          "origin": ""
         },
         "country": {
           "id": 1,

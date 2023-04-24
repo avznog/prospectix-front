@@ -5,4 +5,5 @@ export interface CreateCityDto {
     zipcode: number;
     version: VersionCityType;
     dateScraped: Date;
+    origin: string;
 }

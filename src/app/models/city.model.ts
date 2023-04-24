@@ -6,4 +6,5 @@ export interface City {
   zipcode: number;
   version: VersionCityType;
   dateScraped: Date;
+  origin: string;
 }

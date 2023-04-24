@@ -34,10 +34,10 @@
     <!-- Select city -->
     <div class="w-1/10">
         <label class="label" for="city">
-            <span class="label-text">Ville</span>
+            <span class="label-text">Zone</span>
         </label>
         <select id="city" name="city" [(ngModel)]="cityName" (change)="onEditCity()" class="w-full select select-bordered">
-            <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les villes</option>
+            <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les zones</option>
             <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}} - {{city.zipcode.toFixed()| slice:0:2}}</option>
         </select>
     </div>

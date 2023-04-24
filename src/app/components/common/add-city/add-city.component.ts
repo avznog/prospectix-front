@@ -34,7 +34,8 @@ export class AddCityComponent implements OnInit {
       name: this.name,
       zipcode: this.zipcode,
       version: this.searchParamsService.searchParams.versionCity,
-      dateScraped: new Date
+      dateScraped: new Date,
+      origin: this.name
     });
   }
 }
