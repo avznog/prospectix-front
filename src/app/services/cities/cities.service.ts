@@ -22,7 +22,7 @@ export class CitiesService {
 
   findAll() {
     return this.http.get<[City]>(`cities/find-all`).subscribe(cities => {
-      this.cities = cities.filter((city, index, array) => array.findIndex((c) => c.name === city.name) === index)
+      this.cities = cities;
     })
   }
 

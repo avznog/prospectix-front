@@ -1,10 +1,10 @@
 <div class="inline-flex w-full p-5 space-x-5">
   <!-- Search a prospect - overrides the other filters -->
-  <div class="w-1/4">
+  <div class="w-1/4 ">
     <label class="label" for="search">
-      <span class="label-text">Recherche</span>
+      <span class="label-text">Recherche (nom, tél ou code postal)</span>
     </label>
-    <input type="search" [(ngModel)]="keyword" (keyup.enter)="onEditKeyword()" placeholder="Recherche (entrée pour valider)"
+    <input type="search" [(ngModel)]="keyword" (keyup.enter)="updateParameters()" placeholder="Recherche (entrée pour valider)"
       class="w-full max-w-xs input input-bordered" />
   </div>
 
@@ -15,7 +15,7 @@
           <label class="label" for="primaryActivity">
               <span class="w-full label-text">Tous les domaines primaires</span>
           </label>
-          <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="onPrimaryActivityChange()">
+          <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="updateParameters()">
               <option [ngValue]="null">Domaines primaires</option>
               <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
           </select>
@@ -26,7 +26,7 @@
           <label class="label" for="secondaryActivity">
               <span class="label-text">Tous les domaines secondaires</span>
           </label>
-          <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity" (change)="onSecondaryActivityChange()">
+          <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity" (change)="updateParameters()">
               <option [ngValue]="null">Domaines secondaires</option>
               <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}</option>
           </select>
@@ -37,9 +37,9 @@
     <label class="label" for="city">
       <span class="label-text">Ville</span>
     </label>
-    <select id="city" name="city" [(ngModel)]="cityName" (change)="onEditCity()" class="select select-bordered">
+    <select id="city" name="city" [(ngModel)]="cityName" (change)="updateParameters()" class="select select-bordered">
       <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les villes</option>
-      <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}} - {{city.zipcode.toFixed() | slice:0:2}}
+      <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}}
       </option>
     </select>
   </div>

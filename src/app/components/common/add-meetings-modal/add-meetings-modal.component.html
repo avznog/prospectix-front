@@ -1,16 +1,16 @@
-<label for="{{prospect && 'modal-add-meeting-{{prospect.id}}'}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-<div class="form-control space-y-5">
+<label *ngIf="prospect" for="modal-add-meeting-{{prospect.id}}" class="absolute btn btn-sm btn-circle right-2 top-2">✕</label>
+<div class="space-y-5 form-control">
   <label class="text-2xl font-bold">Ajouter un rendez-vous</label>
   <div class="divider"></div>
   <!-- Date du RDV -->
-  <input type="datetime-local" id="date" class="datepicker input input-bordered" [(ngModel)]="date">
+  <input type="datetime-local" id="date" class="stroke-2 datepicker input input-bordered stroke-primary" [(ngModel)]="date">
   <!-- Type de RDV -->
   <div class="text-center">
-    <select class="select select-bordered w-full" id="typeMeeting" name="typeMeeting" [(ngModel)]="type">
+    <select class="w-full select select-bordered" id="typeMeeting" name="typeMeeting" [(ngModel)]="type">
       <option *ngFor="let typeMeeting of meetingTypeKeys">{{typeMeeting}}</option>
     </select>
 
   </div>
   <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}} " for="{{prospect ? 'modal-add-meeting-{{prospect.id}}' : 'modal-add-prospect'}}" (click)="onCreateMeeting()">Créer le rendez-vous</label>
-  <label class="label text-sm font-extralight text-error" *ngIf="!googleService.logged">Vous n'êtes pas connecté à Google</label>
+  <label class="text-sm label font-extralight text-error" *ngIf="!googleService.logged">Vous n'êtes pas connecté à Google</label>
 </div>

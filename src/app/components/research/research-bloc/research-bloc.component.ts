@@ -23,80 +23,20 @@ export class ResearchBlocComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.keyword = this.prospectsService.researchParamsProspect.keyword;
+    this.keyword = this.prospectsService.researchParamsProspect.keyword;
   }
 
-  onEditCity() {
-    this.cityName ? this.prospectsService.resetSearch({
-      ...this.prospectsService.researchParamsProspect,
-      cityName: this.cityName,
-      keyword: null,
-      secondaryActivity: null,
-      primaryActivity: null
-    }) : 
-      this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
-      this.onPrimaryActivityChange() : 
-        this.keyword ? 
-        this.onEditKeyword() : 
-        this.prospectsService.resetSearch({
-          ...this.prospectsService.researchParamsProspect,
-          keyword: null,
-          cityName: null,
-          secondaryActivity: null,
-          primaryActivity: null,
-        })
-    
-  }
-  onPrimaryActivityChange() {
-    this.primaryActivity ? this.prospectsService.resetSearch({
-      ...this.prospectsService.researchParamsProspect,
-      cityName: null,
-      keyword: null,
-      secondaryActivity: null,
-      primaryActivity: this.primaryActivity!.name
-    }) : 
-      this.cityName ? 
-      this.onEditCity() :
-        this.keyword ? 
-        this.onEditKeyword() :
-          this.prospectsService.resetSearch({
-            ...this.prospectsService.researchParamsProspect,
-            keyword: null,
-            cityName: null,
-            secondaryActivity: null,
-            primaryActivity: null,
-          })
-  }
-
-  onSecondaryActivityChange() {
-    this.secondaryActivity ?
+  updateParameters() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      cityName: null,
-      keyword: null,
-      secondaryActivity: this.secondaryActivity!.name,
-      primaryActivity: this.primaryActivity!.name
-    }) : this.onPrimaryActivityChange() 
+      keyword: this.keyword == '' ? null : this.keyword,
+      secondaryActivity: !this.primaryActivity ? null : !this.secondaryActivity ? null : this.secondaryActivity?.name,
+      cityName: this.cityName,
+      primaryActivity: this.primaryActivity?.name ?? null
+    })
   }
 
-  onEditKeyword() {
-    this.keyword ? this.prospectsService.resetSearch({
-      ...this.prospectsService.researchParamsProspect,
-      keyword: this.keyword,
-      cityName: null,
-      secondaryActivity: null,
-      primaryActivity: null
-    }) :
-      this.cityName ? 
-      this.onEditCity() :
-        this.primaryActivity ? this.secondaryActivity ? this.onSecondaryActivityChange() : 
-        this.onPrimaryActivityChange() :
-        this.prospectsService.resetSearch({
-          ...this.prospectsService.researchParamsProspect,
-          keyword: null,
-          cityName: null,
-          secondaryActivity: null,
-          primaryActivity: null,
-        });
+  changePrimaryActivity() {
+    this.secondaryActivity = null;
   }
 }

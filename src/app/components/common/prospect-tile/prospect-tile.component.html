@@ -4,7 +4,8 @@
     <div class="w-full p-0 m-0 card-title">
       <!-- 1/2 NAME -->
       <div class="w-1/2">
-        {{prospect.companyName | slice:0:30}} - {{prospect.secondaryActivity.name | slice:0:40}}
+        <div class="flex w-full">{{prospect.companyName | slice:0:30}} - {{prospect.secondaryActivity.name | slice:0:40}}</div>
+        <div class="flex w-full mb-0 text-xs italic font-extralight">{{prospect.secondaryActivity.primaryActivity.name}}</div>
       </div>
       <!-- 1/2 REST -->
       <div class="inline-flex w-1/2">
@@ -157,7 +158,7 @@
 
         <!-- FULL ADDRESS -->
         <div class="w-full">
-          {{prospect.streetAddress}}, {{prospect.city.zipcode}} {{prospect.city.name}}, {{prospect.country.name}}
+          {{prospect.streetAddress}}, {{prospect.city.zipcode}} {{prospect.city.origin}}, {{prospect.country.name}}
         </div>
 
         <!-- FULL CONTACT -->
