@@ -1,8 +1,8 @@
-<div class="inline-flex p-5 space-x-5">
+<div class="inline-flex w-full p-5 space-x-5">
     <!-- Search a prospect - overrides the other filters -->
-    <div class="w-1/5">
+    <div class="w-1/4">
         <label class="label" for="search">
-            <span class="label-text">Recherche</span>
+            <span class="label-text">Recherche (Nom, tél ou code postal)</span>
         </label>
         <input type="search" [(ngModel)]="keyword" (keyup.enter)="updateParameters()" placeholder="Recherche (entrée pour valider)" class="w-full max-w-xs input input-bordered" />
     </div>

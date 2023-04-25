@@ -28,7 +28,7 @@ export class ChangelogsService {
           ],
         features: [
           "[Rework Activités] - Création d'activités primaires et secondaires. Dix activités primaires regroupent maintenant l'entièreté des activitiés.",
-          "[Rework Activités] - Changement de l'interface de recherche et de la méthode de recherche de prospects. Il y a maintenant la possibilité de rechercher par activité primaire & par activité secondaire",
+          "[Rework Activités] - Changement de l'interface de recherche et de la méthode de recherche de prospects. Tous les champs de recherche sont compatibles",
           "[Rework Activités] - Changement des méthodes de recherche des prospects",
           "[Rework Villes] - Les villes s'affichent désormais par nom au lieu de s'afficher par zipcode. Néanmoins, lorsque l'on veut modifier / ajouter des villes, il est possible de sélectionner une ville selon son zipcode",
           "[Rework Activités / Villes] - Ajout d'attributs 'version' & 'dateScraped' pour les prospects / activités primaires / activités secondaires / villes pour pouvoir traquer les différentes modifications de base",
