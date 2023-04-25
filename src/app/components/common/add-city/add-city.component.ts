@@ -13,6 +13,7 @@ export class AddCityComponent implements OnInit {
   name: string = "";
   zipcode: number = 0;
   disabled: boolean = true;
+  zone: string | null = null;
   constructor(
     public readonly citiesService: CitiesService,
     private readonly searchParamsService: SearchParamsService
@@ -31,7 +32,7 @@ export class AddCityComponent implements OnInit {
 
   onAddCity() {
     this.citiesService.create({
-      name: this.name,
+      name: this.zone!,
       zipcode: this.zipcode,
       version: this.searchParamsService.searchParams.versionCity,
       dateScraped: new Date,

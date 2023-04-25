@@ -1,4 +1,4 @@
-<div class="card card-compact">
+<div class="flex space-y-5 card card-compact">
   <label for="add-city-modal" class="absolute btn btn-sm btn-circle right-2 top-2">✕</label>
   <div class="card-body">
     <div class="justify-center card-title">Ajouter une ville</div>
@@ -12,6 +12,15 @@
     <input type="text" class="input input-bordered" [(ngModel)]="name" placeholder="Ex: Paris" (input)="onCheckDisabled()"/>
   </div>
 
+  <div class="form-control">
+    <label>
+      <span class="label-text">Zone</span>
+    </label>
+      <select [(ngModel)]="zone" class="select select-bordered">
+        <option [ngValue]="null">Choisir une zone</option>
+        <option *ngFor="let zone of citiesService.cities">{{zone.name}}</option>
+      </select>
+  </div>
   <!-- Code postal de la ville -->
   <div class="form-control">
     <label class="label">
@@ -21,6 +30,6 @@
   </div>
 
   <div class="flex justify-center w-full">
-    <label class="btn btn-outline m-5 w-1/2 {{disabled ? 'btn-disabled' : ''}}" for="add-city-modal" (click)="onAddCity()">Ajouter la ville</label>
+    <label class="btn btn-outline m-5 w-1/2 {{disabled || !zone ? 'btn-disabled' : ''}}" for="add-city-modal" (click)="onAddCity()">Ajouter la ville</label>
   </div>
 </div>
