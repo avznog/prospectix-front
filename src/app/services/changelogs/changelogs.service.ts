@@ -7,6 +7,16 @@ import { Changelog } from 'src/app/models/changelog.model';
 export class ChangelogsService {
   changelogs: Changelog[] = [];
   localVersion: string = "";
+  // Ce message est pour toi, Responsable Technique qui dev sur Prospectix.
+  // Tu as entre les mains un outil formidable, qui a représenté l'entièreté de mon année de Rtech. 
+  // C'est mon bébé, donc prends en soin.
+  // Si jamais tu as du mal, tu bloques, ou tu penses abandonner, n'oublie jamais que l'entièreté des Alumni Responsables Technique est la
+  // pour t'aider, à l'image de Mufasa dans le roi lion mdr
+  // Prends soin de cet outil, car c'est une masterclass
+  // Je compte sur toi pour reprendre le flambeau de la plus belle des manières
+  // C'est avec une larme que mon mandat s'achève et que je vous lègue Prospectix
+  // Coeur sur vous, 
+  // Benjamin GONZVA, Responsable Technique 2022-2023 ♥️
   constructor(
   ) {
     this.localVersion = localStorage.getItem("version") ?? "";
