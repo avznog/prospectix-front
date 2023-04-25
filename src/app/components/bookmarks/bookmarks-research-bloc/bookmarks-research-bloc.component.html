@@ -15,7 +15,7 @@
           <label class="label" for="primaryActivity">
               <span class="w-full label-text">Tous les domaines primaires</span>
           </label>
-          <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="updateParameters()">
+          <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="secondaryActivity = null;updateParameters()">
               <option [ngValue]="null">Domaines primaires</option>
               <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
           </select>
