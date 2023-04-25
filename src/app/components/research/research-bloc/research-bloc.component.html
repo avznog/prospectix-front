@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-    <div [class]="'inline-flex w-full p-5 space-x-5 '">
+    <div [class]="'inline-flex w-full p-5 space-x-5 ' + (scrolling && 'pt-1 pb-1')">
         <!-- Search a prospect - overrides the other filters -->
         <div class="w-1/4">
             <label class="label" for="search">
@@ -45,7 +45,7 @@
     
         <!-- Ajouter un prospect -->
         <div class="pt-9 w-1/10">
-            <label class="btn btn-ghost btn-outline modal-button form-control btn-sm" for="modal-add-prospect">Ajouter un prospect</label>
+            <label class="btn btn-ghost btn-outline modal-button form-control {{scrolling ? 'btn-sm' : 'btn-md'}}" for="modal-add-prospect">Ajouter un prospect</label>
         </div>    
     </div>
     <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
