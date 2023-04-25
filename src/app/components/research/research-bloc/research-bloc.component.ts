@@ -34,7 +34,6 @@ export class ResearchBlocComponent implements OnInit {
       cityName: this.cityName,
       primaryActivity: this.primaryActivity?.name ?? null
     })
-    console.log({ keyword: this.keyword, cityName: this.cityName, secondaryActivity: this.secondaryActivity, primaryActivity: this.primaryActivity })
   }
 
   changePrimaryActivity() {
