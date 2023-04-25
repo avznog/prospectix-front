@@ -1,5 +1,3 @@
-{{ prospectsService.loading}}
-{{prospectsService.nbProspects}}
 <app-research-bloc [class]="" ></app-research-bloc>
 <app-no-result class="self-center align-baseline" *ngIf="!prospectsService.loading && prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
 <div *ngIf="!prospectsService.loading" class="overflow-scroll transition-all">
