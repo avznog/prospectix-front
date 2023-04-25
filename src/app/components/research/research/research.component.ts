@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { lastDayOfWeek } from 'date-fns';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 
@@ -8,7 +9,6 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
   styleUrls: ['./research.component.scss']
 })
 export class ResearchComponent implements OnInit {
-  scrolling: boolean = false;
   constructor(
     public readonly prospectsService: ProspectsService,
     public bookmarksService: BookmarksService
@@ -29,11 +29,5 @@ export class ResearchComponent implements OnInit {
       ...this.prospectsService.researchParamsProspect,
       skip: this.prospectsService.researchParamsProspect.skip - 20
     });
-  }
-
-
-  @HostListener("window:scroll")
-  public onScroll(event: Event) {
-    this.scrolling = document.documentElement.scrollTop > 10;
   }
 }

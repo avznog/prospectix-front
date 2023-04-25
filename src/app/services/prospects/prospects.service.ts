@@ -34,7 +34,6 @@ export class ProspectsService {
     primaryActivity: null,
     keyword: null
   };
-  loading: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -51,7 +50,6 @@ export class ProspectsService {
   }
 
   resetSearch(researchParamsProspect: ResearchParamsProspect) {
-    this.loading = true;
     this.prospects.clear();
     this.updateSearchParameters({
       ...researchParamsProspect,
@@ -60,7 +58,6 @@ export class ProspectsService {
   }
 
   updateSearchParameters(researchParamsProspect: ResearchParamsProspect) {
-    this.loading = true;
     if(researchParamsProspect != this.researchParamsProspect)
       this.researchParamsProspect = researchParamsProspect;
       this.loadMore();
@@ -78,7 +75,6 @@ export class ProspectsService {
     this.http.get<{prospects: Prospect[], count: number}>(`prospects/find-all-paginated/`, { params: queryParameters }).subscribe(data => {
       data.prospects.forEach(prospect => this.prospects.set(prospect.id, prospect));
       this.nbProspects = data.count;
-      this.loading = false;
     });
   }
 

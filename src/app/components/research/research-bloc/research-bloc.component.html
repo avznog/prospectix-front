@@ -1,58 +1,55 @@
-<div class="container mx-auto">
-    <div [class]="'inline-flex w-full p-5 space-x-5 ' + (scrolling && 'pt-1 pb-1')">
-        <!-- Search a prospect - overrides the other filters -->
+<div class="inline-flex w-full p-5 space-x-5">
+    <!-- Search a prospect - overrides the other filters -->
+    <div class="w-1/4">
+        <label class="label" for="search">
+            <span class="label-text">Recherche (Nom, tél ou code postal)</span>
+        </label>
+        <input type="search" [(ngModel)]="keyword" (keyup.enter)="updateParameters()" placeholder="Recherche (entrée pour valider)" class="w-full max-w-xs input input-bordered" />
+    </div>
+
+    <!-- Select activity domain -->
+    
+        <!-- ? Primary -->
         <div class="w-1/4">
-            <label class="label" for="search">
-                <span class="label-text">Recherche (Nom, tél ou code postal)</span>
+            <label class="label" for="primaryActivity">
+                <span class="w-full label-text">Tous les domaines primaires</span>
             </label>
-            <input type="search" [(ngModel)]="keyword" (keyup.enter)="updateParameters()" placeholder="Recherche (entrée pour valider)" class="w-full transition-all max-w-xs input {{scrolling ? 'input-sm' : 'input'}} input-bordered" />
-        </div>
-    
-        <!-- Select activity domain -->
-        
-            <!-- ? Primary -->
-            <div class="w-1/4">
-                <label class="label" for="primaryActivity">
-                    <span class="w-full label-text">Tous les domaines primaires</span>
-                </label>
-                <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered transition-all {{scrolling ? 'select-sm' : 'select'}}" (change)="updateParameters(); changePrimaryActivity();">
-                    <option [ngValue]="null">Domaines primaires</option>
-                    <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
-                </select>
-            </div>
-            
-            <!-- ? Secondary domains-->
-            <div *ngIf="primaryActivity != null" class="w-1/4">
-                <label class="label" for="secondaryActivity">
-                    <span class="label-text">Tous les domaines secondaires</span>
-                </label>
-                <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered transition-all {{scrolling ? 'select-sm' : 'select'}}" [(ngModel)]="secondaryActivity" (change)="updateParameters()">
-                    <option [ngValue]="null">Domaines secondaires</option>
-                    <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}</option>
-                </select>
-            </div>
-    
-        <!-- Select city -->
-        <div class="w-1/10">
-            <label class="label" for="city">
-                <span class="label-text">Zone</span>
-            </label>
-            <select id="city" name="city" [(ngModel)]="cityName" (change)="updateParameters()" class="w-full select select-bordered transition-all {{scrolling ? 'select-sm' : 'select'}}">
-                <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les zones</option>
-                <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}}</option>
+            <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="updateParameters(); changePrimaryActivity();">
+                <option [ngValue]="null">Domaines primaires</option>
+                <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
             </select>
         </div>
-    
-        <!-- Ajouter un prospect -->
-        <div class="pt-9 w-1/10">
-            <label class="btn btn-ghost btn-outline modal-button form-control {{scrolling ? 'btn-sm' : 'btn-md'}}" for="modal-add-prospect">Ajouter un prospect</label>
-        </div>    
-    </div>
-    <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
-    <label for="modal-add-prospect" class="cursor-pointer modal">
-        <label class="relative max-w-screen-xl space-y-4 overflow-y-scroll modal-box" for="">
-            <app-add-prospect></app-add-prospect>
+        
+        <!-- ? Secondary domains-->
+        <div *ngIf="primaryActivity != null" class="w-1/4">
+            <label class="label" for="secondaryActivity">
+                <span class="label-text">Tous les domaines secondaires</span>
+            </label>
+            <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity" (change)="updateParameters()">
+                <option [ngValue]="null">Domaines secondaires</option>
+                <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}</option>
+            </select>
+        </div>
+
+    <!-- Select city -->
+    <div class="w-1/10">
+        <label class="label" for="city">
+            <span class="label-text">Zone</span>
         </label>
-    </label>
-    
+        <select id="city" name="city" [(ngModel)]="cityName" (change)="updateParameters()" class="w-full select select-bordered">
+            <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les zones</option>
+            <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}}</option>
+        </select>
+    </div>
+
+    <!-- Ajouter un prospect -->
+    <div class="pt-9 w-1/10">
+        <label class="btn btn-ghost btn-outline modal-button form-control" for="modal-add-prospect">Ajouter un prospect</label>
+    </div>    
 </div>
+<input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
+<label for="modal-add-prospect" class="cursor-pointer modal">
+    <label class="relative max-w-screen-xl space-y-4 overflow-y-scroll modal-box" for="">
+        <app-add-prospect></app-add-prospect>
+    </label>
+</label>

@@ -1,19 +1,10 @@
-<app-research-bloc [class]="'fixed left-0 z-50 w-full mb-10 bg-base-300 ' + (scrolling && 'backdrop-blur-3xl bg-opacity-80 bg-base-300')" [scrolling]="scrolling" ></app-research-bloc>
-<app-research-bloc class="invisible mb-10"></app-research-bloc>
-<div *ngIf="!prospectsService.loading" class="overflow-scroll transition-all">
-  <div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
-    <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>
-  </div>
-  <app-no-result class="self-center align-baseline" *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
-  <div class="justify-center w-full pb-5 btn-group">
-    <button class="btn btn-outline btn-ghost {{prospectsService.researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-    <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 20 + 1}} / {{(prospectsService.nbProspects / 20 + 1).toFixed()}}</button>
-    <button class="btn btn-outline btn-ghost {{(prospectsService.researchParamsProspect.skip + 20 < prospectsService.nbProspects )? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
-  </div>
+<app-research-bloc></app-research-bloc>
+<div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
+  <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>
 </div>
-
-<div *ngIf="prospectsService.loading" class="flex justify-center w-full transition-all">
-  <div class="self-center mb-32">
-    <img src="../../../../assets/logo_couleur.png" class="w-32 h-32 aspect-square animate-pulse">
-  </div>
+<app-no-result *ngIf="prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
+<div class="justify-center w-full pb-5 btn-group">
+  <button class="btn btn-outline btn-ghost {{prospectsService.researchParamsProspect.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+  <button class="btn btn-outline btn-ghost">Page {{prospectsService.researchParamsProspect.skip / 20 + 1}} / {{(prospectsService.nbProspects / 20 + 1).toFixed()}}</button>
+  <button class="btn btn-outline btn-ghost {{(prospectsService.researchParamsProspect.skip + 20 < prospectsService.nbProspects )? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
 </div>

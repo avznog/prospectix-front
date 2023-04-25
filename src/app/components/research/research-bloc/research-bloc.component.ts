@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PrimaryActivity } from 'src/app/models/primary-activity.model';
 import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
@@ -15,8 +15,6 @@ export class ResearchBlocComponent implements OnInit {
   cityName: string | null = null;
   primaryActivity: PrimaryActivity | null = null;
   secondaryActivity: SecondaryActivity | null = null;
-
-  @Input() scrolling: boolean = false;
 
   constructor(
     public readonly activitiesService: ActivitiesService,
