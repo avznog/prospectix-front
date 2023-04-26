@@ -12,7 +12,7 @@ import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 })
 export class ResearchBlocComponent implements OnInit {
   keyword: string | null = null;
-  cityName: string | null = null;
+  city: number | null = null;
   primaryActivity: PrimaryActivity | null = null;
   secondaryActivity: SecondaryActivity | null = null;
 
@@ -30,9 +30,9 @@ export class ResearchBlocComponent implements OnInit {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
       keyword: this.keyword == '' ? null : this.keyword,
-      secondaryActivity: !this.primaryActivity ? null : !this.secondaryActivity ? null : this.secondaryActivity?.name,
-      cityName: this.cityName,
-      primaryActivity: this.primaryActivity?.name ?? null
+      secondaryActivity: !this.primaryActivity ? null : !this.secondaryActivity ? null : this.secondaryActivity?.id,
+      city: this.city,
+      primaryActivity: this.primaryActivity?.id ?? null
     })
   }
 

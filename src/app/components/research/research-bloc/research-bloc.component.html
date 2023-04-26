@@ -37,9 +37,9 @@
             <label class="label" for="city">
                 <span class="label-text">Zone</span>
             </label>
-            <select id="city" name="city" [(ngModel)]="cityName" (change)="updateParameters()" class="w-full transition-all select select-bordered select-md">
+            <select id="city" name="city" [(ngModel)]="city" (change)="updateParameters()" class="w-full transition-all select select-bordered select-md">
                 <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les zones</option>
-                <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}}</option>
+                <option *ngFor="let city of citiesService.cities" [ngValue]="city.id">{{city.name}}</option>
             </select>
         </div>
     

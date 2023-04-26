@@ -1,8 +1,8 @@
 <app-research-bloc [class]="" ></app-research-bloc>
-<app-no-result class="self-center align-baseline" *ngIf="!prospectsService.loading && prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
+<app-no-result class="self-center align-baseline" *ngIf="!prospectsService.loading && prospectsService.prospects && prospectsService.prospects.length <= 0"></app-no-result>
 <div *ngIf="!prospectsService.loading" class="overflow-scroll transition-all">
-  <div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
-    <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>
+  <div *ngFor="let prospect of prospectsService.prospects | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
+    <app-prospect-tile [prospect]="prospect" *ngIf="prospect.stage == 0 && !prospect.disabled"></app-prospect-tile>
   </div>
   
 </div>

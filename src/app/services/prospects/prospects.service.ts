@@ -29,7 +29,7 @@ export class ProspectsService {
   nbProspects: number = 0;
   researchParamsProspect : ResearchParamsProspect = {
     skip: 0,
-    cityName: null,
+    city: null,
     secondaryActivity: null,
     primaryActivity: null,
     keyword: null
@@ -72,7 +72,7 @@ export class ProspectsService {
     queryParameters = queryParameters.append("take", 20);
     this.researchParamsProspect.skip && (queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip));
     this.researchParamsProspect.keyword && (queryParameters = queryParameters.append("keyword", this.researchParamsProspect.keyword));
-    this.researchParamsProspect.cityName && (queryParameters = queryParameters.append("cityName", this.researchParamsProspect.cityName));
+    this.researchParamsProspect.city && (queryParameters = queryParameters.append("city", this.researchParamsProspect.city));
     this.researchParamsProspect.primaryActivity && (queryParameters = queryParameters.append("primaryActivity", this.researchParamsProspect.primaryActivity));
     this.researchParamsProspect.secondaryActivity && (queryParameters = queryParameters.append("secondaryActivity", this.researchParamsProspect.secondaryActivity));
 
