@@ -1,0 +1,13 @@
+<div class="w-full card">
+  <div class="card-body ">
+    <div class="inline-flex space-x-5">
+      <label class="w-1/2 btn btn-outline btn-ghost">Annuler</label>
+      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'refus'" class="w-1/2 btn btn-outline btn-ghost btn-error">Déclarer comme refus</label>
+      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'mail'" class="w-1/2 btn btn-outline btn-ghost btn-error">Ajouter au mail</label>
+      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'bookmark'" class="w-1/2 btn btn-outline btn-ghost btn-error">Ajouter aux favoris</label>
+      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'pas-pertinent'" class="w-1/2 btn btn-outline btn-ghost btn-error">Supprimer de la base</label>
+      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'passage-en-pro'" class="w-1/2 btn btn-outline btn-ghost btn-error">Passé en PRO</label>
+      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'meeting-effectue'" class="w-1/2 btn btn-outline btn-ghost btn-error">Rendez-vous effectué</label>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+$transition-duration: 100ms;
+$dialog-position-top: 20%;
+@import "ngx-smart-modal/ngx-smart-modal";
+@import "app/app.component";

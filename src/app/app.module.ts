@@ -71,6 +71,9 @@ import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
 import { BackofficeSearchComponent } from './components/backoffice-search/backoffice-search/backoffice-search.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ActionProspectComponent } from './components/common/action-prospect/action-prospect.component';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { AddMeetingAndReminderComponent } from './components/common/add-meeting-and-reminder/add-meeting-and-reminder.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,6 +132,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     EditMyInfosComponent,
     Oauth2callbackComponent,
     BackofficeSearchComponent,
+    ActionProspectComponent,
+    AddMeetingAndReminderComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +142,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ReactiveFormsModule,
     FormsModule,
     NgChartsModule,
+    NgxSmartModalModule.forRoot(),
     QuillModule.forRoot({
       modules: {
         toolbar: [

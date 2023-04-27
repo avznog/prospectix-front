@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
@@ -20,10 +21,14 @@ export class EditDateReminderMeetingComponent implements OnInit {
 
   constructor(
     private readonly remindersService: RemindersService,
-    private readonly meetingsService: MeetingsService
+    private readonly meetingsService: MeetingsService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
+    this.prospect = this.ngxSmartModalService.getModalData('edit-date').prospect
+    this.reminder = this.ngxSmartModalService.getModalData('edit-date').reminder
+    this.meeting = this.ngxSmartModalService.getModalData('edit-date').meeting
     this.date = undefined;
   }
 

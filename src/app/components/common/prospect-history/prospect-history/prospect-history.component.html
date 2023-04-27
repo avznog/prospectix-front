@@ -1,6 +1,6 @@
 <div class="rounded card">
-  <label for="prospect-history-{{prospect.id}}" class="absolute btn btn-sm btn-circle right-2 top-2 text-base-100">✕</label>
-  <div class="card-title"><span class="justify-center">Historique du prospect: {{prospect && prospect.companyName}}</span></div>
+  <label class="absolute btn btn-sm btn-circle right-2 top-2 text-base-100">✕</label>
+  <div class="card-title"><span class="justify-center">Historique du prospect: {{ngxSmartModalService.getModalData('history').companyName}}</span></div>
   <div class="card-body">
     <div class="rounded">
       <ul class="steps steps-vertical">
