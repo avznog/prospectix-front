@@ -29,10 +29,10 @@ export class ResearchBlocComponent implements OnInit {
   updateParameters() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      keyword: this.keyword == '' ? null : this.keyword,
-      secondaryActivity: !this.primaryActivity ? null : !this.secondaryActivity ? null : this.secondaryActivity?.id,
-      city: this.city,
-      primaryActivity: this.primaryActivity?.id ?? null
+      keyword: (!this.secondaryActivity && !this.city && !this.primaryActivity) ? this.keyword == '' ? null : this.keyword : null,
+      secondaryActivity: (!this.keyword && !this.city) ? !this.primaryActivity ? null : !this.secondaryActivity ? null : this.secondaryActivity?.id : null,
+      city: (!this.keyword && !this.secondaryActivity && !this.primaryActivity) ? this.city : null,
+      primaryActivity: (!this.city && !this.keyword) ? this.primaryActivity?.id ?? null : null
     })
   }
 
