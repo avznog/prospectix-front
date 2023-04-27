@@ -1,34 +1,32 @@
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import * as fr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { DatePipe, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgChartsModule } from 'ng2-charts';
 import { QuillModule } from 'ngx-quill';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { environment } from 'src/environments/environment.dev';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AccountComponent } from './components/account/account/account.component';
+import { BackofficeSearchComponent } from './components/backoffice-search/backoffice-search/backoffice-search.component';
 import { BookmarksResearchBlocComponent } from './components/bookmarks/bookmarks-research-bloc/bookmarks-research-bloc.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks/bookmarks.component';
 import { ChangelogsComponent } from './components/changelogs/changelogs.component';
-import { AddBookmarkModalComponent } from './components/common/add-bookmark-modal/add-bookmark-modal.component';
+import { ActionProspectComponent } from './components/common/action-prospect/action-prospect.component';
 import { AddCityComponent } from './components/common/add-city/add-city.component';
-import { AddMailModalComponent } from './components/common/add-mail-modal/add-mail-modal.component';
+import { AddMeetingAndReminderComponent } from './components/common/add-meeting-and-reminder/add-meeting-and-reminder.component';
 import { AddMeetingsModalComponent } from './components/common/add-meetings-modal/add-meetings-modal.component';
 import { AddProspectComponent } from './components/common/add-prospect/add-prospect.component';
 import { AddReminderModalComponent } from './components/common/add-reminder-modal/add-reminder-modal.component';
 import { ConfirmDeleteMailTemplateComponent } from './components/common/confirm-delete-mail-template/confirm-delete-mail-template.component';
-import { ConfirmProComponent } from './components/common/confirm-pro/confirm-pro.component';
-import { ConfirmRefusComponent } from './components/common/confirm-refus/confirm-refus.component';
-import { DisableProspectModalComponent } from './components/common/disable-prospect-modal/disable-prospect-modal.component';
 import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
 import { EditMyInfosComponent } from './components/common/edit-my-infos/edit-my-infos.component';
 import { HeaderComponent } from './components/common/header/header.component';
-import { MarkMeetingDoneAndOutComponent } from './components/common/mark-meeting-done-and-out/mark-meeting-done-and-out.component';
 import { MarkSentEmailSentComponent } from './components/common/mark-sent-email-sent/mark-sent-email-sent.component';
 import { NoResultComponent } from './components/common/no-result/no-result/no-result.component';
 import { ProspectHistoryComponent } from './components/common/prospect-history/prospect-history/prospect-history.component';
@@ -69,11 +67,7 @@ import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interc
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
-import { BackofficeSearchComponent } from './components/backoffice-search/backoffice-search/backoffice-search.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { ActionProspectComponent } from './components/common/action-prospect/action-prospect.component';
-import { NgxSmartModalModule } from 'ngx-smart-modal';
-import { AddMeetingAndReminderComponent } from './components/common/add-meeting-and-reminder/add-meeting-and-reminder.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,15 +96,9 @@ import { AddMeetingAndReminderComponent } from './components/common/add-meeting-
     MailsResearchBlocComponent,
     ProspectTileComponent,
     StatisticsComponent,
-    AddBookmarkModalComponent,
-    AddMailModalComponent,
-    DisableProspectModalComponent,
     FrenchDatePipePipe,
     ShortFrenchDatePipe,
-    ConfirmRefusComponent,
     StatsSmallCardComponent,
-    ConfirmProComponent,
-    MarkMeetingDoneAndOutComponent,
     RankingComponent,
     MyStatsComponent,
     ActivityComponent,

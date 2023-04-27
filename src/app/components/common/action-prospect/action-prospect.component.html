@@ -1,13 +1,21 @@
-<div class="w-full card">
-  <div class="card-body ">
-    <div class="inline-flex space-x-5">
+<div class="w-full pt-5 card">
+  <div class="flex justify-center card-title">{{data.title}}</div>
+  <div class="card-body">
+    <div *ngIf="data.type == 'pas-pertinent'" class="justify-center input-group">
+      <label class="text-md label" for="select-disable-options">Pour quelle raison ?</label>
+      <select id="select-disable-options" [(ngModel)]="reason">
+        <option *ngFor="let reason of reasonDisabledType" [ngValue]="reason">{{ reason == 0 ? 'Grand groupe' : reason == 1 ? 'Numéro non / mal attribué' : reason == 2 ? 'Entreprise fermée' : 'Holdings'}}</option>
+      </select>
+    </div>
+    <div class="inline-flex justify-center space-x-5">
+      
       <label class="w-1/2 btn btn-outline btn-ghost">Annuler</label>
-      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'refus'" class="w-1/2 btn btn-outline btn-ghost btn-error">Déclarer comme refus</label>
-      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'mail'" class="w-1/2 btn btn-outline btn-ghost btn-error">Ajouter au mail</label>
-      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'bookmark'" class="w-1/2 btn btn-outline btn-ghost btn-error">Ajouter aux favoris</label>
-      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'pas-pertinent'" class="w-1/2 btn btn-outline btn-ghost btn-error">Supprimer de la base</label>
-      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'passage-en-pro'" class="w-1/2 btn btn-outline btn-ghost btn-error">Passé en PRO</label>
-      <label *ngIf="ngxSmartModalService.getModalData('action-prospect').type == 'meeting-effectue'" class="w-1/2 btn btn-outline btn-ghost btn-error">Rendez-vous effectué</label>
+      <label *ngIf="data.type == 'refus'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onRefus()">Déclarer comme refus</label>
+      <label *ngIf="data.type == 'mail'" class="w-1/2 btn btn-outline btn-ghost btn-success" (click)="onEmail()">Ajouter au mail</label>
+      <label *ngIf="data.type == 'bookmark'" class="w-1/2 btn btn-outline btn-ghost btn-warning" (click)="onBookmark()">Ajouter aux favoris</label>
+      <label *ngIf="data.type == 'pas-pertinent'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onDisable()">Supprimer de la base</label>
+      <label *ngIf="data.type == 'passage-en-pro'" class="w-1/2 btn btn-outline btn-ghost btn-success" (click)="onPro()">Passé en PRO</label>
+      <label *ngIf="data.type == 'meeting-done-and-out'" class="w-1/2 btn btn-outline btn-ghost btn-info" (click)="onMeetingDone()">Rendez-vous effectué</label>
     </div>
   </div>
 </div>
