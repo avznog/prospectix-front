@@ -59,7 +59,7 @@ export class ProspectTileComponent implements OnInit {
     this.ngxSmartModalService.create('edit-date', EditDateReminderMeetingComponent);
     this.ngxSmartModalService.create('add-meeting-reminder', AddMeetingAndReminderComponent);
     this.ngxSmartModalService.create('history', ProspectHistoryComponent);
-    this.ngxSmartModalService.create('mail-done', MarkSentEmailSentComponent);
+    this.ngxSmartModalService.create('mail-sent', MarkSentEmailSentComponent);
     this.ngxSmartModalService.create('prospect-edit', ProspectEditComponent);
    }
 
