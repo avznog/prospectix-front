@@ -45,13 +45,13 @@
     
         <!-- Ajouter un prospect -->
         <div class="pt-9 w-1/10">
-            <label class="btn btn-ghost btn-outline modal-button form-control btn-md" for="modal-add-prospect">Ajouter un prospect</label>
+            <label class="btn btn-ghost btn-outline form-control btn-md" (click)="ngxSmartModalService.getModal('add-prospect').open()">Ajouter un prospect</label>
         </div>    
     </div>
-    <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
+    <!-- <input type="checkbox" id="modal-add-prospect" class="modal-toggle"/>
     <label for="modal-add-prospect" class="cursor-pointer modal">
         <label class="relative max-w-screen-xl space-y-4 overflow-y-scroll modal-box" for="">
             <app-add-prospect></app-add-prospect>
         </label>
     </label>
-    
+     -->

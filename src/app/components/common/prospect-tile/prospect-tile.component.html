@@ -114,7 +114,7 @@
           </div>
           <!-- Button MODAL Edit prospect -->
           <label *ngIf="(prospect.stage == 2 || prospect.stage == 4) && !(reminder && reminder.done) && !(meeting && meeting.done)" (click)="ngxSmartModalService.getModal('prospect-edit').removeData().setData({prospect: prospect, reminder: reminder, sentEmail: sentEmail}).open()"
-          class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
+          class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -126,8 +126,8 @@
         <!-- 2/3 BUTTONS DELETE / EDIT FOR RESEARCH BOOKMARKS ONLY -->
         <div class="inline-flex justify-end w-2/3 space-x-5" *ngIf="prospect.stage == 0 || prospect.stage == 1">
           <!-- Button MODAL Edit prospect -->
-          <label for="modal-prospect-edit-{{prospect.id}}"
-            class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
+          <label (click)="ngxSmartModalService.getModal('prospect-edit').removeData().setData({prospect: prospect, reminder: reminder, sentEmail: sentEmail}).open()"
+            class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 ">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-inherit hover:text-base-100 hover:bg-opacity-0"
               fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
