@@ -51,6 +51,7 @@ export class ProspectsService {
   }
 
   resetSearch(researchParamsProspect: ResearchParamsProspect) {
+    console.log(researchParamsProspect)
     this.loading = true;
     this.prospects.clear();
     this.updateSearchParameters({
@@ -67,7 +68,6 @@ export class ProspectsService {
   }
 
   loadMore() {
-    console.time();
     let queryParameters = new HttpParams();
     queryParameters = queryParameters.append("take", 20);
     this.researchParamsProspect.skip && (queryParameters = queryParameters.append("skip", this.researchParamsProspect.skip));
@@ -80,7 +80,6 @@ export class ProspectsService {
       data.prospects.forEach(prospect => this.prospects.set(prospect.id, prospect));
       this.nbProspects = data.count;
       this.loading = false;
-      console.timeEnd()
     });
   }
 
