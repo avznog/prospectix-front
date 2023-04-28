@@ -9,7 +9,7 @@
     </div>
     <div class="inline-flex justify-center space-x-5">
       
-      <label class="w-1/2 btn btn-outline btn-ghost">Annuler</label>
+      <label class="w-1/2 btn btn-outline btn-ghost" (click)="closeModal()">Annuler</label>
       <label *ngIf="data.type == 'refus'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onRefus()">Déclarer comme refus</label>
       <label *ngIf="data.type == 'mail'" class="w-1/2 btn btn-outline btn-ghost btn-success" (click)="onEmail()">Ajouter au mail</label>
       <label *ngIf="data.type == 'bookmark'" class="w-1/2 btn btn-outline btn-ghost btn-warning" (click)="onBookmark()">Ajouter aux favoris</label>

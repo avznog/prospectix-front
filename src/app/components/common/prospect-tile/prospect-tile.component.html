@@ -214,7 +214,7 @@
             </label>
 
             <!-- Bouton de rappel  -->
-            <label tabindex="0" *ngIf="prospect.stage == 0 || prospect.stage == 1" (click)="ngxSmartModalService.getModal('add-meeting-reminder').removeData().setData({prospect: prospect}).open()"
+            <label tabindex="0" *ngIf="prospect.stage == 0 || prospect.stage == 1" (click)="ngxSmartModalService.getModal('add-meeting-reminder').removeData().setData({prospect: prospect, type: 'reminder'}).open()"
               class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md"
               >Rappel</label>
 
@@ -222,7 +222,7 @@
             <!-- Bouton de rendez-vous -->
             <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 8"
               tabindex="0"
-              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md {{ (reminder && reminder.done) || (meeting && meeting.done) ? 'btn-disabled' : ''}}" (click)="ngxSmartModalService.getModal('add-meeting-reminder').removeData().setData({prospect: prospect, reminder: reminder}).open()"
+              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md {{ (reminder && reminder.done) || (meeting && meeting.done) ? 'btn-disabled' : ''}}" (click)="ngxSmartModalService.getModal('add-meeting-reminder').removeData().setData({prospect: prospect, type: 'meeting'}).open()"
               >Rendez-vous</label>
 
 
