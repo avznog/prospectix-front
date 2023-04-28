@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
@@ -23,8 +24,11 @@ import { ToastsService } from 'src/app/services/toasts/toasts.service';
 })
 export class MarkSentEmailSentComponent implements OnInit {
 
-  @Input() sentEmail!: SentEmail;
-  @Input() prospect!: Prospect;
+  data: {
+    sentEmail?: SentEmail;
+    prospect?: Prospect;
+  } = {};
+
   clientName: string =  "";
   chosenTemplate: MailTemplate = undefined as unknown as MailTemplate;
   object: string = "";
@@ -47,10 +51,12 @@ export class MarkSentEmailSentComponent implements OnInit {
     public readonly googleService: GoogleService,
     private readonly toastsService: ToastsService,
     private readonly prospectsService: ProspectsService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
-    this.email = this.prospect.email.email;
+    this.data = this.ngxSmartModalService.getModalData('mail-sent');
+    this.email = this.data.prospect!.email.email;
     this.checkFormatEmail();
   }
 
@@ -61,9 +67,9 @@ export class MarkSentEmailSentComponent implements OnInit {
         clientName: this.clientName,
         mailTemplateId: this.chosenTemplate.id,
         prospect: {
-          ...this.prospect,
+          ...this.data.prospect!,
           email: {
-            id: this.prospect.email.id,
+            id: this.data.prospect!.email.id,
             email: this.email
           }
         },
@@ -78,20 +84,20 @@ export class MarkSentEmailSentComponent implements OnInit {
       } else {
         emailToSend = sendEmailDto;
       }
-      this.sentEmailsService.send(emailToSend, this.sentEmail.id);
+      this.sentEmailsService.send(emailToSend, this.data.sentEmail!.id);
   
-      this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-      this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-      this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-      this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-      this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+      this.prospectService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+      this.remindersService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+      this.meetingsService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+      this.bookmarksService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+      this.sentEmailsService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
   
       this.eventsService.create({
         type: EventType.MARK_MAIL_SENT,
         date: new Date,
         description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo} avec le template ${this.chosenTemplate.name}`,
         pm: this.authService.currentUserSubject.getValue(),
-        prospect: this.prospect
+        prospect: this.data.prospect!
       });
     } else {
       this.toastsService.addToast({
@@ -100,24 +106,26 @@ export class MarkSentEmailSentComponent implements OnInit {
       });
       this.googleService.authenticate();
     }
+    this.ngxSmartModalService.closeAll();
   }
 
   onClickSendMailSeparately() {
     this.emailGotChanged && this.updateEmailOnProspect();
-    this.sentEmailsService.sendSeparately(this.sentEmail.id, this.object);
-    this.prospectService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-    this.remindersService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-    this.meetingsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-    this.bookmarksService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
-    this.sentEmailsService.updateByStage(this.prospect.id, { stage: StageType.MAIL_SENT });
+    this.sentEmailsService.sendSeparately(this.data.sentEmail!.id, this.object);
+    this.prospectService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+    this.remindersService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+    this.meetingsService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+    this.bookmarksService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
+    this.sentEmailsService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
 
     this.eventsService.create({
       type: EventType.MARK_MAIL_SENT,
       date: new Date,
       description: `${EventDescriptionType.MARK_MAIL_SENT} ${this.authService.currentUserSubject.getValue().pseudo} séparément`,
       pm: this.authService.currentUserSubject.getValue(),
-      prospect: this.prospect
+      prospect: this.data.prospect!
     });
+    this.ngxSmartModalService.closeAll();
   }
 
   checkFormatEmail() {
@@ -127,17 +135,17 @@ export class MarkSentEmailSentComponent implements OnInit {
   updateEmailOnProspect() {
     const edit = {
       email: {
-        id: this.prospect.email.id,
+        id: this.data.prospect!.email.id,
         email: this.email
       }
     };
   
-    this.prospectsService.updateAllProspect(this.prospect.id, edit);
-    this.remindersService.updateLiveProspect({ ...this.prospect, ...edit });
-    this.meetingsService.updateLiveProspect({ ...this.prospect, ...edit });
-    this.bookmarksService.updateLiveProspect({ ...this.prospect, ...edit });
-    this.sentEmailsService.updateLiveProspect({ ...this.prospect, ...edit });
-    this.sentEmailsService.sentEmails.set(this.sentEmail.id, { ...this.sentEmail, prospect: { ...this.sentEmail.prospect, ...edit}})
+    this.prospectsService.updateAllProspect(this.data.prospect!.id, edit);
+    this.remindersService.updateLiveProspect({ ...this.data.prospect!, ...edit });
+    this.meetingsService.updateLiveProspect({ ...this.data.prospect!, ...edit });
+    this.bookmarksService.updateLiveProspect({ ...this.data.prospect!, ...edit });
+    this.sentEmailsService.updateLiveProspect({ ...this.data.prospect!, ...edit });
+    this.sentEmailsService.sentEmails.set(this.data.sentEmail!.id, { ...this.data.sentEmail!, prospect: { ...this.data.sentEmail!.prospect, ...edit}})
 
   }
 

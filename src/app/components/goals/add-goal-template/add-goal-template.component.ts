@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { GoalTemplatesService } from 'src/app/services/goal-templates/goal-templates.service';
 
 @Component({
@@ -14,18 +15,20 @@ export class AddGoalTemplateComponent implements OnInit {
   disabled: boolean = false;
 
   constructor(
-    private readonly goalTemplatesService: GoalTemplatesService
+    private readonly goalTemplatesService: GoalTemplatesService,
+    private readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
   }
 
   onAddTemplateGoal() {
-      this.goalTemplatesService.create({
-        name: this.name,
-        description: this.description,
-        default: this.default,
-        disabled: this.disabled,
-      });
+    this.goalTemplatesService.create({
+      name: this.name,
+      description: this.description,
+      default: this.default,
+      disabled: this.disabled,
+    });
+    this.ngxSmartModalService.closeAll();
   }
 }

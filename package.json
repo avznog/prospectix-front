@@ -33,6 +33,7 @@
     "katex": "^0.16.4",
     "ng2-charts": "^4.0.1",
     "ngx-quill": "19",
+    "ngx-smart-modal": "^7.4.1",
     "quill": "^1.3.7",
     "rxjs": "~7.5.0",
     "svelte-french-toast": "^1.0.3",

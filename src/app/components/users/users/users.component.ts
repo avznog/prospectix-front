@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UsersService } from 'src/app/services/users/users.service';
+import { CreateUserComponent } from '../create-user/create-user.component';
 
 @Component({
   selector: 'app-users',
@@ -10,11 +12,13 @@ import { UsersService } from 'src/app/services/users/users.service';
 export class UsersComponent implements OnInit {
   constructor(
     public readonly usersService: UsersService,
-    public authService: AuthService
+    public authService: AuthService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   
   ngOnInit(): void {
+    this.ngxSmartModalService.create('add-user', CreateUserComponent);
   }
 
   pageUp() {

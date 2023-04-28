@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+$transition-duration: 100ms;
+.add-prospect {
+  margin-top: 10% !important;
+  min-width: fit-content !important;
+}
+
+.action-prospect {
+  margin-top: 20% !important;
+}
+
+.nsm-content {
+  border-radius: 10px !important;
+}
+@import "ngx-smart-modal/ngx-smart-modal";
+@import "app/app.component";

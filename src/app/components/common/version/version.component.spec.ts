@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmRefusComponent } from './confirm-refus.component';
+import { VersionComponent } from './version.component';
 
-describe('ConfirmRefusComponent', () => {
-  let component: ConfirmRefusComponent;
-  let fixture: ComponentFixture<ConfirmRefusComponent>;
+describe('VersionComponent', () => {
+  let component: VersionComponent;
+  let fixture: ComponentFixture<VersionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmRefusComponent ]
+      declarations: [ VersionComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ConfirmRefusComponent);
+    fixture = TestBed.createComponent(VersionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

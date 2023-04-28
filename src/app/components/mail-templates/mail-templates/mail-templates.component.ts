@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ReasonDisabledType } from 'src/app/constants/reasonDisabled.type';
 import { VersionCityType, VersionPrimaryActivityType, VersionProspectType, VersionSecondaryActivityType } from 'src/app/constants/versions.type';
 import { MailTemplate } from 'src/app/models/mail-template.model';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { ConfirmDeleteMailTemplateComponent } from '../../common/confirm-delete-mail-template/confirm-delete-mail-template.component';
 @Component({
   selector: 'app-mail-templates',
   templateUrl: './mail-templates.component.html',
@@ -19,11 +21,13 @@ export class MailTemplatesComponent implements OnInit {
   constructor(
     public readonly mailTemplatesService: MailTemplatesService,
     public readonly authService: AuthService,
-    private readonly sentEmailService: SentEmailsService
+    private readonly sentEmailService: SentEmailsService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
     this.currentTemplate = localStorage.getItem("currentTemplate") != 'creation' ? JSON.parse(localStorage.getItem("currentTemplate")!) : 'creation' ?? 'creation';
+    this.ngxSmartModalService.create('delete-mail-template', ConfirmDeleteMailTemplateComponent);
   }
 
   changeTemplate(mailTemplate: MailTemplate | "creation") {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { City } from 'src/app/models/city.model';
@@ -11,6 +12,7 @@ import { CitiesService } from 'src/app/services/cities/cities.service';
 import { CountriesService } from 'src/app/services/countries/countries.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { SearchParamsService } from 'src/app/services/search-params/search-params.service';
+import { AddCityComponent } from '../add-city/add-city.component';
 
 @Component({
   selector: 'app-add-prospect',
@@ -26,6 +28,7 @@ export class AddProspectComponent implements OnInit {
     public readonly citiesService: CitiesService,
     public readonly countriesService: CountriesService,
     public readonly bookmarksService: BookmarksService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
   
   city!: City;  
@@ -50,6 +53,7 @@ export class AddProspectComponent implements OnInit {
       name: "France",
       id: 1
     }
+    this.ngxSmartModalService.create('add-city', AddCityComponent);
   }
 
   onCreateProspect() {
@@ -80,8 +84,9 @@ export class AddProspectComponent implements OnInit {
       isBookmarked: false,
     });
 
-    (this.stage == 2 || this.stage == 3) && (
-      this.createProspectDto = {
+    (this.stage == 2 || this.stage == 3) && this.ngxSmartModalService.getModal('add-meeting-reminder').removeData().setData({
+      type: this.stage == 2 ? 'reminder' : 'meeting',
+      createProspectDto: {
         secondaryActivity: {
           ...this.secondaryActivity!,
           primaryActivity: this.primaryActivity!
@@ -107,6 +112,8 @@ export class AddProspectComponent implements OnInit {
         version: this.searchParamsService.searchParams.versionProspect,
         dateScraped: new Date
       }
-    )
+    }).open()
+
+    this.stage != 2 && this.stage != 3 && this.ngxSmartModalService.closeAll();
   }
 }

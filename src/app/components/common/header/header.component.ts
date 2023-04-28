@@ -1,9 +1,11 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { ChangelogsService } from 'src/app/services/changelogs/changelogs.service';
 import { DataThemeService } from 'src/app/services/common/data-theme.service';
+import { VersionComponent } from '../version/version.component';
 
 @Component({
   selector: 'app-header',
@@ -22,9 +24,11 @@ export class HeaderComponent implements OnInit {
     public readonly bookmarksService: BookmarksService,
     public readonly router: Router,
     public dataThemeService: DataThemeService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
+    this.ngxSmartModalService.create('versions', VersionComponent).addCustomClass('add-prospect');
   }
   
   logout() {

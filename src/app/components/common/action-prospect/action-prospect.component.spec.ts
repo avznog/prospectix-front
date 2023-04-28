@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmProComponent } from './confirm-pro.component';
+import { ActionProspectComponent } from './action-prospect.component';
 
-describe('ConfirmProComponent', () => {
-  let component: ConfirmProComponent;
-  let fixture: ComponentFixture<ConfirmProComponent>;
+describe('ActionProspectComponent', () => {
+  let component: ActionProspectComponent;
+  let fixture: ComponentFixture<ActionProspectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmProComponent ]
+      declarations: [ ActionProspectComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ConfirmProComponent);
+    fixture = TestBed.createComponent(ActionProspectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

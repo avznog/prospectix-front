@@ -1,0 +1,23 @@
+<div class="w-full pt-5 card">
+  <div class="flex justify-center card-title">{{data.title}}</div>
+  <div class="card-body">
+    <div *ngIf="data.type == 'pas-pertinent'" class="justify-center input-group">
+      <label class="text-md label" for="select-disable-options">Pour quelle raison ?</label>
+      <select id="select-disable-options" [(ngModel)]="reason">
+        <option *ngFor="let reason of reasonDisabledType" [ngValue]="reason">{{ reason == 0 ? 'Grand groupe' : reason == 1 ? 'Numéro non / mal attribué' : reason == 2 ? 'Entreprise fermée' : 'Holdings'}}</option>
+      </select>
+    </div>
+    <div class="inline-flex justify-center space-x-5">
+      
+      <label class="w-1/2 btn btn-outline btn-ghost" (click)="closeModal()">Annuler</label>
+      <label *ngIf="data.type == 'refus'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onRefus()">Déclarer comme refus</label>
+      <label *ngIf="data.type == 'mail'" class="w-1/2 btn btn-outline btn-ghost btn-success" (click)="onEmail()">Ajouter au mail</label>
+      <label *ngIf="data.type == 'bookmark'" class="w-1/2 btn btn-outline btn-ghost btn-warning" (click)="onBookmark()">Ajouter aux favoris</label>
+      <label *ngIf="data.type == 'pas-pertinent'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onDisable()">Supprimer de la base</label>
+      <label *ngIf="data.type == 'passage-en-pro'" class="w-1/2 btn btn-outline btn-ghost btn-success" (click)="onPro()">Passé en PRO</label>
+      <label *ngIf="data.type == 'meeting-done-and-out'" class="w-1/2 btn btn-outline btn-ghost btn-info" (click)="onMeetingDone()">Rendez-vous effectué</label>
+      <label *ngIf="data.type == 'remove-template-mail'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onTemplateMail()">Supprimer le template {{data.mailTemplate?.name}}</label>
+      <label *ngIf="data.type == 'remove-template-goal'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onTemplateGoal()">Supprimer le template <span class="italic">{{data.goalTemplate?.name}}</span></label>
+    </div>
+  </div>
+</div>

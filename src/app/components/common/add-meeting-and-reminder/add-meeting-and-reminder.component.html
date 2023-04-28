@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="justify-center card-title">Ajouter un {{data.type == 'meeting' ? 'rendez-vous' : 'rappel'}}</div>
+  <div class="divider"></div>
+ <div class="space-y-5 card-body">
+
+    <!-- Date du RDV / Rappel-->
+    <input type="datetime-local" id="date" class="stroke-2 datepicker input input-bordered stroke-primary"
+      [(ngModel)]="date">
+
+    <!-- Type de RDV -->
+    <div class="text-center" *ngIf="data.type == 'meeting'">
+      <select class="w-full select select-bordered" [(ngModel)]="typeMeeting">
+        <option *ngFor="let typeMeeting of meetingTypeKeys">{{typeMeeting}}</option>
+      </select>
+    </div>
+
+    <!-- Priority du reminder -->
+    <div class="inline-flex" *ngIf="data.type == 'reminder'">
+      <label class="w-1/2 text-lg">Priorité du rappel</label>
+      <div class="w-1/2 tooltip" data-tip="Priorité 1 (faible) / 2 (moyen) / 3(élevée)">
+        <input type="range" min="1" max="3" value="1" class="range range-primary"  step="1" [(ngModel)]="reminderPriority"/>
+        <div class="flex justify-between w-full px-2 text-xs">
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decription du rappel -->
+    <textarea *ngIf="data.type == 'reminder'" class="textarea textarea-bordered textarea-ghost" placeholder="Description du rappel" [(ngModel)]="reminderDescription"></textarea>
+
+    <!-- Google message warning -->
+    <label class="text-sm label font-extralight text-error" *ngIf="data.type == 'meeting' && !googleService.logged">Vous n'êtes pas connecté à Google</label>
+
+    <!-- Bouton final de création -->
+    <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}}" (click)="data.type == 'meeting' ? onMeeting() : onReminder()">Créer le {{data.type == 'meeting' ? 'rendez-vous' : 'rappel'}}</label>
+
+  
+ </div>
+</div>

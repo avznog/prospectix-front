@@ -27,6 +27,7 @@ export class ChangelogsService {
         bugs: [
           ],
         features: [
+          "[Performances / Optimisation] - Énorme travail sur les performances / optimisation de l'outil. Utilisation de ngx-smart-modals, qui permet de ne pas préloader tous les modaux. Aussi, regroupement de certains modaux en 1 seul composant.",
           "[Rework Activités] - Création d'activités primaires et secondaires. Dix activités primaires regroupent maintenant l'entièreté des activitiés.",
           "[Rework Activités] - Changement de l'interface de recherche et de la méthode de recherche de prospects. Tous les champs de recherche sont compatibles",
           "[Rework Activités] - Changement des méthodes de recherche des prospects",
