@@ -12,6 +12,8 @@ import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { EventsService } from 'src/app/services/events/events.service';
+import { GoalTemplatesService } from 'src/app/services/goal-templates/goal-templates.service';
+import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
@@ -33,6 +35,14 @@ export class ActionProspectComponent implements OnInit {
     prospect?: Prospect;
     meeting?: Meeting;
     bookmark?: Bookmark;
+    mailTemplate?: {
+      name: string;
+      id: number;
+    };
+    goalTemplate?: {
+      name: string;
+      id: number;
+    }
   } = {};
 
   reasonDisabledType = [ReasonDisabledType.ENTREPRISE_FERMEE, ReasonDisabledType.GRAND_GROUPE, ReasonDisabledType.MAL_ATTRIBUE, ReasonDisabledType.HOLDINGS];
@@ -49,7 +59,9 @@ export class ActionProspectComponent implements OnInit {
     private readonly eventsService: EventsService,
     private readonly statisticsService: StatisticsService,
     private readonly authService: AuthService,
-    private readonly toastsService: ToastsService
+    private readonly toastsService: ToastsService,
+    private readonly mailTemplateService: MailTemplatesService,
+    private readonly goalTemplatesService: GoalTemplatesService
   ) {
   }
 
@@ -222,6 +234,16 @@ export class ActionProspectComponent implements OnInit {
       description: `${EventDescriptionType.DONE_MEETING} ${this.authService.currentUserSubject.getValue().pseudo}`
     });
     return this.meetingsService.markDone(this.data.meeting!.id);
+  }
+
+  onTemplateMail() {
+    this.mailTemplateService.delete(this.data.mailTemplate!.id)
+    this.closeModal();
+  }
+
+  onTemplateGoal() {
+    this.goalTemplatesService.delete(this.data.goalTemplate!.id);
+    this.closeModal();
   }
 
 }

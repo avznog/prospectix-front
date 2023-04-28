@@ -40,5 +40,7 @@ export class EditDateReminderMeetingComponent implements OnInit {
     this.meeting && this.meetingsService.update(this.meeting.id, {
       date: new Date(this.date!)
     });
+
+    this.ngxSmartModalService.closeAll();
   }
 }

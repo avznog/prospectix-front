@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MailTemplate } from 'src/app/models/mail-template.model';
+import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 
 @Component({
@@ -9,15 +9,23 @@ import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templ
 })
 export class ConfirmDeleteMailTemplateComponent implements OnInit {
 
-  @Input() mailTemplate!: MailTemplate;
+  data: {
+     mailTemplate?: {
+      name: string;
+      id: number;
+     }
+  } = {};
   constructor(
-    private readonly mailTemplatesService: MailTemplatesService
+    private readonly mailTemplatesService: MailTemplatesService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
+    this.data = this.ngxSmartModalService.getModalData('delete-mail-template');
   }
 
   onDeleteMailTemplate() {
-    this.mailTemplatesService.delete(this.mailTemplate.id)
+    this.mailTemplatesService.delete(this.data.mailTemplate?.id!)
+    this.ngxSmartModalService.closeAll();
   }
 }

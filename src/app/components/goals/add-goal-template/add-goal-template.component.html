@@ -1,6 +1,5 @@
 <div class="w-full">
-  <label for="add-goal-template-modal" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
-<h3 class="text-lg font-bold">Ajouter un objectif</h3>
+<label class="text-lg font-bold">Ajouter un objectif</label>
 <div class="divider"></div>
 <div class="space-y-5">
   <label class="input-group">
@@ -23,6 +22,6 @@
     <input class="checkbox" type="checkbox" [(ngModel)]="disabled"/>
   </label>
   
-  <label class="btn btn-outline btn-primary flex justify-center {{(name == '' || description == '' || default < 0 ? 'btn-disabled' : '')}}" for="add-goal-template-modal" (click)="onAddTemplateGoal()">Ajouter l'objectif</label>
+  <label class="btn btn-outline btn-primary flex justify-center {{(name == '' || description == '' || default < 0 ? 'btn-disabled' : '')}}" (click)="onAddTemplateGoal()">Ajouter l'objectif</label>
 </div>
 </div>

@@ -113,5 +113,7 @@ export class AddProspectComponent implements OnInit {
         dateScraped: new Date
       }
     }).open()
+
+    this.stage != 2 && this.stage != 3 && this.ngxSmartModalService.closeAll();
   }
 }

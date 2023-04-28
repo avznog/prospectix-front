@@ -16,6 +16,8 @@
       <label *ngIf="data.type == 'pas-pertinent'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onDisable()">Supprimer de la base</label>
       <label *ngIf="data.type == 'passage-en-pro'" class="w-1/2 btn btn-outline btn-ghost btn-success" (click)="onPro()">Passé en PRO</label>
       <label *ngIf="data.type == 'meeting-done-and-out'" class="w-1/2 btn btn-outline btn-ghost btn-info" (click)="onMeetingDone()">Rendez-vous effectué</label>
+      <label *ngIf="data.type == 'remove-template-mail'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onTemplateMail()">Supprimer le template {{data.mailTemplate?.name}}</label>
+      <label *ngIf="data.type == 'remove-template-goal'" class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onTemplateGoal()">Supprimer le template <span class="italic">{{data.goalTemplate?.name}}</span></label>
     </div>
   </div>
 </div>

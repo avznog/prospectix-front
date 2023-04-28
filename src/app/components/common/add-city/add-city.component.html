@@ -1,5 +1,4 @@
 <div class="flex space-y-5 card card-compact">
-  <label for="add-city-modal" class="absolute btn btn-sm btn-circle right-2 top-2">✕</label>
   <div class="card-body">
     <div class="justify-center card-title">Ajouter une ville</div>
   </div>
@@ -30,6 +29,6 @@
   </div>
 
   <div class="flex justify-center w-full">
-    <label class="btn btn-outline m-5 w-1/2 {{disabled || !zone ? 'btn-disabled' : ''}}" for="add-city-modal" (click)="onAddCity()">Ajouter la ville</label>
+    <label class="btn btn-outline m-5 w-1/2 {{disabled || !zone ? 'btn-disabled' : ''}}" (click)="onAddCity()">Ajouter la ville</label>
   </div>
 </div>

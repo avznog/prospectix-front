@@ -25,7 +25,7 @@
           <!-- button add bookmark -->
           <div class="tooltip" attr.data-tip="{{bookmarksService.nbBookmarks}} / {{bookmarksService.maxNbBookmarks}}"  *ngIf="prospect.stage == 0">
             <label  
-            class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button {{bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks ? 'btn-disabled' : ''}}" (click)="ngxSmartModalService.getModal('action-prospect').removeData().setData({type: 'bookmark', title: 'Ajouter aux favoris ?', prospect: prospect}).open()">
+            class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 {{bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks ? 'btn-disabled' : ''}}" (click)="ngxSmartModalService.getModal('action-prospect').removeData().setData({type: 'bookmark', title: 'Ajouter aux favoris ?', prospect: prospect}).open()">
             <svg xmlns="http://www.w3.org/2000/svg"
               class="w-6 h-6 text-inherit hover:stroke-primary fill-base-100 stroke-primary hover:text-base-100 hover:bg-opacity-0" stroke-width="1.5"
               viewBox="0 0 20 20">
@@ -57,7 +57,7 @@
           
           <!-- Button edit time reminder -->
           <label *ngIf="(prospect.stage == 2 && reminder && !reminder.done) || (prospect.stage == 3 && meeting && !meeting.done)" (click)="ngxSmartModalService.getModal('edit-date').removeData().setData({prospect: prospect, reminder: reminder, meeting: meeting}).open()"
-            class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100 modal-button">
+            class="btn btn-primary hover:btn-primary btn-sm bg-base-100 text-primary hover:text-base-100">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
               class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -222,7 +222,7 @@
             <!-- Bouton de rendez-vous -->
             <label *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 8"
               tabindex="0"
-              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md {{ (reminder && reminder.done) || (meeting && meeting.done) ? 'btn-disabled' : ''}}" (click)="ngxSmartModalService.getModal('add-meeting-reminder').removeData().setData({prospect: prospect, type: 'meeting'}).open()"
+              class="btn btn-primary outline outline-1 outline-base-100 text-base-100 btn-md {{ (reminder && reminder.done) || (meeting && meeting.done) ? 'btn-disabled' : ''}}" (click)="ngxSmartModalService.getModal('add-meeting-reminder').removeData().setData({prospect: prospect, reminder: reminder, meeting: meeting, type: 'meeting'}).open()"
               >Rendez-vous</label>
 
 
@@ -271,101 +271,3 @@
     </div>
   </div>
 </div>
-
-<!-- ! MODALS -->
-<!-- modal button edit prospect -->
-<!-- <input type="checkbox" id="modal-prospect-edit-{{prospect.id}}" class="modal-toggle" />
-<label for="modal-prospect-edit-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative max-w-screen-lg modal-box" for="">
-    <app-prospect-edit [prospect]="prospect" [reminder]="reminder && reminder" [sentEmail]="sentEmail && sentEmail"></app-prospect-edit>
-  </label>
-</label> -->
-
-<!-- modal button add bookmarks -->
-<!-- <input type="checkbox" id="add-bookmark-modal-{{prospect.id}}" class="modal-toggle" />
-<label for="add-bookmark-modal-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative modal-box max-w-screen-xs" for="add-bookmark-modal-{{prospect.id}}">
-    <app-add-bookmark-modal [prospect]="prospect" [bookmark]="bookmark"></app-add-bookmark-modal>
-  </label>
-</label> -->
-
-<!-- modal to add mail -->
-<!-- <input type="checkbox" id="add-mail-modal-{{prospect.id}}" class="modal-toggle" />
-<label for="add-mail-modal-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative modal-box max-w-screen-xs" for="add-mail-modal-{{prospect.id}}">
-    <app-add-mail-modal [prospect]="prospect" [reminder]="reminder" [meeting]="meeting"></app-add-mail-modal>
-  </label>
-</label> -->
-
-<!-- modal mark mail done -->
-<!-- <input type="checkbox" id="mark-sentEmail-sent-{{prospect.id}}" class="modal-toggle" />
-<label for="mark-sentEmail-sent-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative modal-box max-w-screen-2xl" for="">
-    <app-mark-sent-email-sent [prospect]="prospect" [sentEmail]="sentEmail"></app-mark-sent-email-sent>
-  </label>
-</label> -->
-
-<!-- modal to add meeting -->
-<!-- <input type="checkbox" id="modal-add-meeting-{{prospect.id}}" class="modal-toggle" />
-<label class="cursor-pointer modal" for="modal-add-meeting-{{prospect.id}}">
-  <label class="modal-box" for="">
-    <app-add-meetings-modal [prospect]="prospect" [reminder]="reminder"></app-add-meetings-modal>
-  </label>
-</label> -->
-
-<!-- Modal to add reminder -->
-
-<!-- <input type="checkbox" id="modal-add-reminder-{{prospect.id}}" class="modal-toggle" />
-<label class="cursor-pointer modal" for="modal-add-reminder-{{prospect.id}}">
-  <label class="modal-box" for="">
-    <app-add-reminder-modal [prospect]="prospect"></app-add-reminder-modal>
-  </label>
-</label> -->
-
-<!-- modal button prospect pas pertinent (trash) -->
-<!-- <input type="checkbox" id="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="modal-toggle" />
-<label for="disable-prospect-modal-{{prospect && prospect.id || bookmark && bookmark.prospect.id}}" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-disable-prospect-modal [prospect]="prospect && prospect" [bookmark]="bookmark && bookmark"></app-disable-prospect-modal>
-  </label>
-</label> -->
-
-<!-- modal button refus -->
-<!-- <input type="checkbox" id="confirm-refus-{{prospect.id}}" class="modal-toggle">
-<label for="confirm-refus-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-confirm-refus [prospect]="prospect" [reminder]="reminder"></app-confirm-refus>
-  </label>
-</label> -->
-
-<!-- modal button passage en pro -->
-<!-- <input type="checkbox" id="confirm-pro-{{prospect.id}}" class="modal-toggle">
-<label for="confirm-pro-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-confirm-pro [prospect]="prospect" [meeting]="meeting"></app-confirm-pro>
-  </label>
-</label> -->
-
-<!-- modal button meeting effectué -->
-<!-- <input type="checkbox" id="mark-meeting-done-and-out-{{prospect.id}}" class="modal-toggle">
-<label for="mark-meeting-done-and-out-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-mark-meeting-done-and-out [prospect]="prospect" [meeting]="meeting"></app-mark-meeting-done-and-out>
-  </label>
-</label> -->
-
-<!-- modal button prospect history -->
-<!-- <input type="checkbox" id="prospect-history-{{prospect.id}}" class="modal-toggle">
-<label for="prospect-history-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-prospect-history [prospect]="prospect && prospect"></app-prospect-history>
-  </label>
-</label> -->
-
-<!-- modal button edit time reminder -->
-<!-- <input *ngIf="reminder || meeting" type="checkbox" id="edit-date-reminder-meeting-{{prospect.id}}" class="modal-toggle">
-<label *ngIf="reminder || meeting" for="edit-date-reminder-meeting-{{prospect.id}}" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-   <app-edit-date-reminder-meeting [prospect]="prospect" [reminder]="reminder && reminder" [meeting]="meeting && meeting"></app-edit-date-reminder-meeting>
-  </label>
-</label> -->

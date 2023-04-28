@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VersionCityType } from 'src/app/constants/versions.type';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { CitiesService } from 'src/app/services/cities/cities.service';
 import { SearchParamsService } from 'src/app/services/search-params/search-params.service';
 
@@ -14,9 +14,11 @@ export class AddCityComponent implements OnInit {
   zipcode: number = 0;
   disabled: boolean = true;
   zone: string | null = null;
+
   constructor(
     public readonly citiesService: CitiesService,
-    private readonly searchParamsService: SearchParamsService
+    private readonly searchParamsService: SearchParamsService,
+    private readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
@@ -38,5 +40,7 @@ export class AddCityComponent implements OnInit {
       dateScraped: new Date,
       origin: this.name
     });
+    this.ngxSmartModalService.getModal('add-city').close();
   }
+
 }

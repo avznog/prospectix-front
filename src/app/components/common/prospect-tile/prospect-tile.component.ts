@@ -56,10 +56,10 @@ export class ProspectTileComponent implements OnInit {
     public readonly ngxSmartModalService: NgxSmartModalService
   ) {
     this.ngxSmartModalService.create('action-prospect', ActionProspectComponent).addCustomClass('action-prospect');
-    this.ngxSmartModalService.create('edit-date', EditDateReminderMeetingComponent).addCustomClass('action-prospect');
-    this.ngxSmartModalService.create('add-meeting-reminder', AddMeetingAndReminderComponent).addCustomClass('action-prospect');
+    this.ngxSmartModalService.create('edit-date', EditDateReminderMeetingComponent).addCustomClass('add-prospect');
+    this.ngxSmartModalService.create('add-meeting-reminder', AddMeetingAndReminderComponent).addCustomClass('add-prospect');
     this.ngxSmartModalService.create('history', ProspectHistoryComponent).addCustomClass('action-prospect');
-    this.ngxSmartModalService.create('mail-sent', MarkSentEmailSentComponent).addCustomClass('action-prospect');
+    this.ngxSmartModalService.create('mail-sent', MarkSentEmailSentComponent).addCustomClass('add-prospect');
     this.ngxSmartModalService.create('prospect-edit', ProspectEditComponent).addCustomClass('add-prospect');
    }
 
@@ -88,8 +88,8 @@ export class ProspectTileComponent implements OnInit {
   }
 
   onChangeNbNo() {
-      this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
-      this.bookmarksService.updateNbNo(this.prospect.id);
+      this.prospect.stage == 0 && this.prospectService.updateNbNo(this.prospect.id, { nbNo: this.prospect.nbNo + 1 });
+      this.prospect.stage == 1 && this.bookmarksService.updateNbNo(this.bookmark);
       this.eventsService.create({
         type: EventType.NO_ANSWER,
         prospect: this.prospect,

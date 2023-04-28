@@ -93,5 +93,6 @@ export class ProspectEditComponent implements OnInit {
     if(this.data.sentEmail) {
       this.sentEmailService.sentEmails.set(this.data.sentEmail!.id, { ...this.data.sentEmail!, prospect: { ...this.data.sentEmail!.prospect, ...edit}})
     }
+    this.ngxSmartModalService.closeAll();
   }
 }

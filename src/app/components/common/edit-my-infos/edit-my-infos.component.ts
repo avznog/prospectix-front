@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
@@ -13,7 +14,8 @@ export class EditMyInfosComponent implements OnInit {
 
   constructor(
     private readonly usersService: UsersService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class EditMyInfosComponent implements OnInit {
   onEditInfos() {
     this.usersService.update(this.authService.currentUserSubject.getValue().id, {
       phone: this.phone
-    })
+    });
+    this.ngxSmartModalService.closeAll();
   }
 }

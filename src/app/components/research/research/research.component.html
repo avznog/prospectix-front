@@ -1,11 +1,11 @@
 <app-research-bloc></app-research-bloc>
 <app-no-result class="self-center align-baseline" *ngIf="!prospectsService.loading && prospectsService.prospects && prospectsService.prospects.size <= 0"></app-no-result>
-<div *ngIf="!prospectsService.loading" class="overflow-scroll transition-all">
+<ng-container *ngIf="!prospectsService.loading" class="overflow-scroll transition-all">
   <div *ngFor="let prospect of prospectsService.prospects | keyvalue | slice:prospectsService.researchParamsProspect.skip:prospectsService.researchParamsProspect.skip + 20" >
     <app-prospect-tile [prospect]="prospect.value" *ngIf="prospect.value.stage == 0 && !prospect.value.disabled"></app-prospect-tile>
   </div>
   
-</div>
+</ng-container>
 <div class="justify-center w-full pb-5 btn-group" *ngIf=" !prospectsService.loading">
   
   <div *ngIf="prospectsService.nbProspects != 0">

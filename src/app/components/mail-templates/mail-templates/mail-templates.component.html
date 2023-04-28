@@ -1,5 +1,5 @@
 <div class="w-full h-full">
-  <div class="w-full inline-flex pt-5 space-x-2 ">
+  <div class="inline-flex w-full pt-5 space-x-2 ">
 
     <!-- ? panel de gauche -->
     <div class="bg-base-100 p-5 w-1/5 h-[85vh] overflow-y-scroll">
@@ -21,7 +21,7 @@
             *ngFor="let mailTemplate of mailTemplatesService.allTemplates | keyvalue"
             (click)="changeTemplate(mailTemplate.value)">
             <div class="inline-flex"><label
-                class="badge badge-secondary badge-sm pb-1">{{mailTemplate.value.pm.pseudo}}</label><a>{{mailTemplate.value.name}}</a>
+                class="pb-1 badge badge-secondary badge-sm">{{mailTemplate.value.pm.pseudo}}</label><a>{{mailTemplate.value.name}}</a>
             </div>
           </li>
         </ng-container>
@@ -34,10 +34,10 @@
 
       <!-- ! HEADER -->
       <div class="inline-flex w-full p-5 pb-0 bg-primary bg-opacity-10" *ngIf="currentTemplate != 'creation'">
-        <label for="delete-mail-template-modal-{{currentTemplate.id}}"
+        <label
           *ngIf="mailTemplatesService.myTemplates.has(currentTemplate.id)"
-          class="modal-button btn btn-outline flex float-left btn-sm btn-error"
-          (click)="editMode ? editMode = !editMode : ''">
+          class="flex float-left btn btn-outline btn-sm btn-error"
+          (click)="editMode ? (editMode = !editMode) : (ngxSmartModalService.getModal('delete-mail-template').removeData().setData({mailTemplate:{ id: currentTemplate.id, name: currentTemplate.name}}).open())">
           <span *ngIf="editMode" class="text-current">Annuler</span>
           <svg *ngIf="!editMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-6 h-6">
@@ -46,9 +46,9 @@
           </svg>
 
         </label>
-        <div class="card-title justify-center flex w-full"><span class="justify-center mb-5"><span *ngIf="authService.currentUserSubject.getValue().admin && currentTemplate.pm.id != authService.currentUserSubject.getValue().id" class="btn btn-md btn-secondary btn-outline btn-disabled mr-5 bg-transparent">{{currentTemplate.pm.pseudo}}</span>{{currentTemplate.name}}</span></div>
-        <label class="btn btn-sm btn-outline btn-primary mr-5" (click)="onSendTestMail()">M'envoyer un mail test</label>
-        <label class="btn btn-outline flex float-right btn-sm btn-primary"
+        <div class="flex justify-center w-full card-title"><span class="justify-center mb-5"><span *ngIf="authService.currentUserSubject.getValue().admin && currentTemplate.pm.id != authService.currentUserSubject.getValue().id" class="mr-5 bg-transparent btn btn-md btn-secondary btn-outline btn-disabled">{{currentTemplate.pm.pseudo}}</span>{{currentTemplate.name}}</span></div>
+        <label class="mr-5 btn btn-sm btn-outline btn-primary" (click)="onSendTestMail()">M'envoyer un mail test</label>
+        <label class="flex float-right btn btn-outline btn-sm btn-primary"
           *ngIf="mailTemplatesService.myTemplates.has(currentTemplate.id)"
           (click)="editMode && updateMailTemplate();editMode = !editMode; htmlContent = currentTemplate.content">
           <svg *ngIf="!editMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -61,19 +61,19 @@
       </div>
 
       <!-- ! CONTENT -->
-      <div class="card-body overflow-y-scroll">
+      <div class="overflow-y-scroll card-body">
 
         <!-- ! creation MODE -->
         <div *ngIf="currentTemplate == 'creation'" class="h-full">
           <div class="flex justify-center">
             <span class="font-extralight">N'écrivez que le contenu du mail. La mention "Bonjour M. NOM DU CLIENT" ainsi que la signature Junior ISEP seront implémentées automatiquement.</span>
           </div>
-          <label class="input-group justify-center p-5">
+          <label class="justify-center p-5 input-group">
             <span class="justify-center">Créer le template</span>
             <input class="justify-center" type="text" placeholder="...nom du template" class="input input-bordered"
               [(ngModel)]="name" />
           </label>
-          <quill-editor class="h-3/5 w-full" [(ngModel)]="htmlContent" [placeholder]="placeholder"></quill-editor>
+          <quill-editor class="w-full h-3/5" [(ngModel)]="htmlContent" [placeholder]="placeholder"></quill-editor>
           <div class="flex justify-center">
             <label class="btn btn-outline m-5 {{name == '' && 'btn-disabled'}}" (click)="onCreateTemplate()">Créer le
               template</label>
@@ -95,7 +95,7 @@
             <div class="flex justify-center p-5">
               <span class="font-extralight">N'écrivez que le contenu du mail. La mention "Bonjour M. NOM DU CLIENT" ainsi que la signature Junior ISEP seront implémentées automatiquement.</span>
             </div>
-            <quill-editor class="h-3/5 w-full" [(ngModel)]="htmlContent" [placeholder]="placeholder">
+            <quill-editor class="w-full h-3/5" [(ngModel)]="htmlContent" [placeholder]="placeholder">
             </quill-editor>
           </div>
         </div>
@@ -104,13 +104,3 @@
     </div>
   </div>
 </div>
-<!-- modal button delete mail template -->
-<input type="checkbox" id="delete-mail-template-modal-{{currentTemplate != 'creation' && currentTemplate.id}}"
-  class="modal-toggle">
-<label for="delete-mail-template-modal-{{currentTemplate != 'creation' && currentTemplate.id}}"
-  class="modal cursor-pointer">
-  <label class="modal-box relative max-w-screen-md text-sm" for="">
-    <app-confirm-delete-mail-template *ngIf="currentTemplate != 'creation'" [mailTemplate]="currentTemplate">
-    </app-confirm-delete-mail-template>
-  </label>
-</label>

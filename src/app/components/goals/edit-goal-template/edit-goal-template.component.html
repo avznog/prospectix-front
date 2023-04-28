@@ -1,6 +1,5 @@
 <div class="w-full">
-  <label for="edit-goal-template-modal-{{goalTemplate.id}}" class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
-  <h3 class="text-lg font-bold">Modifier l'objectif {{goalTemplate.name}}</h3>
+  <h3 class="text-lg font-bold">Modifier l'objectif {{data.goalTemplate?.name}}</h3>
   <div class="divider"></div>
   <div class="space-y-5">
     <label class="input-group">
@@ -20,6 +19,6 @@
     </label>
     <label
       class="btn btn-outline btn-primary flex justify-center {{(name == '' || description == '' || default < 0 ? 'btn-disabled' : '')}}"
-      for="edit-goal-template-modal-{{goalTemplate.id}}" (click)="onEditTemplateGoal()">Modifier l'objectif</label>
+      (click)="onEditTemplateGoal()">Modifier l'objectif</label>
   </div>
 </div>

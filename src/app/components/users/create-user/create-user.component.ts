@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
@@ -19,14 +19,15 @@ export class CreateUserComponent implements OnInit {
   profilePictureLink: string = "";
 
   constructor(
-    private usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
   }
 
-  onCreateUser() : Subscription {
-    return this.usersService.create({
+  onCreateUser() {
+    this.usersService.create({
       firstname: this.firstname,
       name: this.lastname,
       pseudo: `${this.firstname.charAt(0)}${this.lastname}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '').trim(),
@@ -38,5 +39,6 @@ export class CreateUserComponent implements OnInit {
       statsEnabled: this.statsEnabled,
       profilePictureLink: this.profilePictureLink
     });
+    this.ngxSmartModalService.closeAll()
   }
 }

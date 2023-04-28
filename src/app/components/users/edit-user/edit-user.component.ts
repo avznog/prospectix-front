@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { UsersService } from 'src/app/services/users/users.service';
 
@@ -9,7 +10,9 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 export class EditUserComponent implements OnInit {
 
-  @Input() user!: ProjectManager;
+  data: {
+    user?: ProjectManager;
+  } = {};
   firstname: string = "";
   lastname: string = "";
   phone: string = "";
@@ -19,21 +22,23 @@ export class EditUserComponent implements OnInit {
   profilePictureLink: string = "";
 
   constructor(
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
-    this.firstname = this.user.firstname;
-    this.lastname = this.user.name;
-    this.phone = this.user.phone;
-    this.pseudo = this.user.pseudo;
-    this.email = this.user.mail;
-    this.profilePictureLink = this.user.profilePictureLink;
+    this.data = this.ngxSmartModalService.getModalData('edit-user');
+    this.firstname =this.data.user!.firstname;
+    this.lastname =this.data.user!.name;
+    this.phone =this.data.user!.phone;
+    this.pseudo =this.data.user!.pseudo;
+    this.email =this.data.user!.mail;
+    this.profilePictureLink =this.data.user!.profilePictureLink;
     this.onCheckEmail();
   }
 
   onEditUser() {
-    this.usersService.update(this.user.id, {
+    this.usersService.update(this.data.user!.id, {
       firstname: this.firstname,
       name: this.lastname,
       phone: this.phone,
@@ -41,6 +46,7 @@ export class EditUserComponent implements OnInit {
       mail: this.email,
       profilePictureLink: this.profilePictureLink
     });
+    this.ngxSmartModalService.closeAll();
   }
 
   onCheckEmail() {

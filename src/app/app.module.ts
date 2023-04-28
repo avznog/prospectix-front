@@ -20,9 +20,7 @@ import { ChangelogsComponent } from './components/changelogs/changelogs.componen
 import { ActionProspectComponent } from './components/common/action-prospect/action-prospect.component';
 import { AddCityComponent } from './components/common/add-city/add-city.component';
 import { AddMeetingAndReminderComponent } from './components/common/add-meeting-and-reminder/add-meeting-and-reminder.component';
-import { AddMeetingsModalComponent } from './components/common/add-meetings-modal/add-meetings-modal.component';
 import { AddProspectComponent } from './components/common/add-prospect/add-prospect.component';
-import { AddReminderModalComponent } from './components/common/add-reminder-modal/add-reminder-modal.component';
 import { ConfirmDeleteMailTemplateComponent } from './components/common/confirm-delete-mail-template/confirm-delete-mail-template.component';
 import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
 import { EditMyInfosComponent } from './components/common/edit-my-infos/edit-my-infos.component';
@@ -67,6 +65,7 @@ import { JwtInterceptorInterceptor } from './interceptors/jwt-interceptor.interc
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
+import { VersionComponent } from './components/common/version/version.component';
 
 @NgModule({
   declarations: [
@@ -82,8 +81,6 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
     CreateUserComponent,
     HeaderComponent,
     LoginComponent,
-    AddReminderModalComponent,
-    AddMeetingsModalComponent,
     BookmarksComponent,
     AddProspectComponent,
     ProspectEditComponent,
@@ -122,6 +119,7 @@ import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date
     BackofficeSearchComponent,
     ActionProspectComponent,
     AddMeetingAndReminderComponent,
+    VersionComponent,
   ],
   imports: [
     BrowserModule,

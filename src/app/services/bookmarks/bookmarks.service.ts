@@ -98,13 +98,10 @@ export class BookmarksService {
     });
   }
 
-  updateNbNo(idProspect: number) {
-    this.bookmarks.forEach(bookmark => {
-      if(bookmark.prospect.id == idProspect){
-        return bookmark.prospect.nbNo = bookmark.prospect.nbNo + 1
-      }
-      return bookmark
-    })
+  updateNbNo(bookmark: Bookmark) {
+    this.http.get(`secondary-activities/adjustWeightNbNo/${bookmark.prospect.secondaryActivity.id}`).subscribe();
+    this.http.get(`primary-activities/adjustWeightNbNo/${bookmark.prospect.secondaryActivity.primaryActivity.id}`).subscribe();
+    return this.http.patch<Prospect>(`prospects/${bookmark.prospect.id}`, { nbNo: bookmark.prospect.nbNo + 1}).subscribe(() => this.bookmarks.set(bookmark.id, {...bookmark, prospect: { ...bookmark.prospect, nbNo: bookmark.prospect.nbNo + 1}}));
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {
