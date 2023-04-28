@@ -172,6 +172,6 @@ export class AddMeetingAndReminderComponent implements OnInit {
   }
 
   closeModal() {
-    this.ngxSmartModalService.close('add-meeting-reminder')
+    this.ngxSmartModalService.closeAll();
   }
 }

@@ -27,7 +27,7 @@ export class ResearchBlocComponent implements OnInit {
 
   ngOnInit(): void {
     this.keyword = this.prospectsService.researchParamsProspect.keyword;
-    this.ngxSmartModalService.create('add-prospect', AddProspectComponent);
+    this.ngxSmartModalService.create('add-prospect', AddProspectComponent).addCustomClass('add-prospect');
   }
 
   updateParameters() {

@@ -1,5 +1,4 @@
-<div class="">
-  <label for="modal-add-prospect" class="absolute btn btn-sm btn-circle right-2 top-2">✕</label>
+<div>
   <div class="text-lg card-title">Ajouter un prospect dans la base</div>
   <div class="divider"></div>
 
@@ -130,12 +129,12 @@
   <div class="divider"></div>
 
   <!-- Bouton ajouter une ville -->
-  <label class="float-left btn btn-ghost btn-outline float modal-button" for="add-city-modal">Ajouter une ville</label>
+  <label class="float-left btn btn-ghost btn-outline float" (click)="ngxSmartModalService.getModal('add-city').open()">Ajouter une ville</label>
 
   <!-- Bouton créer le prospect -->
     <label
-    class="btn btn-ghost btn-outline float float-right justify-center modal-button {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || secondaryActivity == null || primaryActivity == null || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
-     (click)="onCreateProspect() " for="{{stage == 2 ? 'create-prospect-reminder' : stage == 3 ? 'create-prospect-meeting' : 'modal-add-prospect'}}">{{stage == 0 ? 'Créer le prospect' : stage == 1 ? 'Ajouter aux favoris' : stage == 2 ? 'Définir le rappel' : stage == 3 ? 'Définir le rendez-vous' : stage == 4 ? 'Ajouter aux mails' : stage == 5 ? 'Marquer comme refus' : 'Créer le prospect'}}</label>
+    class="btn btn-ghost btn-outline float float-right justify-center {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || secondaryActivity == null || primaryActivity == null || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
+     (click)="onCreateProspect()">{{stage == 0 ? 'Créer le prospect' : stage == 1 ? 'Ajouter aux favoris' : stage == 2 ? 'Définir le rappel' : stage == 3 ? 'Définir le rendez-vous' : stage == 4 ? 'Ajouter aux mails' : stage == 5 ? 'Marquer comme refus' : 'Créer le prospect'}}</label>
 
   <!-- select stage -->
   <select class="float-right mr-5 select select-bordered" [(ngModel)]="stage">
@@ -149,27 +148,3 @@
 
   <label class="float-right mr-5 float btn btn-outline btn-warning font-extralight btn-disabled bg-base-100" *ngIf="stage == 1">{{bookmarksService.nbBookmarks + ' / ' +  bookmarksService.maxNbBookmarks + ' Favoris'}}</label>
 </div>
-
-<!-- modal button add city -->
-<input type="checkbox" id="add-city-modal" class="modal-toggle">
-<label for="add-city-modal" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-add-city></app-add-city>
-  </label>
-</label>
-
-<!-- modal button create reminder Prospect -->
-<input type="checkbox" id="create-prospect-reminder" class="modal-toggle">
-<label *ngIf="stage == 2" for="create-prospect-reminder" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-add-reminder-modal [createProspectDto]="createProspectDto"></app-add-reminder-modal>
-  </label>
-</label>
-
-<!-- modal button create Meeting prospect -->
-<input type="checkbox" id="create-prospect-meeting" class="modal-toggle">
-<label *ngIf="stage == 3" for="create-prospect-meeting" class="cursor-pointer modal">
-  <label class="relative max-w-screen-md text-sm modal-box" for="">
-    <app-add-meetings-modal [createProspectDto]="createProspectDto"></app-add-meetings-modal>
-  </label>
-</label>
