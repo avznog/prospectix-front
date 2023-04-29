@@ -22,13 +22,14 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
-        version: "3.3",
+        version: "4.0",
         date: new Date("2023-04-20T00:00:00.000Z"),
         bugs: [
           "Résolution des bugs de pagination de la page de recherche"
           ],
         features: [
           "[Performances / Optimisation] - Énorme travail sur les performances / optimisation de l'outil. Utilisation de ngx-smart-modals, qui permet de ne pas préloader tous les modaux. Aussi, regroupement de certains modaux en 1 seul composant.",
+          "[Performances / Optimisation] - Gros travail sur la recherche. Ell est désormais cross search, compatible sur tous les champs, pour la recherche principale, favoris, rendez-vous, meetings, mails",
           "[Rework Activités] - Création d'activités primaires et secondaires. Dix activités primaires regroupent maintenant l'entièreté des activitiés.",
           "[Rework Activités] - Changement de l'interface de recherche et de la méthode de recherche de prospects. Tous les champs de recherche sont compatibles",
           "[Rework Activités] - Changement des méthodes de recherche des prospects",

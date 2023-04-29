@@ -22,9 +22,10 @@ export class BookmarksService {
   researchParamsBookmarks: ResearchParamsBookmarks = {
     keyword: null,
     skip: 0,
-    cityName: null,
+    city: null,
     secondaryActivity: null,
-    primaryActivity: null
+    primaryActivity: null,
+    zipcode: null
   };
   bookmarks = new Map<number, Bookmark>();
   
@@ -56,9 +57,10 @@ export class BookmarksService {
     queryParameters = queryParameters.append("take", 20);
     this.researchParamsBookmarks.skip && (queryParameters = queryParameters.append("skip", this.researchParamsBookmarks.skip));
     this.researchParamsBookmarks.keyword && (queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword));
-    this.researchParamsBookmarks.cityName && (queryParameters = queryParameters.append("cityName", this.researchParamsBookmarks.cityName));
+    this.researchParamsBookmarks.city && (queryParameters = queryParameters.append("city", this.researchParamsBookmarks.city));
     this.researchParamsBookmarks.primaryActivity && (queryParameters = queryParameters.append("primaryActivity", this.researchParamsBookmarks.primaryActivity));
     this.researchParamsBookmarks.secondaryActivity && (queryParameters = queryParameters.append("secondaryActivity", this.researchParamsBookmarks.secondaryActivity));
+    this.researchParamsBookmarks.zipcode && (queryParameters = queryParameters.append('zipcode', this.researchParamsBookmarks.zipcode));
 
     this.http.get<{bookmarks: Bookmark[], count: number}>(`bookmarks/find-all-paginated/`, { params: queryParameters}).subscribe(data => {
       data.bookmarks.forEach(bookmark => this.bookmarks.set(bookmark.id, bookmark));

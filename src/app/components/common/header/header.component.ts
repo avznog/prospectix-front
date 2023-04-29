@@ -23,12 +23,12 @@ export class HeaderComponent implements OnInit {
     public readonly changelogsService: ChangelogsService,
     public readonly bookmarksService: BookmarksService,
     public readonly router: Router,
-    public dataThemeService: DataThemeService,
+    public readonly dataThemeService: DataThemeService,
     public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
-    this.ngxSmartModalService.create('versions', VersionComponent).addCustomClass('add-prospect');
+    this.ngxSmartModalService.create('versions', VersionComponent).addCustomClass('changelogs');
   }
   
   logout() {

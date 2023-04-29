@@ -1,5 +1,5 @@
-<div *ngFor="let log of changelogsService.changelogs" class="w-full">
-  <div class="w-full  text-center underline"><span class="text-xs ">{{log.version}} : {{log.date | date:"dd/MM/YYYY"}}</span></div>
+<div *ngFor="let log of changelogsService.changelogs" class="w-full text-neutral">
+  <div class="w-full text-center underline"><span class="text-xs ">{{log.version}} : {{log.date | date:"dd/MM/YYYY"}}</span></div>
   <span class="text-lg font-bold" *ngIf="log.bugs.length > 0">Bugs résolus:</span>
   <ol *ngIf="log.bugs.length > 0">
       <li class="text-md" *ngFor="let bug of log.bugs">- {{bug}}</li>

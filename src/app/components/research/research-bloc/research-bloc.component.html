@@ -56,11 +56,12 @@
       <label class="label" for="zipcode">
         <span class="label-text">Ville</span>
       </label>
-      <select id="zipcode" name="zipcode" [(ngModel)]="zipcode" (change)="updateParameters()" class="w-full transition-all select select-bordered select-md">
+      <select id="zipcode" name="zipcode" [(ngModel)]="zipcode" (change)="updateParameters()"
+        class="w-full transition-all select select-bordered select-md">
         <option [ngValue]="null">Toutes les zones</option>
-          <option *ngFor="let zipcode of citiesService.citiesByZipcode | sortingCities:city.name" [ngValue]="zipcode">
-            {{zipcode.origin}} - {{zipcode.zipcode}}
-          </option>
+        <option *ngFor="let zipcode of citiesService.citiesByZipcode | sortingCities:city.name" [ngValue]="zipcode">
+          {{zipcode.origin}} - {{zipcode.zipcode}}
+        </option>
       </select>
     </div>
 

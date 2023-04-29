@@ -4,42 +4,60 @@
     <label class="label" for="search">
       <span class="label-text">Recherche (nom, tél ou code postal)</span>
     </label>
-    <input type="search" [(ngModel)]="keyword" (keyup.enter)="updateParameters()" placeholder="Recherche (entrée pour valider)"
-      class="w-full max-w-xs input input-bordered" />
+    <input type="search" [(ngModel)]="keyword" (input)="updateParameters()"
+      placeholder="Recherche (entrée pour valider)" class="w-full max-w-xs input input-bordered" />
   </div>
 
-   <!-- Select activity domain -->
-    
-        <!-- ? Primary -->
-        <div class="w-1/4">
-          <label class="label" for="primaryActivity">
-              <span class="w-full label-text">Tous les domaines primaires</span>
-          </label>
-          <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity" class="w-full select select-bordered" (change)="secondaryActivity = null;updateParameters()">
-              <option [ngValue]="null">Domaines primaires</option>
-              <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">{{primaryActivity.name}}</option>
-          </select>
-      </div>
-      
-      <!-- ? Secondary domains-->
-      <div *ngIf="primaryActivity != null" class="w-1/4">
-          <label class="label" for="secondaryActivity">
-              <span class="label-text">Tous les domaines secondaires</span>
-          </label>
-          <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered" [(ngModel)]="secondaryActivity" (change)="updateParameters()">
-              <option [ngValue]="null">Domaines secondaires</option>
-              <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">{{secondaryActivity.name}}</option>
-          </select>
-      </div>
+  <!-- Select activity domain -->
+
+  <!-- ? Primary -->
+  <div class="w-1/4">
+    <label class="label" for="primaryActivity">
+      <span class="w-full label-text">Tous les domaines primaires</span>
+    </label>
+    <select id="primaryActivity" name="primaryActivity" [(ngModel)]="primaryActivity"
+      class="w-full select select-bordered" (change)="changePrimaryActivity();updateParameters()">
+      <option [ngValue]="null">Domaines primaires</option>
+      <option [ngValue]="primaryActivity" *ngFor="let primaryActivity of activitiesService.primaryActivities">
+        {{primaryActivity.name}}</option>
+    </select>
+  </div>
+
+  <!-- ? Secondary domains-->
+  <div *ngIf="primaryActivity != null" class="w-1/4">
+    <label class="label" for="secondaryActivity">
+      <span class="label-text">Tous les domaines secondaires</span>
+    </label>
+    <select id="secondaryActivity" name="secondaryActivity" class="w-full select select-bordered"
+      [(ngModel)]="secondaryActivity" (change)="updateParameters()">
+      <option [ngValue]="null">Domaines secondaires</option>
+      <option *ngFor="let secondaryActivity of primaryActivity.secondaryActivities" [ngValue]="secondaryActivity">
+        {{secondaryActivity.name}}</option>
+    </select>
+  </div>
 
   <!-- Select city -->
   <div class="w-1/4">
     <label class="label" for="city">
+      <span class="label-text">Zone</span>
+    </label>
+    <select id="city" name="city" [(ngModel)]="city" (change)="changeCity(); updateParameters()" class="w-full transition-all select select-bordered">
+      <option [ngValue]="null">Toutes les zones</option>
+      <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}}
+      </option>
+    </select>
+  </div>
+
+   <!-- Select zipcode -->
+   <div class="w-1/10" *ngIf="city">
+    <label class="label" for="zipcode">
       <span class="label-text">Ville</span>
     </label>
-    <select id="city" name="city" [(ngModel)]="cityName" (change)="updateParameters()" class="select select-bordered">
-      <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les villes</option>
-      <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}}
+    <select id="zipcode" name="zipcode" [(ngModel)]="zipcode" (change)="updateParameters()"
+      class="w-full transition-all select select-bordered select-md">
+      <option [ngValue]="null">Toutes les zones</option>
+      <option *ngFor="let zipcode of citiesService.citiesByZipcode | sortingCities:city.name" [ngValue]="zipcode">
+        {{zipcode.origin}} - {{zipcode.zipcode}}
       </option>
     </select>
   </div>
