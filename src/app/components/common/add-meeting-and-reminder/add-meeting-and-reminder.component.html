@@ -4,8 +4,7 @@
  <div class="space-y-5 card-body">
 
     <!-- Date du RDV / Rappel-->
-    <input type="datetime-local" id="date" class="stroke-2 datepicker input input-bordered stroke-primary"
-      [(ngModel)]="date">
+    <input type="datetime-local" id="date" class="stroke-2 datepicker input input-bordered stroke-primary" [(ngModel)]="date">
 
     <!-- Type de RDV -->
     <div class="text-center" *ngIf="data.type == 'meeting'">

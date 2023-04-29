@@ -25,7 +25,7 @@ import { ToastsService } from 'src/app/services/toasts/toasts.service';
 })
 export class AddMeetingAndReminderComponent implements OnInit {
 
-  date: Date = new Date;
+  date: Date | null = null;
 
   // reminder
   reminderPriority: number = 1;
@@ -82,7 +82,7 @@ export class AddMeetingAndReminderComponent implements OnInit {
     
     this.meetingsService.create({
       type: this.typeMeeting,
-      date: this.date,
+      date: this.date!,
       done: false,
       prospect: this.data.prospect!,
       creationDate: new Date
@@ -94,7 +94,7 @@ export class AddMeetingAndReminderComponent implements OnInit {
         undefined,
         {
           type: this.typeMeeting,
-          date: this.date,
+          date: this.date!,
           done: false,
           prospect: this.data.prospect!,
           creationDate: new Date
@@ -132,7 +132,7 @@ export class AddMeetingAndReminderComponent implements OnInit {
       this.sentEmailsService.updateByStage(this.data.prospect!.id, { stage: StageType.REMINDER });
 
       this.remindersService.create({
-        date: this.date,
+        date: this.date!,
         priority: this.reminderPriority,
         done: false,
         description: this.reminderDescription,
@@ -146,7 +146,7 @@ export class AddMeetingAndReminderComponent implements OnInit {
       this.prospectsService.create(
         this.data.createProspectDto!,
         {
-          date: this.date,
+          date: this.date!,
           priority: this.reminderPriority,
           done: false,
           description: this.reminderDescription,
