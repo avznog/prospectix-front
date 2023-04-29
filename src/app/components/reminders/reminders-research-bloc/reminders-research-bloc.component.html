@@ -1,20 +1,29 @@
-<div class="flex flex-row items-start m-0 mb-5 justify-start space-x-10">
-
+<div class="flex flex-row items-start justify-start m-0 mb-5 space-x-10">
   <div class="form-control min-w-fit">
-    <label for="remindersDone" class="label cursor-pointer">
+    <label for="remindersDone" class="cursor-pointer label">
       <span class="label-text">{{done ? 'Rappels effectués' : 'Rappels à faire'}}</span>
     </label>
     <input class="toggle {{done ? 'toggle-primary' : ''}}" type="checkbox" id="remindersDone" [(ngModel)]="done"
-      (change)="onEditDone()" checked />
+      (change)="updateParameters()" checked />
+  </div>
+
+   <!-- Search a prospect - overrides the other filters -->
+   <div class="w-1/4">
+    <label class="label" for="search">
+      <span class="label-text">Recherche (Nom, tél ou code postal)</span>
+    </label>
+    <input type="search" [(ngModel)]="keyword" (input)="updateParameters()"
+      placeholder="Recherche (entrée pour valider)"
+      class="w-full max-w-xs transition-all input input-md input-bordered" />
   </div>
 
   <div class="form-control min-w-fit">
-    <label for="priority" class="label cursor-pointer">
+    <label for="priority" class="cursor-pointer label">
       <span class="label-text">Priorité</span>
     </label>
     <input type="range" min="0" max="3" value="3" class="range range-primary" id="priority" [(ngModel)]="priority"
-      (change)="onEditPriority()" />
-      <div class="w-full flex justify-between text-xs px-2">
+      (change)="updateParameters()"/>
+      <div class="flex justify-between w-full px-2 text-xs">
         <span>*</span>
         <span>1</span>
         <span>2</span>

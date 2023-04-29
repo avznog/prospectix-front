@@ -1,17 +1,26 @@
 <app-reminders-research-bloc></app-reminders-research-bloc>
-<div *ngIf="remindersService.researchParamsReminder.done == true || remindersService.researchParamsReminder.done == 'true'">
-  <div *ngFor="let reminder of remindersService.remindersDone | keyvalue: asIsOrder | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
-    <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect"></app-prospect-tile>
+<app-no-result class="self-center align-baseline" *ngIf="!remindersService.loading && ((remindersService.researchParamsReminder.done == 0 && remindersService.reminders && remindersService.reminders.size <= 0) || (remindersService.researchParamsReminder.done == 1 && remindersService.remindersDone && remindersService.remindersDone.size <= 0))"></app-no-result>
+<div *ngIf="!remindersService.loading">
+  <div *ngIf="remindersService.researchParamsReminder.done == 1" class="overflow-scroll transition-all">
+    <div *ngFor="let reminder of remindersService.remindersDone | keyvalue: asIsOrder | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
+      <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect"></app-prospect-tile>
+    </div>
+  </div>
+  
+  <div *ngIf="this.remindersService.researchParamsReminder.done == 0" class="overflow-scroll transition-all">
+    <div *ngFor="let reminder of remindersService.reminders | keyvalue: asIsOrder | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
+      <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect" *ngIf="reminder.value.prospect.stage == 2"></app-prospect-tile>
+    </div>
   </div>
 </div>
-<div *ngIf="remindersService.researchParamsReminder.done == false || remindersService.researchParamsReminder.done == 'false'">
-  <div *ngFor="let reminder of remindersService.reminders | keyvalue: asIsOrder | slice:remindersService.researchParamsReminder.skip:remindersService.researchParamsReminder.skip + 20">
-    <app-prospect-tile [reminder]="reminder.value" [prospect]="reminder.value.prospect" *ngIf="reminder.value.prospect.stage == 2"></app-prospect-tile>
+<div class="justify-center w-full pb-6 btn-group" *ngIf="!remindersService.loading">
+  <div *ngIf="remindersService.researchParamsReminder.done == 1 ? remindersService.nbRemindersDone != 0 : remindersService.nbReminders != 0">
+    <button class="btn btn-outline btn-ghost {{ remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{ remindersService.researchParamsReminder.skip / 20 + 1 }} / {{remindersService.researchParamsReminder.done == 1 ? (remindersService.nbRemindersDone - remindersService.nbRemindersDone % 20)/20 + 1 : (remindersService.nbReminders - remindersService.nbReminders % 20)/20 + 1 }}</button>
+    <button class="btn btn-outline btn-ghost {{(remindersService.researchParamsReminder.skip + 19 < (remindersService.researchParamsReminder.done == 1 ? remindersService.nbRemindersDone : remindersService.nbReminders))? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
   </div>
 </div>
-<!-- <app-no-result *ngIf="(remindersService.reminders && remindersService.reminders.size <= 0 && remindersService.researchParamsReminder.done == 'false' || remindersService.researchParamsReminder.done == false) || (remindersService.remindersDone && remindersService.remindersDone.size <= 0)"></app-no-result>  -->
-<div class="justify-center w-full pb-5 btn-group">
-<button class="btn btn-outline btn-ghost {{ remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-<button class="btn btn-outline btn-ghost">Page {{ remindersService.researchParamsReminder.skip / 20 + 1 }} / {{(remindersService.nbReminders - remindersService.nbReminders % 20)/20 + 1}}</button>
-<button class="btn btn-outline btn-ghost {{(remindersService.researchParamsReminder.done == false || remindersService.researchParamsReminder.done == 'false') ? (remindersService.researchParamsReminder.skip + 19 < remindersService.nbReminders) ? '' : 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+<div *ngIf="remindersService.loading" class="flex justify-center w-full transition-all">
+  <div class="self-center mb-32">
+    <img src="../../../../assets/logo_couleur.png" class="w-32 h-32 aspect-square animate-pulse">
 </div>

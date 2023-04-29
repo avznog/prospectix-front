@@ -18,14 +18,17 @@ import { ToastsService } from '../toasts/toasts.service';
 })
 export class RemindersService {
 
+  loading: boolean = true;
   nbReminders: number = 0;
+  nbRemindersDone: number = 0;
   reminders = new Map<number, Reminder>();
   remindersDone = new Map<number, Reminder>();
   researchParamsReminder: ResearchParamsReminder = {
     take: 20,
     skip: 0,
-    done: "false",
-    priority: 0
+    done: 0,
+    priority: null,
+    keyword: null
   }
 
   constructor(
@@ -35,12 +38,12 @@ export class RemindersService {
     private readonly authService: AuthService
   ) {
     this.loadMore();
-    this.loadRemindersDone()
    }
 
 
   resetSearch(researchParamsReminder: ResearchParamsReminder) {
-    this.researchParamsReminder.done == true || this.researchParamsReminder.done == 'true' ? this.remindersDone.clear() : this.reminders.clear();
+    this.loading = true;
+    this.researchParamsReminder.done == 1 ? this.remindersDone.clear() : this.reminders.clear();
     this.updateSearchParameters({
       ...researchParamsReminder,
       skip: 0
@@ -48,31 +51,31 @@ export class RemindersService {
   }
 
   updateSearchParameters(researchParamsReminder: ResearchParamsReminder) {
+    this.loading = true;
     if(researchParamsReminder != this.researchParamsReminder)
       this.researchParamsReminder = researchParamsReminder;
-      this.researchParamsReminder.done == true || this.researchParamsReminder.done == 'true' ? this.loadRemindersDone() : this.loadMore();
+      this.loadMore();
   }
 
   loadMore() {
     let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority)
-  
+    this.researchParamsReminder.priority && (queryParameters = queryParameters.append("priority", this.researchParamsReminder.priority));
+    this.researchParamsReminder.keyword && (queryParameters = queryParameters.append("keyword", this.researchParamsReminder.keyword));
     queryParameters = queryParameters.append("skip", this.researchParamsReminder.skip)      
     queryParameters = queryParameters.append("done", this.researchParamsReminder.done)
     queryParameters = queryParameters.append("take", 20);
     
     return this.http.get<{reminders: Reminder[], count: number}>(`reminders/find-all-paginated`, { params: queryParameters }).subscribe(data => {
-      data.reminders.forEach(reminder => this.reminders.set(reminder.id, reminder))
-      this.nbReminders = data.count;
+      if (this.researchParamsReminder.done == 0) {
+        data.reminders.forEach(reminder => this.reminders.set(reminder.id, reminder));
+        this.nbReminders = data.count; 
+      } else {
+        data.reminders.forEach(reminder => this.remindersDone.set(reminder.id, reminder));
+        this.nbRemindersDone = data.count;
+      }
+      console.log(data.reminders)
+      this.loading = false;
   });
-  }
-
-  loadRemindersDone() {
-    let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("priority",this.researchParamsReminder.priority)
-    queryParameters = queryParameters.append("take",20)
-    queryParameters = queryParameters.append("skip",0)
-    return this.http.get<{remindersDone: Reminder[], count: number}>(`reminders/find-all-reminders-done`, {params: queryParameters }).subscribe(data => data.remindersDone.forEach(reminder => this.remindersDone.set(reminder.id, reminder)));
   }
 
   deleteReminder(idReminder: number) : Subscription {
