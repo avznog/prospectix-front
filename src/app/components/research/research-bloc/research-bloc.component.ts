@@ -14,7 +14,7 @@ import { AddProspectComponent } from '../../common/add-prospect/add-prospect.com
 })
 export class ResearchBlocComponent implements OnInit {
   keyword: string | null = null;
-  city: number | null = null;
+  city: string | null = null;
   primaryActivity: PrimaryActivity | null = null;
   secondaryActivity: SecondaryActivity | null = null;
 
@@ -33,10 +33,14 @@ export class ResearchBlocComponent implements OnInit {
   updateParameters() {
     this.prospectsService.resetSearch({
       ...this.prospectsService.researchParamsProspect,
-      keyword: (!this.secondaryActivity && !this.city && !this.primaryActivity) ? this.keyword == '' ? null : this.keyword : null,
-      secondaryActivity: (!this.keyword && !this.city) ? !this.primaryActivity ? null : !this.secondaryActivity ? null : this.secondaryActivity?.id : null,
-      city: (!this.keyword && !this.secondaryActivity && !this.primaryActivity) ? this.city : null,
-      primaryActivity: (!this.city && !this.keyword) ? this.primaryActivity?.id ?? null : null
+      // keyword: (!this.secondaryActivity && !this.city && !this.primaryActivity) ? this.keyword == '' ? null : this.keyword : null,
+      // secondaryActivity: (!this.keyword && !this.city) ? !this.primaryActivity ? null : !this.secondaryActivity ? null : this.secondaryActivity?.id : null,
+      // city: (!this.keyword && !this.secondaryActivity && !this.primaryActivity) ? this.city : null,
+      // primaryActivity: (!this.city && !this.keyword) ? this.primaryActivity?.id ?? null : null
+      keyword: this.keyword != '' ? this.keyword ?? null : null,
+      city: this.city,
+      primaryActivity: this.primaryActivity?.id ?? null,
+      secondaryActivity: this.primaryActivity ? this.secondaryActivity?.id ?? null : null
     })
   }
 

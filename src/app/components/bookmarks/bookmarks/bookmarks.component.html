@@ -5,6 +5,6 @@
 <app-no-result *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0"></app-no-result>
 <div class="justify-center w-full pb-5 btn-group">
   <button class="btn btn-outline btn-ghost {{bookmarksService.researchParamsBookmarks.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 20 + 1}} / {{(bookmarksService.nbBookmarks / 20 + 1).toFixed()}}</button>
-  <button class="btn btn-outline btn-ghost {{( bookmarksService.researchParamsBookmarks.skip + 20 < bookmarksService.nbBookmarks) ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
+  <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 20 + 1}} / {{(bookmarksService.nbBookmarks - bookmarksService.nbBookmarks % 20)/20 + 1}}</button>
+  <button class="btn btn-outline btn-ghost {{( bookmarksService.researchParamsBookmarks.skip + 19 < bookmarksService.nbBookmarks) ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
 </div>

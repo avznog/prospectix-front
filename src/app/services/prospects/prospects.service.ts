@@ -51,7 +51,6 @@ export class ProspectsService {
   }
 
   resetSearch(researchParamsProspect: ResearchParamsProspect) {
-    console.log(researchParamsProspect)
     this.loading = true;
     this.prospects.clear();
     this.updateSearchParameters({

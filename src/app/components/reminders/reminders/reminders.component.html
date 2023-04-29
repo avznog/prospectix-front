@@ -10,8 +10,8 @@
   </div>
 </div>
 <!-- <app-no-result *ngIf="(remindersService.reminders && remindersService.reminders.size <= 0 && remindersService.researchParamsReminder.done == 'false' || remindersService.researchParamsReminder.done == false) || (remindersService.remindersDone && remindersService.remindersDone.size <= 0)"></app-no-result>  -->
-<div class="btn-group justify-center pb-5 w-full">
+<div class="justify-center w-full pb-5 btn-group">
 <button class="btn btn-outline btn-ghost {{ remindersService.researchParamsReminder.skip! <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-<button class="btn btn-outline btn-ghost">Page {{ remindersService.researchParamsReminder.skip / 20 + 1 }} / {{ remindersService.nbReminders <= 20 ? 1 : (remindersService.nbReminders / 20 + 1).toFixed() }}</button>
-<button class="btn btn-outline btn-ghost {{(remindersService.researchParamsReminder.done == false || remindersService.researchParamsReminder.done == 'false') ? (remindersService.researchParamsReminder.skip + 20 < remindersService.nbReminders) ? '' : 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
+<button class="btn btn-outline btn-ghost">Page {{ remindersService.researchParamsReminder.skip / 20 + 1 }} / {{(remindersService.nbReminders - remindersService.nbReminders % 20)/20 + 1}}</button>
+<button class="btn btn-outline btn-ghost {{(remindersService.researchParamsReminder.done == false || remindersService.researchParamsReminder.done == 'false') ? (remindersService.researchParamsReminder.skip + 19 < remindersService.nbReminders) ? '' : 'btn-disabled' : ''}}" (click)="pageUp()">»</button>
 </div>

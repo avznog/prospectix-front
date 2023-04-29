@@ -25,6 +25,7 @@ export class ChangelogsService {
         version: "3.3",
         date: new Date("2023-04-20T00:00:00.000Z"),
         bugs: [
+          "Résolution des bugs de pagination de la page de recherche"
           ],
         features: [
           "[Performances / Optimisation] - Énorme travail sur les performances / optimisation de l'outil. Utilisation de ngx-smart-modals, qui permet de ne pas préloader tous les modaux. Aussi, regroupement de certains modaux en 1 seul composant.",

@@ -5,7 +5,7 @@
       <label class="label" for="search">
         <span class="label-text">Recherche (Nom, tél ou code postal)</span>
       </label>
-      <input type="search" [(ngModel)]="keyword" (keyup.enter)="updateParameters()"
+      <input type="search" [(ngModel)]="keyword" (input)="updateParameters()"
         placeholder="Recherche (entrée pour valider)"
         class="w-full max-w-xs transition-all input input-md input-bordered" />
     </div>
@@ -48,7 +48,7 @@
       <select id="city" name="city" [(ngModel)]="city" (change)="updateParameters()"
         class="w-full transition-all select select-bordered select-md">
         <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les zones</option>
-        <option *ngFor="let city of citiesService.cities" [ngValue]="city.id">{{city.name}}</option>
+        <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}}</option>
       </select>
     </div>
 
