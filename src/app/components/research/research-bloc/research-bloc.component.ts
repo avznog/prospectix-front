@@ -43,6 +43,10 @@ export class ResearchBlocComponent implements OnInit {
     })
   }
 
+  changeCity() {
+    this.zipcode = null;
+  }
+
   changePrimaryActivity() {
     this.secondaryActivity = null;
   }
