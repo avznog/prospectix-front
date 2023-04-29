@@ -66,6 +66,7 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { FrenchDatePipePipe } from './pipes/french-date/french-date-pipe.pipe';
 import { ShortFrenchDatePipe } from './pipes/short-french-date/short-french-date.pipe';
 import { VersionComponent } from './components/common/version/version.component';
+import { SortingCitiesPipe } from './pipes/sorting-cities/sorting-cities.pipe';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { VersionComponent } from './components/common/version/version.component'
     ActionProspectComponent,
     AddMeetingAndReminderComponent,
     VersionComponent,
+    SortingCitiesPipe,
   ],
   imports: [
     BrowserModule,

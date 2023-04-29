@@ -47,8 +47,20 @@
       </label>
       <select id="city" name="city" [(ngModel)]="city" (change)="updateParameters()"
         class="w-full transition-all select select-bordered select-md">
-        <option [defaultSelected]="'Toutes les villes'" [ngValue]="null">Toutes les zones</option>
-        <option *ngFor="let city of citiesService.cities" [ngValue]="city.name">{{city.name}}</option>
+        <option [ngValue]="null">Toutes les zones</option>
+        <option *ngFor="let city of citiesService.cities" [ngValue]="city">{{city.name}}</option>
+      </select>
+    </div>
+    <!-- Select zipcode -->
+    <div class="w-1/10" *ngIf="city">
+      <label class="label" for="zipcode">
+        <span class="label-text">Ville</span>
+      </label>
+      <select id="zipcode" name="zipcode" [(ngModel)]="zipcode" (change)="updateParameters()" class="w-full transition-all select select-bordered select-md">
+        <option [ngValue]="null">Toutes les zones</option>
+          <option *ngFor="let zipcode of citiesService.citiesByZipcode | sortingCities:city.name" [ngValue]="zipcode">
+            {{zipcode.origin}} - {{zipcode.zipcode}}
+          </option>
       </select>
     </div>
 
