@@ -15,6 +15,7 @@ import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
+import { ToastsService } from 'src/app/services/toasts/toasts.service';
 import { ProspectEditComponent } from '../../prospect-edit/prospect-edit.component';
 import { ActionProspectComponent } from '../action-prospect/action-prospect.component';
 import { AddMeetingAndReminderComponent } from '../add-meeting-and-reminder/add-meeting-and-reminder.component';
@@ -46,14 +47,15 @@ export class ProspectTileComponent implements OnInit {
   phoneOn: boolean = false;
 
   constructor(
-    private readonly prospectService: ProspectsService,
     public readonly bookmarksService: BookmarksService,
-    private readonly eventsService: EventsService,
     public readonly authService: AuthService,
+    public readonly ngxSmartModalService: NgxSmartModalService,
+    private readonly prospectService: ProspectsService,
+    private readonly eventsService: EventsService,
     private readonly meetingsService: MeetingsService,
     private readonly remindersService: RemindersService,
     private readonly sentEmailsService: SentEmailsService,
-    public readonly ngxSmartModalService: NgxSmartModalService
+    private readonly toastsService: ToastsService
   ) {
     this.ngxSmartModalService.create('action-prospect', ActionProspectComponent).addCustomClass('action-prospect');
     this.ngxSmartModalService.create('edit-date', EditDateReminderMeetingComponent).addCustomClass('add-prospect');
@@ -124,14 +126,12 @@ export class ProspectTileComponent implements OnInit {
     }).open();
   }
 
-  onClickPhone() {
-    window.open(`tel:${this.phone}`, "_blank")
-  }
-
-  onClickEmail() {
-    // TODO : copier le mail
-    navigator.clipboard.writeText(this.email)
-    // window.open(`mailto:${this.email}`, "_blank")
+  onCopyClipBoard(toCopy: string) {
+    navigator.clipboard.writeText(toCopy)
+    this.toastsService.addToast({
+      type: `alert-info`,
+      message: `${toCopy.includes('@') ? 'Email' : 'Téléphone'} copié dans le presse-papier`
+    })
   }
 
   onClickWebsite() {

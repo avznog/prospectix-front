@@ -166,8 +166,7 @@
           <div class="space-x-2">
 
             <!-- Phone -->
-            <label class="btn btn-sm btn-outline btn-primary" *ngIf="phone" (mouseover)="phoneOn = true" (mouseout)="phoneOn = false"
-              (click)="onClickPhone()">
+            <label class="btn btn-sm btn-outline btn-primary" *ngIf="phone" (mouseover)="phoneOn = true" (mouseout)="phoneOn = false" (click)="onCopyClipBoard(phone)">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3 {{phoneOn ? 'stroke-base-100' : 'stroke-primary'}} " fill="none" stroke-width="1.5" viewBox="0 0 24 24" >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path
@@ -176,7 +175,7 @@
             </label>
 
             <!-- Mail -->
-            <label class="btn btn-sm btn-primary btn-outline hover:text-base-100 {{email == '' && 'btn-disabled'}}" (click)="onClickEmail()" (mouseover)="emailShown = true" (mouseout)="emailShown = false">
+            <label class="btn btn-sm btn-primary btn-outline hover:text-base-100 {{email == '' && 'btn-disabled'}}" (click)="onCopyClipBoard(email)" (mouseover)="emailShown = true" (mouseout)="emailShown = false">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-2/3 {{emailShown ? 'stroke-base-100' : 'stroke-current '}}" viewBox="0 0 24 24" stroke-width="1.5"
                 fill="none">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
