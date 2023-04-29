@@ -62,55 +62,55 @@ export class AddMeetingAndReminderComponent implements OnInit {
   }
 
   onMeeting() {
-    if(this.googleService.logged){
-      if(this.data.prospect) {
-        this.data.prospect!.stage == 2 && this.onMarkReminderDone();
+    if(this.data.prospect) {
+      this.data.prospect!.stage == 2 && this.onMarkReminderDone();
 
-      // count as a call
-      (this.data.prospect!.stage == 0 || this.data.prospect!.stage == 1) && this.statisticsService.createCallForMe({
-        prospect: this.data.prospect!,
-        date: new Date
-      });
-  
-      // Incrementing the meetings count
-      this.statisticsService.createMeetingForMe();
-  
-      this.prospectsService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
-      this.remindersService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
-      this.meetingsService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
-      this.bookmarksService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
-      this.sentEmailsService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
-      
-      this.meetingsService.create({
-        type: this.typeMeeting,
-        date: this.date,
-        done: false,
-        prospect: this.data.prospect!,
-        creationDate: new Date
-      });
+    // count as a call
+    (this.data.prospect!.stage == 0 || this.data.prospect!.stage == 1) && this.statisticsService.createCallForMe({
+      prospect: this.data.prospect!,
+      date: new Date
+    });
 
-      } else if (this.data.createProspectDto) {
-        this.prospectsService.create(
-          this.data.createProspectDto!,
-          undefined,
-          {
-            type: this.typeMeeting,
-            date: this.date,
-            done: false,
-            prospect: this.data.prospect!,
-            creationDate: new Date
-          }
-        )
-      }
-  
-    } else {
-      this.toastsService.addToast({
-        type: "alert-error", 
-        message: "Connexion à google requise"
-      })
-      this.googleService.authenticate()
+    // Incrementing the meetings count
+    this.statisticsService.createMeetingForMe();
+
+    this.prospectsService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
+    this.remindersService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
+    this.meetingsService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
+    this.bookmarksService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
+    this.sentEmailsService.updateByStage(this.data.prospect!.id, { stage: StageType.MEETING });
+    
+    this.meetingsService.create({
+      type: this.typeMeeting,
+      date: this.date,
+      done: false,
+      prospect: this.data.prospect!,
+      creationDate: new Date
+    });
+
+    } else if (this.data.createProspectDto) {
+      this.prospectsService.create(
+        this.data.createProspectDto!,
+        undefined,
+        {
+          type: this.typeMeeting,
+          date: this.date,
+          done: false,
+          prospect: this.data.prospect!,
+          creationDate: new Date
+        }
+      )
     }
-    this.closeModal()
+  
+  this.closeModal()
+  }
+
+  onGoogle() {
+    this.toastsService.addToast({
+      type: "alert-error", 
+      message: "Connexion à google requise"
+    })
+    this.googleService.authenticate()
   }
 
   onReminder() {

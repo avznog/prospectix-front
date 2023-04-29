@@ -34,7 +34,10 @@
     <label class="text-sm label font-extralight text-error" *ngIf="data.type == 'meeting' && !googleService.logged">Vous n'êtes pas connecté à Google</label>
 
     <!-- Bouton final de création -->
-    <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}}" (click)="data.type == 'meeting' ? onMeeting() : onReminder()">Créer le {{data.type == 'meeting' ? 'rendez-vous' : 'rappel'}}</label>
+    <label class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}}" *ngIf="googleService.logged" (click)="data.type == 'meeting' ? onMeeting() : onReminder()">Créer le {{data.type == 'meeting' ? 'rendez-vous' : 'rappel'}}</label>
+
+    <!-- Bouton de connexion à google -->
+    <label *ngIf="!googleService.logged" class="btn btn-outline btn-ghost {{!date ? 'btn-disabled' : ''}}" (click)="data.type == 'meeting' ? onGoogle() : ''">Se connecter à Google</label>
 
   
  </div>
