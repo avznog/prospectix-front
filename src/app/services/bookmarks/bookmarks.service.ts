@@ -17,6 +17,7 @@ import { ToastsService } from '../toasts/toasts.service';
 })
 export class BookmarksService {
 
+  loading: boolean = true;
   maxNbBookmarks: number = 50;
   nbBookmarks: number = 0;
   researchParamsBookmarks: ResearchParamsBookmarks = {
@@ -39,6 +40,7 @@ export class BookmarksService {
   }
 
   resetSearch(researchParamsBookmarks: ResearchParamsBookmarks) {
+    this.loading = true;
     this.bookmarks.clear();
     this.updateSearchParameters({
       ...researchParamsBookmarks,
@@ -47,6 +49,7 @@ export class BookmarksService {
   }
 
   updateSearchParameters(researchParamsBookmarks: ResearchParamsBookmarks) {
+    this.loading = true;
     if(researchParamsBookmarks != this.researchParamsBookmarks)
       this.researchParamsBookmarks = researchParamsBookmarks;
       this.loadMore();
@@ -65,6 +68,7 @@ export class BookmarksService {
     this.http.get<{bookmarks: Bookmark[], count: number}>(`bookmarks/find-all-paginated/`, { params: queryParameters}).subscribe(data => {
       data.bookmarks.forEach(bookmark => this.bookmarks.set(bookmark.id, bookmark));
       this.nbBookmarks = data.count;
+      this.loading = false;
     });
   }
 
