@@ -74,7 +74,6 @@ export class RemindersService {
         data.reminders.forEach(reminder => this.remindersDone.set(reminder.id, reminder));
         this.nbRemindersDone = data.count;
       }
-      console.log(data.reminders)
       this.loading = false;
   });
   }
