@@ -1,16 +1,31 @@
 <app-mails-research-bloc></app-mails-research-bloc>
-<div *ngIf="sentEmailsService.researchParamsSentEmails.sent">
-  <div *ngFor="let sentEmailSent of sentEmailsService.sentEmailsSent | keyvalue: asIsOrder | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
-    <app-prospect-tile *ngIf="sentEmailSent.value.prospect.stage == 8" [prospect]="sentEmailSent.value.prospect" [sentEmail]="sentEmailSent.value"></app-prospect-tile>
+<app-no-result class="self-center align-baseline" *ngIf="!sentEmailsService.loading && ((sentEmailsService.researchParamsSentEmails.sent == 0 && sentEmailsService.sentEmails && sentEmailsService.sentEmails.size <= 0) || (sentEmailsService.researchParamsSentEmails.sent == 1 && sentEmailsService.sentEmailsSent && sentEmailsService.sentEmailsSent.size <= 0))"></app-no-result>
+
+<div *ngIf="!sentEmailsService.loading">
+  <!-- ? emails sent -->
+  <div *ngIf="sentEmailsService.researchParamsSentEmails.sent == 1" class="overflow-scroll transition-all">
+    <div *ngFor="let sentEmailSent of sentEmailsService.sentEmailsSent | keyvalue: asIsOrder | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
+      <app-prospect-tile *ngIf="sentEmailSent.value.prospect.stage == 8" [prospect]="sentEmailSent.value.prospect" [sentEmail]="sentEmailSent.value"></app-prospect-tile>
+    </div>
+  </div>
+
+<!-- ?email not sent -->
+  <div *ngIf="sentEmailsService.researchParamsSentEmails.sent == 0" class="overflow-scroll transition-all">
+    <div *ngFor="let sentEmail of sentEmailsService.sentEmails | keyvalue: asIsOrder | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
+      <app-prospect-tile *ngIf="sentEmail.value.prospect.stage == 4" [prospect]="sentEmail.value.prospect" [sentEmail]="sentEmail.value"></app-prospect-tile>
+    </div>
   </div>
 </div>
-<div *ngIf="!sentEmailsService.researchParamsSentEmails.sent">
-  <div *ngFor="let sentEmail of sentEmailsService.sentEmails | keyvalue: asIsOrder | slice:sentEmailsService.researchParamsSentEmails.skip:sentEmailsService.researchParamsSentEmails.skip + 20">
-    <app-prospect-tile *ngIf="sentEmail.value.prospect.stage == 4" [prospect]="sentEmail.value.prospect" [sentEmail]="sentEmail.value"></app-prospect-tile>
+
+<div class="justify-center w-full pb-6 btn-group" *ngIf="!sentEmailsService.loading">
+  <div *ngIf="sentEmailsService.researchParamsSentEmails.sent == 1 ? sentEmailsService.nbSentEmailsSent != 0 : sentEmailsService.nbSentEmails != 0">
+    <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.skip <= 0 ? 'btn-disabled' : '' }}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 + 1}} / {{(( !sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.nbSentEmails : sentEmailsService.nbSentEmailsSent) - ( !sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.nbSentEmails : sentEmailsService.nbSentEmailsSent) % 20)/20 + 1 }}</button>
+    <button class="btn btn-outline btn-ghost {{(sentEmailsService.researchParamsSentEmails.skip + 19 < (sentEmailsService.researchParamsSentEmails.sent == 1 ? sentEmailsService.nbSentEmailsSent : sentEmailsService.nbSentEmails))? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
   </div>
 </div>
-<div class="btn-group pb-5 justify-center w-full">
-  <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.skip <= 0 ? 'btn-disabled' : '' }}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{sentEmailsService.researchParamsSentEmails.skip / 20 + 1}} / {{( !sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.nbSentEmails : sentEmailsService.nbSentEmailsSent) <= 20 ? 1 : (( !sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.nbSentEmails : sentEmailsService.nbSentEmailsSent) / 20 + 1).toFixed() }}</button>
-  <button class="btn btn-outline btn-ghost {{sentEmailsService.researchParamsSentEmails.sent ? sentEmailsService.researchParamsSentEmails.skip + 20 < sentEmailsService.nbSentEmailsSent  ? '' : 'btn-disabled' :  sentEmailsService.researchParamsSentEmails.skip + 20 < sentEmailsService.nbSentEmails ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
+
+<div *ngIf="sentEmailsService.loading" class="flex justify-center w-full transition-all">
+  <div class="self-center mb-32">
+    <img src="../../../../assets/logo_couleur.png" class="w-32 h-32 aspect-square animate-pulse">
 </div>

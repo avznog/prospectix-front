@@ -7,10 +7,43 @@ import { Changelog } from 'src/app/models/changelog.model';
 export class ChangelogsService {
   changelogs: Changelog[] = [];
   localVersion: string = "";
+  // Ce message est pour toi, Responsable Technique qui dev sur Prospectix.
+  // Tu as entre les mains un outil formidable, qui a représenté l'entièreté de mon année de Rtech. 
+  // C'est mon bébé, donc prends en soin.
+  // Si jamais tu as du mal, tu bloques, ou tu penses abandonner, n'oublie jamais que l'entièreté des Alumni Responsables Technique est la
+  // pour t'aider, à l'image de Mufasa dans le roi lion mdr
+  // Prends soin de cet outil, car c'est une masterclass
+  // Je compte sur toi pour reprendre le flambeau de la plus belle des manières
+  // C'est avec une larme que mon mandat s'achève et que je vous lègue Prospectix
+  // Coeur sur vous, 
+  // Benjamin GONZVA, Responsable Technique 2022-2023 ♥️
   constructor(
   ) {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
+      {
+        version: "4.0",
+        date: new Date("2023-04-30T00:00:00.000Z"),
+        bugs: [
+          "Résolution des bugs de pagination de la page de recherche"
+          ],
+        features: [
+          "[Base de données] - Grosse refonte de la base de données, suite à un scraping plus visé. Réduction du nombre de villes & de domaines d'activités. Scraping V2",
+          "[Performances / Opitmisation] - Prospectix est maintenant une PWA. Il est possible de la télécharger depuis Chrome ou téléphone mobile",
+          "[Performances / Optimisation] - Énorme travail sur les performances / optimisation de l'outil. Utilisation de ngx-smart-modals, qui permet de ne pas préloader tous les modaux. Aussi, regroupement de certains modaux en 1 seul composant.",
+          "[Performances / Optimisation] - Gros travail sur la recherche. Ell est désormais cross search, compatible sur tous les champs, pour la recherche principale, favoris, rendez-vous, meetings, mails",
+          "[Rework Activités] - Création d'activités primaires et secondaires. Dix activités primaires regroupent maintenant l'entièreté des activitiés.",
+          "[Rework Activités] - Changement de l'interface de recherche et de la méthode de recherche de prospects. Tous les champs de recherche sont compatibles",
+          "[Rework Activités] - Changement des méthodes de recherche des prospects",
+          "[Rework Villes] - Les villes s'affichent désormais par nom au lieu de s'afficher par zipcode. Néanmoins, lorsque l'on veut modifier / ajouter des villes, il est possible de sélectionner une ville selon son zipcode",
+          "[Rework Activités / Villes] - Ajout d'attributs 'version' & 'dateScraped' pour les prospects / activités primaires / activités secondaires / villes pour pouvoir traquer les différentes modifications de base",
+          "[Rework Activités / Villes] - Lorsque l'on ajoute ou edit un prospect, les villes / domains d'activités disponibles sont les mêmes que ceux de la recherche",
+          "[Rework Poids] - Modification du 'Poids' de chaque catégorie (IA) : maintenant, les catégories primaires ont aussi un 'Poids'. Aussi, le nombre d'appels est aussi enregistré afin de pouvoir pondéré les résultats",
+          "Refactor du code de search des rendez-vous / meetings / sentEmails",
+          "Ajout d'une nouvelle page au backoffice : il est désormais possible de choisir la version de prospect / ville / activités secondaires - primaires que l'on veut rechercher",
+          "Ajout d'un type d'évènement : Mise à jour de prospect, pour lorsqu'un prospect est mis à jour à la suite d'un scraping"
+        ]
+      },
       {
         version: "3.2",
         date: new Date("2023-03-31T00:00:00.000Z"),

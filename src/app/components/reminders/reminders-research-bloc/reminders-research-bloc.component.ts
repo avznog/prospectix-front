@@ -9,28 +9,26 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 })
 export class RemindersResearchBlocComponent implements OnInit {
 
-  done: string | boolean = "";
-  priority: number = 0;
+  done: boolean = false;
+  keyword: string | null = null;
+  priority: number | null = null;
 
   constructor(
     private remindersService: RemindersService
   ) { }
 
   ngOnInit(): void {
-    this.done = this.remindersService.researchParamsReminder.done == "true" || this.remindersService.researchParamsReminder.done == true ? true: false
+    this.done = this.remindersService.researchParamsReminder.done == 1 ? true : false;
+    this.priority = Number(localStorage.getItem('reminders-priority')) ?? 0;
   }
 
-  onEditPriority() : void {
+  updateParameters() {
+    localStorage.setItem('reminders-priority', this.priority?.toString() ?? '');
     this.remindersService.resetSearch({
       ...this.remindersService.researchParamsReminder,
-      priority: this.priority
-    });
-  }
-
-  onEditDone() : void {
-    this.remindersService.resetSearch({
-      ...this.remindersService.researchParamsReminder,
-      done: this.done
+      done: this.done ? 1 : 0,
+      keyword: this.keyword != '' ? this.keyword : null,
+      priority: this.priority == 0 ? null : this.priority,
     })
   }
 }

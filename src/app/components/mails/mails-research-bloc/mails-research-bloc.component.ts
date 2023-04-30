@@ -9,20 +9,21 @@ import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.serv
 export class MailsResearchBlocComponent implements OnInit {
 
   sent: boolean = false;
+  keyword: string | null = null;
 
   constructor(
     private readonly sentEmailsService: SentEmailsService
   ) { }
 
   ngOnInit(): void {
-    this.sent = this.sentEmailsService.researchParamsSentEmails.sent;
+    this.sent = this.sentEmailsService.researchParamsSentEmails.sent == 1 ? true : false;
   }
 
-  onEditSent() {
+  updateParameters() {
     this.sentEmailsService.resetSearch({
-      sent: this.sent,
-      take: 20,
-      skip: 0
+      ...this.sentEmailsService.researchParamsSentEmails,
+      sent: this.sent ? 1 : 0,
+      keyword: this.keyword != '' ? this.keyword : null
     })
   }
 

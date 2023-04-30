@@ -11,30 +11,27 @@ export class MeetingsResearchBlocComponent implements OnInit {
 
   meetingTypeKeys = [MeetingType.EXT, MeetingType.MEETING_TABLE, MeetingType.TEL_VISIO];
 
-  done: boolean | string = "";
-  type: string = "Tous les types";
+  done: boolean = false;
+  type: MeetingType | null = null;
+  keyword: string | null = null;
 
   constructor(
     public meetingsService: MeetingsService
   ) { }
 
   ngOnInit(): void {
-    this.type = "allTypes";
-    this.done = this.meetingsService.researchParamsMeeting.done == "true" ? true : false
+    this.done = this.meetingsService.researchParamsMeeting.done == 1 ? true : false;
+    this.type = localStorage.getItem('meetings-type') != '' ? localStorage.getItem('meetings-type') as MeetingType : null;
   }
 
-  onEditDone() {
+  updateParameters() {
+    localStorage.setItem('meetings-type', this.type! ?? '');
     this.meetingsService.resetSearch({
       ...this.meetingsService.researchParamsMeeting,
-      done: this.done.toString()
-    });
-  }
-
-  onEditType() {
-    this.meetingsService.resetSearch({
-      ...this.meetingsService.researchParamsMeeting,
-      type: this.type != "allTypes" ? this.type : ""
-    });
+      keyword: this.keyword != '' ? this.keyword : null,
+      done: this.done ? 1 : 0,
+      type: this.type ?? null
+    })
   }
 
 }

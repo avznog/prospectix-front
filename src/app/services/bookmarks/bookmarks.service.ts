@@ -17,13 +17,16 @@ import { ToastsService } from '../toasts/toasts.service';
 })
 export class BookmarksService {
 
+  loading: boolean = true;
   maxNbBookmarks: number = 50;
   nbBookmarks: number = 0;
   researchParamsBookmarks: ResearchParamsBookmarks = {
-    keyword: '',
+    keyword: null,
     skip: 0,
-    zipcode: -1000,
-    activity: "allActivities",
+    city: null,
+    secondaryActivity: null,
+    primaryActivity: null,
+    zipcode: null
   };
   bookmarks = new Map<number, Bookmark>();
   
@@ -37,6 +40,7 @@ export class BookmarksService {
   }
 
   resetSearch(researchParamsBookmarks: ResearchParamsBookmarks) {
+    this.loading = true;
     this.bookmarks.clear();
     this.updateSearchParameters({
       ...researchParamsBookmarks,
@@ -45,6 +49,7 @@ export class BookmarksService {
   }
 
   updateSearchParameters(researchParamsBookmarks: ResearchParamsBookmarks) {
+    this.loading = true;
     if(researchParamsBookmarks != this.researchParamsBookmarks)
       this.researchParamsBookmarks = researchParamsBookmarks;
       this.loadMore();
@@ -52,16 +57,19 @@ export class BookmarksService {
 
   loadMore() {
     let queryParameters = new HttpParams();
-      queryParameters = queryParameters.append("activity", this.researchParamsBookmarks.activity)
-      queryParameters = queryParameters.append("zipcode", this.researchParamsBookmarks.zipcode)
-    
-    if(this.researchParamsBookmarks.skip)
-      queryParameters = queryParameters.append("skip", this.researchParamsBookmarks.skip)
-    
-    queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword)
     queryParameters = queryParameters.append("take", 20);
-    this.http.get<Bookmark[]>(`bookmarks/find-all-paginated/`, { params: queryParameters}).subscribe(bookmarks => bookmarks.forEach(bookmark => this.bookmarks.set(bookmark.id, bookmark)));
-    this.countBookmarks();
+    this.researchParamsBookmarks.skip && (queryParameters = queryParameters.append("skip", this.researchParamsBookmarks.skip));
+    this.researchParamsBookmarks.keyword && (queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword));
+    this.researchParamsBookmarks.city && (queryParameters = queryParameters.append("city", this.researchParamsBookmarks.city));
+    this.researchParamsBookmarks.primaryActivity && (queryParameters = queryParameters.append("primaryActivity", this.researchParamsBookmarks.primaryActivity));
+    this.researchParamsBookmarks.secondaryActivity && (queryParameters = queryParameters.append("secondaryActivity", this.researchParamsBookmarks.secondaryActivity));
+    this.researchParamsBookmarks.zipcode && (queryParameters = queryParameters.append('zipcode', this.researchParamsBookmarks.zipcode));
+
+    this.http.get<{bookmarks: Bookmark[], count: number}>(`bookmarks/find-all-paginated/`, { params: queryParameters}).subscribe(data => {
+      data.bookmarks.forEach(bookmark => this.bookmarks.set(bookmark.id, bookmark));
+      this.nbBookmarks = data.count;
+      this.loading = false;
+    });
   }
 
   create(createBookmarkDto: CreateBookmarkDto) : Subscription {
@@ -96,13 +104,10 @@ export class BookmarksService {
     });
   }
 
-  updateNbNo(idProspect: number) {
-    this.bookmarks.forEach(bookmark => {
-      if(bookmark.prospect.id == idProspect){
-        return bookmark.prospect.nbNo = bookmark.prospect.nbNo + 1
-      }
-      return bookmark
-    })
+  updateNbNo(bookmark: Bookmark) {
+    this.http.get(`secondary-activities/adjustWeightNbNo/${bookmark.prospect.secondaryActivity.id}`).subscribe();
+    this.http.get(`primary-activities/adjustWeightNbNo/${bookmark.prospect.secondaryActivity.primaryActivity.id}`).subscribe();
+    return this.http.patch<Prospect>(`prospects/${bookmark.prospect.id}`, { nbNo: bookmark.prospect.nbNo + 1}).subscribe(() => this.bookmarks.set(bookmark.id, {...bookmark, prospect: { ...bookmark.prospect, nbNo: bookmark.prospect.nbNo + 1}}));
   }
 
   updateByStage(idProspect: number, stage: { stage: StageType }) {
@@ -119,19 +124,6 @@ export class BookmarksService {
         return bookmark.prospect = prospect
       return
     })
-  }
-
-  countBookmarks() {
-    let queryParameters = new HttpParams();
-      queryParameters = queryParameters.append("activity", this.researchParamsBookmarks.activity)
-      queryParameters = queryParameters.append("zipcode", this.researchParamsBookmarks.zipcode)
-
-    if(this.researchParamsBookmarks.skip)
-      queryParameters = queryParameters.append("skip", this.researchParamsBookmarks.skip)
-  
-    queryParameters = queryParameters.append("keyword", this.researchParamsBookmarks.keyword)
-    queryParameters = queryParameters.append("take", 20);
-    return this.http.get<number>(`bookmarks/count-bookmarks`, { params: queryParameters}).subscribe(nbBookmarks => this.nbBookmarks = nbBookmarks);
   }
 
   updateCommentProspect(idProspect: number, newComment: string) {

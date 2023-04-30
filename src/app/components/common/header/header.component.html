@@ -15,9 +15,8 @@
 
     <!-- ! Versions button -->
     <li>
-      <label *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"
-        for="modal-version"
-        class="bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': 'hover:text-primary stroke-current'}} normal-case text-xs modal-button indicator">Versions<span
+      <label *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin" (click)="ngxSmartModalService.getModal('versions').open()"
+        class="bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': 'hover:text-primary stroke-current'}} normal-case text-xs indicatorl">Versions<span
           *ngIf="changelogsService.changelogs[0].version != this.changelogsService.localVersion"
           class="badge badge-secondary indicator-item badge-xs"></span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-3 h-3 ">
@@ -117,8 +116,8 @@
       *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin"
       class="dropdown dropdown-end">
       <label tabindex="0"
-        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
-        == "/users" ? 'User' : router.url == "/goals" ? 'Objectifs' : router.url == '/watchtower' ? 'Tour de contrôle' : 'Admin'}}</label>
+        class="btn btn-ghost bg-opacity-0 text-xl font-medium hover:bg-opacity-0 {{dataThemeService.dataTheme == 'jisep' ? router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' || router.url == '/backoffice-search' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/users' || router.url == '/goals' || router.url == '/watchtower' || router.url == '/backoffice-search' ? 'text-primary stroke-current' : 'hover:stroke-primary hover:text-primary stroke-current'}}">{{router.url
+        == "/users" ? 'User' : router.url == "/goals" ? 'Objectifs' : router.url == '/watchtower' ? 'Tour de contrôle' : router.url == '/backoffice-search' ? 'Gestion des versions' : 'Admin'}}</label>
       <ul tabindex="0" class="p-2 mt-4 shadow menu dropdown-content bg-base-100 rounded-box w-60 outline outline-1">
 
         <!-- ? Page users -->
@@ -137,6 +136,13 @@
         <li routerLink="/watchtower">
           <a 
             class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/watchtower' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/watchtower' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current '}}">Tour de contrôle des objectifs
+          </a>
+        </li>
+
+        <!-- ? page gestion des versions-->
+        <li routerLink="/backoffice-search">
+          <a 
+            class="w-full {{dataThemeService.dataTheme == 'jisep' ? router.url == '/backoffice-search' ? 'bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent stroke-secondary' : 'hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-secondary hover:to-accent hover:stroke-secondary stroke-current': router.url == '/backoffice-search' ? 'text-primary stroke-current' : 'hover:text-primary stroke-current '}}">Gestion des versions
           </a>
         </li>
       </ul>
@@ -178,25 +184,3 @@
    
   </ul>
 </div>
-
-<!-- MODALS -->
-
-<!-- modal version -->
-<input type="checkbox" id="modal-version" class="modal-toggle" />
-<label for="modal-version" class="cursor-pointer modal">
-  <label class="max-w-screen-lg modal-box" for="">
-    <label for="modal-version" class="absolute btn btn-sm btn-circle right-2 top-2">✕</label>
-    <div class="w-full">
-      <span class="text-xl font-bold stroke-current">Dev /w ❤️ by your pôle tech, started by Benjamin GONZVA <a
-          href="https://www.instagram.com/ben.gonzva/" target="_blank" class="font-thin link-primary"
-          *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin">(@ben.gonzva)
-        </a></span>
-      <ul>
-        <li>2022-2023 : <a href="https://www.linkedin.com/in/benjamin-gonzva-828b071a2/" target="_blank"
-            class="link-primary">Benjamin GONZVA</a></li>
-      </ul>
-      <div class="divider"></div>
-      <app-changelogs class="w-full max-h-screen"></app-changelogs>
-    </div>
-  </label>
-</label>

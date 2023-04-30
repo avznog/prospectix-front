@@ -1,10 +1,18 @@
 <app-bookmarks-research-bloc></app-bookmarks-research-bloc>
-<div *ngFor="let bookmark of bookmarksService.bookmarks | keyvalue | slice:bookmarksService.researchParamsBookmarks.skip:bookmarksService.researchParamsBookmarks.skip + 20">
-  <app-prospect-tile [prospect]="bookmark.value.prospect" [bookmark]="bookmark.value" *ngIf="bookmark.value.prospect.stage == 1"></app-prospect-tile>
+<app-no-result class="self-center align-baseline" *ngIf="!bookmarksService.loading && bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0"></app-no-result>
+<ng-container *ngIf="!bookmarksService.loading" class="overflow-scroll transition-all">
+  <div *ngFor="let bookmark of bookmarksService.bookmarks | keyvalue | slice:bookmarksService.researchParamsBookmarks.skip:bookmarksService.researchParamsBookmarks.skip + 20">
+    <app-prospect-tile [prospect]="bookmark.value.prospect" [bookmark]="bookmark.value" *ngIf="bookmark.value.prospect.stage == 1"></app-prospect-tile>
+  </div>
+</ng-container>
+<div *ngIf="!bookmarksService.loading" class="justify-center w-full pb-5 btn-group">
+  <div *ngIf="bookmarksService.nbBookmarks != 0">
+    <button class="btn btn-outline btn-ghost {{bookmarksService.researchParamsBookmarks.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 20 + 1}} / {{(bookmarksService.nbBookmarks - bookmarksService.nbBookmarks % 20)/20 + 1}}</button>
+    <button class="btn btn-outline btn-ghost {{( bookmarksService.researchParamsBookmarks.skip + 19 < bookmarksService.nbBookmarks) ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
+  </div>
 </div>
-<app-no-result *ngIf="bookmarksService.bookmarks && bookmarksService.bookmarks.size <= 0"></app-no-result>
-<div class="btn-group justify-center pb-5 w-full">
-  <button class="btn btn-outline btn-ghost {{bookmarksService.researchParamsBookmarks.skip > 0 ? '' : 'btn-disabled'}}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{bookmarksService.researchParamsBookmarks.skip / 20 + 1}} / {{(bookmarksService.nbBookmarks / 20 + 1).toFixed()}}</button>
-  <button class="btn btn-outline btn-ghost {{( bookmarksService.researchParamsBookmarks.skip + 20 < bookmarksService.nbBookmarks) ? '' : 'btn-disabled'}}" (click)="pageUp()">»</button>
+<div *ngIf="bookmarksService.loading" class="flex justify-center w-full transition-all">
+  <div class="self-center mb-32">
+    <img src="../../../../assets/logo_couleur.png" class="w-32 h-32 aspect-square animate-pulse">
 </div>

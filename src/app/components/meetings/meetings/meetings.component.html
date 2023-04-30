@@ -1,22 +1,26 @@
 <app-meetings-research-bloc></app-meetings-research-bloc>
-<div *ngIf="meetingsService.researchParamsMeeting.done == true || meetingsService.researchParamsMeeting.done == 'true'">
-  <div
-    *ngFor="let meeting of meetingsService.meetingsDone | keyvalue: asIsOrder | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
-    <app-prospect-tile [prospect]="meeting.value.prospect" [meeting]="meeting.value"></app-prospect-tile>
+<app-no-result class="self-center align-baseline" *ngIf="!meetingsService.loading && ((meetingsService.researchParamsMeeting.done == 0 && meetingsService.meetings && meetingsService.meetings.size <= 0) || (meetingsService.researchParamsMeeting.done == 1 && meetingsService.meetingsDone && meetingsService.meetingsDone.size <= 0))"></app-no-result>
+<div *ngIf="!meetingsService.loading">
+  <div *ngIf="meetingsService.researchParamsMeeting.done == 1" class="overflow-scroll transition-all">
+    <div *ngFor="let meeting of meetingsService.meetingsDone | keyvalue: asIsOrder | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
+      <app-prospect-tile [prospect]="meeting.value.prospect" [meeting]="meeting.value"></app-prospect-tile>
+    </div>
   </div>
-</div>
-<div
-  *ngIf="meetingsService.researchParamsMeeting.done == false || meetingsService.researchParamsMeeting.done == 'false'">
-  <div
-    *ngFor="let meeting of meetingsService.meetings | keyvalue: asIsOrder | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
-    <app-prospect-tile *ngIf="meeting.value.prospect.stage == 3" [prospect]="meeting.value.prospect"
-      [meeting]="meeting.value"></app-prospect-tile>
+  <div *ngIf="meetingsService.researchParamsMeeting.done == 0" class="overflow-scroll transition-all">
+    <div *ngFor="let meeting of meetingsService.meetings | keyvalue: asIsOrder | slice:meetingsService.researchParamsMeeting.skip:meetingsService.researchParamsMeeting.skip + 20">
+      <app-prospect-tile *ngIf="meeting.value.prospect.stage == 3" [prospect]="meeting.value.prospect" [meeting]="meeting.value"></app-prospect-tile>
+    </div>
   </div>
 </div>
 
-<!-- <app-no-result *ngIf="meetingsService.meetings && meetingsService.meetings.size <= 0"></app-no-result> -->
-<div class="btn-group justify-center pb-5 w-full">
-  <button class="btn btn-outline btn-ghost {{meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
-  <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 20 + 1}} / {{meetingsService.nbMeetings <= 20 ? 1 : (meetingsService.nbMeetings / 20 + 1).toFixed() }}</button>
-  <button class="btn btn-outline btn-ghost {{(meetingsService.researchParamsMeeting.done == false || meetingsService.researchParamsMeeting.done == 'false') ? (meetingsService.researchParamsMeeting.skip + 20 < meetingsService.nbMeetings) ? '' : 'btn-disabled' : ''}} " (click)="pageUp()">»</button>
+<div class="justify-center w-full pb-6 btn-group" *ngIf="!meetingsService.loading">
+  <div *ngIf="meetingsService.researchParamsMeeting.done == 1 ? meetingsService.nbMeetingsDone != 0 : meetingsService.nbMeetings != 0">
+    <button class="btn btn-outline btn-ghost {{meetingsService.researchParamsMeeting.skip <= 0 ? 'btn-disabled' : ''}}" (click)="pageDown()">«</button>
+    <button class="btn btn-outline btn-ghost">Page {{meetingsService.researchParamsMeeting.skip / 20 + 1}} / {{(meetingsService.nbMeetings - meetingsService.nbMeetings % 20)/20 + 1}}</button>
+    <button class="btn btn-outline btn-ghost {{(meetingsService.researchParamsMeeting.skip + 19 < (meetingsService.researchParamsMeeting.done == 1 ? meetingsService.nbMeetingsDone : meetingsService.nbMeetings))? '' : 'btn-disabled'}} " (click)="pageUp()">»</button>
+  </div>
+</div>
+<div *ngIf="meetingsService.loading" class="flex justify-center w-full transition-all">
+  <div class="self-center mb-32">
+    <img src="../../../../assets/logo_couleur.png" class="w-32 h-32 aspect-square animate-pulse">
 </div>

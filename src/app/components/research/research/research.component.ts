@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { lastDayOfWeek } from 'date-fns';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 
@@ -22,7 +21,6 @@ export class ResearchComponent implements OnInit {
       ...this.prospectsService.researchParamsProspect,
       skip: this.prospectsService.researchParamsProspect.skip + 20
     });
-    console.log(this.prospectsService.prospects)
   }
 
   pageDown() {

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { Subscription } from 'rxjs';
 import { ProjectManager } from 'src/app/models/project-manager.model';
 import { ProjectManagersService } from 'src/app/services/project-managers/project-managers.service';
 import { UsersService } from 'src/app/services/users/users.service';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-list-users',
@@ -13,10 +15,12 @@ export class ListUsersComponent implements OnInit {
 
   constructor(
     public readonly usersService: UsersService,
-    private readonly pmService: ProjectManagersService
+    private readonly pmService: ProjectManagersService,
+    public readonly ngxSmartModalService: NgxSmartModalService
   ) { }
 
   ngOnInit(): void {
+    this.ngxSmartModalService.create('edit-user', EditUserComponent).addCustomClass('add-prospect');
   }
 
   onChangeUserStatus(user: ProjectManager) {

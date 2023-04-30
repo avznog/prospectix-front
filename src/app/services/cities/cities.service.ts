@@ -10,17 +10,26 @@ import { ToastsService } from '../toasts/toasts.service';
 export class CitiesService {
 
   cities: City[] = [];
-  countCities = new Map<number, number>();
+  citiesByZipcode: City[] = [];
+  
   constructor(
     private http: HttpClient,
     private readonly toastsService: ToastsService
   ) {
-    this.findAll().subscribe(cities => this.cities = cities)
-    this.countForCities().subscribe(cities => cities.forEach(city => this.countCities.set(city.id, city.count)))
+    this.findAll()
+    this.findAllByZipcode()
    }
 
   findAll() {
-    return this.http.get<City[]>("cities");
+    return this.http.get<[City]>(`cities/find-all`).subscribe(cities => {
+      this.cities = cities;
+    })
+  }
+
+  findAllByZipcode() {
+    return this.http.get<[City]>(`cities/find-all-by-zipcode`).subscribe(citiesByZipcode => {
+      this.citiesByZipcode = citiesByZipcode;
+    })
   }
 
   create(createCityDto: CreateCityDto) {
@@ -31,9 +40,5 @@ export class CitiesService {
         message: `${city.name} : ${city.zipcode} ajoutée`
       })
     });
-  }
-
-  countForCities() {
-    return this.http.get<{id: number, count: number}[]>(`prospects/count-for-cities`);
   }
 }

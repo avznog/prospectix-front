@@ -1,7 +1,5 @@
 <div class="card ">
-  <div class="card-body flex justify-center">
-    <label for="edit-user-modal-{{user.id}}"
-      class="btn btn-sm btn-circle btn-ghost btn-outline absolute right-2 top-2">✕</label>
+  <div class="flex justify-center card-body">
     <label class="card-title">Modifier un utilisateur</label>
     <div class="divider"></div>
     <div class="space-y-5">
@@ -44,8 +42,8 @@
       </label>
 
       <!-- Button -->
-      <div class="modal-action">
-        <label for="edit-user-modal-{{user.id}}" (click)="onEditUser()" class="btn btn-outline btn-ghost {{emailCorrect ? '' : 'btn-disabled'}}">Modifier
+      <div>
+        <label (click)="onEditUser()" class="btn btn-outline btn-ghost {{emailCorrect ? '' : 'btn-disabled'}}">Modifier
           l'utilisateur</label>
       </div>
     </div>

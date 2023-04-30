@@ -1,7 +1,6 @@
-<div class="card rounded">
-  <label for="prospect-history-{{prospect.id}}" class="btn btn-sm btn-circle absolute right-2 top-2 text-base-100">✕</label>
-  <div class="card-title"><span class="justify-center">Historique du prospect: {{prospect && prospect.companyName}}</span></div>
-  <div class="card-body">
+<div class="rounded card">
+  <div class="card-title"><span class="justify-center">Historique du prospect: {{ngxSmartModalService.getModalData('history').companyName}}</span></div>
+  <div class="flex justify-start card-body">
     <div class="rounded">
       <ul class="steps steps-vertical">
         <li 
@@ -20,7 +19,9 @@
         (event.type == 'NO_ANSWER' && '💬') ||
         (event.type == 'PASSAGE_PRO' && '📝') ||
         (event.type == 'NEGATIVE_ANSWER' && '🗑') ||
-        (event.type == 'MARK_MAIL_SENT' && '✉️') " 
+        (event.type == 'MARK_MAIL_SENT' && '✉️') || 
+        (event.type == 'UPDATE_PROSPECT' && '♻')" 
+
         class="
           step
           {{event.type == 'CREATION' ? 'step-success' : ''}}
@@ -38,6 +39,7 @@
           {{event.type == 'PASSAGE_PRO' ? 'step-success' : ''}}
           {{event.type == 'NO_ANSWER' ? 'step-error' : ''}}
           {{event.type == 'MARK_MAIL_SENT' ? 'step-success' : ''}}
+          {{event.type == 'UPDATE_PROSPECT' ? 'step-warning' : ''}}
           "
           *ngFor="let event of eventsService.events; let index = index">{{event.date | date:"dd MMMM" }} - {{event.description}}</li>
       </ul>

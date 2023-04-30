@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
+import { MeetingType } from 'src/app/constants/meeting.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateMeetingDto } from 'src/app/dto/meetings/create-meeting.dto';
 import { UpdateMeetingDto } from 'src/app/dto/meetings/update-meeting.dto';
@@ -19,13 +20,17 @@ import { ToastsService } from '../toasts/toasts.service';
 })
 export class MeetingsService {
 
+  loading: boolean = true;
   nbMeetings: number = 0;
+  nbMeetingsDone: number = 0;
   meetings = new Map<number, Meeting>();
   meetingsDone = new Map<number, Meeting>();
   researchParamsMeeting: ResearchParamsMeeting = {
     take: 20,
     skip: 0,
-    done: "false"
+    done: 0,
+    type: null,
+    keyword: null
   }
   constructor(
     private http: HttpClient,
@@ -34,13 +39,14 @@ export class MeetingsService {
     private readonly eventsService: EventsService,
     private readonly authService: AuthService
   ) { 
+    this.researchParamsMeeting.type = localStorage.getItem('meetings-type') != '' ? localStorage.getItem('meetings-type') as MeetingType : null;
     this.loadMore();
-    this.loadMeetingsDone();
   }
 
 
   resetSearch(researchParamsMeeting: ResearchParamsMeeting) {
-    this.researchParamsMeeting.done == true || this.researchParamsMeeting.done == 'true' ? this.meetingsDone.clear() : this.meetings.clear();
+    this.loading = true;
+    this.researchParamsMeeting.done == 1 ? this.meetingsDone.clear() : this.meetings.clear();
     this.updateSearchParameters({
       ...researchParamsMeeting,
       take: 20,
@@ -49,33 +55,30 @@ export class MeetingsService {
   }
 
   updateSearchParameters(researchParamsMeeting: ResearchParamsMeeting) {
+    this.loading = true;
     if(researchParamsMeeting != this.researchParamsMeeting)
       this.researchParamsMeeting = researchParamsMeeting;
-      this.researchParamsMeeting.done == true || this.researchParamsMeeting.done == 'true' ? this.loadMeetingsDone() : this.loadMore();
+      this.loadMore();
   }
 
   loadMore() {
     let queryParameters = new HttpParams();
-
-    if(this.researchParamsMeeting.type)
-      queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
-
+    this.researchParamsMeeting.type && (queryParameters = queryParameters.append('type', this.researchParamsMeeting.type));
+    this.researchParamsMeeting.keyword && (queryParameters = queryParameters.append('keyword', this.researchParamsMeeting.keyword));
     queryParameters = queryParameters.append("skip", this.researchParamsMeeting.skip)
     queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
     queryParameters = queryParameters.append("take",20)
     
-    this.http.get<Meeting[]>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(meetings => meetings.forEach(meeting => this.meetings.set(meeting.id, meeting)));
-    this.countMeetings();
-  }
-
-  loadMeetingsDone() {
-    let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("skip",this.researchParamsMeeting.skip)
-    queryParameters = queryParameters.append("take",20)
-    if(this.researchParamsMeeting.type)
-      queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
-    
-    return this.http.get<Meeting[]>(`meetings/find-all-meetings-done`, { params: queryParameters}).subscribe(meetings => meetings.forEach(meeting => this.meetingsDone.set(meeting.id, meeting)));
+    this.http.get<{meetings: Meeting[], count: number}>(`meetings/find-all-paginated`, { params: queryParameters }).subscribe(data => {
+      if(this.researchParamsMeeting.done == 1) {
+        data.meetings.forEach(meeting => this.meetingsDone.set(meeting.id, meeting));
+        this.nbMeetingsDone = data.count;
+      } else {
+        data.meetings.forEach(meeting => this.meetings.set(meeting.id, meeting));
+        this.nbMeetings = data.count;
+      }
+      this.loading = false;
+    });
   }
 
   deleteMeeting(idMeeting: number) : Subscription {
@@ -159,19 +162,6 @@ export class MeetingsService {
         return meeting.prospect = prospect
       return
     })
-  }
-
-  countMeetings() {
-    let queryParameters = new HttpParams();
-
-    if(this.researchParamsMeeting.type)
-      queryParameters = queryParameters.append("type", this.researchParamsMeeting.type)
-
-    queryParameters = queryParameters.append("skip", this.researchParamsMeeting.skip)
-    queryParameters = queryParameters.append("done", this.researchParamsMeeting.done)
-    queryParameters = queryParameters.append("take",20);
-
-    return this.http.get<number>(`meetings/count-meetings`, { params: queryParameters }).subscribe(nbMeetings => this.nbMeetings = nbMeetings);
   }
 
   updateCommentProspect(id: number, newComment: string) {

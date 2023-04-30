@@ -1,7 +1,9 @@
 export interface ResearchParamsBookmarks {
-  keyword: string;
+  keyword: string | null;
   take?: number;
   skip: number;
-  zipcode: number;
-  activity: string;
+  city: string | null;
+  secondaryActivity: number | null;
+  primaryActivity: number | null;
+  zipcode: number | null;
 }

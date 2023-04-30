@@ -1,10 +1,10 @@
 <div class="card">
-  <div class="card-title justify-center"><span class="justify-center">Supprimer l'objectif template {{goalTemplate.name}} ?</span>
+  <div class="justify-center card-title"><span class="justify-center">Supprimer l'objectif template {{goalTemplate.name}} ?</span>
   </div>
   <div class="card-body ">
     <div class="inline-flex space-x-5">
-      <label class="btn btn-outline btn-ghost w-1/2" for="delete-goal-template-modal-{{goalTemplate.id}}">Annuler</label>
-      <label class="btn btn-outline btn-ghost w-1/2 btn-error" for="delete-goal-template-modal-{{goalTemplate.id}}" (click)="onDeleteGoalTemplate()">Supprimer</label>
+      <label class="w-1/2 btn btn-outline btn-ghost">Annuler</label>
+      <label class="w-1/2 btn btn-outline btn-ghost btn-error" (click)="onDeleteGoalTemplate()">Supprimer</label>
     </div>
   </div>
 </div>
