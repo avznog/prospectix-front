@@ -28,6 +28,8 @@ export class ChangelogsService {
           "Résolution des bugs de pagination de la page de recherche"
           ],
         features: [
+          "[Base de données] - Grosse refonte de la base de données, suite à un scraping plus visé. Réduction du nombre de villes & de domaines d'activités. Scraping V2",
+          "[Performances / Opitmisation] - Prospectix est maintenant une PWA. Il est possible de la télécharger depuis Chrome ou téléphone mobile",
           "[Performances / Optimisation] - Énorme travail sur les performances / optimisation de l'outil. Utilisation de ngx-smart-modals, qui permet de ne pas préloader tous les modaux. Aussi, regroupement de certains modaux en 1 seul composant.",
           "[Performances / Optimisation] - Gros travail sur la recherche. Ell est désormais cross search, compatible sur tous les champs, pour la recherche principale, favoris, rendez-vous, meetings, mails",
           "[Rework Activités] - Création d'activités primaires et secondaires. Dix activités primaires regroupent maintenant l'entièreté des activitiés.",
