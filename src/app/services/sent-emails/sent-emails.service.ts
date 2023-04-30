@@ -18,14 +18,19 @@ import { ToastsService } from '../toasts/toasts.service';
 })
 export class SentEmailsService {
 
+  loading: boolean = true;
+
+
   nbSentEmails: number = 0;
   nbSentEmailsSent: number = 0;
+
   sentEmails = new Map<number, SentEmail>();
   sentEmailsSent = new Map<number, SentEmail>();
   researchParamsSentEmails : ResearchParamsSentEmails = {
     take: 20,
     skip: 0,
-    sent: false,
+    sent: 0,
+    keyword: null
   };
 
   constructor(
@@ -35,13 +40,14 @@ export class SentEmailsService {
     private readonly authService: AuthService
   ) { 
     this.loadMore();
-    this.loadMoreSent();
+    // this.loadMoreSent();
   }
 
   // ! sent emails not Sent yet
 
   resetSearch(researchParamsSentEmails: ResearchParamsSentEmails) {
-    this.researchParamsSentEmails.sent ? this.sentEmailsSent.clear() : this.sentEmails.clear()
+    this.loading = true;
+    this.researchParamsSentEmails.sent == 1 ? this.sentEmailsSent.clear() : this.sentEmails.clear();
     this.updateSearchParameters({
       ...researchParamsSentEmails,
       skip: 0,
@@ -50,34 +56,28 @@ export class SentEmailsService {
   }
 
   updateSearchParameters(researchParamsSentEmails: ResearchParamsSentEmails) {
+    this.loading = true;
     if(researchParamsSentEmails != this.researchParamsSentEmails)
       this.researchParamsSentEmails = researchParamsSentEmails;
-      this.researchParamsSentEmails.sent ? this.loadMoreSent() : this.loadMore();
-    
+      this.loadMore();
   }
 
   loadMore() {
     let queryParameters = new HttpParams();
+    this.researchParamsSentEmails.keyword && (queryParameters = queryParameters.append('keyword', this.researchParamsSentEmails.keyword));
     queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip);
+    queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
     queryParameters = queryParameters.append("take", 20);
-    queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
     this.http.get<{sentEmails: SentEmail[], count: number}>(`sent-emails/find-all-paginated`, { params: queryParameters }).subscribe(data => {
-      data.sentEmails.forEach(sentEmail => this.sentEmails.set(sentEmail.id, sentEmail))
-      this.nbSentEmails = data.count;
+      if(this.researchParamsSentEmails.sent == 1) {
+        data.sentEmails.forEach(sentEmail => this.sentEmailsSent.set(sentEmail.id, sentEmail));
+        this.nbSentEmailsSent = data.count;
+      } else {
+        data.sentEmails.forEach(sentEmail => this.sentEmails.set(sentEmail.id, sentEmail));
+        this.nbSentEmails = data.count;
+      }
+      this.loading = false;
     });
-  }
-
-  // ! sent emails SENT
-
-  loadMoreSent() {
-    let queryParameters = new HttpParams();
-    queryParameters = queryParameters.append("skip", this.researchParamsSentEmails.skip)
-    queryParameters = queryParameters.append("take", 20),
-    queryParameters = queryParameters.append("sent", this.researchParamsSentEmails.sent)
-    this.http.get<{sentEmailsSent: SentEmail[], count: number}>(`sent-emails/find-all-paginated-sent`, { params: queryParameters }).subscribe(data => {
-      data.sentEmailsSent.forEach(sentEmailSent => this.sentEmailsSent.set(sentEmailSent.id, sentEmailSent));
-      this.nbSentEmailsSent = data.count;
-    })
   }
   
   create(createSentEmailDto: CreateSentEmailDto) : Subscription {

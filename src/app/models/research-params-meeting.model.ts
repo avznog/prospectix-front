@@ -1,6 +1,9 @@
+import { MeetingType } from "../constants/meeting.type";
+
 export interface ResearchParamsMeeting {
     take?: number;
     skip: number;
-    done: string | boolean;
-    type?: string
+    done: number;
+    type: MeetingType | null;
+    keyword: string | null;
 }

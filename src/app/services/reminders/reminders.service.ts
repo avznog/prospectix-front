@@ -37,6 +37,7 @@ export class RemindersService {
     private readonly eventsService: EventsService,
     private readonly authService: AuthService
   ) {
+    this.researchParamsReminder.priority = Number(localStorage.getItem('reminders-priority')) ?? 0;
     this.loadMore();
    }
 

@@ -1,4 +1,5 @@
 <div class="flex flex-row items-start justify-start m-0 mb-5 space-x-10">
+  <!-- ? done / not done -->
   <div class="form-control min-w-fit">
     <label for="remindersDone" class="cursor-pointer label">
       <span class="label-text">{{done ? 'Rappels effectués' : 'Rappels à faire'}}</span>
@@ -7,7 +8,7 @@
       (change)="updateParameters()" checked />
   </div>
 
-   <!-- Search a prospect - overrides the other filters -->
+   <!-- ? Search a prospect by keyword -->
    <div class="w-1/4">
     <label class="label" for="search">
       <span class="label-text">Recherche (nom ou tel)</span>
@@ -17,6 +18,7 @@
       class="w-full max-w-xs transition-all input input-md input-bordered" />
   </div>
 
+  <!-- ? priority -->
   <div class="form-control min-w-fit">
     <label for="priority" class="cursor-pointer label">
       <span class="label-text">Priorité</span>

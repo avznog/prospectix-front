@@ -1,10 +1,23 @@
-<div class="flex flex-row justify-start space-x-10 items-start m-0 mb-5">
-  <!-- done -->
+<div class="flex flex-row items-start justify-start m-0 mb-5 space-x-10">
+ 
+  <!-- ? done / not done -->
   <div class="form-control min-w-fit">
-    <label class="label" for="meetingsDone">
+    <label for="meetingsDone" class="cursor-pointer label">
       <span class="label-text">{{done ? 'RDV effectués' : 'RDV à faire'}}</span>
     </label>
-    <input class="toggle {{done ? 'toggle-primary' : '' }}" type="checkbox" id="meetingsDone" [(ngModel)]="done" (change)="onEditDone()" />
+    <input class="toggle {{done ? 'toggle-primary' : ''}}" type="checkbox" id="meetingsDone" [(ngModel)]="done"
+      (change)="updateParameters()" checked />
+  </div>
+
+
+   <!-- ? Search a prospect by keyword -->
+   <div class="w-1/4">
+    <label class="label" for="search">
+      <span class="label-text">Recherche (nom ou tel)</span>
+    </label>
+    <input type="search" [(ngModel)]="keyword" (input)="updateParameters()"
+      placeholder="Recherche (entrée pour valider)"
+      class="w-full max-w-xs transition-all input input-md input-bordered" />
   </div>
 
   <!-- type of meeting -->
@@ -12,8 +25,8 @@
     <label class="label" for="typeMeeting">
       <span class="label-text">Type de RDV</span>
     </label>
-    <select id="type" name="type" [(ngModel)]="type" (change)="onEditType()" class="select select-bordered">
-      <option [defaultSelected]="'Tous les types'" selected [value]="'allTypes'">Tous les types</option>
+    <select id="type" name="type" [(ngModel)]="type" (change)="updateParameters()" class="select select-bordered">
+      <option [ngValue]="null">Tous les types</option>
       <option *ngFor="let type of meetingTypeKeys" [ngValue]="type">{{type}}</option>
     </select>
   </div>
