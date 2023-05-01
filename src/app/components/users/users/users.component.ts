@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.ngxSmartModalService.create('add-user', CreateUserComponent);
+    this.ngxSmartModalService.create('add-user', CreateUserComponent).addCustomClass('add-user').closable = false;
   }
 
   pageUp() {

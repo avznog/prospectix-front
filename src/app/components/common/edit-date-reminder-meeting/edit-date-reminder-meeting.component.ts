@@ -3,6 +3,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
 import { RemindersService } from 'src/app/services/reminders/reminders.service';
 
@@ -22,7 +23,8 @@ export class EditDateReminderMeetingComponent implements OnInit {
   constructor(
     private readonly remindersService: RemindersService,
     private readonly meetingsService: MeetingsService,
-    public readonly ngxSmartModalService: NgxSmartModalService
+    public readonly ngxSmartModalService: NgxSmartModalService,
+    public readonly dataThemeService: DataThemeService
   ) { }
 
   ngOnInit(): void {

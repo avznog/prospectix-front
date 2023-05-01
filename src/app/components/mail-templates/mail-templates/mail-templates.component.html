@@ -37,7 +37,7 @@
         <label
           *ngIf="mailTemplatesService.myTemplates.has(currentTemplate.id)"
           class="flex float-left btn btn-outline btn-sm btn-error"
-          (click)="editMode ? (editMode = !editMode) : (ngxSmartModalService.getModal('delete-mail-template').removeData().setData({mailTemplate:{ id: currentTemplate.id, name: currentTemplate.name}}).open())">
+          (click)="editMode ? (editMode = !editMode) : (ngxSmartModalService.getModal('action-prospect').removeData().setData({mailTemplate:{id: currentTemplate.id, name: currentTemplate.name}, type: 'remove-template-mail', title: 'Supprimer le template de mail'}).open())">
           <span *ngIf="editMode" class="text-current">Annuler</span>
           <svg *ngIf="!editMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-6 h-6">

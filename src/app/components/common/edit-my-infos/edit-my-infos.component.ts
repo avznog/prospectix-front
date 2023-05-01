@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthService } from 'src/app/auth/auth.service';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class EditMyInfosComponent implements OnInit {
   constructor(
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
-    public readonly ngxSmartModalService: NgxSmartModalService
+    public readonly ngxSmartModalService: NgxSmartModalService,
+    public readonly dataThemeService: DataThemeService
   ) { }
 
   ngOnInit(): void {

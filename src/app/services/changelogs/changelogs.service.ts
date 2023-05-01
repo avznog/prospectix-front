@@ -22,6 +22,15 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "4.0.1",
+        date: new Date("2023-05-01T00:00:00.000Z"),
+        bugs: [
+          "Résolution de bugs d'affichage des pop-ups"
+        ],
+        features: [
+          ""
+        ]
+      },{
         version: "4.0",
         date: new Date("2023-04-30T00:00:00.000Z"),
         bugs: [

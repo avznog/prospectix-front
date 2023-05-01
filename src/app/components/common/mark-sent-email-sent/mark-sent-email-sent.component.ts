@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
@@ -8,6 +8,7 @@ import { MailTemplate } from 'src/app/models/mail-template.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { GoogleService } from 'src/app/services/google/google.service';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
@@ -47,11 +48,12 @@ export class MarkSentEmailSentComponent implements OnInit {
     private readonly sentEmailsService: SentEmailsService,
     private readonly eventsService: EventsService,
     private readonly authService: AuthService,
-    public readonly mailTemplatesService: MailTemplatesService,
-    public readonly googleService: GoogleService,
     private readonly toastsService: ToastsService,
     private readonly prospectsService: ProspectsService,
-    public readonly ngxSmartModalService: NgxSmartModalService
+    public readonly mailTemplatesService: MailTemplatesService,
+    public readonly googleService: GoogleService,
+    public readonly ngxSmartModalService: NgxSmartModalService,
+    public readonly dataThemeService: DataThemeService
   ) { }
 
   ngOnInit(): void {

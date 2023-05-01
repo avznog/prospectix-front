@@ -18,7 +18,7 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ngxSmartModalService.create('edit-account', EditMyInfosComponent);
+    this.ngxSmartModalService.create('edit-account', EditMyInfosComponent).addCustomClass('edit-account').closable = false;
   }
 
   onClickGoogleLogout() {

@@ -4,19 +4,31 @@
 $transition-duration: 100ms;
 .add-prospect {
   margin-top: 10% !important;
+  min-width: 80%;
+  border-radius: 20px !important;
+}
+
+.add-meeting-reminder, .edit-date, .mail-sent, .add-user, .edit-user, .add-goal-template, .edit-goal-template, .edit-account {
+  margin-top: 10% !important;
   min-width: fit-content !important;
+  border-radius: 20px !important;
 }
 
 .changelogs {
-  min-width: fit-content;
-  margin-top: 0 !important;
+  // min-width: fit-content;
+  min-width: 70%;
+  margin-top: 5% !important;
 }
+
 .action-prospect {
   margin-top: 20% !important;
+  padding: 0 !important;
+
 }
 
 .nsm-content {
-  border-radius: 10px !important;
+  border-radius: 20px !important;
+  padding: 0 !important;
 }
 @import "ngx-smart-modal/ngx-smart-modal";
 @import "app/app.component";

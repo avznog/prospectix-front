@@ -11,6 +11,7 @@ import { Meeting } from 'src/app/models/meeting.model';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { GoalTemplatesService } from 'src/app/services/goal-templates/goal-templates.service';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
@@ -42,7 +43,7 @@ export class ActionProspectComponent implements OnInit {
     goalTemplate?: {
       name: string;
       id: number;
-    }
+    },
   } = {};
 
   reasonDisabledType = [ReasonDisabledType.ENTREPRISE_FERMEE, ReasonDisabledType.GRAND_GROUPE, ReasonDisabledType.MAL_ATTRIBUE, ReasonDisabledType.HOLDINGS];
@@ -61,7 +62,8 @@ export class ActionProspectComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly toastsService: ToastsService,
     private readonly mailTemplateService: MailTemplatesService,
-    private readonly goalTemplatesService: GoalTemplatesService
+    private readonly goalTemplatesService: GoalTemplatesService,
+    public readonly dataThemeService: DataThemeService
   ) {
   }
 

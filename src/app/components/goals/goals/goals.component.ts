@@ -26,9 +26,9 @@ export class GoalsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ngxSmartModalService.create('add-goal-template', AddGoalTemplateComponent);
-    this.ngxSmartModalService.create('action-prospect', ActionProspectComponent);
-    this.ngxSmartModalService.create('edit-goal-template', EditGoalTemplateComponent);
+    this.ngxSmartModalService.create('add-goal-template', AddGoalTemplateComponent).addCustomClass('add-goal-template').closable = false;
+    this.ngxSmartModalService.create('action-prospect', ActionProspectComponent).addCustomClass('action-prospect').closable = false;
+    this.ngxSmartModalService.create('edit-goal-template', EditGoalTemplateComponent).addCustomClass('edit-goal-template').closable = false;
   }
 
   onChangeDisabledTemplate(goalTemplate: KeyValue<number, GoalTemplate>) {

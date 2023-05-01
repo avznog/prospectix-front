@@ -9,6 +9,7 @@ import { SecondaryActivity } from 'src/app/models/secondary-activity.model';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
 import { CitiesService } from 'src/app/services/cities/cities.service';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { CountriesService } from 'src/app/services/countries/countries.service';
 import { ProspectsService } from 'src/app/services/prospects/prospects.service';
 import { SearchParamsService } from 'src/app/services/search-params/search-params.service';
@@ -28,7 +29,8 @@ export class AddProspectComponent implements OnInit {
     public readonly citiesService: CitiesService,
     public readonly countriesService: CountriesService,
     public readonly bookmarksService: BookmarksService,
-    public readonly ngxSmartModalService: NgxSmartModalService
+    public readonly ngxSmartModalService: NgxSmartModalService,
+    public readonly dataThemeService: DataThemeService
   ) { }
   
   city!: City;  

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ProjectManager } from 'src/app/models/project-manager.model';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class EditUserComponent implements OnInit {
 
   constructor(
     private readonly usersService: UsersService,
-    private readonly ngxSmartModalService: NgxSmartModalService
+    private readonly ngxSmartModalService: NgxSmartModalService,
+    public readonly dataThemeService: DataThemeService
   ) { }
 
   ngOnInit(): void {
