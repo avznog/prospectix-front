@@ -1,4 +1,4 @@
-<div>
+<div [attr.data-theme]="dataThemeService.dataTheme" class="h-full p-5 rounded-xl card">
   <div class="text-lg card-title">Ajouter un prospect dans la base</div>
   <div class="divider"></div>
 
@@ -9,7 +9,7 @@
       <label class="label">
         <span class="label-text">Nom du prospect</span>
       </label>
-      <input type="text" class="input input-bordered" [(ngModel)]="companyName" placeholder="Ex: ISEP" />
+      <input type="text" class="input input-bordered " [(ngModel)]="companyName" placeholder="Ex: ISEP" />
     </div>
 
     <!-- Adresse du prospect -->
@@ -127,24 +127,28 @@
 
 
   <div class="divider"></div>
-
   <!-- Bouton ajouter une ville -->
-  <label class="float-left btn btn-ghost btn-outline float" (click)="ngxSmartModalService.getModal('add-city').open()">Ajouter une ville</label>
+  <div class="inline-flex justify-around w-full">
+    <label class="w-1/5 btn btn-ghost btn-outline" (click)="ngxSmartModalService.getModal('add-city').open()">Ajouter une ville</label>
 
-  <!-- Bouton créer le prospect -->
-    <label
-    class="btn btn-ghost btn-outline float float-right justify-center {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || secondaryActivity == null || primaryActivity == null || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
-     (click)="onCreateProspect()">{{stage == 0 ? 'Créer le prospect' : stage == 1 ? 'Ajouter aux favoris' : stage == 2 ? 'Définir le rappel' : stage == 3 ? 'Définir le rendez-vous' : stage == 4 ? 'Ajouter aux mails' : stage == 5 ? 'Marquer comme refus' : 'Créer le prospect'}}</label>
 
-  <!-- select stage -->
-  <select class="float-right mr-5 select select-bordered" [(ngModel)]="stage">
-    <option [ngValue]="0">Recherche</option>
-    <option [ngValue]="1">Favori</option>
-    <option [ngValue]="2">Rappel</option>
-    <option [ngValue]="3">Rendez-vous</option>
-    <option [ngValue]="4">Mail</option>
-    <option [ngValue]="5">Refus</option>
-  </select>
-
-  <label class="float-right mr-5 float btn btn-outline btn-warning font-extralight btn-disabled bg-base-100" *ngIf="stage == 1">{{bookmarksService.nbBookmarks + ' / ' +  bookmarksService.maxNbBookmarks + ' Favoris'}}</label>
+   
+    
+    <label class="w-1/5 btn btn-outline btn-warning font-extralight btn-disabled bg-base-100" *ngIf="stage == 1">{{bookmarksService.nbBookmarks + ' / ' +  bookmarksService.maxNbBookmarks + ' Favoris'}}</label>  
+    
+    <!-- select stage -->
+    <select class="w-1/5 select select-bordered" [(ngModel)]="stage">
+      <option [ngValue]="0">Recherche</option>
+      <option [ngValue]="1">Favori</option>
+      <option [ngValue]="2">Rappel</option>
+      <option [ngValue]="3">Rendez-vous</option>
+      <option [ngValue]="4">Mail</option>
+      <option [ngValue]="5">Refus</option>
+    </select>
+     <!-- Bouton créer le prospect -->
+     <label
+     class="btn btn-ghost btn-outline justify-center w-1/5 {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || secondaryActivity == null || primaryActivity == null || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
+      (click)="onCreateProspect()">{{stage == 0 ? 'Créer le prospect' : stage == 1 ? 'Ajouter aux favoris' : stage == 2 ? 'Définir le rappel' : stage == 3 ? 'Définir le rendez-vous' : stage == 4 ? 'Ajouter aux mails' : stage == 5 ? 'Marquer comme refus' : 'Créer le prospect'}}</label>
+ 
+  </div>
 </div>

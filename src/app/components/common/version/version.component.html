@@ -1,12 +1,16 @@
-<div class="w-full text-neutral">
-  <span class="text-xl font-bold">Dev w/ ❤️ by your pôle tech, founded by Benjamin GONZVA <a
-      href="https://www.instagram.com/ben.gonzva/" target="_blank" class="font-thin link-primary"
-      *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin">(@ben.gonzva)
-    </a></span>
-  <ul>
-    <li>2022-2023 : <a href="https://www.linkedin.com/in/benjamingonzva/" target="_blank"
-        class="link-primary">Benjamin GONZVA</a></li>
-  </ul>
-  <div class="divider"></div>
-  <app-changelogs class="w-full max-h-screen"></app-changelogs>
+<div class="max-h-screen p-5 card" [attr.data-theme]="dataThemeService.dataTheme">
+  <div class="w-full">
+    <span class="text-xl font-bold">Dev w/ ❤️ by your pôle tech, founded by Benjamin GONZVA <a
+        href="https://www.instagram.com/ben.gonzva/" target="_blank" class="font-thin link-primary"
+        *ngIf="authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin">(@ben.gonzva)
+      </a></span>
+    <ul>
+      <li>2022-2023 : <a href="https://www.linkedin.com/in/benjamingonzva/" target="_blank"
+          class="link-primary">Benjamin GONZVA</a></li>
+    </ul>
+    <div class="divider"></div>
+    <div class="overflow-scroll h-[70vh]">
+      <app-changelogs class="w-full"></app-changelogs>
+    </div>
+  </div>
 </div>

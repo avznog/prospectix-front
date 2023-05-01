@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 
 @Component({
   selector: 'app-version',
@@ -9,7 +10,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class VersionComponent implements OnInit {
 
   constructor(
-    public readonly authService: AuthService
+    public readonly authService: AuthService,
+    public readonly dataThemeService: DataThemeService
+
   ) { }
 
   ngOnInit(): void {

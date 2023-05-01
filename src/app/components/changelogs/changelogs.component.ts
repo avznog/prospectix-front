@@ -9,7 +9,7 @@ import { ChangelogsService } from 'src/app/services/changelogs/changelogs.servic
 export class ChangelogsComponent implements OnInit {
 
   constructor(
-    public changelogsService: ChangelogsService
+    public readonly changelogsService: ChangelogsService
   ) { }
 
   ngOnInit(): void {

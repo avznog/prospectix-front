@@ -21,7 +21,6 @@ import { ActionProspectComponent } from './components/common/action-prospect/act
 import { AddCityComponent } from './components/common/add-city/add-city.component';
 import { AddMeetingAndReminderComponent } from './components/common/add-meeting-and-reminder/add-meeting-and-reminder.component';
 import { AddProspectComponent } from './components/common/add-prospect/add-prospect.component';
-import { ConfirmDeleteMailTemplateComponent } from './components/common/confirm-delete-mail-template/confirm-delete-mail-template.component';
 import { EditDateReminderMeetingComponent } from './components/common/edit-date-reminder-meeting/edit-date-reminder-meeting.component';
 import { EditMyInfosComponent } from './components/common/edit-my-infos/edit-my-infos.component';
 import { HeaderComponent } from './components/common/header/header.component';
@@ -112,7 +111,6 @@ import { SortingCitiesPipe } from './pipes/sorting-cities/sorting-cities.pipe';
     WatchtowerComponent,
     MailTemplatesComponent,
     DisplayMailTemplateComponent,
-    ConfirmDeleteMailTemplateComponent,
     EditUserComponent,
     AccountComponent,
     EditMyInfosComponent,

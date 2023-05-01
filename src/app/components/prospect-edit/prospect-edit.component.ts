@@ -13,6 +13,7 @@ import { RemindersService } from 'src/app/services/reminders/reminders.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
 import { PrimaryActivity } from 'src/app/models/primary-activity.model';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 
 @Component({
   selector: 'app-prospect-edit',
@@ -45,7 +46,8 @@ export class ProspectEditComponent implements OnInit {
     private readonly meetingsService: MeetingsService,
     private readonly bookmarksService: BookmarksService,
     private readonly sentEmailService: SentEmailsService,
-    private readonly ngxSmartModalService: NgxSmartModalService
+    private readonly ngxSmartModalService: NgxSmartModalService,
+    public readonly dataThemeService: DataThemeService
   ) {
     
    }

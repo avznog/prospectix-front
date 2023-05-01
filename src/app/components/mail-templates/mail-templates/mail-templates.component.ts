@@ -6,7 +6,8 @@ import { VersionCityType, VersionPrimaryActivityType, VersionProspectType, Versi
 import { MailTemplate } from 'src/app/models/mail-template.model';
 import { MailTemplatesService } from 'src/app/services/mail-templates/mail-templates.service';
 import { SentEmailsService } from 'src/app/services/sent-emails/sent-emails.service';
-import { ConfirmDeleteMailTemplateComponent } from '../../common/confirm-delete-mail-template/confirm-delete-mail-template.component';
+import { ActionProspectComponent } from '../../common/action-prospect/action-prospect.component';
+
 @Component({
   selector: 'app-mail-templates',
   templateUrl: './mail-templates.component.html',
@@ -27,7 +28,7 @@ export class MailTemplatesComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentTemplate = localStorage.getItem("currentTemplate") != 'creation' ? JSON.parse(localStorage.getItem("currentTemplate")!) : 'creation' ?? 'creation';
-    this.ngxSmartModalService.create('delete-mail-template', ConfirmDeleteMailTemplateComponent);
+    this.ngxSmartModalService.create('action-prospect', ActionProspectComponent).addCustomClass('action-prospect').closable = false;
   }
 
   changeTemplate(mailTemplate: MailTemplate | "creation") {

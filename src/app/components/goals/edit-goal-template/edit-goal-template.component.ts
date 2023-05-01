@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { GoalTemplate } from 'src/app/models/goal-template.model';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { GoalTemplatesService } from 'src/app/services/goal-templates/goal-templates.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class EditGoalTemplateComponent implements OnInit {
 
   constructor(
     private readonly goalTemplatesService: GoalTemplatesService,
-    private readonly ngxSmartModalService: NgxSmartModalService
+    private readonly ngxSmartModalService: NgxSmartModalService,
+    public readonly dataThemeService: DataThemeService
   ) { }
 
   ngOnInit(): void {

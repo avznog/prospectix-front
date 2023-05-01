@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ngxSmartModalService.create('versions', VersionComponent).addCustomClass('changelogs');
+    this.ngxSmartModalService.create('versions', VersionComponent).addCustomClass('changelogs').closable = false;
   }
   
   logout() {

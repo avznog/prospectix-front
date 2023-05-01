@@ -57,12 +57,12 @@ export class ProspectTileComponent implements OnInit {
     private readonly sentEmailsService: SentEmailsService,
     private readonly toastsService: ToastsService
   ) {
-    this.ngxSmartModalService.create('action-prospect', ActionProspectComponent).addCustomClass('action-prospect');
-    this.ngxSmartModalService.create('edit-date', EditDateReminderMeetingComponent).addCustomClass('add-prospect');
-    this.ngxSmartModalService.create('add-meeting-reminder', AddMeetingAndReminderComponent).addCustomClass('add-prospect');
-    this.ngxSmartModalService.create('history', ProspectHistoryComponent).addCustomClass('action-prospect');
-    this.ngxSmartModalService.create('mail-sent', MarkSentEmailSentComponent).addCustomClass('add-prospect');
-    this.ngxSmartModalService.create('prospect-edit', ProspectEditComponent).addCustomClass('add-prospect');
+    this.ngxSmartModalService.create('action-prospect', ActionProspectComponent).addCustomClass('action-prospect').closable = false;
+    this.ngxSmartModalService.create('edit-date', EditDateReminderMeetingComponent).addCustomClass('edit-date').closable = false;
+    this.ngxSmartModalService.create('add-meeting-reminder', AddMeetingAndReminderComponent).addCustomClass('add-meeting-reminder').closable = false;
+    this.ngxSmartModalService.create('history', ProspectHistoryComponent).addCustomClass('action-prospect').closable = false;
+    this.ngxSmartModalService.create('mail-sent', MarkSentEmailSentComponent).addCustomClass('mail-sent').closable = false;
+    this.ngxSmartModalService.create('prospect-edit', ProspectEditComponent).addCustomClass('add-prospect').closable = false;
    }
 
   ngOnInit(): void {

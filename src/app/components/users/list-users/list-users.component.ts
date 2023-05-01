@@ -20,7 +20,7 @@ export class ListUsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ngxSmartModalService.create('edit-user', EditUserComponent).addCustomClass('add-prospect');
+    this.ngxSmartModalService.create('edit-user', EditUserComponent).addCustomClass('edit-user').closable = false;
   }
 
   onChangeUserStatus(user: ProjectManager) {

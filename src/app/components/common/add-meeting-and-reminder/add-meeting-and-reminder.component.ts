@@ -9,6 +9,7 @@ import { CreateProspectDto } from 'src/app/dto/prospects/create-prospect.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { Reminder } from 'src/app/models/reminder.model';
 import { BookmarksService } from 'src/app/services/bookmarks/bookmarks.service';
+import { DataThemeService } from 'src/app/services/common/data-theme.service';
 import { EventsService } from 'src/app/services/events/events.service';
 import { GoogleService } from 'src/app/services/google/google.service';
 import { MeetingsService } from 'src/app/services/meetings/meetings.service';
@@ -46,6 +47,7 @@ export class AddMeetingAndReminderComponent implements OnInit {
   constructor(
     public readonly ngxSmartModalService: NgxSmartModalService,
     public readonly googleService: GoogleService,
+    public readonly dataThemeService: DataThemeService,
     private readonly prospectsService: ProspectsService,
     private readonly remindersService: RemindersService,
     private readonly meetingsService: MeetingsService,
