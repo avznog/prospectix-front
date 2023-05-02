@@ -57,6 +57,23 @@
 
     <!-- Ville du prospect -->
     <div class="form-control">
+      <label class="label" for="zone">
+        <span class="label-text">Zone</span>
+      </label>
+      <div class="inline-flex">
+
+        <!-- select zone -->
+        <select id="zone" name="zone" [(ngModel)]="zone" class="select select-bordered">
+          <option [ngValue]="null">Sélectionner une zone</option>
+          <option *ngFor="let z of citiesService.cities" [ngValue]="z">{{z.name}}</option>
+        </select>
+
+
+      </div>
+    </div>
+
+    <!-- Ville du prospect -->
+    <div class="form-control" *ngIf="zone">
       <label class="label" for="city">
         <span class="label-text">Ville</span>
       </label>
@@ -64,8 +81,8 @@
 
         <!-- select city -->
         <select id="city" name="city" [(ngModel)]="city" class="select select-bordered">
-          <option selected [defaultSelected]="true" [ngValue]="undefined">Sélectionner une ville</option>
-          <option *ngFor="let city of citiesService.citiesByZipcode" [ngValue]="city">{{city.origin}} : {{city.zipcode}}</option>
+          <option [ngValue]="null">Sélectionner une ville</option>
+          <option *ngFor="let city of citiesService.citiesByZipcode | sortingCities:zone.name" [ngValue]="city">{{city.origin}} : {{city.zipcode}}</option>
         </select>
 
 
@@ -147,7 +164,7 @@
     </select>
      <!-- Bouton créer le prospect -->
      <label
-     class="btn btn-ghost btn-outline justify-center w-1/5 {{companyName == '' || phone == '' || phone.length > 14 || address == '' || city == undefined || secondaryActivity == null || primaryActivity == null || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
+     class="btn btn-ghost btn-outline justify-center w-1/5 {{companyName == '' || phone == '' || phone.length > 14 || address == '' || !city || !zone || secondaryActivity == null || primaryActivity == null || (stage == 1 && bookmarksService.nbBookmarks >= bookmarksService.maxNbBookmarks)? 'btn-disabled' : ''}} "
       (click)="onCreateProspect()">{{stage == 0 ? 'Créer le prospect' : stage == 1 ? 'Ajouter aux favoris' : stage == 2 ? 'Définir le rappel' : stage == 3 ? 'Définir le rendez-vous' : stage == 4 ? 'Ajouter aux mails' : stage == 5 ? 'Marquer comme refus' : 'Créer le prospect'}}</label>
  
   </div>
