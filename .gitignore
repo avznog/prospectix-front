@@ -50,5 +50,10 @@ Thumbs.db
 .yarn/sdks
 .yarn/versions
 
+# vscode lines counter
 .VSCodeCounter/**
 /.VSCodeCounter
+
+# documentation repository
+/documentation
+/documentation/*
