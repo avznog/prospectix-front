@@ -33,7 +33,8 @@ export class AddProspectComponent implements OnInit {
     public readonly dataThemeService: DataThemeService
   ) { }
   
-  city!: City;  
+  city: City | null = null;
+  zone: City | null = null;
 
   primaryActivity: PrimaryActivity | null = null;
   secondaryActivity: SecondaryActivity | null = null;
@@ -64,7 +65,7 @@ export class AddProspectComponent implements OnInit {
         ...this.secondaryActivity!,
         primaryActivity: this.primaryActivity!
       },
-      city: this.city,
+      city: this.city!,
       country: this.country,
       stage: this.stage,
       phone: {
