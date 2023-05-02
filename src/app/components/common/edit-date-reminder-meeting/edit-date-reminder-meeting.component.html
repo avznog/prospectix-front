@@ -7,8 +7,8 @@
       <input for="date" class="stroke-2 input input-bordered stroke-primary" type="datetime-local" [(ngModel)]="date" >
     </div>
     <div class="inline-flex pt-5 pb-0 space-x-5">
-      <label class="w-1/2 btn btn-outline btn-ghost" for="edit-date-reminder-meeting-{{prospect.id}}">Annuler</label>
-      <label class="btn btn-outline btn-ghost w-1/2 btn-primary {{!date ? 'btn-disabled' : ''}}" for="edit-date-reminder-meeting-{{prospect.id}}" (click)="onClickChangeDate()">Changer la date et l'heure du {{reminder && 'rappel' || meeting && 'rendez-vous'}}</label>
+      <label class="w-1/2 btn btn-outline btn-ghost" (click)="ngxSmartModalService.closeAll()">Annuler</label>
+      <label class="btn btn-outline btn-ghost w-1/2 btn-primary {{!date ? 'btn-disabled' : ''}}" (click)="onClickChangeDate()">Changer la date et l'heure du {{reminder && 'rappel' || meeting && 'rendez-vous'}}</label>
     </div>
   </div>
 </div>
