@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc": "compodoc --customLogo ./src/assets/logo_couleur.png -a ./src/assets -n Prospectix-front -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc --customLogo ./src/assets/logo_couleur.png -a ./src/assets -n Prospectix-front -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s"
   },
