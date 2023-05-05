@@ -22,15 +22,26 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "4.0.2",
+        date: new Date("2023-05-04T00:00:00.000Z"),
+        bugs: [
+          "Critical HotFix : les dates entrées en base de données étaient entrées avec 2H de retard. Fixé en back pour tous les enregistrements de date",
+          "Rework total du backEnd -> ajout des modules"
+        ],
+        features: [
+          "Mise à jour de la notification slack pour les rappels. Elle se fait désormais 30 mn à l'avance"
+        ]
+      },
+      {
         version: "4.0.1",
         date: new Date("2023-05-01T00:00:00.000Z"),
         bugs: [
           "Résolution de bugs d'affichage des pop-ups"
         ],
         features: [
-          ""
         ]
-      },{
+      },
+      {
         version: "4.0",
         date: new Date("2023-04-30T00:00:00.000Z"),
         bugs: [
