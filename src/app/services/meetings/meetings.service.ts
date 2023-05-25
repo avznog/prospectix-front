@@ -37,7 +37,7 @@ export class MeetingsService {
     private readonly toastsService: ToastsService,
     private readonly slackService: SlackService,
     private readonly eventsService: EventsService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) { 
     this.researchParamsMeeting.type = localStorage.getItem('meetings-type') != '' ? localStorage.getItem('meetings-type') as MeetingType : null;
     this.loadMore();
@@ -127,9 +127,12 @@ export class MeetingsService {
   update(idMeeting: number, updateMeetingDto: UpdateMeetingDto) {
     return this.http.patch<Meeting>(`meetings/${idMeeting}`, updateMeetingDto).subscribe(() => {
       this.meetings.set(idMeeting, { ...this.meetings.get(idMeeting)!, ...updateMeetingDto})
+      this.meetings.forEach(meeting => {
+         if(meeting.pm.id != this.authService.currentUserSubject.getValue().id) this.meetings.delete(meeting.id);
+      })
       this.toastsService.addToast({
         type: "alert-success",
-        message: `Rendez-vous avec ${this.meetings.get(idMeeting)!.prospect.companyName} mis à jour`
+        message: `Rendez-vous avec ${this.meetings.get(idMeeting)?.prospect.companyName ?? ''} mis à jour`
       })
     })
   }

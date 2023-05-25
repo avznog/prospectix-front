@@ -21,6 +21,8 @@ export class ProjectManagersService {
   projectManagers: ProjectManager[] = [];
   pmGoals = new Map<ProjectManager, Goal[]>();
 
+  projectManagersForMeetings: ProjectManager[] = [];
+
   constructor(
     private http: HttpClient,
     private readonly authService: AuthService
@@ -35,6 +37,7 @@ export class ProjectManagersService {
       })
       this.updateMyGoals();
     });
+    this.findAllPmForMeetings()
   }
 
   findAll() {
@@ -95,5 +98,12 @@ export class ProjectManagersService {
           this.myMeetingsGoal = this.myGoals.find(goal => goal.goalTemplate.name == "Rendez-vous")!
       }
     }
+  }
+
+  // find all pm who we can give a meeting to
+  findAllPmForMeetings() {
+    this.http.get<ProjectManager[]>(`project-managers/find-all-for-meetings`).subscribe(pms => {
+      this.projectManagersForMeetings = pms;
+    })
   }
 }
