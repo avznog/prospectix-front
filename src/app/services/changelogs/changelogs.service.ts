@@ -22,6 +22,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "4.0.3",
+        date: new Date("2023-05-24T00:00:00.000Z"),
+        bugs: [
+         
+        ],
+        features: [
+          "Ajout de la possiblité de donner un rendez-vous à un autre chef de projet"
+        ]
+      },
+      {
         version: "4.0.2",
         date: new Date("2023-05-04T00:00:00.000Z"),
         bugs: [
