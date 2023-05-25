@@ -1,14 +1,20 @@
 <div class="p-5 card" [attr.data-theme]="dataThemeService.dataTheme">
   <div class="justify-center card-title"><span class="justify-center">Modifier la date et l'heure du {{reminder && 'rappel' || meeting && 'rendez-vous'}} avec {{prospect.companyName}}</span>
   </div>
-  <div class="card-body ">
+  <div class="space-y-5 card-body">
     <div class="flex justify-center input-group">
       <span id="date" >Je change mon {{reminder && 'rappel' || meeting && 'rendez-vous'}} au </span>
       <input for="date" class="stroke-2 input input-bordered stroke-primary" type="datetime-local" [(ngModel)]="date" >
     </div>
+    <div *ngIf="meeting" class="flex justify-center form-control">
+      <select class="select select-bordered" [(ngModel)]="pmForMeeting">
+        <option [ngValue]="null">Je garde mon rendez-vous</option>
+        <option [ngValue]="pm" *ngFor="let pm of pmService.projectManagersForMeetings">{{pm.firstname}} {{pm.name.toUpperCase()}}</option>
+      </select>
+    </div>
     <div class="inline-flex pt-5 pb-0 space-x-5">
       <label class="w-1/2 btn btn-outline btn-ghost" (click)="ngxSmartModalService.closeAll()">Annuler</label>
-      <label class="btn btn-outline btn-ghost w-1/2 btn-primary {{!date ? 'btn-disabled' : ''}}" (click)="onClickChangeDate()">Changer la date et l'heure du {{reminder && 'rappel' || meeting && 'rendez-vous'}}</label>
+      <label class="w-1/2 btn btn-outline btn-ghost btn-primary {{!date && !pmForMeeting ? 'btn-disabled' : ''}}" (click)="onClickChangeDate()">Changer la date et l'heure du {{reminder && 'rappel' || meeting && 'rendez-vous'}}</label>
     </div>
   </div>
 </div>
