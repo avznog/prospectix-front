@@ -22,6 +22,16 @@ export class ChangelogsService {
     this.localVersion = localStorage.getItem("version") ?? "";
     this.changelogs = [
       {
+        version: "4.1",
+        date: new Date("2023-06-13T00:00:00.000Z"),
+        bugs: [
+         "Résolution du bug des mails envoyés"
+        ],
+        features: [
+          "Changement du fonctionnement des mails -> on peut envoyer les mails directement depuis la recherche. Il est aussi possible de noter un mail comme à envoyer plus tard"
+        ]
+      },
+      {
         version: "4.0.3",
         date: new Date("2023-05-24T00:00:00.000Z"),
         bugs: [

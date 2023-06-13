@@ -1,12 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventDescriptionType } from 'src/app/constants/event-descriptions.type';
 import { EventType } from 'src/app/constants/event.type';
 import { StageType } from 'src/app/constants/stage.type';
 import { CreateSentEmailDto } from 'src/app/dto/sent-emails/create-sent-emails.dto';
-import { sendEmailDto } from 'src/app/dto/sent-emails/send-email.dto';
+import { SendEmailDto } from 'src/app/dto/sent-emails/send-email.dto';
 import { Prospect } from 'src/app/models/prospect.model';
 import { ResearchParamsSentEmails } from 'src/app/models/research-params-sent-emails.model';
 import { SentEmail } from 'src/app/models/sent-email.model';
@@ -80,7 +79,7 @@ export class SentEmailsService {
     });
   }
   
-  create(createSentEmailDto: CreateSentEmailDto) : Subscription {
+  create(createSentEmailDto: CreateSentEmailDto) {
     return this.http.post<SentEmail>(`sent-emails`, createSentEmailDto).subscribe(sentEmail => {
       this.sentEmails.set(sentEmail.id, { ...sentEmail, prospect: { ...sentEmail.prospect, stage: StageType.MAIL}})
       this.nbSentEmails += 1;
@@ -88,7 +87,7 @@ export class SentEmailsService {
         type: "alert-success",
         message: `${sentEmail.prospect.companyName} ajouté aux mails`
       });
-
+  
       this.eventsService.create({
         type: EventType.ADD_SENT_EMAIL,
         date: new Date,
@@ -99,7 +98,66 @@ export class SentEmailsService {
     })
   }
 
-  send(sendEmailDto: sendEmailDto, idSentEmail: number) {
+
+  createAndSend(createSentEmailDto: CreateSentEmailDto, sendEmailDto: SendEmailDto) {
+    return this.http.post<SentEmail>(`sent-emails/create-and-send`, {  createSentEmailDto: createSentEmailDto, sendEmailDto: sendEmailDto }).subscribe(sentEmail => {
+      this.sentEmailsSent.set(sentEmail.id, sentEmail)
+
+      this.nbSentEmailsSent += 1;
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `${sentEmail.prospect.companyName} ajouté aux mails`
+      });
+  
+      this.eventsService.create({
+        type: EventType.ADD_SENT_EMAIL,
+        date: new Date,
+        description: `${EventDescriptionType.ADD_SENT_EMAIL} ${this.authService.currentUserSubject.getValue().pseudo}`,
+        pm: this.authService.currentUserSubject.getValue(),
+        prospect: sentEmail.prospect
+      });
+
+      sentEmail.id != -1 && this.sentEmailsSent.set(sentEmail.id, { ...this.sentEmailsSent.get(sentEmail.id)!, sent: true});
+      sentEmail.id != -1 && (this.nbSentEmailsSent += 1);
+      sentEmail.id != -1 && this.toastsService.addToast({
+        type: "alert-success",
+        message: `Mail envoyé à ${this.sentEmailsSent.get(sentEmail.id)!.prospect.companyName}`
+      })
+
+      sentEmail.id == -1 && this.toastsService.addToast({
+        type: "alert-success",
+        message: `Mail test envoyé`
+      });
+
+    })
+  }
+
+  createAndSendSeparately(createSentEmailDto: CreateSentEmailDto, object: string) {
+    return this.http.post<SentEmail>(`sent-emails/create-and-send-separately`, { createSentEmailDto: createSentEmailDto, object: object}).subscribe(sentEmail => {
+      this.sentEmailsSent.set(sentEmail.id, sentEmail)
+      this.nbSentEmailsSent += 1;
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `${sentEmail.prospect.companyName} ajouté aux mails`
+      });
+  
+      this.eventsService.create({
+        type: EventType.ADD_SENT_EMAIL,
+        date: new Date,
+        description: `${EventDescriptionType.ADD_SENT_EMAIL} ${this.authService.currentUserSubject.getValue().pseudo}`,
+        pm: this.authService.currentUserSubject.getValue(),
+        prospect: sentEmail.prospect
+      });
+      this.sentEmailsSent.set(sentEmail.id, { ...this.sentEmailsSent.get(sentEmail.id)!, sent: true});
+
+      this.toastsService.addToast({
+        type: "alert-success",
+        message: `Mail envoyé à ${this.sentEmailsSent.get(sentEmail.id)!.prospect.companyName}`
+      })
+    })
+  }
+
+  send(sendEmailDto: SendEmailDto, idSentEmail: number) {
     return this.http.post(`sent-emails/send/${idSentEmail}`, sendEmailDto).subscribe(() => {
       idSentEmail != -1 && this.sentEmails.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});
       idSentEmail != -1 && this.sentEmailsSent.set(idSentEmail, { ...this.sentEmails.get(idSentEmail)!, sent: true});

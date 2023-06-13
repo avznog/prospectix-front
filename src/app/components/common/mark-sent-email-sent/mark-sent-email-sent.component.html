@@ -52,9 +52,10 @@
   </quill-editor>
   
     <div class="inline-flex p-5 space-x-5">
-      <label class="w-1/3 btn btn-outline btn-ghost btn-error" (click)="ngxSmartModalService.closeAll()">Annuler</label>
-      <label class="btn btn-outline btn-ghost w-1/3 btn-success {{(!chosenTemplate || object == '' || !correctEmail)  && 'btn-disabled'}}" (click)="onClickMarkSentEmailSent()">Envoyer le mail</label>
-      <label class="btn btn-outline btn-ghost w-1/3 btn-warning {{object == '' ? 'btn-disabled' : ''}}" (click)="onClickSendMailSeparately()">Mail envoyé séparément</label>
+      <label class="w-1/4 btn btn-outline btn-ghost btn-error" (click)="ngxSmartModalService.closeAll()">Annuler</label>
+      <label class="btn btn-outline btn-ghost w-1/4 btn-success {{(!chosenTemplate || object == '' || !correctEmail)  && 'btn-disabled'}}" (click)="data.prospect?.stage == 4 ? onClickMarkSentEmailSent() : onClickCreateAndMarkSentEmailSent()">Envoyer le mail</label>
+      <label class="btn btn-outline btn-ghost w-1/4 btn-warning {{object == '' ? 'btn-disabled' : ''}}" (click)="data.prospect?.stage == 4 ? onClickSendMailSeparately() : onClickCreateAndSendMailSeparately()">Mail envoyé séparément</label>
+      <label class="w-1/4 btn btn-outline btn-ghost btn-info {{data.prospect?.stage == 4 ? 'btn-disabled': ''}}" (click)="onSendLater()">Envoyer plus tard</label>
     </div>
     <label class="flex justify-center text-sm label font-extralight text-error" *ngIf="!googleService.logged">Vous n'êtes pas connecté à Google</label>
   </div>
