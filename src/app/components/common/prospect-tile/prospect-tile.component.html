@@ -243,16 +243,11 @@
             </label>
 
             <!-- Bouton mail envoyé -->
-            <label class="outline outline-1 outline-base-100 text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) || (meeting && meeting.done) ? 'btn-disabled' : ''}}" *ngIf="prospect.stage == 4" (click)="ngxSmartModalService.getModal('mail-sent').removeData().setData({prospect: prospect, sentEmail: sentEmail}).open()">
-              Envoyer le mail
+            <label class="outline outline-1 outline-base-100 text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) || (meeting && meeting.done) ? 'btn-disabled' : ''}}" *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2 || prospect.stage == 4" (click)="ngxSmartModalService.getModal('mail-sent').removeData().setData({prospect: prospect, sentEmail: sentEmail, reminder: reminder, meeting: meeting}).open()">
+              <span *ngIf="prospect.stage == 4">Envoyer le mail</span>
+              <span *ngIf="prospect.stage != 4">Mail</span>
             </label>
 
-            <!-- button mail -->
-            <label 
-              class="rounded outline outline-1 outline-base-100 text-base-100 btn btn-md btn-primary {{(reminder && reminder.done) || (meeting && meeting.done)? 'btn-disabled' : ''}}" (click)="ngxSmartModalService.getModal('action-prospect').removeData().setData({type: 'mail', prospect: prospect, meeting: meeting, reminder: reminder, title: 'Ajouter aux mails ?'}).open()"
-              *ngIf="prospect.stage == 0 || prospect.stage == 1 || prospect.stage == 2">
-              Mail
-            </label>
           </div>
         </div>
 
