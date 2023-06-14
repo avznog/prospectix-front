@@ -169,6 +169,7 @@ export class MarkSentEmailSentComponent implements OnInit {
         prospect: this.data.prospect!,
         pm: this.authService.currentUserSubject.getValue(),
         sent: false,
+        sendingDate: new Date
       }, sendEmailDto);
 
       this.prospectService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });
@@ -245,6 +246,7 @@ export class MarkSentEmailSentComponent implements OnInit {
         prospect: this.data.prospect!,
         pm: this.authService.currentUserSubject.getValue(),
         sent: false,
+        sendingDate: new Date
       }, object)
 
       this.prospectService.updateByStage(this.data.prospect!.id, { stage: StageType.MAIL_SENT });

@@ -17,6 +17,9 @@ export class ChangelogsService {
   // C'est avec une larme que mon mandat s'achève et que je vous lègue Prospectix
   // Coeur sur vous, 
   // Benjamin GONZVA, Responsable Technique 2022-2023 ♥️
+
+  // PS : je ne demande qu'une seule chose à l'avenir, pour que mon héritage perdure : la fonctionnalité de thèmes est une fonctionnalité qui me tient à coeur
+  // C'est la nature de mon projet, son âme, sur laquelle nous avons travaillé pendant de nombreuses heures. Je demande humblement à la laisser 
   constructor(
   ) {
     this.localVersion = localStorage.getItem("version") ?? "";
