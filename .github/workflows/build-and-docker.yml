@@ -23,6 +23,12 @@ jobs:
         cache: 'yarn'
     - run: yarn install --immutable --silent
     - run: yarn run build --configuration bgonzva
+  
+  docker:
+
+    runs-on: ubuntu-latest
+
+    steps:
     
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag front:$(date +%s)
