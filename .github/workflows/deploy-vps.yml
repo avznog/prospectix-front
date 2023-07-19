@@ -1,0 +1,70 @@
+name: Deploy prospectix front to vps
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env: 
+  REGISTRY: ghrc.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Installing yarn
+      uses: actions/setup-node@v3
+      with:
+        cache: 'yarn'
+    - run: yarn install --immutable --silent
+    - run: yarn run build --configuration bgonzva
+
+    - uses: actions/upload-artifact@v2
+      with:
+          name: prospectix-front-dist
+          path: dist/
+  
+  docker:
+
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v2
+        with:
+          name: prospectix-front-dist
+      # - run: docker build . --file Dockerfile --tag front:$(date +%s)
+
+      
+      - name: Log in to the Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata (tags, labels) for Docker
+        uses: docker/metadata-actions@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build & push to GitHub Packages
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: front:$(date +%s)
