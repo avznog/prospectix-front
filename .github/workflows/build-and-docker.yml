@@ -39,7 +39,4 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: prospectix-front-dist
-    - run: ls
-    - run: cd dist
-    - run: ls
     - run: docker build . --file Dockerfile --tag front:$(date +%s)
