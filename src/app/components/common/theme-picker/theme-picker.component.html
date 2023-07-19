@@ -3,13 +3,13 @@
     <div (click)="onChangeTheme('jisep')">
       <div data-theme="jisep" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'jisep' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">Junior ISEP</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -18,13 +18,13 @@
     <div (click)="onChangeTheme('light')">
       <div data-theme="light" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'light' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Melki': 'light'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">light</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -33,13 +33,13 @@
     <div (click)="onChangeTheme('dark')">
       <div data-theme="dark" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'dark' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Bustin': 'dark'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">dark</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -48,13 +48,13 @@
     <div data-set-theme="cupcake" (click)="onChangeTheme('cupcake')">
       <div data-theme="cupcake" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'cupcake' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Préhu👸🏻': 'cupcake'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">cupcake</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -64,13 +64,13 @@
       data-act-class="outline">
       <div data-theme="bumblebee" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'bumblebee' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Gonzva 👑': 'bumblebee'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">bumblebee</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -80,13 +80,13 @@
       data-act-class="outline">
       <div data-theme="emerald" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'emerald' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">emerald</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -96,13 +96,13 @@
       data-act-class="outline">
       <div data-theme="corporate" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'corporate' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Chapurlat': 'corporate'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">corporate</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -112,13 +112,13 @@
       data-act-class="outline">
       <div data-theme="synthwave" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'synthwave' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Rouge': 'synthwave'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">synthwave</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -128,13 +128,13 @@
       data-act-class="outline">
       <div data-theme="retro" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'retro' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Itart-Longueville': 'retro'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">retro</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -144,13 +144,13 @@
       data-act-class="outline">
       <div data-theme="cyberpunk" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'cyberpunk' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Lambert': 'cyberpunk'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">cyberpunk</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -160,13 +160,13 @@
       data-act-class="outline">
       <div data-theme="valentine" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'valentine' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Chardonnens': 'valentine'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">valentine</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -176,13 +176,13 @@
       data-act-class="outline">
       <div data-theme="halloween" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'halloween' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">halloween</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -192,13 +192,13 @@
       data-act-class="outline">
       <div data-theme="garden" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'garden' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Vigneron': 'garden'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">garden</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -208,13 +208,13 @@
       data-act-class="outline">
       <div data-theme="forest" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'forest' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'La Forest': 'forest'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">forest</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -224,13 +224,13 @@
       data-act-class="outline">
       <div data-theme="aqua" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'aqua' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Bidault': 'aqua'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">aqua</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -240,13 +240,13 @@
       data-act-class="outline">
       <div data-theme="lofi" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'lofi' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">lofi</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -256,13 +256,13 @@
       data-act-class="outline">
       <div data-theme="pastel" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'pastel' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Giordan': 'pasteil'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">pasteil</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -272,13 +272,13 @@
       data-act-class="outline">
       <div data-theme="fantasy" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'fantasy' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">fantasy</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -288,13 +288,13 @@
       data-act-class="outline">
       <div data-theme="wireframe" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'wireframe' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">wireframe</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -304,13 +304,13 @@
       data-act-class="outline">
       <div data-theme="black" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'black' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Gradus': 'black'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">black</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -320,13 +320,13 @@
       data-act-class="outline">
       <div data-theme="luxury" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'luxury' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Lendais': 'luxury'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">luxury</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -336,13 +336,13 @@
       data-act-class="outline">
       <div data-theme="dracula" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'dracula' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">dracula</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -352,13 +352,13 @@
       data-act-class="outline">
       <div data-theme="cmyk" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'cmyk' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">cmyk</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -368,13 +368,13 @@
       data-act-class="outline">
       <div data-theme="autumn" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'autumn' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">autumn</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -384,13 +384,13 @@
       data-act-class="outline">
       <div data-theme="business" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'business' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">business</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -400,13 +400,13 @@
       data-act-class="outline">
       <div data-theme="acid" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'acid' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">acid</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -416,13 +416,13 @@
       data-act-class="outline">
       <div data-theme="lemonade" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'lemonade' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">lemonade</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -432,13 +432,13 @@
       data-act-class="outline">
       <div data-theme="night" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'night' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Pinat': 'night'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">night</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -448,13 +448,13 @@
       data-act-class="outline">
       <div data-theme="coffee" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'coffee' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{{authService.currentUserSubject.getValue() && authService.currentUserSubject.getValue().admin ? 'Godfroy': 'coffee'}}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+            <div class="flex-grow text-sm font-bold">coffee</div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>
@@ -464,13 +464,13 @@
       data-act-class="outline">
       <div data-theme="winter" class="bg-base-100 text-base-content w-full cursor-pointer font-sans outline hover:outline-2 {{currentTheme == 'winter' ? 'outline-2' : 'outline-0'}}  rounded-lg">
         <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+          <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
             <div class="flex-grow text-sm font-bold">winter</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+            <div class="flex flex-wrap flex-shrink-0 gap-1">
+              <div class="w-2 rounded bg-primary"></div>
+              <div class="w-2 rounded bg-secondary"></div>
+              <div class="w-2 rounded bg-accent"></div>
+              <div class="w-2 rounded bg-neutral"></div>
             </div>
           </div>
         </div>

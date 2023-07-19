@@ -35,7 +35,7 @@
                       <div *ngIf="loginForm.value['password'].errors.required">Password is required</div>
                   </div>
                 </div>
-
+                
                 <div class="justify-center card-actions">
                     <button class="btn btn-primary text-base-100" [disabled]="loading" type="submit">
                         <span *ngIf="loading" class="mr-1 spinner-border spinner-border-sm"></span>
@@ -43,6 +43,7 @@
                     </button>
                     <div *ngIf="error" class="mt-3 mb-0 alert alert-danger">{{error}}</div>
                 </div>
+                <div class="w-full p-0 m-0 italic text-center font-extralight">Made for <a class="text-primary" href="https://juniorisep.com">Junior ISEP</a></div>
             </form>
             </div>
           </div>
