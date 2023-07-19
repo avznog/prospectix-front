@@ -65,5 +65,5 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - run: docker login ghrc.io -u ${{github.actor}} -p ${{secrets.GITHUB_TOKEN}}
-      - run: docker build . --file Dockerfile --tag avznog/prospectixfront:latest
-      - run: docker push avznog/prospectixfront:latest
+      - run: docker build . --file Dockerfile --tag ghrc.io/avznog/prospectixfront:latest
+      - run: docker push ghrc.io/avznog/prospectixfront:latest
