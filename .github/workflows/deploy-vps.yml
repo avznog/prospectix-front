@@ -64,5 +64,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build & push to GitHub Packages
-        run: docker login ghrc.io -u ${{github.actor}} -p ${{secrets.GITHUB_TOKEN}}
+      - run: docker login ghrc.io -u ${{github.actor}} -p ${{secrets.GITHUB_TOKEN}}
+      - run: docker build . --file Dockerfile --tag avznog/prospectixfront:latest
+      # - run: docker push ${{steps.meta.outputs.tags}}
