@@ -22,6 +22,11 @@ jobs:
         cache: 'yarn'
     - run: yarn install --immutable --silent
     - run: yarn run build --configuration bgonzva
+
+    - uses: actions/upload-artifact@v2
+      with:
+          name: prospectix-front-dist
+          path: dist/
   
   docker:
 
@@ -31,5 +36,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/download-artifacts@v2
+      with:
+        name: prospectix-front-dist
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag front:$(date +%s)
