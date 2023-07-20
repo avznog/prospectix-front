@@ -60,11 +60,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Deploy compose on VPS
+      
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{secrets.VPS}}
           username: ${{secrets.VPS_USERNAME}}
           key: ${{secrets.VPS_PRIVATE_KEY}}
-          script: echo hello world
-  
+          script: |
+            docker login -u ${{secrets.DOCKER_LOGIN}} -p ${{secrets.DOCKER_TOKEN}}
+            docker compose -f /home/prospectix/docker-compose.yml down
+            docker system prune -f
+            docker compose -f /home/prospectix/docker-compose.yml pull
+            docker compose -f /home/prospectix/docker-compose.yml up
