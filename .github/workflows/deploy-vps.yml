@@ -60,9 +60,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: bash -c "ssh-add <(echo \"${{secrets.VPS_PRIVATE_KEY}}\")"
-      - run: ssh root@${{secrets.VPS}} docker login -u ${{secrets.DOCKER_LOGIN}} -p ${{secrets.DOCKER_TOKEN}}
-      - run: ssh root@${{secrets.VPS}} docker compose down
-      - run: ssh root@${{secrets.VPS}} docker system prune -f
-      - run: ssh root@${{secrets.VPS}} docker compose pull
-      - run: ssh root@${{secrets.VPS}} docker compose up
+      - name: Deploy compose on VPS
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{secrets.VPS}}
+          username: ${{secrets.VPS_USERNAME}}
+          key: ${{secrets.VPS_PRIVATE_KEY}}
+          script: echo hello world
+  
