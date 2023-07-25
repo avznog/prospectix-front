@@ -31,6 +31,13 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: Install yarn
+        uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+      - run: yarn install --immutable --silent
+      - run: yarn run build --configuration bgonzva
+        
       - name: Build and push the docker image
         uses: docker/build-push-action@v4
         with:
